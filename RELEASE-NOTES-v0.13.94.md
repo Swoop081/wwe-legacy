@@ -128,3 +128,15 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - User-facing distribution continues to exclude the entire `assets/` directory and is intended as an overlay on the existing current flat asset library.
 - Verification against inherited v0.14.00 assets: **823 tests / 726 passed / 0 failed / 97 intentionally skipped**; validation, collector-ID, flow, card-effect and counter/submission-state audits report 0 issues.
 
+
+## v0.14.05 — Consolidated Tabled UX + Booster Collation
+
+- Live Events hub is capped at exactly three rotating tower cards. Birthday Bash and RAW LIVE limited-time towers displace generic rotating slots instead of creating a fourth/fifth rotating event.
+- Money in the Bank remains always available as its own persistent event and now renders below the three rotating Live Events.
+- Auto Counter hand selection preserves the horizontal hand-rail scroll position after each card is selected or deselected for the ditch cost.
+- Season 1 launch/continue promo keeps John Cena’s authored physical Superstar card centered in the left reward bay, with explicit centering rules preventing legacy offsets from leaking into the card container.
+- Defeated Live Event route opponents now receive a large green check overlay directly over their Superstar card for immediate completion readability.
+- Standard five-card booster printing-tier collation is tightened: maximum two non-Normal printings per pack, with maximum one Sapphire-or-Ruby printing. A second premium printing may be Emerald; excess premium-tier results resolve to Normal.
+- Superstar chase remains 2% per eligible pack with the 100-pack hard pity unchanged.
+- No gameplay card balance, deck, Season progression, reward quantity, live-set availability, or collection ownership changes.
+- User-facing ZIP excludes the entire `assets/` directory and overlays the existing current flat asset library.

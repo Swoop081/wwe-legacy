@@ -1,17 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.14.04';
-import { deckIds } from '../js/data/decks.js?v=0.14.04';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.14.05';
+import { deckIds } from '../js/data/decks.js?v=0.14.05';
 
 const desiredLead = ['momentum-strength','momentum-strike','momentum-technical','fallaway-slam','punch'];
 
-test('v0.14.04 existing Razor saved decks receive the authored Technical Lead Off', () => {
+test('v0.14.05 existing Razor saved decks receive the authored Technical Lead Off', () => {
   const p = createProfile('roman-reigns');
   p.version = 38;
   p.unlockedSuperstars.push('razor-ramon');
 
-  // Simulate a valid pre-v0.14.04 saved Razor deck whose sole Technical
+  // Simulate a valid pre-v0.14.05 saved Razor deck whose sole Technical
   // Momentum exists in the deck but is outside the first five pages. Use only
   // launch-safe cards so public-launch filtering cannot invalidate the fixture.
   const ids = [
@@ -40,11 +40,11 @@ test('v0.14.04 existing Razor saved decks receive the authored Technical Lead Of
   assert.deepEqual([...migrated.savedDecks['razor-ramon'].map(x=>x.id)].sort(), [...ids].sort());
 });
 
-test('v0.14.04 fresh/authored Razor deck still begins with the same Lead Off', () => {
+test('v0.14.05 fresh/authored Razor deck still begins with the same Lead Off', () => {
   assert.deepEqual(deckIds['razor-ramon'].slice(0,5), desiredLead);
 });
 
-test('v0.14.04 includes all tabled presentation fixes in source', () => {
+test('v0.14.05 includes all tabled presentation fixes in source', () => {
   const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url),'utf8');
   const css = fs.readFileSync(new URL('../css/game.css', import.meta.url),'utf8');
   assert.match(app,/collectibleCardMarkup\(card,\{ tier:"ruby"/);

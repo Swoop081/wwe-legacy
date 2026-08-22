@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.04";
-import { decks } from "../js/data/decks.js?v=0.14.04";
-import { superstars } from "../js/data/superstars.js?v=0.14.04";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.04";
+import { allGameplayCards } from "../js/data/content.js?v=0.14.05";
+import { decks } from "../js/data/decks.js?v=0.14.05";
+import { superstars } from "../js/data/superstars.js?v=0.14.05";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.05";
 
 test("Biel Toss is a shared SummerSlam Common with the approved power-grapple profile", () => {
   const card = allGameplayCards.find(c => c.id === "biel-toss");

@@ -1,12 +1,14 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.14.04";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=0.14.04";
-import { duplicateUniversePointsFor } from "./store.js?v=0.14.04";
-import { sets } from "./sets.js?v=0.14.04";
-import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=0.14.04";
-import { CARD_TIERS, TIER_PULL_WEIGHTS, rollCardTier } from "./variants.js?v=0.14.04";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.14.05";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=0.14.05";
+import { duplicateUniversePointsFor } from "./store.js?v=0.14.05";
+import { sets } from "./sets.js?v=0.14.05";
+import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=0.14.05";
+import { CARD_TIERS, TIER_PULL_WEIGHTS, rollCardTier } from "./variants.js?v=0.14.05";
 
 export const BOOSTER_SIZE = 5;
 export const MAX_VERY_RARE_PULLS = 1;
+export const MAX_NON_NORMAL_PRINTINGS = 2;
+export const MAX_SAPPHIRE_OR_RUBY_PRINTINGS = 1;
 export const RARITY_WEIGHTS = Object.freeze({ 1: .5, 2: .3, 3: .15, 4: .05 });
 export const SUPERSTAR_PITY_PACKS = 100;
 export const SUPERSTAR_CHASE_CHANCE = .02;
@@ -126,6 +128,8 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
   // Standard packs allow at most one 4★ Very Rare. A chase Superstar counts
   // toward the pack's Very Rare ceiling.
   let veryRarePulls = superstarCard?.rarity === 4 ? 1 : 0;
+  let nonNormalPrintings = 0;
+  let sapphireOrRubyPrintings = 0;
 
   for (let i = 0; i < BOOSTER_SIZE; i += 1) {
     let card = null;
@@ -156,6 +160,18 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
     if (!card) continue;
     const availableTiers = CARD_TIERS.filter(tier => underTierOwnershipCap(profile, card, tier));
     if (availableTiers.length && !availableTiers.includes(pullTier)) pullTier = rollCardTier(rng, availableTiers, TIER_PULL_WEIGHTS);
+    // v0.14.05 premium-print collation: no more than two colored printings in
+    // a five-card booster, and at most one of those may be Sapphire or Ruby.
+    // Any excess premium result resolves to Normal rather than rerolling into
+    // another colored tier.
+    const highPremium = pullTier === "sapphire" || pullTier === "ruby";
+    if (pullTier !== "normal" && (nonNormalPrintings >= MAX_NON_NORMAL_PRINTINGS || (highPremium && sapphireOrRubyPrintings >= MAX_SAPPHIRE_OR_RUBY_PRINTINGS))) {
+      pullTier = "normal";
+    }
+    if (pullTier !== "normal") {
+      nonNormalPrintings += 1;
+      if (pullTier === "sapphire" || pullTier === "ruby") sapphireOrRubyPrintings += 1;
+    }
     const beforeTotal = totalOwnedCopies(profile, card.id);
     const wasUnlocked = card.kind === "superstar" && profile.unlockedSuperstars?.includes(card.superstarId);
     const result = addOwnedCard(profile, card.id, { tier: pullTier, amount: 1 });

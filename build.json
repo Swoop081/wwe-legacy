@@ -1,5 +1,5 @@
 {
-  "version": "0.14.04",
-  "releasedAt": "2026-08-22",
+  "version": "0.14.05",
+  "releasedAt": "2026-08-23",
   "updatePolicy": "network-version-check"
 }

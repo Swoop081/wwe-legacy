@@ -1,6 +1,6 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.14.04";
-import { superstars } from "./superstars.js?v=0.14.04";
-import { grantRandomBoosters } from "./boosters.js?v=0.14.04";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.14.05";
+import { superstars } from "./superstars.js?v=0.14.05";
+import { grantRandomBoosters } from "./boosters.js?v=0.14.05";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -435,13 +435,18 @@ function birthdayTowers(now) {
 
 export function activeLiveEventTowers(now = new Date(), profile = null) {
   const rawLive = profile ? rawLiveTower(profile, now) : null;
-  return [
+  const birthdays = birthdayTowers(now);
+  // v0.14.05: the Live Events hub always exposes exactly three rotating towers.
+  // Limited-time Birthday Bash / RAW LIVE towers take priority and displace a
+  // generic themed slot instead of growing the screen to four or five events.
+  const candidates = [
     primaryDailyTower(now),
-    themedDailyTower(now, "feature-a", THREE_DAY_TOWERS, 0),
-    themedDailyTower(now, "feature-b", WEEKLY_TOWERS, 1),
+    ...birthdays,
     rawLive,
-    ...birthdayTowers(now)
-  ].filter(Boolean).map(tower => descriptorRemaining(tower, now));
+    themedDailyTower(now, "feature-a", THREE_DAY_TOWERS, 0),
+    themedDailyTower(now, "feature-b", WEEKLY_TOWERS, 1)
+  ].filter(Boolean);
+  return candidates.slice(0, 3).map(tower => descriptorRemaining(tower, now));
 }
 export function liveEventTowerByKey(towerKey, now = new Date(), profile = null) {
   return activeLiveEventTowers(now, profile).find(tower => tower.key === towerKey) ?? null;
