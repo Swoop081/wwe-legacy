@@ -1,4 +1,4 @@
-import { applyCardTier, CARD_TIERS, normalizeCardTier, tierRank } from './variants.js?v=0.14.06';
+import { applyCardTier, CARD_TIERS, normalizeCardTier, tierRank } from './variants.js?v=0.14.07';
 
 const sortedTiers = cards => cards.map(c => normalizeCardTier(c?.tier, 'normal')).sort((a,b)=>tierRank(b)-tierRank(a));
 

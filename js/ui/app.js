@@ -1,40 +1,40 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.14.06";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.14.06";
-import { superstars } from "../data/superstars.js?v=0.14.06";
-import { decks } from "../data/decks.js?v=0.14.06";
-import { sets } from "../data/sets.js?v=0.14.06";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.14.06";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.14.06";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.14.06";
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.14.06";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.14.06";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.14.06";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.14.06";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.14.06";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=0.14.06";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=0.14.06";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.14.06";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.14.06";
-import { totalMomentum } from "../engine/utils.js?v=0.14.06";
-import { healthZone } from "../engine/health.js?v=0.14.06";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.14.06";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.14.06";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.14.06";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.14.06";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.14.06";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.14.06";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.14.06";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.14.06";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.14.06";
-import { COLLECTION_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.14.06";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.14.06";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.14.06";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.14.06";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.14.06";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.14.06";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.14.06";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.14.06";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.14.06";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.14.07";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.14.07";
+import { superstars } from "../data/superstars.js?v=0.14.07";
+import { decks } from "../data/decks.js?v=0.14.07";
+import { sets } from "../data/sets.js?v=0.14.07";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.14.07";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.14.07";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.14.07";
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.14.07";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.14.07";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.14.07";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.14.07";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.14.07";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=0.14.07";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=0.14.07";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.14.07";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.14.07";
+import { totalMomentum } from "../engine/utils.js?v=0.14.07";
+import { healthZone } from "../engine/health.js?v=0.14.07";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.14.07";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.14.07";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.14.07";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.14.07";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.14.07";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.14.07";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.14.07";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.14.07";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.14.07";
+import { COLLECTION_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.14.07";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.14.07";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.14.07";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.14.07";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.14.07";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.14.07";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.14.07";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.14.07";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.14.07";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -187,12 +187,15 @@ const superstarById = Object.fromEntries(Object.values(superstars).filter(star =
 const launchCollectionCards = collectionCards.filter(card => CURRENT_PLAYER_SET_IDS.includes(card.setId));
 const launchSetCollections = Object.fromEntries(Object.entries(setCollections).filter(([setId]) => CURRENT_PLAYER_SET_IDS.includes(setId)));
 function playerFacingCollectionCards() {
-  const rewardCards = collectionCards.filter(card => card.setId === "season-1-last-time-is-now" && (CARD_TIERS.some(tier => ownedCount(profile, card.id, tier) > 0)));
+  // Season reward cards are part of the current player-facing catalogue from
+  // day one. Ownership controls whether they are marked OWNED / NOT OWNED; it
+  // must never hide the authored Cena reward package from Catalogue filters.
+  const rewardCards = collectionCards.filter(card => card.setId === "season-1-last-time-is-now");
   return [...launchCollectionCards, ...rewardCards];
 }
 function playerFacingSetCollections() {
   const out = { ...launchSetCollections };
-  if (playerFacingCollectionCards().some(card => card.setId === "season-1-last-time-is-now")) out["season-1-last-time-is-now"] = setCollections["season-1-last-time-is-now"];
+  if (setCollections["season-1-last-time-is-now"]) out["season-1-last-time-is-now"] = setCollections["season-1-last-time-is-now"];
   return out;
 }
 const collectionById = new Map(collectionCards.map(card => [card.id, card]));
@@ -226,15 +229,18 @@ const menuSuperstarPhotoMarkup = (id, name, cls = "") => {
   return `<img class="${cls} superstar-render-visual official-menu-superstar-photo" src="${portrait}" alt="${name}" data-menu-superstar-photo="${id}" onerror="this.onerror=null;this.src='${superstarArtwork[id] ?? assetUrl("assets/images/card-temp-superstar-placeholder.svg")}';">`;
 };
 const finalBossRockMarkup = (cls = "") => `<img class="${cls} superstar-render-visual final-boss-rock-menu-art" src="${finalBossRockMenuArtwork}" alt="The Rock — Final Boss">`;
+const SEASON_ONE_CENA_LAYERED_CARD = assetUrl("assets/images/card-layered-superstar-john-cena.webp");
+const SEASON_ONE_CENA_FLAT_CARD = assetUrl("assets/images/card-custom-superstar-john-cena.webp");
 const seasonOneCenaCardMarkup = (cls = "") => {
-  // Use the canonical collectible-card renderer so the splash shows the exact
-  // installed John Cena physical front (layered first, then the user's flat
-  // Card Studio export) instead of rebuilding a lookalike from the menu render.
-  const card = superstarCollectibleFor("john-cena");
-  const front = card
-    ? collectibleCardMarkup(card,{ tier:"ruby", interactive:false, eagerArt:true, extraClass:"season-one-cena-authored-collectible" })
-    : superstarPreviewCardMarkup("john-cena", "season-one-cena-runtime-fallback");
-  return `<span class="season-one-cena-actual-card season-one-cena-card ${cls}">${front}</span>`;
+  // Splash reward art is exact-front-only. Never rebuild Cena's physical card
+  // from a menu/profile render: that produces a lookalike rather than the
+  // authored collectible. Try the Card Studio layered export, then the exact
+  // flat/custom export. If neither is installed, show an explicit missing-art
+  // state so the wrong card can never silently appear again.
+  return `<span class="season-one-cena-actual-card season-one-cena-card ${cls}" data-season-cena-card="exact-authored-front">
+    <img class="season-one-cena-exact-front" src="${SEASON_ONE_CENA_LAYERED_CARD}" alt="John Cena — The Last Time Is Now Superstar card" data-flat-front="${SEASON_ONE_CENA_FLAT_CARD}" onerror="if(!this.dataset.flatTried){this.dataset.flatTried='1';this.src=this.dataset.flatFront;return;}this.onerror=null;this.hidden=true;this.closest('.season-one-cena-actual-card')?.classList.add('is-missing-authored-front');">
+    <span class="season-one-cena-missing-front"><b>JOHN CENA</b><small>AUTHORED SUPERSTAR CARD ART NOT INSTALLED</small><em>Expected: card-layered-superstar-john-cena.webp</em></span>
+  </span>`;
 };
 const SEASON_ONE_CENA_RENDER = assetUrl("assets/images/art-wwe-menu-superstars-john-cena.webp");
 const seasonOneCenaRenderMarkup = (cls = "") => `<img class="${cls} season-one-cena-render superstar-render-visual official-wwe-cena-render" src="${SEASON_ONE_CENA_RENDER}" alt="John Cena" data-season-one-cena-render="wwe.com" onerror="this.onerror=null;this.src='${assetUrl("assets/images/card-temp-superstar-placeholder.svg")}';">`;
@@ -1445,13 +1451,18 @@ function renderLiveEventTowerDetail(towerKey) {
   const previewOpponents = previewBossId
     ? [...previewPool.filter(id => id !== previewBossId).slice(0, LIVE_EVENT_LENGTH - 1), previewBossId]
     : previewPool.slice(0, LIVE_EVENT_LENGTH);
-  const opponentIds = active ? run.opponents.filter(id => superstarById[id]) : previewOpponents;
+  // Preserve the authored opponent route after a tower is cleared. The saved run
+  // remains the source of truth, so reopening a completed tower reconstructs
+  // every DEFEATED state/check instead of falling back to a fresh preview route.
+  const hasSavedRoute = Array.isArray(run?.opponents) && run.opponents.some(id => superstarById[id]);
+  const opponentIds = hasSavedRoute ? run.opponents.filter(id => superstarById[id]) : previewOpponents;
   const route = opponentIds.map((id,index) => {
     const star = superstarById[id];
     const eventStage = liveEventStage(event,index);
-    const stateClass = active ? (index < run.stage ? 'cleared' : index === run.stage ? 'current' : 'waiting') : 'preview';
-    const stateLabel = active ? (index < run.stage ? 'DEFEATED' : index === run.stage ? 'CURRENT' : index === LIVE_EVENT_LENGTH - 1 ? 'REWARD' : 'WAITING') : (index === LIVE_EVENT_LENGTH - 1 ? 'REWARD' : 'WAITING');
-    return `<article class="live-tower-route-card ${stateClass}"><div class="live-tower-route-head"><span>${index+1}</span><em>${stateLabel}</em></div><div class="live-tower-route-superstar">${superstarPreviewCardMarkup(id,"live-tower-opponent-card")}${stateClass === 'cleared' ? '<span class="live-tower-defeated-check" aria-hidden="true">✓</span>' : ''}</div><div class="live-tower-route-copy"><strong>${star?.name ?? id}</strong><small>${eventStage.label}</small></div></article>`;
+    const stateClass = cleared ? 'cleared' : active ? (index < run.stage ? 'cleared' : index === run.stage ? 'current' : 'waiting') : 'preview';
+    const stateLabel = cleared ? 'DEFEATED' : active ? (index < run.stage ? 'DEFEATED' : index === run.stage ? 'CURRENT' : index === LIVE_EVENT_LENGTH - 1 ? 'REWARD' : 'WAITING') : (index === LIVE_EVENT_LENGTH - 1 ? 'REWARD' : 'WAITING');
+    const defeatedCheck = stateClass === 'cleared' ? '<span class="live-tower-defeated-check" aria-hidden="true">✓</span>' : '';
+    return `<article class="live-tower-route-card ${stateClass}" data-live-route-index="${index}" data-live-route-state="${stateClass}"><div class="live-tower-route-head"><span>${index+1}</span><em>${stateLabel}</em></div><div class="live-tower-route-superstar"><span class="live-tower-route-card-frame">${superstarPreviewCardMarkup(id,"live-tower-opponent-card")}${defeatedCheck}</span></div><div class="live-tower-route-copy"><strong>${star?.name ?? id}</strong><small>${eventStage.label}</small></div></article>`;
   }).join('');
   const detailAccent = liveEventAccentForTower(tower, now);
   const command = active
@@ -1898,7 +1909,7 @@ function renderMainMenu() {
         ${homeHubSplitTitle("SEASON", "ONE")}
         <span><b>${tierProgressLabel}</b><small>${tierProgressDetail}</small></span>
         <span class="legacy-season-progress season-home-progress"><i style="width:${seasonProgress.percent}%"></i></span>
-        <small class="legacy-season-foot">${seasonProgress.intoTier} / ${seasonProgress.needed} XP · TIER 100 · JOHN CENA</small>
+        <small class="legacy-season-foot">${seasonProgress.intoTier} / ${seasonProgress.needed} XP · TIER ${SEASON_TIER_COUNT} · JOHN CENA</small>
       </span>
     </button>
 

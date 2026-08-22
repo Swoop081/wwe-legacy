@@ -8,7 +8,7 @@ export const seasonExclusiveSuperstars = {
     nickname: "The Last Time Is Now",
     persona: "babyface farewell run",
     seasonId: "season-1",
-    unlock: "tier-100-completion",
+    unlock: "tier-50-completion",
     postSeasonAvailability: "future-decision",
     boosterEligible: false,
     fullDeckReward: true

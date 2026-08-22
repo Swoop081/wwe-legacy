@@ -9442,7 +9442,7 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
   transform:none!important;
 }
 
-/* v0.14.06 — Season 1 launch splash redesign + robust physical Cena reward card. */
+/* v0.14.07 — Season 1 launch splash redesign + robust physical Cena reward card. */
 .clean-launch-splash .season-one-splash-v2{
   position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(220px,.72fr);
   gap:clamp(18px,4vw,42px);align-items:center;overflow:hidden;
@@ -9491,3 +9491,99 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
   .clean-launch-splash .season-one-splash-v2 .season-ad-rock,.clean-launch-splash .season-one-splash-v2 .season-one-cena-actual-card,.clean-launch-splash .season-one-splash-v2 .season-ad-cena{max-width:205px!important}
 }
 
+
+/* v0.14.07 — Cena source-of-truth + persistent Live Event route state. */
+.live-tower-route-superstar{
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+}
+.live-tower-route-card-frame{
+  position:relative!important;
+  display:block!important;
+  width:fit-content!important;
+  max-width:100%!important;
+  margin-inline:auto!important;
+}
+.live-tower-route-card-frame>.live-tower-opponent-card,
+.live-tower-route-card-frame>.ccg-card,
+.live-tower-route-card-frame>.generated-superstar-preview{
+  display:block!important;
+  margin-inline:auto!important;
+}
+.live-tower-route-card-frame>.live-tower-defeated-check{
+  left:50%!important;
+  top:50%!important;
+  transform:translate(-50%,-50%) rotate(-7deg)!important;
+}
+
+/* The Season splash is never allowed to synthesize Cena's collectible from a
+   menu render. It displays only an installed exact Card Studio front. */
+.season-one-cena-actual-card{
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  aspect-ratio:680/1000!important;
+  overflow:hidden!important;
+  border-radius:18px!important;
+  background:linear-gradient(165deg,#12141a,#090a0d)!important;
+}
+.season-one-cena-exact-front{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  margin:auto!important;
+}
+.season-one-cena-missing-front{
+  display:none;
+  width:100%;height:100%;padding:18px;
+  align-content:center;justify-items:center;text-align:center;gap:8px;
+  border:1px dashed rgba(244,199,94,.45);border-radius:16px;
+  color:#fff;background:linear-gradient(160deg,rgba(45,12,15,.95),rgba(9,10,14,.98));
+}
+.season-one-cena-actual-card.is-missing-authored-front .season-one-cena-missing-front{display:grid}
+.season-one-cena-missing-front b{font-size:1.05rem;letter-spacing:.06em}
+.season-one-cena-missing-front small{color:#efc86a;font-size:.58rem;font-weight:900;letter-spacing:.12em;line-height:1.35}
+.season-one-cena-missing-front em{font-style:normal;color:#9da6b5;font-size:.48rem;line-height:1.35;overflow-wrap:anywhere}
+
+/* Let the premium launch splash take the vertical space it actually needs on
+   phones. The previous fixed grid row could force the hero to overflow into
+   the Continue Your Legacy panel. */
+@media(max-width:760px){
+  body[data-screen="splash"] .clean-launch-splash{
+    min-height:100svh!important;
+    height:auto!important;
+    overflow-y:auto!important;
+    align-items:start!important;
+  }
+  body[data-screen="splash"] .clean-splash-content{
+    height:auto!important;
+    min-height:0!important;
+    grid-template-rows:auto auto auto auto auto!important;
+    align-content:start!important;
+    gap:12px!important;
+  }
+  body[data-screen="splash"] .clean-splash-brand{
+    min-height:clamp(190px,27svh,280px)!important;
+    height:auto!important;
+  }
+  body[data-screen="splash"] .season-one-splash-v2{
+    align-self:start!important;
+    height:auto!important;
+    max-height:none!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body[data-screen="splash"] .clean-splash-profile{
+    position:relative!important;
+    z-index:4!important;
+    margin-top:0!important;
+  }
+}
+@media(max-width:390px){
+  body[data-screen="splash"] .clean-splash-brand{min-height:172px!important}
+  body[data-screen="splash"] .season-one-splash-v2{padding:20px 16px 18px!important}
+}

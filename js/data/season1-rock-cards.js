@@ -1,1 +1,1 @@
-import { allGameplayCards } from "./content.js?v=0.14.06"; export const season1RockCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="season-1-final-boss").map(c=>[c.id,c]));
+import { allGameplayCards } from "./content.js?v=0.14.07"; export const season1RockCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="season-1-final-boss").map(c=>[c.id,c]));
