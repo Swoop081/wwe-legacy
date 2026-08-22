@@ -149,8 +149,34 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Kept all authored **standing-only and grounded-only card requirements** intact; the bug was corrected in match posture/state recovery instead of flattening card legality.
 - Fully redesigned the **Season 1 launch/continue splash** into a larger premium John Cena hero/reward presentation.
 - Corrected obsolete splash copy from the old 100-tier structure to the current **50-tier Season Road**, culminating in the **Tier 50 Ruby John Cena Superstar** reward.
-- Hardened John Cena collectible-card presentation so the splash does not go blank when a finished Cena card-front export is absent; the physical-card renderer can use the installed Cena character source as its art fallback.
+- Season splash presentation was expanded for the 50-tier Cena completion reward. (The exact-card source policy is superseded by v0.14.07 below.)
 - Ran the post-fix launch-roster balance audit: **41 Superstars / 16,400 matches / 0 stalls / 26.79 average turns / 14,172 pin finishes / 2,228 submission finishes**. No automatic balance retuning was applied.
 - Verification: **834 tests / 737 passed / 0 failed / 97 intentionally skipped**, plus validation, collector-ID, flow, card-effect and counter/submission-state audits with 0 issues.
 - User-facing ZIP continues to **exclude the entire `assets/` directory**.
 
+## v0.14.07 — Cena Catalogue + Live Route Hotfix
+
+- Fixed **John Cena Season 1 Catalogue visibility**. All eight authored `season-1-last-time-is-now` collectibles now appear in the player-facing Catalogue from day one, including when they are not yet owned. Ownership controls the NOT OWNED / owned state instead of hiding the cards entirely.
+- The eight visible Season 1 Cena collectibles remain **Season-exclusive and booster-ineligible**: Protobomb, Five Knuckle Shuffle, STF, Attitude Adjustment, Hustle, Loyalty, Respect, The Time Is Now, Never Give Up, and the John Cena Superstar card.
+- Changed the Season 1 launch/continue splash to an **exact-authored-front-only** Cena card policy. It tries `card-layered-superstar-john-cena.webp`, then `card-custom-superstar-john-cena.webp`, and never reconstructs a physical card from Cena's menu/profile render.
+- Because user-facing builds intentionally exclude `assets/`, the exact Cena card front is not bundled in this overlay. If neither exact local Card Studio front exists, the splash now reports the missing authored front rather than showing the wrong card.
+- Corrected remaining Cena completion metadata / Home Season copy from obsolete **Tier 100** wording to the locked **Tier 50** Season 1 structure.
+- Fixed **Live Event defeated-route persistence**. Saved run opponents remain the route source of truth after returning to a tower, including after full completion, so previously cleared cards no longer revert to WAITING.
+- Centered the large defeated check relative to the **physical Superstar card frame itself**. Every already-cleared opponent receives the check when the route is reconstructed.
+- Tightened mobile launch-splash containment so the Season promo cannot overlap **Continue Your Legacy** or the entry CTA.
+- No gameplay balance, deck composition, pack odds, rewards, live-set availability, or match-state rules changed from v0.14.06.
+- Verification: **840 tests / 743 passed / 0 failed / 97 intentionally skipped**; targeted v0.14.07 tests **6/6**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues**; collector, flow, card-effect and counter/submission-state audits report 0 issues.
+- User-facing ZIP continues to **exclude the entire `assets/` directory**.
+
+## v0.14.08 — Cena Physical Card Renderer Hotfix
+
+- Fixed the Season 1 launch/continue splash John Cena card presentation again at the actual source of the v0.14.07 regression.
+- `card-layered-superstar-john-cena.webp` is an authored **layered Superstar card plate**, not a finished standalone front. Its lower name area is intentionally blank because WWE Legacy adds the Superstar nameplate at runtime.
+- v0.14.07 incorrectly displayed that layered plate as a complete image, producing the blank black name box seen on-device.
+- The splash now composes the exact installed Cena layered plate inside the canonical physical-card shell and adds John Cena’s authored runtime nameplate, matching the way layered Superstar cards are intended to render throughout WWE Legacy.
+- If the layered plate is absent, the splash may use the exact finished `card-custom-superstar-john-cena.webp`; when that finished flat front is used, the runtime nameplate is automatically suppressed so it cannot duplicate a printed nameplate.
+- The splash **never falls back to Cena menu/profile art**. If neither authored card asset exists locally, it shows the explicit missing-card state.
+- The Season completion card remains the **Tier 50 Ruby John Cena Superstar** and remains centered/bounded as one physical card in the reward bay.
+- All v0.14.07 Cena Catalogue visibility, Live Event defeated-route persistence/check placement, v0.14.06 grounded/Stun fixes, v0.14.05 booster collation and other prior changes are preserved.
+- No gameplay balance, deck composition, pack odds, reward quantities, Season progression, live-set availability or collection ownership changed.
+- User-facing ZIP continues to exclude the entire `assets/` directory.

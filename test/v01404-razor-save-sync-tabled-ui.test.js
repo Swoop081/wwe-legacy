@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.14.06';
-import { deckIds } from '../js/data/decks.js?v=0.14.06';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.14.08';
+import { deckIds } from '../js/data/decks.js?v=0.14.08';
 
 const desiredLead = ['momentum-strength','momentum-strike','momentum-technical','fallaway-slam','punch'];
 
@@ -47,8 +47,9 @@ test('v0.14.05 fresh/authored Razor deck still begins with the same Lead Off', (
 test('v0.14.05 includes all tabled presentation fixes in source', () => {
   const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url),'utf8');
   const css = fs.readFileSync(new URL('../css/game.css', import.meta.url),'utf8');
-  assert.match(app,/collectibleCardMarkup\(card,\{ tier:"ruby"/);
-  assert.match(css,/season-one-cena-authored-collectible/);
+  assert.match(app,/card-layered-superstar-john-cena\.webp/);
+  assert.match(app,/data-season-cena-card="canonical-authored-card"/);
+  assert.match(css,/season-one-cena-exact-front/);
   assert.match(css,/width:53%!important/);
   assert.match(css,/streamlined-pack-summary[\s\S]*overflow-y:auto!important/);
   assert.match(css,/grid-template-rows:auto minmax\(28px,auto\)/);

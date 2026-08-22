@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.06';
-import { moveEligibility, counterEligibility, canPlayAction, effectiveTotalMomentum } from '../js/engine/rules.js?v=0.14.06';
-import { superstars } from '../js/data/superstars.js?v=0.14.06';
-import { decks } from '../js/data/decks.js?v=0.14.06';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.08';
+import { moveEligibility, counterEligibility, canPlayAction, effectiveTotalMomentum } from '../js/engine/rules.js?v=0.14.08';
+import { superstars } from '../js/data/superstars.js?v=0.14.08';
+import { decks } from '../js/data/decks.js?v=0.14.08';
 
 const stars = Object.values(superstars);
 const rng = () => 0.42;

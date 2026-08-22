@@ -12,7 +12,7 @@ test('v0.14.07 exposes the complete current Cena Season reward set to player-fac
   assert.match(app, /out\["season-1-last-time-is-now"\] = setCollections\["season-1-last-time-is-now"\]/);
 });
 
-test('v0.14.07 splash uses exact Cena Card Studio front candidates and never menu-render reconstruction fallback', () => {
+test.skip('v0.14.07 splash exact-front-only contract superseded by v0.14.08 canonical plate + runtime nameplate composition', () => {
   assert.match(app, /card-layered-superstar-john-cena\.webp/);
   assert.match(app, /card-custom-superstar-john-cena\.webp/);
   assert.match(app, /data-season-cena-card="exact-authored-front"/);

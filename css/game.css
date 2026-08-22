@@ -9587,3 +9587,32 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
   body[data-screen="splash"] .clean-splash-brand{min-height:172px!important}
   body[data-screen="splash"] .season-one-splash-v2{padding:20px 16px 18px!important}
 }
+
+/* v0.14.08 — Season 1 Cena physical card renderer hotfix.
+   A layered Superstar export is a plate with a deliberately blank name area.
+   Compose it through the physical-card shell so the runtime John Cena nameplate
+   is present; only a finished flat/custom front suppresses that overlay. */
+.clean-launch-splash .season-one-cena-actual-card>.season-one-cena-authored-collectible{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0 auto!important;
+  transform:none!important;
+}
+.clean-launch-splash .season-one-cena-actual-card>.season-one-cena-authored-collectible .ccg-card-inner,
+.clean-launch-splash .season-one-cena-actual-card>.season-one-cena-authored-collectible .ccg-card-face,
+.clean-launch-splash .season-one-cena-actual-card>.season-one-cena-authored-collectible .ccg-card-art{
+  width:100%!important;
+  height:100%!important;
+}
+.clean-launch-splash .season-one-cena-actual-card>.season-one-cena-authored-collectible .ccg-layered-card-plate{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+}
+.clean-launch-splash .season-one-cena-actual-card.is-missing-authored-front>.season-one-cena-authored-collectible{display:none!important}
+.clean-launch-splash .season-one-cena-actual-card:not(.is-missing-authored-front)>.season-one-cena-missing-front{display:none!important}

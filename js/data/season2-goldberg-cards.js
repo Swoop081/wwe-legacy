@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.14.07";
+import { allGameplayCards } from "./content.js?v=0.14.08";
 
 // Canonical Season 2 prestige-reward package. Kept as a focused export so
 // reward/store/collection surfaces can reference Goldberg without duplicating

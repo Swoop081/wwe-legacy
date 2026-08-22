@@ -25,7 +25,11 @@ if(stale.length) throw new Error(`Runtime still contains legacy image roots: ${s
 const staticRefs=new Set();
 const refRe=/assets\/images\/[A-Za-z0-9_.-]+\.(?:png|webp|jpe?g|svg|gif|ico|avif)/g;
 for(const f of runtimeFiles){const t=fs.readFileSync(f,'utf8'); for(const m of t.matchAll(refRe)) staticRefs.add(m[0]);}
-const missingStatic=[...staticRefs].filter(ref=>!fs.existsSync(path.join(root,ref)));
+const optionalUserFronts=new Set([
+  'assets/images/card-layered-superstar-john-cena.webp',
+  'assets/images/card-custom-superstar-john-cena.webp',
+]);
+const missingStatic=[...staticRefs].filter(ref=>!optionalUserFronts.has(ref)&&!fs.existsSync(path.join(root,ref)));
 if(missingStatic.length) throw new Error(`Missing static image refs: ${missingStatic.join(', ')}`);
 
 let installedCardFronts=0, layered=0, flat=0;
