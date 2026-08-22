@@ -1,9 +1,9 @@
-import { decks } from "./decks.js?v=0.14.05";
-import { collectionCards } from "./collection.js?v=0.14.05";
-import { superstars } from "./superstars.js?v=0.14.05";
-import { isUnreleasedSetId } from "./release.js?v=0.14.05";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.14.05";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.14.05";
+import { decks } from "./decks.js?v=0.14.06";
+import { collectionCards } from "./collection.js?v=0.14.06";
+import { superstars } from "./superstars.js?v=0.14.06";
+import { isUnreleasedSetId } from "./release.js?v=0.14.06";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.14.06";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.14.06";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -796,7 +796,7 @@ export function migrateProfile(old) {
   }
 
   // v0.12.55 Final Boss reward-road migration: Rock's exclusive package is now
-  // earned progressively instead of arriving as a complete deck at Tier 100.
+  // earned progressively instead of arriving as a complete deck at Tier 50.
   // Preserve any cards an older profile already owns, and retroactively grant
   // the milestone rewards for tiers that were already claimed.
   if (sourceVersion < 27) {

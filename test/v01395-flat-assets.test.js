@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { collectionCards } from '../js/data/collection.js?v=0.14.05';
-import { layeredCardArtFor, superstarCardArtFor, superstarHeadshotFor } from '../js/data/artwork.js?v=0.14.05';
+import { collectionCards } from '../js/data/collection.js?v=0.14.06';
+import { layeredCardArtFor, superstarCardArtFor, superstarHeadshotFor } from '../js/data/artwork.js?v=0.14.06';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const strip=u=>String(u??'').replace(/\?v=.*$/,'');

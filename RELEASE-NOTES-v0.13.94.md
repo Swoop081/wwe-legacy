@@ -140,3 +140,17 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Superstar chase remains 2% per eligible pack with the 100-pack hard pity unchanged.
 - No gameplay card balance, deck, Season progression, reward quantity, live-set availability, or collection ownership changes.
 - User-facing ZIP excludes the entire `assets/` directory and overlays the existing current flat asset library.
+
+## v0.14.06 — Match State Recovery + Season Splash
+
+- Fixed the match-state bug that could leave both Superstars marked **GROUNDED** for the remainder of a match. When Control transfers to a grounded Superstar, they now automatically return to **Standing**, while grounded posture can still persist during an opponent's retained-Control grounded sequence.
+- Fixed **Stun** enforcement. A Superstar with active Stun cannot play a normal Counter/reversal or use Auto Counter; CPU defenders obey the same restriction.
+- Existing Stun clears when the opponent successfully Connects with a Move, when the stunned Superstar later commits a legal Move, or when the stunned Superstar passes. If the connecting Move applies a fresh Stun, the new Stun remains active after the old one is consumed.
+- Kept all authored **standing-only and grounded-only card requirements** intact; the bug was corrected in match posture/state recovery instead of flattening card legality.
+- Fully redesigned the **Season 1 launch/continue splash** into a larger premium John Cena hero/reward presentation.
+- Corrected obsolete splash copy from the old 100-tier structure to the current **50-tier Season Road**, culminating in the **Tier 50 Ruby John Cena Superstar** reward.
+- Hardened John Cena collectible-card presentation so the splash does not go blank when a finished Cena card-front export is absent; the physical-card renderer can use the installed Cena character source as its art fallback.
+- Ran the post-fix launch-roster balance audit: **41 Superstars / 16,400 matches / 0 stalls / 26.79 average turns / 14,172 pin finishes / 2,228 submission finishes**. No automatic balance retuning was applied.
+- Verification: **834 tests / 737 passed / 0 failed / 97 intentionally skipped**, plus validation, collector-ID, flow, card-effect and counter/submission-state audits with 0 issues.
+- User-facing ZIP continues to **exclude the entire `assets/` directory**.
+

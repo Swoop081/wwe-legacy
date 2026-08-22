@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.14.05";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.14.05";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.14.05";
+import { assetUrl } from "../config/build.js?v=0.14.06";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.14.06";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.14.06";
 
 const SUMMERSLAM_ROOT = "assets/images/art-summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/images/art-wwe-profile-portraits";
@@ -31,6 +31,7 @@ const rawMenuSuperstarArtwork = {
 // Superstar art is deliberately centralized. Replacing a portrait later only
 // requires changing one path here (or using superstarArtOverrides below).
 const rawSuperstarArtwork = {
+  "john-cena": `${WWE_MENU_SUPERSTAR_ROOT}-john-cena.webp`,
   "cody-rhodes": `${SUMMERSLAM_ROOT}-superstars-cody-rhodes.webp`,
   "cm-punk": `${SUMMERSLAM_ROOT}-superstars-cm-punk.webp`,
   "roman-reigns": `${SUMMERSLAM_ROOT}-superstars-roman-reigns.webp`,

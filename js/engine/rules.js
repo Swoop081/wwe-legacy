@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=0.14.05";
-import { healthRatio, healthZone } from "./health.js?v=0.14.05";
+import { totalMomentum } from "./utils.js?v=0.14.06";
+import { healthRatio, healthZone } from "./health.js?v=0.14.06";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -52,6 +52,7 @@ export function counterEligibility(state,playerId,incoming,counter){
  const fail=reason=>({ok:false,legal:false,reason}); const p=state?.players?.[playerId];
  if(state?.phase!=="COUNTER")return fail("Not a Counter window");
  if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
+ if(Math.max(Number(p?.status?.stunnedTurns??0),Number(p?.stun??0))>0)return fail("Stunned Superstars cannot Counter");
  if(!incoming||incoming.kind!=="move")return fail("Only incoming Moves can be Countered");
  if(counter?.kind==="action"&&counter?.effect?.type==="onceTooOften")return onceTooOftenEligibility(state,playerId,incoming,counter); if(p?.events?.pipersPitLockedCounterId&&counter?.id===p.events.pipersPitLockedCounterId)return fail("Piper’s Pit has shut down this Counter for the Control sequence");
  const isCounterAttack=!!state?.proposedMove?.isCounterAttack;
@@ -75,6 +76,7 @@ export function autoCounterEligibility(state,playerId,incoming=state?.proposedMo
  const p=state?.players?.[playerId];
  if(state?.phase!=="COUNTER")return fail("Not a Counter window");
  if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
+ if(Math.max(Number(p?.status?.stunnedTurns??0),Number(p?.stun??0))>0)return fail("Stunned Superstars cannot Auto Counter");
  if(!incoming||incoming.kind!=="move")return fail("No incoming Move");
  if(state?.proposedMove?.isCounterAttack)return fail("Counter-attacks cannot be Auto Countered");
  if(incoming.finisher)return fail("Finishers cannot be Auto Countered");
