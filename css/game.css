@@ -9668,3 +9668,49 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
 }
 .clean-launch-splash .season-one-cena-authored-collectible.has-flat-superstar-front .season-one-cena-name-text{display:none!important}
 .clean-launch-splash .season-one-cena-authored-collectible .ccg-tier-overlay{display:none!important}
+
+
+/* Cena splash direct-plate correction — remove generic card shell entirely.
+   The authored 680x1000 image owns its complete physical card bounds. */
+.clean-launch-splash .season-one-splash-v2 .season-one-cena-actual-card{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  max-width:280px!important;
+  aspect-ratio:680/1000!important;
+  height:auto!important;
+  margin:0 auto!important;
+  padding:0!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.clean-launch-splash .season-one-splash-v2 .season-one-cena-actual-card>.season-one-cena-exact-front{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:fill!important;
+  object-position:center!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.clean-launch-splash .season-one-cena-actual-card.uses-flat-cena-front .season-one-cena-name-text{display:none!important}
+.clean-launch-splash .season-one-cena-actual-card.is-missing-authored-front>.season-one-cena-exact-front{display:none!important}
+@media(max-width:520px){
+  .clean-launch-splash .season-one-splash-v2 .season-one-cena-actual-card{max-width:190px!important}
+}
+@media(max-width:390px){
+  .clean-launch-splash .season-one-splash-v2 .season-one-cena-actual-card{max-width:205px!important}
+}

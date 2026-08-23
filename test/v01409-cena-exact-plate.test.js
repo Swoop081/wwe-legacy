@@ -15,7 +15,7 @@ test('v0.14.09 premium splash renders the canonical Cena card helper', () => {
 test('v0.14.09 Cena exact plate is never reconstructed from menu art', () => {
   const block = app.slice(app.indexOf('const SEASON_ONE_CENA_CARD_ID'), app.indexOf('const SEASON_ONE_CENA_RENDER'));
   assert.doesNotMatch(block, /SEASON_ONE_CENA_RENDER|official-wwe-cena-render|menuSuperstarPhotoMarkup/);
-  assert.match(block, /The supplied Cena WebP is the exact authored 680x1000 physical card plate/);
+  assert.match(block, /supplied 680x1000[\s\S]*actual authored card plate/);
 });
 
 test('v0.14.09 Cena splash applies text only inside the baked name bay', () => {

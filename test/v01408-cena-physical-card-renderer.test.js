@@ -17,7 +17,6 @@ test('v0.14.09 Season splash uses the exact authored Cena plate and text-only na
   assert.match(block, /card-layered-superstar-john-cena\.webp/);
   assert.match(block, /card-custom-superstar-john-cena\.webp/);
   assert.match(block, /season-one-cena-name-text/);
-  assert.match(block, /data-card-tier="ruby"/);
   assert.match(block, /data-season-cena-card="canonical-authored-card"/);
   assert.doesNotMatch(block, /superstarNameplateMarkup\(card\)/);
   assert.doesNotMatch(block, /ccg-tier-overlay/);
@@ -31,11 +30,11 @@ test('v0.14.09 Cena splash does not paint a second nameplate panel over the auth
 
 test('v0.14.09 flat finished Cena front suppresses the text-only overlay', () => {
   const block = cenaBlock();
-  assert.match(block, /classList\.add\('has-flat-superstar-front'\)/);
-  assert.match(css, /\.season-one-cena-authored-collectible\.has-flat-superstar-front \.season-one-cena-name-text\{display:none!important\}/);
+  assert.match(block, /classList\.add\('uses-flat-cena-front'\)/);
+  assert.match(css, /\.season-one-cena-actual-card\.uses-flat-cena-front \.season-one-cena-name-text\{display:none!important\}/);
 });
 
 test('v0.14.09 splash Cena card remains centered and preserves the exact 680 by 1000 ratio', () => {
   assert.match(css, /\.season-one-cena-actual-card\{[\s\S]*aspect-ratio:680\/1000!important;/);
-  assert.match(css, /\.season-one-cena-exact-front\{[\s\S]*object-fit:contain!important;[\s\S]*object-position:center center!important;/);
+  assert.match(css, /\.season-one-cena-actual-card>\.season-one-cena-exact-front\{[\s\S]*object-fit:fill!important;[\s\S]*object-position:center!important;/);
 });

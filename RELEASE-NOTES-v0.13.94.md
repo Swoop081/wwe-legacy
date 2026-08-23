@@ -192,3 +192,13 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - All v0.14.08 and earlier fixes remain intact, including Cena Catalogue visibility, 50-tier Season copy, Live Event cleared-route reconstruction/checks, Grounded/Stun state recovery, Auto Counter scroll retention, Live Event hub ordering and booster-printing collation.
 - No gameplay balance, deck composition, pack odds, rewards, Season progression or live-set availability changed.
 - User-facing ZIP continues to exclude the entire `assets/` directory.
+
+
+## v0.14.10 — Cena Direct Plate Hotfix
+
+- Season 1 launch/continue splash no longer nests John Cena's authored 680×1000 physical card plate inside the generic `.ccg-card` shell.
+- Exact Cena plate now renders edge-to-edge at its authored bounds, removing the repeated right/bottom black gutter and extra frame seen on iPhone.
+- Splash adds only `John Cena` + `SUPERSTAR` text inside the plate's existing blank name bay.
+- No synthetic Cena card reconstruction, duplicate frame, generic nameplate background, or tier-surface overlay is used on this splash.
+- All prior tabled fixes carry forward.
+- Distribution remains no-assets.
