@@ -1,5 +1,5 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.14.10";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.14.10";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.14.11";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.14.11";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-22T00:00:00";
 export const SEASON_END = "2026-09-21T00:00:00";
@@ -70,7 +70,8 @@ function ensure(profile) {
     freePackLastClaimAt: null,
     freePacksClaimed: 0,
     matchXpEarned: 0,
-    challengeXpEarned: 0
+    challengeXpEarned: 0,
+    liveEventBonusXpEarned: 0
   };
   const state = profile.seasons[SEASON_ID];
   state.xp = Math.max(0, Number(state.xp) || 0);
@@ -79,6 +80,7 @@ function ensure(profile) {
   state.freePacksClaimed ??= 0;
   state.matchXpEarned ??= 0;
   state.challengeXpEarned ??= 0;
+  state.liveEventBonusXpEarned ??= 0;
   return state;
 }
 
@@ -107,6 +109,7 @@ export function awardSeasonXp(profile, amount, source = "other") {
   const actual = state.xp - before;
   if (source === "match") state.matchXpEarned += actual;
   if (source === "challenge") state.challengeXpEarned += actual;
+  if (source === "live-event-daily-set") state.liveEventBonusXpEarned += actual;
   return { awarded: actual, before, after: state.xp, tierBefore: Math.floor(before / XP_PER_TIER), tierAfter: seasonTier(profile) };
 }
 export function awardMatchSeasonXp(profile, result) {

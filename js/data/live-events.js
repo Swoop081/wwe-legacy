@@ -1,10 +1,12 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.14.10";
-import { superstars } from "./superstars.js?v=0.14.10";
-import { grantRandomBoosters } from "./boosters.js?v=0.14.10";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.14.11";
+import { superstars } from "./superstars.js?v=0.14.11";
+import { grantRandomBoosters } from "./boosters.js?v=0.14.11";
+import { awardSeasonXp } from "./seasons.js?v=0.14.11";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
 export const LIVE_EVENT_CLEAR_BOOSTERS = 1;
+export const DAILY_LIVE_EVENT_SET_XP = 25;
 
 const LIVE_REWARD_FALLBACKS = Object.freeze([
   "summerslam-series-1",
@@ -458,6 +460,7 @@ function ensureTowerStore(profile, now = new Date()) {
   store.states ??= {};
   store.totalClears ??= profile.weeklyLiveEvents?.totalClears ?? 0;
   store.completedKeys ??= [];
+  store.dailySetXpClaimedDays ??= [];
   store.rawLiveLastUsedAt ??= null;
   profile.weeklyLiveEvents ??= { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: store.totalClears, bestStage: 0, completedWeeks: [] };
   profile.weeklyLiveEvents.totalClears = Math.max(profile.weeklyLiveEvents.totalClears ?? 0, store.totalClears ?? 0);
@@ -592,6 +595,32 @@ export function currentLiveEventTowerStage(profile, towerKey, now = new Date()) 
   if (!entry) return null;
   return liveEventStage(entry.tower.event, entry.state.activeRun?.stage ?? 0);
 }
+export function dailyLiveEventSetStatus(profile, now = new Date()) {
+  const day = dateKey(localDayStart(now));
+  const towers = activeLiveEventTowers(now, profile);
+  const store = ensureTowerStore(profile, now);
+  const completed = towers.filter(tower => stateForTower(profile, tower, now).cleared).length;
+  const required = 3;
+  const claimed = store.dailySetXpClaimedDays.includes(day);
+  return {
+    dayKey: day,
+    completed,
+    required,
+    complete: towers.length === required && completed === required,
+    claimed,
+    xpReward: DAILY_LIVE_EVENT_SET_XP
+  };
+}
+
+export function awardDailyLiveEventSetCompletionXp(profile, now = new Date()) {
+  const status = dailyLiveEventSetStatus(profile, now);
+  if (!status.complete || status.claimed) return { ...status, awarded: 0, seasonXp: null };
+  const store = ensureTowerStore(profile, now);
+  const seasonXp = awardSeasonXp(profile, DAILY_LIVE_EVENT_SET_XP, "live-event-daily-set");
+  if (!store.dailySetXpClaimedDays.includes(status.dayKey)) store.dailySetXpClaimedDays.push(status.dayKey);
+  return { ...status, claimed: true, awarded: seasonXp.awarded, seasonXp };
+}
+
 export function recordLiveEventTowerMatch(profile, towerKey, result, now = new Date(), rng = Math.random) {
   const entry = liveEventTowerState(profile, towerKey, now);
   if (!entry) throw new Error("That Live Event has expired.");
@@ -611,7 +640,19 @@ export function recordLiveEventTowerMatch(profile, towerKey, result, now = new D
     profile.weeklyLiveEvents.totalClears = aggregate.totalClears;
     const rewardSetIds = grantRandomBoosters(profile, LIVE_EVENT_CLEAR_BOOSTERS, rng, now);
     run.rewardSetIds = rewardSetIds;
-    return { status: "cleared", run, tower, event: tower.event, packAwarded: true, packCount: rewardSetIds.length, rewardSetIds };
+    const dailySetBonus = awardDailyLiveEventSetCompletionXp(profile, now);
+    return {
+      status: "cleared",
+      run,
+      tower,
+      event: tower.event,
+      packAwarded: true,
+      packCount: rewardSetIds.length,
+      rewardSetIds,
+      dailySetXpAwarded: dailySetBonus.awarded ?? 0,
+      dailySetXpReward: dailySetBonus.seasonXp ?? null,
+      dailySetStatus: dailySetBonus
+    };
   }
   return { status: "advance", run, tower, stage: liveEventStage(tower.event, run.stage) };
 }

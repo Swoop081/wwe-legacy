@@ -9714,3 +9714,45 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
 @media(max-width:390px){
   .clean-launch-splash .season-one-splash-v2 .season-one-cena-actual-card{max-width:205px!important}
 }
+
+
+/* v0.14.11 — tabled Season splash cleanup + Daily Live Event completion reward. */
+/* The legacy Season art rule masks every image inside .season-ad-rock. Cena's
+   exact physical card must never inherit that right-edge fade or filtering. */
+.clean-launch-splash .season-one-splash-v2 .season-ad-rock>.season-one-cena-actual-card>.season-one-cena-exact-front{
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+  filter:none!important;
+  opacity:1!important;
+  left:0!important;
+  right:0!important;
+  top:0!important;
+  bottom:0!important;
+}
+.clean-launch-splash .season-one-splash-v2 .season-splash-facts{display:none!important}
+
+.daily-live-set-progress{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 12px;
+  padding:12px 14px;
+  border:1px solid rgba(98,202,255,.30);
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(20,37,62,.82),rgba(8,14,25,.94));
+  box-shadow:0 10px 26px rgba(0,0,0,.22);
+}
+.daily-live-set-progress>div{display:flex;flex-direction:column;gap:2px}
+.daily-live-set-progress span{font-size:.54rem;font-weight:900;letter-spacing:.14em;color:#8fd8ff}
+.daily-live-set-progress strong{font-size:.90rem;letter-spacing:.03em;color:#fff}
+.daily-live-set-progress>b{font-size:.58rem;letter-spacing:.08em;color:#d8efff;text-align:right}
+.daily-live-set-progress.is-claimed{
+  border-color:rgba(65,224,145,.34);
+  background:linear-gradient(135deg,rgba(16,64,49,.82),rgba(7,24,20,.94));
+}
+.daily-live-set-progress.is-claimed span,.daily-live-set-progress.is-claimed>b{color:#8ff0b9}
+@media(max-width:520px){
+  .daily-live-set-progress{align-items:flex-start;flex-direction:column;gap:6px;padding:10px 12px}
+  .daily-live-set-progress>b{text-align:left;font-size:.54rem}
+}

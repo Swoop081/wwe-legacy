@@ -1,25 +1,17 @@
-# WWE Legacy v0.14.10 — Cena Direct Plate Hotfix
+# WWE Legacy v0.14.11 — Season Splash Cleanup + Daily Live Event XP
 
 This is a **verified no-assets overlay build**. Copy it over the current WWE Legacy installation while retaining the existing `assets/` folder.
 
-## Season 1 Cena splash fix
+## Included tabled changes
 
-The Season 1 launch/continue splash now renders the exact user-supplied `card-layered-superstar-john-cena.webp` (680×1000) **directly**, without nesting it inside WWE Legacy's generic `.ccg-card` shell.
+- **Season 1 splash:** removes the inherited right-edge fade/mask from John Cena’s exact authored physical card so the card renders at full opacity edge-to-edge.
+- **Season 1 splash:** removes the redundant `50 TIERS` and `TIER 50 RUBY SUPERSTAR` fact boxes. The 50-tier structure remains stated naturally in the Season copy and the reward remains the Tier 50 John Cena Superstar.
+- **Live Event route:** opening or returning to a tower automatically scrolls the opponent rail to the current match and centers it where possible. Completed towers open at the final cleared opponent.
+- **Daily Live Event XP:** the three rotating Daily Live Events remain 5 matches each. Wins continue to award **5 Season XP per match** (15 wins = 75 XP). Clearing all three rotating Daily Live Events on the same local day automatically awards a **one-time +25 Season XP** completion bonus, making the full three-event daily routine **100 Season XP**.
+- The Live Events hub now shows daily set progress (`0/3` through `3/3`) and the +25 XP completion reward/claimed state.
 
-That generic shell was the source of the repeated black gutter / extra frame on iPhone. v0.14.10 removes it from this splash path entirely.
+All v0.14.10 and earlier fixes carry forward, including the exact Cena direct-plate renderer, grounded/stun recovery, Live Event defeated-state checks, Auto Counter scroll retention, 3-event + MITB ordering, booster premium-printing collation, and 100-pack Superstar pity.
 
-The splash now:
+## Packaging
 
-- renders the authored Cena plate edge-to-edge at its true 680:1000 ratio;
-- adds only `John Cena` + `SUPERSTAR` text inside the plate's existing blank name bay;
-- does not draw a second card shell, frame, tier overlay, or nameplate background;
-- never reconstructs the card from Cena menu/profile artwork;
-- keeps finished flat/custom Cena fronts supported and suppresses runtime name text for those finished fronts.
-
-Expected existing asset:
-
-`assets/images/card-layered-superstar-john-cena.webp`
-
-The `assets/` directory is intentionally excluded from this distribution.
-
-All v0.14.09 and earlier fixes carry forward.
+The `assets/` directory is intentionally excluded from this ZIP. It overlays the current WWE Legacy asset library.

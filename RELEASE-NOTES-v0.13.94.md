@@ -202,3 +202,16 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - No synthetic Cena card reconstruction, duplicate frame, generic nameplate background, or tier-surface overlay is used on this splash.
 - All prior tabled fixes carry forward.
 - Distribution remains no-assets.
+
+## v0.14.11 — Season Splash Cleanup + Daily Live Event XP
+
+- Fixed the remaining **right-side fade on John Cena’s Season 1 physical card**. The fade came from an older `.season-ad-rock img` mask/filter rule that still applied to the exact direct-plate image. The Cena splash path now explicitly disables both standard and WebKit masks, legacy filtering and inherited opacity on the exact card front.
+- Removed the redundant Season splash fact boxes **`50 TIERS`** and **`TIER 50 RUBY SUPERSTAR`**. The splash still correctly describes the 50-tier Season Road in its main copy and still presents John Cena as the Tier 50 completion Superstar.
+- Live Event tower detail now **auto-scrolls the horizontal opponent route to the current match** on entry/return. The active opponent is centered where possible; completed towers focus the final cleared opponent instead of resetting to Match 1.
+- Added a once-per-local-day **+25 Season XP Daily Live Event set-completion bonus**. The bonus awards automatically when all three rotating Daily Live Events shown for that day are cleared.
+- Existing match XP remains **+5 XP per win**. Because the three Daily Live Events contain 15 required wins total, completing the full daily set now yields **75 match XP + 25 completion XP = 100 Season XP**.
+- The Live Events hub now displays the current daily set completion count (`0/3` through `3/3`) and clearly shows the +25 XP reward/claimed state.
+- The +25 XP reward is idempotent: reopening completed towers or revisiting the hub cannot award it twice for the same local day.
+- No card balance, deck composition, pack odds, Superstar pity, Season tier count, reward-card identities, live-set availability, or collection ownership changed.
+- User-facing distribution continues to exclude the entire `assets/` directory.
+

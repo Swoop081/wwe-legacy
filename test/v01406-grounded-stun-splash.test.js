@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.10';
-import { counterEligibility, autoCounterEligibility } from '../js/engine/rules.js?v=0.14.10';
-import { superstars } from '../js/data/superstars.js?v=0.14.10';
-import { decks } from '../js/data/decks.js?v=0.14.10';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.10';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.11';
+import { counterEligibility, autoCounterEligibility } from '../js/engine/rules.js?v=0.14.11';
+import { superstars } from '../js/data/superstars.js?v=0.14.11';
+import { decks } from '../js/data/decks.js?v=0.14.11';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.11';
 
 const star=id=>Object.values(superstars).find(s=>s.id===id);
 const card=id=>allGameplayCards.find(c=>c.id===id);
@@ -64,12 +64,12 @@ test('v0.14.07 Stun clears when the stunned controller passes',()=>{
   assert.equal(p.status.stunnedTurns,0); assert.equal(p.stun,0);
 });
 
-test('v0.14.07 launch splash is a 50-tier Cena reward splash with no obsolete 100-tier copy',()=>{
+test('v0.14.11 launch splash keeps the 50-tier Cena reward but removes redundant tier fact boxes',()=>{
   const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
   assert.match(app,/season-one-splash-v2/);
   assert.match(app,/50-tier Season Road/);
   assert.match(app,/TIER 50/);
-  assert.match(app,/RUBY SUPERSTAR/);
   assert.match(app,/seasonOneCenaCardMarkup\("season-ad-cena"\)/);
   assert.doesNotMatch(app,/Climb the 100-tier Season Road/);
+  assert.doesNotMatch(app,/season-splash-facts" aria-label="Season 1 details/);
 });
