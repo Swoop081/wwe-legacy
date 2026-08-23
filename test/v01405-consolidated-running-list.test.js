@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.14.13';
-import { grantBooster, openBooster, MAX_NON_NORMAL_PRINTINGS, MAX_SAPPHIRE_OR_RUBY_PRINTINGS, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=0.14.13';
-import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.14.13';
+import { createProfile } from '../js/data/profile.js?v=0.14.14';
+import { grantBooster, openBooster, MAX_NON_NORMAL_PRINTINGS, MAX_SAPPHIRE_OR_RUBY_PRINTINGS, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=0.14.14';
+import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.14.14';
 const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
 test('v0.14.05 Live Events exposes exactly three rotating towers and MITB follows them',()=>{const p=createProfile('roman-reigns');const a=activeLiveEventTowers(new Date('2026-08-23T12:00:00'),p);assert.equal(a.length,3);const b=activeLiveEventTowers(new Date('2027-07-12T12:00:00'),p);assert.equal(b.length,3);assert.ok(b.some(t=>t.cadence==='birthday'));assert.ok(app.includes('${cards}${mitbCard}'));});

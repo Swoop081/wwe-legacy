@@ -1,5 +1,5 @@
-import { superstars } from "./superstars.js?v=0.14.13";
-import { grantBooster } from "./boosters.js?v=0.14.13";
+import { superstars } from "./superstars.js?v=0.14.14";
+import { grantBooster } from "./boosters.js?v=0.14.14";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 40;
 export const LEGACY_CHAMPIONSHIP_ROAD_LENGTH = 32;
@@ -75,7 +75,7 @@ function normalizeRoad(road) {
     if (!Array.isArray(road.activeRun.opponents)) {
       road.activeRun = null;
     } else if (road.activeRun.opponents.length !== CHAMPIONSHIP_ROAD_LENGTH) {
-      // v0.14.13 expands the road from 32 to 40 matches. Preserve existing progress
+      // v0.14.14 expands the road from 32 to 40 matches. Preserve existing progress
       // instead of discarding the player's run when the canonical opponent map changes.
       const previousLength = road.activeRun.opponents.length;
       const wasLegacyClear = road.activeRun.status === "cleared" && Number(road.activeRun.stage ?? 0) >= previousLength;

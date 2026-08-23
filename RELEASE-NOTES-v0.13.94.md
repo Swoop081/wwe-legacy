@@ -241,3 +241,13 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - No card balance, deck, pack-odds, Superstar-pity, Season-XP, Daily-Live-Event-XP, collection-ownership or unrelated match-rule changes.
 - User-facing distribution continues to exclude the entire `assets/` directory.
 - Verification: **864 tests / 766 passed / 0 failed / 98 intentionally skipped**; targeted v0.14.13 tests **4/4**; validation, collector-ID, flow, card-effect and counter/submission-state audits report 0 issues.
+
+## v0.14.14 — Championship Road Launch Hotfix
+
+- Fixed the **blocking Championship Road Fight Match regression** introduced in v0.14.13. Championship Road passes lightweight presentation metadata so each section can use its correct arena/set theme, but the shared matchup splash incorrectly treated any metadata object as a Daily Live Event and attempted to call `eventMeta.eventName.toUpperCase()`. Championship Road metadata has no `eventName`, so tapping **FIGHT MATCH** could stop before the matchup splash appeared.
+- Matchup presentation now normalizes metadata by mode: only `mode === "live-event"` uses Live Event heading/stage/rule fields. Championship Road keeps its section `rewardSetId` for arena/ring/set presentation but enters the normal **MAIN EVENT** matchup flow safely.
+- Restores match launching for **every active per-Superstar Championship Road**, including existing/migrated 40-match progress such as Roman Reigns at Match 11 and fresh roads such as Razor Ramon at Match 1.
+- Corrected the stale Championship Road hero kicker from **24 MATCHES · FOUR DIFFICULTIES** to **40 MATCHES · FOUR DIFFICULTIES**.
+- No Championship Road stage/progress values, opponent order, difficulty unlocks, section rewards, card balance, pack odds, Season XP, Daily Live Event XP, Superstar pity or collection ownership changed.
+- User-facing distribution continues to exclude the entire `assets/` directory.
+- Verification against the inherited current asset library: **866 tests / 768 passed / 0 failed / 98 intentionally skipped historical contracts**; targeted v0.14.14 tests **2/2**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues**; collector-ID **782/782 / 0 issues**; flow **76/76 / 0 issues**; card-effect and counter/submission-state audits report **0 issues**.

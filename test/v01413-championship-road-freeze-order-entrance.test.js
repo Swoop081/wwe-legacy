@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.14.13';
+import { createProfile } from '../js/data/profile.js?v=0.14.14';
 import {
   CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS,
   championshipRoadForSuperstar, championshipRoadSectionForStage
-} from '../js/data/championship-road.js?v=0.14.13';
+} from '../js/data/championship-road.js?v=0.14.14';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
 
-test('v0.14.13 Championship Road is 40 matches in the approved ten-section order', () => {
+test('v0.14.14 Championship Road is 40 matches in the approved ten-section order', () => {
   assert.equal(CHAMPIONSHIP_ROAD_LENGTH, 40);
   assert.deepEqual(CHAMPIONSHIP_ROAD_SECTIONS.map(s => [s.label,s.start,s.end]), [
     ['Golden Era · Part I',1,4],['New Generation · Part I',5,8],['Attitude Era · Part I',9,12],
@@ -23,7 +23,7 @@ test('v0.14.13 Championship Road is 40 matches in the approved ten-section order
   assert.equal(championshipRoadSectionForStage(28).label, 'Attitude Era · Part II');
 });
 
-test('v0.14.13 legacy 32-match active runs expand without losing numeric progress', () => {
+test('v0.14.14 legacy 32-match active runs expand without losing numeric progress', () => {
   const p = createProfile('roman-reigns');
   p.championshipRoad.roadsBySuperstar ??= {};
   p.championshipRoad.roadsBySuperstar['roman-reigns'] = {
@@ -38,7 +38,7 @@ test('v0.14.13 legacy 32-match active runs expand without losing numeric progres
   assert.deepEqual(road.activeRun.opponents, CHAMPIONSHIP_ROAD_OPPONENTS);
 });
 
-test('v0.14.13 Championship Road freezes upper controls and focuses the active route group', () => {
+test('v0.14.14 Championship Road freezes upper controls and focuses the active route group', () => {
   assert.match(app, /class="champ-road-fixed"/);
   assert.match(app, /data-champ-section=/);
   assert.match(app, /const focusSection = championshipRoadSectionForStage\(focusStage\)/);
@@ -47,7 +47,7 @@ test('v0.14.13 Championship Road freezes upper controls and focuses the active r
   assert.match(css, /body\[data-screen="championship"\] \.champ-road-fixed\{[\s\S]*flex:0 0 auto!important/);
 });
 
-test('v0.14.13 entrance label uses the lower open portion of the hero while the logo remains in row one', () => {
+test('v0.14.14 entrance label uses the lower open portion of the hero while the logo remains in row one', () => {
   assert.match(css, /entrance-hero-band\{[\s\S]*grid-template-rows:auto minmax\(0,1fr\) auto!important/);
   assert.match(css, /entrance-intro-heading\{[\s\S]*grid-row:3!important;align-self:end!important/);
 });

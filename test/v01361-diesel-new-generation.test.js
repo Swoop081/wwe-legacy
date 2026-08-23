@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=0.14.13";
-import { superstars } from "../js/data/superstars.js?v=0.14.13";
-import { decks } from "../js/data/decks.js?v=0.14.13";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.13";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.13";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.13";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.13";
-import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.13";
+import { sets } from "../js/data/sets.js?v=0.14.14";
+import { superstars } from "../js/data/superstars.js?v=0.14.14";
+import { decks } from "../js/data/decks.js?v=0.14.14";
+import { allGameplayCards } from "../js/data/content.js?v=0.14.14";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.14";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.14";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.14";
+import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.14";
 
 const diesel=Object.values(superstars).find(s=>s.id==="diesel");
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));

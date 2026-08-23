@@ -1,20 +1,32 @@
-# WWE Legacy v0.14.13 — Championship Road 40-Match + Frozen Controls
+# WWE Legacy v0.14.14 — Championship Road Launch Hotfix
 
 This is a **verified no-assets overlay build**. Copy it over the current WWE Legacy installation while retaining the existing `assets/` folder.
 
-## Included tabled changes
+## Critical fix
 
-- **Opponent Entrance spacing:** keeps the set/show logo at its established top position but moves the `OPPONENT ENTRANCE` / Superstar-name block down into the open lower portion of the entrance hero band, immediately above the divider/card stage. The Superstar card position is unchanged.
-- **Championship Road frozen control deck:** the entire upper Championship Road command area now stays fixed in place on iPhone — Road header/progress, per-Superstar road selector, difficulty selector, status/current-match panel and Fight Match CTA. Only the opponent route below it scrolls vertically.
-- **Championship Road current-group focus:** entering/returning to Championship Road automatically scrolls the lower route viewport to the four-match group containing the current match rather than starting at the beginning of the road. Completed roads focus the final group.
-- **Championship Road expanded to 40 matches:** restores the missing Golden Era Part II and Attitude Era Part II sections and gives all five live sets a Part I and Part II.
-- **Approved ten-section order:** Golden Era I → New Generation I → Attitude Era I → SummerSlam I → Evolution I → Golden Era II → New Generation II → Attitude Era II → SummerSlam II → Evolution II. Each group remains four matches.
-- **Live-set roster coverage:** the 40-match road now uses eight Superstars from each of the five live sets. Golden Era Part II adds Rowdy Roddy Piper, Ted DiBiase, Jake “The Snake” Roberts and Mr. Perfect; Attitude Era Part II adds The Rock, Triple H, Chris Jericho and Kurt Angle.
-- **Existing-save migration:** active legacy 32-match Championship Road runs are expanded to the new canonical 40-opponent route while preserving the player's numeric match progress and difficulty. A legacy completed 32-match active run resumes from Match 33 so the newly restored final eight matches can be played.
-- **Road rewards:** the existing one-booster-per-four-match-section rule remains. A full 40-match road therefore contains ten themed section-clear boosters instead of eight.
+v0.14.13 introduced a blocking Championship Road launch regression. Tapping **FIGHT MATCH** supplied Championship Road section metadata to the shared matchup splash so the correct era arena/ring theme could be used. The splash mistakenly treated that metadata as Daily Live Event metadata and read an `eventName` field that Championship Road does not have, stopping the transition before the match could begin.
 
-All v0.14.12 and earlier fixes carry forward, including Championship Road era-matched arena presentation, compact Tier Up, Tribal Chief front text, stronger premium-card glow, the Daily Live Event 100-XP routine, grounded/Stun recovery, Cena Season splash fixes, Live Event defeated checks and route centering, Auto Counter scroll retention, Razor's current deck state, booster premium-printing collation, and the 100-pack Superstar pity.
+v0.14.14 separates the two metadata paths:
+
+- Live Event metadata drives Live Event headings and rule panels only when the mode is actually `live-event`.
+- Championship Road metadata continues to provide the active section set identity for the correct Golden Era / New Generation / Attitude Era / SummerSlam / Evolution presentation.
+- **FIGHT MATCH** now proceeds through the normal MAIN EVENT matchup flow for Championship Road.
+- The stale Championship Road header copy is corrected from **24 MATCHES** to **40 MATCHES**.
+
+All v0.14.13 tabled changes remain intact: 40-match ten-section road order, Golden Era Part II and Attitude Era Part II, per-Superstar progress, legacy 32→40 migration, frozen upper control deck, lower-route current-group focus, Opponent Entrance spacing, and all earlier WWE Legacy fixes.
+
+## Verification
+
+Verified against the inherited current asset library:
+
+- **866 tests discovered / 768 passed / 0 failed / 98 intentionally skipped historical contracts**
+- v0.14.14 targeted tests: **2/2 passed**
+- Validation: **76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues**
+- Collector ID audit: **782 / 782 / 0 issues**
+- Flow audit: **76 / 76 / 0 issues**
+- Card-effect audit: **0 issues**
+- Counter/submission-state audit: **0 issues**
 
 ## Packaging
 
-The `assets/` directory is intentionally excluded from this ZIP. No asset files are added, deleted, renamed or replaced by v0.14.13.
+The `assets/` directory is intentionally excluded from this ZIP. No image assets are added, removed, renamed or replaced by this hotfix.
