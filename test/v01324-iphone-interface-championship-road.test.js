@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.14.11';
+import { createProfile } from '../js/data/profile.js?v=0.14.13';
 import {
   CHAMPIONSHIP_ROAD_LENGTH,
   CHAMPIONSHIP_ROAD_OPPONENTS,
@@ -12,7 +12,7 @@ import {
   championshipRoadState,
   startChampionshipRoad,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=0.14.11';
+} from '../js/data/championship-road.js?v=0.14.13';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -30,14 +30,14 @@ const EXPECTED_ROAD = [
 
 function clearRoad(profile, difficultyId, superstarId = 'cm-punk') {
   const run = startChampionshipRoad(profile, superstarId, [], () => 0.42, difficultyId);
-  assert.equal(run.opponents.length, 32);
+  assert.equal(run.opponents.length, CHAMPIONSHIP_ROAD_LENGTH);
   let outcome = null;
   const sectionEnds = [];
-  for (let i = 1; i <= 32; i += 1) {
+  for (let i = 1; i <= CHAMPIONSHIP_ROAD_LENGTH; i += 1) {
     outcome = recordChampionshipMatch(profile, 'win');
     if (outcome.sectionCleared) sectionEnds.push(outcome.sectionCleared.end);
   }
-  assert.deepEqual(sectionEnds, [4,8,12,16,20,24,28,32]);
+  assert.deepEqual(sectionEnds, [4,8,12,16,20,24,28,32,36,40]);
   assert.equal(outcome.status, 'cleared');
   return outcome;
 }
@@ -57,7 +57,7 @@ test.skip('v0.13.24 Championship Road is the approved 32-match eight-theme Seaso
   ]);
 });
 
-test('v0.13.24 Championship Road difficulty gates Easy → Normal → Hard → Hardcore across 128 matches', () => {
+test('v0.13.24 Championship Road difficulty gates Easy → Normal → Hard → Hardcore across 160 matches', () => {
   const p = createProfile('cm-punk');
   assert.deepEqual(CHAMPIONSHIP_DIFFICULTY_ORDER, ['easy','normal','hard','hardcore']);
   assert.equal(championshipDifficultyUnlocked(p, 'easy'), true);
@@ -77,7 +77,7 @@ test('v0.13.24 Championship Road difficulty gates Easy → Normal → Hard → H
   const state = championshipRoadState(p);
   assert.equal(Object.values(state.clearsByDifficulty).reduce((sum, value) => sum + value, 0), 4);
   assert.deepEqual(state.unlockedDifficulties, ['easy','normal','hard','hardcore']);
-  assert.equal(Object.values(state.bestStageByDifficulty).reduce((sum, value) => sum + value, 0), 128);
+  assert.equal(Object.values(state.bestStageByDifficulty).reduce((sum, value) => sum + value, 0), 160);
 });
 
 test('v0.13.24 Championship Road HP modifiers affect only the CPU side at the approved values', () => {

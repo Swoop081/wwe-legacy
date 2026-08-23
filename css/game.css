@@ -9756,3 +9756,100 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
   .daily-live-set-progress{align-items:flex-start;flex-direction:column;gap:6px;padding:10px 12px}
   .daily-live-set-progress>b{text-align:left;font-size:.54rem}
 }
+
+
+/* v0.14.12 — Tabled mobile polish: compact Tier Up, Tribal Chief live text,
+   Championship Road theme handoff, and stronger printing-tier differentiation. */
+
+/* Tier Up must read as a compact reward moment on iPhone, not a poster taller than the viewport. */
+#tier-up-layer .tier-up-celebration{
+  padding:max(12px,env(safe-area-inset-top)) 14px max(12px,env(safe-area-inset-bottom))!important;
+  overflow:auto!important;
+}
+#tier-up-layer .tier-up-card{
+  width:min(480px,92vw)!important;
+  max-height:calc(100dvh - max(24px,env(safe-area-inset-top)) - max(24px,env(safe-area-inset-bottom)))!important;
+  justify-content:center!important;
+  gap:4px!important;
+  padding:0!important;
+}
+#tier-up-layer .tier-up-card>span{font-size:.55rem!important;letter-spacing:.24em!important}
+#tier-up-layer .tier-up-card h1{font-size:clamp(2rem,8.5vw,3.6rem)!important;line-height:.88!important}
+#tier-up-layer .tier-up-number{margin:0!important;column-gap:5px!important;transform-origin:center}
+#tier-up-layer .tier-up-number small{font-size:.52rem!important;padding-bottom:4px!important}
+#tier-up-layer .tier-up-number b{font-size:clamp(3.4rem,15vw,5.4rem)!important;line-height:.76!important;letter-spacing:-.05em!important;padding:0!important}
+#tier-up-layer .tier-up-number.tier-digits-2 b{font-size:clamp(3.2rem,14vw,5rem)!important}
+#tier-up-layer .tier-up-number.tier-digits-3 b{font-size:clamp(2.9rem,12.5vw,4.5rem)!important}
+#tier-up-layer .tier-up-number em{margin-top:2px!important;font-size:clamp(.78rem,3.6vw,1rem)!important;letter-spacing:.2em!important}
+#tier-up-layer .tier-up-xp-slam{width:min(360px,78vw)!important;margin:0 0 2px!important}
+#tier-up-layer .tier-up-xp-slam i{height:5px!important}
+#tier-up-layer .tier-up-reward{
+  width:min(360px,82vw)!important;
+  min-height:0!important;
+  gap:3px!important;
+  margin:1px 0 0!important;
+}
+#tier-up-layer .tier-up-reward .ccg-card.tier-up-superstar-card,
+#tier-up-layer .tier-up-superstar-card{
+  width:min(136px,30vw)!important;
+  max-width:136px!important;
+  height:auto!important;
+  flex:0 0 auto!important;
+  filter:drop-shadow(0 11px 18px rgba(0,0,0,.58))!important;
+}
+#tier-up-layer .tier-up-reward>strong{font-size:clamp(.72rem,3vw,.92rem)!important;line-height:1!important}
+#tier-up-layer .tier-up-reward>small{font-size:.42rem!important;line-height:1.1!important}
+#tier-up-layer .tier-up-reward-pack{width:min(116px,27vw)!important;margin:0 auto!important}
+#tier-up-layer .tier-up-up-coin{width:82px!important;height:82px!important;border-width:3px!important}
+#tier-up-layer .tier-up-up-coin b{font-size:1.55rem!important}
+#tier-up-layer .tier-up-card button{width:min(360px,82vw)!important;min-height:48px!important;margin-top:2px!important;font-size:.82rem!important}
+@media(max-height:740px){
+  #tier-up-layer .tier-up-card{gap:2px!important}
+  #tier-up-layer .tier-up-card h1{font-size:2.2rem!important}
+  #tier-up-layer .tier-up-number b,#tier-up-layer .tier-up-number.tier-digits-2 b{font-size:3.35rem!important}
+  #tier-up-layer .tier-up-reward .ccg-card.tier-up-superstar-card,#tier-up-layer .tier-up-superstar-card{width:108px!important;max-width:108px!important}
+  #tier-up-layer .tier-up-reward-pack{width:96px!important}
+  #tier-up-layer .tier-up-card button{min-height:44px!important}
+}
+
+/* Tribal Chief uses an authored image plate whose lower identity/rules bay is blank.
+   Fill that authored bay live instead of showing an empty Action card front. */
+.ccg-card.has-tribal-chief-live-front .ccg-card-front{container-type:inline-size}
+.ccg-card.has-tribal-chief-live-front .ccg-tribal-chief-front-data{
+  position:absolute;z-index:48;left:7.3%;right:7.3%;top:80.5%;bottom:3.1%;
+  display:grid;grid-template-rows:auto auto 1fr;align-content:center;justify-items:center;gap:1.2cqw;
+  padding:2.2cqw 3.4cqw 1.8cqw;box-sizing:border-box;pointer-events:none;text-align:center;
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  text-shadow:0 .25cqw .45cqw rgba(0,0,0,.95);
+}
+.ccg-card.has-tribal-chief-live-front .ccg-tribal-chief-front-data strong{
+  color:#fff;font-size:6.2cqw;line-height:.92;font-weight:1000;letter-spacing:-.025em;text-transform:uppercase;
+}
+.ccg-card.has-tribal-chief-live-front .ccg-tribal-chief-front-data span{
+  color:#ff9d38;font-size:2.45cqw;line-height:1;font-weight:950;letter-spacing:.08em;text-transform:uppercase;
+}
+.ccg-card.has-tribal-chief-live-front .ccg-tribal-chief-front-data em{
+  align-self:start;margin-top:.4cqw;color:rgba(255,255,255,.94);font-size:2.55cqw;line-height:1.22;font-style:normal;font-weight:760;text-transform:none;
+}
+
+/* Printing tiers need to be obvious at hand size. Keep artwork readable: glow sits on the edge/outside,
+   with Sapphire stronger than Emerald and Ruby strongest. */
+.ccg-card.tier-emerald.is-tier-glow .ccg-card-front{
+  border-color:#53ef96!important;
+  box-shadow:inset 0 0 0 2px rgba(103,255,167,.88),0 0 0 2px rgba(42,213,110,.48),0 0 18px 5px rgba(38,229,113,.50),0 9px 20px rgba(0,0,0,.30)!important;
+}
+.ccg-card.tier-emerald.is-tier-glow .ccg-card-inner{filter:drop-shadow(0 0 7px rgba(48,236,124,.72)) drop-shadow(0 0 15px rgba(31,190,94,.46))}
+.ccg-card.tier-sapphire.is-tier-glow .ccg-card-front{
+  border-color:#63baff!important;
+  box-shadow:inset 0 0 0 2px rgba(143,215,255,.92),0 0 0 3px rgba(66,150,255,.56),0 0 23px 7px rgba(56,151,255,.60),0 9px 20px rgba(0,0,0,.30)!important;
+}
+.ccg-card.tier-sapphire.is-tier-glow .ccg-card-inner{filter:drop-shadow(0 0 9px rgba(79,172,255,.78)) drop-shadow(0 0 18px rgba(43,116,235,.52))}
+.ccg-card.tier-ruby.is-tier-glow .ccg-card-front{
+  border-color:#ff5c6d!important;
+  box-shadow:inset 0 0 0 2px rgba(255,135,145,.96),0 0 0 3px rgba(245,48,70,.62),0 0 29px 9px rgba(239,44,67,.69),0 9px 20px rgba(0,0,0,.30)!important;
+}
+.ccg-card.tier-ruby.is-tier-glow .ccg-card-inner{filter:drop-shadow(0 0 11px rgba(255,76,94,.84)) drop-shadow(0 0 22px rgba(200,31,52,.58))}
+.ccg-card.tier-emerald .ccg-tier-overlay{opacity:.72!important}
+.ccg-card.tier-sapphire .ccg-tier-overlay{opacity:.82!important}
+.ccg-card.tier-ruby .ccg-tier-overlay{opacity:.92!important}
+\n\n/* v0.14.13 — Entrance spacing + frozen 40-match Championship Road viewport. */\n.champ-road-fixed{display:grid;gap:10px;min-width:0}\n\n@media(max-width:600px){\n  /* Keep the show/set logo at its established hero position; use the open lower\n     portion of the hero band for the entrance label + Superstar name. */\n  body[data-screen="entrance-intro"] .entrance-hero-band{\n    grid-template-rows:auto minmax(0,1fr) auto!important;\n    align-content:stretch!important;\n  }\n  body[data-screen="entrance-intro"] .entrance-intro-heading{\n    grid-row:3!important;align-self:end!important;margin:0!important;\n    padding:0 0 7px!important;\n  }\n\n  /* Championship Road upper controls are a fixed command deck. Only the lower\n     route map scrolls, so Superstar/difficulty/current-match controls never leave view. */\n  body[data-screen="championship"] main{\n    height:100svh!important;max-height:100svh!important;min-height:0!important;\n    box-sizing:border-box!important;overflow:hidden!important;\n    padding-top:calc(var(--legacy-chrome-h) + env(safe-area-inset-top) + 6px)!important;\n    padding-bottom:calc(var(--fixed-nav-h) + env(safe-area-inset-bottom) + 2px)!important;\n  }\n  body[data-screen="championship"] #game{\n    height:100%!important;min-height:0!important;overflow:hidden!important;\n    padding-top:0!important;gap:0!important;\n  }\n  body[data-screen="championship"] .championship-map-screen{\n    height:100%!important;min-height:0!important;max-height:100%!important;\n    display:flex!important;flex-direction:column!important;gap:6px!important;\n    overflow:hidden!important;padding-bottom:0!important;\n  }\n  body[data-screen="championship"] .champ-road-fixed{\n    flex:0 0 auto!important;display:grid!important;gap:6px!important;\n    position:relative!important;z-index:8!important;min-width:0!important;\n    padding-bottom:2px!important;background:linear-gradient(180deg,#090b10 0%,#090b10 92%,rgba(9,11,16,.94) 100%)!important;\n  }\n  body[data-screen="championship"] .champ-road-map{\n    flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;\n    -webkit-overflow-scrolling:touch!important;overscroll-behavior-y:contain!important;\n    scroll-behavior:auto!important;padding-bottom:30px!important;\n  }\n}\n

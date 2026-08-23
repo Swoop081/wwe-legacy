@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=0.14.11';
-import { decks } from '../js/data/decks.js?v=0.14.11';
-import { createProfile, addOwnedCard, ownedCount, cardOwnershipCap } from '../js/data/profile.js?v=0.14.11';
-import { applyCardTier, CARD_TIERS, DEFAULT_STARTER_TIER, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=0.14.11';
-import { scaleCpuDeckToPlayer } from '../js/data/cpu-tier-scaling.js?v=0.14.11';
-import { LAUNCH_LIVE_SET_IDS, BANKED_PLAYER_SET_IDS } from '../js/data/release.js?v=0.14.11';
-import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.14.11';
-import { SEASON_1 } from '../js/data/seasons.js?v=0.14.11';
-import { COLLECTION_MILESTONES, RUBY_MILESTONES } from '../js/data/set-progression.js?v=0.14.11';
+import { collectionCards } from '../js/data/collection.js?v=0.14.13';
+import { decks } from '../js/data/decks.js?v=0.14.13';
+import { createProfile, addOwnedCard, ownedCount, cardOwnershipCap } from '../js/data/profile.js?v=0.14.13';
+import { applyCardTier, CARD_TIERS, DEFAULT_STARTER_TIER, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=0.14.13';
+import { scaleCpuDeckToPlayer } from '../js/data/cpu-tier-scaling.js?v=0.14.13';
+import { LAUNCH_LIVE_SET_IDS, BANKED_PLAYER_SET_IDS } from '../js/data/release.js?v=0.14.13';
+import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.14.13';
+import { SEASON_1 } from '../js/data/seasons.js?v=0.14.13';
+import { COLLECTION_MILESTONES, RUBY_MILESTONES } from '../js/data/set-progression.js?v=0.14.13';
 import fs from 'node:fs';
-import { CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS } from '../js/data/championship-road.js?v=0.14.11';
+import { CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS } from '../js/data/championship-road.js?v=0.14.13';
 
 const byId = new Map(collectionCards.map(c=>[c.id,c]));
 
@@ -52,10 +52,11 @@ test('v0.13.87 live set pool is five sets with RAW banked', () => {
   assert.equal(LAUNCH_LIVE_SET_IDS.includes('raw-series-1'),false);
 });
 
-test('v0.13.87 Championship Road late blocks use live New Generation rather than banked RAW', () => {
-  assert.equal(CHAMPIONSHIP_ROAD_SECTIONS.at(-1).setId,'new-generation-series-1');
-  assert.equal(CHAMPIONSHIP_ROAD_SECTIONS.at(-2).setId,'new-generation-series-1');
-  assert.deepEqual(CHAMPIONSHIP_ROAD_OPPONENTS.slice(-8), ['bret-hart','shawn-michaels','razor-ramon','diesel','doink-the-clown','yokozuna','owen-hart','british-bulldog']);
+test('v0.14.13 Championship Road uses only the five live sets across both halves', () => {
+  assert.equal(CHAMPIONSHIP_ROAD_SECTIONS.length,10);
+  assert.ok(CHAMPIONSHIP_ROAD_SECTIONS.every(section => LAUNCH_LIVE_SET_IDS.includes(section.setId)));
+  assert.equal(CHAMPIONSHIP_ROAD_OPPONENTS.length,40);
+  assert.deepEqual(CHAMPIONSHIP_ROAD_OPPONENTS.slice(24,28), ['doink-the-clown','yokozuna','owen-hart','british-bulldog']);
 });
 
 test('v0.13.87 Ruby is the pack chase tier without changing intrinsic card rarity', () => {

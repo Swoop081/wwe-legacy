@@ -215,3 +215,29 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - No card balance, deck composition, pack odds, Superstar pity, Season tier count, reward-card identities, live-set availability, or collection ownership changed.
 - User-facing distribution continues to exclude the entire `assets/` directory.
 
+
+## v0.14.12 — Tabled Mobile Polish
+
+- Compacted the **Season Tier Up** celebration for iPhone: smaller Tier Up headline/tier numeral, tighter spacing, shorter XP line, smaller reward card/pack and a compact Continue CTA so the complete reward moment fits cleanly within the phone viewport.
+- Updated the Tier Up major-completion check to use the current **50-tier Season** rather than the obsolete Tier 100 condition.
+- Fixed Roman Reigns' **Tribal Chief** Action front. Its authored physical art plate has a deliberately blank lower bay; WWE Legacy now renders `TRIBAL CHIEF`, `ACTION · VERY RARE`, and the regain-Control once-per-match effect directly into that bay instead of displaying a textless card in hand.
+- Fixed **Championship Road match presentation theming**. The active road section now supplies its set identity to the match, so Golden Era, SummerSlam, Evolution, Attitude Era and New Generation matches use the correct themed arena/ring canvas/logo treatment instead of a random or mismatched era.
+- Increased premium printing differentiation at normal hand size. **Emerald** now has a clear green edge/outer halo, **Sapphire** a stronger blue treatment, and **Ruby** the strongest red treatment; Normal remains unlit and the glow is kept around card edges to preserve artwork/text clarity.
+- No card balance, deck, pack odds, Season XP, reward, pity, live-set, collection ownership or match-rule changes.
+- User-facing distribution continues to exclude the entire `assets/` directory.
+- Verification with the inherited current asset library: **860 tests / 762 passed / 0 failed / 98 intentionally skipped**; targeted v0.14.12 tests **4/4**; validation, collector-ID, flow, card-effect and counter/submission-state audits report 0 issues.
+
+## v0.14.13 — Championship Road 40-Match + Frozen Controls
+
+- Opponent Entrance keeps the set/show logo at its existing hero position and moves the `OPPONENT ENTRANCE` / Superstar-name block down into the unused lower portion of the upper hero band, just above the card-stage divider.
+- Championship Road upper controls are now frozen on iPhone: Road header/progress, per-Superstar selector, difficulty selector, current-match/status panel and Fight Match CTA remain visible while the lower opponent route scrolls independently.
+- Entering or returning to Championship Road auto-focuses the lower route on the four-match section containing the current match. Completed roads focus the final section instead of jumping back to the beginning.
+- Championship Road expands from **32 to 40 matches** and from eight to **ten four-match sections**.
+- Approved section order is **Golden Era Part I → New Generation Part I → Attitude Era Part I → SummerSlam Part I → Evolution Part I → Golden Era Part II → New Generation Part II → Attitude Era Part II → SummerSlam Part II → Evolution Part II**.
+- Restores the missing **Golden Era Part II** and **Attitude Era Part II** groups. Golden Era Part II uses Rowdy Roddy Piper, Ted DiBiase, Jake “The Snake” Roberts and Mr. Perfect. Attitude Era Part II uses The Rock, Triple H, Chris Jericho and Kurt Angle.
+- Existing 32-match active saves migrate onto the new 40-match canonical route without losing numeric stage or difficulty progress. A legacy 32-match completed active run resumes at Match 33 so the newly restored final eight matches remain playable.
+- The existing section reward rule remains one themed booster every four wins; a full Championship Road now therefore contains **10 themed section-clear boosters** instead of 8.
+- Match presentation continues to inherit the active Championship Road section set identity, so each of the ten sections uses its corresponding arena/ring theme.
+- No card balance, deck, pack-odds, Superstar-pity, Season-XP, Daily-Live-Event-XP, collection-ownership or unrelated match-rule changes.
+- User-facing distribution continues to exclude the entire `assets/` directory.
+- Verification: **864 tests / 766 passed / 0 failed / 98 intentionally skipped**; targeted v0.14.13 tests **4/4**; validation, collector-ID, flow, card-effect and counter/submission-state audits report 0 issues.

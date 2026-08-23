@@ -1,7 +1,8 @@
-import { superstars } from "./superstars.js?v=0.14.11";
-import { grantBooster } from "./boosters.js?v=0.14.11";
+import { superstars } from "./superstars.js?v=0.14.13";
+import { grantBooster } from "./boosters.js?v=0.14.13";
 
-export const CHAMPIONSHIP_ROAD_LENGTH = 32;
+export const CHAMPIONSHIP_ROAD_LENGTH = 40;
+export const LEGACY_CHAMPIONSHIP_ROAD_LENGTH = 32;
 export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";
 export const WORLD_CHAMPIONS = ["cm-punk", "roman-reigns"];
 export const CHAMPIONSHIP_DIFFICULTY_ORDER = ["easy", "normal", "hard", "hardcore"];
@@ -13,29 +14,35 @@ export const CHAMPIONSHIP_DIFFICULTIES = Object.freeze({
 });
 
 export const CHAMPIONSHIP_ROAD_SECTIONS = Object.freeze([
-  { id: "golden-era", label: "Golden Era", start: 1, end: 4, accent: "gold", setId: "golden-era-series-1" },
-  { id: "summerslam-a", label: "SummerSlam · Part I", start: 5, end: 8, accent: "blue", setId: "summerslam-series-1" },
-  { id: "evolution-a", label: "Evolution · Part I", start: 9, end: 12, accent: "violet", setId: "evolution-series-1" },
-  { id: "attitude-era", label: "Attitude Era", start: 13, end: 16, accent: "red", setId: "attitude-era-series-1" },
-  { id: "summerslam-b", label: "SummerSlam · Part II", start: 17, end: 20, accent: "blue", setId: "summerslam-series-1" },
-  { id: "evolution-b", label: "Evolution · Part II", start: 21, end: 24, accent: "violet", setId: "evolution-series-1" },
-  { id: "new-generation-a", label: "New Generation · Part I", start: 25, end: 28, accent: "blue", setId: "new-generation-series-1" },
-  { id: "new-generation-b", label: "New Generation · Part II", start: 29, end: 32, accent: "blue", setId: "new-generation-series-1" }
+  { id: "golden-era-a", label: "Golden Era · Part I", start: 1, end: 4, accent: "gold", setId: "golden-era-series-1" },
+  { id: "new-generation-a", label: "New Generation · Part I", start: 5, end: 8, accent: "blue", setId: "new-generation-series-1" },
+  { id: "attitude-era-a", label: "Attitude Era · Part I", start: 9, end: 12, accent: "red", setId: "attitude-era-series-1" },
+  { id: "summerslam-a", label: "SummerSlam · Part I", start: 13, end: 16, accent: "blue", setId: "summerslam-series-1" },
+  { id: "evolution-a", label: "Evolution · Part I", start: 17, end: 20, accent: "violet", setId: "evolution-series-1" },
+  { id: "golden-era-b", label: "Golden Era · Part II", start: 21, end: 24, accent: "gold", setId: "golden-era-series-1" },
+  { id: "new-generation-b", label: "New Generation · Part II", start: 25, end: 28, accent: "blue", setId: "new-generation-series-1" },
+  { id: "attitude-era-b", label: "Attitude Era · Part II", start: 29, end: 32, accent: "red", setId: "attitude-era-series-1" },
+  { id: "summerslam-b", label: "SummerSlam · Part II", start: 33, end: 36, accent: "blue", setId: "summerslam-series-1" },
+  { id: "evolution-b", label: "Evolution · Part II", start: 37, end: 40, accent: "violet", setId: "evolution-series-1" }
 ]);
 
 export const CHAMPIONSHIP_ROAD_OPPONENTS = Object.freeze([
+  // Part I: Golden Era → New Generation → Attitude Era → SummerSlam → Evolution.
   "hulk-hogan", "andre-the-giant", "randy-savage", "ultimate-warrior",
+  "bret-hart", "shawn-michaels", "razor-ramon", "diesel",
+  "mankind", "kane", "the-undertaker", "stone-cold-steve-austin",
   "cm-punk", "seth-rollins", "roman-reigns", "kevin-owens",
   "iyo-sky", "bayley", "paige", "stephanie-vaquer",
-  "mankind", "kane", "the-undertaker", "stone-cold-steve-austin",
+  // Part II repeats the same set order with each set's remaining four Superstars.
+  "rowdy-roddy-piper", "ted-dibiase", "jake-roberts", "mr-perfect",
+  "doink-the-clown", "yokozuna", "owen-hart", "british-bulldog",
+  "the-rock-attitude", "triple-h", "chris-jericho", "kurt-angle",
   "cody-rhodes", "oba-femi", "brock-lesnar", "gunther",
-  "charlotte-flair", "rhea-ripley", "liv-morgan", "becky-lynch",
-  "bret-hart", "shawn-michaels", "razor-ramon", "diesel",
-  "doink-the-clown", "yokozuna", "owen-hart", "british-bulldog"
+  "charlotte-flair", "rhea-ripley", "liv-morgan", "becky-lynch"
 ]);
 
 // Retained as a compatibility export for older source/tests. Championship Road
-// is now one continuous 24-match map rather than four selectable branches.
+// is now one continuous 40-match map rather than selectable branches.
 export const CHAMPIONSHIP_BRANCHES = Object.freeze({
   season1: { id: "season1", label: "Season 1 Road", setId: CHAMPIONSHIP_SET_ID, finals: ["rhea-ripley", "liv-morgan"] }
 });
@@ -64,7 +71,21 @@ function normalizeRoad(road) {
   road.completedByDifficulty ??= {};
   road.unlockedDifficulties ??= ["easy"];
   road.selectedDifficulty ??= "easy";
-  if (road.activeRun && (!Array.isArray(road.activeRun.opponents) || road.activeRun.opponents.length !== CHAMPIONSHIP_ROAD_LENGTH)) road.activeRun = null;
+  if (road.activeRun) {
+    if (!Array.isArray(road.activeRun.opponents)) {
+      road.activeRun = null;
+    } else if (road.activeRun.opponents.length !== CHAMPIONSHIP_ROAD_LENGTH) {
+      // v0.14.13 expands the road from 32 to 40 matches. Preserve existing progress
+      // instead of discarding the player's run when the canonical opponent map changes.
+      const previousLength = road.activeRun.opponents.length;
+      const wasLegacyClear = road.activeRun.status === "cleared" && Number(road.activeRun.stage ?? 0) >= previousLength;
+      road.activeRun.opponents = [...CHAMPIONSHIP_ROAD_OPPONENTS];
+      road.activeRun.stage = Math.max(0, Math.min(Number(road.activeRun.stage ?? 0), CHAMPIONSHIP_ROAD_LENGTH));
+      if (wasLegacyClear && previousLength === LEGACY_CHAMPIONSHIP_ROAD_LENGTH && road.activeRun.stage < CHAMPIONSHIP_ROAD_LENGTH) {
+        road.activeRun.status = "active";
+      }
+    }
+  }
   road.unlockedDifficulties = CHAMPIONSHIP_DIFFICULTY_ORDER.filter(id => id === "easy" || road.unlockedDifficulties.includes(id));
   if (!road.unlockedDifficulties.includes("easy")) road.unlockedDifficulties.unshift("easy");
   return road;
@@ -87,7 +108,7 @@ function ensure(profile) {
   // Lazy one-time migration from the older single global run. Historical global
   // totals/rewards remain untouched; only the per-Superstar career view is split.
   if (!state.perSuperstarRoadsMigrated) {
-    if (state.activeRun && Array.isArray(state.activeRun.opponents) && state.activeRun.opponents.length === CHAMPIONSHIP_ROAD_LENGTH && state.activeRun.superstarId) {
+    if (state.activeRun && Array.isArray(state.activeRun.opponents) && [CHAMPIONSHIP_ROAD_LENGTH, LEGACY_CHAMPIONSHIP_ROAD_LENGTH].includes(state.activeRun.opponents.length) && state.activeRun.superstarId) {
       const id = state.activeRun.superstarId;
       const road = normalizeRoad(state.roadsBySuperstar[id] ?? blankSuperstarRoad());
       road.activeRun = { ...state.activeRun, opponents: [...state.activeRun.opponents] };

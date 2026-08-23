@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.14.11';
-import { deckIds } from '../js/data/decks.js?v=0.14.11';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.14.13';
+import { deckIds } from '../js/data/decks.js?v=0.14.13';
 
 const desiredLead = ['momentum-strength','momentum-strike','momentum-technical','fallaway-slam','punch'];
 
