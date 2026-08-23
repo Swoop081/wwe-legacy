@@ -1,12 +1,20 @@
-# WWE Legacy v0.14.08 — Cena Physical Card Renderer Hotfix
+# WWE Legacy v0.14.09 — Cena Exact Plate Composition Hotfix
 
 This is a **no-assets overlay build**. Copy it over the current WWE Legacy installation while retaining the existing `assets/` folder.
 
-The build fixes the Season 1 splash so John Cena’s layered Superstar export is treated correctly as a card plate and receives the canonical runtime John Cena nameplate. A finished flat/custom Cena front remains supported without receiving a duplicate runtime nameplate.
+The Season 1 launch/continue splash has been corrected against the exact user-supplied `card-layered-superstar-john-cena.webp` asset (680×1000).
 
-Expected existing Cena card asset candidates:
+Key rule:
 
-- `assets/images/card-layered-superstar-john-cena.webp` — preferred layered card plate
-- `assets/images/card-custom-superstar-john-cena.webp` — exact finished flat/custom fallback
+- the WebP already contains the complete physical frame **and the black/red/blue name bay**;
+- WWE Legacy now overlays **only `John Cena` + `SUPERSTAR` text** inside that existing bay;
+- it no longer paints a second generic nameplate panel over the card;
+- it no longer paints the animated Ruby surface sweep over this splash card;
+- it never reconstructs the card from Cena menu/profile artwork;
+- a finished `card-custom-superstar-john-cena.webp` fallback remains supported and suppresses the runtime text overlay.
 
-The splash does not synthesize a Cena physical card from menu/profile artwork.
+Expected existing asset:
+
+- `assets/images/card-layered-superstar-john-cena.webp`
+
+This asset is intentionally not bundled because user-facing WWE Legacy builds exclude `assets/`.

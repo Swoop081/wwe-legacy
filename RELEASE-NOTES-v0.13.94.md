@@ -180,3 +180,15 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - All v0.14.07 Cena Catalogue visibility, Live Event defeated-route persistence/check placement, v0.14.06 grounded/Stun fixes, v0.14.05 booster collation and other prior changes are preserved.
 - No gameplay balance, deck composition, pack odds, reward quantities, Season progression, live-set availability or collection ownership changed.
 - User-facing ZIP continues to exclude the entire `assets/` directory.
+
+## v0.14.09 — Cena Exact Plate Composition Hotfix
+
+- Corrected the Season 1 John Cena splash card using the **exact user-supplied 680×1000 `card-layered-superstar-john-cena.webp`** as the visual source of truth.
+- Confirmed the supplied WebP already contains the complete physical card frame and its black/red/blue lower name bay. The splash now adds **text only** (`John Cena` / `SUPERSTAR`) inside that authored bay.
+- Removed the generic runtime Superstar **nameplate background/panel** from this splash composition, eliminating the second dark/glossy name box that was covering the authored card design in v0.14.08.
+- Removed the animated Ruby surface sweep from this splash-card presentation so the exact physical plate is not obscured. The surrounding Season UI still identifies the reward as the Tier 50 Ruby Superstar.
+- A finished `card-custom-superstar-john-cena.webp` fallback is still supported; when used, all runtime Cena name text is suppressed so printed text cannot duplicate.
+- The splash never reconstructs Cena's physical card from menu/profile artwork.
+- All v0.14.08 and earlier fixes remain intact, including Cena Catalogue visibility, 50-tier Season copy, Live Event cleared-route reconstruction/checks, Grounded/Stun state recovery, Auto Counter scroll retention, Live Event hub ordering and booster-printing collation.
+- No gameplay balance, deck composition, pack odds, rewards, Season progression or live-set availability changed.
+- User-facing ZIP continues to exclude the entire `assets/` directory.

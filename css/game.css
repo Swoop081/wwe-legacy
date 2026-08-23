@@ -9588,7 +9588,7 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
   body[data-screen="splash"] .season-one-splash-v2{padding:20px 16px 18px!important}
 }
 
-/* v0.14.08 — Season 1 Cena physical card renderer hotfix.
+/* v0.14.09 — Season 1 Cena physical card renderer hotfix.
    A layered Superstar export is a plate with a deliberately blank name area.
    Compose it through the physical-card shell so the runtime John Cena nameplate
    is present; only a finished flat/custom front suppresses that overlay. */
@@ -9616,3 +9616,55 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
 }
 .clean-launch-splash .season-one-cena-actual-card.is-missing-authored-front>.season-one-cena-authored-collectible{display:none!important}
 .clean-launch-splash .season-one-cena-actual-card:not(.is-missing-authored-front)>.season-one-cena-missing-front{display:none!important}
+
+/* v0.14.09 — exact John Cena physical plate composition.
+   The supplied 680x1000 WebP already contains the complete framed name bay.
+   Add only the name/type text; never paint a second generic nameplate panel or
+   a sweeping tier overlay over the authored card face. */
+.clean-launch-splash .season-one-cena-name-text{
+  position:absolute!important;
+  z-index:5!important;
+  left:5.4%!important;
+  right:5.4%!important;
+  bottom:2.7%!important;
+  height:15.8%!important;
+  display:grid!important;
+  place-content:center!important;
+  justify-items:center!important;
+  gap:1.4%!important;
+  padding:2.2% 5% 1.8%!important;
+  box-sizing:border-box!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+}
+.clean-launch-splash .season-one-cena-name-text strong{
+  display:block!important;
+  max-width:100%!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  font-family:var(--np-font,"Bahnschrift Condensed","Avenir Next Condensed","Arial Narrow",Arial,sans-serif)!important;
+  font-weight:var(--np-weight,950)!important;
+  font-style:var(--np-style,italic)!important;
+  font-size:clamp(8px,calc(10cqw * var(--np-font-scale,.968)),27px)!important;
+  line-height:.92!important;
+  letter-spacing:clamp(.015em,calc(var(--np-tracking,.415) * .018em),.055em)!important;
+  transform:skewX(var(--np-skew,0deg)) scaleX(var(--np-scale-x,.974))!important;
+  transform-origin:center!important;
+  color:#fff4c8!important;
+  -webkit-text-stroke:clamp(.35px,.55cqw,var(--np-stroke,1.8px)) #260307!important;
+  paint-order:stroke fill!important;
+  text-shadow:0 0 min(var(--np-glow,3px),5px) rgba(228,183,76,.62),0 2px 2px #000!important;
+}
+.clean-launch-splash .season-one-cena-name-text small{
+  font-size:clamp(4px,2.6cqw,8px)!important;
+  font-weight:900!important;
+  letter-spacing:.18em!important;
+  color:#ef3d4c!important;
+  line-height:1!important;
+}
+.clean-launch-splash .season-one-cena-authored-collectible.has-flat-superstar-front .season-one-cena-name-text{display:none!important}
+.clean-launch-splash .season-one-cena-authored-collectible .ccg-tier-overlay{display:none!important}
