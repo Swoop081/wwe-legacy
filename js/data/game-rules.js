@@ -142,7 +142,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Ownership caps", "Every collectible card tracks Normal, Emerald, Sapphire and Ruby separately. Each tier can hold up to 5 owned copies; copy 6+ of that same tier converts to Universe Points. Deck-construction limits remain separate from Collection ownership limits."],
       ["Card tiers", "Normal has no glow and is −2 Damage; Emerald has a green glow and is −1; Sapphire has a blue glow and uses authored Damage; Ruby has a red glow and is +1. Submission pressure scales on the same ladder. Cost, Method requirements, Counter states and secondary effects remain unchanged."],
       ["Tier deck use", "Deck Lab and Deck Assistance prefer the strongest owned tier. The live card plate shows the active Damage and submission pressure so tier strength is never a hidden modifier."],
-      ["Collection milestones", "Overall Collection and Ruby Collection tracks each award 1 random released-set booster at 25%, 50%, 75% and 100% completion."]
+      ["Collection milestones", "Each released set has Base, Emerald, Sapphire and Ruby collection tracks. Every track awards 1 random released-set booster at 25%, 50%, 75% and 100% completion. Base counts a collector identity once if any printing is owned; premium tracks count unique cards at that exact printing tier."]
     ]
   },
   {

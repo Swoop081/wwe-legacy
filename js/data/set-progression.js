@@ -1,24 +1,28 @@
-import { cardsForSet } from './collection.js?v=0.14.15';
-import { ownedCount } from './profile.js?v=0.14.15';
-import { grantRandomBoosters } from './boosters.js?v=0.14.15';
-import { CARD_TIERS } from './variants.js?v=0.14.15';
+import { cardsForSet } from './collection.js?v=0.14.16';
+import { ownedCount } from './profile.js?v=0.14.16';
+import { grantRandomBoosters } from './boosters.js?v=0.14.16';
+import { CARD_TIERS } from './variants.js?v=0.14.16';
 
 export const SET_LIFECYCLES = ['featured','vaulted','returning'];
 export const COLLECTION_MILESTONES = [
   { percent: 25, reward: 1 }, { percent: 50, reward: 1 }, { percent: 75, reward: 1 }, { percent: 100, reward: 1 }
 ];
-// Preserve the old two-track milestone economy: overall Collection + premium
-// chase Collection. Ruby replaces the former Foil completion track.
-export const RUBY_MILESTONES = [
-  { percent: 25, reward: 1 }, { percent: 50, reward: 1 }, { percent: 75, reward: 1 }, { percent: 100, reward: 1 }
-];
+// v0.14.16 — all four collection-printing tracks share the same simple
+// 25/50/75/100 reward cadence. Base remains the overall unique-card track
+// (own any printing); Emerald/Sapphire/Ruby count unique cards at that exact tier.
+export const EMERALD_MILESTONES = COLLECTION_MILESTONES;
+export const SAPPHIRE_MILESTONES = COLLECTION_MILESTONES;
+export const RUBY_MILESTONES = COLLECTION_MILESTONES;
 export const FOIL_MILESTONES = RUBY_MILESTONES; // legacy internal alias
+export const MILESTONE_TRACKS = Object.freeze(['collection','emerald','sapphire','ruby']);
 
 function ensure(profile, setId = 'summerslam-series-1') {
   profile.setProgress ??= {};
-  profile.setProgress[setId] ??= { lifecycle: 'featured', claimedCollection: [], claimedRuby: [] };
+  profile.setProgress[setId] ??= { lifecycle: 'featured', claimedCollection: [], claimedEmerald: [], claimedSapphire: [], claimedRuby: [] };
   const state = profile.setProgress[setId];
   state.claimedCollection ??= [];
+  state.claimedEmerald ??= [];
+  state.claimedSapphire ??= [];
   state.claimedRuby ??= state.claimedFoil ?? [];
   delete state.claimedFoil;
   return state;
@@ -48,15 +52,25 @@ export function availableMilestoneRewards(profile, setId = 'summerslam-series-1'
   const state = ensure(profile,setId), progress = collectionProgress(profile,setId);
   return {
     collection: COLLECTION_MILESTONES.filter(m => progress.percent >= m.percent && !state.claimedCollection.includes(m.percent)),
+    emerald: EMERALD_MILESTONES.filter(m => progress.emeraldPercent >= m.percent && !state.claimedEmerald.includes(m.percent)),
+    sapphire: SAPPHIRE_MILESTONES.filter(m => progress.sapphirePercent >= m.percent && !state.claimedSapphire.includes(m.percent)),
     ruby: RUBY_MILESTONES.filter(m => progress.rubyPercent >= m.percent && !state.claimedRuby.includes(m.percent)),
     foil: []
   };
 }
 export function claimMilestone(profile, type, percent, setId = 'summerslam-series-1', now = new Date(), rng = Math.random) {
-  const state = ensure(profile,setId), ruby = type === 'ruby' || type === 'foil';
-  const list = ruby ? RUBY_MILESTONES : COLLECTION_MILESTONES;
-  const claimed = ruby ? state.claimedRuby : state.claimedCollection;
-  const progress = collectionProgress(profile,setId), actual = ruby ? progress.rubyPercent : progress.percent;
+  const normalizedType = type === 'foil' ? 'ruby' : type;
+  const trackConfig = {
+    collection: { list: COLLECTION_MILESTONES, claimedKey: 'claimedCollection', progressKey: 'percent' },
+    emerald: { list: EMERALD_MILESTONES, claimedKey: 'claimedEmerald', progressKey: 'emeraldPercent' },
+    sapphire: { list: SAPPHIRE_MILESTONES, claimedKey: 'claimedSapphire', progressKey: 'sapphirePercent' },
+    ruby: { list: RUBY_MILESTONES, claimedKey: 'claimedRuby', progressKey: 'rubyPercent' }
+  }[normalizedType];
+  if (!trackConfig) throw new Error('Invalid milestone track');
+  const state = ensure(profile,setId);
+  const list = trackConfig.list;
+  const claimed = state[trackConfig.claimedKey];
+  const progress = collectionProgress(profile,setId), actual = progress[trackConfig.progressKey];
   const milestone = list.find(m => m.percent === Number(percent));
   if (!milestone) throw new Error('Milestone not found');
   if (actual < milestone.percent) throw new Error('Milestone not reached');

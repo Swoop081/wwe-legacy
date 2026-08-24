@@ -262,3 +262,15 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Pack Reveal progression remains unchanged: tapping the readable fallback still advances to the next pull/summary, while Pack Complete cards remain inspectable.
 - No card balance, pack odds/collation, rewards, Season XP, Championship Road, Live Event, collection ownership, Superstar pity or match rules changed from v0.14.14.
 - User-facing distribution continues to exclude the entire `assets/` directory.
+
+## v0.14.16 — Set Milestone Expansion + RAW Presentation
+
+- Expanded Set Milestones from the prior Base/Ruby structure to four tracks for every released set: **Base / Emerald / Sapphire / Ruby**.
+- All four tracks use 25% / 50% / 75% / 100% milestones, and every milestone awards exactly **1 random released-set booster**.
+- Base progress continues to count each collector identity once when any printing is owned; Emerald, Sapphire and Ruby tracks count unique cards owned at that exact printing tier.
+- Existing Base and Ruby milestone claim history is preserved. New Emerald/Sapphire claim arrays initialize safely for existing profiles.
+- Set Milestone sections are now collapsible. They default closed, auto-expand when a reward is claimable, and remember manual expansion for the current app session.
+- Challenge notification counts now include all four milestone tracks.
+- RAW Daily/RAW LIVE event presentation is locked to RAW branding: red/black/white hub treatment, packaged RAW Series 1 logo on hub/detail, and RAW Series 1 arena/ring presentation during matches before the set's public release. This is presentation-only and does not release RAW Series 1 cards or boosters.
+- Carries forward all v0.14.15 and earlier gameplay/UI fixes.
+- Distribution ZIP excludes `assets/` per the current packaging policy.

@@ -1,40 +1,40 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.14.15";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.14.15";
-import { superstars } from "../data/superstars.js?v=0.14.15";
-import { decks } from "../data/decks.js?v=0.14.15";
-import { sets } from "../data/sets.js?v=0.14.15";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.14.15";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.14.15";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.14.15";
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.14.15";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.14.15";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.14.15";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.14.15";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.14.15";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=0.14.15";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=0.14.15";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.14.15";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.14.15";
-import { totalMomentum } from "../engine/utils.js?v=0.14.15";
-import { healthZone } from "../engine/health.js?v=0.14.15";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.14.15";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.14.15";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.14.15";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.14.15";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.14.15";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.14.15";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=0.14.15";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.14.15";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.14.15";
-import { COLLECTION_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.14.15";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.14.15";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.14.15";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.14.15";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.14.15";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.14.15";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.14.15";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.14.15";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.14.15";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.14.16";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.14.16";
+import { superstars } from "../data/superstars.js?v=0.14.16";
+import { decks } from "../data/decks.js?v=0.14.16";
+import { sets } from "../data/sets.js?v=0.14.16";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.14.16";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.14.16";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.14.16";
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.14.16";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.14.16";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.14.16";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.14.16";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.14.16";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=0.14.16";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=0.14.16";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.14.16";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.14.16";
+import { totalMomentum } from "../engine/utils.js?v=0.14.16";
+import { healthZone } from "../engine/health.js?v=0.14.16";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.14.16";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.14.16";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.14.16";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.14.16";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.14.16";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.14.16";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=0.14.16";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.14.16";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.14.16";
+import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.14.16";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.14.16";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.14.16";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.14.16";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.14.16";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.14.16";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.14.16";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.14.16";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.14.16";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -66,6 +66,7 @@ let catalogueFilter = defaultCatalogueFilters();
 let cataloguePage = 1;
 let catalogueFiltersOpen = false;
 let collectionFiltersOpen = false;
+const expandedMilestoneSetIds = new Set();
 let flippedCatalogueCards = new Set();
 let lastPack = null;
 let pendingUpgrades = [];
@@ -384,7 +385,7 @@ function attentionState() {
   const challengeGoals = [...(challengeData.daily ?? []), ...(challengeData.weekly ?? [])].filter(c => !c.claimed && (c.progress ?? 0) >= c.target).length;
   const milestoneClaims = Object.values(launchSetCollections).reduce((sum, set) => {
     const rewards = availableMilestoneRewards(profile, set.id);
-    return sum + rewards.collection.length + rewards.ruby.length;
+    return sum + rewards.collection.length + rewards.emerald.length + rewards.sapphire.length + rewards.ruby.length;
   }, 0);
   const challenges = challengeGoals + milestoneClaims;
   const reached = seasonTier(profile);
@@ -1304,23 +1305,40 @@ function renderChallenges() {
       ${c.claimed ? '<button disabled>CLAIMED</button>' : complete ? `<button class="primary" data-claim-challenge="${c.id}">${uiIcon('gift')} CLAIM</button>` : '<button disabled>IN PROGRESS</button>'}
     </article>`;
   };
+  const milestoneTrackMeta = Object.freeze({
+    collection: { label: 'BASE', icon: 'trophy', actualKey: 'percent', claimedKey: 'claimedCollection' },
+    emerald: { label: 'EMERALD', icon: 'star', actualKey: 'emeraldPercent', claimedKey: 'claimedEmerald' },
+    sapphire: { label: 'SAPPHIRE', icon: 'star', actualKey: 'sapphirePercent', claimedKey: 'claimedSapphire' },
+    ruby: { label: 'RUBY', icon: 'star', actualKey: 'rubyPercent', claimedKey: 'claimedRuby' }
+  });
   const milestone = (setId, m, type, progress, state) => {
-    const actual = type === 'ruby' ? progress.rubyPercent : progress.percent;
-    const claimedList = type === 'ruby' ? state.claimedRuby : state.claimedCollection;
+    const meta = milestoneTrackMeta[type] ?? milestoneTrackMeta.collection;
+    const actual = progress[meta.actualKey] ?? 0;
+    const claimedList = state[meta.claimedKey] ?? [];
     const claimed = claimedList.includes(m.percent);
     const ready = actual >= m.percent && !claimed;
     const toward = Math.max(0, Math.min(100, (actual / Math.max(1, m.percent)) * 100));
-    return `<article class="milestone-row premium-milestone-row ${claimed?'claimed':ready?'ready':'locked'}">
-      <span class="milestone-icon">${uiIcon(type === 'ruby' ? 'star' : 'trophy')}</span>
-      <div class="milestone-copy"><b>${type === 'ruby' ? 'RUBY' : 'COLLECTION'} ${m.percent}%</b><span>${m.reward} random booster${m.reward===1?'':'s'}</span><div class="milestone-progress-track" aria-label="${actual}% toward ${m.percent}%"><i style="width:${toward}%"></i></div><small>${Math.min(actual,m.percent)}% / ${m.percent}%</small></div>
+    return `<article class="milestone-row premium-milestone-row track-${type} ${claimed?'claimed':ready?'ready':'locked'}">
+      <span class="milestone-icon">${uiIcon(meta.icon)}</span>
+      <div class="milestone-copy"><b>${meta.label} ${m.percent}%</b><span>1 random booster</span><div class="milestone-progress-track" aria-label="${actual}% toward ${m.percent}%"><i style="width:${toward}%"></i></div><small>${Math.min(actual,m.percent)}% / ${m.percent}%</small></div>
       ${claimed?'<button disabled>CLAIMED</button>':ready?`<button class="primary" data-claim-milestone="${setId}:${type}:${m.percent}">CLAIM</button>`:'<button disabled>LOCKED</button>'}
     </article>`;
   };
-  const milestoneSections = setRows.map(({set,progress,state}) => `<section class="challenge-section set-milestone-section ${setVisualClass(set.id)}"><div class="set-milestone-heading"><div class="set-milestone-logo">${setLogoMarkup(set.id,'challenge-set-logo')}</div><div><span>SET MILESTONES</span><h3>${set.displayName}</h3><small>${progress.ownedUnique}/${progress.total} UNIQUE · ${progress.rubyUnique}/${progress.total} RUBY</small></div></div><div class="milestone-grid milestone-roadmap-grid">${[...COLLECTION_MILESTONES.map(m=>milestone(set.id,m,'collection',progress,state)),...RUBY_MILESTONES.map(m=>milestone(set.id,m,'ruby',progress,state))].join('')}</div></section>`).join('');
+  const milestoneTrack = (setId, type, list, progress, state) => {
+    const meta = milestoneTrackMeta[type];
+    const actual = progress[meta.actualKey] ?? 0;
+    return `<section class="milestone-track-block track-${type}"><div class="milestone-track-heading"><span>${meta.label} COLLECTION</span><b>${actual}%</b></div><div class="milestone-grid milestone-roadmap-grid">${list.map(m=>milestone(setId,m,type,progress,state)).join('')}</div></section>`;
+  };
+  const milestoneSections = setRows.map(({set,progress,state,rewards}) => {
+    const readyCount = rewards.collection.length + rewards.emerald.length + rewards.sapphire.length + rewards.ruby.length;
+    const shouldOpen = readyCount > 0 || expandedMilestoneSetIds.has(set.id);
+    const summary = `BASE ${progress.percent}% · EMERALD ${progress.emeraldPercent}% · SAPPHIRE ${progress.sapphirePercent}% · RUBY ${progress.rubyPercent}%`;
+    return `<details class="challenge-section set-milestone-section ${setVisualClass(set.id)} ${readyCount?'has-claimable':''}" data-milestone-set="${set.id}" ${shouldOpen?'open':''}><summary class="set-milestone-heading"><div class="set-milestone-logo">${setLogoMarkup(set.id,'challenge-set-logo')}</div><div class="set-milestone-heading-copy"><span>SET MILESTONES</span><h3>${set.displayName}</h3><small>${summary}</small>${readyCount?`<em>${readyCount} READY TO CLAIM</em>`:''}</div><i class="set-milestone-chevron" aria-hidden="true">⌄</i></summary><div class="set-milestone-body">${milestoneTrack(set.id,'collection',COLLECTION_MILESTONES,progress,state)}${milestoneTrack(set.id,'emerald',EMERALD_MILESTONES,progress,state)}${milestoneTrack(set.id,'sapphire',SAPPHIRE_MILESTONES,progress,state)}${milestoneTrack(set.id,'ruby',RUBY_MILESTONES,progress,state)}</div></details>`;
+  }).join('');
   const challengeSetStats = setRows.map(({set,progress})=>{ const packs=boosterCreditsFor(profile,set.id); return `<article class="challenge-set-stat ${setVisualClass(set.id)}"><div class="challenge-set-logo">${setLogoMarkup(set.id,"challenge-mini-set-logo")}</div><div class="challenge-set-copy"><b>${Math.round((progress.ownedUnique/Math.max(1,progress.total))*100)}%</b><small>${progress.ownedUnique}/${progress.total} unique</small></div><span class="challenge-pack-count">${uiIcon('pack')} ${packs}</span></article>`; }).join('');
   const dailyReady = challenges.daily.filter(c=>!c.claimed && (c.progress??0)>=c.target).length;
   const weeklyReady = challenges.weekly.filter(c=>!c.claimed && (c.progress??0)>=c.target).length;
-  const milestoneReady = setRows.reduce((n,row)=>n+row.rewards.collection.length+row.rewards.ruby.length,0);
+  const milestoneReady = setRows.reduce((n,row)=>n+row.rewards.collection.length+row.rewards.emerald.length+row.rewards.sapphire.length+row.rewards.ruby.length,0);
   root.innerHTML = `<section class="challenges-screen premium-screen challenges-premium challenges-compact-screen">
     ${premiumHubHeading("MY", "CHALLENGES", "DAILY · WEEKLY · COLLECTION", "Complete goals and build Season XP", "hub-challenges")}
     <section class="challenge-overview-strip"><span>${uiIcon('bolt')}<b>${dailyReady}</b><small>DAILY READY</small></span><span>${uiIcon('calendar')}<b>${weeklyReady}</b><small>WEEKLY READY</small></span><span>${uiIcon('trophy')}<b>${milestoneReady}</b><small>MILESTONES</small></span></section>
@@ -1331,7 +1349,8 @@ function renderChallenges() {
     ${milestoneSections}
   </section>`;
   root.querySelectorAll('[data-claim-challenge]').forEach(btn=>btn.addEventListener('click',()=>{ try { const xpBefore=seasonState(profile).xp; const tierBefore=seasonTier(profile); const reward=claimChallenge(profile,btn.dataset.claimChallenge,new Date(),Math.random); const xpAfter=seasonState(profile).xp; const tierAfter=seasonTier(profile); queueTierUps(tierBefore,tierAfter,xpBefore,xpAfter); saveProfile(profile); message=reward.packs ? `Weekly challenge claimed: +${reward.xp} Season XP and ${reward.packs} random booster${reward.packs===1?'':'s'}.` : `Daily challenge claimed: +${reward.xp} Season XP.`; } catch(e){ message=e.message; } renderChallenges(); showTierUpCelebration(); }));
-  root.querySelectorAll('[data-claim-milestone]').forEach(btn=>btn.addEventListener('click',()=>{ try { const [setId,type,pct]=btn.dataset.claimMilestone.split(':'); const reward=claimMilestone(profile,type,Number(pct),setId,new Date(),Math.random); saveProfile(profile); message=`${setCollections[setId]?.name??setId} ${type==='ruby'?'Ruby':'Collection'} milestone claimed: +${reward.packs} random booster${reward.packs===1?'':'s'}.`; } catch(e){ message=e.message; } renderChallenges(); }));
+  root.querySelectorAll('[data-milestone-set]').forEach(section=>section.addEventListener('toggle',()=>{ const setId=section.dataset.milestoneSet; if(!setId)return; if(section.open)expandedMilestoneSetIds.add(setId); else expandedMilestoneSetIds.delete(setId); }));
+  root.querySelectorAll('[data-claim-milestone]').forEach(btn=>btn.addEventListener('click',()=>{ try { const [setId,type,pct]=btn.dataset.claimMilestone.split(':'); expandedMilestoneSetIds.add(setId); const reward=claimMilestone(profile,type,Number(pct),setId,new Date(),Math.random); saveProfile(profile); const label=milestoneTrackMeta[type]?.label ?? 'BASE'; message=`${setCollections[setId]?.name??setId} ${label} milestone claimed: +${reward.packs} random booster${reward.packs===1?'':'s'}.`; } catch(e){ message=e.message; } renderChallenges(); }));
   syncMobileAttentionBadges();
 }
 
@@ -1381,6 +1400,7 @@ function startCurrentLiveEventMatch(towerKey = selectedLiveEventKey ?? activeLiv
 
 const LIVE_EVENT_ACCENT_ROTATION = Object.freeze(["cyan", "magenta", "orange", "purple", "teal", "red", "blue"]);
 function liveEventAccentForTower(tower, now = new Date()) {
+  if (tower?.event?.logoMode === 'raw' || tower?.event?.id === 'raw-live-spotlight' || tower?.event?.id === 'raw-live') return 'red';
   const lineup = activeLiveEventTowers(now, profile);
   const index = Math.max(0, lineup.findIndex(item => item.key === tower?.key));
   return LIVE_EVENT_ACCENT_ROTATION[index % LIVE_EVENT_ACCENT_ROTATION.length];
@@ -1407,11 +1427,13 @@ function renderLiveEventHub() {
     const status = state?.cleared ? "COMPLETE" : run?.status === "active" ? `MATCH ${run.stage + 1}/${LIVE_EVENT_LENGTH}` : "AVAILABLE";
     const rewardSet = sets[tower.event.rewardSetId];
     const accent = liveEventAccentForTower(tower, now);
-    return `<article class="live-tower-hub-card compact-live-choice ${accent}" data-open-live-tower="${tower.key}">
+    const isRaw = tower.event.logoMode === 'raw' || tower.event.id === 'raw-live-spotlight' || tower.event.id === 'raw-live';
+    const titleMarkup = isRaw ? `<div class="raw-live-hub-lockup">${setLogoMarkup('raw-series-1','raw-live-hub-logo')}<strong>EVENT</strong></div>` : splitTowerTitle(tower.event.name,accent);
+    return `<article class="live-tower-hub-card compact-live-choice ${accent} ${isRaw?'brand-raw raw-live-hub-card':''}" data-open-live-tower="${tower.key}">
       <span class="legacy-mode-beams" aria-hidden="true"></span>
       <div class="live-tower-hub-copy">
         <span class="live-tower-cadence">${tower.cadenceLabel} · ${status}</span>
-        ${splitTowerTitle(tower.event.name,accent)}
+        ${titleMarkup}
         <small class="live-choice-summary">${progress}/${LIVE_EVENT_LENGTH} MATCHES · 1 RANDOM PACK ON CLEAR</small>
         <div class="live-tower-hub-footer"><b class="live-tower-enter">${status === "COMPLETE" ? "VIEW COMPLETED TOWER" : status === "AVAILABLE" ? "PLAY" : `CONTINUE ${status}`} <i>›</i></b></div>
       </div>
@@ -1491,7 +1513,7 @@ function renderLiveEventTowerDetail(towerKey) {
     : cleared
       ? `<section class="live-tower-command complete"><div><span>TOWER COMPLETE</span><strong>${event.name}</strong><small>${chosenStar?.name ?? 'Your Superstar'} cleared all ${LIVE_EVENT_LENGTH} matches.</small><p>1 random released-set booster awarded for clearing all ${LIVE_EVENT_LENGTH} matches.</p></div><button id="back-live-events" class="nav-button">Back to Live Events</button></section>`
       : `<section class="live-tower-player horizontal-selector live-tower-selector-panel"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name ?? 'Choose your Superstar'}</h3></div><small>Locked for this tower once started</small></div>${selectionCarouselMarkup(unlocked,chosenId,'live-event-select')}<p class="live-tower-selector-note">Clear all ${LIVE_EVENT_LENGTH} matches before the timer expires.</p><button id="start-live-event" class="start-match select-confirm">START WITH ${(chosenStar?.name ?? 'SUPERSTAR').toUpperCase()}</button></section>`;
-  root.innerHTML = `<section class="live-tower-detail cadence-${tower.cadence} accent-${detailAccent} event-${event.id} ${active?'is-active-tower':cleared?'is-cleared-tower':'is-setup-tower'}">
+  root.innerHTML = `<section class="live-tower-detail cadence-${tower.cadence} accent-${detailAccent} ${event.logoMode==='raw'?'brand-raw':''} event-${event.id} ${active?'is-active-tower':cleared?'is-cleared-tower':'is-setup-tower'}">
     <button id="live-events-back" class="live-tower-back">‹ All Live Events</button>
     <section class="live-tower-detail-hero compact-live-detail-hero">
       <div class="live-tower-detail-copy">${event.logoMode !== 'legacy' ? liveEventBrandMarkup(event) : modeLogoMarkup('live-event',true)}<span class="live-tower-detail-cadence">${tower.cadenceLabel} · ${event.dayLabel ?? 'LIMITED TIME'}</span><h2>${detailTitle}</h2><p>${event.description}</p></div>
@@ -1805,7 +1827,7 @@ function modeLogoMarkup(mode, compact = false) {
 
 function liveEventBrandMarkup(event) {
   if (!event) return modeLogoMarkup("live-event", true);
-  if (event.logoMode === "raw") return `<div class="event-brand-logo raw-brand" aria-label="RAW"><small>MONDAY NIGHT</small><span>RAW</span></div>`;
+  if (event.logoMode === "raw") return `<div class="event-brand-logo raw-brand" aria-label="RAW">${setLogoMarkup('raw-series-1','event-brand-set-logo raw-event-logo')}</div>`;
   if (event.logoMode === "nxt") return `<div class="event-brand-logo nxt-brand" aria-label="NXT"><small>WEDNESDAY NIGHT</small><span>NXT</span></div>`;
   if (event.logoMode === "smackdown") return `<div class="event-brand-logo smackdown-brand" aria-label="SMACKDOWN"><small>SATURDAY NIGHT</small><span>SMACKDOWN</span></div>`;
   return `${modeLogoMarkup("live-event", true)}<div class="event-name-lockup"><small>${event.dayLabel ?? "TODAY"}</small><span>${event.name}</span></div>`;

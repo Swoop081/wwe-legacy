@@ -1,5 +1,5 @@
-import { superstars } from "./superstars.js?v=0.14.15";
-import { grantBooster } from "./boosters.js?v=0.14.15";
+import { superstars } from "./superstars.js?v=0.14.16";
+import { grantBooster } from "./boosters.js?v=0.14.16";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 40;
 export const LEGACY_CHAMPIONSHIP_ROAD_LENGTH = 32;
