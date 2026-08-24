@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.16';
-import { superstars } from '../js/data/superstars.js?v=0.14.16';
-import { decks } from '../js/data/decks.js?v=0.14.16';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.16';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
+import { superstars } from '../js/data/superstars.js?v=0.14.20';
+import { decks } from '../js/data/decks.js?v=0.14.20';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const rng=()=>0.42;
@@ -14,7 +14,7 @@ test('v0.12.33 Andre powerhouse package is re-anchored for defender-only retaine
   const splash=byId('andre-the-giant-sitdown-splash');
   const entrance=byId('entrance-andre-the-giant');
   assert.equal(andre.hp,72);
-  assert.equal(andre.ability.trigger.maxUses,2);
+  assert.equal(andre.ability.trigger.maxUses,1); // superseded by v0.14.20
   assert.equal(andre.ability.trigger.discount,1);
   assert.equal(andre.ability.trigger.damage,2);
   assert.equal(andre.entrance.preMatchAdrenaline,1);

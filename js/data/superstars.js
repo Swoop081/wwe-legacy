@@ -704,15 +704,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Giant’s Reach",
-      "text": "The first 2 times André connects with a Strike Move, his next Strength Move during that Control sequence costs 1 less, deals +2 Damage, and André gains +1 Adrenaline.",
+      "text": "The first time André connects with a Strike Move, his next Strength Move during that Control sequence costs 1 less and deals +2 Damage.",
       "trigger": {
         "type": "strikeDiscountStrength",
-        "maxUses": 2,
+        "maxUses": 1,
         "discount": 1,
-        "damage": 2,
-        "adrenaline": 1
+        "damage": 2
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-andre-the-giant",
@@ -835,11 +834,10 @@ export const superstars = {
     },
     "ability": {
       "name": "Macho Madness",
-      "text": "The first 2 times Savage connects with an Agility Move after he has connected with a Strike Move earlier in the same Control sequence, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first 2 times Savage connects with an Agility Move after he has connected with a Strike Move earlier in the same Control sequence, gain +1 Adrenaline.",
       "trigger": {
         "type": "agilityAfterStrike",
         "maxUses": 2,
-        "draw": 1,
         "adrenaline": 1
       },
       "maxUses": 2
@@ -1748,7 +1746,7 @@ export const superstars = {
       "becky-lynch-bexploder"
     ],
     "archetype": "reviewed-starter",
-    "hp": 64,
+    "hp": 65,
     "methodLimits": {
       "agility": 1,
       "strength": 2,
@@ -2250,13 +2248,13 @@ export const superstars = {
       "setId": "worlds-collide-series-1",
       "rarity": 4,
       "superstarId": "penta",
-      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Technical Momentum.",
       "preMatchMomentum": {
         "agility": 1,
         "strength": 1,
         "technical": 1
       },
-      "preMatchAdrenaline": 1,
+      "preMatchAdrenaline": 0,
       "delayedTurn5": false
     },
     "special": {
@@ -3757,7 +3755,7 @@ export const superstars = {
       "lola-vice-305"
     ],
     "archetype": "strike-technical-mma-counter-striker",
-    "hp": 59,
+    "hp": 61,
     "methodLimits": {
       "strike": null,
       "technical": 4,
@@ -4300,7 +4298,7 @@ export const superstars = {
       "doink-whoopee-cushion"
     ],
     "archetype": "technical-agility-trickster",
-    "hp": 60,
+    "hp": 62,
     "methodLimits": {
       "technical": null,
       "agility": 4,
@@ -4314,11 +4312,12 @@ export const superstars = {
     },
     "ability": {
       "name": "The Joke’s on You!",
-      "text": "The first 2 times each match Doink successfully Counters an opponent’s Move, draw 1 page.",
+      "text": "The first 2 times each match Doink successfully Counters an opponent’s Move, draw 2 pages and gain +1 Adrenaline.",
       "trigger": {
         "type": "counterDraw",
         "maxUses": 2,
-        "draw": 1
+        "draw": 2,
+        "adrenaline": 1
       },
       "maxUses": 2
     },
@@ -4434,7 +4433,7 @@ export const superstars = {
       "owen-hart-sharpshooter"
     ],
     "archetype": "technical-all-rounder-flash-pin",
-    "hp": 62,
+    "hp": 63,
     "methodLimits": {
       "technical": null,
       "agility": 4,
@@ -4475,7 +4474,7 @@ export const superstars = {
       "type": "owenSlammyAwards",
       "look": 7,
       "maxChoices": 2,
-      "maxRarity": 2
+      "maxRarity": 3
     }
   },
   "britishBulldog": {
@@ -4613,7 +4612,7 @@ export const superstars = {
     },
     "special": {
       "type": "pipersPit",
-      "nextUseAdrenalineTax": 2
+      "nextControlAdrenalineDrain": 1
     }
   },
   "tedDiBiase": {
@@ -4655,14 +4654,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Everybody Has a Price",
-      "text": "The first 2 times each match DiBiase Connects with a Technical Move costing 4+, draw 1 page and the opponent loses 1 Adrenaline.",
+      "text": "The first 3 times each match DiBiase Connects with a Technical Move costing 4+, draw 1 page and the opponent loses 1 Adrenaline.",
       "trigger": {
         "type": "connectMethodCost",
         "method": "technical",
         "minCost": 4,
         "draw": 1,
         "opponentAdrenaline": -1,
-        "maxUses": 2
+        "maxUses": 3
       }
     },
     "entrance": {
@@ -4785,10 +4784,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Perfect Execution",
-      "text": "The first time each Control sequence Mr. Perfect successfully Counters a Move, his next Technical Move costs 2 less that Control sequence.",
+      "text": "The first time each Control sequence Mr. Perfect successfully Counters a Move, his next Technical Move costs 2 less that Control sequence. The first 2 successful Counters each match also draw 1 page.",
       "trigger": {
         "type": "perfectExecution",
-        "discount": 2
+        "discount": 2,
+        "draw": 1,
+        "drawMaxUses": 2
       }
     },
     "entrance": {

@@ -1,9 +1,9 @@
-import { decks } from "./decks.js?v=0.14.16";
-import { collectionCards } from "./collection.js?v=0.14.16";
-import { superstars } from "./superstars.js?v=0.14.16";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.14.16";
-import { isPlayerReleasedSetId } from "./release.js?v=0.14.16";
-import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=0.14.16";
+import { decks } from "./decks.js?v=0.14.20";
+import { collectionCards } from "./collection.js?v=0.14.20";
+import { superstars } from "./superstars.js?v=0.14.20";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.14.20";
+import { isPlayerReleasedSetId } from "./release.js?v=0.14.20";
+import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=0.14.20";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -58,6 +58,18 @@ export function cardEligibilityForSuperstar(star, card) {
 }
 
 export function legalForSuperstar(star, card) { return cardEligibilityForSuperstar(star, card).legal; }
+
+// Some collector cards are intentionally shared/manual-legal but are authored
+// for one Superstar's identity and should never be injected as generic Auto
+// Build filler elsewhere. This is presentation/deck-assistance affinity only;
+// it does not change manual Deck Lab legality, rarity, ownership, or card data.
+export function autoBuildEligibilityForSuperstar(star, card) {
+  const base = cardEligibilityForSuperstar(star, card);
+  if (!base.legal) return base;
+  const ids = Array.isArray(card?.autoBuildSuperstarIds) ? card.autoBuildSuperstarIds : [];
+  if (ids.length && !ids.includes(star.id)) return { legal: false, reason: "Reserved for another Superstar's Auto Build" };
+  return { legal: true, reason: "Valid Auto Build card" };
+}
 
 export function entranceEligibilityForSuperstar(star, card) {
   if (!star || !card || card.kind !== "entrance") return { legal: false, reason: "Not an Entrance" };
@@ -317,7 +329,7 @@ function preferOwnedDraftTiers(profile, draft = []) {
 export function buildBestOwnedRecommendedDraft(profile, sid) {
   const star = starById.get(sid), wantedCards = decks[sid] ?? [];
   if (!star || wantedCards.length !== 60) return [];
-  const candidates = eligibleOwnedCards(profile, sid);
+  const candidates = eligibleOwnedCards(profile, sid).filter(card => autoBuildEligibilityForSuperstar(star, card).legal);
   const out = [];
   const remainingNeed = new Map();
   for (const card of wantedCards) remainingNeed.set(card.id, (remainingNeed.get(card.id) ?? 0) + 1);
@@ -425,7 +437,7 @@ export function autoFillOwnedDraft(profile, sid, draft = []) {
   const star = starById.get(sid); if (!star) return [...draft];
   const out = [...draft.map(e => typeof e === "string" ? { id: e, tier: DEFAULT_AUTHORED_TIER } : { ...e })];
   const target = (decks[sid] ?? []).length || 60;
-  const candidates = eligibleOwnedCards(profile, sid).sort((a, b) => {
+  const candidates = eligibleOwnedCards(profile, sid).filter(card => autoBuildEligibilityForSuperstar(star, card).legal).sort((a, b) => {
     const ar = a.rarity ?? 0, br = b.rarity ?? 0; if (br !== ar) return br - ar;
     return (a.cost ?? 0) - (b.cost ?? 0) || a.name.localeCompare(b.name);
   });

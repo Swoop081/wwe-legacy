@@ -9903,12 +9903,12 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
 .premium-milestone-row.track-sapphire{border-color:rgba(75,174,255,.18)!important;background:linear-gradient(90deg,rgba(48,139,224,.09),rgba(255,255,255,.02))!important}
 .premium-milestone-row.track-ruby{border-color:rgba(255,71,86,.18)!important;background:linear-gradient(90deg,rgba(211,45,59,.09),rgba(255,255,255,.02))!important}
 
+/* v0.14.17 — RAW hub typography + in-match RAW logo routing */
 .live-events-hub .raw-live-hub-card{border-color:rgba(239,38,55,.58)!important;background:radial-gradient(circle at 84% 20%,rgba(239,38,55,.24),transparent 32%),linear-gradient(145deg,#24080d,#0b080b 74%)!important;box-shadow:inset 0 0 0 1px rgba(255,71,86,.13),0 10px 26px rgba(75,0,8,.22)!important}
 .live-events-hub .raw-live-hub-card .legacy-mode-beams{background:linear-gradient(120deg,transparent 8%,rgba(255,42,61,.12) 42%,transparent 72%)!important}
 .live-events-hub .raw-live-hub-card .live-tower-cadence{color:#ff7b86!important}
-.raw-live-hub-lockup{display:flex;align-items:flex-end;gap:9px;min-height:56px;margin:1px 0 2px}
-.raw-live-hub-lockup .raw-live-hub-logo{display:block;width:min(155px,72%);height:54px;object-fit:contain;object-position:left center;filter:drop-shadow(0 3px 8px rgba(239,38,55,.28))}
-.raw-live-hub-lockup strong{font-size:clamp(1.55rem,6vw,2.35rem);line-height:.82;font-style:italic;letter-spacing:-.04em;color:#fff}
+.live-events-hub .raw-live-hub-card .live-event-split-title.title-raw span{color:#f7f8fb!important}
+.live-events-hub .raw-live-hub-card .live-event-split-title.title-raw b{color:#ef2637!important}
 .event-brand-logo.raw-brand{display:flex!important;align-items:center!important;justify-content:flex-start!important;min-height:48px!important}
 .event-brand-logo.raw-brand .raw-event-logo{display:block!important;width:min(210px,72vw)!important;height:58px!important;object-fit:contain!important;object-position:left center!important;filter:drop-shadow(0 4px 10px rgba(239,38,55,.26))!important}
 .live-tower-detail.brand-raw .live-tower-detail-hero{border-color:rgba(239,38,55,.45)!important;background:radial-gradient(circle at 82% 18%,rgba(239,38,55,.20),transparent 28%),linear-gradient(155deg,#20090d,#09090d)!important}
@@ -9921,6 +9921,34 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
   .set-milestone-heading h3{font-size:1.05rem!important}
   .set-milestone-heading-copy small{font-size:.47rem!important}
   .set-milestone-body{padding:0 8px 9px!important;gap:9px!important}
-  .raw-live-hub-lockup{min-height:48px}
-  .raw-live-hub-lockup .raw-live-hub-logo{height:45px;width:min(135px,70%)}
+}
+
+
+/* v0.14.18 — Tier Up reward cards are compact supporting rewards, not full-screen hero cards. */
+#tier-up-layer .tier-up-superstar-reward .tier-up-physical-card{
+  display:block!important;
+  width:min(112px,26vw)!important;
+  max-width:112px!important;
+  min-width:0!important;
+  margin:0 auto 1px!important;
+  flex:0 0 auto!important;
+}
+#tier-up-layer .tier-up-superstar-reward .tier-up-physical-card>.ccg-card,
+#tier-up-layer .tier-up-superstar-reward .tier-up-physical-card>.tier-up-superstar-card{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  flex:none!important;
+  pointer-events:none!important;
+  filter:drop-shadow(0 9px 15px rgba(0,0,0,.56))!important;
+}
+#tier-up-layer .tier-up-superstar-reward{
+  width:min(320px,78vw)!important;
+  gap:2px!important;
+}
+@media(max-height:760px){
+  #tier-up-layer .tier-up-superstar-reward .tier-up-physical-card{width:min(96px,23vw)!important;max-width:96px!important}
 }

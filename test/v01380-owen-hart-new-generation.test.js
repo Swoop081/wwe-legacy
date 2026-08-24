@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=0.14.16';
-import { superstars } from '../js/data/superstars.js?v=0.14.16';
-import { decks } from '../js/data/decks.js?v=0.14.16';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.16';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.14.16';
-import { boosterEligible } from '../js/data/boosters.js?v=0.14.16';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.16';
-import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=0.14.16';
-await import('../js/data/superstar-nameplates.js?v=0.14.16');
+import { sets } from '../js/data/sets.js?v=0.14.20';
+import { superstars } from '../js/data/superstars.js?v=0.14.20';
+import { decks } from '../js/data/decks.js?v=0.14.20';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.14.20';
+import { boosterEligible } from '../js/data/boosters.js?v=0.14.20';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
+import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=0.14.20';
+await import('../js/data/superstar-nameplates.js?v=0.14.20');
 
 const owen=Object.values(superstars).find(s=>s.id==='owen-hart');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
@@ -26,7 +26,7 @@ function opponentFor(star){return Object.values(superstars).find(s=>s.id!==star.
 
 test('v0.13.80 adds Owen Hart as the seventh authored New Generation Superstar with the approved all-rounder profile',()=>{
   assert.deepEqual(sets['new-generation-series-1'].plannedSuperstarIds,['bret-hart','shawn-michaels','diesel','razor-ramon','doink-the-clown','yokozuna','owen-hart','british-bulldog']);
-  assert.ok(owen); assert.equal(owen.hp,62); assert.equal(owen.nickname,'The King of Harts'); assert.equal(owen.developmentOnly,false);
+  assert.ok(owen); assert.equal(owen.hp,63); // superseded by v0.14.20 roster balance assert.equal(owen.nickname,'The King of Harts'); assert.equal(owen.developmentOnly,false);
   assert.deepEqual(owen.starterMomentum,{technical:5,agility:3,strike:3,strength:1});
   assert.deepEqual(owen.methodLimits,{technical:null,agility:4,strike:4,strength:2});
   assert.equal(owen.ability.name,'King of Harts'); assert.deepEqual(owen.ability.trigger,{type:'owenKingOfHarts',draw:1,maxPinUses:1});
@@ -56,7 +56,7 @@ test('v0.13.80 Owen owns NG1-061 through NG1-067 with the approved Sharpshooter 
   assert.equal(byId['owen-hart-missile-dropkick'].standingOnly,true); assert.deepEqual(byId['owen-hart-missile-dropkick'].effects,[{type:'gainAdrenaline',amount:1}]);
   const fin=byId['owen-hart-sharpshooter']; assert.equal(fin.rarity,4); assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,0); assert.deepEqual(fin.requirements,{}); assert.equal(fin.method,null); assert.equal(fin.groundedOnly,true); assert.deepEqual(fin.submission,{bodyPart:'legs',pressure:6}); assert.equal(fin.submissionTarget,'legs');
   assert.equal(byId['entrance-owen-hart'].name,'The King of Harts'); assert.deepEqual(byId['entrance-owen-hart'].preMatchMomentum,{technical:1,agility:1}); assert.equal(byId['entrance-owen-hart'].preMatchAdrenaline,1);
-  assert.equal(byId['special-owen-hart'].name,'Two-Time Slammy Award Winner'); assert.deepEqual(byId['special-owen-hart'].special,{type:'owenSlammyAwards',look:7,maxChoices:2,maxRarity:2});
+  assert.equal(byId['special-owen-hart'].name,'Two-Time Slammy Award Winner'); assert.deepEqual(byId['special-owen-hart'].special,{type:'owenSlammyAwards',look:7,maxChoices:2,maxRarity:3});
   assert.ok(CARD_IDS_BY_SET['new-generation-series-1'].length>=67);
 });
 
@@ -77,7 +77,7 @@ test('v0.13.80 King of Harts also treats a played Pin Escape as a failed Owen Pi
   assert.equal(a.abilityUses,1); assert.equal(st.playerInControl,'p1'); assert.equal(st.phase,'ACTION');
 });
 
-test('v0.13.80 Two-Time Slammy Award Winner reveals seven and can take up to two different 1★/2★ Moves',()=>{
+test('v0.13.80 Two-Time Slammy Award Winner reveals seven and can take up to two different 1★/2★/3★ Moves',()=>{
   const opp=opponentFor(owen); const g=new MatchEngine({p1:owen,p2:opp,decks,rng:()=>0.42}); const st=g.state(),p=st.players.p1;
   const special={...byId['special-owen-hart'],instanceId:'slammy'};
   p.hand=[special]; p.deck=[
@@ -91,7 +91,7 @@ test('v0.13.80 Two-Time Slammy Award Winner reveals seven and can take up to two
   ];
   p.usedSpecialIds=[]; p.specialUsed=false; st.phase='ACTION'; st.playerInControl='p1';
   assert.equal(canPlaySpecial(st,'p1',special),true); assert.equal(g.playSpecial('p1',special),true);
-  assert.ok(st.pendingTopDeckTutorChoice); assert.equal(st.pendingTopDeckTutorChoice.maxChoices,2); assert.deepEqual(new Set(st.pendingTopDeckTutorChoice.eligibleIds),new Set(['fisherman-suplex','wheel-kick','step-up-enzuigiri','gutbuster']));
+  assert.ok(st.pendingTopDeckTutorChoice); assert.equal(st.pendingTopDeckTutorChoice.maxChoices,2); assert.deepEqual(new Set(st.pendingTopDeckTutorChoice.eligibleIds),new Set(['fisherman-suplex','wheel-kick','owen-hart-enzuigiri','step-up-enzuigiri','gutbuster']));
   assert.equal(g.resolveTopDeckTutorChoice('p1','fisherman-suplex'),true); assert.ok(st.pendingTopDeckTutorChoice); assert.equal(st.pendingTopDeckTutorChoice.eligibleIds.includes('fisherman-suplex'),false);
   assert.equal(g.resolveTopDeckTutorChoice('p1','wheel-kick'),true); assert.equal(st.pendingTopDeckTutorChoice,null);
   assert.equal(p.hand.filter(c=>['fisherman-suplex','wheel-kick'].includes(c.id)).length,2); assert.equal(p.deck.length,5);

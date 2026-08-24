@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.16';
-import { counterEligibility } from '../js/engine/rules.js?v=0.14.16';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
+import { counterEligibility } from '../js/engine/rules.js?v=0.14.20';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=()=>({superstar:{id:'test'},momentum:{strength:10,strike:10,technical:10,agility:10,attitude:10},adrenaline:10,hand:[],specialUsed:false,controlMoveCount:0,events:{},posture:'standing'});
@@ -13,7 +13,7 @@ test('v0.12.28 elite 18-19 Damage Finishers carry a printed Cost premium',()=>{
     ['andre-the-giant-sitdown-splash',12,18],
     ['the-rock-people-s-elbow',11,18],
     ['goldberg-jackhammer',12,19],
-    ['diesel-jackknife-powerbomb',11,18],
+    ['diesel-jackknife-powerbomb',12,18],
     ['yokozuna-banzai-drop',11,19],
     ['john-cena-attitude-adjustment',11,18],
   ]);

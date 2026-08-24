@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { deckIds } from '../js/data/decks.js?v=0.14.16';
-import { superstars } from '../js/data/superstars.js?v=0.14.16';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.16';
+import { deckIds } from '../js/data/decks.js?v=0.14.20';
+import { superstars } from '../js/data/superstars.js?v=0.14.20';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
 
 const razor = Object.values(superstars).find(star => star.id === 'razor-ramon');
 const ids = deckIds['razor-ramon'];

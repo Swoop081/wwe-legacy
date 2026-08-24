@@ -1,15 +1,16 @@
-import { decks } from "./decks.js?v=0.14.16";
-import { collectionCards } from "./collection.js?v=0.14.16";
-import { superstars } from "./superstars.js?v=0.14.16";
-import { isUnreleasedSetId } from "./release.js?v=0.14.16";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.14.16";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.14.16";
+import { decks } from "./decks.js?v=0.14.20";
+import { collectionCards } from "./collection.js?v=0.14.20";
+import { superstars } from "./superstars.js?v=0.14.20";
+import { isUnreleasedSetId } from "./release.js?v=0.14.20";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.14.20";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.14.20";
+import { cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=0.14.20";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 39;
+export const PROFILE_VERSION = 40;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -577,6 +578,77 @@ function migrateOnceTooOftenIntoSavedDeck(saved = []) {
   return out;
 }
 
+const RHEA_CRUCIFIX_ID = "razor-s-edge";
+const RHEA_CRUCIFIX_OWNER_ID = "rhea-ripley";
+const REPAIR_TIER_ORDER = Object.freeze(["ruby", "sapphire", "emerald", "normal"]);
+
+function savedEntryId(entry) { return typeof entry === "string" ? entry : entry?.id; }
+function savedEntryTier(entry) { return normalizeCardTier(typeof entry === "string" ? DEFAULT_STARTER_TIER : (entry?.tier ?? (entry?.foil ? "ruby" : DEFAULT_STARTER_TIER))); }
+function savedCountId(saved, id, skipIndex = -1) {
+  return saved.reduce((n, entry, index) => n + (index !== skipIndex && savedEntryId(entry) === id ? 1 : 0), 0);
+}
+function savedCountTier(saved, id, tier, skipIndex = -1) {
+  const wanted = normalizeCardTier(tier);
+  return saved.reduce((n, entry, index) => n + (index !== skipIndex && savedEntryId(entry) === id && savedEntryTier(entry) === wanted ? 1 : 0), 0);
+}
+function savedCopyFamilyCount(saved, family, skipIndex = -1) {
+  if (!family) return 0;
+  return saved.reduce((n, entry, index) => {
+    if (index === skipIndex) return n;
+    const card = cardById.get(savedEntryId(entry));
+    return n + (card?.copyFamily === family ? 1 : 0);
+  }, 0);
+}
+function bestOwnedRepairTier(profile, saved, id, skipIndex = -1) {
+  for (const tier of REPAIR_TIER_ORDER) {
+    if (savedCountTier(saved, id, tier, skipIndex) < tierOwnedCopies(profile, id, tier)) return tier;
+  }
+  return null;
+}
+function recommendedCountsForRepair(sid) {
+  const counts = new Map();
+  for (const card of decks[sid] ?? []) counts.set(card.id, (counts.get(card.id) ?? 0) + 1);
+  return counts;
+}
+function repairCandidateScore(target, candidate, recommended, saved, replaceIndex) {
+  let score = 0;
+  const haveWithout = savedCountId(saved, candidate.id, replaceIndex);
+  const wanted = recommended.get(candidate.id) ?? 0;
+  if (haveWithout < wanted) score += 500 + Math.min(5, wanted - haveWithout) * 20;
+  if (categoryForCard(target) === categoryForCard(candidate)) score += 140;
+  if (target?.kind === candidate.kind) score += 55;
+  if (target?.method && target.method === candidate.method) score += 35;
+  if (target?.moveType && target.moveType === candidate.moveType) score += 20;
+  if (Number.isFinite(target?.cost) && Number.isFinite(candidate?.cost)) score -= Math.abs(target.cost - candidate.cost) * 4;
+  score += Math.min(4, Number(candidate?.rarity) || 0) * 2;
+  return score;
+}
+function repairLeakedRheaCrucifix(profile, sid, saved = []) {
+  if (!Array.isArray(saved) || sid === RHEA_CRUCIFIX_OWNER_ID || !saved.some(entry => savedEntryId(entry) === RHEA_CRUCIFIX_ID)) return saved;
+  const star = starById.get(sid), target = cardById.get(RHEA_CRUCIFIX_ID);
+  if (!star || !target) return saved.filter(entry => savedEntryId(entry) !== RHEA_CRUCIFIX_ID);
+  const recommended = recommendedCountsForRepair(sid);
+  const out = saved.map(entry => typeof entry === "string" ? { id: entry, tier: DEFAULT_STARTER_TIER } : { ...entry, tier: savedEntryTier(entry) });
+  for (let index = out.length - 1; index >= 0; index -= 1) {
+    if (savedEntryId(out[index]) !== RHEA_CRUCIFIX_ID) continue;
+    const inLeadOff = index < 5;
+    const candidates = collectionCards.filter(card => {
+      if (!card || card.id === RHEA_CRUCIFIX_ID || ["superstar", "entrance"].includes(card.kind) || isUnreleasedSetId(card.setId)) return false;
+      if (inLeadOff && !["move", "momentum"].includes(card.kind)) return false;
+      if (!cardEligibilityForSuperstar(star, card).legal) return false;
+      const defaultCap = card.kind === "momentum" ? 12 : 5;
+      const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap, totalOwnedCopies(profile, card.id));
+      if (savedCountId(out, card.id, index) >= cap) return false;
+      if (card.copyFamily && savedCopyFamilyCount(out, card.copyFamily, index) >= 5) return false;
+      return bestOwnedRepairTier(profile, out, card.id, index) !== null;
+    }).sort((a,b) => repairCandidateScore(target,b,recommended,out,index) - repairCandidateScore(target,a,recommended,out,index) || a.name.localeCompare(b.name));
+    const replacement = candidates[0] ?? null;
+    if (!replacement) { out.splice(index, 1); continue; }
+    out[index] = { id: replacement.id, tier: bestOwnedRepairTier(profile, out, replacement.id, index) ?? DEFAULT_STARTER_TIER };
+  }
+  return out;
+}
+
 export function migrateProfile(old) {
   const sourceVersion = Number(old?.version) || 0;
   if (!old?.starterId || !STARTER_CHOICES.includes(old.starterId) || !decks[old.starterId]) return null;
@@ -933,6 +1005,23 @@ export function migrateProfile(old) {
   for (const setId of Object.keys(p.ladder?.completionPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.ladder.completionPackCreditsBySet[setId] = 0;
   for (const setId of Object.keys(p.championshipRoad?.championshipPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.championshipRoad.championshipPackCreditsBySet[setId] = 0;
   p.pendingUnlockCelebrations = (p.pendingUnlockCelebrations ?? []).filter(event => releasedStarIds.has(event?.superstarId));
+
+  // v0.14.19 Rhea Crucifix Auto Build hotfix: EVO1-004 is intentionally a
+  // shared Uncommon for manual deckbuilding, but its Rhea-authored identity
+  // should never be injected as generic Auto Build filler for other
+  // Strength-capable Superstars such as Kane. Make existing affected saves
+  // self-heal once: keep every
+  // unaffected slot/tier intact, replace only the leaked Rhea page with the
+  // best legal owned card, and fall back to removing it if no legal owned
+  // replacement exists. Rhea's own deck is untouched.
+  if (sourceVersion < 40) {
+    for (const [sid, saved] of Object.entries(p.savedDecks ?? {})) {
+      if (!Array.isArray(saved) || sid === RHEA_CRUCIFIX_OWNER_ID) continue;
+      if (!saved.some(entry => savedEntryId(entry) === RHEA_CRUCIFIX_ID)) continue;
+      p.savedDecks[sid] = repairLeakedRheaCrucifix(p, sid, saved);
+      p.deckNeedsCards[sid] = recommendedOwnedMissingCount(p, sid);
+    }
+  }
 
   // v0.14.05 Razor Lead Off sync: v0.14.02 changed Razor's authored opening
   // hand, but profiles that already had a valid saved Razor deck kept their

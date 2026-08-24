@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.14.16';
-import { cardsForSet } from '../js/data/collection.js?v=0.14.16';
-import { boosterCreditsFor } from '../js/data/boosters.js?v=0.14.16';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.14.20';
+import { cardsForSet } from '../js/data/collection.js?v=0.14.20';
+import { boosterCreditsFor } from '../js/data/boosters.js?v=0.14.20';
 import {
   COLLECTION_MILESTONES,
   EMERALD_MILESTONES,
@@ -13,7 +13,7 @@ import {
   availableMilestoneRewards,
   claimMilestone,
   setProgressState
-} from '../js/data/set-progression.js?v=0.14.16';
+} from '../js/data/set-progression.js?v=0.14.20';
 
 const fixedRng = () => 0.314159;
 const now = new Date(2026,7,24,12,0,0);
@@ -59,7 +59,7 @@ test('v0.14.16 Challenges renders collapsible set sections and auto-opens claima
 
 test('v0.14.16 RAW Live presentation is locked red and uses the RAW Series 1 logo asset', () => {
   assert.match(app,/logoMode === 'raw'.*return 'red'/s);
-  assert.match(app,/setLogoMarkup\('raw-series-1','raw-live-hub-logo'\)/);
+  assert.match(app,/"raw-series-1": assetUrl\("assets\/images\/branding-raw-series-1-raw-logo\.webp"\)/);
   assert.match(app,/setLogoMarkup\('raw-series-1','event-brand-set-logo raw-event-logo'\)/);
   assert.match(app,/brand-raw raw-live-hub-card/);
   assert.match(css,/raw-live-hub-card/);

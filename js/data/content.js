@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.14.16";
+import { enrichCounterState } from "./counter-states.js?v=0.14.20";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -3581,6 +3581,9 @@ export const allGameplayCards = [
     "moveType": "grapple",
     "method": "strength",
     "superstarId": null,
+    "autoBuildSuperstarIds": [
+      "rhea-ripley"
+    ],
     "rarity": 2,
     "rulesText": "",
     "groundOpponent": false,
@@ -3730,14 +3733,14 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "becky-lynch",
     "rarity": 3,
-    "rulesText": "Becky-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Arm damage per successful turn.",
+    "rulesText": "Becky-exclusive Trademark. Grounded opponent only. Submission. +6 persistent Arm damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
-      "pressure": 5
+      "pressure": 6
     },
     "trademark": true,
     "effects": [],
@@ -3750,7 +3753,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 9,
-    "damage": 16,
+    "damage": 17,
     "requirements": {},
     "moveType": "grapple",
     "method": null,
@@ -6518,12 +6521,12 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "rarity": 4,
     "superstarId": "penta",
-    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum.",
     "preMatchMomentum": {
       "agility": 1,
       "strength": 1
     },
-    "preMatchAdrenaline": 1,
+    "preMatchAdrenaline": 0,
     "delayedTurn5": false
   },
   {
@@ -11348,7 +11351,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "lola-vice",
     "rarity": 3,
-    "rulesText": "Lola Vice-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Head damage per successful turn.",
+    "rulesText": "Lola Vice-exclusive Trademark. Grounded opponent only. Submission. +6 persistent Head damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -11356,7 +11359,7 @@ export const allGameplayCards = [
     "trademark": true,
     "submission": {
       "bodyPart": "head",
-      "pressure": 5
+      "pressure": 6
     },
     "effects": [],
     "counterState": "torso-trapped",
@@ -12327,7 +12330,7 @@ export const allGameplayCards = [
     "name": "Jackknife Powerbomb",
     "kind": "move",
     "setId": "new-generation-series-1",
-    "cost": 11,
+    "cost": 12,
     "damage": 18,
     "requirements": {},
     "moveType": "grapple",
@@ -13088,18 +13091,14 @@ export const allGameplayCards = [
     "superstarId": "doink-the-clown",
     "rarity": 3,
     "trademark": true,
-    "rulesText": "Doink the Clown-exclusive Trademark. Grounds opponent. On Connect: Stump Puller costs 1 less this Control sequence.",
+    "rulesText": "Doink the Clown-exclusive Trademark. Grounds opponent. On Connect: search/draw Stump Puller; it costs 1 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [
-      {
-        "type": "discountNextByName",
-        "name": "Stump Puller",
-        "amount": 1
-      }
-    ],
+    "searchOnConnectName": "Stump Puller",
+    "searchOnConnectDiscount": 1,
+    "effects": [],
     "counterState": "front-control"
   },
   {
@@ -13117,14 +13116,14 @@ export const allGameplayCards = [
     "superstarId": "doink-the-clown",
     "rarity": 3,
     "trademark": true,
-    "rulesText": "Doink the Clown-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Leg damage per successful turn.",
+    "rulesText": "Doink the Clown-exclusive Trademark. Grounded opponent only. Submission. +6 persistent Leg damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 5
+      "pressure": 6
     },
     "effects": [],
     "counterState": "leg-extended",
@@ -13797,7 +13796,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "owen-hart",
     "rarity": 4,
-    "rulesText": "Once per match during Owen’s Control: look at the top 7 pages of your Playbook. Choose up to two different 1★/2★ Moves and put them into your hand. Put the rest on the bottom.",
+    "rulesText": "Once per match during Owen’s Control: look at the top 7 pages of your Playbook. Choose up to two different 1★/2★/3★ Moves and put them into your hand. Put the rest on the bottom.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -13806,7 +13805,7 @@ export const allGameplayCards = [
       "type": "owenSlammyAwards",
       "look": 7,
       "maxChoices": 2,
-      "maxRarity": 2
+      "maxRarity": 3
     },
     "effects": []
   },
@@ -14377,7 +14376,7 @@ export const allGameplayCards = [
     "moveType": null,
     "method": null,
     "rarity": 4,
-    "rulesText": "Once per match during Piper’s Control: look at the opponent’s hand. Choose 1 Counter; that Counter cannot be played this Control sequence. If it remains in their hand when they next gain Control, its next Counter use costs +2 Adrenaline. If they have no Counter, draw 1 page.",
+    "rulesText": "Once per match during Piper’s Control: look at the opponent’s hand. Choose 1 Counter; that Counter cannot be played this Control sequence. When they next gain Control, they lose 1 Adrenaline. If they have no Counter, draw 1 page.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -14389,7 +14388,7 @@ export const allGameplayCards = [
     "superstarId": "rowdy-roddy-piper",
     "special": {
       "type": "pipersPit",
-      "nextUseAdrenalineTax": 2
+      "nextControlAdrenalineDrain": 1
     }
   },
   {
@@ -14477,7 +14476,7 @@ export const allGameplayCards = [
     "moveType": "submission",
     "method": null,
     "rarity": 4,
-    "rulesText": "DiBiase-exclusive Finisher. No Method requirement. Submission. +6 persistent Head damage per successful turn.",
+    "rulesText": "DiBiase-exclusive Finisher. No Method requirement. Submission. +7 persistent Head damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -14491,7 +14490,7 @@ export const allGameplayCards = [
     "counterState": "rear-control",
     "submission": {
       "bodyPart": "head",
-      "pressure": 6
+      "pressure": 7
     }
   },
   {
@@ -14746,7 +14745,7 @@ export const allGameplayCards = [
     "moveType": "grapple",
     "method": null,
     "rarity": 4,
-    "rulesText": "Mr. Perfect-exclusive Finisher. No Method requirement. Grounds opponent. An immediate Pin reduces the defender’s kickout chance by 10 percentage points.",
+    "rulesText": "Mr. Perfect-exclusive Finisher. No Method requirement. Grounds opponent. An immediate Pin reduces the defender’s kickout chance by 15 percentage points.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -14758,7 +14757,7 @@ export const allGameplayCards = [
     "superstarId": "mr-perfect",
     "finisher": true,
     "counterState": "front-control",
-    "pinKickoutPenalty": 10
+    "pinKickoutPenalty": 15
   },
   {
     "kind": "action",
@@ -15857,9 +15856,12 @@ export const allGameplayCards = [
     "setId": "season-1-last-time-is-now",
     "rarity": 4,
     "superstarId": "john-cena",
-    "rulesText": "Once per match below 50% HP: gain +2 Adrenaline and draw 1.",
+    "rulesText": "Install this Support. The first time Cena drops to 50% HP or less, gain +2 Adrenaline and draw 1 page.",
     "effect": {
-      "type": "peopleChampionship"
+      "type": "hustleLoyaltyRespect",
+      "hpPct": 0.5,
+      "adrenaline": 2,
+      "draw": 1
     }
   },
   {

@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.16';
-import { superstars } from '../js/data/superstars.js?v=0.14.16';
-import { decks } from '../js/data/decks.js?v=0.14.16';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.16';
-import { counterEligibility } from '../js/engine/rules.js?v=0.14.16';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
+import { superstars } from '../js/data/superstars.js?v=0.14.20';
+import { decks } from '../js/data/decks.js?v=0.14.20';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
+import { counterEligibility } from '../js/engine/rules.js?v=0.14.20';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -37,45 +37,30 @@ test('v0.13.84 locks Balance Pass 2 numerical changes',()=>{
   assert.equal(card('paige-paige-turner').damage,10);
   assert.equal(card('entrance-paige').preMatchAdrenaline,2);
   assert.equal(star('paige').entrance.preMatchAdrenaline,2);
-  assert.equal(card('special-rowdy-roddy-piper').special.nextUseAdrenalineTax,2);
+  assert.equal(card('special-rowdy-roddy-piper').special.nextControlAdrenalineDrain,1); // superseded by v0.14.20
 });
 
-test('v0.13.84 Piper Pit converts the locked Counter into a one-use +2 Adrenaline tax after control changes',()=>{
+test('v0.14.20 Piper Pit shuts down one Counter this Control sequence and drains 1 Adrenaline on the opponent’s next Control',()=>{
   const g=engineFor('rowdy-roddy-piper','hulk-hogan');
   const s=g.state(),p=s.players.p1,d=s.players.p2;
   moveExistingCardToHand(p,'special-rowdy-roddy-piper');
-  // Guarantee a known Counter is the first eligible Counter in Punk's hand.
   const known=moveExistingCardToHand(d,'punch');
   d.hand=[known,...d.hand.filter(c=>c!==known)];
+  d.adrenaline=3; d.events.entranceAdrenalineGranted=true;
   s.phase='ACTION'; s.playerInControl='p1';
   const special=p.hand.find(c=>c.id==='special-rowdy-roddy-piper');
   assert.equal(g.playSpecial('p1',special),true);
   assert.equal(d.events.pipersPitLockedCounterId,'punch');
-  assert.equal(d.events.pipersPitLockedCounterTax,2);
-  g._setControl('p2');
-  assert.equal(d.events.pipersPitLockedCounterId,undefined);
-  assert.equal(d.events.pipersPitTaxCounterId,'punch');
-  assert.equal(d.events.pipersPitCounterAdrenalineTax,2);
+  assert.equal(d.events.pipersPitNextControlAdrenalineDrain,1);
 
-  // After Punk's control ends, the tax remains for the next defensive use.
-  g._setControl('p1');
-  d.adrenaline=1; d.momentum.attitude=1;
-  s.phase='COUNTER'; s.proposedMove={attackerId:'p1',defenderId:'p2',card:card('elbow-strike')??card('body-slam'),isCounterAttack:false,counterDepth:0};
-  const incoming=s.proposedMove.card;
-  // Punch needs an incoming state it can answer; use an Elbow/Strike exchange card if available.
-  if(!counterEligibility(s,'p2',incoming,known).legal){
-    const answerable=allGameplayCards.find(c=>c.kind==='move'&&c.id!==known.id&&known.counterStates?.includes(c.counterState));
-    assert.ok(answerable,'Expected a Move answerable by Punch');
-    s.proposedMove.card=answerable;
-  }
-  let e=counterEligibility(s,'p2',s.proposedMove.card,known);
-  assert.equal(e.legal,false);
-  assert.match(e.reason,/2 Adrenaline/);
-  d.adrenaline=2; d.momentum.attitude=2;
-  e=counterEligibility(s,'p2',s.proposedMove.card,known);
-  assert.equal(e.legal,true);
-  assert.equal(e.adrenalineCost,2);
-  assert.equal(g.counter('p2',known),true);
-  assert.equal(d.adrenaline,0);
-  assert.equal(d.events.pipersPitTaxCounterId,undefined);
+  s.phase='COUNTER'; s.proposedMove={attackerId:'p1',defenderId:'p2',card:card('body-slam'),isCounterAttack:false,counterDepth:0};
+  const blocked=counterEligibility(s,'p2',s.proposedMove.card,known);
+  assert.equal(blocked.legal,false);
+  assert.match(blocked.reason,/Piper’s Pit/);
+
+  g._setControl('p2');
+  assert.equal(d.adrenaline,2);
+  assert.equal(d.events.pipersPitLockedCounterId,undefined);
+  assert.equal(d.events.pipersPitNextControlAdrenalineDrain,undefined);
+  assert.ok(s.log.some(x=>x.effect==='pipers-pit-next-control-drain'&&x.adrenaline===-1));
 });

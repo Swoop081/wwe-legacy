@@ -274,3 +274,55 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - RAW Daily/RAW LIVE event presentation is locked to RAW branding: red/black/white hub treatment, packaged RAW Series 1 logo on hub/detail, and RAW Series 1 arena/ring presentation during matches before the set's public release. This is presentation-only and does not release RAW Series 1 cards or boosters.
 - Carries forward all v0.14.15 and earlier gameplay/UI fixes.
 - Distribution ZIP excludes `assets/` per the current packaging policy.
+
+## v0.14.17 — RAW Hub Typography + In-Match Branding
+
+- Removed the **RAW image logo from the Live Events hub card** and restored the same split-title typography used by the other event tiles.
+- RAW hub title is now **RAW** in white with **EVENT** in RAW red.
+- Added a dedicated Live Event `presentationSetId` path so presentation branding no longer has to reuse the booster reward set.
+- RAW Live Event matches force **RAW Series 1** as their presentation set even while RAW Series 1 remains unreleased; booster rewards continue to use the released-set fallback and therefore do not expose unreleased RAW boosters.
+- The RAW logo now appears reliably on both **player/opponent Entrance screens** and the **Play Pile ring-centre mat/logo** in RAW matches.
+- RAW detail-screen logo treatment and red/black/white event styling remain unchanged.
+- No card balance, deck, match-rule, pack-odds/collation, Season XP, Daily Live Event XP, Championship Road, pity, collection ownership or live-set release changes from v0.14.16.
+- Distribution remains a **no-assets overlay package**.
+
+
+## v0.14.18 — Compact Tier Up Reward Cards
+
+- Reduced physical card rewards on the **Season Tier Up** celebration so the reward card no longer overwhelms the screen.
+- Added a dedicated `tier-up-physical-card` presentation wrapper capped at **112px wide** on standard iPhone layouts and **96px** on shorter viewports.
+- Season move-card and final Superstar-card rewards still use the canonical collectible renderer, so authored card artwork, printing treatment and identity remain intact at the smaller size.
+- Tier Up reward cards are non-interactive on the celebration overlay, preventing accidental flips while continuing through earned tiers.
+- Booster-pack and Universe Point Tier Up reward sizes are unchanged.
+- No Season XP curve, tier count, reward identity/quantity, claim behavior, card stats/effects, deck composition, match rules, pack odds/collation, Live Event rewards, Championship Road, pity, collection ownership or release-state changes from v0.14.17.
+- Distribution remains a **no-assets overlay package**.
+
+## v0.14.19 — Rhea Crucifix Auto Build Hotfix
+
+- Fixed **Rhea’s Crucifix Powerbomb (EVO1-004)** being automatically inserted into non-Rhea decks such as Kane’s by Deck Lab Auto Build.
+- Preserved the card’s established collector/gameplay identity: **2★ Uncommon, Cost 7, Damage 11, Strength 3, Grapple, Body Elevated**, with the same EVO1-004 collector slot and Rhea authored-deck reference.
+- Added an Auto Build affinity restriction so EVO1-004 is an automatic candidate for **Rhea Ripley only** while remaining manually legal under the existing shared-card rules.
+- Deck Lab Auto Build and Auto Fill now respect card-specific automatic-build affinity after normal Superstar legality checks.
+- Existing affected saves migrate automatically. A leaked EVO1-004 in any non-Rhea saved deck is repaired once without rebuilding the entire custom deck; the migration replaces only that slot with the best legal owned candidate where possible and preserves unrelated card/tier choices and Lead Off order.
+- Rhea’s own saved/authored deck is explicitly left untouched.
+- No card stats/effects, rarity, collector numbering, authored deck composition, pack odds/collation, rewards, Season XP, Daily Live Event XP, Championship Road, pity, live-set state or collection ownership changed from v0.14.18.
+- Distribution remains a **no-assets overlay package**.
+
+## v0.14.20 — Roster Balance Pass
+
+- Applied the approved roster-audit balance pass across André the Giant, Diesel, Doink the Clown, Ted DiBiase, Mr. Perfect, Rowdy Roddy Piper, Becky Lynch, Owen Hart, Randy Savage, John Cena, Penta and Lola Vice.
+- **André:** Giant’s Reach now triggers once instead of twice and no longer grants +1 Adrenaline; its next-Strength −1 Cost / +2 Damage payoff remains.
+- **Diesel:** Jackknife Powerbomb Cost **11 → 12**, Damage remains 18.
+- **Doink:** HP **60 → 62**; Joke’s on You first two Counters now draw 2 and gain +1 Adrenaline; Drop Toe Hold searches Stump Puller with −1 Cost; Stump Puller pressure **5 → 6**.
+- **Ted DiBiase:** Million Dollar Dream pressure **6 → 7**; Everybody Has a Price first qualifying Technical triggers **2 → 3**.
+- **Mr. Perfect:** Perfect-Plex immediate-pin kickout penalty **10 → 15 percentage points**; Perfect Execution additionally draws 1 on the first two successful Counters each match.
+- **Roddy Piper:** Piper’s Pit replaces the old future +2-Adrenaline Counter tax with **opponent −1 Adrenaline on their next gain of Control**, while retaining the current-Control Counter shutdown and no-Counter draw fallback.
+- **Becky Lynch:** HP **64 → 65**; Dis-arm-her pressure **5 → 6**; Manhandle Slam Damage **16 → 17**.
+- **Owen Hart:** HP **62 → 63**; Two-Time Slammy Award Winner can now take up to two different eligible **1★/2★/3★ Moves** from the top seven.
+- **Randy Savage:** Macho Madness retains its first-two-use cap and +1 Adrenaline reward but no longer draws 1 page.
+- **John Cena:** Hustle, Loyalty, Respect is now a persistent installed Support that triggers exactly once the first time Cena reaches 50% HP or less, even if installed earlier; installing it after reaching the threshold triggers it immediately.
+- **Penta:** Cero Miedo no longer gives +1 starting Adrenaline.
+- **Lola Vice:** HP **59 → 61**; Triangle Choke pressure **5 → 6**.
+- Fresh released-roster audit: **41 Superstars / 16,400 matches / 0 stalls / 26.91 average turns**. André and Diesel settle at **60.8%**, Savage at **54.3%**, Ted at **45.5%**. Oba Femi (**64.3%**) and Roman Reigns (**62.6%**) remain on the watchlist; no speculative nerf was applied. Cena’s corrected HLR is live but he remains a low outlier at **35.6%**, so a further Cena numerical buff is deferred to a measured follow-up.
+- Verification: v0.14.20 targeted tests **5/5**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state audits **0 issues**; full no-assets suite **879 discovered / 775 passed / 94 skipped / 10 expected asset-presence failures**.
+- Distribution remains a **verified no-assets overlay package**.

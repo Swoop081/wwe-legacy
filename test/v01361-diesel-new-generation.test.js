@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=0.14.16";
-import { superstars } from "../js/data/superstars.js?v=0.14.16";
-import { decks } from "../js/data/decks.js?v=0.14.16";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.16";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.16";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.16";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.16";
-import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.16";
+import { sets } from "../js/data/sets.js?v=0.14.20";
+import { superstars } from "../js/data/superstars.js?v=0.14.20";
+import { decks } from "../js/data/decks.js?v=0.14.20";
+import { allGameplayCards } from "../js/data/content.js?v=0.14.20";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.20";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.20";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.20";
+import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.20";
 
 const diesel=Object.values(superstars).find(s=>s.id==="diesel");
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
@@ -43,7 +43,7 @@ test("v0.13.61 Diesel signature block is era-authentic Rare/Very Rare with elite
   }
   const jackknife=byId["diesel-jackknife-powerbomb"];
   assert.equal(jackknife.name,"Jackknife Powerbomb"); assert.equal(jackknife.rarity,4); assert.equal(jackknife.finisher,true);
-  assert.equal(jackknife.damage,18); assert.equal(jackknife.cost,11); assert.deepEqual(jackknife.requirements,{}); assert.equal(jackknife.method,null); assert.equal(jackknife.groundOpponent,true);
+  assert.equal(jackknife.damage,18); assert.equal(jackknife.cost,12); // superseded by v0.14.20 assert.deepEqual(jackknife.requirements,{}); assert.equal(jackknife.method,null); assert.equal(jackknife.groundOpponent,true);
   assert.equal(byId["special-diesel"].name,"Two Dudes with Attitudes");
   assert.equal(byId["special-diesel"].special.type,"exclusiveTrademarkTutor");
   assert.equal(byId["entrance-diesel"].name,"Diesel Power");

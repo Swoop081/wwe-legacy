@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=0.14.16";
-import { healthRatio, healthZone } from "./health.js?v=0.14.16";
+import { totalMomentum } from "./utils.js?v=0.14.20";
+import { healthRatio, healthZone } from "./health.js?v=0.14.20";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -62,10 +62,10 @@ export function counterEligibility(state,playerId,incoming,counter){
   if(counter?.counterExchangeKey!==exchangeKey)return fail(`Only another ${incoming?.name??'exchange Move'} can continue this exchange`);
  }
  const outta=!isCounterAttack&&!!(p?.superstar?.id==='randy-orton'&&!p.specialUsed&&p.hand?.some(c=>c.kind==='action'&&c.special?.type==='outtaNowhere')&&counter?.name==='RKO'); if(!canCounter(incoming,counter)&&!outta)return fail("Move does not Counter this Move Type"); if(counter.superstarId&&counter.superstarId!==p?.superstar?.id)return fail("Counter is exclusive to another Superstar"); if(Array.isArray(counter.allowedSuperstarIds)&&counter.allowedSuperstarIds.length&&!counter.allowedSuperstarIds.includes(p?.superstar?.id))return fail("Counter is restricted to another Superstar family");
- const counterDiscount=Math.max(0,p?.events?.nextCounterDiscount??0)+(outta?(p.superstar.special?.discount??2):0)+(p.superstar?.id==='sami-zayn'&&p.controlMoveCount===0&&p.hp<(state.players[state.proposedMove.attackerId]?.hp??0)?(p.superstar.ability?.trigger?.discount??1):0); const needed=Math.max(0,(counter.cost??0)-counterDiscount); if(totalMomentum(p)<needed)return fail(`Need ${needed} Momentum + Attitude`); const piperTax=p?.events?.pipersPitTaxCounterId===counter?.id?Math.max(0,p.events?.pipersPitCounterAdrenalineTax??0):0; if(piperTax&&(p.adrenaline??0)<piperTax)return fail(`Need ${piperTax} Adrenaline — Piper’s Pit`);
+ const counterDiscount=Math.max(0,p?.events?.nextCounterDiscount??0)+(outta?(p.superstar.special?.discount??2):0)+(p.superstar?.id==='sami-zayn'&&p.controlMoveCount===0&&p.hp<(state.players[state.proposedMove.attackerId]?.hp??0)?(p.superstar.ability?.trigger?.discount??1):0); const needed=Math.max(0,(counter.cost??0)-counterDiscount); if(totalMomentum(p)<needed)return fail(`Need ${needed} Momentum + Attitude`);
  if(!counter.finisher) for(const [m,n] of Object.entries(counter.requirements??{})){if(methodAmount(p,m)<n)return fail(`Need ${n} ${m} Momentum`);}
  const attacker=state.players[state.proposedMove.attackerId],attackerGrounded=['on-mat','grounded'].includes(attacker?.posture); if(counter.groundedOnly&&!attackerGrounded)return fail("Opponent must be grounded"); if(counter.moveType==='submission'&&counter.standingOnly&&attackerGrounded)return fail("Opponent must be standing");
- return {ok:true,legal:true,reason:null,effectiveCost:needed,adrenalineCost:piperTax,offensive:!counter.defensiveOnly,outtaNowhere:outta,outtaNowhereDiscount:outta?(p.superstar.special?.discount??2):0};
+ return {ok:true,legal:true,reason:null,effectiveCost:needed,adrenalineCost:0,offensive:!counter.defensiveOnly,outtaNowhere:outta,outtaNowhereDiscount:outta?(p.superstar.special?.discount??2):0};
 }
 export function autoCounterCost(state,playerId){
  const uses=Math.max(0,Number(state?.players?.[playerId]?.autoCounterUses??0));

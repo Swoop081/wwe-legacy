@@ -19,7 +19,7 @@ const handledMoveEffects = new Set([
 const handledUtilityEffects = new Set([
   "discountNext", "buffNext", "gainAdrenaline", "healSelf", "buffNextMethod", "romanOohAhh",
   "fightForever", "drawThenDiscardSelf", "topDeckTutor", "searchChoice", "onceTooOften",
-  "crowdSupport", "peopleChampionship", "what", "paulHeymanManager", "paulHeymanPromo", "visionManager",
+  "crowdSupport", "peopleChampionship", "hustleLoyaltyRespect", "what", "paulHeymanManager", "paulHeymanPromo", "visionManager",
   "virgilManager", "stephanieMcMahonManager", "angleIntensity", "angleIntegrity", "angleIntelligence"
 ]);
 const handledSpecialTypes = new Set([
