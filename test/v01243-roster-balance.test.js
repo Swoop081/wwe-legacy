@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
-import { superstars } from '../js/data/superstars.js?v=0.14.20';
-import { decks } from '../js/data/decks.js?v=0.14.20';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
+import { superstars } from '../js/data/superstars.js?v=0.14.25';
+import { decks } from '../js/data/decks.js?v=0.14.25';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
 
 const stars=Object.values(superstars);
 const star=id=>stars.find(s=>s.id===id);
@@ -16,7 +16,7 @@ test('v0.12.43 roster durability locks preserve prestige hierarchy and balanced 
     'roman-reigns':67,'the-rock':67,'raquel-rodriguez':65,'jade-cargill':67,'mankind':67,
     'stone-cold-steve-austin':66,'kevin-owens':66,'rhea-ripley':66,'damian-priest':66,'solo-sikoa':66,
     'randy-orton':65,'charlotte-flair':65,'penta':65,'cody-rhodes':64,'seth-rollins':64,'cm-punk':64,
-    'sami-zayn':64,'finn-balor':64,'la-knight':64,'jey-uso':64,'becky-lynch':65,'chad-gable':64,
+    'sami-zayn':64,'finn-balor':64,'la-knight':64,'jey-uso':64,'becky-lynch':67,'chad-gable':64,
     'el-grande-americano':64,'randy-savage':64,'bayley':63,'paige':64,'stephanie-vaquer':63,
     'tiffany-stratton':62,'liv-morgan':64,'alexa-bliss':62,'logan-paul':62,'dominik-mysterio':61,
     'chelsea-green':61,'danhausen':61,'sol-ruca':58,'iyo-sky':57,'rey-mysterio':57

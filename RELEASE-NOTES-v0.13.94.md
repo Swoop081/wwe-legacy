@@ -326,3 +326,70 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Fresh released-roster audit: **41 Superstars / 16,400 matches / 0 stalls / 26.91 average turns**. André and Diesel settle at **60.8%**, Savage at **54.3%**, Ted at **45.5%**. Oba Femi (**64.3%**) and Roman Reigns (**62.6%**) remain on the watchlist; no speculative nerf was applied. Cena’s corrected HLR is live but he remains a low outlier at **35.6%**, so a further Cena numerical buff is deferred to a measured follow-up.
 - Verification: v0.14.20 targeted tests **5/5**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state audits **0 issues**; full no-assets suite **879 discovered / 775 passed / 94 skipped / 10 expected asset-presence failures**.
 - Distribution remains a **verified no-assets overlay package**.
+
+## v0.14.21 — Cena Season Reward Power Pass
+
+- Promoted John Cena into the intended elite Season 1 reward band after v0.14.20 confirmed that the corrected HLR trigger alone left him underpowered.
+- Cena Lead Off 5 now opens with **Strength Momentum + Strike Momentum** rather than Strength + Technical, and his authored 12-page Momentum split becomes **5 Strength / 4 Technical / 3 Strike**.
+- **Five Knuckle Shuffle** Strike requirement **2 → 1**, making Protobomb’s intended search chain consistently reachable. Cost 6 / Damage 10 / rarity remain unchanged.
+- **STF** persistent Leg pressure **6 → 7**; Cost remains 9.
+- **Hustle, Loyalty, Respect** keeps its once-only 50%-HP trigger and +2 Adrenaline reward but now **draws 2 pages** instead of 1.
+- **Attitude Adjustment remains C11/D18**, preserving the established elite 18-Damage Cost premium.
+- Cena HP remains 68; The Champ Is Here, The Time Is Now and Never Give Up are unchanged.
+- Focused Cena simulation: **3,200 matches / 59.31% / 0 stalls / 25.04 average turns**.
+- Full released-roster audit: **41 Superstars / 16,400 matches / 0 stalls / 26.74 average turns**; Cena finishes **493–307 (61.63%)**, behind Oba Femi and Roman Reigns and inside the intended high-50s/60 Season-reward band.
+- Verification: v0.14.21 targeted tests **4/4**; focused regression set **11/11**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state audits **0 issues**; full no-assets suite **883 discovered / 779 passed / 94 skipped / 10 expected asset-presence failures**.
+- Distribution remains a **verified no-assets overlay package**.
+
+## v0.14.22 — Live Event Rematch Progress Hotfix
+
+- Fixed the Daily Live Event result-routing bug where a completed Live Event could be treated as an Exhibition match, expose **REMATCH**, and route that button into an Exhibition instead of the active tower.
+- Match launch mode is now snapshotted for the full lifetime of the match rather than relying on mutable navigation/setup `activeMode` state at result time.
+- Live Event tower identity is snapshotted with the match so the correct tower always receives the win/loss result.
+- Challenges, career records, rewards and structured-mode progression now read the immutable match snapshot when a match completes.
+- Live Event result screens cannot render the Exhibition **REMATCH** action; their CTA remains **RETURN TO TOWER**.
+- Defensive restart routing also uses the immutable snapshot, so a stale Rematch control cannot convert a Live Event retry/continuation into Exhibition.
+- Existing tower rules are unchanged: losses retry the current stage with no progress loss; wins advance exactly once; clear rewards and Daily Live Event XP remain unchanged.
+- Verification: v0.14.22 targeted tests **4/4**; Live Event persistence/retry **6/6**; focused Live Event/UI regressions **32 passed / 0 failed / 1 skipped**; full no-assets suite **887 discovered / 783 passed / 94 skipped / 10 expected asset-presence failures**; validation/collector/flow/card-effect/counter-state audits all report **0 issues**.
+- Distribution remains a **verified no-assets overlay package**.
+
+
+## v0.14.23 — Live Event Opening Superstar Switch
+
+- Daily Live Event towers now allow the player to **change to any owned, player-visible Superstar while Match 1 is still unbeaten**.
+- The switch remains available after any number of Match 1 losses because a loss leaves tower progress at 0/5.
+- The moment Match 1 is won and the tower advances to Match 2, the selected Superstar is **locked for the remainder of that tower**.
+- Active Match 1 detail screens expose a compact **CHANGE SUPERSTAR** control. It opens an owned-Superstar selector without expanding the fixed iPhone event-detail layout.
+- Tower setup copy now explicitly says the Superstar **locks after Match 1 is won**, replacing the old “locked once started” wording.
+- Changing Superstar preserves the existing opponent route wherever possible, preventing the selector from becoming a free route-reroll mechanic. If the newly selected Superstar is already scheduled as an opponent, only the invalid self-match is repaired with an eligible replacement.
+- The data layer independently rejects unowned/unreleased Superstar choices and rejects all changes once the run has advanced beyond stage 0.
+- Existing Live Event win/loss progress, one-pack clear reward, Daily Live Event XP, result routing and rematch hotfix behavior are unchanged.
+- No card stats/effects, Superstar balance, decks, pack odds/collation, Season XP, Championship Road, pity, release state or collection ownership changed from v0.14.22.
+- Verification: v0.14.23 targeted tests **5/5**; combined Live Event routing/switch/UI regression set **18/18**; full no-assets suite **892 discovered / 788 passed / 94 skipped / 10 expected asset-presence failures**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state audits **0 issues**.
+- Distribution remains a **verified no-assets overlay package**.
+
+## v0.14.24 — Counter-State Clarity Pass
+
+- Renamed the Move card-back field **COUNTER STATE** to **CAN BE COUNTERED AS** so the exposed state is no longer confused with a reversal ability.
+- A card such as Razor's Abdominal Stretch now reads **CAN BE COUNTERED AS · Rear Control**; this describes how the defender may respond and does not imply the move reverses Rear Control.
+- Actual defensive state-reversal abilities retain the separate **REVERSES** label.
+- Collection and Deck Lab text summaries now use **Countered as** for the same exposed-state metadata.
+- Expanded the Rulebook Counter State glossary to distinguish an incoming Move's exposed state from a card's actual reversal capability.
+- No Counter legality, Counter State mapping, Submission targeting, card stats/effects, Superstar balance, decks, rewards, progression, pack odds/collation, release state or collection ownership changed from v0.14.23.
+- Verification: v0.14.24 targeted tests **3/3**; focused counter-system + v0.14.24 selection **25 passed / 0 failed / 1 intentionally skipped**; full no-assets suite **895 discovered / 791 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state audits **0 issues**.
+- Distribution remains a **verified no-assets overlay package**.
+
+## v0.14.25 — Roster Balance + Reactive Control Consistency
+
+- **Oba Femi:** The Ruler once-per-match draw now requires a **C7+ Strength Move** instead of C6+.
+- **Roman Reigns:** Tribal Chief now offers only after one of Roman’s **non-Finisher Moves is successfully Countered**. It no longer triggers from a pass, failed pin/kickout, or other generic Control loss.
+- **Doink the Clown:** HP **62 → 63**; Stump Puller persistent Leg pressure **6 → 7**.
+- **Becky Lynch:** HP **65 → 67**; Dis-arm-her persistent Arm pressure **6 → 7**.
+- **Mr. Perfect:** HP **64 → 65**. Perfect Execution keeps its once-per-Control-sequence −2 Technical Cost payoff, while the first **3** successful Counters each match now also **draw 1 + gain 1 Adrenaline**.
+- Standardized reactive Control effects: **Best in the World** and **Shoulder Up** now stop the Pin and then use normal failed-pin Control rules; **Welcome to the KO Show** cancels the utility and spends that Action/Support window without stealing Control; **The Deadman Rises** and **Veteran Instincts** now describe the normal Control transfer already produced by a kickout/Counter.
+- Counter-specific retention cards already using narrow triggers (including Bloodline Rules, Hammer in the Boot and 173–0) remain unchanged.
+- Focused released-roster simulations (800 matches each, 0 stalls): **Oba 58.25%, Roman 60.75%, Doink 48.63%, Becky 45.88%, Mr. Perfect 49.38%, Punk 49.63%, Kevin Owens 54.75%, Cena 61.50%**.
+- Full released-roster round robin: **41 Superstars / 16,400 matches / 0 stalls / 26.80 average turns**. Key post-pass results: **Roman 61.4%, Cena 61.1%, Kevin Owens 59.0%, Oba 55.8%, Punk 49.1%, Doink 46.0%, Becky 45.6%, Mr. Perfect 45.3%**.
+- No changes to pack odds/collation, Season XP, Daily Live Event XP, Championship Road, pity, release state or collection ownership.
+- Distribution remains a **verified no-assets overlay package**.
+

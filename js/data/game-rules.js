@@ -209,7 +209,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Printed", "The number or rule physically authored on the card before temporary match effects modify it."],
       ["Trademark", "A signature wrestler move, generally Rare when exclusive."],
       ["Finisher", "A top-tier finishing Move. Finishers ignore generic Method requirements and wrestler-exclusive Finishers are Very Rare."],
-      ["Counter State", "The physical state an incoming Move exposes for reversal matching."],
+      ["Counter State", "The physical state an incoming Move exposes to the defender for reversal matching. Card backs label this CAN BE COUNTERED AS; it does not mean the Move reverses anything itself. Actual reversal abilities are labeled REVERSES."],
       ["UP", "Universe Points, the store currency also earned from duplicate overflow and selected game rewards."],
       ["Card tiers", "The four printing tiers are Normal, Emerald, Sapphire and Ruby. Sapphire is the authored baseline; Damage and submission pressure step −2 / −1 / 0 / +1 across the ladder."],
       ["REWARD pack", "A special completion-pack wrapper used for Money in the Bank and Championship-style completion rewards; its underlying set still determines the cards inside."]

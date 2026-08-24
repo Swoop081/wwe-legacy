@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.14.20';
+import { createProfile } from '../js/data/profile.js?v=0.14.25';
 import {
   CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS,
   championshipRoadForSuperstar, championshipRoadSectionForStage
-} from '../js/data/championship-road.js?v=0.14.20';
+} from '../js/data/championship-road.js?v=0.14.25';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');

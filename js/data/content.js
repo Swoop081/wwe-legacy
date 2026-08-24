@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.14.20";
+import { enrichCounterState } from "./counter-states.js?v=0.14.25";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -3733,14 +3733,14 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "becky-lynch",
     "rarity": 3,
-    "rulesText": "Becky-exclusive Trademark. Grounded opponent only. Submission. +6 persistent Arm damage per successful turn.",
+    "rulesText": "Becky-exclusive Trademark. Grounded opponent only. Submission. +7 persistent Arm damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
-      "pressure": 6
+      "pressure": 7
     },
     "trademark": true,
     "effects": [],
@@ -4594,7 +4594,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 1,
     "pinEscape": true,
-    "rulesText": "Stop one Pin attempt and take Control."
+    "rulesText": "Stop one Pin attempt. Resolve Control using the normal failed-pin rules."
   },
   {
     "id": "game-plan",
@@ -5145,7 +5145,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "roman-reigns",
-    "rulesText": "Once per match after Roman loses Control: you may play this to regain Control.",
+    "rulesText": "Once per match after one of Roman’s non-Finisher Moves is successfully Countered: the Counter resolves normally, then Roman may regain Control.",
     "special": {
       "type": "regainAfterLoseControl"
     }
@@ -5169,7 +5169,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "cm-punk",
-    "rulesText": "Once per match when Punk is being pinned: stop the Pin and take Control.",
+    "rulesText": "Once per match when Punk is being pinned: stop the Pin. Resolve Control using the normal failed-pin rules.",
     "special": {
       "type": "pinEscape"
     }
@@ -5224,7 +5224,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "kevin-owens",
-    "rulesText": "Once per match when the opponent plays an Action or Support: cancel it and take Control.",
+    "rulesText": "Once per match when the opponent plays an Action or Support: cancel it. The opponent keeps Control, but that Action or Support window is spent.",
     "special": {
       "type": "cancelOpponentUtility"
     }
@@ -5261,7 +5261,7 @@ export const allGameplayCards = [
     "setId": "attitude-era-series-1",
     "rarity": 4,
     "superstarId": "the-undertaker",
-    "rulesText": "Once per match after Undertaker successfully kicks out: gain +1 Adrenaline and take Control.",
+    "rulesText": "Once per match after Undertaker successfully kicks out: gain +1 Adrenaline. Control changes normally after the kickout.",
     "special": {
       "type": "kickoutControlAdrenaline",
       "amount": 1
@@ -5398,7 +5398,7 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "bayley",
-    "rulesText": "Once per match after Bayley successfully Counters, draw 3 pages and immediately take Control.",
+    "rulesText": "Once per match after Bayley successfully Counters, draw 3 pages. Control changes normally from the successful Counter.",
     "special": {
       "type": "counterDrawControl",
       "draw": 3
@@ -13116,14 +13116,14 @@ export const allGameplayCards = [
     "superstarId": "doink-the-clown",
     "rarity": 3,
     "trademark": true,
-    "rulesText": "Doink the Clown-exclusive Trademark. Grounded opponent only. Submission. +6 persistent Leg damage per successful turn.",
+    "rulesText": "Doink the Clown-exclusive Trademark. Grounded opponent only. Submission. +7 persistent Leg damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 6
+      "pressure": 7
     },
     "effects": [],
     "counterState": "leg-extended",
@@ -15782,7 +15782,7 @@ export const allGameplayCards = [
     "cost": 6,
     "damage": 10,
     "requirements": {
-      "strike": 2
+      "strike": 1
     },
     "moveType": "strike",
     "method": "strike",
@@ -15815,7 +15815,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "john-cena",
     "rarity": 4,
-    "rulesText": "John Cena-exclusive Finisher. Grounded opponent only. +6 persistent Leg damage per successful turn.",
+    "rulesText": "John Cena-exclusive Finisher. Grounded opponent only. +7 persistent Leg damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -15825,7 +15825,7 @@ export const allGameplayCards = [
     "counterState": "leg-extended",
     "submission": {
       "bodyPart": "legs",
-      "pressure": 6
+      "pressure": 7
     }
   },
   {
@@ -15856,12 +15856,12 @@ export const allGameplayCards = [
     "setId": "season-1-last-time-is-now",
     "rarity": 4,
     "superstarId": "john-cena",
-    "rulesText": "Install this Support. The first time Cena drops to 50% HP or less, gain +2 Adrenaline and draw 1 page.",
+    "rulesText": "Install this Support. The first time Cena drops to 50% HP or less, gain +2 Adrenaline and draw 2 pages.",
     "effect": {
       "type": "hustleLoyaltyRespect",
       "hpPct": 0.5,
       "adrenaline": 2,
-      "draw": 1
+      "draw": 2
     }
   },
   {

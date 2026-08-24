@@ -1,17 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.14.20';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
-import { collectionCards } from '../js/data/collection.js?v=0.14.20';
-import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.14.20';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.14.20';
-import { superstars } from '../js/data/superstars.js?v=0.14.20';
-import { decks } from '../js/data/decks.js?v=0.14.20';
-import { activeLiveEventTowers, LIVE_EVENT_WIN_UP } from '../js/data/live-events.js?v=0.14.20';
-import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.14.20';
-import { layeredCardArtFor, finishedCardArtFor } from '../js/data/artwork.js?v=0.14.20';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.14.25';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
+import { collectionCards } from '../js/data/collection.js?v=0.14.25';
+import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.14.25';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.14.25';
+import { superstars } from '../js/data/superstars.js?v=0.14.25';
+import { decks } from '../js/data/decks.js?v=0.14.25';
+import { activeLiveEventTowers, LIVE_EVENT_WIN_UP } from '../js/data/live-events.js?v=0.14.25';
+import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.14.25';
+import { layeredCardArtFor, finishedCardArtFor } from '../js/data/artwork.js?v=0.14.25';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -53,11 +53,11 @@ test.skip('v0.13.35 layered fronts are attempted for Superstars before the stand
   assert.match(app,/this\.src=this\.dataset\.flatFinishedArt/);
 });
 
-test('v0.13.35 Tribal Chief is offered, decline preserves it, and it can be used on a later trigger',()=>{
+test('v0.13.35 Tribal Chief is offered on a countered non-Finisher, decline preserves it, and it can be used on a later trigger',()=>{
   const g=new MatchEngine({p1:star('roman-reigns'),p2:star('liv-morgan'),decks,rng:()=>0.42});
-  const s=g.state(),p=s.players.p1,special=card('special-roman-reigns');
+  const s=g.state(),p=s.players.p1,special=card('special-roman-reigns'),incoming=card('punch');
   p.hand=[special];p.deck=[];p.discard=[];p.specialUsed=false;s.phase='ACTION';s.playerInControl='p1';
-  assert.equal(g.passTurn('p1'),true);
+  assert.equal(g._transferControl('p2','counter',{draw:true,counteredCard:incoming}),true);
   assert.equal(s.phase,'TRIGGER_RESPONSE');
   assert.equal(s.pendingTriggeredSpecial?.cardId,special.id);
   assert.equal(p.specialUsed,false);
@@ -66,7 +66,7 @@ test('v0.13.35 Tribal Chief is offered, decline preserves it, and it can be used
   assert.equal(p.specialUsed,false);
   assert.ok(p.hand.some(c=>c.id===special.id));
   s.phase='ACTION';g._setControl('p1');
-  assert.equal(g.passTurn('p1'),true);
+  assert.equal(g._transferControl('p2','counter',{draw:true,counteredCard:incoming}),true);
   assert.equal(s.phase,'TRIGGER_RESPONSE');
   assert.equal(g.resolveTriggeredSpecial('p1',true),true);
   assert.equal(s.playerInControl,'p1');
@@ -74,11 +74,11 @@ test('v0.13.35 Tribal Chief is offered, decline preserves it, and it can be used
   assert.ok(p.outOfPlay.some(c=>c.id===special.id));
 });
 
-test('v0.13.35 CPU declines Tribal Chief when regaining Control would provide no continuation',()=>{
+test('v0.13.35 CPU declines Tribal Chief when a countered non-Finisher would regain Control with no continuation',()=>{
   const g=new MatchEngine({p1:star('liv-morgan'),p2:star('roman-reigns'),decks,rng:()=>0.42});
-  const s=g.state(),p=s.players.p2,special=card('special-roman-reigns');
+  const s=g.state(),p=s.players.p2,special=card('special-roman-reigns'),incoming=card('punch');
   p.hand=[special];p.deck=[];p.discard=[];p.specialUsed=false;s.phase='ACTION';g._setControl('p2');
-  assert.equal(g.passTurn('p2'),true);
+  assert.equal(g._transferControl('p1','counter',{draw:true,counteredCard:incoming}),true);
   assert.equal(s.phase,'TRIGGER_RESPONSE');
   assert.deepEqual(cpuDecision(g,'p2'),{type:'triggerSpecial',use:false});
 });

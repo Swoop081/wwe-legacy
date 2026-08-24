@@ -9952,3 +9952,27 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
 @media(max-height:760px){
   #tier-up-layer .tier-up-superstar-reward .tier-up-physical-card{width:min(96px,23vw)!important;max-width:96px!important}
 }
+
+/* v0.14.23 — Match 1 Live Event Superstar switch */
+.live-tower-inline-change{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:0!important;height:auto!important;margin-left:7px!important;padding:3px 7px!important;border:1px solid color-mix(in srgb,var(--tower-accent) 55%,rgba(255,255,255,.16))!important;border-radius:999px!important;background:color-mix(in srgb,var(--tower-accent) 14%,rgba(7,11,17,.94))!important;color:#fff!important;font:inherit!important;font-size:.42rem!important;letter-spacing:.11em!important;font-weight:1000!important;vertical-align:middle!important;white-space:nowrap!important}
+.live-tower-inline-change:active{transform:translateY(1px)}
+.live-event-superstar-swap-modal{position:fixed!important;z-index:1700!important;inset:0!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;padding:calc(env(safe-area-inset-top) + 18px) 10px calc(env(safe-area-inset-bottom) + 10px)!important;background:rgba(0,0,0,.78)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
+.live-event-superstar-swap-sheet{position:relative!important;width:min(720px,100%)!important;max-height:min(76svh,680px)!important;overflow:hidden!important;display:grid!important;grid-template-rows:auto minmax(0,1fr) auto!important;gap:9px!important;padding:15px 13px 12px!important;border:1px solid color-mix(in srgb,var(--tower-accent,#45d8ff) 45%,rgba(255,255,255,.16))!important;border-radius:22px!important;background:linear-gradient(160deg,#151a23 0%,#090c12 58%,#07090d 100%)!important;box-shadow:0 -18px 54px rgba(0,0,0,.58)!important}
+.live-event-superstar-swap-close{position:absolute!important;z-index:3!important;top:10px!important;right:10px!important;width:34px!important;height:34px!important;min-height:0!important;padding:0!important;border:1px solid rgba(255,255,255,.15)!important;border-radius:50%!important;background:rgba(255,255,255,.07)!important;color:#fff!important;font-size:1.35rem!important;line-height:1!important}
+.live-event-superstar-swap-head{display:grid!important;gap:3px!important;padding-right:42px!important}
+.live-event-superstar-swap-head>span{font-size:.48rem!important;letter-spacing:.16em!important;color:var(--tower-accent,#45d8ff)!important;font-weight:1000!important}
+.live-event-superstar-swap-head>h3{margin:0!important;font-size:1.35rem!important;line-height:1!important;color:#fff!important}
+.live-event-superstar-swap-head>p{margin:2px 0 0!important;max-width:610px!important;color:#aeb8c5!important;font-size:.66rem!important;line-height:1.3!important}
+.live-event-superstar-swap-sheet .superstar-select-carousel{min-height:0!important;height:100%!important;gap:9px!important;margin:0!important;padding:3px 1px 6px!important;align-items:stretch!important}
+.live-event-superstar-swap-sheet .select-superstar-card{flex:0 0 min(38vw,180px)!important;width:min(38vw,180px)!important;height:auto!important;min-height:0!important;max-height:100%!important;aspect-ratio:680/1000!important;border-radius:14px!important;background:#080a0f!important}
+.live-event-superstar-swap-sheet .select-card-front,.live-event-superstar-swap-sheet .selection-owned-card{height:100%!important;overflow:hidden!important}
+.live-event-superstar-swap-sheet .select-card-front img{width:100%!important;height:100%!important;object-fit:contain!important;padding:0!important}
+.live-event-superstar-swap-note{display:block!important;color:#8e98a5!important;font-size:.54rem!important;line-height:1.25!important;text-align:center!important}
+@media(max-width:600px){
+  .live-tower-inline-change{margin-left:5px!important;padding:2px 6px!important;font-size:.36rem!important}
+  .live-event-superstar-swap-modal{padding-left:7px!important;padding-right:7px!important}
+  .live-event-superstar-swap-sheet{max-height:72svh!important;padding:12px 10px 10px!important;border-radius:18px!important}
+  .live-event-superstar-swap-head>h3{font-size:1.15rem!important}
+  .live-event-superstar-swap-head>p{font-size:.58rem!important}
+  .live-event-superstar-swap-sheet .select-superstar-card{flex-basis:41vw!important;width:41vw!important}
+}

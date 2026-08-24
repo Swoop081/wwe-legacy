@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.14.20';
-import { collectionCards } from '../js/data/collection.js?v=0.14.20';
-import { layeredCardArtFor } from '../js/data/artwork.js?v=0.14.20';
-import { superstars } from '../js/data/superstars.js?v=0.14.20';
-import { decks } from '../js/data/decks.js?v=0.14.20';
-import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.14.20';
-import { LIVE_EVENT_WIN_UP, activeLiveEventTowers } from '../js/data/live-events.js?v=0.14.20';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
-import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.14.20';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.14.25';
+import { collectionCards } from '../js/data/collection.js?v=0.14.25';
+import { layeredCardArtFor } from '../js/data/artwork.js?v=0.14.25';
+import { superstars } from '../js/data/superstars.js?v=0.14.25';
+import { decks } from '../js/data/decks.js?v=0.14.25';
+import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.14.25';
+import { LIVE_EVENT_WIN_UP, activeLiveEventTowers } from '../js/data/live-events.js?v=0.14.25';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
+import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.14.25';
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 const collectionById = new Map(collectionCards.map(card => [card.id, card]));
@@ -54,9 +54,9 @@ test.skip('v0.13.35 layered artwork lookup includes Superstars while Method Mome
   assert.equal(layeredCardArtFor(momentum), null);
 });
 
-test('v0.13.35 Tribal Chief offers a choice, declining preserves it, and accepting consumes it', () => {
+test('v0.13.35 Tribal Chief offers a choice on a countered non-Finisher, declining preserves it, and accepting consumes it', () => {
   const roman = Object.values(superstars).find(item=>item.id==='roman-reigns'), punk = Object.values(superstars).find(item=>item.id==='cm-punk');
-  const tribal = byId('special-roman-reigns');
+  const tribal = byId('special-roman-reigns'), incoming = byId('punch');
   const make = () => {
     const game = new MatchEngine({ p1: roman, p2: punk, decks, rng: () => 0.42 });
     const state = game.state();
@@ -68,7 +68,7 @@ test('v0.13.35 Tribal Chief offers a choice, declining preserves it, and accepti
     return game;
   };
   const decline = make();
-  assert.equal(decline.passTurn('p1'), true);
+  assert.equal(decline._transferControl('p2','counter',{draw:true,counteredCard:incoming}), true);
   assert.equal(decline.state().phase, 'TRIGGER_RESPONSE');
   assert.equal(decline.state().pendingTriggeredSpecial?.cardId, tribal.id);
   assert.equal(decline.resolveTriggeredSpecial('p1', false), true);
@@ -77,7 +77,7 @@ test('v0.13.35 Tribal Chief offers a choice, declining preserves it, and accepti
   assert.equal(decline.state().playerInControl, 'p2');
 
   const use = make();
-  assert.equal(use.passTurn('p1'), true);
+  assert.equal(use._transferControl('p2','counter',{draw:true,counteredCard:incoming}), true);
   assert.equal(use.resolveTriggeredSpecial('p1', true), true);
   assert.equal(use.state().players.p1.specialUsed, true);
   assert.equal(use.state().playerInControl, 'p1');

@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
-import { superstars } from '../js/data/superstars.js?v=0.14.20';
-import { decks } from '../js/data/decks.js?v=0.14.20';
-import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.14.20';
-import { boosterEligible } from '../js/data/boosters.js?v=0.14.20';
-import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.14.20';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
-import { moveEligibility } from '../js/engine/rules.js?v=0.14.20';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
+import { superstars } from '../js/data/superstars.js?v=0.14.25';
+import { decks } from '../js/data/decks.js?v=0.14.25';
+import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.14.25';
+import { boosterEligible } from '../js/data/boosters.js?v=0.14.25';
+import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.14.25';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
+import { moveEligibility } from '../js/engine/rules.js?v=0.14.25';
 
 const stars = Object.values(superstars);
 const star = id => stars.find(s => s.id === id);
@@ -70,7 +70,7 @@ test('v0.13.3 printed kickout-retain effects now execute for Standing Moonsault 
   }
 });
 
-test('v0.13.3 ordinary failed pins still transfer Control and explicit pin-escape Actions override attacker retention', () => {
+test('v0.13.3 ordinary failed pins transfer Control and pin-escape Actions now use normal failed-pin retention rules', () => {
   const attacker = star('logan-paul'), defender = star('cm-punk');
   const ordinary = byName('Powerbomb');
   const g1 = new MatchEngine({ p1: attacker, p2: defender, decks, rng: () => 0.999 });
@@ -80,5 +80,5 @@ test('v0.13.3 ordinary failed pins still transfer Control and explicit pin-escap
   const standing = byName('Standing Moonsault'), escape = card('special-cm-punk');
   const g2 = new MatchEngine({ p1: attacker, p2: defender, decks, rng: () => 0.999 });
   const b = g2.state(); b.playerInControl='p1'; b.phase='PIN_RESPONSE'; b.postMove={attackerId:'p1',defenderId:'p2',cardId:standing.id}; b.proposedPin={attackerId:'p1',defenderId:'p2'}; b.players.p1.discard.push(standing); b.players.p2.hand=[escape];
-  assert.equal(g2.playPinEscape('p2', escape), true); assert.equal(b.playerInControl, 'p2', 'Best in the World explicitly takes Control and overrides Standing Moonsault retention');
+  assert.equal(g2.playPinEscape('p2', escape), true); assert.equal(b.playerInControl, 'p1', 'Best in the World stops the Pin but Standing Moonsault still applies its printed failed-pin Control retention');
 });

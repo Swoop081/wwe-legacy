@@ -276,7 +276,7 @@ export const superstars = {
     "specialId": "special-john-cena",
     "leadOffIds": [
       "momentum-strength",
-      "momentum-technical",
+      "momentum-strike",
       "shoulder-tackle",
       "body-slam",
       "punch"
@@ -297,8 +297,8 @@ export const superstars = {
     },
     "starterMomentum": {
       "strength": 5,
-      "technical": 5,
-      "strike": 2
+      "technical": 4,
+      "strike": 3
     },
     "ability": {
       "name": "The Champ Is Here",
@@ -1428,11 +1428,11 @@ export const superstars = {
     },
     "ability": {
       "name": "The Ruler",
-      "text": "The first time Oba connects with a C6+ Strength Move, draw 1 page.",
+      "text": "The first time Oba connects with a C7+ Strength Move, draw 1 page.",
       "trigger": {
         "type": "connectMethodCost",
         "method": "strength",
-        "minCost": 6,
+        "minCost": 7,
         "maxUses": 1,
         "draw": 1
       },
@@ -1746,7 +1746,7 @@ export const superstars = {
       "becky-lynch-bexploder"
     ],
     "archetype": "reviewed-starter",
-    "hp": 65,
+    "hp": 67,
     "methodLimits": {
       "agility": 1,
       "strength": 2,
@@ -4298,7 +4298,7 @@ export const superstars = {
       "doink-whoopee-cushion"
     ],
     "archetype": "technical-agility-trickster",
-    "hp": 62,
+    "hp": 63,
     "methodLimits": {
       "technical": null,
       "agility": 4,
@@ -4770,7 +4770,7 @@ export const superstars = {
       "mr-perfect-perfect-plex"
     ],
     "archetype": "elite-technical-counter",
-    "hp": 64,
+    "hp": 65,
     "methodLimits": {
       "technical": null,
       "strike": 4,
@@ -4784,12 +4784,13 @@ export const superstars = {
     },
     "ability": {
       "name": "Perfect Execution",
-      "text": "The first time each Control sequence Mr. Perfect successfully Counters a Move, his next Technical Move costs 2 less that Control sequence. The first 2 successful Counters each match also draw 1 page.",
+      "text": "The first time each Control sequence Mr. Perfect successfully Counters a Move, his next Technical Move costs 2 less that Control sequence. The first 3 successful Counters each match also draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "perfectExecution",
         "discount": 2,
         "draw": 1,
-        "drawMaxUses": 2
+        "adrenaline": 1,
+        "drawMaxUses": 3
       }
     },
     "entrance": {

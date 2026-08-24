@@ -1,47 +1,28 @@
-# WWE Legacy v0.14.20 — Roster Balance Pass
+# WWE Legacy v0.14.25 — Roster Balance + Reactive Control Consistency
 
-This is a **verified no-assets overlay build**. Copy it over the current WWE Legacy installation while retaining the existing `assets/` folder.
+This verified no-assets overlay build supersedes v0.14.24.
 
-## Current change
+## What changed
 
-v0.14.20 implements the approved roster-audit balance pass across the current and authored upcoming roster without changing collector identities, rarity, deck size, pack economy or core match rules.
+- **Oba Femi:** The Ruler now requires a **C7+ Strength Move** instead of C6+ before its once-per-match draw triggers. HP and move damage remain unchanged.
+- **Roman Reigns:** Tribal Chief can now regain Control only after one of Roman’s **non-Finisher Moves is successfully Countered**. Passing, failed pins, kickouts and other Control losses no longer offer the card.
+- **Doink the Clown:** HP **62 → 63** and Stump Puller pressure **6 → 7**.
+- **Becky Lynch:** HP **65 → 67** and Dis-arm-her pressure **6 → 7**. Manhandle Slam remains D17.
+- **Mr. Perfect:** HP **64 → 65**. Perfect Execution now gives its draw + **1 Adrenaline** package on the first **3 successful Counters** each match; the per-Control-sequence Technical discount remains 2.
 
-- **André the Giant — Giant’s Reach:** now triggers only the first time each match. It still gives the next Strength Move in that Control sequence **−1 Cost / +2 Damage**, but no longer grants +1 Adrenaline.
-- **Diesel — Jackknife Powerbomb:** **Cost 11 → 12**; Damage remains 18.
-- **Doink the Clown:** **HP 60 → 62**; The Joke’s on You now makes the first two successful Counters each match **draw 2 + gain 1 Adrenaline**; Drop Toe Hold now searches/draws Stump Puller and makes it cost 1 less that Control sequence; Stump Puller pressure **5 → 6**.
-- **Ted DiBiase:** Million Dollar Dream pressure **6 → 7**; Everybody Has a Price now triggers on the first **3** qualifying Technical connects instead of 2.
-- **Mr. Perfect:** Perfect-Plex immediate-pin kickout penalty **−10 → −15 percentage points**; Perfect Execution keeps its once-per-Control **Technical −2 Cost** reward and the first two successful Counters each match additionally draw 1 page.
-- **Rowdy Roddy Piper:** Piper’s Pit still shuts down one Counter for the current Control sequence, but the old future +2 Adrenaline Counter tax is replaced by a cleaner effect: the opponent loses **1 Adrenaline the next time they gain Control**. If no Counter exists in hand, Piper still draws 1.
-- **Becky Lynch:** **HP 64 → 65**; Dis-arm-her pressure **5 → 6**; Manhandle Slam Damage **16 → 17**.
-- **Owen Hart:** **HP 62 → 63**; Two-Time Slammy Award Winner may now take eligible **1★/2★/3★ Moves** from the top seven pages, still capped at two different choices.
-- **Randy Savage:** Macho Madness remains capped at the first two qualifying sequences, but its **draw 1 is removed**. It now grants only **+1 Adrenaline**, which was the first tested lever that produced a meaningful reduction without damaging the Flying Elbow chain.
-- **John Cena:** Hustle, Loyalty, Respect is now a genuinely persistent installed Support. The **first time Cena reaches 50% HP or less**, it grants **+2 Adrenaline and draw 1**, even when installed earlier; installing it after Cena is already at/below the threshold triggers it immediately. It can trigger only once.
-- **Penta:** Cero Miedo no longer gives +1 starting Adrenaline. Its authored starting Momentum package remains intact.
-- **Lola Vice:** **HP 59 → 61**; Triangle Choke pressure **5 → 6**.
+## Reactive Control consistency
 
-## Post-pass roster audit
+- **Best in the World** and generic **Shoulder Up** now stop the Pin and then resolve Control using the normal failed-pin rules; they no longer override printed/ability-based failed-pin Control retention.
+- **Welcome to the KO Show** still cancels an opponent Action or Support and consumes that window, but it no longer steals Control.
+- **The Deadman Rises** and **Veteran Instincts** were clarified to use the Control change that already comes from a successful kickout or Counter rather than claiming a second special Control takeover.
+- Counter-specific retain/regain effects such as Bloodline Rules, Hammer in the Boot and 173–0 remain tied to their authored counter triggers.
 
-A fresh released-roster CPU-vs-CPU audit completed **16,400 matches across 41 released Superstars with 0 stalls** and a **26.91-turn** average.
+## Simulation targets
 
-Notable post-pass positions: André **60.8%**, Diesel **60.8%**, Randy Savage **54.3%**, Ted DiBiase **45.5%**, Owen Hart **42.0%**, Doink **41.9%**, Mr. Perfect **41.9%**, Becky Lynch **40.9%**, and John Cena **35.6%**. Oba Femi (**64.3%**) and Roman Reigns (**62.6%**) remain on the audit watchlist; no speculative change was applied to either in this pass because the earlier candidate tests did not isolate a clean Roman lever and Oba’s identity-preserving lever still needs a dedicated follow-up choice.
+Focused released-roster audits (800 matches per Superstar) landed at: **Oba 58.25%**, **Roman 60.75%**, **Doink 48.63%**, **Becky 45.88%**, **Mr. Perfect 49.38%**, **CM Punk 49.63%**, **Kevin Owens 54.75%**, with **0 stalls** in every focused run. Cena remains elite at **61.50%**.
 
-Cena’s HLR fix is confirmed live in CPU matches; the fresh simulation shows he remains a low outlier even after the behavior correction, so any further Cena numerical buff should be a separate measured follow-up rather than bundled blindly into this pass.
-
-## Carry-forward baseline
-
-v0.14.20 carries forward the complete v0.14.19 baseline, including the Rhea Crucifix Auto Build repair, compact Tier Up rewards, four-track Set Milestones, RAW hub typography/in-match branding, 50-tier Season 1 structure, 40-match per-Superstar Championship Road, Live Event rewards/rotation, four-tier print system, booster collation and all previously locked gameplay/UI fixes.
-
-## Verification
-
-- v0.14.20 targeted roster-balance tests: **5/5 passed**.
-- Full no-assets suite: **879 tests discovered / 775 passed / 94 skipped / 10 expected asset-presence failures**. The 10 failures are inherited tests that explicitly require the intentionally omitted `assets/` library.
-- Validation: **76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues**.
-- Collector ID audit: **782 cards / 782 manifest entries / 0 issues**.
-- Flow audit: **76 Superstars / 0 issues**.
-- Card-effect audit: **574 scoped gameplay cards / 389 effect-bearing / 0 issues**.
-- Counter/submission-state audit: **706 gameplay cards / 517 Moves / 0 issues**.
-- Released-roster balance audit: **41 Superstars / 16,400 matches / 0 stalls**.
+The full released-roster round robin is **41 Superstars / 16,400 matches / 0 stalls**, averaging **26.80 turns**. The primary post-pass results are Roman **61.4%**, Cena **61.1%**, Oba **55.8%**, Kevin Owens **59.0%**, Punk **49.1%**, Doink **46.0%**, Becky **45.6%**, and Mr. Perfect **45.3%**.
 
 ## Packaging
 
-The user-facing ZIP intentionally contains **no `assets/` directory** and is designed to overlay the current WWE Legacy installation without replacing or deleting image assets.
+The ZIP intentionally contains **no `assets/` directory** and is designed to overlay the current WWE Legacy installation without replacing or deleting image assets.

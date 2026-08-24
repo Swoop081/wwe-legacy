@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.20';
-import { superstars } from '../js/data/superstars.js?v=0.14.20';
-import { decks } from '../js/data/decks.js?v=0.14.20';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.14.20';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.20';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
+import { superstars } from '../js/data/superstars.js?v=0.14.25';
+import { decks } from '../js/data/decks.js?v=0.14.25';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.14.25';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(hp,maxHp=100)=>({hp,maxHp});

@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.14.20";
-import { superstars } from "./superstars.js?v=0.14.20";
-import { grantRandomBoosters } from "./boosters.js?v=0.14.20";
-import { awardSeasonXp } from "./seasons.js?v=0.14.20";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.14.25";
+import { superstars } from "./superstars.js?v=0.14.25";
+import { grantRandomBoosters } from "./boosters.js?v=0.14.25";
+import { awardSeasonXp } from "./seasons.js?v=0.14.25";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -583,6 +583,22 @@ export function startLiveEventTower(profile, towerKey, superstarId, eligibleOppo
     startedAt: new Date().toISOString()
   };
   return state.activeRun;
+}
+
+export function changeLiveEventTowerSuperstar(profile, towerKey, superstarId, now = new Date()) {
+  const entry = liveEventTowerState(profile, towerKey, now);
+  if (!entry) throw new Error("That Live Event has expired.");
+  const { tower, state } = entry;
+  const run = state.activeRun;
+  if (!run || run.status !== "active") throw new Error("No active Live Event run");
+  if (state.cleared || Number(run.stage ?? 0) !== 0) throw new Error("Your Superstar is locked after Match 1 is complete.");
+  const nextId = String(superstarId ?? "").trim();
+  const nextStar = superstarRecord(nextId);
+  if (!nextStar || !isPlayerVisibleSuperstar(nextStar, profile, now) || !profile?.unlockedSuperstars?.includes(nextId)) throw new Error("Choose an unlocked Superstar.");
+  if (nextId === run.superstarId) return run;
+  run.superstarId = nextId;
+  repairLiveEventRunReleaseGate(profile, tower, state, now);
+  return run;
 }
 
 export function currentLiveEventTowerOpponent(profile, towerKey, now = new Date()) {

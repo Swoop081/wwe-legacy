@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { championshipRoadSectionForStage } from '../js/data/championship-road.js?v=0.14.20';
-import { collectionCards } from '../js/data/collection.js?v=0.14.20';
+import { championshipRoadSectionForStage } from '../js/data/championship-road.js?v=0.14.25';
+import { collectionCards } from '../js/data/collection.js?v=0.14.25';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
@@ -26,7 +26,7 @@ test('v0.14.12 Tribal Chief authored plate receives live front name, type and ef
   assert.match(tribal.rulesText, /regain Control/i);
   assert.match(app, /function tribalChiefFrontOverlayMarkup/);
   assert.match(app, /TRIBAL CHIEF/);
-  assert.match(app, /After Roman loses Control: play this to regain Control\. Once per match\./);
+  assert.match(app, /After Roman’s non-Finisher Move is Countered: play this to regain Control\. Once per match\./);
   assert.match(app, /has-tribal-chief-live-front/);
   assert.match(css, /\.ccg-card\.has-tribal-chief-live-front \.ccg-tribal-chief-front-data/);
 });

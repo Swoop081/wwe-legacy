@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.14.20";
+import { allGameplayCards } from "./content.js?v=0.14.25";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -4653,7 +4653,7 @@ export const deckIds={
   ],
   "john-cena": [
     "momentum-strength",
-    "momentum-technical",
+    "momentum-strike",
     "shoulder-tackle",
     "body-slam",
     "punch",
