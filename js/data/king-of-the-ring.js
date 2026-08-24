@@ -1,4 +1,4 @@
-import { grantRandomBoosters } from "./boosters.js?v=0.14.14";
+import { grantRandomBoosters } from "./boosters.js?v=0.14.15";
 
 export const KING_OF_THE_RING_FIELD_SIZE = 8;
 export const KING_OF_THE_RING_ROUNDS = Object.freeze(["Quarterfinal", "Semifinal", "Final"]);

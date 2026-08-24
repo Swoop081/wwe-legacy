@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.14.14';
-import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.14.14';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.14.14';
-import { cardsForSet } from '../js/data/collection.js?v=0.14.14';
-import { superstars } from '../js/data/superstars.js?v=0.14.14';
+import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.14.15';
+import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.14.15';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.14.15';
+import { cardsForSet } from '../js/data/collection.js?v=0.14.15';
+import { superstars } from '../js/data/superstars.js?v=0.14.15';
 
 const setId='summerslam-series-1';
 const sequenceRng=(values,fallback=.42)=>{let i=0;return()=>values[i++]??fallback;};
@@ -106,6 +106,6 @@ test.skip('v0.12.65 pack presentation stays face up, converts duplicates, shows 
 
 test('v0.12.65 preserves missing-front rules fallback and live Momentum front exception',()=>{
   const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
-  assert.match(app,/classList\.add\('uses-rules-fallback','is-flipped'\)/,'failed custom art reveals canonical rules face');
+  assert.match(app,/classList\.add\('uses-rules-fallback','(?:is-flipped|force-rules-face)'\)/,'failed custom art reveals canonical rules face');
   assert.match(app,/card\.kind === "momentum"[\s\S]*return momentumMockupMarkup\(card\)/,'Momentum keeps authored live UI fronts');
 });

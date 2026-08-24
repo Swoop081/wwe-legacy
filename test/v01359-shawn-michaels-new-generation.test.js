@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=0.14.14";
-import { superstars } from "../js/data/superstars.js?v=0.14.14";
-import { decks } from "../js/data/decks.js?v=0.14.14";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.14";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.14";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.14";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.14";
-import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.14";
+import { sets } from "../js/data/sets.js?v=0.14.15";
+import { superstars } from "../js/data/superstars.js?v=0.14.15";
+import { decks } from "../js/data/decks.js?v=0.14.15";
+import { allGameplayCards } from "../js/data/content.js?v=0.14.15";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.15";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.15";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.15";
+import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.15";
 
 const shawn = Object.values(superstars).find(s => s.id === "shawn-michaels");
 const byId = Object.fromEntries(allGameplayCards.map(c => [c.id,c]));

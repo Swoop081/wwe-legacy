@@ -251,3 +251,14 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - No Championship Road stage/progress values, opponent order, difficulty unlocks, section rewards, card balance, pack odds, Season XP, Daily Live Event XP, Superstar pity or collection ownership changed.
 - User-facing distribution continues to exclude the entire `assets/` directory.
 - Verification against the inherited current asset library: **866 tests / 768 passed / 0 failed / 98 intentionally skipped historical contracts**; targeted v0.14.14 tests **2/2**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues**; collector-ID **782/782 / 0 issues**; flow **76/76 / 0 issues**; card-effect and counter/submission-state audits report **0 issues**.
+
+## v0.14.15 — Pack Missing-Art Fallback Hotfix
+
+- Fixed a pack-opening identity failure where a collectible whose installed front image could not be loaded could render as an empty glowing card frame, leaving the player unable to tell what was pulled.
+- Runtime failures of layered, finished/custom, or authored card-front images now expose the card's canonical **rules/details face directly** instead of relying on an iOS 3D flip repaint.
+- The readable fallback includes the existing canonical card identity and rules data: card name, type/rarity/printing label, Cost/Damage where applicable, Method requirements, effect text, restrictions/counter/submission information, collector code and rarity stars.
+- The same fallback behavior applies in the **single-card Pack Reveal**, **Pack Complete five-card summary**, and the normal card inspector because all three use the canonical collectible renderer.
+- Premium printing presentation is preserved around the fallback face, so Emerald/Sapphire/Ruby pulls remain visually identifiable even when their artwork front is unavailable.
+- Pack Reveal progression remains unchanged: tapping the readable fallback still advances to the next pull/summary, while Pack Complete cards remain inspectable.
+- No card balance, pack odds/collation, rewards, Season XP, Championship Road, Live Event, collection ownership, Superstar pity or match rules changed from v0.14.14.
+- User-facing distribution continues to exclude the entire `assets/` directory.

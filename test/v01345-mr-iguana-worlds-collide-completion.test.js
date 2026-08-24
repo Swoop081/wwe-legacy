@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.14';
-import { collectionCards } from '../js/data/collection.js?v=0.14.14';
-import { decks } from '../js/data/decks.js?v=0.14.14';
-import { superstars } from '../js/data/superstars.js?v=0.14.14';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.14';
-import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.14.14';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.14.14';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.15';
+import { collectionCards } from '../js/data/collection.js?v=0.14.15';
+import { decks } from '../js/data/decks.js?v=0.14.15';
+import { superstars } from '../js/data/superstars.js?v=0.14.15';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.15';
+import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.14.15';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.14.15';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);

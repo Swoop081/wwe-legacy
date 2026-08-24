@@ -1,32 +1,32 @@
-# WWE Legacy v0.14.14 — Championship Road Launch Hotfix
+# WWE Legacy v0.14.15 — Pack Missing-Art Fallback Hotfix
 
 This is a **verified no-assets overlay build**. Copy it over the current WWE Legacy installation while retaining the existing `assets/` folder.
 
-## Critical fix
+## Current change
 
-v0.14.13 introduced a blocking Championship Road launch regression. Tapping **FIGHT MATCH** supplied Championship Road section metadata to the shared matchup splash so the correct era arena/ring theme could be used. The splash mistakenly treated that metadata as Daily Live Event metadata and read an `eventName` field that Championship Road does not have, stopping the transition before the match could begin.
+- Pack Reveal and Pack Complete can no longer show an unidentified blank/glowing card when a collectible front image is missing or fails to load.
+- Layered, finished/custom and authored-front load failures now expose the card's canonical **rules/details face directly**.
+- The fallback keeps the pull identifiable with card name, type/printing, Cost/Damage where relevant, Method requirements, effect text, restrictions/counter/submission information, collector code and rarity stars.
+- Emerald / Sapphire / Ruby presentation remains visible around the readable fallback face.
+- The single-card reveal still advances normally when tapped; Pack Complete fallback cards still open the normal inspector.
 
-v0.14.14 separates the two metadata paths:
+## Carry-forward baseline
 
-- Live Event metadata drives Live Event headings and rule panels only when the mode is actually `live-event`.
-- Championship Road metadata continues to provide the active section set identity for the correct Golden Era / New Generation / Attitude Era / SummerSlam / Evolution presentation.
-- **FIGHT MATCH** now proceeds through the normal MAIN EVENT matchup flow for Championship Road.
-- The stale Championship Road header copy is corrected from **24 MATCHES** to **40 MATCHES**.
-
-All v0.14.13 tabled changes remain intact: 40-match ten-section road order, Golden Era Part II and Attitude Era Part II, per-Superstar progress, legacy 32→40 migration, frozen upper control deck, lower-route current-group focus, Opponent Entrance spacing, and all earlier WWE Legacy fixes.
+v0.14.15 includes the complete v0.14.14 baseline and all previously tabled changes, including the 40-match per-Superstar Championship Road, current-group auto-focus/frozen upper controls, correct Championship Road match launching/theme inheritance, Daily Live Event +25 completion XP, grounded/Stun recovery, Auto Counter rail retention, Live Event defeated checks, booster premium-printing collation, Cena Season 1/Catalogue fixes, Tier Up compact presentation, Tribal Chief front text and premium printing glow differentiation.
 
 ## Verification
 
-Verified against the inherited current asset library:
+Verified against the inherited v0.14.00 flat asset library plus the exact current John Cena layered plate supplied during development:
 
-- **866 tests discovered / 768 passed / 0 failed / 98 intentionally skipped historical contracts**
-- v0.14.14 targeted tests: **2/2 passed**
+- **868 tests discovered / 770 passed / 0 failed / 98 intentionally skipped historical contracts**
+- v0.14.15 targeted regression tests: **2/2 passed**
 - Validation: **76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues**
-- Collector ID audit: **782 / 782 / 0 issues**
-- Flow audit: **76 / 76 / 0 issues**
-- Card-effect audit: **0 issues**
-- Counter/submission-state audit: **0 issues**
+- Collector ID audit: **782 cards / 782 manifest entries / 0 issues**
+- Flow audit: **76 Superstars / 0 issues**
+- Card-effect audit: **574 scoped gameplay cards / 389 effect-bearing / 0 issues**
+- Counter/submission-state audit: **706 gameplay cards / 517 Moves / 0 issues**
+- Flat asset audit in verification overlay: **618 images / 310 installed gameplay-card fronts / 158 layered / 152 flat / 48 headshots / 39 menu portraits**
 
 ## Packaging
 
-The `assets/` directory is intentionally excluded from this ZIP. No image assets are added, removed, renamed or replaced by this hotfix.
+The user-facing ZIP intentionally contains **no `assets/` directory**. It is designed to overlay the user's existing current WWE Legacy folder without replacing or deleting image assets.
