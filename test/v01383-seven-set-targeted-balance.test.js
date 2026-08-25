@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
-import { superstars } from '../js/data/superstars.js?v=0.14.25';
-import { decks } from '../js/data/decks.js?v=0.14.25';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
-import { autoCounterEligibility } from '../js/engine/rules.js?v=0.14.25';
+import { allGameplayCards } from '../js/data/content.js?v=0.15.00';
+import { superstars } from '../js/data/superstars.js?v=0.15.00';
+import { decks } from '../js/data/decks.js?v=0.15.00';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.15.00';
+import { autoCounterEligibility } from '../js/engine/rules.js?v=0.15.00';
 
 const card = id => allGameplayCards.find(c => c.id === id);
 const star = id => Object.values(superstars).find(s => s.id === id);
@@ -38,12 +38,12 @@ test('v0.13.83 locks the approved targeted numerical balance changes', () => {
   assert.equal(card('lola-vice-305').damage, 16);
   assert.equal(card('doink-stump-puller').submission.pressure, 7); // superseded by v0.14.25 roster balance
   assert.equal(card('doink-whoopee-cushion').cost, 9);
-  assert.equal(card('owen-hart-sharpshooter').submission.pressure, 6);
+  assert.equal(card('owen-hart-sharpshooter').submission.pressure, 7); // superseded by v0.14.26
   assert.equal(star('andre-the-giant').ability.trigger.discount, 1);
   assert.equal(star('andre-the-giant').ability.trigger.damage, 2);
   assert.equal(card('randy-savage-flying-elbow-drop').cost, 9);
   assert.equal(card('rowdy-roddy-piper-bulldog').searchOnConnectDiscount, 2);
-  assert.equal(card('rowdy-roddy-piper-sleeper-hold').submission.pressure, 6);
+  assert.equal(card('rowdy-roddy-piper-sleeper-hold').submission.pressure, 7); // superseded by v0.14.26
   assert.equal(star('mr-perfect').ability.trigger.discount, 2);
   assert.equal(card('special-mr-perfect').special.look, 7);
   assert.equal(star('chyna').ability.trigger.maxUses, 2);
@@ -129,7 +129,7 @@ test('v0.13.83 Triple H Cerebral Assassin accepts a Technical setup and Chyna Ni
     const move=card('body-slam'); const hp=d.hp;
     s.phase='RESOLVE_MOVE'; s.proposedMove={attackerId:'p1',defenderId:'p2',card:move};
     g._connect();
-    assert.equal(hp-d.hp, (move.damage??0)+1);
+    assert.equal(hp-d.hp, (move.damage??0)+3);
     assert.equal(a.abilityUses,1);
   }
   {

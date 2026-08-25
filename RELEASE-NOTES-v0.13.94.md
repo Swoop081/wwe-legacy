@@ -393,3 +393,60 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - No changes to pack odds/collation, Season XP, Daily Live Event XP, Championship Road, pity, release state or collection ownership.
 - Distribution remains a **verified no-assets overlay package**.
 
+
+## v0.14.26 — Move Health + Lower-Roster Balance
+
+- Completed the approved move-health pass and added a reverse **printed-text → runtime** audit so promises written on cards are checked against actual implementation, not only structured-effect data. Current result: **706 gameplay cards / 0 issues**.
+- Fixed live/runtime mismatches for **Bulldog** (opponent ditches 1), **Cody Rhodes — Disaster Kick** (+1 additional Adrenaline), **Swanton Bomb** (Grounded-only), **Running Uppercut** (Rear Control + Neck/Head Submission reversals), and **Oba Femi — One-Handed Backbreaker** (+3 persistent Back damage).
+- Enforced `standingOnly` for ordinary proactive Moves at engine level. Owen Hart’s Missile Dropkick and every other authored Standing-only Move now obey the printed restriction.
+- Counter windows now use the incoming Move’s exposed Counter state/Submission target rather than proactive Standing/Grounded restrictions, preventing stale posture state from invalidating a legal reversal.
+- Preserved intended same-Control setup chains despite strict Standing-only enforcement by explicitly allowing **Exploder → Helluva Kick, Pump Kick → Jaded, Military Press Powerslam → Goldberg’s Spear, and Goldberg’s Spear → Jackhammer** to use their searched follow-up after the named setup.
+- Rewired **Bron Breakker’s Spear** to the live prior-Agility discount implementation.
+- Gave **Schoolboy Roll-Up, Bridging German Suplex and British Bulldog’s Crucifix** a real quick-pin identity: their immediate Amber/Red Pin applies **−5 percentage points to kickout chance**.
+- Certified rarity health: released **3★ Rare Trademarks** average **C5.43 / D8.06 / 1.52 Damage-per-Cost** versus released **2★ Uncommon Moves** at **C5.11 / D6.66 / 1.30**. Zero-Damage Submission Trademarks make raw Damage-only comparisons misleading at some individual Cost bands, so rarity remains a total-package standard rather than a blanket Damage rule.
+- Certified four-tier scaling with **0 issues**: Sapphire remains authored baseline; Normal/Emerald/Sapphire/Ruby apply **−2 / −1 / 0 / +1** to Move Damage and Submission Pressure where applicable.
+- Lower-roster balance: **Piper** Sleeper Hold P7 + Hot Rod 3 uses; **Owen** HP65 + Sharpshooter P7; **Charlotte** HP66 + Genetically Superior 3 uses; **IYO** Over the Moonsault D17 + Genius of the Sky 3 uses; **Austin** Glass Shatters +2 starting Adrenaline; **Jake Roberts** HP66 + Jake’s DDT D17; **Triple H** HP68 + Cerebral Assassin qualifying Grapple +2 Damage.
+- Final released-roster simulation: **41 Superstars / 16,400 matches / 0 stalls / 26.83 average turns**, with 13,835 Pins and 2,565 Submissions. Key rates: Roman 60.3%, André 59.6%, Cena 59.3%, Charlotte 47.6%, Owen 46.6%, Piper 46.5%, Jake 45.3%, IYO 44.3%, Triple H 43.5%. Austin remains a measured watchlist outlier at 41.3%; no extra unapproved stat package was silently added.
+- Dedicated Counter-density audit: average **14.07 structural Counter pages** per released deck and **15.07 effective reactive-defense pages** including Once Too Often, range **9–24**. All 41 released decks cover all **8 Counter states + 4 Submission targets**. Highest density is Liv Morgan 24, then Mankind 21 and Shawn Michaels/Stephanie Vaquer 20. Density has essentially zero linear relationship with current CPU win rate (Pearson ≈ 0.03), so no blind deck-wide pruning was bundled into this build.
+- Verification: v0.14.26 targeted tests **9/9**; full no-assets suite **909 discovered / 805 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state/printed-effect/tier audits all report **0 issues**.
+- Distribution remains a **verified no-assets overlay package**.
+
+## v0.14.27 — Counter Density + Focused Balance
+
+- Applied the approved targeted Counter-density cleanup rather than forcing every deck to one reversal count.
+- **Liv Morgan 24→17**, **Mankind 21→17**, **Stephanie Vaquer 20→18**, **Gunther 19→17**, **IYO SKY 19→18**, **Oba Femi 19→17**, **Paige 19→18**, **Rhea Ripley 19→18** effective reactive-defense pages.
+- All affected decks remain exactly 60 pages and retain **8/8 Counter-state + 4/4 Submission-target coverage**.
+- **Shawn Michaels remains at 20** effective reactive pages by design. Candidate pruning materially weakened his already non-elite result, so his offensive reversals are treated as archetype-critical rather than redundant.
+- Released-roster average structural Counter density falls **14.07→13.59**; effective density including Once Too Often falls **15.07→14.59**; range becomes **9–20**. Final density/win-rate Pearson remains effectively zero at approximately **−0.05**.
+- **Stone Cold Steve Austin:** HP **66→67**; And That’s the Bottom Line first-Countered-Move rewards **2→3 uses**.
+- **Ted DiBiase:** HP **65→67**; his existing Million Dollar Championship / Everybody Has a Price / Million Dollar Dream package is otherwise unchanged.
+- **Mr. Perfect:** HP **65→66**; Absolutely Perfect starting Adrenaline **+1→+2**, with physical Entrance card data synchronized.
+- **Triple H:** Cerebral Assassin qualifying Grapple bonus **+2→+3 Damage**; runtime execution is regression-tested.
+- Final released-roster audit: **41 Superstars / 16,400 matches / 0 stalls / 26.75 average turns**. Austin **46.9%**, Mr. Perfect **46.3%**, Ted **45.6%**, Triple H **45.5%**. Cena remains elite at **57.4%**, Roman **57.5%**, André **61.4%**.
+- Current lower watchlist after redistribution: Shawn Michaels **41.4%**, Kurt Angle **41.4%**, IYO SKY **42.9%**. No silent post-audit buffs were added.
+- Verification: v0.14.27 targeted tests **5/5**; full no-assets suite **914 discovered / 810 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state/printed-effect/card-health audits all clean.
+- Distribution remains a **verified no-assets overlay package**.
+
+## v0.14.28 — Watchlist Balance Pass
+
+- Resolved the remaining v0.14.27 lower-roster watchlist with a narrow Shawn Michaels / Kurt Angle / IYO SKY pass rather than another broad roster sweep.
+- **Shawn Michaels:** HP **61 → 64**; Flying Forearm Damage **6 → 7** at unchanged Cost 4. Heartbreak Kid, The Showstopper, Sweet Chin Music and his intentionally preserved high Counter-density archetype remain unchanged.
+- **Kurt Angle:** HP **65 → 66**; Ankle Lock persistent Leg pressure **6 → 7**. Olympic Gold Medalist and Angle's Action/technical package remain unchanged.
+- **IYO SKY:** HP **57 → 58** only, preserving her role as one of the roster's lowest-HP high-agility Superstars. Genius of the Sky and Over the Moonsault remain unchanged.
+- Focused released-roster audits, 800 matches each / 0 stalls: Shawn **48.00%**, Kurt **49.00%**, IYO **46.25%**.
+- Final released-roster audit: **41 Superstars / 16,400 matches / 0 stalls / 26.77 average turns**; Shawn **46.5%**, Kurt **46.9%**, IYO **45.0%**. Cena remains **56.5%**, Roman **57.4%**, André **61.4%**.
+- Counter density is unchanged from v0.14.27: **13.59** structural / **14.59** effective average, **9–20** effective range, **41/41** decks retain 8/8 Counter-state and 4/4 Submission-target coverage; density/win-rate correlation remains approximately **−0.04**.
+- Card-health remains clean. Released 3★ Rare Trademarks now average **D8.07 at C5.43 / 1.52 D:C**, remaining clearly ahead of released 2★ Uncommon Moves at **D6.66 at C5.11 / 1.30 D:C**. Four-tier scaling issues remain **0**.
+- Verification: v0.14.28 targeted tests **4/4**; full no-assets suite **918 discovered / 814 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state/printed-effect/card-health audits all clean.
+- Distribution remains a **verified no-assets overlay package**.
+
+## v0.15.00 — Final Gameplay Certification
+
+- Began the pre-v1.0 certification track with a new **23-case Rules Interaction Matrix** covering the highest-risk combinations across Control, Counters, Pins, Submissions, Stun, Auto Counter, Once Too Often, reactive Superstar cards, Action cancellation, Playbook recycling and posture restrictions. **23/23 pass**.
+- Removed the duplicate identical `attemptPin()` / `_pinChance()` block from MatchEngine and added a regression requiring one canonical Pin implementation. No intended Pin-rule change.
+- Final balance confidence testing identified **Becky Lynch** as the only released Superstar repeatedly sitting on the intervention edge. Her focused HP67 result was **42.88%** over 1,600 released-roster matches; HP68 tested at **44.50%** and HP69 at **45.88%**. Final change: **Becky Lynch HP 67 → 69**. Her moves, ability and deck remain otherwise unchanged.
+- Final two-seed released-roster certification combines **32,800 CPU-vs-CPU matches / 1,600 per Superstar / 0 stalls / 26.82 average turns / 27,590 Pins / 5,210 Submissions**.
+- No hard balance outliers remain under the launch intervention gates using 95% Wilson intervals. Key results: André **61.44%**, Bret **58.75%**, Brock **58.44%**, Cody **57.44%**, Roman **57.12%**, Cena **56.50%**. Lower edge: Becky **44.38%**, Doink **44.31%**, Piper **43.94%**, Paige **43.81%**.
+- Existing card-health and Counter-density certification remains clean: **706/706** printed-effect runtime checks, **390** structured effect-bearing cards / 0 issues, **517** Counter-state Moves / 0 issues, four-tier scaling 0 issues, released 3★ Rare Trademarks remain ahead of 2★ Uncommons on overall authored efficiency, and all 41 released decks retain 8/8 Counter-state + 4/4 Submission-target coverage.
+- Verification: v0.15.00 targeted tests **3/3**; Rules Interaction Matrix **23/23**; full no-assets suite **921 discovered / 817 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state/printed-effect/card-health audits all clean.
+- Distribution remains a **verified no-assets overlay package**.

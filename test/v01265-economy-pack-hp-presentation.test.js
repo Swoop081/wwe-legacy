@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.14.25';
-import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.14.25';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.14.25';
-import { cardsForSet } from '../js/data/collection.js?v=0.14.25';
-import { superstars } from '../js/data/superstars.js?v=0.14.25';
+import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.15.00';
+import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.15.00';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.15.00';
+import { cardsForSet } from '../js/data/collection.js?v=0.15.00';
+import { superstars } from '../js/data/superstars.js?v=0.15.00';
 
 const setId='summerslam-series-1';
 const sequenceRng=(values,fallback=.42)=>{let i=0;return()=>values[i++]??fallback;};
@@ -84,7 +84,7 @@ test('v0.12.65 HP follows physical strength and size with Andre as unique ceilin
   assert.equal(hp['cody-rhodes'],64);
   assert.equal(hp['seth-rollins'],64);
   assert.equal(hp['rey-mysterio'],57);
-  assert.equal(hp['iyo-sky'],57);
+  assert.equal(hp['iyo-sky'],58);
   assert.equal(Math.max(...Object.values(hp)),72);
   assert.equal(Object.values(hp).filter(value=>value===72).length,1);
 });

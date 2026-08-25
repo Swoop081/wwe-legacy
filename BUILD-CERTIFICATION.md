@@ -1,56 +1,75 @@
-# WWE Legacy v0.14.25 — Build Certification
+# WWE Legacy v0.15.00 — Build Certification
 
-**Build:** v0.14.25 — Roster Balance + Reactive Control Consistency  
+**Build:** v0.15.00 — Final Gameplay Certification  
 **Date:** 25 August 2026  
 **Distribution:** verified no-assets overlay package
 
 ## Objective
 
-Finish the next roster-balance pass while applying one consistent rule to reactive effects that stop a Pin, cancel utility, or regain/retain Control.
+Begin the pre-v1.0 certification track by freezing the core gameplay rules behind a reproducible interaction matrix, performing a higher-confidence released-roster balance certification, and removing any engine duplication discovered during the pass.
 
-## Implemented balance
+## Rules Interaction Matrix
 
-- Oba Femi — The Ruler threshold C6+ → C7+ Strength.
-- Roman Reigns — Tribal Chief only after a countered non-Finisher Move.
-- Doink the Clown — HP 62 → 63; Stump Puller pressure 6 → 7.
-- Becky Lynch — HP 65 → 67; Dis-arm-her pressure 6 → 7.
-- Mr. Perfect — HP 64 → 65; first 3 successful Counters each match draw 1 + gain 1 Adrenaline through Perfect Execution; Technical discount remains 2.
+**23/23 scenarios passed.** Coverage includes Lead Off / Turn 1 draw behavior, Entrance Adrenaline, retained-Control replenishment, connected-Move Adrenaline, Counter/Control transfer, Tribal Chief, failed Pin and Pin-escape retention, Pin health gates, quick-pin modifiers, Submission lifecycle/persistence, Finisher Method exemption, Stun, Auto Counter, Once Too Often, Action Counter immunity, KO Show cancellation, Hustle Loyalty Respect, Playbook recycling and posture-vs-Counter-state legality.
 
-## Reactive Control consistency
+The matrix is available through `npm run rules-matrix`.
 
-- Best in the World and Shoulder Up stop the Pin, then normal failed-pin Control rules resolve.
-- Welcome to the KO Show cancels the opponent utility and spends its Action/Support window without taking Control.
-- The Deadman Rises and Veteran Instincts retain their authored bonuses but no longer imply a redundant special Control takeover.
-- Roman’s Tribal Chief now matches the counter-specific design family rather than triggering after every Control loss.
+## Engine hygiene
 
-## Focused balance verification
+Removed a duplicate identical `attemptPin()` / `_pinChance()` method pair from `MatchEngine`. A v0.15.00 regression now requires exactly one canonical Pin implementation.
 
-800 released-roster matches per listed Superstar, 0 stalls in every run:
+## Final roster balance
 
-- Oba Femi: **58.25%**
-- Roman Reigns: **60.75%**
-- Doink the Clown: **48.63%**
-- Becky Lynch: **45.88%**
-- Mr. Perfect: **49.38%**
-- CM Punk: **49.63%**
-- Kevin Owens: **54.75%**
-- John Cena: **61.50%**
+### Becky Lynch
 
-## Full released-roster verification
+A focused released-roster baseline at HP67 produced **686–914 (42.88%)** over 1,600 matches. Candidate testing gave:
 
-- **41 released Superstars / 16,400 matches / 0 stalls**
-- **26.80 average turns**
-- Pin finishes: **13,915**; Submission finishes: **2,485**
-- Key results: Roman **61.4%**, Cena **61.1%**, Kevin Owens **59.0%**, Oba **55.8%**, Punk **49.1%**, Doink **46.0%**, Becky **45.6%**, Mr. Perfect **45.3%**
+- HP68: **44.50%**.
+- HP69: **45.88%**.
+
+The final build therefore locks **Becky Lynch HP 67 → 69**. Dis-arm-her, Manhandle Slam, The Man, Straight Fire and her deck composition remain otherwise unchanged.
+
+### Two-seed released-roster certification
+
+Two independent 16,400-match round robins were combined for the final balance read:
+
+- **32,800 matches**.
+- **41 released Superstars**.
+- **1,600 matches per Superstar**.
+- **0 stalls**.
+- **26.82 average turns**.
+- **27,590 Pins / 5,210 Submissions**.
+- **0 hard outliers** where the 95% Wilson interval sits entirely below 42% or above 62%.
+
+Top/reference results: André **61.44%**, Bret **58.75%**, Brock **58.44%**, Cody **57.44%**, Roman **57.12%**, Cena **56.50%**.
+
+Lower edge: Becky **44.38%**, Doink **44.31%**, Piper **43.94%**, Paige **43.81%**. All remain statistically inside the approved launch floor rather than warranting another broad balance sweep.
+
+## Card / deck health carried forward
+
+- Validation: **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**.
+- Collector manifest: **782/782 / 0 issues**.
+- Flow audit: **0 issues**.
+- Structured effects: **390 effect-bearing cards / 0 issues**.
+- Counter states: **517 Moves / 0 issues**.
+- Reverse printed-text audit: **706 gameplay cards / 0 issues**.
+- Rarity health: 2★ Uncommon Moves **64 / C5.11 / D6.66 / 1.30 D:C**; 3★ Rare Trademarks **94 / C5.43 / D8.07 / 1.52 D:C**.
+- Four-tier scaling issues: **0**.
+- Counter density unchanged: **13.59 structural / 14.59 effective average**, range **9–20**, with full 8-state / 4-Submission-target coverage in all 41 released decks.
 
 ## Automated verification
 
-- v0.14.25 targeted tests: **5/5 passed**.
-- Full no-assets suite: **900 discovered / 796 passed / 94 intentionally skipped / 10 expected asset-presence failures only**.
-- Validation: **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**.
-- Collector audit: **782/782 / 0 issues**.
-- Flow, card-effect and counter-state audits: **0 issues**.
+- v0.15.00 targeted regression tests: **3/3 passed**.
+- Rules Interaction Matrix: **23/23 passed**.
+- Full no-assets suite: **921 discovered / 817 passed / 94 intentionally skipped / 10 expected physical-asset-presence failures only**.
+
+The 10 failures are the same no-assets physical-file assertions carried by verified overlay distributions and are not gameplay/data regressions.
+
+## v1.0 gate status
+
+**Completed:** Final gameplay interaction certification + final roster balance confidence pass.  
+**Next gate:** Economy/progression end-to-end simulation and reward pacing certification.
 
 ## Packaging
 
-The ZIP intentionally contains **no `assets/` directory**. Overlay it on the current WWE Legacy installation so the installed asset library is retained.
+The ZIP intentionally contains **no `assets/` directory**.

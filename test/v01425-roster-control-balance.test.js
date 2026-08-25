@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
-import { superstars } from '../js/data/superstars.js?v=0.14.25';
-import { decks } from '../js/data/decks.js?v=0.14.25';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
+import { allGameplayCards } from '../js/data/content.js?v=0.15.00';
+import { superstars } from '../js/data/superstars.js?v=0.15.00';
+import { decks } from '../js/data/decks.js?v=0.15.00';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.15.00';
 
 const card = id => allGameplayCards.find(c => c.id === id);
 const star = id => Object.values(superstars).find(s => s.id === id);
@@ -19,11 +19,11 @@ test('v0.14.25 locks the approved roster balance values', () => {
   assert.equal(card('doink-stump-puller').submission.pressure, 7);
 
   const becky = star('becky-lynch');
-  assert.equal(becky.hp, 67);
+  assert.equal(becky.hp, 69);
   assert.equal(card('becky-lynch-dis-arm-her').submission.pressure, 7);
 
   const perfect = star('mr-perfect');
-  assert.equal(perfect.hp, 65);
+  assert.equal(perfect.hp, 66);
   assert.equal(perfect.ability.trigger.drawMaxUses, 3);
   assert.equal(perfect.ability.trigger.adrenaline, 1);
 });

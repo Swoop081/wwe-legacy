@@ -1,1 +1,1 @@
-import { allGameplayCards } from "./content.js?v=0.14.25"; export const attitudeEraCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="attitude-era-series-1").map(c=>[c.id,c]));
+import { allGameplayCards } from "./content.js?v=0.15.00"; export const attitudeEraCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="attitude-era-series-1").map(c=>[c.id,c]));

@@ -21,7 +21,7 @@ export const superstars = {
       "iyo-sky-over-the-moonsault"
     ],
     "archetype": "reviewed-starter",
-    "hp": 57,
+    "hp": 58,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -36,15 +36,15 @@ export const superstars = {
     },
     "ability": {
       "name": "Genius of the Sky",
-      "text": "The first 2 times IYO connects with a Move requiring Agility 2+, gain +1 Adrenaline and draw 1 page.",
+      "text": "The first 3 times IYO connects with a Move requiring Agility 2+, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "agilityRequirement",
         "minRequirement": 2,
-        "maxUses": 2,
+        "maxUses": 3,
         "adrenaline": 1,
         "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-iyo-sky",
@@ -951,7 +951,7 @@ export const superstars = {
       "charlotte-flair-spear"
     ],
     "archetype": "reviewed-starter",
-    "hp": 65,
+    "hp": 66,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -966,14 +966,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Genetically Superior",
-      "text": "The first 2 times Charlotte connects with a Technical Move, draw 1 page and her next Agility Move during that Control sequence costs 2 less.",
+      "text": "The first 3 times Charlotte connects with a Technical Move, draw 1 page and her next Agility Move during that Control sequence costs 2 less.",
       "trigger": {
         "type": "technicalDiscountAgility",
-        "maxUses": 2,
+        "maxUses": 3,
         "discount": 2,
         "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-charlotte-flair",
@@ -1479,7 +1479,7 @@ export const superstars = {
       "stone-cold-give-me-a-hell-yeah"
     ],
     "archetype": "reviewed-starter",
-    "hp": 66,
+    "hp": 67,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1492,14 +1492,14 @@ export const superstars = {
     },
     "ability": {
       "name": "And That’s the Bottom Line",
-      "text": "The first 2 times one of Austin’s Moves is Countered, gain +1 Adrenaline and draw 1 page.",
+      "text": "The first 3 times one of Austin’s Moves is Countered, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "moveCountered",
-        "maxUses": 2,
+        "maxUses": 3,
         "adrenaline": 1,
         "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-stone-cold-steve-austin",
@@ -1508,11 +1508,11 @@ export const superstars = {
       "setId": "attitude-era-series-1",
       "rarity": 4,
       "superstarId": "stone-cold-steve-austin",
-      "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +2 Adrenaline.",
       "preMatchMomentum": {
         "strike": 1
       },
-      "preMatchAdrenaline": 1,
+      "preMatchAdrenaline": 2,
       "delayedTurn5": false
     },
     "special": {
@@ -1746,7 +1746,7 @@ export const superstars = {
       "becky-lynch-bexploder"
     ],
     "archetype": "reviewed-starter",
-    "hp": 67,
+    "hp": 69,
     "methodLimits": {
       "agility": 1,
       "strength": 2,
@@ -4093,7 +4093,7 @@ export const superstars = {
       "shawn-michaels-sweet-chin-music"
     ],
     "archetype": "agility-strike-showstopper",
-    "hp": 61,
+    "hp": 64,
     "methodLimits": {
       "agility": null,
       "strike": 4,
@@ -4433,7 +4433,7 @@ export const superstars = {
       "owen-hart-sharpshooter"
     ],
     "archetype": "technical-all-rounder-flash-pin",
-    "hp": 63,
+    "hp": 65,
     "methodLimits": {
       "technical": null,
       "agility": 4,
@@ -4586,14 +4586,15 @@ export const superstars = {
     },
     "ability": {
       "name": "Hot Rod",
-      "text": "The first 2 times each match Piper Connects with a Strike Move dealing 4+ Damage, the opponent ditches 1 page.",
+      "text": "The first 3 times each match Piper Connects with a Strike Move dealing 4+ Damage, the opponent ditches 1 page.",
       "trigger": {
         "type": "connectMethodDamage",
         "method": "strike",
         "minDamage": 4,
         "discardOpponent": 1,
-        "maxUses": 2
-      }
+        "maxUses": 3
+      },
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-rowdy-roddy-piper",
@@ -4640,7 +4641,7 @@ export const superstars = {
       "ted-dibiase-million-dollar-dream"
     ],
     "archetype": "technical-strength-resource-control",
-    "hp": 65,
+    "hp": 67,
     "methodLimits": {
       "technical": null,
       "strength": 4,
@@ -4710,7 +4711,7 @@ export const superstars = {
       "jake-roberts-ddt"
     ],
     "archetype": "technical-strike-setup",
-    "hp": 65,
+    "hp": 66,
     "methodLimits": {
       "technical": null,
       "strike": 4,
@@ -4770,7 +4771,7 @@ export const superstars = {
       "mr-perfect-perfect-plex"
     ],
     "archetype": "elite-technical-counter",
-    "hp": 65,
+    "hp": 66,
     "methodLimits": {
       "technical": null,
       "strike": 4,
@@ -4800,11 +4801,11 @@ export const superstars = {
       "setId": "golden-era-series-1",
       "rarity": 4,
       "superstarId": "mr-perfect",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline. The first Counter Mr. Perfect plays each match costs 1 less Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +2 Adrenaline. The first Counter Mr. Perfect plays each match costs 1 less Adrenaline.",
       "preMatchMomentum": {
         "technical": 1
       },
-      "preMatchAdrenaline": 1,
+      "preMatchAdrenaline": 2,
       "delayedTurn5": false,
       "preMatchCounterDiscount": 1
     },
@@ -4838,7 +4839,7 @@ export const superstars = {
       "triple-h-the-pedigree"
     ],
     "archetype": "technical-strength-methodical-combo",
-    "hp": 67,
+    "hp": 68,
     "methodLimits": {
       "technical": null,
       "strength": 5,
@@ -4852,9 +4853,10 @@ export const superstars = {
     },
     "ability": {
       "name": "Cerebral Assassin",
-      "text": "The first time each Control sequence Triple H Connects with a Strike or Technical Move and then a Grapple, gain +1 Adrenaline and that Grapple deals +1 Damage.",
+      "text": "The first time each Control sequence Triple H Connects with a Strike or Technical Move and then a Grapple, gain +1 Adrenaline and that Grapple deals +3 Damage.",
       "trigger": {
-        "type": "tripleHCerebral"
+        "type": "tripleHCerebral",
+        "damage": 3
       }
     },
     "entrance": {
@@ -5035,7 +5037,7 @@ export const superstars = {
       "kurt-angle-ankle-lock"
     ],
     "archetype": "pure-technical-suplex-submission",
-    "hp": 65,
+    "hp": 66,
     "methodLimits": {
       "technical": null,
       "strength": 3,

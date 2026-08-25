@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.25';
-import { superstars } from '../js/data/superstars.js?v=0.14.25';
-import { decks } from '../js/data/decks.js?v=0.14.25';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.14.25';
+import { allGameplayCards } from '../js/data/content.js?v=0.15.00';
+import { superstars } from '../js/data/superstars.js?v=0.15.00';
+import { decks } from '../js/data/decks.js?v=0.15.00';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.15.00';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -33,10 +33,10 @@ test('v0.14.20 locks the roster audit numerical changes',()=>{
   assert.equal(star('mr-perfect').ability.trigger.drawMaxUses,3);
   assert.equal(star('mr-perfect').ability.trigger.adrenaline,1);
 
-  assert.equal(star('becky-lynch').hp,67);
+  assert.equal(star('becky-lynch').hp,69);
   assert.equal(card('becky-lynch-dis-arm-her').submission.pressure,7);
   assert.equal(card('becky-lynch-manhandle-slam').damage,17);
-  assert.equal(star('owen-hart').hp,63);
+  assert.equal(star('owen-hart').hp,65); // superseded by v0.14.26
   assert.equal(card('special-owen-hart').special.maxRarity,3);
 
   assert.equal(star('randy-savage').ability.trigger.maxUses,2);

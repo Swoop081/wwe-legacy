@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.14.25";
+import { enrichCounterState } from "./counter-states.js?v=0.15.00";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -219,7 +219,12 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "discardOpponent",
+        "amount": 1
+      }
+    ],
     "counterState": "front-control"
   },
   {
@@ -281,12 +286,17 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "cody-rhodes",
     "rarity": 3,
-    "rulesText": "Cody-exclusive. Gain +1 additional Attitude.",
+    "rulesText": "Cody-exclusive Trademark. On Connect: gain +1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "leg-extended"
   },
   {
@@ -2093,13 +2103,13 @@ export const allGameplayCards = [
     "requirements": {
       "agility": 2
     },
-    "moveType": "grapple",
+    "moveType": "aerial",
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
     "rulesText": "Grounded opponent only.",
-    "groundOpponent": true,
-    "groundedOnly": false,
+    "groundOpponent": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
@@ -2223,7 +2233,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "counterStates": [
+      "rear-control"
+    ],
+    "counterSubmissionTargets": [
+      "neck-head"
+    ]
   },
   {
     "id": "chokeslam",
@@ -2293,14 +2309,18 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "oba-femi",
     "rarity": 3,
-    "rulesText": "Oba-exclusive Trademark; +3 Back pressure",
+    "rulesText": "Oba-exclusive Trademark. On Connect: +3 persistent Back damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "amount": 3
+    }
   },
   {
     "id": "oba-femi-fall-from-grace",
@@ -4362,7 +4382,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 9,
-    "damage": 16,
+    "damage": 17,
     "requirements": {},
     "moveType": "aerial",
     "method": null,
@@ -4882,11 +4902,11 @@ export const allGameplayCards = [
     "setId": "attitude-era-series-1",
     "rarity": 4,
     "superstarId": "stone-cold-steve-austin",
-    "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +2 Adrenaline.",
     "preMatchMomentum": {
       "strike": 1
     },
-    "preMatchAdrenaline": 1,
+    "preMatchAdrenaline": 2,
     "delayedTurn5": false
   },
   {
@@ -7784,9 +7804,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "discountIfPriorAgility": 2,
     "effects": [],
-    "counterState": "torso-trapped"
+    "counterState": "torso-trapped",
+    "discountIfMethodConnectedThisControl": {
+      "method": "agility",
+      "amount": 2
+    }
   },
   {
     "id": "bron-breakker-steiner-recliner",
@@ -7917,7 +7940,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "standingOnly": true
   },
   {
     "id": "dropkick-to-the-back",
@@ -7939,7 +7963,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "leg-extended"
+    "counterState": "leg-extended",
+    "standingOnly": true
   },
   {
     "id": "elbow",
@@ -7966,7 +7991,8 @@ export const allGameplayCards = [
     "counterStates": [
       "arm-extended"
     ],
-    "counterExchangeKey": "punch-elbow"
+    "counterExchangeKey": "punch-elbow",
+    "standingOnly": true
   },
   {
     "id": "running-knees-to-the-back",
@@ -8604,8 +8630,9 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "sami-zayn",
     "rarity": 4,
-    "rulesText": "Sami Zayn-exclusive Finisher. Standing opponent only. Grounds opponent. If Exploder Suplex Into Turnbuckle connected earlier this Control sequence, costs 2 less.",
+    "rulesText": "Sami Zayn-exclusive Finisher. Standing opponent only, except after Exploder Suplex Into Turnbuckle this Control sequence. Grounds opponent. If Exploder Suplex Into Turnbuckle connected earlier this Control sequence, costs 2 less.",
     "groundOpponent": true,
+    "standingChainAfter": "Exploder Suplex Into Turnbuckle",
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
@@ -8851,8 +8878,9 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "jade-cargill",
     "rarity": 4,
-    "rulesText": "Jade Cargill-exclusive Finisher. Standing opponent only. Grounds opponent. Pump Kick can reduce this Move’s cost by 2 during the same Control sequence.",
+    "rulesText": "Jade Cargill-exclusive Finisher. Standing opponent only, except after Pump Kick this Control sequence. Grounds opponent. Pump Kick can reduce this Move’s cost by 2 during the same Control sequence.",
     "groundOpponent": true,
+    "standingChainAfter": "Pump Kick",
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
@@ -9342,8 +9370,9 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "goldberg",
     "rarity": 3,
-    "rulesText": "Goldberg-exclusive Trademark. Standing opponent only. Grounds opponent. On connect, search/draw Jackhammer and it costs 3 less this Control sequence. If Goldberg had 2+ Streak counters before playing this Move, the opponent loses 1 Adrenaline.",
+    "rulesText": "Goldberg-exclusive Trademark. Standing opponent only, except after Military Press Powerslam this Control sequence. Grounds opponent. On connect, search/draw Jackhammer and it costs 3 less this Control sequence. If Goldberg had 2+ Streak counters before playing this Move, the opponent loses 1 Adrenaline.",
     "standingOnly": true,
+    "standingChainAfter": "Military Press Powerslam",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -9375,8 +9404,9 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "goldberg",
     "rarity": 4,
-    "rulesText": "Goldberg-exclusive Finisher. Standing opponent only. Grounds opponent. If Goldberg connected with Goldberg’s Spear earlier in this Control sequence, Jackhammer costs 3 less.",
+    "rulesText": "Goldberg-exclusive Finisher. Standing opponent only, except after Goldberg’s Spear this Control sequence. Grounds opponent. If Goldberg connected with Goldberg’s Spear earlier in this Control sequence, Jackhammer costs 3 less.",
     "standingOnly": true,
+    "standingChainAfter": "Goldberg’s Spear",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -11972,7 +12002,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "new-generation-series-1",
     "cost": 4,
-    "damage": 6,
+    "damage": 7,
     "requirements": {
       "strike": 1
     },
@@ -13039,14 +13069,15 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent. If the opponent is already in Amber or Red when this Connects, you may immediately attempt a Pin.",
+    "rulesText": "Shared. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them −5 percentage points to their kickout chance.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "schoolboyRollUp": true,
     "effects": [],
-    "counterState": "front-control"
+    "counterState": "front-control",
+    "pinKickoutPenalty": 5
   },
   {
     "id": "reverse-chinlock",
@@ -13625,13 +13656,14 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent. If the opponent is already Amber or Red when this Connects, you may immediately attempt a Pin.",
+    "rulesText": "Shared. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them −5 percentage points to their kickout chance.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "rear-control"
+    "counterState": "rear-control",
+    "pinKickoutPenalty": 5
   },
   {
     "id": "step-up-enzuigiri",
@@ -13756,14 +13788,14 @@ export const allGameplayCards = [
     "superstarId": "owen-hart",
     "rarity": 4,
     "finisher": true,
-    "rulesText": "Owen Hart-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +6 persistent Legs damage per successful maintain turn.",
+    "rulesText": "Owen Hart-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +7 persistent Legs damage per successful maintain turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 6
+      "pressure": 7
     },
     "effects": [],
     "counterState": "leg-extended",
@@ -14005,13 +14037,14 @@ export const allGameplayCards = [
     "superstarId": "british-bulldog",
     "rarity": 3,
     "trademark": true,
-    "rulesText": "British Bulldog-exclusive Trademark. Grounds opponent. If the opponent is already Amber or Red when this Connects, you may immediately attempt a Pin.",
+    "rulesText": "British Bulldog-exclusive Trademark. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them −5 percentage points to their kickout chance.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "front-control"
+    "counterState": "front-control",
+    "pinKickoutPenalty": 5
   },
   {
     "id": "british-bulldog-military-press-slam",
@@ -14351,7 +14384,7 @@ export const allGameplayCards = [
     "moveType": "submission",
     "method": null,
     "rarity": 4,
-    "rulesText": "Piper-exclusive Finisher. No Method requirement. Submission. +6 persistent Head damage per successful turn.",
+    "rulesText": "Piper-exclusive Finisher. No Method requirement. Submission. +7 persistent Head damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -14365,7 +14398,7 @@ export const allGameplayCards = [
     "counterState": "rear-control",
     "submission": {
       "bodyPart": "head",
-      "pressure": 6
+      "pressure": 7
     }
   },
   {
@@ -14612,7 +14645,7 @@ export const allGameplayCards = [
   {
     "kind": "move",
     "cost": 8,
-    "damage": 16,
+    "damage": 17,
     "requirements": {},
     "moveType": "grapple",
     "method": null,
@@ -15393,7 +15426,7 @@ export const allGameplayCards = [
     "moveType": "submission",
     "method": null,
     "rarity": 4,
-    "rulesText": "Angle-exclusive Finisher. No Method requirement. Grounded opponent only. +6 persistent Leg damage per successful turn.",
+    "rulesText": "Angle-exclusive Finisher. No Method requirement. Grounded opponent only. +7 persistent Leg damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -15407,7 +15440,7 @@ export const allGameplayCards = [
     "counterState": "leg-extended",
     "submission": {
       "bodyPart": "legs",
-      "pressure": 6
+      "pressure": 7
     }
   },
   {
@@ -15534,11 +15567,11 @@ export const allGameplayCards = [
     "setId": "golden-era-series-1",
     "rarity": 4,
     "superstarId": "mr-perfect",
-    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline. The first Counter Mr. Perfect plays each match costs 1 less Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +2 Adrenaline. The first Counter Mr. Perfect plays each match costs 1 less Adrenaline.",
     "preMatchMomentum": {
       "technical": 1
     },
-    "preMatchAdrenaline": 1,
+    "preMatchAdrenaline": 2,
     "delayedTurn5": false,
     "preMatchCounterDiscount": 1
   },

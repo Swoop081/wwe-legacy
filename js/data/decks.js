@@ -1,10 +1,9 @@
-import { allGameplayCards } from "./content.js?v=0.14.25";
+import { allGameplayCards } from "./content.js?v=0.15.00";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
     "momentum-agility",
     "momentum-strike",
-    "dropkick",
     "hurricanrana",
     "running-forearm",
     "punch",
@@ -61,13 +60,12 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "duck",
-    "sidestep"
+    "sidestep",
+    "meteora"
   ],
   "mankind": [
     "momentum-strike",
     "momentum-strength",
-    "punch",
-    "headbutt",
     "ddt",
     "punch",
     "punch",
@@ -117,13 +115,15 @@ export const deckIds={
     "mankind-have-a-nice-day",
     "once-too-often",
     "jawbreaker",
-    "jawbreaker",
-    "jawbreaker",
     "dodge",
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "block"
+    "block",
+    "ddt",
+    "stomp",
+    "forearm-smash",
+    "body-slam"
   ],
   "the-rock": [
     "momentum-strength",
@@ -376,7 +376,6 @@ export const deckIds={
   "paige": [
     "momentum-technical",
     "momentum-strike",
-    "punch",
     "running-forearm",
     "ddt",
     "punch",
@@ -433,7 +432,8 @@ export const deckIds={
     "headbutt",
     "jawbreaker",
     "jawbreaker",
-    "block"
+    "block",
+    "running-forearm"
   ],
   "seth-rollins": [
     "momentum-agility",
@@ -562,7 +562,6 @@ export const deckIds={
   "stephanie-vaquer": [
     "momentum-technical",
     "momentum-agility",
-    "punch",
     "stephanie-vaquer-dragon-screw",
     "dropkick",
     "punch",
@@ -575,7 +574,6 @@ export const deckIds={
     "dodge",
     "chain-wrestling",
     "dropkick",
-    "arm-drag",
     "arm-drag",
     "ddt",
     "ddt",
@@ -619,7 +617,9 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "block"
+    "block",
+    "running-forearm",
+    "diving-crossbody"
   ],
   "randy-savage": [
     "momentum-strike",
@@ -1058,7 +1058,6 @@ export const deckIds={
   "rhea-ripley": [
     "momentum-strength",
     "momentum-strike",
-    "punch",
     "headbutt",
     "body-slam",
     "punch",
@@ -1115,7 +1114,8 @@ export const deckIds={
     "punch",
     "rollover-counter",
     "jawbreaker",
-    "block"
+    "block",
+    "stomp"
   ],
   "cody-rhodes": [
     "momentum-technical",
@@ -1182,7 +1182,6 @@ export const deckIds={
   "oba-femi": [
     "momentum-strength",
     "momentum-strike",
-    "punch",
     "shoulder-tackle",
     "biel-toss",
     "punch",
@@ -1228,7 +1227,6 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "no-sell",
-    "jawbreaker",
     "shoulder-up",
     "fire-up",
     "once-too-often",
@@ -1239,7 +1237,9 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag-counter",
+    "oba-femi-running-elbow",
+    "biel-toss"
   ],
   "stone-cold-steve-austin": [
     "momentum-strike",
@@ -1306,9 +1306,7 @@ export const deckIds={
   "liv-morgan": [
     "momentum-agility",
     "momentum-strike",
-    "punch",
     "running-forearm",
-    "dropkick",
     "punch",
     "punch",
     "running-forearm",
@@ -1319,11 +1317,9 @@ export const deckIds={
     "dropkick",
     "enzuigiri",
     "enzuigiri",
-    "enzuigiri",
     "knee-strike",
     "knee-strike",
     "knee-strike",
-    "hurricanrana",
     "hurricanrana",
     "hurricanrana",
     "clothesline",
@@ -1355,15 +1351,19 @@ export const deckIds={
     "game-plan",
     "fire-up",
     "once-too-often",
-    "arm-drag-counter",
-    "jawbreaker",
     "shoulder-up",
     "game-plan",
-    "arm-drag-counter",
     "standing-switch",
     "jawbreaker",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag-counter",
+    "running-forearm",
+    "running-forearm",
+    "knee-strike",
+    "knee-strike",
+    "diving-crossbody",
+    "diving-crossbody",
+    "missile-dropkick"
   ],
   "brock-lesnar": [
     "momentum-strength",
@@ -1433,7 +1433,6 @@ export const deckIds={
     "stomp",
     "gunther-gunther-s-chop",
     "body-slam",
-    "jawbreaker",
     "knee-drop",
     "knee-drop",
     "body-slam",
@@ -1446,7 +1445,6 @@ export const deckIds={
     "back-suplex",
     "gunther-gunther-s-chop",
     "gunther-gunther-s-chop",
-    "knee-to-the-gut",
     "german-suplex",
     "no-sell",
     "knee-to-the-gut",
@@ -1487,7 +1485,9 @@ export const deckIds={
     "jawbreaker",
     "knee-to-the-gut",
     "jawbreaker",
-    "up-and-over"
+    "up-and-over",
+    "stomp",
+    "body-slam"
   ],
   "becky-lynch": [
     "momentum-strike",
@@ -3662,8 +3662,6 @@ export const deckIds={
   "shawn-michaels": [
     "momentum-agility",
     "momentum-strike",
-    "dropkick",
-    "running-forearm",
     "hurricanrana",
     "momentum-agility",
     "momentum-agility",
@@ -3719,7 +3717,9 @@ export const deckIds={
     "chain-wrestling",
     "shoulder-up",
     "fire-up",
-    "once-too-often"
+    "once-too-often",
+    "running-forearm",
+    "dropkick"
   ],
   "razor-ramon": [
     "momentum-strength",

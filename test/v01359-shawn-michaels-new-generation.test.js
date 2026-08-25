@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=0.14.25";
-import { superstars } from "../js/data/superstars.js?v=0.14.25";
-import { decks } from "../js/data/decks.js?v=0.14.25";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.25";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.25";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.25";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.25";
-import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.25";
+import { sets } from "../js/data/sets.js?v=0.15.00";
+import { superstars } from "../js/data/superstars.js?v=0.15.00";
+import { decks } from "../js/data/decks.js?v=0.15.00";
+import { allGameplayCards } from "../js/data/content.js?v=0.15.00";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.15.00";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.15.00";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.15.00";
+import { canPlaySpecial } from "../js/engine/rules.js?v=0.15.00";
 
 const shawn = Object.values(superstars).find(s => s.id === "shawn-michaels");
 const byId = Object.fromEntries(allGameplayCards.map(c => [c.id,c]));
@@ -25,7 +25,7 @@ test.skip("v0.13.59 Shawn Michaels is an scheduled 5 September 1993-1995 New Gen
 });
 
 test("v0.13.59 HBK has a legal 60-page agility/strike/technical authored baseline", () => {
-  assert.equal(shawn.hp,61);
+  assert.equal(shawn.hp,64);
   assert.deepEqual(shawn.starterMomentum,{agility:6,strike:4,technical:2});
   assert.equal(shawn.ability.name,"Heartbreak Kid");
   assert.equal(shawn.ability.trigger.type,"agilityAfterStrike");

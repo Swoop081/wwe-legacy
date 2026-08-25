@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.14.25';
-import { superstars } from '../js/data/superstars.js?v=0.14.25';
-import { seasonState, awardMatchSeasonXp } from '../js/data/seasons.js?v=0.14.25';
+import { createProfile } from '../js/data/profile.js?v=0.15.00';
+import { superstars } from '../js/data/superstars.js?v=0.15.00';
+import { seasonState, awardMatchSeasonXp } from '../js/data/seasons.js?v=0.15.00';
 import {
   activeLiveEventTowers,
   startLiveEventTower,
@@ -11,7 +11,7 @@ import {
   dailyLiveEventSetStatus,
   DAILY_LIVE_EVENT_SET_XP,
   LIVE_EVENT_LENGTH
-} from '../js/data/live-events.js?v=0.14.25';
+} from '../js/data/live-events.js?v=0.15.00';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
