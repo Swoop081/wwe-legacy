@@ -1,5 +1,5 @@
-import { BUILD_VERSION } from "../config/build.js?v=0.18.00";
-import { PROFILE_VERSION, migrateProfile } from "./profile.js?v=0.18.00";
+import { BUILD_VERSION } from "../config/build.js?v=1.0.0";
+import { PROFILE_VERSION, migrateProfile } from "./profile.js?v=1.0.0";
 
 export const SAVE_FORMAT = "wwe-legacy-save";
 export const SAVE_FORMAT_VERSION = 1;
@@ -8,6 +8,8 @@ export const IMPORT_ROLLBACK_KEY = "wwe-legacy-import-rollback-v1";
 export const BACKUP_META_KEY = "wwe-legacy-backup-meta-v1";
 
 const clone = value => JSON.parse(JSON.stringify(value));
+const safeLocalStorage = env => { try { return env?.localStorage ?? null; } catch { return null; } };
+const resolvedStorage = storage => storage !== undefined ? storage : safeLocalStorage(globalThis);
 
 export function createSaveEnvelope(profile, now = new Date()) {
   if (!profile) throw new Error("No WWE Legacy profile is available to back up.");
@@ -63,13 +65,15 @@ export function parseSaveText(text) {
   return validateAndMigrateSave(parsed);
 }
 
-export function saveImportRollback(profile, storage = globalThis.localStorage) {
+export function saveImportRollback(profile, storage = undefined) {
+  storage = resolvedStorage(storage);
   if (!storage || !profile) return false;
   storage.setItem(IMPORT_ROLLBACK_KEY, JSON.stringify({ createdAt: new Date().toISOString(), profile: clone(profile) }));
   return true;
 }
 
-export function loadImportRollback(storage = globalThis.localStorage) {
+export function loadImportRollback(storage = undefined) {
+  storage = resolvedStorage(storage);
   try {
     const raw = storage?.getItem(IMPORT_ROLLBACK_KEY);
     if (!raw) return null;
@@ -79,16 +83,19 @@ export function loadImportRollback(storage = globalThis.localStorage) {
   } catch { return null; }
 }
 
-export function clearImportRollback(storage = globalThis.localStorage) {
+export function clearImportRollback(storage = undefined) {
+  storage = resolvedStorage(storage);
   storage?.removeItem(IMPORT_ROLLBACK_KEY);
 }
 
-export function backupMetadata(storage = globalThis.localStorage) {
+export function backupMetadata(storage = undefined) {
+  storage = resolvedStorage(storage);
   try { return JSON.parse(storage?.getItem(BACKUP_META_KEY) ?? "null"); }
   catch { return null; }
 }
 
-export function markBackupPrepared(method, storage = globalThis.localStorage) {
+export function markBackupPrepared(method, storage = undefined) {
+  storage = resolvedStorage(storage);
   const meta = { lastBackupAt: new Date().toISOString(), method: String(method || "file") };
   storage?.setItem(BACKUP_META_KEY, JSON.stringify(meta));
   return meta;
@@ -108,14 +115,14 @@ export async function exportSaveToFiles(profile, env = globalThis) {
     const writable = await handle.createWritable();
     await writable.write(blob);
     await writable.close();
-    markBackupPrepared("file-picker", env.localStorage);
+    markBackupPrepared("file-picker", safeLocalStorage(env));
     return { method: "file-picker", filename: SAVE_FILENAME };
   }
 
   const file = new File([blob], SAVE_FILENAME, { type: "application/json" });
   if (env.navigator?.share && (!env.navigator.canShare || env.navigator.canShare({ files: [file] }))) {
     await env.navigator.share({ title: "WWE Legacy Save", text: "WWE Legacy primary save backup", files: [file] });
-    markBackupPrepared("share-sheet", env.localStorage);
+    markBackupPrepared("share-sheet", safeLocalStorage(env));
     return { method: "share-sheet", filename: SAVE_FILENAME };
   }
 
@@ -131,7 +138,7 @@ export async function exportSaveToFiles(profile, env = globalThis) {
   } finally {
     env.setTimeout?.(() => env.URL.revokeObjectURL(url), 1000);
   }
-  markBackupPrepared("download", env.localStorage);
+  markBackupPrepared("download", safeLocalStorage(env));
   return { method: "download", filename: SAVE_FILENAME };
 }
 

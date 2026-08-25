@@ -1,72 +1,81 @@
-# WWE Legacy v0.18.00 — Build Certification
+# WWE Legacy v1.0.0 — Launch Release Certification
 
-**Build:** v0.18.00 — Season 1 + Onboarding Certification  
+**Build:** v1.0.0 — Launch Release  
 **Date:** 25 August 2026  
-**Distribution:** verified no-assets overlay package
+**Distribution:** verified app-icon overlay package
 
 ## Objective
 
-Complete the next pre-v1.0 gate: certify the full new-player start and turn Season 1 Tier 50 into a dedicated, persistent John Cena completion payoff rather than a generic Superstar unlock. No new game mode, economy rebalance or card-balance change is introduced.
+Promote the externally and automatically certified v0.99.00 release candidate to stable v1.0.0 without changing the frozen gameplay/economy/save state, while installing the approved WWE Legacy logo as the official web app icon.
 
-## New-player onboarding certification
+## Stable launch identity
 
-Fresh-start paths were certified end-to-end.
+`build.json` records:
 
-- Starter choices remain exactly **CM Punk / Roman Reigns**.
-- Both starter choices immediately produce a complete **60-page playable Normal deck**.
-- Fresh profiles receive **Amazing Entrance** plus **5 Normal copies of each Momentum Method** for collection/deck-building freedom.
-- The one-time Welcome reward continues to offer all five launch-live sets.
-- Every Welcome set path awards one eligible non-owned Superstar with a complete **60-page Normal deck** and zero missing recommended slots.
-- The Welcome reveal now includes a compact horizontal **Match Basics** rail covering Momentum, Control, Adrenaline, Counters and finishing.
-- The first-match guide is now state-aware instead of showing only generic copy. It teaches four practical phases: **Build Momentum → Control the Match → Defend with Counters → Finish the Match**, with a Submission-specific explanation when relevant.
-- The guide remains optional via **HIDE GUIDE** and still ends automatically after the player's first completed match. Existing profiles are not forced back through onboarding.
+- `version: 1.0.0`
+- `releaseChannel: stable`
+- `launchStatus: released`
+- `featureFreeze: true`
+- `criticalFixOnly: false`
+- `physicalIphoneSmoke: passed-user-certified`
 
-Certification harness result:
+Profile schema remains **v42**.
 
-- Starter paths certified: **2/2**.
-- Welcome-era paths certified: **5/5**.
-- Playable pages on every starter/Welcome deck: **60/60**.
+The browser entrypoint, nested public JavaScript module graph, CSS, manifest and install-icon references are all stamped **v1.0.0**. The cache-stamping utility was also made semantic-version-safe for future v1.x releases.
 
-## Season 1 completion experience
+## Approved launch branding / web app icon
 
-Claiming Tier 50 now raises a dedicated **Season 1 Complete — The Last Time Is Now** celebration.
+The user-supplied square black-and-gold WWE Legacy logo is now the canonical installable web app icon.
 
-- The celebration is stored as a persistent pending Season state before UI rendering, so closing/reloading immediately after the reward is claimed cannot silently lose the payoff.
-- Cena no longer queues the generic Superstar-unlock celebration from the Tier 50 Season claim; the dedicated Season completion screen is the single authoritative reward moment.
-- The screen presents the Ruby Cena Superstar card, confirms the complete **24-copy Ruby-exclusive package**, and reports whether the authored **60-page Cena deck** is ready.
-- Completion actions provide direct routes to **Play as John Cena**, **Open Cena in Deck Lab**, or **View the completed Season Road**.
-- Dismissing the celebration marks it seen and clears the pending flag; the Tier 50 reward itself remains permanently claimed.
+Included branding files:
 
-The v0.16.01/v0.16.02 reward standard remains unchanged:
+- `assets/images/branding-wwe-legacy-logo.png` — 1024×1024 lossless PNG master derived directly from the supplied image.
+- `assets/images/app-apple-touch-icon.png` — 180×180 Apple touch icon.
+- `assets/images/app-icon-192.png` — 192×192 PWA/browser icon and in-app top-bar brand icon.
+- `assets/images/app-icon-512.png` — 512×512 PWA icon.
 
-- 5 Ruby Protobombs.
-- 5 Ruby Five Knuckle Shuffles.
-- 5 Ruby STFs.
-- 5 Ruby Attitude Adjustments.
-- 1 Ruby Hustle, Loyalty, Respect.
-- 1 Ruby Never Give Up.
-- 1 Ruby The Time Is Now Entrance.
-- 1 Ruby John Cena Superstar.
+`index.html` wires the approved logo into iOS Home Screen installation, browser favicon/PWA presentation and the in-app top bar. `manifest.webmanifest` exposes the correct 192×192 and 512×512 launch icons.
 
-That is **24 reward-exclusive Ruby copies** in total, and the completed Cena authored deck remains 60 pages using the highest owned printing of shared cards.
+No generated/redesigned logo artwork was used. The icon files are resized derivatives of the exact supplied logo.
 
-## Automated verification
+## v1.0.0 promotion regression
 
-- v0.18.00 targeted tests: **5/5 passed**.
-- Focused onboarding + inherited Cena/Welcome regression selection: **15 passed / 0 failed / 2 intentionally skipped**.
-- New onboarding/Season certification harness: **all assertions passed**.
+Dedicated launch/freeze/icon invariants: **6/6 passed**.
+
+Full overlay regression:
+
+- **962 discovered**
+- **858 passed**
+- **94 intentionally skipped**
+- **10 expected missing gameplay-art assertions**
+- **0 new gameplay/data/save/economy/routing/version/icon regression failures**
+
+The 10 failures are the same physical gameplay-art/library assertions expected from an overlay distribution that intentionally does not duplicate the complete existing WWE Legacy artwork library. The newly required launch logo/icon assets are physically included and independently verified at their exact dimensions.
+
+## Final certification rerun
+
 - Rules Interaction Matrix: **23/23 passed**.
-- Full no-assets suite: **949 discovered / 845 passed / 94 intentionally skipped / 10 expected physical-asset-presence failures only**.
 - Validation: **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**.
-- Collector/card-ID audit: **782/782 / 0 issues**.
-- Flow audit: **0 issues**.
-- Structured card-effect audit: **390 effect-bearing cards / 0 issues**.
-- Counter-state audit: **517 Moves / 0 issues**.
-- Reverse printed-text audit: **706 cards / 0 issues**.
-- Card-health/four-tier audit: **0 issues**.
+- Collector/card-ID audit: **782 cards / 782 manifest entries / 0 issues**.
+- Final released-roster audit: **41 Superstars / 16,400 matches / 0 stalls / 26.83 average turns / 0 hard outliers**.
+- Ruby Cena audit: **3,200 matches / 59.94% win rate / 0 stalls / 24.64 average turns**.
+- First-month economy target cadence: Tier 50 **day 28.1 mean**; structured ceiling remains **day 24**.
+- Championship Road structured certification: **164 full clears / 6,560 wins / 1,640 checkpoint boosters / 160 intentional mirror matches**.
+- Live Events structured certification: **365 days / 1,095 tower clears / 5,475 wins / 0 unreleased reward leaks**.
+- Onboarding certification: **2/2 starter paths + 5/5 Welcome-set paths**, every resulting deck **60/60 playable pages**; Tier 50 Cena completion package remains valid.
+- Save durability: **6/6 passed**.
+- Long-session certification: **600 sequential matches / 0 stalls / 27.08 average turns / ~2.29 MiB retained heap delta**.
+- Static iPhone viewport certification: **20/20** across 320×568, 375×667, 390×844 and 430×932.
+- External physical-iPhone Safari/gesture gate remains **passed-user-certified** from the accepted v0.99 release-candidate gate.
 
-The 10 full-suite failures are the same physical-file assertions expected from a package that intentionally excludes `assets/`; there are no gameplay/data regression failures.
+## Functional-change boundary
+
+No card stats/effects, Superstar balance, authored deck composition, economy, progression, rewards, Season XP, Daily Live Event XP, Championship Road rewards, pack odds/collation, pity, live-set state, collection-ownership rules or save/profile schema changed from v0.99.00.
+
+The only launch-facing delta is the approved WWE Legacy logo/web-app icon plus stable v1.0.0 release metadata/cache identity. Test/tool version guards were updated only so the existing certification infrastructure correctly accepts semantic versions at **1.0.0 and above**.
 
 ## Packaging
 
-The certified distribution contains **no `assets/` directory**.
+This package is an **app-icon overlay**, not a complete physical-art archive. Overlay it on the current WWE Legacy installation so the existing card/character/artwork library remains in place while the v1.0.0 code, metadata and official web-app icon files are applied.
+
+**Status: WWE Legacy v1.0.0 certified for launch.**

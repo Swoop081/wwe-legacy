@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { runRulesInteractionMatrix } from '../tools/rules-interaction-matrix.mjs';
-import { superstars } from '../js/data/superstars.js?v=0.18.00';
+import { superstars } from '../js/data/superstars.js?v=1.0.0';
 
 test('v0.15.00 Rules Interaction Matrix certifies the core gameplay combinations',()=>{
   const report=runRulesInteractionMatrix();

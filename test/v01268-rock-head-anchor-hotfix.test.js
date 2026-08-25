@@ -8,7 +8,7 @@ const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"))
 const css = fs.readFileSync(path.join(root, "css/game.css"), "utf8");
 
 test("v0.12.68 Final Boss head-anchor hotfix remains documented in history", () => {
-  assert.ok(Number(pkg.version.split(".")[1]) > 12 || Number(pkg.version.split(".").at(-1)) >= 68);
+  assert.ok(pkg.version.split(".").map(Number).reduce((ok,n,i,a)=>ok || (i===0&&n>0) || (i===0&&n===0&&a[1]>12) || (i===0&&n===0&&a[1]===12&&a[2]>=68), false));
   assert.match(css, /v0\.12\.68 — Final Boss Head Anchor Hotfix/);
 });
 

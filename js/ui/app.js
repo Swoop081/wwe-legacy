@@ -1,40 +1,40 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.18.00";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.18.00";
-import { superstars } from "../data/superstars.js?v=0.18.00";
-import { decks } from "../data/decks.js?v=0.18.00";
-import { sets } from "../data/sets.js?v=0.18.00";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.18.00";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.18.00";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.18.00";
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.18.00";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.18.00";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.18.00";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.18.00";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.18.00";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=0.18.00";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=0.18.00";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.18.00";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.18.00";
-import { totalMomentum } from "../engine/utils.js?v=0.18.00";
-import { healthZone } from "../engine/health.js?v=0.18.00";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.18.00";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.18.00";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.18.00";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.18.00";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.18.00";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.18.00";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=0.18.00";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.18.00";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.18.00";
-import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.18.00";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.18.00";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.18.00";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.18.00";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.18.00";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.18.00";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.18.00";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.18.00";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.18.00";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.0.0";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.0.0";
+import { superstars } from "../data/superstars.js?v=1.0.0";
+import { decks } from "../data/decks.js?v=1.0.0";
+import { sets } from "../data/sets.js?v=1.0.0";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.0.0";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.0.0";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.0.0";
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.0.0";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.0.0";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.0.0";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.0.0";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.0.0";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.0.0";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.0.0";
+import { MatchEngine } from "../engine/MatchEngine.js?v=1.0.0";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.0.0";
+import { totalMomentum } from "../engine/utils.js?v=1.0.0";
+import { healthZone } from "../engine/health.js?v=1.0.0";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=1.0.0";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.0.0";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.0.0";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.0.0";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.0.0";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.0.0";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.0.0";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.0.0";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.0.0";
+import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.0.0";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.0.0";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.0.0";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.0.0";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.0.0";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.0.0";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.0.0";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.0.0";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.0.0";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -54,8 +54,9 @@ const totalTierOwnedFor = card => CARD_TIERS.reduce((sum,tier)=>sum + ownedCount
 const bestOwnedTierFor = card => highestOwnedTier(ownedTierCountsFor(card), printingTiersFor(card)) ?? normalizeCardTier(card?.fixedPrintingTier ?? "normal");
 const tierCssClass = tier => `tier-${normalizeCardTier(tier)}`;
 let game = null;
-let message = "";
 let profile = loadProfile();
+const bootPersistenceStatus = profilePersistenceStatus();
+let message = profile && bootPersistenceStatus.recovered ? "Local save recovered automatically from the last healthy copy." : "";
 let screen = "splash";
 let selection = { p1: profile?.starterId ?? "cm-punk", p2: profile?.starterId === "roman-reigns" ? "cm-punk" : "roman-reigns" };
 let lastMatchup = { ...selection };
@@ -2212,7 +2213,7 @@ function renderProfile() {
     <section class="premium-panel career-record-panel"><div class="section-title"><div><h3>Superstar Records</h3><small>Wins and losses with every unlocked Superstar</small></div><span>${profile.unlockedSuperstars.length} UNLOCKED</span></div><div class="career-superstar-records">${superstarRecords}</div></section>
     <section class="premium-panel career-achievements-panel"><div class="section-title"><div><h3>Achievements</h3><small>Career milestones and mode accomplishments</small></div><span>${earnedAchievements}/${achievements.length} EARNED</span></div><div class="career-achievement-grid">${achievementCards}</div></section>
     <section class="legacy-settings premium-panel profile-tools-panel"><div class="section-title"><h3>Career Tools</h3><span>LOCAL SAVE</span></div><p class="career-tracking-note">Match record tracking began with WWE Legacy v${career.trackingSinceBuild ?? "0.12.78"}. Earlier wins and losses are not estimated.</p><div class="profile-actions"><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a></div>
-      ${(() => { const meta = backupMetadata(); const rollback = loadImportRollback(); const last = meta?.lastBackupAt ? new Date(meta.lastBackupAt).toLocaleString() : "No external backup yet"; return `<section class="save-backup-panel"><div class="save-backup-head"><div><span>SAVE & BACKUP</span><strong>Protect Your Legacy</strong><p>Your live profile saves automatically on this device. External backup uses one rolling file: <b>${SAVE_FILENAME}</b>. Back up again to the same Files location and replace that file instead of building a dated archive.</p></div><em>${last}</em></div><div class="save-backup-actions"><button id="export-save" class="start-match">BACK UP TO FILES</button><button id="import-save" class="nav-button">IMPORT FROM FILES</button>${rollback ? `<button id="restore-pre-import" class="nav-button save-rollback-button">UNDO LAST IMPORT</button>` : ""}</div>${pendingSaveImport ? `<div class="save-import-confirm"><span>BACKUP VALIDATED</span><strong>${pendingSaveImport.profile.unlockedSuperstars?.length ?? 0} Superstars · ${(pendingSaveImport.profile.universePoints ?? 0).toLocaleString()} UP</strong><p>${pendingSaveImport.sourceBuildVersion ? `Created by v${pendingSaveImport.sourceBuildVersion}` : "Legacy profile backup"}${pendingSaveImport.exportedAt ? ` · ${new Date(pendingSaveImport.exportedAt).toLocaleString()}` : ""}. Your current profile will be kept as a one-step rollback until the next import.</p><div><button id="cancel-import-save" class="nav-button">Cancel</button><button id="confirm-import-save" class="start-match">REPLACE CURRENT SAVE</button></div></div>` : ""}<small class="save-backup-note">On iPhone, the native share/file interface controls the final Files location. WWE Legacy always uses the same primary filename so you can replace the existing backup rather than create dated copies.</small></section>`; })()}
+      ${(() => { const meta = backupMetadata(); const rollback = loadImportRollback(); const persistence = profilePersistenceStatus(); const last = meta?.lastBackupAt ? new Date(meta.lastBackupAt).toLocaleString() : "No external backup yet"; const localState = persistence.mode === "volatile" ? "LOCAL SAVE NEEDS ATTENTION" : persistence.recovered ? "LOCAL SAVE RECOVERED" : "LOCAL SAVE PROTECTED"; return `<section class="save-backup-panel"><div class="save-backup-head"><div><span>SAVE & BACKUP</span><strong>Protect Your Legacy</strong><p>Your live profile saves automatically on this device and keeps a rolling last-known-good recovery copy. External backup uses one rolling file: <b>${SAVE_FILENAME}</b>. Back up again to the same Files location and replace that file instead of building a dated archive.</p><span class="save-local-health ${persistence.mode === "volatile" ? "is-warning" : "is-healthy"}"><b>${localState}</b><small>${persistence.message || "Local persistence ready."}</small></span></div><em>${last}</em></div><div class="save-backup-actions"><button id="export-save" class="start-match">BACK UP TO FILES</button><button id="import-save" class="nav-button">IMPORT FROM FILES</button>${rollback ? `<button id="restore-pre-import" class="nav-button save-rollback-button">UNDO LAST IMPORT</button>` : ""}</div>${pendingSaveImport ? `<div class="save-import-confirm"><span>BACKUP VALIDATED</span><strong>${pendingSaveImport.profile.unlockedSuperstars?.length ?? 0} Superstars · ${(pendingSaveImport.profile.universePoints ?? 0).toLocaleString()} UP</strong><p>${pendingSaveImport.sourceBuildVersion ? `Created by v${pendingSaveImport.sourceBuildVersion}` : "Legacy profile backup"}${pendingSaveImport.exportedAt ? ` · ${new Date(pendingSaveImport.exportedAt).toLocaleString()}` : ""}. Your current profile will be kept as a one-step rollback until the next import.</p><div><button id="cancel-import-save" class="nav-button">Cancel</button><button id="confirm-import-save" class="start-match">REPLACE CURRENT SAVE</button></div></div>` : ""}<small class="save-backup-note">On iPhone, the native share/file interface controls the final Files location. WWE Legacy always uses the same primary filename so you can replace the existing backup rather than create dated copies.</small></section>`; })()}
       <article class="option-row app-update-row"><div><strong>App Update</strong><p>${appUpdateState.available ? `Installed v${BUILD_VERSION} · Latest v${appUpdateState.latest}${appUpdateState.deferred ? " · waiting for match to finish" : ""}` : appUpdateState.error ? `Installed v${BUILD_VERSION} · latest version could not be checked` : `Installed v${BUILD_VERSION} · ${appUpdateState.checking ? "checking for update…" : "tap to verify the live build"}`}</p></div>${appUpdateState.available && !appUpdateState.deferred ? `<button id="apply-app-update" class="start-match">UPDATE NOW</button>` : `<button id="check-app-update" class="nav-button" ${appUpdateState.checking ? "disabled" : ""}>${appUpdateState.checking ? "CHECKING…" : "CHECK FOR UPDATE"}</button>`}</article>
       <article class="option-row danger-zone"><div><strong>Reset Progress</strong><p>Erase this device's WWE Legacy profile, collection, unlocked Superstars, Season progress, career record, achievements and saved decks.</p></div>${optionsResetArmed ? `<div class="reset-confirm-actions"><button id="cancel-reset-progress" class="nav-button">Cancel</button><button id="confirm-reset-progress" class="start-match danger">CONFIRM RESET</button></div>` : `<button id="reset-progress" class="nav-button danger">Reset Progress</button>`}</article>${optionsResetArmed ? `<p class="reset-warning"><b>Testing reset armed.</b> This cannot be undone on this device.</p>` : ""}<div class="option-row"><div><strong>Build</strong><p>WWE Legacy: Collectible Card Game v${BUILD_VERSION}</p></div></div></section>
   </section>`;
@@ -3811,7 +3812,15 @@ function applyTwoButtonRows(root = document) {
 const pairedActionRoot = document.querySelector("#game") ?? document.body;
 applyTwoButtonRows(pairedActionRoot);
 if (globalThis.MutationObserver && pairedActionRoot) {
-  const pairedActionObserver = new MutationObserver(() => applyTwoButtonRows(pairedActionRoot));
+  let pairedActionScanPending = false;
+  const schedulePairedActionScan = () => {
+    if (pairedActionScanPending) return;
+    pairedActionScanPending = true;
+    const run = () => { pairedActionScanPending = false; applyTwoButtonRows(pairedActionRoot); };
+    if (typeof globalThis.requestAnimationFrame === "function") globalThis.requestAnimationFrame(run);
+    else globalThis.queueMicrotask?.(run) ?? globalThis.setTimeout?.(run, 0);
+  };
+  const pairedActionObserver = new MutationObserver(schedulePairedActionScan);
   pairedActionObserver.observe(pairedActionRoot, { childList: true, subtree: true });
 }
 
@@ -3835,12 +3844,16 @@ document.querySelector("#chrome-packs")?.addEventListener("click", showBoosters)
 
 if (screen === "splash") renderSplash(); else if (screen === "starter") renderStarter(); else if (screen === "welcome-superstar") renderWelcomeSuperstar(); else if (screen === "menu") renderMainMenu(); else if (screen === "play-menu") renderPlayMenu(); else if (screen === "profile") renderProfile(); else if (screen === "rules") renderRules(); else if (screen === "boosters") renderBoosters(); else if (screen === "store") renderStore(); else if (screen === "catalogue") renderCardCatalogue(); else if (screen === "king-of-the-ring") renderKingOfTheRing(); else if (screen === "ladder") renderLadder(); else if (screen === "championship") renderChampionship(); else if (screen === "live-events") renderLiveEvents(); else if (screen === "challenges") renderChallenges(); else if (screen === "seasons") renderSeasons(); else if (screen === "season-complete") renderSeasonCompletionCelebration(); else if (screen === "deck-builder") renderDeckBuilder(); else renderSetup();
 
+const flushLocalProfile = () => { if (profile) saveProfile(profile); };
+globalThis.window?.addEventListener?.("pagehide", flushLocalProfile);
+globalThis.window?.addEventListener?.("beforeunload", flushLocalProfile);
 globalThis.window?.addEventListener?.("pageshow", () => { checkForAppUpdate({ autoApply: true }); });
 globalThis.document?.addEventListener?.("visibilitychange", () => {
-  if (document.visibilityState === "visible") checkForAppUpdate({ autoApply: true });
+  if (document.visibilityState === "hidden") flushLocalProfile();
+  else checkForAppUpdate({ autoApply: true });
 });
 if (globalThis.location?.href && typeof globalThis.fetch === "function") {
   setTimeout(() => { checkForAppUpdate({ autoApply: true }); }, 1200);
 }
 
-setInterval(refreshSeasonClocks, 1000);
+setInterval(() => { if (globalThis.document?.visibilityState !== "hidden") refreshSeasonClocks(); }, 1000);

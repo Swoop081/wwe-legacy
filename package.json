@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.18.00",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -32,6 +32,9 @@
     "economy-month": "node tools/first-month-economy-certification.mjs",
     "cena-ruby-balance": "node tools/cena-ruby-season-balance-audit.mjs",
     "structured-modes": "node tools/structured-mode-certification.mjs",
-    "onboarding-season": "node tools/onboarding-season-certification.mjs"
+    "onboarding-season": "node tools/onboarding-season-certification.mjs",
+    "save-durability": "node tools/save-durability-certification.mjs",
+    "long-session": "node --expose-gc tools/long-session-certification.mjs",
+    "iphone-ui": "python3 tools/iphone-ui-certification.py"
   }
 }

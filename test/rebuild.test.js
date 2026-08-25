@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.18.00";
-import { decks } from "../js/data/decks.js?v=0.18.00";
-import { allGameplayCards } from "../js/data/content.js?v=0.18.00";
-import { collectionCards } from "../js/data/collection.js?v=0.18.00";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.18.00";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.18.00";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.18.00";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.18.00";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.18.00";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.18.00";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.18.00";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.18.00";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.18.00";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.18.00";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.18.00";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.18.00";
-import { healthZone } from "../js/engine/health.js?v=0.18.00";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.18.00";
+import { superstars } from "../js/data/superstars.js?v=1.0.0";
+import { decks } from "../js/data/decks.js?v=1.0.0";
+import { allGameplayCards } from "../js/data/content.js?v=1.0.0";
+import { collectionCards } from "../js/data/collection.js?v=1.0.0";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.0.0";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=1.0.0";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=1.0.0";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=1.0.0";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=1.0.0";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=1.0.0";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=1.0.0";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=1.0.0";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=1.0.0";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.0.0";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=1.0.0";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=1.0.0";
+import { healthZone } from "../js/engine/health.js?v=1.0.0";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isUnreleasedSetId } from "../js/data/release.js?v=1.0.0";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -268,7 +268,7 @@ test.skip("A completely maxed five-card booster converts every overflow duplicat
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.18.00");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=1.0.0");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -1612,14 +1612,14 @@ test("current public module graph is cache-coherent and boots for fresh + migrat
   const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
   const version=pkg.version;
   const index=readFileSync(path.join(root,"index.html"),"utf8");
-  assert.match(version,/^0\.\d+\.\d+$/);
+  assert.match(version,/^\d+\.\d+\.\d+$/);
   for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
     assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
   }
   const browserFiles=["js/ui/app.js","js/data/profile.js","js/data/boosters.js","js/data/catalogue.js","js/data/deck-builder.js","js/data/matchmaking.js","js/data/release.js"];
   for(const rel of browserFiles){
     const text=readFileSync(path.join(root,rel),"utf8");
-    const mismatches=[...text.matchAll(/[?&]v=(0\.\d+\.\d+)/g)].map(m=>m[1]).filter(v=>v!==version);
+    const mismatches=[...text.matchAll(/[?&]v=(\d+\.\d+\.\d+)/g)].map(m=>m[1]).filter(v=>v!==version);
     assert.deepEqual(mismatches,[],`${rel} contains stale cache stamps`);
   }
   const walkJs=(dir)=>{

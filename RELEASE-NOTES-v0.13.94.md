@@ -1,3 +1,44 @@
+## v0.99.00 — Critical-Fix-Only Release Candidate
+
+- Promotes the feature-frozen v0.90.00 branch into the final **critical-fix-only** stage before v1.0. No gameplay, balance, economy, reward, progression or save-schema change is included.
+- Records the external physical-iPhone RC gate as **passed-user-certified** after approximately a week and a half of sustained real-device testing by the project owner. The sandbox does not claim independent physical-device execution.
+- Build metadata now records `criticalFixOnly: true` while retaining `releaseChannel: release-candidate`, `featureFreeze: true` and profile schema **v42**.
+- v0.99 critical-fix/freeze invariants: **6/6 passed**.
+- Full no-assets regression: **962 discovered / 858 passed / 94 intentionally skipped / 10 expected physical-asset-presence failures only**. There are **0 new gameplay/data/save/economy/routing failures**.
+- All v0.90.00 certified launch results carry forward unchanged: Rules Matrix 23/23; 41-Superstar roster audit 16,400 matches / 0 stalls / 0 hard outliers; Ruby Cena 3,200 matches / 59.94%; economy Tier 50 day 28.1 mean; 164 Championship Road clears including 160 intentional mirror matches; 365-day Live Event certification with 0 unreleased reward leaks; save durability 6/6; 600-match long-session harness; static iPhone viewport audit 20/20.
+- Distribution remains a verified **no-assets overlay package**.
+- From this build until v1.0, only release-blocking defects qualify for change. If no blocker is reported, the next promotion is **v1.0.0**.
+
+## v0.90.00 — Release Candidate + Feature Freeze
+
+- Enters the formal **v1.0 release-candidate feature freeze**. No new modes, progression systems, launch-set releases, balance experiments or economy changes are permitted from this point unless they resolve a release-blocking defect.
+- Build metadata now explicitly declares `releaseChannel: release-candidate` and `featureFreeze: true`; cache/version stamping is advanced to v0.90.00 without changing gameplay data or profile schema.
+- Adds five RC freeze invariants covering build identity, certified launch-content counts, Ruby-only major reward sets, no-assets packaging and profile-schema stability. **5/5 passed**.
+- Full no-assets regression: **961 discovered / 857 passed / 94 intentionally skipped / 10 expected physical-asset-presence failures only**. The 10 failures are unchanged tests that require omitted image/template files; no gameplay, data, save, economy or routing regression failed.
+- Final gameplay balance rerun: **41 released Superstars / 16,400 matches / 0 stalls / 26.83 average turns / no hard outliers**. John Cena remains elite at 57.38% in the full-roster run and 59.94% in the dedicated Ruby-Cena 3,200-match audit.
+- Economy certification rerun: target 30-match cadence still reaches Tier 50 on **day 28.1 mean**; structured reward ceiling remains **day 24**; Season booster distribution remains 4/3/3/3/3 across the five live launch sets.
+- Structured-mode certification remains clean: **164 complete Championship Roads / 6,560 wins / 160 intentional mirror matches**, plus **365 days / 1,095 Live Event tower clears / 0 unreleased reward leaks**.
+- Save durability remains **6/6**; long-session certification remains **600 matches / 0 stalls / ~2.36 MiB retained heap delta**; static iPhone viewport certification remains **20/20** across 320×568, 375×667, 390×844 and 430×932.
+- Validation remains **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow, structured-effect, Counter-state, reverse printed-text, card-health/four-tier and Counter-density audits remain clean.
+- The only remaining RC gate that cannot be completed inside the build sandbox is a **real-device iPhone Safari visual/interaction smoke test**. After that, development moves to **v0.99 critical-fix-only** and then v1.0.
+- Distribution remains a verified **no-assets overlay package**.
+
+## v0.19.00 — Save Durability + Performance + iPhone Certification
+
+- Completed the code-side pre-v1.0 durability/performance/UI gate without changing gameplay balance or economy.
+- Local profile persistence now keeps a rolling **last-known-good recovery copy** beside the primary save. Corrupt/truncated primary JSON automatically restores from that copy through the normal migration path.
+- Rejected storage writes no longer throw through the game or clear the previous durable save. The current profile remains playable in-memory and My Legacy warns when persistence has fallen back to volatile session mode.
+- `localStorage` access itself is guarded, so Safari/private/security modes that throw on the storage getter no longer abort startup.
+- The current profile is flushed on **pagehide**, **beforeunload** and background visibility changes. Reset Progress clears primary/recovery metadata together.
+- My Legacy Save & Backup now reports **Local Save Protected / Recovered / Needs Attention** while preserving the existing one-file external backup/import and one-step import rollback workflow.
+- Long-session harness: **600 sequential matches / 0 stalls / 27.08 average turns / 50 max turns / 441 max log entries / 10,471-byte profile / ~2.4 MiB retained heap delta after explicit GC**.
+- UI background work was reduced: global two-button-row MutationObserver work is coalesced and the one-second Season clock refresh pauses while the document is hidden.
+- Final mobile containment layer adds `100svh` + `100dvh`, root horizontal-overflow guards and `width:100% / max-width:100% / min-width:0` constraints across launch screen families, plus a <=340px fallback for compact profile/save controls.
+- Automated iPhone CSS/template guardrail audit covers **320×568 / 375×667 / 390×844 / 430×932** and passes **20/20 checks**. Interactive browser navigation is blocked in the build sandbox, so real-device/pixel smoke testing remains an RC gate.
+- Verification: v0.19.00 targeted tests **7/7**; save durability **6/6**; Rules Interaction Matrix **23/23**; full no-assets suite **956 discovered / 852 passed / 94 skipped / 10 expected physical-asset failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/effect/Counter-state/printed-text/card-health audits all clean.
+- No card stats/effects, Superstar balance, deck composition, pack odds/collation, XP, structured-mode rewards, pity, milestone thresholds, release state or collection ownership rules changed from v0.18.00.
+- Distribution remains a **verified no-assets overlay package**.
+
 ## v0.17.01 — Championship Road Mirror Match Restoration
 
 - Reverses the mistaken v0.17.00 no-self Championship Road change. **Mirror matches are intentional and remain part of Championship Road.**
@@ -516,3 +557,16 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - No card stats/effects, Superstar balance, deck composition, pack odds/collation, Season XP, Daily Live Event XP, Championship rewards, pity, milestone thresholds, release state or collection ownership rules changed from v0.17.01.
 - Distribution remains a **verified no-assets overlay package**.
 
+
+## v1.0.0 — Launch Release + WWE Legacy Web App Icon
+
+- Promoted the fully certified **v0.99.00 Critical-Fix-Only Release Candidate** to the first stable WWE Legacy release.
+- Build/package/cache identity is now **1.0.0** with `releaseChannel: stable` and `launchStatus: released`.
+- The certified physical-iPhone Safari/gesture gate remains recorded as **passed-user-certified** and the profile schema remains **v42**.
+- Added the user-supplied black-and-gold WWE Legacy logo as the canonical launch/web-app brand asset.
+- Added exact resized derivatives for **180×180 Apple touch icon**, **192×192 PWA/browser icon**, and **512×512 PWA icon**; the 192 icon also powers the in-app top-bar brand button.
+- Corrected the manifest 512 icon path to `assets/images/app-icon-512.png` and stamped all web/module/icon cache references to **v1.0.0**.
+- No gameplay, card stats/effects, Superstar balance, authored deck composition, economy, progression, rewards, Season XP, Daily Live Event XP, Championship Road, pack odds/collation, pity, release-state, collection-ownership rules or save/profile schema changed from v0.99.00.
+- Distribution is a **verified app-icon overlay**: it includes only the launch logo/icon assets and intentionally relies on the existing installed gameplay-art library for all other physical assets.
+- Updated historical/version-certification guards and the cache-stamping utility to accept **1.x semantic versions**, preventing the pre-v1 `0.x` assumptions from falsely rejecting the stable launch build; no gameplay/runtime rule change.
+- v1.0.0 certification: dedicated launch/icon invariants **6/6**; full overlay suite **962 discovered / 858 passed / 94 skipped / 10 expected missing gameplay-art assertions only**; Rules Matrix **23/23**; validation **76/76/706 / 0 issues**; collector audit **782/782 / 0 issues**; released-roster sim **16,400 matches / 0 stalls / 0 hard outliers**; Ruby Cena **3,200 / 59.94% / 0 stalls**; save durability **6/6**; long session **600 / 0 stalls**; static iPhone checks **20/20**.

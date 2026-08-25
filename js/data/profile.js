@@ -1,13 +1,15 @@
-import { decks } from "./decks.js?v=0.18.00";
-import { collectionCards } from "./collection.js?v=0.18.00";
-import { superstars } from "./superstars.js?v=0.18.00";
-import { isUnreleasedSetId } from "./release.js?v=0.18.00";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.18.00";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=0.18.00";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=0.18.00";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=0.18.00";
+import { decks } from "./decks.js?v=1.0.0";
+import { collectionCards } from "./collection.js?v=1.0.0";
+import { superstars } from "./superstars.js?v=1.0.0";
+import { isUnreleasedSetId } from "./release.js?v=1.0.0";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.0.0";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.0.0";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.0.0";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.0.0";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
+export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
+export const PROFILE_RECOVERY_META_KEY = "wa-modern-profile-v3-recovery-meta-v1";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
@@ -1136,16 +1138,114 @@ export function migrateProfile(old) {
   return p;
 }
 
-export function loadProfile(storage = globalThis.localStorage) {
-  try {
-    if (!storage) return null;
-    const raw = storage.getItem(PROFILE_KEY);
-    return raw ? migrateProfile(JSON.parse(raw)) : null;
-  } catch { return null; }
+
+function resolveProfileStorage(storage) {
+  if (storage !== undefined) return storage;
+  try { return globalThis.localStorage ?? null; } catch { return null; }
 }
-export function saveProfile(p, storage = globalThis.localStorage) {
-  storage?.setItem(PROFILE_KEY, JSON.stringify(p));
+
+let volatileProfile = null;
+let persistenceStatus = { mode: "unknown", recovered: false, lastSavedAt: null, message: "" };
+const cloneProfile = value => value == null ? null : JSON.parse(JSON.stringify(value));
+
+function parseStoredProfile(raw) {
+  if (!raw) return null;
+  const parsed = JSON.parse(raw);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  return migrateProfile(parsed);
+}
+
+function setRecoveryMeta(storage, meta) {
+  try { storage?.setItem(PROFILE_RECOVERY_META_KEY, JSON.stringify(meta)); } catch {}
+}
+
+export function profilePersistenceStatus(storage = undefined) {
+  storage = resolveProfileStorage(storage);
+  let meta = null;
+  try { meta = JSON.parse(storage?.getItem(PROFILE_RECOVERY_META_KEY) ?? "null"); } catch {}
+  if (persistenceStatus.mode !== "unknown") return { ...(meta && typeof meta === "object" ? meta : {}), ...persistenceStatus };
+  return { ...persistenceStatus, ...(meta && typeof meta === "object" ? meta : {}) };
+}
+
+export function loadProfile(storage = undefined) {
+  storage = resolveProfileStorage(storage);
+  if (!storage) {
+    persistenceStatus = { mode: "volatile", recovered: false, lastSavedAt: null, message: "Device storage is unavailable. Progress is protected only for this open session." };
+    return cloneProfile(volatileProfile);
+  }
+  let primaryRaw = null, recoveryRaw = null;
+  try { primaryRaw = storage.getItem(PROFILE_KEY); } catch {
+    persistenceStatus = { mode: "volatile", recovered: false, lastSavedAt: null, message: "Device storage could not be read. Progress is protected only for this open session." };
+    return cloneProfile(volatileProfile);
+  }
+  if (primaryRaw) {
+    try {
+      const migrated = parseStoredProfile(primaryRaw);
+      if (migrated) {
+        volatileProfile = cloneProfile(migrated);
+        try { storage.setItem(PROFILE_RECOVERY_KEY, JSON.stringify(migrated)); } catch {}
+        persistenceStatus = { mode: "persistent", recovered: false, lastSavedAt: new Date().toISOString(), message: "Local save and recovery copy are healthy." };
+        setRecoveryMeta(storage, persistenceStatus);
+        return migrated;
+      }
+    } catch {}
+  }
+  try { recoveryRaw = storage.getItem(PROFILE_RECOVERY_KEY); } catch {}
+  if (recoveryRaw) {
+    try {
+      const recovered = parseStoredProfile(recoveryRaw);
+      if (recovered) {
+        const serialized = JSON.stringify(recovered);
+        volatileProfile = cloneProfile(recovered);
+        try { storage.setItem(PROFILE_KEY, serialized); } catch {}
+        const meta = { mode: "persistent", recovered: true, recoveredAt: new Date().toISOString(), lastSavedAt: new Date().toISOString(), message: "The primary local save was unreadable, so WWE Legacy restored the last healthy recovery copy." };
+        persistenceStatus = meta;
+        setRecoveryMeta(storage, meta);
+        return recovered;
+      }
+    } catch {}
+  }
+  persistenceStatus = { mode: "persistent", recovered: false, lastSavedAt: null, message: primaryRaw ? "The local save could not be recovered. Import a backup from My Legacy if available." : "No local profile exists yet." };
+  return cloneProfile(volatileProfile);
+}
+
+export function saveProfile(p, storage = undefined) {
+  storage = resolveProfileStorage(storage);
+  if (!p) return p;
+  volatileProfile = cloneProfile(p);
+  const savedAt = new Date().toISOString();
+  if (!storage) {
+    persistenceStatus = { mode: "volatile", recovered: false, lastSavedAt: savedAt, message: "Device storage is unavailable. Progress is protected only for this open session." };
+    return p;
+  }
+  const serialized = JSON.stringify(p);
+  try {
+    // Keep one rolling last-known-good copy. localStorage setItem is atomic; if
+    // the new primary write is rejected (quota/security/private-mode), the old
+    // primary and recovery copy remain available instead of being cleared first.
+    let previous = null;
+    try { previous = storage.getItem(PROFILE_KEY); } catch {}
+    if (previous) {
+      try { if (parseStoredProfile(previous)) storage.setItem(PROFILE_RECOVERY_KEY, previous); } catch {}
+    }
+    storage.setItem(PROFILE_KEY, serialized);
+    try { storage.setItem(PROFILE_RECOVERY_KEY, serialized); } catch {}
+    const meta = { mode: "persistent", recovered: false, lastSavedAt: savedAt, message: "Local save and recovery copy are healthy." };
+    persistenceStatus = meta;
+    setRecoveryMeta(storage, meta);
+  } catch (error) {
+    const meta = { mode: "volatile", recovered: false, lastSavedAt: savedAt, message: "The browser blocked this save write. Your current session remains playable; back up from My Legacy before closing the tab.", error: String(error?.name || "StorageError") };
+    persistenceStatus = meta;
+    setRecoveryMeta(storage, meta);
+  }
   return p;
 }
-export function resetProfile(storage = globalThis.localStorage) { storage?.removeItem(PROFILE_KEY); }
+export function resetProfile(storage = undefined) {
+  storage = resolveProfileStorage(storage);
+  try { storage?.removeItem(PROFILE_KEY); } catch {}
+  try { storage?.removeItem(PROFILE_RECOVERY_KEY); } catch {}
+  try { storage?.removeItem(PROFILE_RECOVERY_META_KEY); } catch {}
+  volatileProfile = null;
+  persistenceStatus = { mode: "unknown", recovered: false, lastSavedAt: null, message: "" };
+}
 export function buildBestOwnedDeck(_p, sid) { return decks[sid] ?? []; }
