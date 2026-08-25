@@ -1,4 +1,4 @@
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.0.0";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.0.1";
 // WWE Legacy four-tier collectible printing system.
 // Authored card data is the Sapphire balance baseline. Normal/Emerald step
 // down offensive strength; Ruby is the premium +1 chase. Cost, requirements,

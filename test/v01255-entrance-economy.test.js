@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=1.0.0';
-import { cardsForSet } from '../js/data/collection.js?v=1.0.0';
-import { superstars } from '../js/data/superstars.js?v=1.0.0';
-import { decks } from '../js/data/decks.js?v=1.0.0';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.0.0';
-import { claimSeasonTier } from '../js/data/seasons.js?v=1.0.0';
-import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=1.0.0';
-import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=1.0.0';
-import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=1.0.0';
+import { collectionCards } from '../js/data/collection.js?v=1.0.1';
+import { cardsForSet } from '../js/data/collection.js?v=1.0.1';
+import { superstars } from '../js/data/superstars.js?v=1.0.1';
+import { decks } from '../js/data/decks.js?v=1.0.1';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.0.1';
+import { claimSeasonTier } from '../js/data/seasons.js?v=1.0.1';
+import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=1.0.1';
+import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=1.0.1';
+import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=1.0.1';
 
 const momentumIds=['momentum-strength','momentum-strike','momentum-technical','momentum-agility'];
 const byId=new Map(collectionCards.map(card=>[card.id,card]));

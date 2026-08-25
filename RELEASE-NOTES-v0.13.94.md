@@ -570,3 +570,11 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Distribution is a **verified app-icon overlay**: it includes only the launch logo/icon assets and intentionally relies on the existing installed gameplay-art library for all other physical assets.
 - Updated historical/version-certification guards and the cache-stamping utility to accept **1.x semantic versions**, preventing the pre-v1 `0.x` assumptions from falsely rejecting the stable launch build; no gameplay/runtime rule change.
 - v1.0.0 certification: dedicated launch/icon invariants **6/6**; full overlay suite **962 discovered / 858 passed / 94 skipped / 10 expected missing gameplay-art assertions only**; Rules Matrix **23/23**; validation **76/76/706 / 0 issues**; collector audit **782/782 / 0 issues**; released-roster sim **16,400 matches / 0 stalls / 0 hard outliers**; Ruby Cena **3,200 / 59.94% / 0 stalls**; save durability **6/6**; long session **600 / 0 stalls**; static iPhone checks **20/20**.
+
+## v1.0.1 — Launch Splash Branding Hotfix
+
+- Replaced the old CSS-built WWE / silver LEGACY splash wordmark on the launch/continue screen with the **user-supplied black-and-gold WWE Legacy logo**, matching the canonical v1.0 web-app icon identity.
+- Added `branding-wwe-legacy-lockup.png`, a **non-generative crop/derivative of the supplied logo** optimized for the wide splash-header slot; no artwork was redesigned or synthesized.
+- The existing 180×180, 192×192 and 512×512 installable web-app icons remain the supplied-logo derivatives from v1.0.0.
+- No gameplay, card data, Superstar balance, decks, economy, progression, rewards, pack collation/odds, release state, collection ownership or save/profile schema changed.
+- v1.0.0 remains the immutable launch baseline; this is an explicit **v1.0.x presentation hotfix** for launch-brand consistency.

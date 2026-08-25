@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "releasedAt": "2026-08-25",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",

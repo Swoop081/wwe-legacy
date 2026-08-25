@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=1.0.0';
-import { createProfile } from '../js/data/profile.js?v=1.0.0';
-import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=1.0.0';
-import { superstars } from '../js/data/superstars.js?v=1.0.0';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=1.0.0';
+import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=1.0.1';
+import { createProfile } from '../js/data/profile.js?v=1.0.1';
+import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=1.0.1';
+import { superstars } from '../js/data/superstars.js?v=1.0.1';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=1.0.1';
 
 const eligible = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id);
 

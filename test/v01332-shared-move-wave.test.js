@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.0.0';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.0.0';
+import { allGameplayCards } from '../js/data/content.js?v=1.0.1';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.0.1';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 

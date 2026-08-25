@@ -1,6 +1,6 @@
-import { superstars } from "./superstars.js?v=1.0.0";
-import { grantBooster } from "./boosters.js?v=1.0.0";
-import { isPlayerVisibleSuperstar } from "./release.js?v=1.0.0";
+import { superstars } from "./superstars.js?v=1.0.1";
+import { grantBooster } from "./boosters.js?v=1.0.1";
+import { isPlayerVisibleSuperstar } from "./release.js?v=1.0.1";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 40;
 export const LEGACY_CHAMPIONSHIP_ROAD_LENGTH = 32;
