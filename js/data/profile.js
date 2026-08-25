@@ -1,16 +1,16 @@
-import { decks } from "./decks.js?v=0.15.00";
-import { collectionCards } from "./collection.js?v=0.15.00";
-import { superstars } from "./superstars.js?v=0.15.00";
-import { isUnreleasedSetId } from "./release.js?v=0.15.00";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.15.00";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.15.00";
-import { cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=0.15.00";
+import { decks } from "./decks.js?v=0.16.01";
+import { collectionCards } from "./collection.js?v=0.16.01";
+import { superstars } from "./superstars.js?v=0.16.01";
+import { isUnreleasedSetId } from "./release.js?v=0.16.01";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.16.01";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=0.16.01";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=0.16.01";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 40;
+export const PROFILE_VERSION = 41;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -59,7 +59,10 @@ export function hasIndependentTierCaps(card) { return !!card; }
 export const hasIndependentFinishCaps = hasIndependentTierCaps;
 export function underTierOwnershipCap(profile, card, tier = "normal") {
   if (!card) return false;
-  return tierOwnedCopies(profile, card.id, tier) < cardOwnershipCap(card);
+  const fixedTier = fixedPrintingTierFor(card);
+  const requestedTier = normalizeCardTier(tier);
+  if (fixedTier && requestedTier !== fixedTier) return false;
+  return tierOwnedCopies(profile, card.id, fixedTier ?? requestedTier) < cardOwnershipCap(card);
 }
 export function underFinishOwnershipCap(profile, card, tierOrFoil = "normal") {
   const tier = typeof tierOrFoil === "boolean" ? (tierOrFoil ? "ruby" : "normal") : tierOrFoil;
@@ -72,8 +75,10 @@ export function addOwnedCard(profile, id, { tier = null, foil = null, amount = 1
   const o = profile.ownedCards[id];
   // Old Foil calls map to Ruby only for legacy migration/certification. New live
   // code always supplies an explicit tier. Missing tier defaults to Normal.
-  const resolvedTier = tier != null ? normalizeCardTier(tier) : (foil === true ? "ruby" : "normal");
-  const cap = cardOwnershipCap(cardById.get(id));
+  const card = cardById.get(id);
+  const fixedTier = fixedPrintingTierFor(card);
+  const resolvedTier = fixedTier ?? (tier != null ? normalizeCardTier(tier) : (foil === true ? "ruby" : "normal"));
+  const cap = cardOwnershipCap(card);
   let added = 0, overflowed = 0;
   for (let i = 0; i < amount; i += 1) {
     if ((o[resolvedTier] ?? 0) >= cap) { overflowed += 1; continue; }
@@ -660,6 +665,43 @@ export function migrateProfile(old) {
   p.favouriteSuperstars = (p.favouriteSuperstars ?? []).filter(id => p.unlockedSuperstars.includes(id));
   p.ownedCards ??= {};
   p.savedDecks ??= {};
+  p.selectedEntrances ??= {};
+  p.deckNeedsCards ??= {};
+  p.seasons ??= {};
+
+  // v0.16.01 Season 1 Cena reward printing migration: every collectible in
+  // Cena's Season-exclusive set is Ruby-only. Older v0.16.00 profiles could
+  // already own Normal copies of the four Season moves. Collapse any legacy
+  // Normal/Emerald/Sapphire copies into the single Ruby printing and rewrite
+  // saved-deck entries so no inaccessible historical printing survives.
+  if (sourceVersion < 41) {
+    for (const card of collectionCards) {
+      const fixedTier = fixedPrintingTierFor(card);
+      if (!fixedTier) continue;
+      const owned = p.ownedCards?.[card.id];
+      if (owned) {
+        const total = CARD_TIERS.reduce((sum, tier) => sum + Math.max(0, Number(owned[tier]) || 0), 0);
+        p.ownedCards[card.id] = { normal: 0, emerald: 0, sapphire: 0, ruby: 0, [fixedTier]: Math.min(cardOwnershipCap(card), total) };
+      }
+    }
+    for (const [sid, saved] of Object.entries(p.savedDecks ?? {})) {
+      if (!Array.isArray(saved)) continue;
+      p.savedDecks[sid] = saved.map(entry => {
+        const id = typeof entry === "string" ? entry : entry?.id;
+        const fixedTier = fixedPrintingTierFor(cardById.get(id));
+        if (!fixedTier) return entry;
+        return { ...(typeof entry === "string" ? { id } : entry), tier: fixedTier };
+      });
+    }
+    const cenaSeason = p.seasons?.["season-1"] ?? {};
+    const cenaComplete = (cenaSeason.claimedTiers ?? []).includes(50) || cenaSeason.completionRewardClaimed || p.unlockedSuperstars.includes("john-cena");
+    if (cenaComplete) {
+      if ((p.ownedCards?.["entrance-john-cena"]?.ruby ?? 0) > 0) p.selectedEntrances["john-cena"] = "entrance-john-cena";
+      const bestCenaDeck = buildBestOwnedRecommendedDraft(p, "john-cena");
+      if (bestCenaDeck.length) p.savedDecks["john-cena"] = bestCenaDeck;
+      p.deckNeedsCards["john-cena"] = recommendedOwnedMissingCount(p, "john-cena");
+    }
+  }
   // v0.12.76 Mankind card replacement: HOF1-026 is now Mankind’s Elbow Drop (renamed in v0.12.99; collector ID preserved).
   // Preserve any collected normal/foil copies and rewrite saved deck entries
   // from the retired Running Knee to the Corner id to the replacement id.

@@ -1,3 +1,29 @@
+## v0.16.01 — Cena Ruby Season Completion
+
+- Corrected the Season 1 John Cena reward model so **all eight Cena-exclusive collectibles are Ruby-only**. Normal, Emerald and Sapphire versions of those cards no longer exist.
+- Season 1 awards **5 Ruby copies each** of Protobomb, Five Knuckle Shuffle, STF and Attitude Adjustment, plus **1 Ruby** Hustle, Loyalty, Respect; Never Give Up; The Time Is Now; and John Cena Superstar.
+- Ruby gameplay values are Protobomb **D11**, Five Knuckle Shuffle **D11**, STF **Pressure 8**, and Attitude Adjustment **D19**. Costs, Method requirements and effects remain unchanged.
+- Added fixed-printing enforcement across tier materialization, ownership, Collection display and saved decks so requesting or loading a lower Cena printing resolves to Ruby.
+- Tier 50 now assembles Cena's canonical **60-page best-owned deck** from the player's collection, using the highest owned printing for shared cards, keeps all Cena-exclusive entries at Ruby, and equips The Time Is Now. Missing shared cards are not gifted.
+- Profile schema advances to **v41**. Existing lower-printing Cena Season rewards are migrated into Ruby ownership and saved deck tiers are repaired automatically; completed Cena profiles rebuild the best owned deck.
+- Focused Ruby-Cena balance audit: **3,200 matches / 59.94% win rate / 0 stalls / 24.64 average turns**, keeping the Season completion reward in the intended elite high-50s/low-60s band.
+- The complete v0.16.00 economy certification was rerun with no pacing change: target Tier 50 remains **day 28.1 mean**, and the structured ceiling remains day 24. No XP, pack quantity, odds, pity, UP or milestone values changed.
+- Verification: v0.16.01 + inherited economy targeted tests **8/8**; Cena Ruby-specific tests **5/5**; Rules Interaction Matrix **23/23**; full no-assets suite **929 discovered / 825 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/effect/Counter-state/printed-text/card-health audits all clean.
+- Distribution remains a verified no-assets overlay package. Next v1.0 gate remains Championship Road + Live Events structured-mode certification.
+
+## v0.16.00 — First-Month Economy + Progression Certification
+
+- Completes the next pre-v1.0 gate with a reproducible 30-day Season simulation using the live Season XP, Daily/Weekly Challenges, free pack, Daily Live Event, Exhibition, booster collation, Superstar pity, duplicate-UP and Set Milestone systems.
+- Fixed a real Season booster-distribution bug. v0.15.00's raw-tier modulo logic produced the 16 Season boosters as SummerSlam 4 / Evolution 2 / New Generation 0 / Golden Era 8 / Attitude Era 2. v0.16.00 cycles the actual booster reward ordinal across the five launch-live sets for a balanced **4 / 3 / 3 / 3 / 3** distribution. Unreleased sets remain ineligible.
+- Target cadence certification (20 complete month simulations): 30 matches/day, all three Daily Live Events, 50% wins across the other 15 matches, all available challenge goals and live reward systems. Tier 50 was reached in 20/20 runs on day 28–29 (28.1 mean), with 210 mean packs, 67.9% mean released-card unique completion, 1362.8 mean UP and 8.2 mean total unlocked Superstars.
+- XP pacing remains unchanged and certified: 20 matches/day under the same assumptions projects to 4,650 XP; 25/day to 5,025; 30/day to 5,400 raw XP. Thirty matches/day with only two Daily Challenge claims on average still projects to 5,100 XP.
+- Structured reward ceiling (10 complete month simulations using Daily Live Events + MITB + KOTR inside the same 30-match/day cap): Tier 50 day 24, 269.1 mean packs, 72.8% mean unique collection, 1471.8 mean UP and 8.8 mean unlocked Superstars. Premium printing completion remains far from exhausted.
+- Target cohort Set Milestones average 10.7 Base claims and 4.3 Emerald claims, with 0 Sapphire and 0 Ruby claims in month one. Mean printing pulls are 708.3 Normal / 243.4 Emerald / 75.3 Sapphire / 23.0 Ruby, with all premium collation caps preserved.
+- Every target run verifies the full Tier 50 Cena payoff: Cena unlocked, 5 Normal copies each of Protobomb / Five Knuckle Shuffle / STF / Attitude Adjustment, plus Ruby The Time Is Now and Ruby John Cena Superstar.
+- No Season XP value, reward quantity, booster size, pack odds, printing-tier weights, Superstar pity threshold, duplicate-UP rate, milestone threshold, card balance, match rule or release-state change was made beyond the Season booster set-distribution correction.
+- Verification: v0.16.00 targeted tests 3/3; economy certification 20 target + 10 structured-ceiling simulations with all assertions passed; Rules Interaction Matrix 23/23; full no-assets suite 924 discovered / 820 passed / 94 skipped / 10 expected asset-presence failures only; validation 76 Superstars / 76 decks / 706 gameplay cards / 0 issues; collector audit 782/782 / 0 issues; flow, structured-effect, Counter-state, reverse printed-text and card-health/tier audits all clean.
+- Distribution remains a verified no-assets overlay package. Next v1.0 gate: Championship Road + Live Events structured-mode certification.
+
 # WWE Legacy v0.13.96 — Onboarding Card + Pack Presentation
 
 Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, card data, Season 1 Cena, Attitude Era Rock, four-tier progression, starter grants and live-set availability are unchanged.

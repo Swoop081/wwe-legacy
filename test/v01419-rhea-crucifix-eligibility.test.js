@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { allGameplayCards } from '../js/data/content.js?v=0.15.00';
-import { collectionCards } from '../js/data/collection.js?v=0.15.00';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.15.00';
-import { decks } from '../js/data/decks.js?v=0.15.00';
-import { superstars } from '../js/data/superstars.js?v=0.15.00';
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, autoBuildEligibilityForSuperstar } from '../js/data/deck-builder.js?v=0.15.00';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.15.00';
+import { allGameplayCards } from '../js/data/content.js?v=0.16.01';
+import { collectionCards } from '../js/data/collection.js?v=0.16.01';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.16.01';
+import { decks } from '../js/data/decks.js?v=0.16.01';
+import { superstars } from '../js/data/superstars.js?v=0.16.01';
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, autoBuildEligibilityForSuperstar } from '../js/data/deck-builder.js?v=0.16.01';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.16.01';
 
 const RHEA_CARD_ID = 'razor-s-edge';
 const byId = new Map(collectionCards.map(card => [card.id, card]));

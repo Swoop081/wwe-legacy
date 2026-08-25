@@ -1,7 +1,7 @@
-import { superstars } from "./superstars.js?v=0.15.00";
-import { sets } from "./sets.js?v=0.15.00";
-import { allGameplayCards } from "./content.js?v=0.15.00";
-import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=0.15.00";
+import { superstars } from "./superstars.js?v=0.16.01";
+import { sets } from "./sets.js?v=0.16.01";
+import { allGameplayCards } from "./content.js?v=0.16.01";
+import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=0.16.01";
 
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
 const orderedStars = Object.values(superstars);
@@ -13,6 +13,7 @@ const starCards = orderedStars.map(s => ({
   subtitle: s.nickname,
   rarity: 4,
   setId: s.setId,
+  ...(s.setId === "season-1-last-time-is-now" ? { fixedPrintingTier: "ruby" } : {}),
   era: s.era ?? null,
 }));
 

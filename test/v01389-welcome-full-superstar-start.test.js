@@ -9,9 +9,9 @@ import {
   welcomeSuperstarCandidates,
   freshNormalDeckBlueprint,
   ownedCount
-} from '../js/data/profile.js?v=0.15.00';
-import { validateDeckDraft, selectedEntranceId } from '../js/data/deck-builder.js?v=0.15.00';
-import { superstars } from '../js/data/superstars.js?v=0.15.00';
+} from '../js/data/profile.js?v=0.16.01';
+import { validateDeckDraft, selectedEntranceId } from '../js/data/deck-builder.js?v=0.16.01';
+import { superstars } from '../js/data/superstars.js?v=0.16.01';
 
 const starById = new Map(Object.values(superstars).map(star => [star.id, star]));
 

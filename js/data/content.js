@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.15.00";
+import { enrichCounterState } from "./counter-states.js?v=0.16.01";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -15783,6 +15783,7 @@ export const allGameplayCards = [
     "name": "Protobomb",
     "kind": "move",
     "setId": "season-1-last-time-is-now",
+    "fixedPrintingTier": "ruby",
     "cost": 6,
     "damage": 10,
     "requirements": {
@@ -15812,6 +15813,7 @@ export const allGameplayCards = [
     "name": "Five Knuckle Shuffle",
     "kind": "move",
     "setId": "season-1-last-time-is-now",
+    "fixedPrintingTier": "ruby",
     "cost": 6,
     "damage": 10,
     "requirements": {
@@ -15841,6 +15843,7 @@ export const allGameplayCards = [
     "name": "STF",
     "kind": "move",
     "setId": "season-1-last-time-is-now",
+    "fixedPrintingTier": "ruby",
     "cost": 9,
     "damage": 0,
     "requirements": {},
@@ -15866,6 +15869,7 @@ export const allGameplayCards = [
     "name": "Attitude Adjustment",
     "kind": "move",
     "setId": "season-1-last-time-is-now",
+    "fixedPrintingTier": "ruby",
     "cost": 11,
     "damage": 18,
     "requirements": {},
@@ -15887,6 +15891,7 @@ export const allGameplayCards = [
     "name": "Hustle, Loyalty, Respect",
     "kind": "support",
     "setId": "season-1-last-time-is-now",
+    "fixedPrintingTier": "ruby",
     "rarity": 4,
     "superstarId": "john-cena",
     "rulesText": "Install this Support. The first time Cena drops to 50% HP or less, gain +2 Adrenaline and draw 2 pages.",
@@ -15902,6 +15907,7 @@ export const allGameplayCards = [
     "name": "The Time Is Now",
     "kind": "entrance",
     "setId": "season-1-last-time-is-now",
+    "fixedPrintingTier": "ruby",
     "rarity": 4,
     "superstarId": "john-cena",
     "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
@@ -15917,6 +15923,7 @@ export const allGameplayCards = [
     "name": "Never Give Up",
     "kind": "action",
     "setId": "season-1-last-time-is-now",
+    "fixedPrintingTier": "ruby",
     "cost": 0,
     "damage": 0,
     "requirements": {},

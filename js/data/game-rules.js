@@ -185,7 +185,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Weekly challenges", "Three Weekly Challenges rotate each week. Each completed Weekly Challenge awards 25 Season XP plus 1 random released-set booster."],
       ["Daily free booster", "The Season page provides one free booster on a 24-hour timer. Claiming it opens the booster immediately."],
       ["Season reward gating", "Season booster tiers can only resolve to sets that are actually released at that time; future subsets cannot appear early."],
-      ["Season 1 chase", "John Cena’s exclusive Moves are earned across the road until the player owns 5 Normal copies each of Protobomb, Five Knuckle Shuffle, STF and Attitude Adjustment. The road also includes his support, Action and Ruby Entrance, culminating in his Ruby Superstar card at Tier 50."]
+      ["Season 1 chase", "John Cena’s Season 1 cards are Ruby-only. The road awards 5 Ruby copies each of Protobomb, Five Knuckle Shuffle, STF and Attitude Adjustment, plus Ruby Hustle, Loyalty, Respect, Never Give Up and The Time Is Now, culminating in the Ruby John Cena Superstar at Tier 50. Completing the Season automatically assembles Cena’s strongest owned version of his authored deck."]
     ]
   },
   {

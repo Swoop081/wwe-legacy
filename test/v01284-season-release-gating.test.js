@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { tierReward } from '../js/data/seasons.js?v=0.15.00';
-import { isUnreleasedSetId, LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.15.00';
+import { tierReward } from '../js/data/seasons.js?v=0.16.01';
+import { isUnreleasedSetId, LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.16.01';
 
 test('v0.12.84 Season Road booster tiers do not surface unreleased sets before they are promoted live',()=>{
   const now = new Date(2026,7,18,12,0,0,0);

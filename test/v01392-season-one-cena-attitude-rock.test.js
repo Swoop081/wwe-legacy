@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.15.00';
-import { decks } from '../js/data/decks.js?v=0.15.00';
-import { sets } from '../js/data/sets.js?v=0.15.00';
-import { superstars } from '../js/data/superstars.js?v=0.15.00';
-import { SEASON_1_CHASE_TIER_REWARDS, SEASON_1_COMPLETION_SUPERSTAR, SEASON_START, SEASON_END, SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, claimSeasonTier, claimAllSeasonTiers } from '../js/data/seasons.js?v=0.15.00';
-import { LAUNCH_LIVE_SET_IDS, LIVE_SEASON_REWARD_SET_IDS, isLaunchRosterSuperstar } from '../js/data/release.js?v=0.15.00';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.15.00';
-import { canPlaySpecial } from '../js/engine/rules.js?v=0.15.00';
-import { createProfile, ownedCount } from '../js/data/profile.js?v=0.15.00';
+import { allGameplayCards } from '../js/data/content.js?v=0.16.01';
+import { decks } from '../js/data/decks.js?v=0.16.01';
+import { sets } from '../js/data/sets.js?v=0.16.01';
+import { superstars } from '../js/data/superstars.js?v=0.16.01';
+import { SEASON_1_CHASE_TIER_REWARDS, SEASON_1_COMPLETION_SUPERSTAR, SEASON_START, SEASON_END, SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, claimSeasonTier, claimAllSeasonTiers } from '../js/data/seasons.js?v=0.16.01';
+import { LAUNCH_LIVE_SET_IDS, LIVE_SEASON_REWARD_SET_IDS, isLaunchRosterSuperstar } from '../js/data/release.js?v=0.16.01';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.16.01';
+import { canPlaySpecial } from '../js/engine/rules.js?v=0.16.01';
+import { createProfile, ownedCount } from '../js/data/profile.js?v=0.16.01';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 const starById = new Map(Object.values(superstars).map(star => [star.id, star]));
@@ -68,7 +68,7 @@ test('v0.13.92 Season 1 is a 50-tier chase lasting exactly 30 days', () => {
   assert.equal(new Date(SEASON_END).getTime() - new Date(SEASON_START).getTime(), 30 * 24 * 60 * 60 * 1000);
 });
 
-test('v0.13.92 Season 1 awards five Normal copies of every Cena-exclusive Move', () => {
+test('Season 1 awards five Ruby copies of every Cena-exclusive Move', () => {
   const moveIds = [
     'john-cena-protobomb',
     'john-cena-five-knuckle-shuffle',
@@ -81,7 +81,7 @@ test('v0.13.92 Season 1 awards five Normal copies of every Cena-exclusive Move',
       .map(([tier, reward]) => ({ tier: Number(tier), ...reward }));
     assert.equal(rewards.length, 5, id);
     assert.ok(rewards.every(reward => reward.amount === 1), `${id} is awarded one copy at a time`);
-    assert.ok(rewards.every(reward => !reward.printingTier || reward.printingTier === 'normal'), `${id} rewards remain Normal`);
+    assert.ok(rewards.every(reward => reward.printingTier === 'ruby'), `${id} rewards are Ruby-only`);
   }
 });
 
@@ -95,7 +95,7 @@ test('v0.13.92 completing all 50 tiers leaves a full five-copy Cena Move playset
     'john-cena-five-knuckle-shuffle',
     'john-cena-stf',
     'john-cena-attitude-adjustment'
-  ]) assert.equal(ownedCount(p, id, 'normal'), 5, id);
+  ]) assert.equal(ownedCount(p, id, 'ruby'), 5, id);
   assert.equal(ownedCount(p, 'entrance-john-cena', 'ruby'), 1);
   assert.equal(ownedCount(p, 'superstar-john-cena', 'ruby'), 1);
   assert.ok(p.unlockedSuperstars.includes('john-cena'));

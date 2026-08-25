@@ -15,6 +15,17 @@ export function normalizeCardTier(value, fallback = "normal") {
   const key = String(value ?? "").toLowerCase();
   return CARD_TIERS.includes(key) ? key : fallback;
 }
+export function fixedPrintingTierFor(card) {
+  const raw = String(card?.fixedPrintingTier ?? "").toLowerCase();
+  return CARD_TIERS.includes(raw) ? raw : null;
+}
+export function cardPrintingTiers(card) {
+  const fixed = fixedPrintingTierFor(card);
+  return fixed ? [fixed] : CARD_TIERS;
+}
+export function resolveCardTier(card, requested = DEFAULT_AUTHORED_TIER, fallback = DEFAULT_AUTHORED_TIER) {
+  return fixedPrintingTierFor(card) ?? normalizeCardTier(requested, fallback);
+}
 export function tierLabel(value) { return TIER_LABELS[normalizeCardTier(value)] ?? TIER_LABELS.normal; }
 export function tierRank(value) { return TIER_RANK[normalizeCardTier(value)] ?? 0; }
 export function isTierHigher(a, b) { return tierRank(a) > tierRank(b); }
@@ -23,14 +34,14 @@ export function tierDamageOffsetFor(card, tier = DEFAULT_AUTHORED_TIER) {
   if (!card || card.kind !== "move") return 0;
   const base = Number(card.authoredDamage ?? card.damage ?? 0);
   if (!(base > 0)) return 0;
-  const wanted = TIER_DAMAGE_OFFSETS[normalizeCardTier(tier, DEFAULT_AUTHORED_TIER)] ?? 0;
+  const wanted = TIER_DAMAGE_OFFSETS[resolveCardTier(card, tier, DEFAULT_AUTHORED_TIER)] ?? 0;
   return Math.max(0, base + wanted) - base;
 }
 
 export function tierSubmissionPressureOffsetFor(card, tier = DEFAULT_AUTHORED_TIER) {
   const base = Number(card?.authoredSubmissionPressure ?? card?.submission?.pressure ?? 0);
   if (!(base > 0)) return 0;
-  const wanted = TIER_DAMAGE_OFFSETS[normalizeCardTier(tier, DEFAULT_AUTHORED_TIER)] ?? 0;
+  const wanted = TIER_DAMAGE_OFFSETS[resolveCardTier(card, tier, DEFAULT_AUTHORED_TIER)] ?? 0;
   // Submission pressure is a primary offensive stat just like Damage. Keep a
   // +1 floor so a low-pressure hold never becomes a zero-pressure hold.
   return Math.max(1, base + wanted) - base;
@@ -38,7 +49,7 @@ export function tierSubmissionPressureOffsetFor(card, tier = DEFAULT_AUTHORED_TI
 
 export function applyCardTier(card, tier = DEFAULT_AUTHORED_TIER) {
   if (!card) return card;
-  const resolvedTier = normalizeCardTier(tier, DEFAULT_AUTHORED_TIER);
+  const resolvedTier = resolveCardTier(card, tier, DEFAULT_AUTHORED_TIER);
   const authoredDamage = Number(card.authoredDamage ?? card.damage ?? 0);
   const damageOffset = tierDamageOffsetFor({ ...card, damage: authoredDamage, authoredDamage }, resolvedTier);
   const authoredSubmissionPressure = Number(card.authoredSubmissionPressure ?? card.submission?.pressure ?? 0);
