@@ -1,4 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=0.16.01";
+import { enrichCounterState } from "./counter-states.js?v=0.18.00";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=0.18.00";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -15945,7 +15946,11 @@ export const allGameplayCards = [
     }
   }
 ];
-allGameplayCards.forEach(enrichCounterState);
+allGameplayCards.forEach(card => {
+  const rewardTier = rewardPrintingTierForSet(card.setId);
+  if (rewardTier) card.fixedPrintingTier = rewardTier;
+  enrichCounterState(card);
+});
 
 // Linked/generated gameplay cards are intentionally outside allGameplayCards and the canonical collector manifest.
 export const linkedGameplayCards = [

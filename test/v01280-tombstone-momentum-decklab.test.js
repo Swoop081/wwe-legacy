@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.16.01";
-import { superstars } from "../js/data/superstars.js?v=0.16.01";
-import { moveEligibility } from "../js/engine/rules.js?v=0.16.01";
-import { cardEligibilityForSuperstar, recommendedDeckDraft, removeCardFromDraft, addCardToDraft } from "../js/data/deck-builder.js?v=0.16.01";
+import { allGameplayCards } from "../js/data/content.js?v=0.18.00";
+import { superstars } from "../js/data/superstars.js?v=0.18.00";
+import { moveEligibility } from "../js/engine/rules.js?v=0.18.00";
+import { cardEligibilityForSuperstar, recommendedDeckDraft, removeCardFromDraft, addCardToDraft } from "../js/data/deck-builder.js?v=0.18.00";
 
 const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
 

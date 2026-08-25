@@ -252,7 +252,7 @@ const expectedPace = {
 };
 
 console.log(JSON.stringify({
-  build: '0.16.01',
+  build: '0.17.01',
   seasonBoosterDistribution,
   expectedPace,
   target30Matches: aggregate(target),

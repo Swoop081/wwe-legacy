@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.16.01';
+import { createProfile } from '../js/data/profile.js?v=0.18.00';
 import {
   CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS,
-  championshipRoadForSuperstar, championshipRoadSectionForStage
-} from '../js/data/championship-road.js?v=0.16.01';
+  championshipRoadForSuperstar, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar
+} from '../js/data/championship-road.js?v=0.18.00';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -35,7 +35,7 @@ test('v0.14.14 legacy 32-match active runs expand without losing numeric progres
   const road = championshipRoadForSuperstar(p,'roman-reigns');
   assert.equal(road.activeRun.stage,9);
   assert.equal(road.activeRun.opponents.length,40);
-  assert.deepEqual(road.activeRun.opponents, CHAMPIONSHIP_ROAD_OPPONENTS);
+  assert.deepEqual(road.activeRun.opponents, championshipRoadOpponentsForSuperstar('roman-reigns'));
 });
 
 test('v0.14.14 Championship Road freezes upper controls and focuses the active route group', () => {

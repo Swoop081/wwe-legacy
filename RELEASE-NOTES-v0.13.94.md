@@ -1,3 +1,27 @@
+## v0.17.01 — Championship Road Mirror Match Restoration
+
+- Reverses the mistaken v0.17.00 no-self Championship Road change. **Mirror matches are intentional and remain part of Championship Road.**
+- Every Road again uses the canonical 40-opponent launch map without replacing the selected Superstar's slot with John Cena.
+- Each of the 40 launch-live Superstars therefore has exactly one mirror match on their Road. Cena continues to use the canonical 40 and has no self slot because he is not part of that canonical opponent map.
+- Saves briefly migrated by v0.17.00 to a no-self route automatically restore the canonical opponent map while preserving stage, difficulty and clear history.
+- All other v0.17.00 structured-mode protections remain intact: owned/released player eligibility, immutable Championship match-origin routing, structured restart/retry behavior, actual saved-route rendering, full 365-day Live Event certification and repaired Birthday Bash coverage.
+- Championship certification: **41 released Superstars × 4 difficulties = 164 full Road clears**, **6,560 wins**, **1,640 checkpoint boosters**, **40 mirror-bearing launch Roads** and **160 mirror matches exercised across the four difficulties**.
+- Verification: targeted structured-mode tests **11/11**; Rules Interaction Matrix **23/23**; full no-assets suite **944 discovered / 840 passed / 94 intentionally skipped / 10 expected physical-asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**.
+- Distribution remains a verified no-assets overlay package. Next v1.0 gate remains **Season 1 completion experience + new-player onboarding certification/polish**.
+
+## v0.16.02 — Reward Ruby Migration + Grandfathering
+
+- Generalized the Cena Season 1 rule into a system-wide **major reward printing standard**: collectibles from `season-exclusive` and `future-reward` sets are Ruby-only and cannot materialize as Normal, Emerald or Sapphire.
+- The rule currently covers **29 reward-exclusive collector identities** across Cena Season 1, the banked Final Boss reward, Goldberg Season 2 and parked Chyna content. Banked/future rewards remain unreleased and are not newly granted or booster-eligible.
+- Profile schema advances to **v42**. Any reward-exclusive card already owned at Normal/Emerald/Sapphire automatically consolidates into Ruby on migration; saved-deck entries are rewritten to Ruby.
+- Previously earned banked reward cards are now grandfathered instead of being removed by unreleased-content cleanup. A banked reward Superstar remains unlocked only when its Superstar card genuinely existed in the incoming save.
+- Grandfathering snapshots incoming ownership **before** historical migration helpers run, so manually injected/unearned unreleased Superstar state still gets stripped and cannot manufacture future rewards.
+- Current Season 1 Cena rewards and balance remain unchanged from v0.16.01; focused Ruby Cena audit remains **3,200 matches / 59.94% / 0 stalls / 24.64 average turns**.
+- Regular booster/event-set cards keep the standard four-tier Normal / Emerald / Sapphire / Ruby system.
+- First-month economy certification remains unchanged: target Tier 50 **day 28.1 mean**, structured ceiling day 24, and Season booster distribution **4 / 3 / 3 / 3 / 3** across the five live launch sets.
+- Verification: v0.16.02 reward + inherited Cena targeted tests **9/9**; full no-assets suite **933 discovered / 829 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/effect/Counter-state/printed-text/card-health audits clean; Rules Interaction Matrix **23/23**.
+- Distribution remains a verified no-assets overlay package. Next v1.0 gate remains Championship Road + Live Events structured-mode certification.
+
 ## v0.16.01 — Cena Ruby Season Completion
 
 - Corrected the Season 1 John Cena reward model so **all eight Cena-exclusive collectibles are Ruby-only**. Normal, Emerald and Sapphire versions of those cards no longer exist.
@@ -476,3 +500,19 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Existing card-health and Counter-density certification remains clean: **706/706** printed-effect runtime checks, **390** structured effect-bearing cards / 0 issues, **517** Counter-state Moves / 0 issues, four-tier scaling 0 issues, released 3★ Rare Trademarks remain ahead of 2★ Uncommons on overall authored efficiency, and all 41 released decks retain 8/8 Counter-state + 4/4 Submission-target coverage.
 - Verification: v0.15.00 targeted tests **3/3**; Rules Interaction Matrix **23/23**; full no-assets suite **921 discovered / 817 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state/printed-effect/card-health audits all clean.
 - Distribution remains a **verified no-assets overlay package**.
+
+## v0.18.00 — Season 1 + Onboarding Certification
+
+- Completed the next pre-v1.0 gate: **Season 1 completion experience + new-player onboarding certification/polish**.
+- Tier 50 now raises a dedicated, persistent **Season 1 Complete — The Last Time Is Now** celebration instead of queuing Cena through the generic Superstar unlock presentation.
+- The Season completion screen confirms the complete **24-copy Ruby-exclusive Cena package** and the status of Cena's authored 60-page deck, with direct actions to **Play as John Cena**, open **Deck Lab**, or return to the completed Season Road.
+- Tier 50 sets the dedicated completion celebration pending before UI rendering, so an immediate close/reload cannot silently lose the reward moment. Dismissing it marks the presentation seen without altering the claimed reward.
+- Cena's established Ruby reward contents and balance are unchanged: 5× each exclusive Move plus Ruby HLR, Never Give Up, The Time Is Now and Ruby John Cena.
+- Starter onboarding remains CM Punk/Roman Reigns with a complete 60-page Normal deck, Amazing Entrance access and 5 Normal copies of every Momentum Method.
+- The Welcome Superstar reveal now includes a compact horizontal **Match Basics** rail explaining Momentum, Control, Adrenaline, Counters and finishing before the player enters the main game.
+- The first-match coach is now state-aware and teaches **Build Momentum → Control the Match → Defend with Counters → Finish the Match**, with a Submission-specific explanation when a Submission battle is active. It can still be hidden and automatically ends after the first completed match.
+- New certification harness verifies **2/2 starter paths**, **5/5 Welcome set paths**, all resulting decks **60/60 playable pages**, and the Tier 50 Cena completion package/deck/celebration state.
+- Verification: v0.18.00 targeted tests **5/5**; focused onboarding/Cena/Welcome selection **15 passed / 0 failed / 2 intentionally skipped**; Rules Interaction Matrix **23/23**; full no-assets suite **949 discovered / 845 passed / 94 skipped / 10 expected asset-presence failures only**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; collector audit **782/782 / 0 issues**; flow/card-effect/counter-state/printed-effect/card-health audits all clean.
+- No card stats/effects, Superstar balance, deck composition, pack odds/collation, Season XP, Daily Live Event XP, Championship rewards, pity, milestone thresholds, release state or collection ownership rules changed from v0.17.01.
+- Distribution remains a **verified no-assets overlay package**.
+

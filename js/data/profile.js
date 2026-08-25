@@ -1,16 +1,17 @@
-import { decks } from "./decks.js?v=0.16.01";
-import { collectionCards } from "./collection.js?v=0.16.01";
-import { superstars } from "./superstars.js?v=0.16.01";
-import { isUnreleasedSetId } from "./release.js?v=0.16.01";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.16.01";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=0.16.01";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=0.16.01";
+import { decks } from "./decks.js?v=0.18.00";
+import { collectionCards } from "./collection.js?v=0.18.00";
+import { superstars } from "./superstars.js?v=0.18.00";
+import { isUnreleasedSetId } from "./release.js?v=0.18.00";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.18.00";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=0.18.00";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=0.18.00";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=0.18.00";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 41;
+export const PROFILE_VERSION = 42;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -657,6 +658,21 @@ function repairLeakedRheaCrucifix(profile, sid, saved = []) {
 export function migrateProfile(old) {
   const sourceVersion = Number(old?.version) || 0;
   if (!old?.starterId || !STARTER_CHOICES.includes(old.starterId) || !decks[old.starterId]) return null;
+  // Snapshot genuinely owned reward-exclusive cards before any historical
+  // migration helpers can synthesize unlock-package ownership. Only cards that
+  // existed in the incoming save qualify for grandfathering if their reward set
+  // is currently banked/unreleased.
+  const sourceOwnedRewardCardIds = new Set(Object.entries(old?.ownedCards ?? {})
+    .filter(([id, owned]) => {
+      const card = cardById.get(id);
+      if (!card || !isRubyOnlyRewardSetId(card.setId)) return false;
+      return Object.values(owned ?? {}).some(value => Math.max(0, Number(value) || 0) > 0);
+    })
+    .map(([id]) => id));
+  const sourceGrandfatheredRewardStarIds = new Set(Object.values(superstars)
+    .filter(star => sourceOwnedRewardCardIds.has(`superstar-${star.id}`))
+    .map(star => star.id));
+
   const p = JSON.parse(JSON.stringify(old));
   p.version = PROFILE_VERSION;
   p.universePoints = Math.max(0, Math.floor(Number(p.universePoints) || 0));
@@ -669,12 +685,11 @@ export function migrateProfile(old) {
   p.deckNeedsCards ??= {};
   p.seasons ??= {};
 
-  // v0.16.01 Season 1 Cena reward printing migration: every collectible in
-  // Cena's Season-exclusive set is Ruby-only. Older v0.16.00 profiles could
-  // already own Normal copies of the four Season moves. Collapse any legacy
-  // Normal/Emerald/Sapphire copies into the single Ruby printing and rewrite
-  // saved-deck entries so no inaccessible historical printing survives.
-  if (sourceVersion < 41) {
+  // v0.17.01 reward-printing migration: every major reward-exclusive
+  // collectible is Ruby-only. Collapse any previously-earned Normal/Emerald/
+  // Sapphire copies from older reward tracks into the single Ruby printing and
+  // rewrite saved-deck entries so no inaccessible historical printing survives.
+  if (sourceVersion < 42) {
     for (const card of collectionCards) {
       const fixedTier = fixedPrintingTierFor(card);
       if (!fixedTier) continue;
@@ -1023,25 +1038,32 @@ export function migrateProfile(old) {
   }
   // Public launch-state migration: unreleased development content is kept in
   // the authored data files, but it must not leak into a player profile.
-  const releasedStarIds = new Set(Object.values(superstars).filter(star => !star.developmentOnly && !isUnreleasedSetId(star.setId)).map(star => star.id));
+  // v0.17.01 exception: reward-exclusive ownership that was genuinely earned
+  // in an older build is permanent. Grandfather those cards/characters, convert
+  // their printings to Ruby, and keep their saved reward deck/Entrance usable.
+  // This does not newly grant or expose any unreleased reward content.
+  const grandfatheredRewardStarIds = sourceGrandfatheredRewardStarIds;
+  const releasedStarIds = new Set(Object.values(superstars)
+    .filter(star => (!star.developmentOnly && !isUnreleasedSetId(star.setId)) || grandfatheredRewardStarIds.has(star.id))
+    .map(star => star.id));
   p.unlockedSuperstars = p.unlockedSuperstars.filter(id => releasedStarIds.has(id));
   if (!p.unlockedSuperstars.includes(p.starterId)) p.unlockedSuperstars.unshift(p.starterId);
   p.favouriteSuperstars = p.favouriteSuperstars.filter(id => p.unlockedSuperstars.includes(id));
   for (const id of Object.keys(p.ownedCards)) {
     const card = cardById.get(id);
-    if (card && isUnreleasedSetId(card.setId)) delete p.ownedCards[id];
+    if (card && isUnreleasedSetId(card.setId) && (!isRubyOnlyRewardSetId(card.setId) || !sourceOwnedRewardCardIds.has(id))) delete p.ownedCards[id];
   }
   for (const sid of Object.keys(p.savedDecks)) {
     const star = starById.get(sid);
-    if (!star || isUnreleasedSetId(star.setId)) { delete p.savedDecks[sid]; continue; }
+    if (!star || (isUnreleasedSetId(star.setId) && !grandfatheredRewardStarIds.has(sid))) { delete p.savedDecks[sid]; continue; }
     p.savedDecks[sid] = (p.savedDecks[sid] ?? []).filter(entry => {
       const card = cardById.get(typeof entry === "string" ? entry : entry?.id);
-      return card && !isUnreleasedSetId(card.setId);
+      return card && (!isUnreleasedSetId(card.setId) || (isRubyOnlyRewardSetId(card.setId) && sourceOwnedRewardCardIds.has(card.id)));
     });
   }
   for (const sid of Object.keys(p.selectedEntrances)) {
     const star = starById.get(sid);
-    if (!star || isUnreleasedSetId(star.setId)) delete p.selectedEntrances[sid];
+    if (!star || (isUnreleasedSetId(star.setId) && !grandfatheredRewardStarIds.has(sid))) delete p.selectedEntrances[sid];
   }
   for (const setId of Object.keys(p.boosterCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.boosterCreditsBySet[setId] = 0;
   for (const setId of Object.keys(p.ladder?.completionPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.ladder.completionPackCreditsBySet[setId] = 0;

@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.16.01";
-import { superstars } from "../js/data/superstars.js?v=0.16.01";
-import { decks } from "../js/data/decks.js?v=0.16.01";
-import { isLaunchLiveSetId } from "../js/data/release.js?v=0.16.01";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.16.01";
+import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.18.00";
+import { superstars } from "../js/data/superstars.js?v=0.18.00";
+import { decks } from "../js/data/decks.js?v=0.18.00";
+import { isLaunchLiveSetId } from "../js/data/release.js?v=0.18.00";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.18.00";
 
 const roster = Object.values(superstars).filter(star => !star.developmentOnly && isLaunchLiveSetId(star.setId));
 const rosterIds = roster.map(star => star.id);
@@ -34,7 +34,7 @@ test("v0.12.81 all Daily Live Event opponent pools stay inside the authored rost
 
 test("v0.12.81 Live Event tower persists five stages, retries losses and clears once per day", () => {
   const now = new Date("2026-08-18T12:00:00");
-  const profile = {};
+  const profile = { unlockedSuperstars: ["cm-punk"] };
   const run = startWeeklyLiveEvent(profile, "cm-punk", rosterIds, () => 0.37, now);
   assert.equal(run.opponents.length, LIVE_EVENT_LENGTH);
   assert.equal(new Set(run.opponents).size, LIVE_EVENT_LENGTH);

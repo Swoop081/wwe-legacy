@@ -1,3 +1,4 @@
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=0.18.00";
 // WWE Legacy four-tier collectible printing system.
 // Authored card data is the Sapphire balance baseline. Normal/Emerald step
 // down offensive strength; Ruby is the premium +1 chase. Cost, requirements,
@@ -17,7 +18,8 @@ export function normalizeCardTier(value, fallback = "normal") {
 }
 export function fixedPrintingTierFor(card) {
   const raw = String(card?.fixedPrintingTier ?? "").toLowerCase();
-  return CARD_TIERS.includes(raw) ? raw : null;
+  if (CARD_TIERS.includes(raw)) return raw;
+  return rewardPrintingTierForSet(card?.setId);
 }
 export function cardPrintingTiers(card) {
   const fixed = fixedPrintingTierFor(card);

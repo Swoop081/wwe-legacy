@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.16.01",
+  "version": "0.18.00",
   "private": true,
   "type": "module",
   "scripts": {
@@ -30,6 +30,8 @@
     "rules-matrix": "node tools/rules-interaction-matrix.mjs",
     "final-gameplay-balance": "node tools/final-gameplay-balance-audit.mjs",
     "economy-month": "node tools/first-month-economy-certification.mjs",
-    "cena-ruby-balance": "node tools/cena-ruby-season-balance-audit.mjs"
+    "cena-ruby-balance": "node tools/cena-ruby-season-balance-audit.mjs",
+    "structured-modes": "node tools/structured-mode-certification.mjs",
+    "onboarding-season": "node tools/onboarding-season-certification.mjs"
   }
 }

@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=0.16.01';
-import { addOwnedCard, createProfile, migrateProfile, ownedCount, PROFILE_VERSION } from '../js/data/profile.js?v=0.16.01';
-import { claimAllSeasonTiers, SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=0.16.01';
-import { applyCardTier } from '../js/data/variants.js?v=0.16.01';
+import { collectionCards } from '../js/data/collection.js?v=0.18.00';
+import { addOwnedCard, createProfile, migrateProfile, ownedCount, PROFILE_VERSION } from '../js/data/profile.js?v=0.18.00';
+import { claimAllSeasonTiers, SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=0.18.00';
+import { applyCardTier } from '../js/data/variants.js?v=0.18.00';
 
 const CENA_SET = 'season-1-last-time-is-now';
 const MOVE_IDS = ['john-cena-protobomb','john-cena-five-knuckle-shuffle','john-cena-stf','john-cena-attitude-adjustment'];
@@ -15,7 +15,7 @@ function finishSeason(profile) {
   return profile;
 }
 
-test('v0.16.01 every Season 1 Cena collectible is Ruby-only', () => {
+test('v0.17.01 every Season 1 Cena collectible is Ruby-only', () => {
   const cards = collectionCards.filter(card => card.setId === CENA_SET);
   assert.equal(cards.length, 8);
   for (const card of cards) {
@@ -26,13 +26,13 @@ test('v0.16.01 every Season 1 Cena collectible is Ruby-only', () => {
   }
 });
 
-test('v0.16.01 Season 1 awards the complete Cena package only as Ruby', () => {
+test('v0.17.01 Season 1 awards the complete Cena package only as Ruby', () => {
   for (const reward of Object.values(SEASON_1_CHASE_TIER_REWARDS)) assert.equal(reward.printingTier, 'ruby', reward.cardId);
   for (const id of MOVE_IDS) assert.equal(Object.values(SEASON_1_CHASE_TIER_REWARDS).filter(reward => reward.cardId === id).length, 5, id);
   for (const id of ALL_CENA_REWARDS.slice(4)) assert.equal(Object.values(SEASON_1_CHASE_TIER_REWARDS).filter(reward => reward.cardId === id).length, 1, id);
 });
 
-test('v0.16.01 Tier 50 leaves Cena with his complete Ruby reward package and best owned authored deck', () => {
+test('v0.17.01 Tier 50 leaves Cena with his complete Ruby reward package and best owned authored deck', () => {
   const profile = finishSeason(createProfile('roman-reigns'));
   for (const id of MOVE_IDS) assert.equal(ownedCount(profile, id, 'ruby'), 5, id);
   for (const id of ALL_CENA_REWARDS.slice(4)) assert.equal(ownedCount(profile, id, 'ruby'), 1, id);
@@ -49,7 +49,7 @@ test('v0.16.01 Tier 50 leaves Cena with his complete Ruby reward package and bes
   assert.ok(cenaEntries.every(entry => entry.tier === 'ruby'));
 });
 
-test('v0.16.01 ownership cannot create a non-Ruby Cena Season printing', () => {
+test('v0.17.01 ownership cannot create a non-Ruby Cena Season printing', () => {
   const profile = createProfile('cm-punk');
   addOwnedCard(profile, 'john-cena-protobomb', { tier: 'normal', amount: 1 });
   assert.equal(ownedCount(profile, 'john-cena-protobomb', 'normal'), 0);
@@ -61,7 +61,7 @@ test('v0.16.01 ownership cannot create a non-Ruby Cena Season printing', () => {
   assert.equal(applyCardTier(byId.get('john-cena-attitude-adjustment'), 'normal').damage, 19);
 });
 
-test('v0.16.01 migration collapses legacy Cena printings into Ruby', () => {
+test('v0.17.01 migration collapses legacy Cena printings into Ruby', () => {
   const old = createProfile('cm-punk');
   old.version = 40;
   old.ownedCards['john-cena-protobomb'] = { normal: 3, emerald: 1, sapphire: 0, ruby: 1 };

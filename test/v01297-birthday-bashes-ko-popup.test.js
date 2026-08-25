@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=0.16.01';
-import { allGameplayCards } from '../js/data/content.js?v=0.16.01';
-import { decks } from '../js/data/decks.js?v=0.16.01';
-import { superstars } from '../js/data/superstars.js?v=0.16.01';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=0.16.01';
-import { createProfile } from '../js/data/profile.js?v=0.16.01';
+import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=0.18.00';
+import { allGameplayCards } from '../js/data/content.js?v=0.18.00';
+import { decks } from '../js/data/decks.js?v=0.18.00';
+import { superstars } from '../js/data/superstars.js?v=0.18.00';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=0.18.00';
+import { createProfile } from '../js/data/profile.js?v=0.18.00';
 
 const released = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id).sort();
 const byId = id => allGameplayCards.find(c=>c.id===id);
@@ -24,6 +24,7 @@ test('v0.12.97 each Birthday Bash places the birthday Superstar in Challenger 5'
     assert.ok(tower,event.id);
     const p=createProfile('cm-punk');
     const playerId = event.bossId==='cm-punk' ? 'roman-reigns' : 'cm-punk';
+    if (!p.unlockedSuperstars.includes(playerId)) p.unlockedSuperstars.push(playerId);
     const run=startLiveEventTower(p,tower.key,playerId,released,()=>0.31,now);
     assert.equal(run.opponents.length,5,event.id);
     assert.equal(run.opponents[4],event.bossId,`${event.id} boss is Challenger 5`);

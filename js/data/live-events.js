@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.16.01";
-import { superstars } from "./superstars.js?v=0.16.01";
-import { grantRandomBoosters } from "./boosters.js?v=0.16.01";
-import { awardSeasonXp } from "./seasons.js?v=0.16.01";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.18.00";
+import { superstars } from "./superstars.js?v=0.18.00";
+import { grantRandomBoosters } from "./boosters.js?v=0.18.00";
+import { awardSeasonXp } from "./seasons.js?v=0.18.00";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -218,13 +218,15 @@ export const WEEKLY_TOWERS = Object.freeze([
 // v0.13.82 — 24-hour Birthday Bash towers for the complete currently released launch roster.
 // Future authored Superstars remain omitted until their sets are promoted live.
 export const RELEASED_BIRTHDAY_ROSTER_IDS = Object.freeze([
-  "iyo-sky", "mankind", "hulk-hogan", "bayley", "cm-punk", "paige",
+  "iyo-sky", "mankind", "the-rock-attitude", "hulk-hogan", "bayley", "cm-punk", "paige",
   "seth-rollins", "andre-the-giant", "stephanie-vaquer", "randy-savage",
   "roman-reigns", "charlotte-flair", "kevin-owens", "kane", "the-undertaker",
   "ultimate-warrior", "rhea-ripley", "cody-rhodes", "oba-femi",
   "stone-cold-steve-austin", "liv-morgan", "brock-lesnar", "gunther", "becky-lynch",
+  "bret-hart", "shawn-michaels", "razor-ramon", "diesel", "doink-the-clown",
+  "yokozuna", "owen-hart", "british-bulldog",
   "rowdy-roddy-piper", "ted-dibiase", "jake-roberts", "mr-perfect",
-  "triple-h", "chris-jericho", "chyna", "kurt-angle"
+  "triple-h", "chris-jericho", "kurt-angle"
 ]);
 
 const BIRTHDAY_PROFILES = Object.freeze([
@@ -234,6 +236,8 @@ const BIRTHDAY_PROFILES = Object.freeze([
   ["mr-perfect", "Mr. Perfect", 3, 28, "technical", "golden-era-series-1"],
   ["stephanie-vaquer", "Stephanie Vaquer", 3, 29, "technical", "evolution-series-1"],
   ["charlotte-flair", "Charlotte Flair", 4, 5, "technical", "evolution-series-1"],
+  ["the-rock-attitude", "The Rock", 5, 2, "strength", "attitude-era-series-1"],
+  ["owen-hart", "Owen Hart", 5, 7, "technical", "new-generation-series-1"],
   ["rowdy-roddy-piper", "Rowdy Roddy Piper", 4, 17, "strike", "golden-era-series-1"],
   ["oba-femi", "Oba Femi", 4, 22, "strength", "summerslam-series-1"],
   ["kane", "Kane", 4, 26, "strength", "attitude-era-series-1"],
@@ -248,14 +252,21 @@ const BIRTHDAY_PROFILES = Object.freeze([
   ["bayley", "Bayley", 6, 15, "technical", "evolution-series-1"],
   ["ultimate-warrior", "Ultimate Warrior", 6, 16, "strength", "golden-era-series-1"],
   ["cody-rhodes", "Cody Rhodes", 6, 30, "technical", "summerslam-series-1"],
+  ["bret-hart", "Bret Hart", 7, 2, "technical", "new-generation-series-1"],
+  ["diesel", "Diesel", 7, 9, "strength", "new-generation-series-1"],
   ["brock-lesnar", "Brock Lesnar", 7, 12, "strength", "summerslam-series-1"],
+  ["shawn-michaels", "Shawn Michaels", 7, 22, "agility", "new-generation-series-1"],
+  ["doink-the-clown", "Doink the Clown", 7, 27, "technical", "new-generation-series-1"],
   ["triple-h", "Triple H", 7, 27, "technical", "attitude-era-series-1"],
   ["hulk-hogan", "Hulk Hogan", 8, 11, "strength", "golden-era-series-1"],
   ["paige", "Paige", 8, 17, "strike", "evolution-series-1"],
   ["gunther", "Gunther", 8, 20, "strength", "summerslam-series-1"],
+  ["yokozuna", "Yokozuna", 10, 2, "strength", "new-generation-series-1"],
   ["rhea-ripley", "Rhea Ripley", 10, 11, "strength", "evolution-series-1"],
+  ["razor-ramon", "Razor Ramon", 10, 20, "strength", "new-generation-series-1"],
   ["cm-punk", "CM Punk", 10, 26, "technical", "summerslam-series-1"],
   ["chris-jericho", "Chris Jericho", 11, 9, "agility", "attitude-era-series-1"],
+  ["british-bulldog", "British Bulldog", 11, 27, "strength", "new-generation-series-1"],
   ["randy-savage", "Randy Savage", 11, 15, "agility", "golden-era-series-1"],
   ["kurt-angle", "Kurt Angle", 12, 9, "technical", "attitude-era-series-1"],
   ["stone-cold-steve-austin", "Stone Cold Steve Austin", 12, 18, "strike", "attitude-era-series-1"],
@@ -549,10 +560,19 @@ export function liveEventStage(event, stageIndex) {
   return { index, ...stages[index] };
 }
 
-function chooseOpponents(tower, superstarId, eligibleOpponentIds, rng = Math.random) {
-  const eligible = new Set(eligibleOpponentIds ?? []);
+function liveEventPlayerEligible(profile, superstarId, now = new Date()) {
+  const star = superstarRecord(superstarId);
+  return !!star && !!profile?.unlockedSuperstars?.includes(superstarId) && isPlayerVisibleSuperstar(star, profile, now);
+}
+
+function chooseOpponents(profile, tower, superstarId, eligibleOpponentIds, rng = Math.random, now = new Date()) {
+  const visibleEligible = [...new Set(eligibleOpponentIds ?? [])].filter(id => {
+    const star = superstarRecord(id);
+    return !!star && isPlayerVisibleSuperstar(star, profile, now);
+  });
+  const eligible = new Set(visibleEligible);
   const pool = tower.event.opponentPool.filter(id => eligible.has(id) && id !== superstarId);
-  const fallback = (eligibleOpponentIds ?? []).filter(id => id !== superstarId && !pool.includes(id));
+  const fallback = visibleEligible.filter(id => id !== superstarId && !pool.includes(id));
   const bossId = tower.event.bossId && tower.event.bossId !== superstarId && eligible.has(tower.event.bossId) ? tower.event.bossId : null;
   const withoutBoss = pool.filter(id => id !== bossId);
   const opponents = [...shuffle(withoutBoss, rng), ...shuffle(fallback.filter(id => id !== bossId), rng)].slice(0, LIVE_EVENT_LENGTH - (bossId ? 1 : 0));
@@ -566,11 +586,12 @@ export function startLiveEventTower(profile, towerKey, superstarId, eligibleOppo
   const { tower, state } = entry;
   if (state.cleared) throw new Error("This Live Event is already complete.");
   if (state.activeRun?.status === "active") return state.activeRun;
+  if (!liveEventPlayerEligible(profile, superstarId, now)) throw new Error("Choose an unlocked Superstar for this Live Event.");
   if (tower.event.id === RAW_LIVE_EVENT.id) {
     const store = ensureTowerStore(profile, now);
     store.rawLiveLastUsedAt = (now instanceof Date ? now : new Date(now)).toISOString();
   }
-  const opponents = chooseOpponents(tower, superstarId, eligibleOpponentIds, rng);
+  const opponents = chooseOpponents(profile, tower, superstarId, eligibleOpponentIds, rng, now);
   if (opponents.length !== LIVE_EVENT_LENGTH) throw new Error("Not enough eligible opponents for this Live Event.");
   state.activeRun = {
     towerKey,
@@ -580,7 +601,7 @@ export function startLiveEventTower(profile, towerKey, superstarId, eligibleOppo
     opponents,
     stage: 0,
     status: "active",
-    startedAt: new Date().toISOString()
+    startedAt: (now instanceof Date ? now : new Date(now)).toISOString()
   };
   return state.activeRun;
 }
@@ -650,7 +671,7 @@ export function recordLiveEventTowerMatch(profile, towerKey, result, now = new D
   if (run.stage >= LIVE_EVENT_LENGTH) {
     run.status = "cleared";
     state.cleared = true;
-    state.completedAt = new Date().toISOString();
+    state.completedAt = (now instanceof Date ? now : new Date(now)).toISOString();
     aggregate.totalClears = (aggregate.totalClears ?? 0) + 1;
     if (!aggregate.completedKeys.includes(tower.key)) aggregate.completedKeys.push(tower.key);
     profile.weeklyLiveEvents.totalClears = aggregate.totalClears;

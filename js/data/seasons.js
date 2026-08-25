@@ -1,6 +1,6 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.16.01";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.16.01";
-import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=0.16.01";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.18.00";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.18.00";
+import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=0.18.00";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-22T00:00:00";
 export const SEASON_END = "2026-09-21T00:00:00";
@@ -74,7 +74,9 @@ function ensure(profile) {
     freePacksClaimed: 0,
     matchXpEarned: 0,
     challengeXpEarned: 0,
-    liveEventBonusXpEarned: 0
+    liveEventBonusXpEarned: 0,
+    completionCelebrationPending: false,
+    completionCelebrationSeen: false
   };
   const state = profile.seasons[SEASON_ID];
   state.xp = Math.max(0, Number(state.xp) || 0);
@@ -84,6 +86,8 @@ function ensure(profile) {
   state.matchXpEarned ??= 0;
   state.challengeXpEarned ??= 0;
   state.liveEventBonusXpEarned ??= 0;
+  state.completionCelebrationPending ??= false;
+  state.completionCelebrationSeen ??= false;
   return state;
 }
 
@@ -173,7 +177,7 @@ export function claimSeasonTier(profile, tier, now = new Date()) {
       // Tier 50 completes Cena's Ruby-only Season package. Shared cards are not
       // gifted, but the game immediately assembles the strongest owned version
       // of Cena's authored 60-page blueprint and equips his Ruby Entrance.
-      grantSuperstarIdentityUnlockPackage(profile, reward.superstarId, { tier: reward.printingTier ?? "ruby" });
+      grantSuperstarIdentityUnlockPackage(profile, reward.superstarId, { tier: reward.printingTier ?? "ruby", celebrate: false });
       profile.selectedEntrances ??= {};
       if ((profile.ownedCards?.["entrance-john-cena"]?.ruby ?? 0) > 0) profile.selectedEntrances[reward.superstarId] = "entrance-john-cena";
       profile.savedDecks ??= {};
@@ -182,6 +186,8 @@ export function claimSeasonTier(profile, tier, now = new Date()) {
       profile.deckNeedsCards[reward.superstarId] = recommendedDeckMissingCount(reward.superstarId, profile.savedDecks[reward.superstarId]);
       state.completionRewardClaimed = true;
       state.completionSuperstarId = reward.superstarId;
+      state.completionCelebrationPending = true;
+      state.completionCelebrationSeen = false;
     } else {
       addOwnedCard(profile, reward.cardId, { amount: reward.amount ?? 1, tier: reward.printingTier ?? "normal" });
     }

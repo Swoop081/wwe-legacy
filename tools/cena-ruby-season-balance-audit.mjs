@@ -1,9 +1,9 @@
-import { superstars } from '../js/data/superstars.js?v=0.16.01';
-import { decks } from '../js/data/decks.js?v=0.16.01';
-import { applyCardTier } from '../js/data/variants.js?v=0.16.01';
-import { isPlayerReleasedSetId } from '../js/data/release.js?v=0.16.01';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.16.01';
-import { decisionOwner, cpuDecision, executeCpuDecision } from '../js/ai/WrestlingAI.js?v=0.16.01';
+import { superstars } from '../js/data/superstars.js?v=0.18.00';
+import { decks } from '../js/data/decks.js?v=0.18.00';
+import { applyCardTier } from '../js/data/variants.js?v=0.18.00';
+import { isPlayerReleasedSetId } from '../js/data/release.js?v=0.18.00';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.18.00';
+import { decisionOwner, cpuDecision, executeCpuDecision } from '../js/ai/WrestlingAI.js?v=0.18.00';
 
 const N = Math.max(20, Number(process.env.MATCHES_PER_OPP ?? 80));
 const stars = Object.values(superstars).filter(star => isPlayerReleasedSetId(star.setId));
@@ -28,5 +28,5 @@ for(let j=0;j<stars.length;j++){
   }
 }
 const exclusiveStats=Object.fromEntries(cenaDeck.filter(card=>card.fixedPrintingTier).map(card=>[card.id,{tier:card.tier,damage:card.damage,pressure:card.submission?.pressure??null}]));
-console.log(JSON.stringify({version:'0.16.01',matches,wins,winRate:+(100*wins/matches).toFixed(2),stalls,avgTurns:+(totalTurns/matches).toFixed(2),exclusiveStats},null,2));
+console.log(JSON.stringify({version:'0.17.01',matches,wins,winRate:+(100*wins/matches).toFixed(2),stalls,avgTurns:+(totalTurns/matches).toFixed(2),exclusiveStats},null,2));
 if(stalls) process.exitCode=1;

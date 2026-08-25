@@ -1,5 +1,6 @@
-import { superstars } from "./superstars.js?v=0.16.01";
-import { grantBooster } from "./boosters.js?v=0.16.01";
+import { superstars } from "./superstars.js?v=0.18.00";
+import { grantBooster } from "./boosters.js?v=0.18.00";
+import { isPlayerVisibleSuperstar } from "./release.js?v=0.18.00";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 40;
 export const LEGACY_CHAMPIONSHIP_ROAD_LENGTH = 32;
@@ -48,6 +49,19 @@ export const CHAMPIONSHIP_BRANCHES = Object.freeze({
 });
 export const CHAMPIONSHIP_STAGES = Object.freeze(CHAMPIONSHIP_ROAD_OPPONENTS.map((_, i) => `Match ${i + 1}`));
 
+export function championshipRoadOpponentsForSuperstar(_superstarId) {
+  // Championship Road intentionally uses the canonical 40-match launch map for
+  // every selected Superstar. If the player's Superstar appears on that map,
+  // their own slot is preserved as an intentional mirror match. Do not replace
+  // that slot with another wrestler.
+  return [...CHAMPIONSHIP_ROAD_OPPONENTS];
+}
+
+function championshipRoadPlayerEligible(profile, superstarId, now = new Date()) {
+  const star = Object.values(superstars).find(item => item.id === superstarId) ?? null;
+  return !!star && !!profile?.unlockedSuperstars?.includes(superstarId) && isPlayerVisibleSuperstar(star, profile, now);
+}
+
 function blankSuperstarRoad() {
   return {
     activeRun: null,
@@ -79,11 +93,19 @@ function normalizeRoad(road) {
       // instead of discarding the player's run when the canonical opponent map changes.
       const previousLength = road.activeRun.opponents.length;
       const wasLegacyClear = road.activeRun.status === "cleared" && Number(road.activeRun.stage ?? 0) >= previousLength;
-      road.activeRun.opponents = [...CHAMPIONSHIP_ROAD_OPPONENTS];
+      road.activeRun.opponents = championshipRoadOpponentsForSuperstar(road.activeRun.superstarId);
       road.activeRun.stage = Math.max(0, Math.min(Number(road.activeRun.stage ?? 0), CHAMPIONSHIP_ROAD_LENGTH));
       if (wasLegacyClear && previousLength === LEGACY_CHAMPIONSHIP_ROAD_LENGTH && road.activeRun.stage < CHAMPIONSHIP_ROAD_LENGTH) {
         road.activeRun.status = "active";
       }
+    } else if (road.activeRun.superstarId
+      && CHAMPIONSHIP_ROAD_OPPONENTS.includes(road.activeRun.superstarId)
+      && !road.activeRun.opponents.includes(road.activeRun.superstarId)
+      && road.activeRun.opponents.includes("john-cena")) {
+      // v0.17.01 restores the intended Championship Road mirror match for saves
+      // briefly migrated by v0.17.00 to a no-self route. Preserve stage, difficulty
+      // and clear history while returning the opponent map to the canonical 40.
+      road.activeRun.opponents = [...CHAMPIONSHIP_ROAD_OPPONENTS];
     }
   }
   road.unlockedDifficulties = CHAMPIONSHIP_DIFFICULTY_ORDER.filter(id => id === "easy" || road.unlockedDifficulties.includes(id));
@@ -150,7 +172,7 @@ export function championshipRoadForSuperstar(profile, superstarId) {
 
 export function selectChampionshipRoadSuperstar(profile, superstarId) {
   const state = ensure(profile);
-  if (!Object.values(superstars).some(star => star.id === superstarId)) throw new Error("Choose a valid Superstar for Championship Road");
+  if (!championshipRoadPlayerEligible(profile, superstarId)) throw new Error("Choose an unlocked Superstar for Championship Road");
   state.selectedSuperstarId = superstarId;
   const road = championshipRoadForSuperstar(profile, superstarId);
   state.activeRun = road.activeRun;
@@ -198,7 +220,7 @@ export function championshipRoadSectionForStage(stage = 0) {
 
 export function startChampionshipRoad(profile, superstarId, _opponentIds = [], _rng = Math.random, difficultyId = "easy") {
   const state = ensure(profile);
-  if (!Object.values(superstars).some(star => star.id === superstarId)) throw new Error("Choose a valid Superstar for Championship Road");
+  if (!championshipRoadPlayerEligible(profile, superstarId)) throw new Error("Choose an unlocked Superstar for Championship Road");
   if (!CHAMPIONSHIP_DIFFICULTIES[difficultyId]) throw new Error("Unknown Championship Road difficulty");
   selectChampionshipRoadSuperstar(profile, superstarId);
   if (!championshipDifficultyUnlocked(profile, difficultyId, superstarId)) throw new Error(`Complete ${CHAMPIONSHIP_DIFFICULTIES[CHAMPIONSHIP_DIFFICULTY_ORDER[difficultyIndex(difficultyId)-1]]?.label ?? "the previous difficulty"} first`);
@@ -209,7 +231,7 @@ export function startChampionshipRoad(profile, superstarId, _opponentIds = [], _
     difficultyId,
     branchId: "season1",
     setId: CHAMPIONSHIP_SET_ID,
-    opponents: [...CHAMPIONSHIP_ROAD_OPPONENTS],
+    opponents: championshipRoadOpponentsForSuperstar(superstarId),
     stage: 0,
     status: "active",
     startedAt: new Date().toISOString()
@@ -226,9 +248,9 @@ export function currentChampionshipOpponent(profile, superstarId = null) {
   return !run || run.status !== "active" ? null : run.opponents[run.stage] ?? null;
 }
 
-export function recordChampionshipMatch(profile, result) {
+export function recordChampionshipMatch(profile, result, matchSuperstarId = null) {
   const state = ensure(profile);
-  const superstarId = state.selectedSuperstarId ?? state.activeRun?.superstarId;
+  const superstarId = matchSuperstarId ?? state.selectedSuperstarId ?? state.activeRun?.superstarId;
   const road = superstarId ? championshipRoadForSuperstar(profile, superstarId) : null;
   const run = road?.activeRun;
   if (!run || run.status !== "active") throw new Error("No active Championship Road run");
@@ -256,10 +278,10 @@ export function recordChampionshipMatch(profile, result) {
     if (firstWithSuperstar) state.completedBy.push(run.superstarId);
     const idx = difficultyIndex(run.difficultyId), next = CHAMPIONSHIP_DIFFICULTY_ORDER[idx + 1];
     if (next && !road.unlockedDifficulties.includes(next)) road.unlockedDifficulties.push(next);
-    state.unlockedDifficulties = [...road.unlockedDifficulties];
+    if (state.selectedSuperstarId === superstarId) state.unlockedDifficulties = [...road.unlockedDifficulties];
     return { status: "cleared", run, packAwarded: !!packSetId, packSetId, firstWithSuperstar, unlockedDifficulty: next ?? null, sectionCleared: completedSection };
   }
-  state.activeRun = run;
+  if (state.selectedSuperstarId === superstarId) state.activeRun = run;
   return { status: "advance", run, sectionCleared: completedSection, packAwarded: !!packSetId, packSetId };
 }
 
