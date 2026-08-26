@@ -79,3 +79,59 @@ The only launch-facing delta is the approved WWE Legacy logo/web-app icon plus s
 This package is an **app-icon overlay**, not a complete physical-art archive. Overlay it on the current WWE Legacy installation so the existing card/character/artwork library remains in place while the v1.0.0 code, metadata and official web-app icon files are applied.
 
 **Status: WWE Legacy v1.0.0 certified for launch.**
+
+# WWE Legacy v1.0.2 — Launch Regression Hotfix Certification
+
+**Build:** v1.0.2 — Launch Regression Hotfix  
+**Date:** 25 August 2026  
+**Distribution:** verified app-icon/branding overlay package
+
+## Hotfix scope
+
+This patch packages the post-launch regressions identified during physical-iPhone play without introducing new content, economy experiments or unapproved stat rebalance.
+
+- Restores correctly proportioned play-pile card inspection on front and back.
+- Binds play-pile inspection to the actual physical printing tier (Normal / Emerald / Sapphire / Ruby), including tier-adjusted Submission text. Normal **Guillotine (SS1-035)** presents **+1** pressure instead of the Sapphire +3 value.
+- Restores a compact one-screen iPhone Pack Complete layout and tap-to-inspect at approximately 60% of the viewport.
+- Formats Daily Live Event countdowns as compact `Hh:MM:SS` without a redundant zero-day field.
+- Restores **You Are in the Hold** as a fixed modal overlay so the match page is not pushed downward.
+- Corrects Submission response flow: the defender draws 1 page after each successful pressure application before the next response window; a locked non-Finisher Submission can be Auto Countered under the normal escalating cost / minimum-hand rules; Finisher Submissions cannot be Auto Countered.
+- Restores Tier Up as a full-viewport iPhone reward celebration using the available safe-area height.
+
+Profile schema remains **v42**. No pack odds/collation, pity, collection ownership, Season reward structure, Championship Road reward structure, released set state or authored card-stat values changed.
+
+## v1.0.2 verification
+
+- Dedicated v1.0.2 regression tests: **4/4 passed**.
+- Focused inherited rules/branding sample: **15/15 passed**.
+- Full overlay regression: **969 discovered / 865 passed / 94 intentionally skipped / 10 expected missing gameplay-art assertions**.
+- Rules Interaction Matrix: **23/23 passed**.
+- Validation: **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**.
+- Printed-effect audit: **706 cards / 0 issues**.
+- Card-health four-tier scaling audit: **0 issues**.
+- Collector/card-ID audit: **782 cards / 782 manifest entries / 0 issues**.
+- Save durability: **6/6 passed**.
+- Static iPhone viewport certification: **20/20** across 320×568, 375×667, 390×844 and 430×932.
+- Long-session certification: **600 matches / 0 stalls / 26.84 average turns**.
+- Ruby Cena audit: **3,200 matches / 60.75% win rate / 0 stalls / 24.62 average turns**.
+
+The 10 full-suite failures are the known physical-art/library assertions caused by this overlay distribution intentionally omitting the complete gameplay artwork archive. No code, rules, save, economy, routing, version, card-tier or interaction regression failed in that suite.
+
+## Balance consequence audit
+
+Because the approved rules correction strengthens defense against multi-turn Submissions, the canonical final gameplay balance audit was rerun rather than silently carrying forward v1.0.1 numbers.
+
+- **41 released Superstars / 16,400 matches / 0 stalls / 26.86 average turns**.
+- **Doink the Clown: 38.25%** — low hard outlier.
+- **Rowdy Roddy Piper: 35.50%** — low hard outlier.
+- Additional low watchlist results include Owen Hart, Kurt Angle, Ted DiBiase and Charlotte Flair.
+
+No compensating buffs or other balance edits were added because they were not part of the approved hotfix list. The build therefore preserves the requested Submission rules exactly and records the balance consequence for a later explicit decision.
+
+## Packaging boundary
+
+This remains an **overlay package**. Deploy it over the existing WWE Legacy installation so the complete gameplay-art library stays in place while the v1.0.2 code, styles, metadata and existing official WWE Legacy branding assets are updated.
+
+The launch-line physical-iPhone gate remains recorded as `passed-user-certified`; because v1.0.2 changes several touch/layout surfaces, a quick physical-device smoke is recommended after deployment.
+
+**Status: v1.0.2 functional/regression certification passed; known Submission-specialist balance impact recorded without unapproved rebalance.**

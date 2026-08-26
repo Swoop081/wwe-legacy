@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=1.0.1";
-import { healthRatio, healthZone } from "./health.js?v=1.0.1";
+import { totalMomentum } from "./utils.js?v=1.0.2";
+import { healthRatio, healthZone } from "./health.js?v=1.0.2";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -71,20 +71,21 @@ export function autoCounterCost(state,playerId){
  const uses=Math.max(0,Number(state?.players?.[playerId]?.autoCounterUses??0));
  return 5+uses;
 }
-export function autoCounterEligibility(state,playerId,incoming=state?.proposedMove?.card){
+export function autoCounterEligibility(state,playerId,incoming=state?.proposedMove?.card??state?.submission?.card){
  const fail=reason=>({ok:false,legal:false,reason,cost:autoCounterCost(state,playerId)});
  const p=state?.players?.[playerId];
- if(state?.phase!=="COUNTER")return fail("Not a Counter window");
- if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
+ const counterWindow=state?.phase==="COUNTER"&&state?.proposedMove?.defenderId===playerId;
+ const submissionWindow=state?.phase==="SUBMISSION_RESPONSE"&&state?.submission?.defenderId===playerId;
+ if(!counterWindow&&!submissionWindow)return fail("Not a Counter window");
  if(Math.max(Number(p?.status?.stunnedTurns??0),Number(p?.stun??0))>0)return fail("Stunned Superstars cannot Auto Counter");
  if(!incoming||incoming.kind!=="move")return fail("No incoming Move");
- if(state?.proposedMove?.isCounterAttack)return fail("Counter-attacks cannot be Auto Countered");
- if(incoming.finisher)return fail("Finishers cannot be Auto Countered");
- if(state?.proposedMove?.noAutoCounter)return fail("This Move cannot be Auto Countered");
+ if(counterWindow&&state?.proposedMove?.isCounterAttack)return fail("Counter-attacks cannot be Auto Countered");
+ if(incoming.finisher||submissionWindow&&state?.submission?.finisher)return fail("Finishers cannot be Auto Countered");
+ if(counterWindow&&state?.proposedMove?.noAutoCounter||submissionWindow&&state?.submission?.noAutoCounter)return fail("This Move cannot be Auto Countered");
  const cost=autoCounterCost(state,playerId);
  const handSize=p?.hand?.length??0;
  if(handSize<cost+2)return fail(`Need ${cost} pages to ditch and at least 2 pages remaining`);
- return {ok:true,legal:true,reason:null,cost,remaining:handSize-cost,useNumber:(p?.autoCounterUses??0)+1};
+ return {ok:true,legal:true,reason:null,cost,remaining:handSize-cost,useNumber:(p?.autoCounterUses??0)+1,window:submissionWindow?"submission":"counter"};
 }
 export function canAttemptPin(state,playerId){
  const p=state.players?.[playerId];

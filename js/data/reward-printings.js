@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=1.0.1";
+import { sets } from "./sets.js?v=1.0.2";
 
 // Major character/reward-track collectibles use one definitive printing: Ruby.
 // This applies to current Season-exclusive sets and banked/future reward sets so

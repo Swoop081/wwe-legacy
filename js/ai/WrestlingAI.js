@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=1.0.1";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=1.0.1";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=1.0.2";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=1.0.2";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.pendingTopDeckTutorChoice?.playerId)return state.pendingTopDeckTutorChoice.playerId;if(state.phase==="TRIGGER_RESPONSE")return state.pendingTriggeredSpecial?.playerId??null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -527,7 +527,7 @@ export function cpuDecision(game,pid="p2"){
    const useEscape=!!c&&chance>=20;
    return useEscape?{type:"pinEscape",card:c}:{type:"passPin"};
  }
- if(s.phase==="SUBMISSION_RESPONSE")return{type:"passSubmissionResponse"};
+ if(s.phase==="SUBMISSION_RESPONSE"){const incoming=s.submission?.card,auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}return{type:"passSubmissionResponse"};}
  if(s.phase==="SUBMISSION_MAINTAIN")return p.hand.length?cpuSubmissionDecision(s,pid):{type:"release"};
  if(s.phase==="ACTION"){
    const defId=pid==="p1"?"p2":"p1",def=s.players[defId];

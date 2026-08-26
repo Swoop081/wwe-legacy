@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.0.1';
-import { superstars } from '../js/data/superstars.js?v=1.0.1';
-import { playerReleasedCollectibleSetIds } from '../js/data/release.js?v=1.0.1';
-import { boosterCreditsFor } from '../js/data/boosters.js?v=1.0.1';
-import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen } from '../js/data/king-of-the-ring.js?v=1.0.1';
+import { createProfile } from '../js/data/profile.js?v=1.0.2';
+import { superstars } from '../js/data/superstars.js?v=1.0.2';
+import { playerReleasedCollectibleSetIds } from '../js/data/release.js?v=1.0.2';
+import { boosterCreditsFor } from '../js/data/boosters.js?v=1.0.2';
+import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen } from '../js/data/king-of-the-ring.js?v=1.0.2';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');

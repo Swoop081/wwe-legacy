@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BUILD_VERSION } from '../js/config/build.js?v=1.0.1';
+import { BUILD_VERSION } from '../js/config/build.js?v=1.0.2';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 
 function pngSize(file){
@@ -12,12 +12,12 @@ function pngSize(file){
   return [buf.readUInt32BE(16),buf.readUInt32BE(20)];
 }
 
-test('v1.0.1 is the stable launch-branding hotfix',()=>{
+test('v1.0.1 launch-branding hotfix carries forward on the v1.0 patch line',()=>{
   const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
   const build=JSON.parse(fs.readFileSync(path.join(root,'build.json'),'utf8'));
-  assert.equal(pkg.version,'1.0.1');
-  assert.equal(build.version,'1.0.1');
-  assert.equal(BUILD_VERSION,'1.0.1');
+  assert.match(pkg.version,/^1\.0\.[1-9]\d*$/);
+  assert.equal(build.version,pkg.version);
+  assert.equal(BUILD_VERSION,pkg.version);
   assert.equal(build.releaseChannel,'stable');
   assert.equal(build.launchStatus,'released');
   assert.equal(build.featureFreeze,true);

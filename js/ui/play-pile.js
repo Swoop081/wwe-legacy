@@ -18,7 +18,7 @@ export function reconstructCurrentPlayPile(state, {
   const addMove = (cardId, playerId, event, resolved = false) => {
     const card = cardId ? lookup(cardId) : null;
     if (!card) return null;
-    const item = { card, playerId, event, isMovePlay: true, resolved };
+    const item = { card, playerId, event, cardTier: event?.cardTier ?? null, isMovePlay: true, resolved };
     items.push(item);
     moveItems.push(item);
     return item;
@@ -45,15 +45,15 @@ export function reconstructCurrentPlayPile(state, {
       const incomingPlayerId = event.attackerId ?? (event.defenderId === humanId ? cpuId : humanId);
       const incoming = latestMove(incomingPlayerId, event.incomingCardId, { unresolvedOnly: true })
         ?? latestMove(incomingPlayerId, event.incomingCardId);
-      if (incoming) { incoming.event = { ...event, type: "MOVE_COUNTERED" }; incoming.resolved = true; }
-      addMove(event.counterCardId, event.defenderId, { ...event, type: "MOVE_COUNTERED" }, event.counterAttack === false);
+      if (incoming) { incoming.event = { ...event, type: "MOVE_COUNTERED" }; incoming.cardTier = event.incomingCardTier ?? incoming.cardTier; incoming.resolved = true; }
+      addMove(event.counterCardId, event.defenderId, { ...event, type: "MOVE_COUNTERED", cardTier: event.counterCardTier ?? null }, event.counterAttack === false);
       continue;
     }
     if (event.type === "MOVE_CONNECTED") {
       const playerId = event.playerId ?? event.attackerId;
       const existing = latestMove(playerId, event.cardId, { unresolvedOnly: true })
         ?? latestMove(playerId, event.cardId);
-      if (existing) { existing.event = event; existing.resolved = true; }
+      if (existing) { existing.event = event; existing.cardTier = event.cardTier ?? existing.cardTier; existing.resolved = true; }
       else addMove(event.cardId, playerId, event, true);
       continue;
     }
@@ -69,8 +69,8 @@ export function reconstructCurrentPlayPile(state, {
   if (proposed) {
     const playerId = state.proposedMove.attackerId;
     const existing = latestMove(playerId, proposed.id, { unresolvedOnly: true });
-    if (existing) existing.event = { type: "MOVE_DECLARED", cardId: proposed.id, playerId };
-    else addMove(proposed.id, playerId, { type: "MOVE_DECLARED", cardId: proposed.id, playerId }, false);
+    if (existing) { existing.event = { type: "MOVE_DECLARED", cardId: proposed.id, playerId, cardTier: proposed.tier ?? null }; existing.cardTier = proposed.tier ?? existing.cardTier; }
+    else addMove(proposed.id, playerId, { type: "MOVE_DECLARED", cardId: proposed.id, playerId, cardTier: proposed.tier ?? null }, false);
   }
   return items.slice(-limit).reverse();
 }

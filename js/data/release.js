@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=1.0.1";
+import { sets } from "./sets.js?v=1.0.2";
 
 // v0.13.87 — releases are build-controlled, not calendar-controlled.
 // This deliberately removes the public roadmap/automatic date unlock model so

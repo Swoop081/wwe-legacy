@@ -578,3 +578,17 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - The existing 180×180, 192×192 and 512×512 installable web-app icons remain the supplied-logo derivatives from v1.0.0.
 - No gameplay, card data, Superstar balance, decks, economy, progression, rewards, pack collation/odds, release state, collection ownership or save/profile schema changed.
 - v1.0.0 remains the immutable launch baseline; this is an explicit **v1.0.x presentation hotfix** for launch-brand consistency.
+
+## v1.0.2 — Launch Regression Hotfix
+
+- Restores correctly proportioned play-pile card inspection and binds the inspector to the actual Normal / Emerald / Sapphire / Ruby printing that was played.
+- Corrects tier-adjusted Submission effect copy on card backs; confirmed Normal Guillotine now presents +1 rather than the authored Sapphire +3 pressure.
+- Restores a one-screen iPhone Pack Complete layout and makes every result tile tappable for the ~60% viewport card inspector.
+- Daily Live Event countdowns now use compact `Hh:MM:SS` presentation with no redundant zero-day field.
+- Restores the defender Submission status as a true overlay instead of an inline panel that pushes the match page downward.
+- Defender draws 1 page after each successful Submission pressure application before the next response window. Locked non-Finisher Submissions can now be Auto Countered under the normal escalating cost / two-pages-remaining rule; Finisher Submissions remain protected.
+- Restores Tier Up as a full-viewport iPhone reward celebration with the reward occupying the available central space and Continue anchored toward the lower safe area.
+- No profile-schema, economy, pack-odds/collation, release-state, progression-reward or authored card-stat changes. Profile schema remains v42.
+- Verification: dedicated v1.0.2 regression **4/4**; focused inherited sample **15/15**; full overlay suite **969 discovered / 865 passed / 94 skipped / 10 expected missing gameplay-art assertions only**; Rules Matrix **23/23**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; printed-effect audit **706/0**; collector/card-ID audit **782/782 / 0 issues**; save durability **6/6**; static iPhone checks **20/20**; long-session **600 matches / 0 stalls**.
+- Final gameplay balance rerun after the intended Submission-defense correction: **41 Superstars / 16,400 matches / 0 stalls / 26.86 average turns**. Doink the Clown **38.25%** and Rowdy Roddy Piper **35.50%** are now low hard outliers. No compensating balance changes were silently added; this consequence is recorded for a later explicit balance decision.
+- Ruby Cena remains elite and stable at **3,200 matches / 60.75% / 0 stalls**.
