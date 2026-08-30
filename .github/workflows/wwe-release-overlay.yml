@@ -32,8 +32,8 @@ jobs:
           fi
           for patch in "${patches[@]}"; do
             echo "Applying ${patch}"
-            git apply --check "${patch}"
-            git apply "${patch}"
+            git apply --check --ignore-space-change --ignore-whitespace "${patch}"
+            git apply --ignore-space-change --ignore-whitespace "${patch}"
           done
 
       - name: Stamp release version and regenerate Card Studio data
