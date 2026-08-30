@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BUILD_VERSION } from '../js/config/build.js?v=1.1.28';
-import { PROFILE_VERSION } from '../js/data/profile.js?v=1.1.28';
+import { BUILD_VERSION } from '../js/config/build.js?v=1.1.29';
+import { PROFILE_VERSION } from '../js/data/profile.js?v=1.1.29';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 
 function pkgVersion(){return JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version;}
