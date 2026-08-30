@@ -1,0 +1,169 @@
+diff --git a/js/data/card-number-manifest.js b/js/data/card-number-manifest.js
+index b697da6..e98d444 100644
+--- a/js/data/card-number-manifest.js
++++ b/js/data/card-number-manifest.js
+@@ -479,6 +479,12 @@ export const CARD_NUMBER_MANIFEST = [
+     "cardNumber": 80,
+     "cardCode": "NG1-080"
+   },
++  {
++    "id": "bret-hart-ringpost-figure-four",
++    "setId": "new-generation-series-1",
++    "cardNumber": 81,
++    "cardCode": "NG1-081"
++  },
+   {
+     "id": "goldberg-military-press-powerslam",
+     "setId": "season-2-whos-next",
+diff --git a/js/data/content.js b/js/data/content.js
+index c2e5317..31a04f5 100644
+--- a/js/data/content.js
++++ b/js/data/content.js
+@@ -1,5 +1,5 @@
+-import { enrichCounterState } from "./counter-states.js?v=1.1.37";
+-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.37";
++import { enrichCounterState } from "./counter-states.js?v=1.1.39";
++import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.39";
+ export const allGameplayCards = [
+   {
+     "id": "cody-rhodes-dropdown-uppercut",
+@@ -12066,6 +12066,40 @@ export const allGameplayCards = [
+     ],
+     "counterState": "diving-aerial"
+   },
++  {
++    "id": "bret-hart-ringpost-figure-four",
++    "name": "Ringpost Figure Four",
++    "kind": "move",
++    "setId": "new-generation-series-1",
++    "cost": 6,
++    "damage": 0,
++    "requirements": {
++      "technical": 2
++    },
++    "moveType": "submission",
++    "method": "technical",
++    "superstarId": "bret-hart",
++    "rarity": 3,
++    "rulesText": "Bret Hart-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Leg damage per successful turn. On Connect: your next Sharpshooter costs 1 less this Control sequence.",
++    "groundOpponent": false,
++    "groundedOnly": true,
++    "stun": 0,
++    "selfDamage": 0,
++    "trademark": true,
++    "submission": {
++      "bodyPart": "legs",
++      "pressure": 5
++    },
++    "effects": [
++      {
++        "type": "discountNextByName",
++        "name": "Sharpshooter",
++        "amount": 1
++      }
++    ],
++    "counterState": "leg-extended",
++    "submissionTarget": "legs"
++  },
+   {
+     "id": "bret-hart-sharpshooter",
+     "name": "Sharpshooter",
+diff --git a/js/data/decks.js b/js/data/decks.js
+index ed0f30d..54cdd32 100644
+--- a/js/data/decks.js
++++ b/js/data/decks.js
+@@ -1,4 +1,4 @@
+-import { allGameplayCards } from "./content.js?v=1.1.37";
++import { allGameplayCards } from "./content.js?v=1.1.39";
+ const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
+ export const deckIds={
+   "iyo-sky": [
+@@ -3622,15 +3622,12 @@ export const deckIds={
+     "ddt",
+     "ddt",
+     "back-suplex",
+-    "back-suplex",
+-    "elbow-drop",
+     "elbow-drop",
+     "momentum-strike",
+     "european-uppercut",
+     "clothesline",
+     "clothesline",
+     "piledriver",
+-    "boston-crab",
+     "dodge",
+     "hotshot",
+     "bret-hart-inverted-atomic-drop",
+@@ -3642,6 +3639,9 @@ export const deckIds={
+     "bret-hart-second-rope-elbow-drop",
+     "bret-hart-second-rope-elbow-drop",
+     "bret-hart-second-rope-elbow-drop",
++    "bret-hart-ringpost-figure-four",
++    "bret-hart-ringpost-figure-four",
++    "bret-hart-ringpost-figure-four",
+     "bret-hart-sharpshooter",
+     "bret-hart-sharpshooter",
+     "special-bret-hart",
+diff --git a/js/data/superstars.js b/js/data/superstars.js
+index 0776e0d..cb1f2c7 100644
+--- a/js/data/superstars.js
++++ b/js/data/superstars.js
+@@ -4025,6 +4025,7 @@ export const superstars = {
+       "bret-hart-inverted-atomic-drop",
+       "bret-hart-pendulum-backbreaker",
+       "bret-hart-second-rope-elbow-drop",
++      "bret-hart-ringpost-figure-four",
+       "bret-hart-sharpshooter"
+     ],
+     "archetype": "technical-three-method-sequencer",
+diff --git a/test/v01381-british-bulldog-new-generation.test.js b/test/v01381-british-bulldog-new-generation.test.js
+index 6e0ae7d..440143d 100644
+--- a/test/v01381-british-bulldog-new-generation.test.js
++++ b/test/v01381-british-bulldog-new-generation.test.js
+@@ -1,15 +1,15 @@
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import fs from 'node:fs';
+-import { sets } from '../js/data/sets.js?v=1.1.37';
+-import { superstars } from '../js/data/superstars.js?v=1.1.37';
+-import { decks } from '../js/data/decks.js?v=1.1.37';
+-import { allGameplayCards } from '../js/data/content.js?v=1.1.37';
+-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.37';
+-import { boosterEligible } from '../js/data/boosters.js?v=1.1.37';
+-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.37';
+-import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.37';
+-await import('../js/data/superstar-nameplates.js?v=1.1.37');
++import { sets } from '../js/data/sets.js?v=1.1.39';
++import { superstars } from '../js/data/superstars.js?v=1.1.39';
++import { decks } from '../js/data/decks.js?v=1.1.39';
++import { allGameplayCards } from '../js/data/content.js?v=1.1.39';
++import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.39';
++import { boosterEligible } from '../js/data/boosters.js?v=1.1.39';
++import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.39';
++import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.39';
++await import('../js/data/superstar-nameplates.js?v=1.1.39');
+ 
+ const bulldog=Object.values(superstars).find(s=>s.id==='british-bulldog');
+ const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
+@@ -55,7 +55,7 @@ test('v0.13.81 British Bulldog owns NG1-074 through NG1-080 with the approved Ru
+   const fin=byId['british-bulldog-running-powerslam']; assert.equal(fin.rarity,4); assert.equal(fin.finisher,true); assert.equal(fin.cost,10); assert.equal(fin.damage,17); assert.deepEqual(fin.requirements,{}); assert.equal(fin.method,null); assert.equal(fin.counterState,'body-elevated');
+   assert.equal(byId['entrance-british-bulldog'].name,'Rule Britannia'); assert.deepEqual(byId['entrance-british-bulldog'].preMatchMomentum,{strength:1,technical:1}); assert.equal(byId['entrance-british-bulldog'].preMatchAdrenaline,1);
+   assert.equal(byId['special-british-bulldog'].name,'Made in Britain'); assert.deepEqual(byId['special-british-bulldog'].special,{type:'bulldogMadeInBritain',methods:['strength','technical'],maxRarity:2});
+-  assert.equal(CARD_IDS_BY_SET['new-generation-series-1'].length,80);
++  assert.equal(CARD_IDS_BY_SET['new-generation-series-1'].length,81);
+ });
+ 
+ test('v0.13.81 Power & Technique discounts only the next Strength Move and only once per Control sequence',()=>{
+@@ -87,10 +87,10 @@ test('v0.13.81 Made in Britain searches one low-rarity Strength and one low-rari
+   assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='made-in-britain'&&e.searchedCardIds?.length===2));
+ });
+ 
+-test('v0.13.81 British Bulldog completes the New Generation Studio/nameplate roster and the set is gap-free through NG1-080',()=>{
++test('v0.13.81 British Bulldog completes the New Generation Studio/nameplate roster and the original launch set remains gap-free through NG1-080',()=>{
+   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio-data.js',import.meta.url),'utf8');
+   assert.match(studio,/"id":"superstar-british-bulldog"[\s\S]{0,260}"cardCode":"NG1-080"/); assert.match(studio,/"id":"british-bulldog","name":"British Bulldog","setId":"new-generation-series-1"/);
+   assert.ok(globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES['british-bulldog']);
+   const codes=CARD_IDS_BY_SET['new-generation-series-1'].map(id=>CARD_NUMBER_BY_ID[id].cardCode);
+-  assert.deepEqual(codes,Array.from({length:80},(_,i)=>`NG1-${String(i+1).padStart(3,'0')}`));
++  assert.deepEqual(codes.slice(0,80),Array.from({length:80},(_,i)=>`NG1-${String(i+1).padStart(3,'0')}`));
+ });
