@@ -1,3 +1,29 @@
+# WWE Legacy v1.1.40 — Gunther's Front Dropkick
+
+## Release identity
+- Version: **v1.1.40**
+- Title: **Gunther's Front Dropkick**
+- Date: **30 August 2026**
+- Base: **v1.1.39 — Bret Hart Ringpost Figure Four**
+- Distribution: **no-assets code overlay**; existing repository artwork/animation assets are preserved.
+
+## Certified addition
+- Adds `SS1-149` **Gunther's Front Dropkick** as a Gunther-exclusive 3★ Rare Trademark.
+- Cost 5 / Damage 9 / Strike 2; Strike Move; Leg Extended counter state.
+- Gunther's authored 60-page deck replaces both shared Front Dropkick pages with two copies of the exclusive Trademark.
+- Existing SummerSlam collector numbers remain unchanged; the set extends cleanly to SS1-149.
+- Card Studio data includes the new card and canonical artwork paths; no artwork is packaged.
+
+## Verification
+- Dedicated v1.1.40 assertions: **3 passed / 0 failed**.
+- Focused Gunther / Bret / rarity sample: **21 passed / 0 failed / 1 historical skip**.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 837 gameplay cards / 0 orphans / 0 issues**.
+- Card-ID audit: **932 collector cards / 932 manifest entries / 0 issues**; SummerSlam is gap-free through `SS1-149`.
+- Card-health and counter-density audits: **0 issues**.
+- Full no-assets suite: **915 passed / 97 failed / 97 skipped**, versus v1.1.39 at 912 / 97 / 97 — **3 new passes and 0 new carry-forward failures**.
+- Physical iPhone smoke: pending.
+
 # WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
 
 ## Release identity

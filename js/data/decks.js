@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.39";
+import { allGameplayCards } from "./content.js?v=1.1.40";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -1438,8 +1438,8 @@ export const deckIds={
     "body-slam",
     "big-boot",
     "big-boot",
-    "front-dropkick",
-    "front-dropkick",
+    "gunther-front-dropkick",
+    "gunther-front-dropkick",
     "backflip-counter",
     "back-suplex",
     "back-suplex",

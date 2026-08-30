@@ -1,3 +1,9 @@
+# WWE Legacy v1.1.40 — Gunther's Front Dropkick
+
+**Current working baseline.** v1.1.40 supersedes v1.1.39.
+
+Adds `SS1-149` **Gunther's Front Dropkick** as a Gunther-exclusive 3★ Rare Trademark. It is Cost 5 / Damage 9 / Strike 2 with the Leg Extended counter state. Gunther's two shared Front Dropkick deck pages are replaced one-for-one by this exclusive version, keeping his deck at exactly 60 pages while preserving his existing Gojira Clutch Finisher package and all other gameplay identity. Card Studio receives the canonical blank art paths; no artwork is packaged.
+
 # WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
 
 **Current working baseline.** v1.1.39 supersedes v1.1.38.

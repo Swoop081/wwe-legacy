@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.39';
-import { decks } from '../js/data/decks.js?v=1.1.39';
-import { sets } from '../js/data/sets.js?v=1.1.39';
-import { superstars } from '../js/data/superstars.js?v=1.1.39';
-import { SEASON_1_CHASE_TIER_REWARDS, SEASON_1_COMPLETION_SUPERSTAR, SEASON_START, SEASON_END, SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, claimSeasonTier, claimAllSeasonTiers } from '../js/data/seasons.js?v=1.1.39';
-import { LAUNCH_LIVE_SET_IDS, LIVE_SEASON_REWARD_SET_IDS, isLaunchRosterSuperstar } from '../js/data/release.js?v=1.1.39';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.39';
-import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.39';
-import { createProfile, ownedCount } from '../js/data/profile.js?v=1.1.39';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.40';
+import { decks } from '../js/data/decks.js?v=1.1.40';
+import { sets } from '../js/data/sets.js?v=1.1.40';
+import { superstars } from '../js/data/superstars.js?v=1.1.40';
+import { SEASON_1_CHASE_TIER_REWARDS, SEASON_1_COMPLETION_SUPERSTAR, SEASON_START, SEASON_END, SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, claimSeasonTier, claimAllSeasonTiers } from '../js/data/seasons.js?v=1.1.40';
+import { LAUNCH_LIVE_SET_IDS, LIVE_SEASON_REWARD_SET_IDS, isLaunchRosterSuperstar } from '../js/data/release.js?v=1.1.40';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.40';
+import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.40';
+import { createProfile, ownedCount } from '../js/data/profile.js?v=1.1.40';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 const starById = new Map(Object.values(superstars).map(star => [star.id, star]));

@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { collectionCards } from '../js/data/collection.js?v=1.1.39';
-import { MERCH_ITEMS } from '../js/data/merch.js?v=1.1.39';
-import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.39';
-import { canonicalCardImagePath, canonicalBasePlatePath } from '../js/data/artwork.js?v=1.1.39';
+import { collectionCards } from '../js/data/collection.js?v=1.1.40';
+import { MERCH_ITEMS } from '../js/data/merch.js?v=1.1.40';
+import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.40';
+import { canonicalCardImagePath, canonicalBasePlatePath } from '../js/data/artwork.js?v=1.1.40';
 
 const root = new URL('../', import.meta.url);
 const read = relative => fs.readFileSync(new URL(relative, root), 'utf8');
@@ -61,7 +61,7 @@ test('v1.1.2 Superstar complete library joins deck cards, exclusives, Actions, M
 test('v1.1.2 every collectible, Merch and Variant has a unique base-plate target', () => {
   const all=[...collectionCards,...MERCH_ITEMS,...SUPERSTAR_VARIANTS];
   const plates=all.map(card=>canonicalBasePlatePath(card));
-  assert.equal(all.length, 1541);
+  assert.equal(all.length, 1542);
   assert.equal(plates.filter(Boolean).length, all.length);
   assert.equal(new Set(plates).size, all.length);
   assert.equal(canonicalBasePlatePath(collectionCards.find(card=>card.id==='superstar-john-cena')), 'assets/images/john-cena-superstar-base-plate.webp');

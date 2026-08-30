@@ -1,3 +1,14 @@
+# WWE Legacy v1.1.40 — Gunther's Front Dropkick
+
+- Adds **Gunther's Front Dropkick** as `SS1-149`, a Gunther-exclusive **3★ Rare Trademark** in SummerSlam — Series 1.
+- Cost 5 / Damage 9 / Strike 2; Strike Move; Leg Extended counter state.
+- Replaces the two shared Front Dropkick pages in Gunther's authored 60-page deck with two copies of his exclusive Trademark.
+- Gunther's 2× Gojira Clutch Finisher package, existing Momentum structure, abilities and other exclusive moves remain unchanged.
+- SummerSlam — Series 1 expands from 148 to **149 collector cards** without renumbering any existing card.
+- Card Studio receives the new canonical card entry/art paths; no artwork is packaged.
+- No gameplay-engine, economy, reward, progression or mode logic changes.
+- Verification: dedicated v1.1.40 **3/3**; focused Gunther/Bret/rarity sample **21 passed / 0 failed / 1 historical skip**; flow **95/0**; rebuild **95 decks / 837 gameplay cards / 0 issues**; card IDs **932/932**; full suite **915 passed / 97 failed / 97 skipped**, therefore **3 new passes and 0 new carry-forward failures** versus v1.1.39.
+
 # WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
 
 - Adds **Ringpost Figure Four** as `NG1-081`, a Bret Hart-exclusive **3★ Rare Trademark Submission** in New Generation — Series 1.

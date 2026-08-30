@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.39";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.39";
+import { enrichCounterState } from "./counter-states.js?v=1.1.40";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.40";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -1563,6 +1563,29 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "leg-extended"
+  },
+  {
+    "id": "gunther-front-dropkick",
+    "name": "Gunther's Front Dropkick",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 5,
+    "damage": 9,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "gunther",
+    "rarity": 3,
+    "rulesText": "Gunther-exclusive Trademark.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "leg-extended",
+    "trademark": true
   },
   {
     "id": "back-suplex",

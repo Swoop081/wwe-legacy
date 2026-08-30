@@ -3408,6 +3408,12 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "SS1-148"
   },
   {
+    "id": "gunther-front-dropkick",
+    "setId": "summerslam-series-1",
+    "cardNumber": 149,
+    "cardCode": "SS1-149"
+  },
+  {
     "id": "northern-lights-suplex",
     "setId": "evolution-series-1",
     "cardNumber": 1,

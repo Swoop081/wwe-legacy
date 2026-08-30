@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.39';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.39';
-import { superstars } from '../js/data/superstars.js?v=1.1.39';
-import { decks } from '../js/data/decks.js?v=1.1.39';
-import { counterEligibility } from '../js/engine/rules.js?v=1.1.39';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.40';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.40';
+import { superstars } from '../js/data/superstars.js?v=1.1.40';
+import { decks } from '../js/data/decks.js?v=1.1.40';
+import { counterEligibility } from '../js/engine/rules.js?v=1.1.40';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const byName=name=>allGameplayCards.find(c=>c.name===name&&!c.defensiveOnly);

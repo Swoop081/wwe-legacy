@@ -1675,6 +1675,7 @@ export const superstars = {
       "body-slam"
     ],
     "signatures": [
+      "gunther-front-dropkick",
       "gunther-folding-powerbomb",
       "last-symphony"
     ],
