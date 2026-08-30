@@ -1,0 +1,23 @@
+diff --git a/js/ui/app.js b/js/ui/app.js
+index 984de7f..94e0865 100644
+--- a/js/ui/app.js
++++ b/js/ui/app.js
+@@ -2776,11 +2778,13 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
+   card = applyCardTier(card, resolvedTier);
+   const superstarFront = card.kind === "superstar";
+   const moveFront = card.kind === "move";
+-  // Finished Card Studio exports are authoritative on every game surface.
+-  // A card only enters layered reconstruction if that image fails at runtime.
+-  const finishedFront = card.kind !== "momentum" && Boolean(finishedCardArtFor(card));
+-  const forcedFinishedFront = finishedFront;
+-  const layeredFront = !finishedFront && Boolean(layeredCardArtFor(card));
++  // The repository's saved Card Studio format is the layered/base-plate export.
++  // Treat that as the normal front on every surface; cardArtFace performs the
++  // runtime existence check and falls back to a flat finished export only if the
++  // base plate itself is missing.
++  const layeredFront = card.kind !== "momentum" && Boolean(layeredCardArtFor(card));
++  const finishedFront = !layeredFront && card.kind !== "momentum" && Boolean(finishedCardArtFor(card));
++  const forcedFinishedFront = false;
+   const tribalChiefLiveFront = card?.id === "special-roman-reigns";
+   const authoredRawArt = Boolean(artworkFor(card));
+   const missingCustomFront = !superstarFront && card.kind !== "momentum" && !finishedFront && !layeredFront && !authoredRawArt;

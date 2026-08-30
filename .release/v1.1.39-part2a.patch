@@ -1,0 +1,157 @@
+diff --git a/css/game.css b/css/game.css
+index 8433382..56e7c6e 100644
+--- a/css/game.css
++++ b/css/game.css
+@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
+   position:absolute;
+   inset:-28px;
+   z-index:-2;
+-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.37") center/cover no-repeat;
++  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.39") center/cover no-repeat;
+   filter:blur(20px) brightness(.42) saturate(.9);
+   transform:scale(1.08);
+ }
+@@ -10317,7 +10317,6 @@ body[data-screen="splash"] #game>section{animation:none!important}
+ .ccg-card.type-move .ccg-animated-card-surface{top:12.5%!important;bottom:27.5%!important}
+ .ccg-card.type-entrance .ccg-animated-card-surface,.ccg-card.type-action .ccg-animated-card-surface,.ccg-card.type-manager .ccg-animated-card-surface,.ccg-card.type-variant .ccg-animated-card-surface,.ccg-card.type-momentum .ccg-animated-card-surface{top:12.5%!important;bottom:23.5%!important}
+ .ccg-animated-card-plate{object-fit:contain!important;object-position:center center!important}
+-.ccg-card.set-summerslam-series-1.type-move .ccg-animated-card-surface{background:linear-gradient(145deg,#063a70 0%,#12568c 38%,#563b83 67%,#c52970 100%)!important}
+ .ccg-card.has-active-animation .ccg-animated-card-surface{display:grid!important;place-items:center!important}
+ .ccg-card.has-active-animation .ccg-animated-card-plate{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important}
+ .ccg-card.type-merch .ccg-animated-card-plate{object-fit:cover!important}
+@@ -10640,3 +10639,135 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
+   .legacy-season-rock:has(img.legacy-season-cena){top:-7%!important;right:0!important;width:48%!important;height:111%!important}
+   .legacy-season-rock img.legacy-season-cena{transform:scale(1.58)!important}
+ }
++
++
++/* ========================================================================== */
++/* v1.1.38 — Card Studio parity + set-field animation layering.               */
++/* Static cards always remain the saved Card Studio base plate + live plaque. */
++/* A loaded animation adds: set field -> centred animation -> plaque/logo.     */
++/* ========================================================================== */
++.ccg-animated-set-background,
++.ccg-animated-set-logo{display:none!important;pointer-events:none!important}
++.ccg-card.has-active-animation .ccg-animated-set-background{
++  display:block!important;
++  position:absolute!important;
++  z-index:2!important;
++  left:4.8%!important;right:4.8%!important;top:4.4%!important;bottom:4.4%!important;
++  overflow:hidden!important;
++  border-radius:10px!important;
++}
++.ccg-card.has-active-animation .ccg-animated-set-logo{
++  display:block!important;
++  position:absolute!important;
++  z-index:5!important;
++  top:5.2%!important;right:7.5%!important;
++  width:auto!important;max-width:25.5%!important;max-height:10.5%!important;
++  object-fit:contain!important;object-position:right top!important;
++  filter:drop-shadow(0 .3cqw .5cqw rgba(0,0,0,.72))!important;
++}
++.ccg-card.has-active-animation .ccg-animated-card-surface{
++  display:grid!important;
++  place-items:center!important;
++  position:absolute!important;
++  z-index:3!important;
++  left:4.8%!important;right:4.8%!important;
++  top:4.8%!important;
++  bottom:22.8%!important;
++  overflow:hidden!important;
++  border-radius:0!important;
++  clip-path:none!important;-webkit-clip-path:none!important;
++  background:transparent!important;
++}
++/* Card Studio move plaque begins at 74.0% of card height. */
++.ccg-card.type-move.has-active-animation .ccg-animated-card-surface{bottom:26%!important}
++/* Every non-Move Card Studio plaque begins at 77.2% of card height. */
++.ccg-card.type-superstar.has-active-animation .ccg-animated-card-surface,
++.ccg-card.type-entrance.has-active-animation .ccg-animated-card-surface,
++.ccg-card.type-action.has-active-animation .ccg-animated-card-surface,
++.ccg-card.type-manager.has-active-animation .ccg-animated-card-surface,
++.ccg-card.type-variant.has-active-animation .ccg-animated-card-surface,
++.ccg-card.type-merch.has-active-animation .ccg-animated-card-surface{bottom:22.8%!important}
++.ccg-card.has-active-animation .ccg-animated-card-plate{
++  position:relative!important;inset:auto!important;
++  width:100%!important;height:100%!important;
++  max-width:100%!important;max-height:100%!important;
++  object-fit:contain!important;object-position:center center!important;
++  opacity:1!important;border-radius:0!important;background:transparent!important;
++}
++.ccg-card.has-active-animation .ccg-live-front-data,
++.ccg-card.has-active-animation .ccg-superstar-nameplate,
++.ccg-card.has-active-animation .ccg-card-title,
++.ccg-card.has-active-animation .ccg-card-stats{z-index:4!important}
++
++/* Full-card set fields used only after an animation has successfully loaded. */
++.ccg-card.set-summerslam-series-1 .ccg-animated-set-background{
++  background:
++    repeating-linear-gradient(-10deg,transparent 0 9.3%,rgba(117,217,255,.11) 9.5% 9.8%,transparent 10% 19%),
++    radial-gradient(circle at 77% 18%,rgba(255,204,87,.46) 0,rgba(245,87,65,.17) 35%,transparent 52%),
++    linear-gradient(145deg,#07172b 0%,#153d70 42%,#8d2c58 72%,#ee6f32 100%)!important;
++}
++.ccg-card.set-evolution-series-1 .ccg-animated-set-background{
++  background:
++    repeating-linear-gradient(64deg,transparent 0 10%,rgba(168,234,255,.10) 10.2% 10.5%,transparent 10.7% 20%),
++    radial-gradient(circle at 74% 19%,rgba(91,230,255,.34) 0,rgba(255,83,221,.16) 35%,transparent 55%),
++    linear-gradient(145deg,#160d2c 0%,#3b1c69 40%,#912d8c 72%,#ec4da7 100%)!important;
++}
++.ccg-card.set-smackdown-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 62% 18%,rgba(55,170,255,.36),rgba(16,93,210,.20) 42%,transparent 70%),linear-gradient(145deg,#020812 0%,#071d44 38%,#0757a9 72%,#02101f 100%)!important;
++}
++.ccg-card.set-raw-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 72% 18%,rgba(239,38,55,.38),rgba(122,10,22,.16) 38%,transparent 60%),linear-gradient(145deg,#030304 0%,#0d0d10 38%,#31070c 72%,#980d1b 100%)!important;
++}
++.ccg-card.set-nxt-series-1 .ccg-animated-set-background{
++  background:linear-gradient(120deg,transparent 0 38%,rgba(233,239,244,.12) 48%,rgba(255,255,255,.03) 58%,transparent 72%),linear-gradient(145deg,#020304 0%,#171b1f 46%,#07090b 76%,#252b31 100%)!important;
++}
++.ccg-card.set-ruthless-aggression-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 76% 20%,rgba(239,45,55,.34),rgba(150,17,26,.13) 38%,transparent 62%),linear-gradient(145deg,#050303 0%,#171012 44%,#3c080e 70%,#090304 100%)!important;
++}
++.ccg-card.set-golden-era-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 48% 25%,rgba(255,224,112,.30),rgba(228,62,47,.10) 42%,transparent 70%),linear-gradient(145deg,#08122b 0%,#10245a 46%,#45130d 72%,#09090b 100%)!important;
++}
++.ccg-card.set-attitude-era-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 58% 26%,rgba(235,235,235,.14),rgba(230,32,48,.12) 40%,transparent 62%),linear-gradient(145deg,#050506 0%,#181a1d 48%,#09090a 76%,#26070b 100%)!important;
++}
++.ccg-card.set-new-generation-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 16% 72%,rgba(49,224,212,.24),rgba(49,224,212,.08) 48%,transparent 58%),radial-gradient(circle at 73% 16%,rgba(238,59,159,.38),rgba(118,49,158,.18) 38%,transparent 68%),linear-gradient(145deg,#090d34 0%,#25256f 34%,#57246f 66%,#11123b 100%)!important;
++}
++.ccg-card.set-survivor-series-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 78% 18%,rgba(255,107,27,.38),rgba(212,73,12,.11) 42%,transparent 72%),linear-gradient(145deg,#06162f 0%,#0a1c36 52%,#020812 100%)!important;
++}
++.ccg-card.set-money-in-the-bank-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 66% 18%,rgba(126,255,67,.34),rgba(152,70,224,.22) 34%,rgba(228,184,58,.10) 70%,transparent 82%),linear-gradient(145deg,#090511 0%,#21102f 32%,#173618 62%,#050706 100%)!important;
++}
++.ccg-card.set-worlds-collide-series-1 .ccg-animated-set-background{
++  background:radial-gradient(circle at 56% 21%,rgba(226,184,63,.30),rgba(86,241,63,.16) 30%,rgba(212,31,38,.12) 58%,transparent 72%),linear-gradient(145deg,#020303 0%,#0a0b08 34%,#11180d 62%,#2d0a0b 82%,#090909 100%)!important;
++}
++.ccg-card.set-season-1-final-boss .ccg-animated-set-background,
++.ccg-card.set-season-1-last-time-is-now .ccg-animated-set-background,
++.ccg-card.set-season-2-whos-next .ccg-animated-set-background,
++.ccg-card.set-parked-chyna .ccg-animated-set-background{
++  background:radial-gradient(circle at 68% 20%,rgba(239,196,93,.29),rgba(210,37,54,.15) 36%,transparent 58%),linear-gradient(145deg,#090506 0%,#26080d 46%,#690e1a 76%,#b51b28 100%)!important;
++}
++.ccg-card .ccg-animated-set-background{background-color:#0b1019}
++
++/* Superstar Card Studio plates use the same clean rectangular lower plaque as
++   every other authored card. The plate already contains the frame; this layer
++   supplies the profile-driven live name/type exactly inside that footprint. */
++.ccg-card.is-layered-front .ccg-superstar-nameplate{
++  left:5.2%!important;right:5.2%!important;bottom:4.2%!important;height:18.6%!important;
++  padding:0!important;display:block!important;
++  clip-path:none!important;-webkit-clip-path:none!important;border-radius:0!important;
++  background:linear-gradient(180deg,rgba(20,25,32,.95),rgba(3,5,9,.995))!important;
++  border:1px solid var(--np-edge,#fff)!important;box-shadow:none!important;
++}
++.ccg-card.is-layered-front .ccg-superstar-nameplate strong{
++  position:absolute!important;left:5%!important;right:5%!important;top:43%!important;
++  transform:translateY(-50%) skewX(var(--np-skew,0deg)) scaleX(var(--np-scale-x,1))!important;
++  transform-origin:center!important;
++}
++.ccg-card.is-layered-front .ccg-superstar-nameplate small{
++  position:absolute!important;left:0!important;right:0!important;top:73%!important;text-align:center!important;
++}
++@media (prefers-reduced-motion:reduce){
++  .ccg-animated-set-background,.ccg-animated-set-logo,.ccg-animated-card-surface{display:none!important}
++}
