@@ -1,18 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=1.1.30';
-import { superstars } from '../js/data/superstars.js?v=1.1.30';
-import { decks } from '../js/data/decks.js?v=1.1.30';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.30';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.30';
-import { boosterEligible } from '../js/data/boosters.js?v=1.1.30';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.30';
-import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=1.1.30';
+import { sets } from '../js/data/sets.js?v=1.1.31';
+import { superstars } from '../js/data/superstars.js?v=1.1.31';
+import { decks } from '../js/data/decks.js?v=1.1.31';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.31';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.31';
+import { boosterEligible } from '../js/data/boosters.js?v=1.1.31';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.31';
+import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=1.1.31';
 
 const doink=Object.values(superstars).find(s=>s.id==='doink-the-clown');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
-await import('../js/data/superstar-nameplates.js?v=1.1.30');
+await import('../js/data/superstar-nameplates.js?v=1.1.31');
 
 const shared=[
  ['monkey-flip','Monkey Flip','NG1-029',1,3,5,'agility',{agility:1},'front-control'],

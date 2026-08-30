@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.30";
-import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../js/data/animated-card-art.js?v=1.1.30";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.31";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../js/data/animated-card-art.js?v=1.1.31";
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
 const html=fs.readFileSync(new URL("../tools/card-art-studio.html",import.meta.url),"utf8");

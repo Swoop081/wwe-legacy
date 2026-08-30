@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.30") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.31") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10438,4 +10438,51 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
   body[data-screen="seasons"] .season-reward-up{width:68px!important;height:68px!important}.season-reward-up b{font-size:1.2rem!important}
   body[data-screen="seasons"] .season-road-reward strong{font-size:.76rem!important}.season-road-reward small{font-size:.46rem!important}.season-road-reward em{font-size:.40rem!important}
   .superstar-pack-card-row{grid-auto-columns:104px}.superstar-pack-card .welcome-pack-ccg{width:104px!important;max-width:104px!important}
+}
+
+/* ========================================================================== */
+/* v1.1.31 — Two-page Play hub + WWE.com Cody / Hulk mode portraits.          */
+/* ========================================================================== */
+.mode-survivor-series{--mode-banner-accent:#45d8ff;--mode-accent:#45d8ff;--mode-accent-2:#b9efff}
+.mode-logo-survivor-series strong{color:#45d8ff!important;text-shadow:0 2px 0 rgba(255,255,255,.10)!important}
+.legacy-play-heading p b{color:#cbd3dd;font-size:.9em;letter-spacing:.12em;margin-left:5px}
+.play-mode-page-arrow{
+  width:100%;min-height:62px;margin:1px 0 0;padding:7px 16px 8px;display:flex;align-items:center;justify-content:center;gap:14px;
+  border:1px solid rgba(255,255,255,.16);border-radius:5px;background:linear-gradient(105deg,#080b11,#111822 58%,#080b11);color:#fff;
+  box-shadow:0 12px 28px rgba(0,0,0,.30);font:inherit;cursor:pointer;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+}
+.play-mode-page-arrow span{font-size:.52rem;letter-spacing:.20em;font-weight:1000;color:#93a0b0}
+.play-mode-page-arrow b{font-size:2.75rem;line-height:.65;font-weight:800;color:#4dd8ff;text-shadow:0 0 18px rgba(77,216,255,.24)}
+.play-mode-page-arrow.is-back b{color:#efc24a;text-shadow:0 0 18px rgba(239,194,74,.22)}
+.play-mode-page-arrow:active{transform:translateY(1px)}
+.play-mode-page-arrow:focus-visible{outline:2px solid #4dd8ff;outline-offset:2px}
+.legacy-mode-stack-featured{grid-template-rows:repeat(2,minmax(224px,1fr))!important}
+.legacy-mode-stack-featured .legacy-mode-banner{min-height:224px!important}
+.legacy-mode-stack-featured .legacy-mode-copy{min-height:224px!important;width:61%!important;padding-top:18px!important;padding-bottom:18px!important}
+.legacy-mode-stack-featured .legacy-mode-copy .mode-logo span{font-size:clamp(1.45rem,4.7vw,2.35rem)!important}
+.legacy-mode-stack-featured .legacy-mode-copy .mode-logo strong{font-size:clamp(2.45rem,7vw,3.8rem)!important}
+.legacy-mode-stack-featured .legacy-mode-copy>small{font-size:.52rem!important;line-height:1.15!important}
+.legacy-mode-stack-featured .legacy-mode-copy>b{margin-top:12px!important;font-size:.55rem!important;padding:8px 11px!important}
+.legacy-mode-stack-featured .legacy-mode-superstar{right:-7%!important;bottom:-15%!important;width:62%!important;height:144%!important}
+.play-menu-page-2 .mode-survivor-series .legacy-mode-superstar{right:-4%!important;bottom:-13%!important;width:58%!important;height:140%!important}
+
+@media(max-width:600px){
+  .play-mode-page-arrow{min-height:56px;padding:5px 12px 6px}.play-mode-page-arrow b{font-size:2.45rem}.play-mode-page-arrow span{font-size:.46rem}
+  .legacy-mode-stack-featured{grid-template-rows:repeat(2,minmax(218px,1fr))!important}
+  .legacy-mode-stack-featured .legacy-mode-banner{min-height:218px!important}
+  .legacy-mode-stack-featured .legacy-mode-copy{min-height:218px!important;width:62%!important;padding:15px 4px 15px 14px!important}
+  .legacy-mode-stack-featured .legacy-mode-copy .mode-logo span{font-size:1.38rem!important}
+  .legacy-mode-stack-featured .legacy-mode-copy .mode-logo strong{font-size:2.55rem!important}
+  .legacy-mode-stack-featured .legacy-mode-copy>small{font-size:.43rem!important}
+  .legacy-mode-stack-featured .legacy-mode-copy>b{font-size:.47rem!important}
+  .legacy-mode-stack-featured .legacy-mode-superstar{right:-13%!important;bottom:-17%!important;width:72%!important;height:150%!important}
+  .play-menu-page-2 .mode-survivor-series .legacy-mode-superstar{right:-9%!important;bottom:-15%!important;width:68%!important;height:147%!important}
+}
+@media(max-width:390px){
+  .legacy-mode-stack-featured{grid-template-rows:repeat(2,minmax(210px,1fr))!important}
+  .legacy-mode-stack-featured .legacy-mode-banner{min-height:210px!important}
+  .legacy-mode-stack-featured .legacy-mode-copy{min-height:210px!important;width:64%!important}
+  .legacy-mode-stack-featured .legacy-mode-copy .mode-logo strong{font-size:2.38rem!important}
+  .legacy-mode-stack-featured .legacy-mode-superstar{right:-16%!important;width:76%!important}
+  .play-menu-page-2 .mode-survivor-series .legacy-mode-superstar{right:-12%!important;width:72%!important}
 }

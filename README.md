@@ -1,6 +1,11 @@
-# WWE Legacy v1.1.30 — Jake Roberts Trademark Audit
+# WWE Legacy v1.1.31 — Play Hub Two-Page Navigation + WWE.com Portrait Fix
 
-**Current working baseline.** v1.1.30 supersedes v1.1.26.
+**Current working baseline.** v1.1.31 supersedes v1.1.30.
+
+
+## Play hub two-page layout
+
+**Choose Your Path** is now split into two iPhone-first pages. Page 1 contains Exhibition Showcase, Live Events and King of the Ring, with a large Next arrow. Page 2 contains enlarged Championship Road and Survivor Series banners, with a matching Back arrow. Live Events uses Cody Rhodes' WWE.com profile render; Survivor Series uses Hulk Hogan's WWE.com profile render and the same shared mode-logo typography as the other Play cards.
 
 ## Jake Roberts audit
 

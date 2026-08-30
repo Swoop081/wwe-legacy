@@ -1,13 +1,23 @@
-# WWE Legacy v1.1.30 — Jake Roberts Trademark Audit
+# WWE Legacy v1.1.31 — Play Hub Two-Page Navigation + WWE.com Portrait Fix
 
 ## Release identity
-- Version: **v1.1.30**
-- Title: **Onboarding Superstar Pack + Season Road Visual Overhaul**
+- Version: **v1.1.31**
+- Title: **Play Hub Two-Page Navigation + WWE.com Portrait Fix**
 - Date: **30 August 2026**
-- Base: **v1.1.26 — Card Presentation Consistency Hotfix**
+- Base: **v1.1.30 — Trish Season Banner Framing Hotfix**
 - Distribution: **no-assets code overlay**; no packaged image asset changed in this release.
 
 ## Implemented changes
+
+### v1.1.31 Play hub / portrait correction
+- Splits the five Play destinations across two pages to eliminate the long mobile scroll.
+- Page 1 order is Exhibition Showcase, Live Events, King of the Ring, then a large Next arrow.
+- Page 2 contains enlarged Championship Road and Survivor Series banners, then a matching Back arrow.
+- Live Events uses Cody Rhodes' current WWE.com profile/headshot render (`CODY_RHODES_PROFILE.png`) instead of the prior WWE.com in-ring action image.
+- Survivor Series uses Hulk Hogan's WWE.com profile/headshot render (`Hulk_Hogan_pro.png`) instead of Randy Orton.
+- Survivor Series now uses the shared `modeLogoMarkup()` typography treatment and dedicated cyan accent, matching the visual system used by the other Play modes.
+- Gameplay and progression logic are unchanged.
+
 
 ### v1.1.30 Jake Roberts audit
 - Removes Jake’s Gutwrench Gutbuster and Jake’s Running Knee Lift completely.
@@ -60,6 +70,9 @@
 - No booster odds, economy values, Season XP thresholds, Merch rules, animation rules, Live Event rules or card printing tiers change.
 
 ## Certification
+- Focused v1.1.31 Play hub / portrait / typography assertions: **3/3 passed**.
+- Structured-mode + Live Event + v1.1 carry-forward sample: **33 passed / 7 retained baseline failures / 1 skipped**. The uploaded v1.1.30 baseline produces the same **7** failures in the same carry-forward sample, so v1.1.31 adds **0 new failures** there.
+- JavaScript syntax check passed for `js/ui/app.js`.
 - Focused v1.1.26 presentation + v1.1.25 onboarding carry-forward assertions: **13/13 passed**.
 - No-assets package-context full suite: **1,077 discovered / 902 passed / 78 retained failures / 97 skipped**.
 - The attached v1.1.25 no-assets baseline produces the same **78** package-context failures; v1.1.26 adds **0 new failing contracts**.
@@ -69,5 +82,5 @@
 - Collector ID audit: **928 cards / 928 manifest entries / 0 issues**.
 - Flow audit: **95 Superstars / 0 issues**.
 - JavaScript syntax checks passed for live UI, profile and Superstar Pack module.
-- Cache/version stamp: **v1.1.30**.
-- Physical iPhone visual smoke remains pending for uppercase Superstar nameplates, exact Superstar Pack branding, full-face Merch artwork, and the v1.1.25 onboarding/Season presentation surfaces.
+- Cache/version stamp: **v1.1.31**.
+- Physical iPhone visual smoke remains pending for the v1.1.31 two-page Play hub, Cody/Hogan WWE.com headshots, Survivor Series typography, and all carried-forward presentation surfaces.

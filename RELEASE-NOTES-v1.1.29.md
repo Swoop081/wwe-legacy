@@ -1,5 +1,16 @@
 # WWE Legacy v1.1.30 — Card Presentation Corrections
 
+## v1.1.31 — Play Hub Two-Page Navigation + WWE.com Portrait Fix
+
+- Splits **Play → Choose Your Path** into two focused pages instead of one long five-mode scroll.
+- Page 1 is **Exhibition Showcase → Live Events → King of the Ring**, followed by a large full-width **Next →** control.
+- Page 2 is **Championship Road → Survivor Series**, with both mode banners enlarged and a matching full-width **← Back** control.
+- Replaces the old Cody Rhodes WWE.com action photo with Cody's WWE.com transparent profile/headshot render for Live Events.
+- Survivor Series now uses Hulk Hogan's WWE.com transparent profile/headshot render instead of Randy Orton.
+- Survivor Series now uses the shared WWE Legacy mode-logo typography system (`SURVIVOR` / `SERIES`) and matching cyan mode accent rather than its one-off text treatment.
+- No gameplay rules, rewards, economy, card data, Live Event schedule, Championship Road progression or Survivor Series capture rules change.
+
+
 ## v1.1.30 — Trish Season Banner Framing Hotfix
 
 - Keeps Trish's requested 2× Home-screen scale.
