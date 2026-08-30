@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.44";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.44";
-import { decks } from "../js/data/decks.js?v=1.1.44";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.45";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.45";
+import { decks } from "../js/data/decks.js?v=1.1.45";
 
 const topRopeNeckbreaker=allGameplayCards.find(card=>card.id==="top-rope-neckbreaker");
 const rearNakedChoke=allGameplayCards.find(card=>card.id==="rear-naked-choke");

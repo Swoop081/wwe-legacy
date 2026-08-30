@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.44") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.45") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10943,3 +10943,50 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
 .ccg-card.has-active-animation .ccg-live-front-data,
 .ccg-card.has-active-animation .ccg-superstar-nameplate{z-index:4!important}
 .ccg-card.has-active-animation .ccg-animated-set-logo{z-index:5!important}
+
+/* ========================================================================== */
+/* v1.1.45 — Atomic Card Studio ink layer.                                    */
+/* The v1.1.44 CSS-positioned labels could disappear or mis-scale on small    */
+/* iPhone card surfaces. The complete printed face now lives in one 680×1000  */
+/* SVG coordinate system, exactly matching Card Studio's canvas.              */
+/* ========================================================================== */
+.ccg-card.is-layered-front .ccg-live-front-svg,
+.ccg-card.is-layered-front .ccg-live-superstar-rarity{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  display:block!important;overflow:visible!important;opacity:1!important;visibility:visible!important;
+  pointer-events:none!important;z-index:4!important;
+}
+.ccg-card.is-layered-front:not(.has-layered-asset) .ccg-live-front-svg,
+.ccg-card.is-layered-front:not(.has-layered-asset) .ccg-live-superstar-rarity{visibility:hidden!important}
+.ccg-card.is-layered-front .ccg-live-front-svg::before,
+.ccg-card.is-layered-front .ccg-live-front-svg::after{content:none!important;display:none!important}
+.ccg-card.is-layered-front .ccg-live-front-svg>*{position:static!important}
+.ccg-card.is-layered-front .ccg-live-svg-plaque{
+  fill:rgba(3,5,9,.985)!important;stroke:var(--lf-border,var(--lf-accent,#e1bd61))!important;stroke-width:2.5!important;
+}
+.ccg-card.is-premium-reward-card.is-layered-front .ccg-live-svg-plaque{fill:rgba(18,7,10,.985)!important;stroke:#efcf73!important}
+.ccg-card.is-layered-front .ccg-live-svg-name{
+  font-family:var(--studio-display-font)!important;font-weight:900!important;
+  stroke:rgba(0,0,0,.96)!important;stroke-width:3!important;paint-order:stroke fill!important;
+  letter-spacing:0!important;text-transform:uppercase!important;
+}
+.ccg-card.is-layered-front .ccg-live-svg-stat-label{
+  font-family:var(--studio-meta-font)!important;font-size:29px!important;font-weight:950!important;
+  letter-spacing:1.1px!important;fill:rgba(255,255,255,.80)!important;stroke:none!important;
+}
+.ccg-card.is-layered-front .ccg-live-svg-stat-value{
+  font-family:var(--studio-number-font)!important;font-size:64px!important;font-weight:1000!important;
+  letter-spacing:0!important;fill:#fff!important;stroke:none!important;
+}
+.ccg-card.is-layered-front .ccg-live-svg-type{
+  font-family:var(--studio-meta-font)!important;font-weight:950!important;letter-spacing:1px!important;
+  fill:var(--lf-accent,#e1bd61)!important;stroke:none!important;text-transform:uppercase!important;
+}
+.ccg-card.is-premium-reward-card.is-layered-front .ccg-live-svg-type{fill:#f1d079!important}
+.ccg-card.is-layered-front .ccg-live-rarity-star,
+.ccg-card.is-layered-front .ccg-live-superstar-rarity .ccg-live-rarity-star{
+  font-family:Arial,sans-serif!important;font-size:24px!important;font-weight:900!important;
+  fill:#f4c542!important;stroke:rgba(28,18,2,.92)!important;stroke-width:3!important;paint-order:stroke fill!important;
+}
+.ccg-card.has-active-animation .ccg-live-front-svg,
+.ccg-card.has-active-animation .ccg-live-superstar-rarity{z-index:4!important}

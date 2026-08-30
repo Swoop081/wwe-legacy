@@ -1,4 +1,4 @@
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.44";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.45";
 // WWE Legacy five-tier collectible printing system.
 // Authored card data is the Sapphire balance baseline. Normal/Emerald step
 // down offensive strength; Ruby is +1 and Amethyst is the final +2 chase. Cost, requirements,

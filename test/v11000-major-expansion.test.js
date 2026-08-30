@@ -1,20 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.1.44';
-import { decks } from '../js/data/decks.js?v=1.1.44';
-import { sets } from '../js/data/sets.js?v=1.1.44';
-import { collectionCards } from '../js/data/collection.js?v=1.1.44';
-import { playerReleasedCollectibleSetIds } from '../js/data/release.js?v=1.1.44';
-import { PROFILE_VERSION, createProfile } from '../js/data/profile.js?v=1.1.44';
-import { CARD_TIERS, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=1.1.44';
-import { BOOSTER_GAMEPLAY_SLOTS, BOOSTER_MERCH_SLOTS, BOOSTER_SIZE, grantBooster, openBooster } from '../js/data/boosters.js?v=1.1.44';
-import { MERCH_ITEMS, GENERIC_MERCH } from '../js/data/merch.js?v=1.1.44';
-import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.44';
-import { DAILY_SPIN_COOLDOWN_MS, DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from '../js/data/daily-spin.js?v=1.1.44';
-import { canEnterSurvivorSeries, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch } from '../js/data/survivor-series-mode.js?v=1.1.44';
-import { SEASON_1_COMPLETION_SUPERSTAR, tierReward } from '../js/data/seasons.js?v=1.1.44';
-import { canonicalCardImagePath, canonicalBasePlatePath, canonicalSuperstarPath } from '../js/data/artwork.js?v=1.1.44';
-await import('../js/data/superstar-nameplates.js?v=1.1.44');
+import { superstars } from '../js/data/superstars.js?v=1.1.45';
+import { decks } from '../js/data/decks.js?v=1.1.45';
+import { sets } from '../js/data/sets.js?v=1.1.45';
+import { collectionCards } from '../js/data/collection.js?v=1.1.45';
+import { playerReleasedCollectibleSetIds } from '../js/data/release.js?v=1.1.45';
+import { PROFILE_VERSION, createProfile } from '../js/data/profile.js?v=1.1.45';
+import { CARD_TIERS, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=1.1.45';
+import { BOOSTER_GAMEPLAY_SLOTS, BOOSTER_MERCH_SLOTS, BOOSTER_SIZE, grantBooster, openBooster } from '../js/data/boosters.js?v=1.1.45';
+import { MERCH_ITEMS, GENERIC_MERCH } from '../js/data/merch.js?v=1.1.45';
+import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.45';
+import { DAILY_SPIN_COOLDOWN_MS, DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from '../js/data/daily-spin.js?v=1.1.45';
+import { canEnterSurvivorSeries, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch } from '../js/data/survivor-series-mode.js?v=1.1.45';
+import { SEASON_1_COMPLETION_SUPERSTAR, tierReward } from '../js/data/seasons.js?v=1.1.45';
+import { canonicalCardImagePath, canonicalBasePlatePath, canonicalSuperstarPath } from '../js/data/artwork.js?v=1.1.45';
+await import('../js/data/superstar-nameplates.js?v=1.1.45');
 
 const now = new Date('2026-08-29T00:00:00+10:00');
 const released = [

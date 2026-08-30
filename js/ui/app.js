@@ -1,46 +1,46 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.44";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.44";
-import { superstars } from "../data/superstars.js?v=1.1.44";
-import { decks } from "../data/decks.js?v=1.1.44";
-import { sets } from "../data/sets.js?v=1.1.44";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.44";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.44";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.44";
-import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.44";
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, claimWelcomeSuperstarPack, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.44";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.44";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.44";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.44";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.44";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.44";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.44";
-import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.44";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.44";
-import { totalMomentum } from "../engine/utils.js?v=1.1.44";
-import { healthZone } from "../engine/health.js?v=1.1.44";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.44";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.44";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.44";
-import { playPileMatStyle } from "./play-pile-mats.js?v=1.1.44";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.44";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.44";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.44";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.44";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.44";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.44";
-import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.44";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.44";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.44";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.44";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.44";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.44";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.44";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.44";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.44";
-import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.44";
-import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.44";
-import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.44";
-import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.44";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.45";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.45";
+import { superstars } from "../data/superstars.js?v=1.1.45";
+import { decks } from "../data/decks.js?v=1.1.45";
+import { sets } from "../data/sets.js?v=1.1.45";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.45";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.45";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.45";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.45";
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, claimWelcomeSuperstarPack, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.45";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.45";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.45";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.45";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.45";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.45";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.45";
+import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.45";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.45";
+import { totalMomentum } from "../engine/utils.js?v=1.1.45";
+import { healthZone } from "../engine/health.js?v=1.1.45";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.45";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.45";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.45";
+import { playPileMatStyle } from "./play-pile-mats.js?v=1.1.45";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.45";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.45";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.45";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.45";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.45";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.45";
+import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.45";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.45";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.45";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.45";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.45";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.45";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.45";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.45";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.45";
+import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.45";
+import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.45";
+import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.45";
+import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.45";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -2615,30 +2615,84 @@ function isPremiumRewardCard(card) {
   return PREMIUM_REWARD_SET_IDS.has(card?.setId) || setType === "future-reward" || setType === "season-exclusive";
 }
 
+const LIVE_FRONT_METHOD_COLORS = {
+  strength: "#ff8a1f",
+  strike: "#ef3f4e",
+  technical: "#36c86f",
+  agility: "#2fa8ff"
+};
+function liveFrontSvgEscape(value = "") {
+  return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+}
+function liveFrontSvgId(value = "card") {
+  return String(value || "card").toLowerCase().replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "") || "card";
+}
+function liveFrontRaritySvg(card) {
+  const rarity = Math.max(1, Math.min(4, Number(card?.rarity) || 1));
+  return Array.from({ length: rarity }, (_, i) => `<text class="ccg-live-rarity-star" x="51" y="${62 + i * 31}" text-anchor="middle" dominant-baseline="middle">★</text>`).join("");
+}
+function liveFrontMethodDotsSvg(card) {
+  if (!card || card.kind !== "move" || card.finisher) return "";
+  const methods = Object.entries(card.requirements ?? {})
+    .filter(([, amount]) => Number(amount) > 0)
+    .flatMap(([method, amount]) => Array.from({ length: Number(amount) }, () => String(method).toLowerCase()));
+  if (!methods.length) return "";
+  const r = 17.4, gap = 10, total = methods.length * r * 2 + Math.max(0, methods.length - 1) * gap;
+  let x = 340 - total / 2 + r;
+  const dots = methods.map(method => {
+    const color = LIVE_FRONT_METHOD_COLORS[method] ?? "#ffffff";
+    const markup = `<g class="ccg-live-method-dot method-${liveFrontSvgId(method)}"><circle cx="${x.toFixed(2)}" cy="866" r="17.4" fill="${color}" stroke="rgba(255,255,255,.84)" stroke-width="2.1"/><circle cx="${(x-r*.26).toFixed(2)}" cy="${(866-r*.28).toFixed(2)}" r="${(r*.28).toFixed(2)}" fill="rgba(255,255,255,.48)"/></g>`;
+    x += r * 2 + gap;
+    return markup;
+  }).join("");
+  return `<g class="ccg-live-requirement">${dots}</g>`;
+}
+function liveFrontMoveTypeSvg(card, hasRequirement) {
+  const moveType = String(card?.moveType || card?.method || "move").toUpperCase();
+  const full = `MOVE • ${moveType}`;
+  const y = hasRequirement ? 929 : 895;
+  const size = hasRequirement ? 34 : 40;
+  if (full.length <= 21) return `<text class="ccg-live-svg-type" x="340" y="${y}" font-size="${size}" text-anchor="middle" dominant-baseline="middle">${liveFrontSvgEscape(full)}</text>`;
+  const gap = size * .82;
+  return `<text class="ccg-live-svg-type" x="340" y="${(y-gap*.48).toFixed(2)}" font-size="${size}" text-anchor="middle" dominant-baseline="middle">MOVE</text><text class="ccg-live-svg-type" x="340" y="${(y+gap*.52).toFixed(2)}" font-size="${size}" text-anchor="middle" dominant-baseline="middle">• ${liveFrontSvgEscape(moveType)}</text>`;
+}
 function layeredFrontOverlayMarkup(card) {
   if (!card) return "";
-  const rarity = rarityStars(card.rarity ?? 1).split("").join("<br>");
+  const safeName = liveFrontSvgEscape(String(card.name ?? "").toUpperCase());
   const nameLength = String(card.name ?? "").length;
-  const nameClass = nameLength > 30 ? "is-name-xl" : nameLength > 22 ? "is-name-long" : "";
-  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : String(card.kind ?? "CARD").toUpperCase();
+  const nameSize = nameLength > 30 ? 33 : nameLength > 22 ? 40 : (card.kind === "move" ? 44 : 49);
+  const gradientId = `ccg-live-name-${liveFrontSvgId(card.id)}`;
+  const plaqueTop = card.kind === "move" ? 740 : 772;
+  const plaqueHeight = card.kind === "move" ? 218 : 186;
+  const rarity = liveFrontRaritySvg(card);
   if (card.kind === "move") {
-    const req = layeredFrontRequirementDotsMarkup(card);
-    const moveType = String(card.moveType || card.method || "move").toUpperCase();
-    return `<span class="ccg-live-front-data ccg-live-front-move" aria-hidden="true">
-      <span class="ccg-live-rarity">${rarity}</span>
-      <strong class="ccg-live-name ${nameClass}" data-card-name-marquee="1"><span class="ccg-live-name-text">${card.name}</span></strong>
-      <span class="ccg-live-stat ccg-live-cost"><small>COST</small><b>${card.cost ?? 0}</b></span>
-      <span class="ccg-live-stat ccg-live-damage"><small>DAMAGE</small><b>${card.damage ?? 0}</b></span>
-      ${req ? `<span class="ccg-live-requirement">${req}</span>` : ""}
-      <span class="ccg-live-type ${req ? "has-requirement" : ""}">MOVE • ${moveType}</span>
-    </span>`;
+    const dots = liveFrontMethodDotsSvg(card);
+    const hasRequirement = Boolean(dots);
+    return `<svg class="ccg-live-front-data ccg-live-front-svg ccg-live-front-move" viewBox="0 0 680 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs><linearGradient id="${gradientId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="62%" stop-color="var(--lf-name-top,#ffffff)"/><stop offset="100%" stop-color="var(--lf-name-bottom,var(--lf-accent,#e1bd61))"/></linearGradient></defs>
+      <rect class="ccg-live-svg-plaque" x="35.36" y="${plaqueTop}" width="609.28" height="${plaqueHeight}"/>
+      ${rarity}
+      <text class="ccg-live-svg-name" x="340" y="787" font-size="${nameSize}" text-anchor="middle" dominant-baseline="middle" fill="url(#${gradientId})">${safeName}</text>
+      <text class="ccg-live-svg-stat-label" x="108.8" y="829" text-anchor="middle" dominant-baseline="middle">COST</text>
+      <text class="ccg-live-svg-stat-label" x="571.2" y="829" text-anchor="middle" dominant-baseline="middle">DAMAGE</text>
+      <text class="ccg-live-svg-stat-value" x="108.8" y="884" text-anchor="middle" dominant-baseline="middle">${liveFrontSvgEscape(card.cost ?? 0)}</text>
+      <text class="ccg-live-svg-stat-value" x="571.2" y="884" text-anchor="middle" dominant-baseline="middle">${liveFrontSvgEscape(card.damage ?? 0)}</text>
+      ${dots}
+      ${liveFrontMoveTypeSvg(card,hasRequirement)}
+    </svg>`;
   }
-  const utilityTypeLabel = card.kind === "merch" ? `MERCH • ${card.duration ?? 1} MATCH${Number(card.duration) === 1 ? "" : "ES"}` : typeLabel;
-  return `<span class="ccg-live-front-data ccg-live-front-utility" aria-hidden="true">
-    <span class="ccg-live-rarity">${rarity}</span>
-    <strong class="ccg-live-name ${nameClass}" data-card-name-marquee="1"><span class="ccg-live-name-text">${card.name}</span></strong>
-    <span class="ccg-live-type">${utilityTypeLabel}</span>
-  </span>`;
+  const typeLabel = card.kind === "merch" ? `MERCH • ${card.duration ?? 1} MATCH${Number(card.duration) === 1 ? "" : "ES"}` : (card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : String(card.kind ?? "CARD").toUpperCase());
+  return `<svg class="ccg-live-front-data ccg-live-front-svg ccg-live-front-utility" viewBox="0 0 680 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="${gradientId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="62%" stop-color="var(--lf-name-top,#ffffff)"/><stop offset="100%" stop-color="var(--lf-name-bottom,var(--lf-accent,#e1bd61))"/></linearGradient></defs>
+    <rect class="ccg-live-svg-plaque" x="35.36" y="${plaqueTop}" width="609.28" height="${plaqueHeight}"/>
+    ${rarity}
+    <text class="ccg-live-svg-name" x="340" y="852" font-size="${nameSize}" text-anchor="middle" dominant-baseline="middle" fill="url(#${gradientId})">${safeName}</text>
+    <text class="ccg-live-svg-type" x="340" y="909" font-size="29" text-anchor="middle" dominant-baseline="middle">${liveFrontSvgEscape(typeLabel)}</text>
+  </svg>`;
+}
+function layeredSuperstarRarityMarkup(card) {
+  if (!card || card.kind !== "superstar") return "";
+  return `<svg class="ccg-live-superstar-rarity" viewBox="0 0 680 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">${liveFrontRaritySvg(card)}</svg>`;
 }
 
 function tribalChiefFrontOverlayMarkup(card) {
@@ -2851,7 +2905,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
   const frontMarkup = forcedFinishedFront
     ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${layeredFallbackData}`
     : layeredFront
-      ? `<span class="ccg-card-art ${superstarFront ? "ccg-superstar-full-art" : moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${superstarFront ? superstarNameplateMarkup(card) : layeredFrontOverlayMarkup(card)}`
+      ? `<span class="ccg-card-art ${superstarFront ? "ccg-superstar-full-art" : moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${superstarFront ? `${superstarNameplateMarkup(card)}${layeredSuperstarRarityMarkup(card)}` : layeredFrontOverlayMarkup(card)}`
     : superstarFront
     ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card,{eager:eagerArt})}</span>${superstarNameplateMarkup(card)}`
       : tribalChiefLiveFront && finishedFront

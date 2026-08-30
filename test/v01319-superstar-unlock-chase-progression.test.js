@@ -2,15 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   createProfile, grantSuperstarUnlockPackage, addOwnedCard, totalOwnedCopies, migrateProfile
-} from '../js/data/profile.js?v=1.1.44';
-import { decks } from '../js/data/decks.js?v=1.1.44';
-import { superstars } from '../js/data/superstars.js?v=1.1.44';
-import { collectionCards } from '../js/data/collection.js?v=1.1.44';
+} from '../js/data/profile.js?v=1.1.45';
+import { decks } from '../js/data/decks.js?v=1.1.45';
+import { superstars } from '../js/data/superstars.js?v=1.1.45';
+import { collectionCards } from '../js/data/collection.js?v=1.1.45';
 import {
   buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedDeckDraft, selectedEntranceId
-} from '../js/data/deck-builder.js?v=1.1.44';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=1.1.44';
-import { SUPERSTAR_CHASE_CHANCE, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=1.1.44';
+} from '../js/data/deck-builder.js?v=1.1.45';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=1.1.45';
+import { SUPERSTAR_CHASE_CHANCE, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=1.1.45';
 
 const sid = 'kevin-owens';
 const idCount = (draft,id) => draft.filter(entry => (entry.id ?? entry) === id).length;
