@@ -21,12 +21,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Apply shared dynamic card-face release
+      - name: Materialize and apply shared dynamic card-face release
         shell: bash
         run: |
           set -euo pipefail
-          git apply --check .deploy-v1148/v1.1.48-existing.patch
-          git apply .deploy-v1148/v1.1.48-existing.patch
+          mkdir -p js/shared test
+          base64 -d .deploy-v1148/renderer.gz.b64 | gunzip > js/shared/card-face-renderer.js
+          base64 -d .deploy-v1148/test.gz.b64 | gunzip > test/v1148-shared-card-face-renderer.test.js
+          base64 -d .deploy-v1148/patch.gz.b64 | gunzip > /tmp/v1.1.48-existing.patch
+          git apply --check /tmp/v1.1.48-existing.patch
+          git apply /tmp/v1.1.48-existing.patch
           npm run stamp-cache
 
       - name: Verify release
