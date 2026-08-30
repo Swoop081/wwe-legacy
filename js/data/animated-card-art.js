@@ -1,11 +1,11 @@
-import { assetUrl } from "../config/build.js?v=1.1.21";
-import { canonicalImageKeyForCard } from "./artwork.js?v=1.1.21";
+import { assetUrl } from "../config/build.js?v=1.1.22";
+import { canonicalImageKeyForCard } from "./artwork.js?v=1.1.22";
 
-// v1.1.19 — Animation is a card-family rule, not a rarity rule.
-// Entrances, Actions and Finishers may use animated base plates. All other
-// cards remain static unless a future release explicitly expands this list.
+// v1.1.22 — Every collectible card may optionally use animated artwork.
+// Animation is never required: linked/packaged animation falls back to the
+// ordinary static artwork/base plate when absent, unavailable or reduced-motion is requested.
 export function isAnimatedCardEligible(card){
-  return Boolean(card && (card.kind === "entrance" || card.kind === "action" || (card.kind === "move" && card.finisher === true)));
+  return Boolean(card && card.id);
 }
 
 export const LINKED_ANIMATION_STORAGE_KEY="wweLegacyAnimatedCardLinks.v1";

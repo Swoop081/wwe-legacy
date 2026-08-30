@@ -71,7 +71,7 @@
 .animated-ineligible-note{margin-top:12px;padding:10px 12px;border:1px dashed rgba(255,255,255,.16);border-radius:12px}
 #export-animated-art:not(:disabled){border-color:#f4c84d;color:#fff6c9}
 
-/* v1.1.21 — CORS-free linked animation workflow */
+/* v1.1.22 — CORS-free linked animation workflow */
 .linked-animation-preview-wrap{display:grid;gap:7px;padding:9px;border:1px solid #303039;border-radius:10px;background:#09090c}
 .linked-animation-preview-wrap[hidden]{display:none!important}
 .linked-animation-preview-wrap>span{font-size:.48rem;letter-spacing:.12em;color:var(--gold);font-weight:1000}

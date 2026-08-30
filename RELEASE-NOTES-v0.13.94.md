@@ -1,4 +1,4 @@
-# WWE Legacy v1.1.21 — Linked Animated URL CORS Fallback
+# WWE Legacy v1.1.22 — Linked Animated URL CORS Fallback
 
 - Fixes Card Art Studio direct animated URLs when a host allows normal GIF/WebP display but blocks JavaScript raw-byte `fetch()` with CORS.
 - Studio now validates direct `.gif` / `.webp` links through a normal image load first. A successful display is saved immediately as a **Linked Animation** for the selected Entrance, Action or Finisher; CORS is not required.
@@ -6,7 +6,7 @@
 - Raw fetch/export is optional: hosts that allow CORS also enable **Export Animated Artwork**; hosts that block CORS keep linked playback working instead of showing the old `Failed to fetch` failure.
 - Live runtime preference order is now **linked URL → packaged animated WebP → packaged GIF → static base plate**. If a linked host later fails, the game falls through automatically.
 - No gameplay, Live Events, Merch, Trish, card-value, deck, economy, roster, booster, progression or save-schema changes from v1.1.20.
-- Certification: focused **9/9** across v1.1.20+v1.1.21; full suite **1,067 / 901 passed / 72 inherited historical failures / 94 skipped**, with **0 added or removed failure names** vs v1.1.20; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930 / 0 issues**; flow **95 / 0 issues**.
+- Certification: focused **9/9** across v1.1.20+v1.1.22; full suite **1,067 / 901 passed / 72 inherited historical failures / 94 skipped**, with **0 added or removed failure names** vs v1.1.20; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930 / 0 issues**; flow **95 / 0 issues**.
 
 # WWE Legacy v1.1.20 — Live Events + Trish Corrections + Authored Merch + Animated URL Import
 
@@ -842,3 +842,10 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Card Art Studio adds an Animated Card workflow for eligible cards, accepts GIF/animated WebP sources and preserves the original animated file instead of flattening it through canvas export.
 - Canonical animated filenames are `assets/images/<image-key>-animated.webp` or `.gif`.
 - No gameplay, card values, Merch rules, deck structure, economy, roster, boosters, progression or save-schema changes.
+
+
+## v1.1.22 — Universal Animation + Merch Alpha Finalisation
+- Every collectible card may optionally use a linked or packaged animated GIF/WebP; static art remains the automatic fallback.
+- Animated media is constrained to the artwork window so it cannot replace the physical card dimensions, border, set logo, rarity stars or live plaque/text.
+- Card Art Studio exposes animation import/link/export for all card types.
+- Merch layered base-plate export now performs a final destination-out alpha clear over the full live plaque footprint after all other composition, preventing any image/background pixels from surviving behind the live plaque.

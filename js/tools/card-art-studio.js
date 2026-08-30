@@ -41,7 +41,7 @@ const LINKED_ANIMATION_STORAGE_KEY="wweLegacyAnimatedCardLinks.v1";
 function linkedAnimationMap(){try{const raw=localStorage.getItem(LINKED_ANIMATION_STORAGE_KEY);if(!raw)return {};const parsed=JSON.parse(raw);return parsed&&typeof parsed==="object"&&!Array.isArray(parsed)?parsed:{};}catch{return {};}}
 function savedLinkedAnimation(card=currentCard()){if(!card?.id)return "";return String(linkedAnimationMap()[card.id]||"").trim();}
 function saveLinkedAnimation(card,url){if(!card?.id)return false;try{const map=linkedAnimationMap(),value=String(url||"").trim();if(value)map[card.id]=value;else delete map[card.id];localStorage.setItem(LINKED_ANIMATION_STORAGE_KEY,JSON.stringify(map));return true;}catch{return false;}}
-const BUILD_VERSION="1.1.21";
+const BUILD_VERSION="1.1.22";
 function assetUrl(path){
   if(/^https?:\/\//i.test(String(path||""))) return String(path);
   const url=new URL(`../${path}`,document.location.href);
@@ -58,16 +58,16 @@ function syncLayoutControls(){const limits=layoutLimits(),xRange=isHeadshotMode(
 function saveLayout(key=state.activeLayoutKey||layoutKey()){state.layouts[key]={zoom:state.artZoom,x:state.artX,y:state.artY};}
 function restoreLayout(key=layoutKey()){const saved=state.layouts[key]||{zoom:1,x:0,y:0},limits=layoutLimits();state.activeLayoutKey=key;state.artZoom=Math.max(limits.zoomMin,Math.min(limits.zoomMax,saved.zoom));state.artX=saved.x;state.artY=saved.y;if(!isHeadshotMode()){state.artX=Math.max(-limits.x,Math.min(limits.x,state.artX));state.artY=Math.max(-limits.y,Math.min(limits.y,state.artY));}syncLayoutControls();updateOutputs();}
 function currentCard(){const id=$("#card-select").value;return STUDIO_CARDS.find(c=>c.id===id)||null;}
-function isAnimationEligible(card=currentCard()){return !!card&&(card.kind==="entrance"||card.kind==="action"||(card.kind==="move"&&card.finisher===true));}
+function isAnimationEligible(card=currentCard()){return !!card&&!!card.id;}
 function animatedDestinationFor(card=currentCard(),ext=state.animatedExtension||"webp"){if(!card||!isAnimationEligible(card))return "assets/images/…";return `assets/images/${card.imageKey||exportId(card)}-animated.${ext}`;}
 function animatedStatus(message="",ok=true){const el=$("#animated-art-status");if(!el)return;el.textContent=message;el.classList.toggle("is-error",!ok);}
 function updateAnimationControls(){const card=currentCard(),eligible=isAnimationEligible(card),panel=$("#animated-artwork-panel"),note=$("#animated-ineligible-note"),path=$("#animated-destination-path"),button=$("#export-animated-art"),remove=$("#remove-linked-animation"),previewWrap=$("#linked-animation-preview-wrap"),preview=$("#linked-animation-preview");if(panel)panel.hidden=!eligible;if(note)note.hidden=eligible;if(path)path.textContent=eligible?(state.animatedLinkedUrl?`Linked: ${state.animatedLinkedUrl}`:animatedDestinationFor(card)):"assets/images/…";if(button)button.disabled=!eligible||!state.animatedFile;if(remove)remove.disabled=!eligible||!state.animatedLinkedUrl;if(previewWrap)previewWrap.hidden=!eligible||!state.animatedLinkedUrl;if(preview){if(eligible&&state.animatedLinkedUrl&&preview.src!==state.animatedLinkedUrl)preview.src=state.animatedLinkedUrl;else if(!state.animatedLinkedUrl)preview.removeAttribute("src");}}
 async function fileIsAnimated(file){if(!file)return false;const type=String(file.type||"").toLowerCase(),name=String(file.name||"").toLowerCase();if(type==="image/gif"||name.endsWith(".gif"))return true;if(!(type==="image/webp"||name.endsWith(".webp")))return false;const bytes=new Uint8Array(await file.arrayBuffer());const ascii=new TextDecoder("latin1").decode(bytes);return ascii.includes("ANIM")||ascii.includes("ANMF");}
-async function animatedFileSelected(file){state.animatedFile=null;state.animatedExtension=null;if(!file){updateAnimationControls();return;}if(!isAnimationEligible())return animatedStatus("This card type is static-only. Choose an Entrance, Action or Finisher.",false);try{if(!(await fileIsAnimated(file)))throw new Error("That file is not an animated GIF or animated WebP.");const lower=String(file.name||"").toLowerCase();state.animatedExtension=lower.endsWith(".gif")||file.type==="image/gif"?"gif":"webp";state.animatedFile=file;updateAnimationControls();animatedStatus(`Animated source ready. Runtime prefers animated WebP and falls back to GIF. Install at ${animatedDestinationFor()}.`,true);}catch(error){state.animatedFile=null;state.animatedExtension=null;updateAnimationControls();animatedStatus(error?.message||String(error),false);}}
+async function animatedFileSelected(file){state.animatedFile=null;state.animatedExtension=null;if(!file){updateAnimationControls();return;}if(!isAnimationEligible())return animatedStatus("Choose a collectible card first.",false);try{if(!(await fileIsAnimated(file)))throw new Error("That file is not an animated GIF or animated WebP.");const lower=String(file.name||"").toLowerCase();state.animatedExtension=lower.endsWith(".gif")||file.type==="image/gif"?"gif":"webp";state.animatedFile=file;updateAnimationControls();animatedStatus(`Animated source ready. Runtime prefers animated WebP and falls back to GIF. Install at ${animatedDestinationFor()}.`,true);}catch(error){state.animatedFile=null;state.animatedExtension=null;updateAnimationControls();animatedStatus(error?.message||String(error),false);}}
 async function animatedUrlSelected(rawUrl){
   const value=String(rawUrl||"").trim();
   if(!value)return animatedStatus("Paste a direct animated GIF or WebP URL first.",false);
-  if(!isAnimationEligible())return animatedStatus("This card type is static-only. Choose an Entrance, Action or Finisher.",false);
+  if(!isAnimationEligible())return animatedStatus("Choose a collectible card first.",false);
   let url;try{url=new URL(value);if(!/^https?:$/.test(url.protocol))throw new Error("Only http:// and https:// URLs are supported.");}catch(error){return animatedStatus(`That is not a valid animated media URL: ${error?.message||error}`,false);}
   const pathname=url.pathname.toLowerCase(),ext=pathname.endsWith(".gif")?"gif":pathname.endsWith(".webp")?"webp":"";
   if(!ext)return animatedStatus("Use a direct media URL ending in .gif or .webp, not the page containing it.",false);
@@ -106,7 +106,7 @@ async function animatedUrlSelected(rawUrl){
 }
 function removeLinkedAnimation(){const card=currentCard();if(!card)return;saveLinkedAnimation(card,"");state.animatedLinkedUrl="";state.animatedFile=null;state.animatedExtension=null;const input=$("#animated-art-url");if(input)input.value="";updateAnimationControls();animatedStatus("Linked animation removed. The game will use packaged animated art if present, otherwise the static base plate.",true);}
 
-function exportAnimatedArtwork(){const card=currentCard();if(!isAnimationEligible(card)||!state.animatedFile)return animatedStatus("Choose an eligible card and animated source first.",false);const name=animatedDestinationFor(card).split("/").pop();download(state.animatedFile,name);animatedStatus(`Saved ${name}. Install it at ${animatedDestinationFor(card)}. The ordinary Base Plate remains the static fallback.`,true);}
+function exportAnimatedArtwork(){const card=currentCard();if(!isAnimationEligible(card)||!state.animatedFile)return animatedStatus("Choose a card and animated source first.",false);const name=animatedDestinationFor(card).split("/").pop();download(state.animatedFile,name);animatedStatus(`Saved ${name}. Install it at ${animatedDestinationFor(card)}. The ordinary Base Plate remains the static fallback.`,true);}
 function currentSet(){const card=currentCard();if(card?.kind==="merch"&&!card?.setId)return SETS["merch-generic"];return SETS[card?.setId]||SETS[$("#set-select").value]||{label:"WWE Legacy",...DEFAULT_STUDIO_THEME};}
 function exportId(card){return card?.kind==="superstar"?(card.superstarId||card.id.replace(/^superstar-/,"")):card?.artKey||card?.id;}
 function isHeadshotMode(){return $("#export-target")?.value==="headshot";}
@@ -253,6 +253,23 @@ function drawResponsiveMoveType(text,cx,y,maxWidth,fontPx,tracking,fill){
   const parts=full.split(" • ");if(parts.length<2){drawTrackedText(full,cx,y,tracking*s);ctx.restore();return false;}
   const lineGap=fontPx*.82*s;drawTrackedText(parts[0],cx,y-lineGap*.48,tracking*s);drawTrackedText(`• ${parts.slice(1).join(" • ")}`,cx,y+lineGap*.52,tracking*s);ctx.restore();return true;
 }
+function merchPlaqueFootprint(){
+  const w=canvas.width,h=canvas.height;
+  return {left:w*.052,top:h*.772,width:w*.896,height:h*(.958-.772)};
+}
+function clearMerchPlaqueFootprint(){
+  const card=currentCard();
+  if(!card||card.kind!=="merch"||!state.renderPlateOnly)return;
+  const r=merchPlaqueFootprint();
+  // v1.1.22 — final export-stage alpha enforcement. Clear after all template/art
+  // layers so no opaque photography, veil, set treatment or prior plaque pixels
+  // can survive underneath the live Merch plaque. A small half-pixel expansion
+  // prevents antialias seams at the boundary without touching the outer frame.
+  const pad=Math.max(.5,scale()*.65);
+  ctx.save();ctx.globalCompositeOperation="destination-out";
+  ctx.fillStyle="#000";ctx.fillRect(r.left-pad,r.top-pad,r.width+pad*2,r.height+pad*2);
+  ctx.restore();
+}
 function drawBottomIdentity(){
   const card=currentCard();if(!card)return;
   const set=currentSet(),w=canvas.width,h=canvas.height,s=scale(),isMove=card.kind==="move",isSuperstar=card.kind==="superstar",isReward=studioRewardSet(card),text=isSuperstar?superstarNameText(card):card.name.toUpperCase();
@@ -263,8 +280,8 @@ function drawBottomIdentity(){
   if(isReward){plate.addColorStop(0,"rgba(38,13,17,.96)");plate.addColorStop(1,"rgba(4,4,7,.995)");}
   else{plate.addColorStop(0,"rgba(20,25,32,.95)");plate.addColorStop(1,"rgba(3,5,9,.995)");}
   if(state.renderPlateOnly&&card.kind==="merch"){
-    // Merch base plates leave the live plaque footprint as true alpha. Product
-    // photography/set art must never bake an opaque rectangle underneath it.
+    // Preview-stage clear; draw() repeats this as the final compositing operation
+    // so later frame/template work cannot reintroduce pixels underneath the plaque.
     ctx.clearRect(panelLeft,panelTop,panelWidth,panelBottom-panelTop);ctx.restore();return;
   }
   ctx.fillStyle=plate;ctx.fillRect(panelLeft,panelTop,panelWidth,panelBottom-panelTop);
@@ -288,7 +305,7 @@ function drawBottomIdentity(){
 }
 function drawFrameOverlay(){const card=currentCard(),set=currentSet(),reward=studioRewardSet(card);frame(ctx,canvas.width,canvas.height,reward?"#efcf73":(set.border||set.accent),reward?"#b51f31":set.accent2);if(!state.renderPlateOnly)drawRarityStars();}
 function drawHeadshot(){const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);drawArt();}
-function draw(){if(isHeadshotMode()){drawHeadshot();return;}if(!state.exportingPlate)state.renderPlateOnly=previewPlateOnly();drawTemplate();const momentumMock=drawMomentumMockup();drawArt();const veil=ctx.createLinearGradient(0,0,0,canvas.height);veil.addColorStop(0,"rgba(0,0,0,.05)");veil.addColorStop(.63,"rgba(0,0,0,0)");veil.addColorStop(1,"rgba(0,0,0,.22)");ctx.fillStyle=veil;ctx.fillRect(0,0,canvas.width,canvas.height);if(!momentumMock){drawSetLogo();drawBottomIdentity();}drawFrameOverlay();}
+function draw(){if(isHeadshotMode()){drawHeadshot();return;}if(!state.exportingPlate)state.renderPlateOnly=previewPlateOnly();drawTemplate();const momentumMock=drawMomentumMockup();drawArt();const veil=ctx.createLinearGradient(0,0,0,canvas.height);veil.addColorStop(0,"rgba(0,0,0,.05)");veil.addColorStop(.63,"rgba(0,0,0,0)");veil.addColorStop(1,"rgba(0,0,0,.22)");ctx.fillStyle=veil;ctx.fillRect(0,0,canvas.width,canvas.height);if(!momentumMock){drawSetLogo();drawBottomIdentity();}drawFrameOverlay();clearMerchPlaqueFootprint();}
 function studioFallbackLogoData(id){return "";}
 async function loadStudioSetLogo(src,id){
   if(/^https?:\/\//i.test(String(src||""))){

@@ -70,6 +70,6 @@ Entrances, Actions and Finisher Moves may install an animated base plate next to
 The ordinary `assets/images/<image-key>-base-plate.webp` remains required/recommended as the static fallback. Animated assets should not bake mutable card text/stats into the media; the runtime live overlay renders those above the animated base plate.
 ## v1.1.20 animated URL + Merch plate rules
 
-- Card Art Studio may ingest a direct `.gif` or animated `.webp` media URL for eligible Entrance, Action and Finisher cards. Remote media is preserved as animation; do not route it through the static image proxy.
+- Card Art Studio may ingest a direct `.gif` or animated `.webp` media URL for any collectible card. Remote media is preserved as animation; do not route it through the static image proxy.
 - Canonical installed animation filenames remain `assets/images/<image-key>-animated.webp` or `assets/images/<image-key>-animated.gif`.
 - For layered **Merch** base plates, the entire live lower-plaque footprint must remain **true alpha/transparent**. Product photography/background art must stop before or be cleared from that rectangle so the runtime plaque is the only footer layer.

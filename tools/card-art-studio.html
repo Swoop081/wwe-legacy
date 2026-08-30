@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08080b">
   <title>WWE Legacy — Card Art Studio</title>
-  <link rel="stylesheet" href="../css/card-art-studio.css?v=1.1.21">
+  <link rel="stylesheet" href="../css/card-art-studio.css?v=1.1.22">
 </head>
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>COLLECTIBLE CARD GAME</small></a>
-    <span class="studio-build">CARD ART STUDIO · v1.1.21</span>
+    <span class="studio-build">CARD ART STUDIO · v1.1.22</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
@@ -73,7 +73,7 @@
         </section>
 
         <section class="control-group">
-          <div class="group-heading"><span>2</span><div><b>Artwork</b><small>Load static art, plus an animated base plate for Entrances, Actions and Finishers.</small></div></div>
+          <div class="group-heading"><span>2</span><div><b>Artwork</b><small>Load static art, plus optional animated artwork for any collectible card.</small></div></div>
           <div class="button-row">
             <button id="use-current-art">Use Current Game Art</button>
             <button id="clear-art">Clear Artwork</button>
@@ -82,8 +82,8 @@
             <input id="art-file" type="file" accept="image/*">
           </label>
           <div id="animated-artwork-panel" class="animated-artwork-panel" hidden>
-            <div class="animated-artwork-title"><span>ANIMATED CARD</span><b>Entrance · Action · Finisher</b></div>
-            <p>Optional animated base plate. Use GIF or animated WebP with the frame/set treatment already composed but no live name/stats text. The normal Base Plate remains the static fallback.</p>
+            <div class="animated-artwork-title"><span>ANIMATED CARD</span><b>Available for every card</b></div>
+            <p>Optional animated artwork. Use GIF or animated WebP; the normal card dimensions, frame, set logo, rarity and information plaque live above it. The normal Base Plate remains the static fallback.</p>
             <label class="file-picker">Choose animated base plate
               <input id="animated-art-file" type="file" accept="image/gif,image/webp,.gif,.webp">
             </label>
@@ -106,7 +106,7 @@
             </div>
             <p id="animated-art-status" class="url-status"></p>
           </div>
-          <div id="animated-ineligible-note" class="animated-ineligible-note">Animated artwork is enabled only for Entrances, Actions and Finishers.</div>
+          <div id="animated-ineligible-note" class="animated-ineligible-note">Animated artwork is optional for every collectible card. Static artwork remains the fallback.</div>
           <div class="art-or">OR</div>
           <div class="url-loader">
             <label>Direct image URL
@@ -189,8 +189,8 @@
       </aside>
     </section>
   </main>
-  <script src="../js/data/superstar-nameplates.js?v=1.1.21"></script>
-  <script src="../js/tools/card-art-studio-data.js?v=1.1.21"></script>
-  <script src="../js/tools/card-art-studio.js?v=1.1.21"></script>
+  <script src="../js/data/superstar-nameplates.js?v=1.1.22"></script>
+  <script src="../js/tools/card-art-studio-data.js?v=1.1.22"></script>
+  <script src="../js/tools/card-art-studio.js?v=1.1.22"></script>
 </body>
 </html>

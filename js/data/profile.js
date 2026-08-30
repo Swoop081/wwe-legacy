@@ -1,11 +1,11 @@
-import { decks } from "./decks.js?v=1.1.21";
-import { collectionCards } from "./collection.js?v=1.1.21";
-import { superstars } from "./superstars.js?v=1.1.21";
-import { isUnreleasedSetId } from "./release.js?v=1.1.21";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.21";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.21";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.21";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.21";
+import { decks } from "./decks.js?v=1.1.22";
+import { collectionCards } from "./collection.js?v=1.1.22";
+import { superstars } from "./superstars.js?v=1.1.22";
+import { isUnreleasedSetId } from "./release.js?v=1.1.22";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.22";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.22";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.22";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.22";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";

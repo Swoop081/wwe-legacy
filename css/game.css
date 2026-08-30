@@ -10222,7 +10222,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.21") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.22") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10292,18 +10292,36 @@ body[data-screen="splash"] #game>section{animation:none!important}
   }
 }
 
-/* v1.1.19 — Animated collectible base plates: Entrance, Action and Finisher only. */
-.ccg-card.is-layered-front .ccg-animated-card-plate{
-  position:absolute!important;
-  inset:0!important;
-  z-index:2!important;
-  width:100%!important;
-  height:100%!important;
-  object-fit:fill!important;
-  display:block!important;
-  opacity:0!important;
-  pointer-events:none!important;
+/* v1.1.22 — Optional animation for every collectible card.
+   The animation is clipped to the artwork window so it never replaces the
+   physical card shell, outer border, set logo, rarity stars or information plaque. */
+.ccg-animated-card-surface{
+  position:absolute!important;z-index:3!important;
+  left:4.2%!important;right:4.2%!important;top:3.6%!important;bottom:24.2%!important;
+  overflow:hidden!important;border-radius:1.35cqw!important;pointer-events:none!important;
 }
-.ccg-card.is-layered-front .ccg-animated-card-plate.is-animation-ready{opacity:1!important}
-.ccg-card.is-layered-front .ccg-live-front-data{z-index:4!important}
-@media (prefers-reduced-motion: reduce){.ccg-animated-card-plate{display:none!important}}
+.ccg-animated-card-surface .ccg-animated-card-plate{
+  position:absolute!important;inset:0!important;z-index:1!important;
+  width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;
+  display:block!important;opacity:0!important;pointer-events:none!important;
+}
+.ccg-animated-card-surface .ccg-animated-card-plate.is-animation-ready{opacity:1!important}
+.ccg-animation-set-logo{
+  display:none!important;position:absolute!important;z-index:4!important;right:7.5%!important;top:5.2%!important;
+  max-width:23.5%!important;max-height:10.5%!important;width:auto!important;height:auto!important;object-fit:contain!important;
+  filter:drop-shadow(0 .25cqw .45cqw rgba(0,0,0,.62));pointer-events:none!important;
+}
+.ccg-animation-rarity{
+  display:none!important;position:absolute!important;z-index:4!important;left:7.5%!important;top:4.8%!important;
+  font-size:3.55cqw!important;line-height:1.28!important;font-weight:1000!important;color:#f4c542!important;
+  text-shadow:0 0 .7cqw rgba(255,202,55,.5),0 .25cqw .45cqw rgba(0,0,0,.95)!important;
+}
+.ccg-card.has-active-animation .ccg-animation-set-logo,.ccg-card.has-active-animation .ccg-animation-rarity{display:block!important}
+.ccg-card.is-layered-front .ccg-live-front-data{z-index:5!important}
+/* In full-screen inspectors show the rules face directly instead of 3D-mirroring it. */
+.superstar-card-modal .ccg-card.is-flipped .ccg-card-inner{transform:none!important;-webkit-transform:none!important}
+.superstar-card-modal .ccg-card.is-flipped .ccg-card-front{display:none!important}
+.superstar-card-modal .ccg-card.is-flipped .ccg-card-rules{display:flex!important;transform:none!important;-webkit-transform:none!important}
+/* Keep large no-requirement Move type copy inside the clean plaque. */
+.ccg-card.is-layered-front .ccg-live-front-move .ccg-live-type:not(.has-requirement){top:92.2%;width:49%;font-size:4.75cqw}
+@media (prefers-reduced-motion: reduce){.ccg-animated-card-surface{display:none!important}}

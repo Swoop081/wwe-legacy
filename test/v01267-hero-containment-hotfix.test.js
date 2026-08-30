@@ -12,14 +12,18 @@ test("v0.12.67 stamps the hero containment repair", () => {
 });
 
 test("launch Rock uses contained artwork rather than v0.12.66 cover crop", () => {
-  const block = css.slice(css.lastIndexOf("/* v0.12.67 — Hero Anchor & Containment Repair."));
+  const start = css.lastIndexOf("/* v0.12.67 — Hero Anchor & Containment Repair.");
+  const end = css.indexOf("/* v0.12.68 — Final Boss Head Anchor Hotfix.", start);
+  const block = css.slice(start, end > start ? end : undefined);
   assert.match(block, /\.season-one-ad\{[\s\S]*overflow:hidden!important/);
   assert.match(block, /img\.final-boss-rock-menu-art\{[\s\S]*left:-7%!important;[\s\S]*width:188%!important;[\s\S]*object-fit:contain!important/);
   assert.doesNotMatch(block, /object-fit:cover!important/);
 });
 
 test("premium run portraits are enlarged but no longer use the broken near-2x transform", () => {
-  const block = css.slice(css.lastIndexOf("/* v0.12.67 — Hero Anchor & Containment Repair."));
+  const start = css.lastIndexOf("/* v0.12.67 — Hero Anchor & Containment Repair.");
+  const end = css.indexOf("/* v0.12.68 — Final Boss Head Anchor Hotfix.", start);
+  const block = css.slice(start, end > start ? end : undefined);
   assert.match(block, /inset:0 -1% 0 46%!important/);
   assert.match(block, /transform:scale\(1\.30\)!important/);
   assert.match(block, /@media\(max-width:600px\)[\s\S]*transform:scale\(1\.32\)!important/);
