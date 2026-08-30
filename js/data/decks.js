@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.36";
+import { allGameplayCards } from "./content.js?v=1.1.37";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -5292,10 +5292,10 @@ export const deckIds={
     "tatum-paxley-psycho-trap",
     "tatum-paxley-cemetery-drive",
     "tatum-paxley-cemetery-drive",
-    "tatum-paxley-cemetery-drive",
     "tatum-paxley-bridging-german-suplex",
     "tatum-paxley-bridging-german-suplex",
     "tatum-paxley-bridging-german-suplex",
+    "tatum-paxley-diving-knee-drop",
     "tatum-paxley-diving-knee-drop",
     "tatum-paxley-diving-knee-drop",
     "special-tatum-paxley",

@@ -1,3 +1,15 @@
+# WWE Legacy v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
+
+**Current working baseline.** v1.1.37 supersedes v1.1.36.
+
+Tatum Paxley’s exclusive move hierarchy has been corrected from the physical-iPhone/content audit. **Cemetery Drive** is now her 4★ Finisher rather than a Submission/Trademark. **Psycho Trap, Bridging German Suplex, and Diving Knee Drop** are all 3★ Trademarks.
+
+Balance and rules corrections: Cemetery Drive is Cost 9 / Damage 17 with no Method requirement, Grapple, Front Control, and +1 persistent Back damage. Psycho Trap is Cost 5 / Damage 8 / Technical 1. Bridging German Suplex is Cost 5 / Damage 8 / Technical 2 and is correctly a Rear-Control Grapple rather than a Diving Aerial grounded-only move. Diving Knee Drop is Cost 6 / Damage 10 / Agility 2 and remains a grounded-opponent Diving Aerial Trademark.
+
+Tatum’s authored 60-page deck now follows the standard three-Trademark / two-Finisher distribution: 3× Psycho Trap, 3× Bridging German Suplex, 3× Diving Knee Drop, 2× Cemetery Drive. Collector identities and artwork paths remain unchanged; existing Card Studio art can be re-exported against the corrected card data.
+
+Verification: dedicated Tatum audit 3/3; flow audit 95 Superstars / 0 issues; rebuild validation 95 decks / 835 gameplay cards / 0 issues; card-ID audit 930/930 / 0 issues; full no-assets suite adds the three new passing assertions with no increase in historical failures.
+
 # WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
 
 Current package adds SD1-072 Matrix Slide as a shared Common Counter-only reversal with Arm Extended + exact Clothesline/Lariat family coverage. User reference imagery is not packaged.

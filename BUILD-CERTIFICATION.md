@@ -1,3 +1,36 @@
+# WWE Legacy v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
+
+## Release identity
+- Version: **v1.1.37**
+- Title: **Tatum Paxley Finisher + Trademark Re-Audit**
+- Date: **30 August 2026**
+- Base: **v1.1.36 — Matrix Slide Shared Common Reversal**
+- Distribution: **no-assets code overlay**; no packaged image asset changed.
+
+## Implemented changes
+- Reclassifies **Cemetery Drive (`NXT1-032`)** from a 3★ Technical Submission/Trademark into Tatum Paxley’s 4★ Finisher.
+- Cemetery Drive is now Cost 9 / Damage 17, Grapple, Front Control, no Method requirement, grounds the opponent, and applies +1 persistent Back damage on Connect. All old submission fields/leg-pressure behavior are removed.
+- **Psycho Trap (`NXT1-031`)** remains a Trademark but is rebalanced to Cost 5 / Damage 8 / Technical 1 and now applies Back rather than Arm body damage while retaining the Cemetery Drive tutor/discount setup.
+- **Bridging German Suplex (`NXT1-033`)** remains a Trademark, rebalanced to Cost 5 / Damage 8 / Technical 2, and corrected from an impossible Diving-Aerial/grounded-only definition to a Rear-Control Grapple that grounds the opponent.
+- **Diving Knee Drop (`NXT1-034`)** is downgraded from the old 4★ Finisher slot to a 3★ Trademark at Cost 6 / Damage 10 / Agility 2, retaining grounded-opponent Diving Aerial identity, +1 Adrenaline and +1 persistent Head damage.
+- Tatum’s 60-page authored deck is normalized to 3× each Trademark and 2× Cemetery Drive.
+- Collector numbers, card IDs and image paths are unchanged.
+
+## Audit basis
+- WWE’s 2026 match results repeatedly identify Cemetery Drive as Tatum Paxley’s match-ending move.
+- WWE 2K26 lists Cemetery Drive as her Finisher and places her aerial offense in the signature tier.
+- The WWE Legacy Cost/Damage pass aligns Cemetery Drive with the NXT finisher band and the three supporting cards with the existing NXT Trademark band.
+
+## Verification
+- Dedicated v1.1.37 Tatum audit assertions: **3 passed / 0 failed**.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 835 gameplay cards / 0 orphans / 0 issues**.
+- Card-ID audit: **930 collector cards / 930 manifest entries / 0 issues**.
+- Card-health audit: **170 Rare Trademarks**, average Cost 5.42 / Damage 8.21; corrected Tatum Trademarks remain inside the established band.
+- Counter-density audit: Tatum retains all **8 counter states / 4 submission-target coverage**, with 14 structural Counter pages / 15 effective reactive-defense pages.
+- Full no-assets suite: **905 passed / 97 failed / 97 skipped** versus v1.1.36 at 902 passed / 97 failed / 97 skipped. The three additional passes are the new Tatum assertions; **0 new carry-forward failures**.
+- Physical iPhone smoke: pending for the refreshed Card Studio/live-card labels once the corrected Tatum fronts are re-exported.
+
 # WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
 
 Current package adds SD1-072 Matrix Slide as a shared Common Counter-only reversal with Arm Extended + exact Clothesline/Lariat family coverage. User reference imagery is not packaged.

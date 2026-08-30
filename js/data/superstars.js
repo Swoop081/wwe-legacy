@@ -5720,8 +5720,8 @@ export const superstars = {
       "eye-rake"
     ],
     "signatures": [
-      "tatum-paxley-psycho-trap",
       "tatum-paxley-cemetery-drive",
+      "tatum-paxley-psycho-trap",
       "tatum-paxley-bridging-german-suplex",
       "tatum-paxley-diving-knee-drop"
     ],

@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.36";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.36";
+import { enrichCounterState } from "./counter-states.js?v=1.1.37";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.37";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -17631,8 +17631,8 @@ export const allGameplayCards = [
     "name": "Psycho Trap",
     "kind": "move",
     "setId": "nxt-series-1",
-    "cost": 4,
-    "damage": 6,
+    "cost": 5,
+    "damage": 8,
     "requirements": {
       "technical": 1
     },
@@ -17641,7 +17641,7 @@ export const allGameplayCards = [
     "superstarId": "tatum-paxley",
     "rarity": 3,
     "trademark": true,
-    "rulesText": "Tatum Paxley-exclusive Trademark. Grounds opponent. On Connect: search/draw Cemetery Drive; it costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "rulesText": "Tatum Paxley-exclusive Trademark. Grounds opponent. On Connect: search/draw Cemetery Drive; it costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -17651,7 +17651,7 @@ export const allGameplayCards = [
     "effects": [],
     "counterState": "front-control",
     "bodyDamage": {
-      "bodyPart": "arms",
+      "bodyPart": "back",
       "pressure": 1
     }
   },
@@ -17660,36 +17660,62 @@ export const allGameplayCards = [
     "name": "Cemetery Drive",
     "kind": "move",
     "setId": "nxt-series-1",
-    "cost": 5,
-    "damage": 0,
-    "requirements": {
-      "technical": 2
-    },
-    "moveType": "submission",
-    "method": "technical",
+    "cost": 9,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
     "superstarId": "tatum-paxley",
-    "rarity": 3,
-    "trademark": true,
-    "rulesText": "Tatum Paxley-exclusive Trademark. Grounded opponent only. Submission. +7 persistent Leg damage per successful turn. On Connect: +1 persistent Leg damage.",
-    "groundOpponent": false,
-    "groundedOnly": true,
+    "rarity": 4,
+    "finisher": true,
+    "rulesText": "Tatum Paxley-exclusive Finisher. Finishers ignore Method requirements. Grounds opponent. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "submission": {
-      "bodyPart": "legs",
-      "pressure": 7
-    },
     "effects": [],
-    "counterState": "leg-extended",
-    "submissionTarget": "legs",
+    "counterState": "front-control",
     "bodyDamage": {
-      "bodyPart": "legs",
+      "bodyPart": "back",
       "pressure": 1
     }
   },
   {
     "id": "tatum-paxley-bridging-german-suplex",
     "name": "Bridging German Suplex",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "tatum-paxley",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Tatum Paxley-exclusive Trademark. Rear Control. Grounds opponent. On Connect: search/draw Diving Knee Drop; it costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Diving Knee Drop",
+        "discount": 1
+      }
+    ],
+    "counterState": "rear-control",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "tatum-paxley-diving-knee-drop",
+    "name": "Diving Knee Drop",
     "kind": "move",
     "setId": "nxt-series-1",
     "cost": 6,
@@ -17702,39 +17728,8 @@ export const allGameplayCards = [
     "superstarId": "tatum-paxley",
     "rarity": 3,
     "trademark": true,
-    "rulesText": "Tatum Paxley-exclusive Trademark. Diving Aerial. Grounded opponent only. On Connect: search/draw Diving Knee Drop; it costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
-    "groundOpponent": true,
-    "groundedOnly": true,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [
-      {
-        "type": "search",
-        "name": "Diving Knee Drop",
-        "discount": 1
-      }
-    ],
-    "counterState": "diving-aerial",
-    "bodyDamage": {
-      "bodyPart": "back",
-      "pressure": 1
-    }
-  },
-  {
-    "id": "tatum-paxley-diving-knee-drop",
-    "name": "Diving Knee Drop",
-    "kind": "move",
-    "setId": "nxt-series-1",
-    "cost": 9,
-    "damage": 17,
-    "requirements": {},
-    "moveType": "aerial",
-    "method": null,
-    "superstarId": "tatum-paxley",
-    "rarity": 4,
-    "finisher": true,
-    "rulesText": "Tatum Paxley-exclusive. Grounded opponent only. On Connect: gain +1 Adrenaline.",
-    "groundOpponent": true,
+    "rulesText": "Tatum Paxley-exclusive Trademark. Diving Aerial. Grounded opponent only. On Connect: gain +1 Adrenaline and +1 persistent Head damage.",
+    "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,

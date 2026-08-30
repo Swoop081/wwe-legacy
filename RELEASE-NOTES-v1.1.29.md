@@ -1,5 +1,18 @@
 # WWE Legacy v1.1.30 — Card Presentation Corrections
 
+## v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
+
+- Corrects **Cemetery Drive (`NXT1-032`)**: it is Tatum Paxley’s Finisher, not a Submission. It becomes 4★, Cost 9 / Damage 17, Grapple, Front Control, no Method requirement, grounds the opponent, and deals +1 persistent Back damage.
+- Removes Cemetery Drive’s incorrect Submission, Leg-pressure, grounded-only and Technical 2 fields.
+- Rebalances **Psycho Trap (`NXT1-031`)** to a 3★ Trademark at Cost 5 / Damage 8 / Technical 1 while retaining its Cemetery Drive search/discount setup.
+- Corrects **Bridging German Suplex (`NXT1-033`)** to a 3★ Rear-Control Grapple Trademark at Cost 5 / Damage 8 / Technical 2; it is no longer incorrectly treated as a Diving Aerial against an already-grounded opponent.
+- Reclassifies **Diving Knee Drop (`NXT1-034`)** from the old Finisher slot to a 3★ Trademark at Cost 6 / Damage 10 / Agility 2.
+- Tatum’s authored 60-page deck now carries 3× Psycho Trap, 3× Bridging German Suplex, 3× Diving Knee Drop and 2× Cemetery Drive, matching the standard three-Trademark / two-Finisher NXT structure.
+- Collector IDs/numbers and artwork paths remain unchanged; existing Card Studio fronts should be re-exported to bake in the corrected labels, rarity and Cost/Damage values.
+- No other Superstar, mode, economy, progression or reward data changes.
+- Verification: dedicated Tatum audit 3/3; flow audit 95 Superstars / 0 issues; rebuild validation 95 decks / 835 gameplay cards / 0 issues; card-ID audit 930/930 / 0 issues; full no-assets suite 905 passed / 97 failed / 97 skipped with **0 new failures** versus v1.1.36.
+
+
 ## v1.1.35 — Exact Card Front Runtime + Clean Play Cards + Trish Reframe
 
 - Removes the chamfered / cut-corner treatment from all six **Choose Your Path** mode banners, their in-card CTA tabs, and the full-width Next / Back controls. Play cards now use clean rectangular edges with normal rounded corners.
