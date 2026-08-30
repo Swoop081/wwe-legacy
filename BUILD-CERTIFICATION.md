@@ -1,13 +1,58 @@
-# WWE Legacy v1.1.31 — Play Hub Two-Page Navigation + WWE.com Portrait Fix
+# WWE Legacy v1.1.34 — Seated Shotgun Dropkick
 
 ## Release identity
-- Version: **v1.1.31**
-- Title: **Play Hub Two-Page Navigation + WWE.com Portrait Fix**
+- Version: **v1.1.34**
+- Title: **Seated Shotgun Dropkick**
 - Date: **30 August 2026**
-- Base: **v1.1.30 — Trish Season Banner Framing Hotfix**
+- Base: **v1.1.33 — Trish Home Banner Position Hotfix**
+- Distribution: **no-assets code overlay**; the user's reference image is not included.
+
+## Implemented changes
+- Adds `seated-shotgun-dropkick` to Evolution Series 1 as `EVO1-076`.
+- Shared 2★ Uncommon; Cost 4 / Damage 7; Agility 2; Strike; Grounded opponent only; Stun 1.
+- IYO SKY, Liv Morgan and Tiffany Stratton each carry two copies in their authored 60-page decks.
+- Existing lead-off Dropkick access remains intact for all three.
+- Card Studio data is regenerated and exposes the new collector card with a canonical, currently unbundled artwork path.
+- No supplied screenshot/reference image is copied into the package.
+
+## Verification
+- Focused regression sample: **7 passed, 0 failed, 1 historical skip**.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 834 gameplay cards / 0 orphans / 0 issues**.
+- Card-ID audit: **929 collector cards / 929 manifest entries / 0 issues**; Evolution Series 1 is gap-free through `EVO1-076`.
+- Card-health audit completed successfully; the new Uncommon remains within the existing low-rarity efficiency band.
+- Counter-density audit completed successfully with full 8-state / 4-submission-target roster coverage.
+- Physical iPhone smoke: pending.
+
+## Carry-forward certification
+
+# WWE Legacy v1.1.33 — Trish Home Banner Position Hotfix
+
+## Release identity
+- Version: **v1.1.33**
+- Title: **Trish Home Banner Position Hotfix**
+- Date: **30 August 2026**
+- Base: **v1.1.32 — Play Hub 3+3 Pagination + Money in the Bank Move**
 - Distribution: **no-assets code overlay**; no packaged image asset changed in this release.
 
 ## Implemented changes
+
+### v1.1.33 Trish Home banner position hotfix
+- Physical-iPhone screenshot showed Trish still occupying the XP-bar lane in the compact Home Season One banner.
+- Keeps Trish at exactly 2× scale.
+- Repositions the render farther right and slightly upward, preserving her full head/face while allowing lower-body crop.
+- No gameplay, progression, reward, economy or card-data changes.
+
+### v1.1.32 Play hub 3+3 / MITB placement
+- Page 1 contains exactly Exhibition Showcase, Live Events and King of the Ring.
+- Page 2 contains exactly Championship Road, Survivor Series and Money in the Bank.
+- Championship Road and Survivor Series return to the same standard banner height as the Page 1 modes.
+- Removes the unused fourth grid row that created the large blank gap before the v1.1.31 Next control.
+- Replaces the tiny Next/Back treatment with a large full-width navigation button directly after the third card.
+- Removes Money in the Bank from the Live Events hub and makes its Play-page card the primary entry point.
+- Completed Money in the Bank runs return to Play page 2, and the bottom Play tab remains active while inside Money in the Bank.
+- No ladder gameplay, lives, opponent generation, rewards, Live Event tower logic, Championship Road logic or Survivor Series rules change.
+
 
 ### v1.1.31 Play hub / portrait correction
 - Splits the five Play destinations across two pages to eliminate the long mobile scroll.
@@ -70,17 +115,10 @@
 - No booster odds, economy values, Season XP thresholds, Merch rules, animation rules, Live Event rules or card printing tiers change.
 
 ## Certification
-- Focused v1.1.31 Play hub / portrait / typography assertions: **3/3 passed**.
-- Structured-mode + Live Event + v1.1 carry-forward sample: **33 passed / 7 retained baseline failures / 1 skipped**. The uploaded v1.1.30 baseline produces the same **7** failures in the same carry-forward sample, so v1.1.31 adds **0 new failures** there.
-- JavaScript syntax check passed for `js/ui/app.js`.
-- Focused v1.1.26 presentation + v1.1.25 onboarding carry-forward assertions: **13/13 passed**.
-- No-assets package-context full suite: **1,077 discovered / 902 passed / 78 retained failures / 97 skipped**.
-- The attached v1.1.25 no-assets baseline produces the same **78** package-context failures; v1.1.26 adds **0 new failing contracts**.
-- The three additional skips are obsolete pre-v1.1.25 player-facing Welcome-era/full-second-deck presentation contracts explicitly superseded by Superstar Pack onboarding.
-- Rebuild validation: **95 Superstars / 95 decks / 833 gameplay cards / 0 orphans / 0 issues**.
-- Superstar Pack coverage: **72 / 72 released player-visible Superstars pack-ready** before profile exclusions.
-- Collector ID audit: **928 cards / 928 manifest entries / 0 issues**.
+- Focused v1.1.32 Play pagination / MITB placement / carry-forward portrait assertions: **17 passed / 0 failed / 1 historical skip** across the targeted suite.
+- Money in the Bank daily-tower rules remain intact in the targeted regression run: 8 opponents, 3 lives, same-day field retention and 2-pack clear reward.
 - Flow audit: **95 Superstars / 0 issues**.
-- JavaScript syntax checks passed for live UI, profile and Superstar Pack module.
-- Cache/version stamp: **v1.1.31**.
-- Physical iPhone visual smoke remains pending for the v1.1.31 two-page Play hub, Cody/Hogan WWE.com headshots, Survivor Series typography, and all carried-forward presentation surfaces.
+- JavaScript syntax checks passed for `js/ui/app.js` and `js/data/game-rules.js`.
+- No packaged image assets are included or changed in v1.1.32.
+- Cache/version stamp: **v1.1.32**.
+- Physical iPhone visual smoke remains pending for the tightened three-cards-plus-navigation layout on both Play pages and the Money in the Bank page-card presentation.

@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=1.1.31';
-import { superstars } from '../js/data/superstars.js?v=1.1.31';
-import { decks } from '../js/data/decks.js?v=1.1.31';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.31';
-import { collectionCards } from '../js/data/collection.js?v=1.1.31';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.31';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=1.1.31';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.31';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.31';
-await import('../js/data/superstar-nameplates.js?v=1.1.31');
+import { sets } from '../js/data/sets.js?v=1.1.34';
+import { superstars } from '../js/data/superstars.js?v=1.1.34';
+import { decks } from '../js/data/decks.js?v=1.1.34';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.34';
+import { collectionCards } from '../js/data/collection.js?v=1.1.34';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.34';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=1.1.34';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.34';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.34';
+await import('../js/data/superstar-nameplates.js?v=1.1.34');
 
 const G='golden-era-series-1', A='attitude-era-series-1', H='hall-of-fame-series-1';
 const golden=['hulk-hogan','andre-the-giant','randy-savage','ultimate-warrior','rowdy-roddy-piper','ted-dibiase','jake-roberts','mr-perfect'];

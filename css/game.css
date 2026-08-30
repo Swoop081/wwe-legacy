@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.31") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.34") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10485,4 +10485,107 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
   .legacy-mode-stack-featured .legacy-mode-copy .mode-logo strong{font-size:2.38rem!important}
   .legacy-mode-stack-featured .legacy-mode-superstar{right:-16%!important;width:76%!important}
   .play-menu-page-2 .mode-survivor-series .legacy-mode-superstar{right:-12%!important;width:72%!important}
+}
+
+/* ========================================================================== */
+/* v1.1.32 — Play hub 3+3 one-screen pagination + standalone MITB placement. */
+/* ========================================================================== */
+.legacy-play-v3{
+  min-height:0!important;
+  grid-template-rows:auto auto auto!important;
+  align-content:start!important;
+  gap:8px!important;
+}
+.legacy-play-v3 .legacy-mode-stack{
+  grid-template-rows:repeat(3,minmax(140px,auto))!important;
+  align-self:auto!important;
+  gap:7px!important;
+}
+.legacy-play-v3 .legacy-mode-banner,
+.legacy-play-v3 .legacy-mode-copy{
+  min-height:140px!important;
+}
+.play-mode-page-arrow{
+  min-height:74px!important;
+  margin:0!important;
+  padding:10px 18px!important;
+  justify-content:space-between!important;
+  border-width:2px!important;
+  border-color:rgba(77,216,255,.62)!important;
+  background:linear-gradient(100deg,rgba(19,93,120,.98),rgba(8,20,30,.98) 58%,rgba(16,54,70,.98))!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.36),inset 0 0 0 1px rgba(255,255,255,.07)!important;
+}
+.play-mode-page-arrow span{
+  font-size:.82rem!important;
+  letter-spacing:.16em!important;
+  color:#fff!important;
+}
+.play-mode-page-arrow b{
+  font-size:3.15rem!important;
+  color:#54dcff!important;
+}
+.play-mode-page-arrow.is-back{
+  border-color:rgba(239,194,74,.62)!important;
+  background:linear-gradient(100deg,rgba(111,79,18,.98),rgba(25,20,10,.98) 58%,rgba(74,52,13,.98))!important;
+}
+.play-mode-page-arrow.is-back b{color:#f4c84e!important}
+.mode-ladder{--mode-banner-accent:#efc24a}
+.mode-ladder .legacy-mode-set-logo{
+  right:1%!important;
+  bottom:2%!important;
+  width:42%!important;
+  height:96%!important;
+  display:grid!important;
+  place-items:center!important;
+}
+.mode-ladder .legacy-mode-set-logo img{
+  width:92%!important;
+  height:72%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  mask-image:none!important;
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.62))!important;
+}
+.mode-ladder .legacy-mode-number{color:rgba(239,194,74,.045)!important}
+
+@media(max-width:600px){
+  .legacy-play-v3 .legacy-mode-stack{grid-template-rows:repeat(3,minmax(136px,auto))!important}
+  .legacy-play-v3 .legacy-mode-banner,.legacy-play-v3 .legacy-mode-copy{min-height:136px!important}
+  .play-mode-page-arrow{min-height:68px!important;padding:8px 14px!important}
+  .play-mode-page-arrow span{font-size:.72rem!important}
+  .play-mode-page-arrow b{font-size:2.9rem!important}
+  .mode-ladder .legacy-mode-set-logo{right:-2%!important;width:46%!important}
+}
+@media(max-width:390px){
+  .legacy-play-v3 .legacy-mode-stack{grid-template-rows:repeat(3,minmax(132px,auto))!important}
+  .legacy-play-v3 .legacy-mode-banner,.legacy-play-v3 .legacy-mode-copy{min-height:132px!important}
+  .play-mode-page-arrow{min-height:64px!important}
+  .play-mode-page-arrow span{font-size:.66rem!important}
+  .play-mode-page-arrow b{font-size:2.7rem!important}
+}
+
+
+/* v1.1.33 — Home Season One Trish framing correction.
+   Keep the approved 2× portrait scale, but move the render into the clean
+   right-hand portrait lane so her full head/face is not underneath the XP bar. */
+.legacy-season-rock:has(img.legacy-season-cena){
+  top:-6%!important;
+  bottom:auto!important;
+  right:-20%!important;
+  width:49%!important;
+  height:106%!important;
+}
+.legacy-season-rock img.legacy-season-cena{
+  transform:scale(2)!important;
+  transform-origin:right top!important;
+  object-fit:contain!important;
+  object-position:right top!important;
+}
+@media(max-width:390px){
+  .legacy-season-rock:has(img.legacy-season-cena){
+    top:-5%!important;
+    right:-21%!important;
+    width:50%!important;
+    height:105%!important;
+  }
 }

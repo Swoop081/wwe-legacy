@@ -3846,6 +3846,12 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "EVO1-075"
   },
   {
+    "id": "seated-shotgun-dropkick",
+    "setId": "evolution-series-1",
+    "cardNumber": 76,
+    "cardCode": "EVO1-076"
+  },
+  {
     "id": "back-body-drop",
     "setId": "golden-era-series-1",
     "cardNumber": 1,

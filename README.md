@@ -1,7 +1,18 @@
-# WWE Legacy v1.1.31 — Play Hub Two-Page Navigation + WWE.com Portrait Fix
+# WWE Legacy v1.1.34 — Seated Shotgun Dropkick
 
-**Current working baseline.** v1.1.31 supersedes v1.1.30.
+**Current working baseline.** v1.1.34 supersedes v1.1.33.
 
+## v1.1.34 shared Evolution move
+
+Adds **Seated Shotgun Dropkick** as `EVO1-076`, a shared 2★ Uncommon Evolution move. It is Cost 4 / Damage 7, requires Agility 2, is playable only against a grounded opponent, and applies Stun 1 on Connect. Iyo Sky, Liv Morgan and Tiffany Stratton each begin with two copies in their authored 60-page decks. No artwork is packaged for the card; its Card Studio slot is ready for user-supplied art.
+
+## v1.1.33 Trish Home banner framing
+
+The Home Season One tile keeps Trish at the approved 2× scale, but positions her farther right and slightly higher so her complete head/face sits in the open right-side portrait lane rather than behind the Season XP progress bar. The lower body is allowed to crop naturally inside the compact banner.
+
+## v1.1.32 Play hub layout
+
+**Choose Your Path** now uses exactly three standard-size mode cards per page. Page 1 contains Exhibition Showcase, Live Events and King of the Ring. Page 2 contains Championship Road, Survivor Series and Money in the Bank. The oversized v1.1.31 Road/Survivor treatment is removed, and both pages use a large full-width Next/Back button immediately after the third mode card. Money in the Bank is no longer listed inside the Live Events hub.
 
 ## Play hub two-page layout
 

@@ -8,11 +8,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const app = fs.readFileSync(path.join(root, "js/ui/app.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "css/game.css"), "utf8");
 
-test("Play hub is split into requested two-page mode groups", () => {
+test("Play hub keeps the two-page groups while v1.1.32 restores standard card height", () => {
   assert.match(app, /const firstPageCards = `[\s\S]*play-exhibition[\s\S]*play-live-event[\s\S]*play-kotr/);
-  assert.match(app, /const secondPageCards = `[\s\S]*play-championship[\s\S]*play-survivor-series/);
+  assert.match(app, /const secondPageCards = `[\s\S]*play-championship[\s\S]*play-survivor-series[\s\S]*play-ladder/);
   assert.match(app, /play-page-\$\{page === 1 \? 'next' : 'back'\}/);
-  assert.match(css, /\.legacy-mode-stack-featured\{grid-template-rows:repeat\(2,minmax\(224px,1fr\)\)!important\}/);
+  assert.match(css, /\.legacy-play-v3 \.legacy-mode-stack\{[\s\S]*grid-template-rows:repeat\(3,minmax\(140px,auto\)\)!important/);
 });
 
 test("Live Events and Survivor Series use requested WWE.com profile renders", () => {

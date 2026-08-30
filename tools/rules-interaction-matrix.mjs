@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.31';
-import { moveEligibility, counterEligibility, autoCounterEligibility, autoCounterCost, onceTooOftenEligibility, canAttemptPin, submissionThreshold } from '../js/engine/rules.js?v=1.1.31';
-import { superstars } from '../js/data/superstars.js?v=1.1.31';
-import { decks } from '../js/data/decks.js?v=1.1.31';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.31';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.34';
+import { moveEligibility, counterEligibility, autoCounterEligibility, autoCounterCost, onceTooOftenEligibility, canAttemptPin, submissionThreshold } from '../js/engine/rules.js?v=1.1.34';
+import { superstars } from '../js/data/superstars.js?v=1.1.34';
+import { decks } from '../js/data/decks.js?v=1.1.34';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.34';
 
 const star = id => Object.values(superstars).find(s => s.id === id);
 const card = id => allGameplayCards.find(c => c.id === id);

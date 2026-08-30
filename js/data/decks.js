@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.31";
+import { allGameplayCards } from "./content.js?v=1.1.34";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -11,7 +11,7 @@ export const deckIds={
     "running-forearm",
     "running-forearm",
     "dropkick",
-    "dropkick",
+    "seated-shotgun-dropkick",
     "hurricanrana",
     "hurricanrana",
     "enzuigiri",
@@ -22,7 +22,7 @@ export const deckIds={
     "meteora",
     "double-stomp",
     "double-stomp",
-    "double-stomp",
+    "seated-shotgun-dropkick",
     "missile-dropkick",
     "missile-dropkick",
     "missile-dropkick",
@@ -1314,7 +1314,7 @@ export const deckIds={
     "stomp",
     "stomp",
     "dropkick",
-    "dropkick",
+    "seated-shotgun-dropkick",
     "enzuigiri",
     "enzuigiri",
     "knee-strike",
@@ -1360,7 +1360,7 @@ export const deckIds={
     "running-forearm",
     "running-forearm",
     "knee-strike",
-    "knee-strike",
+    "seated-shotgun-dropkick",
     "diving-crossbody",
     "diving-crossbody",
     "missile-dropkick"
@@ -2377,8 +2377,8 @@ export const deckIds={
     "front-kick",
     "snap-suplex",
     "snap-suplex",
-    "dropkick",
-    "dropkick",
+    "seated-shotgun-dropkick",
+    "seated-shotgun-dropkick",
     "body-slam",
     "body-slam",
     "standing-moonsault",

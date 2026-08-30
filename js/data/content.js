@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.31";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.31";
+import { enrichCounterState } from "./counter-states.js?v=1.1.34";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.34";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -12615,6 +12615,29 @@ export const allGameplayCards = [
     "effects": [],
     "counterState": "rear-control",
     "submissionTarget": "back"
+  },
+  {
+    "id": "seated-shotgun-dropkick",
+    "name": "Seated Shotgun Dropkick",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only. Stun 1.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "diving-shoulder-block",

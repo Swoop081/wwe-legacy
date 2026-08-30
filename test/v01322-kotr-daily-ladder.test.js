@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.1.31';
-import { superstars } from '../js/data/superstars.js?v=1.1.31';
-import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=1.1.31';
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=1.1.31';
-import { CAREER_MODES } from '../js/data/career.js?v=1.1.31';
+import { createProfile } from '../js/data/profile.js?v=1.1.34';
+import { superstars } from '../js/data/superstars.js?v=1.1.34';
+import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=1.1.34';
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=1.1.34';
+import { CAREER_MODES } from '../js/data/career.js?v=1.1.34';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const fixedRng = () => 0.314159;
@@ -65,13 +65,13 @@ test('v0.13.22 King of the Ring is an 8-person, three-round single-elimination t
   assert.equal(kingOfTheRingState(p).clears, 1);
 });
 
-test('v0.13.24 Play keeps KOTR while Money in the Bank lives only in Live Events', () => {
+test('v1.1.32 Play keeps KOTR and moves Money in the Bank to Play page 2', () => {
   assert.match(app, /id="play-kotr"/);
   assert.match(app, /modeLogoMarkup\("king-of-the-ring",true\)/);
-  assert.doesNotMatch(app, /id="play-ladder"/);
-  assert.match(app, /id="open-money-in-bank"/);
-  const challenges = app.slice(app.indexOf('function renderChallenges()'), app.indexOf('function beginLiveEventTower()'));
-  assert.doesNotMatch(challenges, /open-money-in-bank|Climb the Ladder/);
+  assert.match(app, /id="play-ladder"/);
+  assert.doesNotMatch(app, /id="open-money-in-bank"/);
+  const liveHub = app.slice(app.indexOf('function renderLiveEventHub()'), app.indexOf('function renderLiveEventTowerDetail'));
+  assert.doesNotMatch(liveHub, /open-money-in-bank|money-in-bank-live-card/);
   assert.ok(CAREER_MODES.some(mode => mode.id === 'king-of-the-ring'));
   assert.ok(CAREER_MODES.some(mode => mode.id === 'ladder' && /Money in the Bank/.test(mode.label)));
 });

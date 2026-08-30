@@ -1,5 +1,37 @@
 # WWE Legacy v1.1.30 — Card Presentation Corrections
 
+## v1.1.34 — Seated Shotgun Dropkick
+
+- Adds **Seated Shotgun Dropkick** as the new shared Evolution 2★ Uncommon, collector number `EVO1-076`.
+- Card profile: Cost 4 / Damage 7 / Agility 2; Strike move; Grounded opponent only; Stun 1.
+- Seeds two copies into the authored 60-page decks for **IYO SKY**, **Liv Morgan**, and **Tiffany Stratton**, while preserving their existing lead-off basic Dropkick access.
+- No image from the reference screenshot is imported or packaged. The Card Studio entry is generated with the normal canonical art path so artwork can be added later in Card Studio.
+- Evolution Series 1 expands from 75 to **76 collector cards**.
+- No Superstar abilities, momentum totals, deck sizes, gameplay engine rules, economy, modes or rewards change.
+- Verification: focused regression sample 7 passed / 0 failed / 1 historical skip; flow audit 95 Superstars / 0 issues; rebuild validation 0 issues; card-ID audit 0 issues.
+
+
+## v1.1.33 — Trish Home Banner Position Hotfix
+
+- Corrects the remaining Home Season One Trish framing issue visible on physical iPhone.
+- Keeps the approved 2× Trish WWE.com render scale.
+- Moves Trish substantially farther right and slightly upward so her full head/face occupies the clean right-side portrait lane instead of sitting beneath the Season XP bar and copy.
+- The lower body continues to crop naturally inside the compact Season banner.
+- No Season progression, rewards, Home navigation, gameplay, economy or card data changes.
+
+
+## v1.1.32 — Play Hub 3+3 Pagination + Money in the Bank Move
+
+- Makes **Choose Your Path** a true 3+3 two-page menu: Page 1 is Exhibition Showcase, Live Events and King of the Ring; Page 2 is Championship Road, Survivor Series and Money in the Bank.
+- Returns Championship Road and Survivor Series to the same standard mode-card height used on Page 1.
+- Removes the empty fourth grid row that caused the large blank area before the Next control.
+- Rebuilds Next/Back as large full-width navigation buttons immediately after the third mode card.
+- Moves **Money in the Bank** out of the Live Events hub and into the third slot on Play page 2.
+- Money in the Bank uses its existing WWE set branding as the page-card visual and retains its existing 8-level / 3-life / 2-pack rules.
+- Completed Money in the Bank runs return to Play page 2; the bottom Play tab now stays active while in Money in the Bank.
+- No gameplay balance, rewards, economy, live-event rotation, Championship Road progression or Survivor Series capture logic changes.
+
+
 ## v1.1.31 — Play Hub Two-Page Navigation + WWE.com Portrait Fix
 
 - Splits **Play → Choose Your Path** into two focused pages instead of one long five-mode scroll.

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.1.31';
+import { createProfile } from '../js/data/profile.js?v=1.1.34';
 import {
   CHAMPIONSHIP_ROAD_LENGTH,
   CHAMPIONSHIP_ROAD_OPPONENTS,
@@ -12,7 +12,7 @@ import {
   championshipRoadState,
   startChampionshipRoad,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=1.1.31';
+} from '../js/data/championship-road.js?v=1.1.34';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -89,12 +89,14 @@ test('v0.13.24 Championship Road HP modifiers affect only the CPU side at the ap
   assert.deepEqual(championshipRoadDifficultyModifier('hardcore').startingHpBonus, { p2: 10 });
 });
 
-test('v0.13.24 Money in the Bank is a dedicated Live Event and absent from My Challenges', () => {
+test('v1.1.32 Money in the Bank is a dedicated Play mode and absent from My Challenges / Live Events', () => {
   const challenges = app.slice(app.indexOf('function renderChallenges()'), app.indexOf('function beginLiveEventTower()'));
   const liveEvents = app.slice(app.indexOf('function renderLiveEventHub()'), app.indexOf('function renderLiveEvents()'));
+  const play = app.slice(app.indexOf('function renderPlayMenu()'), app.indexOf('function showSurvivorSeries()'));
   assert.doesNotMatch(challenges, /Climb the Ladder|Money in the Bank/i);
-  assert.match(liveEvents, /open-money-in-bank/);
-  assert.match(liveEvents, /Money in the Bank/i);
+  assert.doesNotMatch(liveEvents, /open-money-in-bank|money-in-bank-live-card/i);
+  assert.match(play, /id="play-ladder"/);
+  assert.match(play, /Money in the Bank/i);
   assert.doesNotMatch(app, /CLIMB THE LADDER/);
 });
 
