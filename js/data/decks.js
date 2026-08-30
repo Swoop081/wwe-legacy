@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.38";
+import { allGameplayCards } from "./content.js?v=1.1.39";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -3622,15 +3622,12 @@ export const deckIds={
     "ddt",
     "ddt",
     "back-suplex",
-    "back-suplex",
-    "elbow-drop",
     "elbow-drop",
     "momentum-strike",
     "european-uppercut",
     "clothesline",
     "clothesline",
     "piledriver",
-    "boston-crab",
     "dodge",
     "hotshot",
     "bret-hart-inverted-atomic-drop",
@@ -3642,6 +3639,9 @@ export const deckIds={
     "bret-hart-second-rope-elbow-drop",
     "bret-hart-second-rope-elbow-drop",
     "bret-hart-second-rope-elbow-drop",
+    "bret-hart-ringpost-figure-four",
+    "bret-hart-ringpost-figure-four",
+    "bret-hart-ringpost-figure-four",
     "bret-hart-sharpshooter",
     "bret-hart-sharpshooter",
     "special-bret-hart",

@@ -1,8 +1,8 @@
-import { superstars } from '../js/data/superstars.js?v=1.1.38';
-import { decks } from '../js/data/decks.js?v=1.1.38';
-import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.38';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.38';
-import { decisionOwner, cpuDecision, executeCpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.38';
+import { superstars } from '../js/data/superstars.js?v=1.1.39';
+import { decks } from '../js/data/decks.js?v=1.1.39';
+import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.39';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.39';
+import { decisionOwner, cpuDecision, executeCpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.39';
 
 const gamesPerPairPerSeed=Math.max(10,Number(process.env.GAMES_PER_PAIR_PER_SEED||10));
 const seedBases=(process.env.BALANCE_SEEDS||'1300000,15000000').split(',').map(Number).filter(Number.isFinite);

@@ -1,3 +1,14 @@
+# WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
+
+- Adds **Ringpost Figure Four** as `NG1-081`, a Bret Hart-exclusive **3★ Rare Trademark Submission** in New Generation — Series 1.
+- Cost 6 / Damage 0 / Technical 2; grounded opponent only; targets Legs; +5 persistent Leg pressure per successful turn; on Connect, Bret’s next Sharpshooter costs 1 less that Control sequence.
+- Adds 3 copies to Bret Hart's authored 60-page deck, replacing the shared Boston Crab, one Back Suplex and one Elbow Drop.
+- Retains Bret's 2× Sharpshooter Finisher package and existing 12-page Momentum structure.
+- New Generation — Series 1 expands from 80 to **81 collector cards** with no renumbering of existing cards.
+- Card Studio receives the new canonical card entry/art paths; no artwork is packaged.
+- No other Superstar, gameplay-engine, economy, reward, progression or mode logic changes.
+- Verification: dedicated v1.1.39 3/3; focused current suite 21/21 with 1 historical skip; flow 95/0; rebuild 95 decks / 836 gameplay cards / 0 issues; card IDs 931/931; full suite **912 passed / 97 failed / 97 skipped**, with **0 new failures** versus v1.1.38.
+
 # WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
 
 - Restores saved Card Studio **base plates** as the first runtime source for all non-Momentum collectible fronts. This directly fixes saved Superstar/Move fronts not appearing even though the repo contains their `*-base-plate.webp` files.

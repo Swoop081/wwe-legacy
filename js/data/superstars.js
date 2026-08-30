@@ -4025,6 +4025,7 @@ export const superstars = {
       "bret-hart-inverted-atomic-drop",
       "bret-hart-pendulum-backbreaker",
       "bret-hart-second-rope-elbow-drop",
+      "bret-hart-ringpost-figure-four",
       "bret-hart-sharpshooter"
     ],
     "archetype": "technical-three-method-sequencer",

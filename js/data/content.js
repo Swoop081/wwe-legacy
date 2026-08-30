@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.38";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.38";
+import { enrichCounterState } from "./counter-states.js?v=1.1.39";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.39";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -12065,6 +12065,40 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "diving-aerial"
+  },
+  {
+    "id": "bret-hart-ringpost-figure-four",
+    "name": "Ringpost Figure Four",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 6,
+    "damage": 0,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": "bret-hart",
+    "rarity": 3,
+    "rulesText": "Bret Hart-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Leg damage per successful turn. On Connect: your next Sharpshooter costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 5
+    },
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Sharpshooter",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
   },
   {
     "id": "bret-hart-sharpshooter",

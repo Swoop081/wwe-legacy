@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=1.1.38';
-import { superstars } from '../js/data/superstars.js?v=1.1.38';
-import { decks } from '../js/data/decks.js?v=1.1.38';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.38';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.38';
-import { boosterEligible } from '../js/data/boosters.js?v=1.1.38';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.38';
-import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.38';
-await import('../js/data/superstar-nameplates.js?v=1.1.38');
+import { sets } from '../js/data/sets.js?v=1.1.39';
+import { superstars } from '../js/data/superstars.js?v=1.1.39';
+import { decks } from '../js/data/decks.js?v=1.1.39';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.39';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.39';
+import { boosterEligible } from '../js/data/boosters.js?v=1.1.39';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.39';
+import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.39';
+await import('../js/data/superstar-nameplates.js?v=1.1.39');
 
 const bulldog=Object.values(superstars).find(s=>s.id==='british-bulldog');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
@@ -55,7 +55,7 @@ test('v0.13.81 British Bulldog owns NG1-074 through NG1-080 with the approved Ru
   const fin=byId['british-bulldog-running-powerslam']; assert.equal(fin.rarity,4); assert.equal(fin.finisher,true); assert.equal(fin.cost,10); assert.equal(fin.damage,17); assert.deepEqual(fin.requirements,{}); assert.equal(fin.method,null); assert.equal(fin.counterState,'body-elevated');
   assert.equal(byId['entrance-british-bulldog'].name,'Rule Britannia'); assert.deepEqual(byId['entrance-british-bulldog'].preMatchMomentum,{strength:1,technical:1}); assert.equal(byId['entrance-british-bulldog'].preMatchAdrenaline,1);
   assert.equal(byId['special-british-bulldog'].name,'Made in Britain'); assert.deepEqual(byId['special-british-bulldog'].special,{type:'bulldogMadeInBritain',methods:['strength','technical'],maxRarity:2});
-  assert.equal(CARD_IDS_BY_SET['new-generation-series-1'].length,80);
+  assert.equal(CARD_IDS_BY_SET['new-generation-series-1'].length,81);
 });
 
 test('v0.13.81 Power & Technique discounts only the next Strength Move and only once per Control sequence',()=>{
@@ -87,10 +87,10 @@ test('v0.13.81 Made in Britain searches one low-rarity Strength and one low-rari
   assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='made-in-britain'&&e.searchedCardIds?.length===2));
 });
 
-test('v0.13.81 British Bulldog completes the New Generation Studio/nameplate roster and the set is gap-free through NG1-080',()=>{
+test('v0.13.81 British Bulldog completes the New Generation Studio/nameplate roster and the original launch set remains gap-free through NG1-080',()=>{
   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio-data.js',import.meta.url),'utf8');
   assert.match(studio,/"id":"superstar-british-bulldog"[\s\S]{0,260}"cardCode":"NG1-080"/); assert.match(studio,/"id":"british-bulldog","name":"British Bulldog","setId":"new-generation-series-1"/);
   assert.ok(globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES['british-bulldog']);
   const codes=CARD_IDS_BY_SET['new-generation-series-1'].map(id=>CARD_NUMBER_BY_ID[id].cardCode);
-  assert.deepEqual(codes,Array.from({length:80},(_,i)=>`NG1-${String(i+1).padStart(3,'0')}`));
+  assert.deepEqual(codes.slice(0,80),Array.from({length:80},(_,i)=>`NG1-${String(i+1).padStart(3,'0')}`));
 });

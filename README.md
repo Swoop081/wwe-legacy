@@ -1,3 +1,15 @@
+# WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
+
+**Current working baseline.** v1.1.39 supersedes v1.1.38.
+
+Adds **Ringpost Figure Four** as Bret Hart's new 3★ Rare Trademark submission in New Generation — Series 1. The card is `NG1-081`, Cost 6, Damage 0, requires Technical 2, is playable against a grounded opponent, targets the Legs, applies 5 persistent Leg submission pressure per successful turn, and makes Bret’s next Sharpshooter cost 1 less that Control sequence.
+
+Bret's authored 60-page deck now carries **3× Ringpost Figure Four**. The new Trademark replaces the shared Boston Crab plus one Back Suplex and one Elbow Drop, keeping the deck at exactly 60 pages while preserving Bret's existing 2× Sharpshooter Finisher package and 12 starting Momentum pages.
+
+The new card is included in Card Studio with canonical blank artwork targets `assets/images/ringpost-figure-four-bret-hart.webp` and `assets/images/ringpost-figure-four-bret-hart-base-plate.webp`; no image asset is packaged in this no-assets overlay. New Generation — Series 1 expands from 80 to **81 collector cards** without renumbering any existing card.
+
+Verification: v1.1.39 dedicated assertions 3/3; focused current suite 21/21 with 1 historical skip; flow 95/0; rebuild 95 decks / 836 gameplay cards / 0 issues; card IDs 931/931; full suite **912 passed / 97 failed / 97 skipped**, with **0 new failures** versus v1.1.38.
+
 # WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
 
 **Current working baseline.** v1.1.38 supersedes v1.1.37.

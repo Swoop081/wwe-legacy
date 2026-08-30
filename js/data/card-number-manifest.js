@@ -480,6 +480,12 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "NG1-080"
   },
   {
+    "id": "bret-hart-ringpost-figure-four",
+    "setId": "new-generation-series-1",
+    "cardNumber": 81,
+    "cardCode": "NG1-081"
+  },
+  {
     "id": "goldberg-military-press-powerslam",
     "setId": "season-2-whos-next",
     "cardNumber": 1,

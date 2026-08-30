@@ -1,3 +1,31 @@
+# WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
+
+## Release identity
+- Version: **v1.1.39**
+- Title: **Bret Hart Ringpost Figure Four**
+- Date: **30 August 2026**
+- Base: **v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix**
+- Distribution: **no-assets code overlay**; existing repository artwork/animation assets are preserved.
+
+## Certified addition
+- Adds `NG1-081` **Ringpost Figure Four** as a Bret Hart-exclusive 3★ Rare Trademark Submission.
+- Cost 6 / Damage 0 / Technical 2.
+- Grounded opponent only; targets Legs; +5 persistent Leg pressure per successful submission turn; on Connect, Bret’s next Sharpshooter costs 1 less this Control sequence.
+- Bret Hart's authored deck carries 3 copies and remains exactly 60 pages.
+- Replaces the shared Boston Crab plus one Back Suplex and one Elbow Drop; 2× Sharpshooter and the existing Momentum package are retained.
+- Existing New Generation collector numbers remain unchanged; the set extends cleanly to NG1-081.
+- Card Studio data includes the new card and canonical artwork paths; no artwork is packaged.
+
+## Verification
+- Dedicated v1.1.39 assertions: **3 passed / 0 failed**.
+- Combined Bret / renderer / rarity focused sample: **21 passed / 0 failed / 1 historical skip**.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 836 gameplay cards / 0 orphans / 0 issues**.
+- Card-ID audit: **931 collector cards / 931 manifest entries / 0 issues**; New Generation is gap-free through `NG1-081`.
+- Card-health and counter-density audits: **0 issues**.
+- Full no-assets suite: **912 passed / 97 failed / 97 skipped**, versus v1.1.38 at 909 / 97 / 97 — **3 new passes and 0 new carry-forward failures**.
+- Physical iPhone smoke: pending.
+
 # WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
 
 ## Release identity
