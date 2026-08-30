@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BUILD_VERSION } from '../js/config/build.js?v=1.1.43';
+import { BUILD_VERSION } from '../js/config/build.js?v=1.1.44';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 
 function pngSize(file){

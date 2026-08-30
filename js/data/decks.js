@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.43";
+import { allGameplayCards } from "./content.js?v=1.1.44";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -362,16 +362,16 @@ export const deckIds={
     "punch",
     "jawbreaker",
     "shoulder-up",
-    "arm-drag-counter",
+    "arm-drag",
     "game-plan",
     "once-too-often",
-    "arm-drag-counter",
+    "arm-drag",
     "jawbreaker",
     "dodge",
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "paige": [
     "momentum-technical",
@@ -738,12 +738,12 @@ export const deckIds={
     "fire-up",
     "once-too-often",
     "jawbreaker",
-    "arm-drag-counter",
+    "arm-drag",
     "dodge",
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "charlotte-flair": [
     "momentum-technical",
@@ -1043,17 +1043,17 @@ export const deckIds={
     "momentum-strike",
     "special-ultimate-warrior",
     "no-sell",
-    "arm-drag-counter",
+    "arm-drag",
     "shoulder-up",
     "fire-up",
     "once-too-often",
-    "arm-drag-counter",
+    "arm-drag",
     "jawbreaker",
     "dodge",
     "jawbreaker",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "rhea-ripley": [
     "momentum-strength",
@@ -1230,14 +1230,14 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "once-too-often",
-    "arm-drag-counter",
+    "arm-drag",
     "jawbreaker",
     "shoulder-up",
     "dodge",
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter",
+    "arm-drag",
     "oba-femi-running-elbow",
     "biel-toss"
   ],
@@ -1356,7 +1356,7 @@ export const deckIds={
     "standing-switch",
     "jawbreaker",
     "jawbreaker",
-    "arm-drag-counter",
+    "arm-drag",
     "running-forearm",
     "running-forearm",
     "knee-strike",
@@ -1603,7 +1603,7 @@ export const deckIds={
     "sidestep",
     "jawbreaker",
     "duck",
-    "arm-drag-counter",
+    "arm-drag",
     "shoulder-up",
     "fire-up",
     "once-too-often",
@@ -1611,7 +1611,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "sol-ruca": [
     "momentum-agility",
@@ -1664,7 +1664,7 @@ export const deckIds={
     "special-sol-ruca",
     "jawbreaker",
     "sidestep",
-    "arm-drag-counter",
+    "arm-drag",
     "leapfrog",
     "shoulder-up",
     "fire-up",
@@ -1910,7 +1910,7 @@ export const deckIds={
     "dominik-mysterio-frog-splash",
     "special-dominik-mysterio",
     "sidestep",
-    "arm-drag-counter",
+    "arm-drag",
     "duck",
     "jawbreaker",
     "shoulder-up",
@@ -1921,7 +1921,7 @@ export const deckIds={
     "standing-switch",
     "jawbreaker",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "penta": [
     "momentum-agility",
@@ -2045,7 +2045,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "jey-uso": [
     "momentum-strike",
@@ -2282,7 +2282,7 @@ export const deckIds={
     "finn-balor-coup-de-grace",
     "special-finn-balor",
     "sidestep",
-    "arm-drag-counter",
+    "arm-drag",
     "duck",
     "jawbreaker",
     "shoulder-up",
@@ -2291,9 +2291,9 @@ export const deckIds={
     "once-too-often",
     "jawbreaker",
     "standing-switch",
-    "arm-drag-counter",
+    "arm-drag",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "danhausen": [
     "momentum-technical",
@@ -2439,9 +2439,9 @@ export const deckIds={
     "elbow",
     "jawbreaker",
     "jawbreaker",
-    "arm-drag-counter",
+    "arm-drag",
     "duck",
-    "arm-drag-counter",
+    "arm-drag",
     "tilt-a-whirl-headscissors",
     "tilt-a-whirl-headscissors",
     "russian-leg-sweep",
@@ -2479,7 +2479,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "damian-priest": [
     "momentum-strength",
@@ -2851,7 +2851,7 @@ export const deckIds={
     "jawbreaker",
     "rollover-counter",
     "jawbreaker",
-    "arm-drag-counter"
+    "arm-drag"
   ],
   "solo-sikoa": [
     "momentum-strike",
@@ -3091,7 +3091,7 @@ export const deckIds={
     "goldberg-jackhammer",
     "special-goldberg",
     "no-sell",
-    "arm-drag-counter",
+    "arm-drag",
     "shoulder-up",
     "fire-up",
     "once-too-often",
@@ -3652,8 +3652,8 @@ export const deckIds={
     "rollover-counter",
     "rollover-counter",
     "catch-the-foot",
-    "arm-drag-counter",
-    "arm-drag-counter",
+    "arm-drag",
+    "arm-drag",
     "chain-wrestling",
     "shoulder-up",
     "fire-up",
@@ -3778,7 +3778,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "catch-the-foot",
-    "arm-drag-counter",
+    "arm-drag",
     "shoulder-up",
     "fire-up",
     "once-too-often"
@@ -3839,7 +3839,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "catch-the-foot",
-    "arm-drag-counter",
+    "arm-drag",
     "chain-wrestling",
     "shoulder-up",
     "fire-up",
@@ -4023,7 +4023,7 @@ export const deckIds={
     "rollover-counter",
     "catch-the-foot",
     "catch-the-foot",
-    "arm-drag-counter",
+    "arm-drag",
     "jawbreaker",
     "sidestep",
     "dodge",
@@ -5016,8 +5016,8 @@ export const deckIds={
     "rollover-counter",
     "rollover-counter",
     "catch-the-foot",
-    "arm-drag-counter",
-    "arm-drag-counter",
+    "arm-drag",
+    "arm-drag",
     "chain-wrestling",
     "shoulder-up",
     "fire-up",
@@ -5080,7 +5080,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "catch-the-foot",
-    "arm-drag-counter",
+    "arm-drag",
     "shoulder-up",
     "fire-up",
     "once-too-often"
@@ -5265,7 +5265,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "catch-the-foot",
-    "arm-drag-counter",
+    "arm-drag",
     "chain-wrestling",
     "shoulder-up",
     "fire-up",
@@ -5575,7 +5575,7 @@ export const deckIds={
     "standing-switch",
     "rollover-counter",
     "catch-the-foot",
-    "arm-drag-counter",
+    "arm-drag",
     "chain-wrestling",
     "shoulder-up",
     "fire-up",

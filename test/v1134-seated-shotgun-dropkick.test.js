@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.43";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.43";
-import { deckIds } from "../js/data/decks.js?v=1.1.43";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.44";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.44";
+import { deckIds } from "../js/data/decks.js?v=1.1.44";
 
 const card=allGameplayCards.find(c=>c.id==="seated-shotgun-dropkick");
 
@@ -23,7 +23,7 @@ test("v1.1.34 adds Seated Shotgun Dropkick as EVO1-076 shared Evolution Uncommon
   assert.equal(card.stun,1);
   assert.equal(card.counterState,"leg-extended");
   assert.equal(CARD_NUMBER_BY_ID[card.id].cardCode,"EVO1-076");
-  assert.equal(CARD_IDS_BY_SET["evolution-series-1"].length,76);
+  assert.equal(CARD_IDS_BY_SET["evolution-series-1"].length,75);
 });
 
 test("v1.1.34 seeds two copies into IYO, Liv and Tiffany while preserving 60 pages and a basic Dropkick",()=>{

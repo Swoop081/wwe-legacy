@@ -64,7 +64,6 @@ const explicitStateById = Object.freeze({
   'rollover-counter': 'front-control',
   'backflip-counter': 'diving-aerial',
   'catch-the-foot': 'leg-extended',
-  'arm-drag-counter': 'front-control',
   'jawbreaker': 'front-control',
   // Manual physical-state audit corrections for moves whose legacy moveType/name can mislead heuristics.
   '619': 'leg-extended',
@@ -215,7 +214,6 @@ const counterStateLinks = Object.freeze({
   'knee-to-the-gut': ['torso-trapped'],
   'standing-switch': ['torso-trapped','rear-control'],
 
-  'arm-drag-counter': ['front-control'],
   'hip-toss': ['front-control'],
   'chain-wrestling': ['front-control','rear-control'],
   jawbreaker: ['front-control','rear-control'],
@@ -233,7 +231,6 @@ const counterExchangeKeys = Object.freeze({
 const submissionCounterLinks = Object.freeze({
   // Arm-targeting holds: turn the captured arm/control back on the attacker.
   'arm-drag': ['arms'],
-  'arm-drag-counter': ['arms'],
   'rollover-counter': ['arms'],
   'chain-wrestling': ['arms','legs','back','neck-head'],
 
@@ -261,7 +258,7 @@ const NO_METHOD_REQUIREMENT_COUNTERS = new Set([
   'punch','drop-toe-hold','knees-up','headbutt','arm-drag','back-elbow',
   // Universal/basic reversals should remain usable even for 0-limit Methods.
   'duck','dodge','block','up-and-over','standing-switch','rollover-counter','backflip-counter',
-  'catch-the-foot','arm-drag-counter','jawbreaker','sidestep','elbow','reverse-elbow','knee-to-the-gut','hip-toss',
+  'catch-the-foot','jawbreaker','sidestep','elbow','reverse-elbow','knee-to-the-gut','hip-toss',
 ]);
 
 export function enrichCounterState(card) {

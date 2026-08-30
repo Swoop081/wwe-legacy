@@ -1,10 +1,10 @@
 {
-  "version": "1.1.43",
+  "version": "1.1.44",
   "releasedAt": "2026-08-31",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.43-user-smoke",
+  "physicalIphoneSmoke": "pending-v1.1.44-user-smoke",
   "launchStatus": "released"
 }

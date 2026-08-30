@@ -1,9 +1,9 @@
-import { decks } from "./decks.js?v=1.1.43";
-import { collectionCards } from "./collection.js?v=1.1.43";
-import { superstars } from "./superstars.js?v=1.1.43";
-import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.43";
-import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, normalizeCardTier, tierDamageOffsetFor, tierLabel, tierRank } from "./variants.js?v=1.1.43";
-import { MERCH_BY_ID, equipMerch, merchEligibilityForSuperstar } from "./merch.js?v=1.1.43";
+import { decks } from "./decks.js?v=1.1.44";
+import { collectionCards } from "./collection.js?v=1.1.44";
+import { superstars } from "./superstars.js?v=1.1.44";
+import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.44";
+import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, normalizeCardTier, tierDamageOffsetFor, tierLabel, tierRank } from "./variants.js?v=1.1.44";
+import { MERCH_BY_ID, equipMerch, merchEligibilityForSuperstar } from "./merch.js?v=1.1.44";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));

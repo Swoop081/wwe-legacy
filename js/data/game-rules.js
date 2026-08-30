@@ -78,7 +78,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Matching a Counter", "A legal Counter must match the incoming card's Counter State, explicit counter-card relationship, or an applicable Submission body target."],
       ["Counter-attacks", "An offensive Counter becomes a counter-attack. Counter-attacks are terminal by default and resolve without opening another generic Counter window."],
       ["Punch / Elbow exchange", "Punch and Elbow are the explicit exchange family that may answer each other and continue the exchange when legal."],
-      ["Mirror locks", "Jawbreaker cannot answer Jawbreaker, and Arm Drag Counter does not recursively counter itself in the same exchange."],
+      ["Mirror locks", "Jawbreaker cannot answer Jawbreaker. Offensive counter-attacks such as Arm Drag resolve terminally and do not recursively open a generic Counter window."],
       ["Once Too Often", "Once Too Often is a reactive Action. If the opponent plays the exact same Move card they already connected with earlier in this match, you may play Once Too Often during that Counter window to reverse the repeat and gain Control. It can answer a repeated Finisher, but not a counter-attack."],
       ["Auto Counter", "Auto Counter is the fallback when you do not use a matching reversal. Its discard Cost is 5 pages the first time, then 6, 7, 8 and so on. You must still have at least 2 pages left in hand afterward."],
       ["Auto Counter limits", "Auto Counter cannot answer a Finisher or a counter-attack. The CPU prefers a real matching Counter and only considers Auto Counter in its authored decision rules."]

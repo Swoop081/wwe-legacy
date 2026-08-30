@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.43';
-import { collectionCards } from '../js/data/collection.js?v=1.1.43';
-import { decks } from '../js/data/decks.js?v=1.1.43';
-import { superstars } from '../js/data/superstars.js?v=1.1.43';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.43';
-import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=1.1.43';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.43';
-import { PRE_RELEASE_TEST_SET_IDS } from '../js/data/release.js?v=1.1.43';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.44';
+import { collectionCards } from '../js/data/collection.js?v=1.1.44';
+import { decks } from '../js/data/decks.js?v=1.1.44';
+import { superstars } from '../js/data/superstars.js?v=1.1.44';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.44';
+import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=1.1.44';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.44';
+import { PRE_RELEASE_TEST_SET_IDS } from '../js/data/release.js?v=1.1.44';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -70,7 +70,7 @@ test.skip('v0.13.42 Lola Vice WC1 package and shared Evolution variants are lock
   };
   for(const [id,code] of Object.entries(expectedCodes)) assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
   assert.equal(CARD_IDS_BY_SET['worlds-collide-series-1'].length,64);
-  assert.equal(CARD_IDS_BY_SET['evolution-series-1'].length,76);
+  assert.equal(CARD_IDS_BY_SET['evolution-series-1'].length,75);
   assert.equal(collectionCards.some(c=>c.id==='spinning-heel-kick'),true);
   assert.equal(collectionCards.some(c=>c.id==='triangle-choke'),true);
   assert.deepEqual(PRE_RELEASE_TEST_SET_IDS,['worlds-collide-series-1','new-generation-series-1']);

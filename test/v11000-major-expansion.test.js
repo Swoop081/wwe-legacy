@@ -1,20 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.1.43';
-import { decks } from '../js/data/decks.js?v=1.1.43';
-import { sets } from '../js/data/sets.js?v=1.1.43';
-import { collectionCards } from '../js/data/collection.js?v=1.1.43';
-import { playerReleasedCollectibleSetIds } from '../js/data/release.js?v=1.1.43';
-import { PROFILE_VERSION, createProfile } from '../js/data/profile.js?v=1.1.43';
-import { CARD_TIERS, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=1.1.43';
-import { BOOSTER_GAMEPLAY_SLOTS, BOOSTER_MERCH_SLOTS, BOOSTER_SIZE, grantBooster, openBooster } from '../js/data/boosters.js?v=1.1.43';
-import { MERCH_ITEMS, GENERIC_MERCH } from '../js/data/merch.js?v=1.1.43';
-import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.43';
-import { DAILY_SPIN_COOLDOWN_MS, DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from '../js/data/daily-spin.js?v=1.1.43';
-import { canEnterSurvivorSeries, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch } from '../js/data/survivor-series-mode.js?v=1.1.43';
-import { SEASON_1_COMPLETION_SUPERSTAR, tierReward } from '../js/data/seasons.js?v=1.1.43';
-import { canonicalCardImagePath, canonicalBasePlatePath, canonicalSuperstarPath } from '../js/data/artwork.js?v=1.1.43';
-await import('../js/data/superstar-nameplates.js?v=1.1.43');
+import { superstars } from '../js/data/superstars.js?v=1.1.44';
+import { decks } from '../js/data/decks.js?v=1.1.44';
+import { sets } from '../js/data/sets.js?v=1.1.44';
+import { collectionCards } from '../js/data/collection.js?v=1.1.44';
+import { playerReleasedCollectibleSetIds } from '../js/data/release.js?v=1.1.44';
+import { PROFILE_VERSION, createProfile } from '../js/data/profile.js?v=1.1.44';
+import { CARD_TIERS, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=1.1.44';
+import { BOOSTER_GAMEPLAY_SLOTS, BOOSTER_MERCH_SLOTS, BOOSTER_SIZE, grantBooster, openBooster } from '../js/data/boosters.js?v=1.1.44';
+import { MERCH_ITEMS, GENERIC_MERCH } from '../js/data/merch.js?v=1.1.44';
+import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.44';
+import { DAILY_SPIN_COOLDOWN_MS, DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from '../js/data/daily-spin.js?v=1.1.44';
+import { canEnterSurvivorSeries, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch } from '../js/data/survivor-series-mode.js?v=1.1.44';
+import { SEASON_1_COMPLETION_SUPERSTAR, tierReward } from '../js/data/seasons.js?v=1.1.44';
+import { canonicalCardImagePath, canonicalBasePlatePath, canonicalSuperstarPath } from '../js/data/artwork.js?v=1.1.44';
+await import('../js/data/superstar-nameplates.js?v=1.1.44');
 
 const now = new Date('2026-08-29T00:00:00+10:00');
 const released = [
@@ -39,7 +39,7 @@ test('SmackDown, NXT and Ruthless Aggression each have the approved eight-Supers
 test('expanded content has complete decks and Trish Stratus is the Season 1 chase', () => {
   assert.equal(Object.keys(superstars).length, 95);
   assert.equal(Object.keys(decks).length, 95);
-  assert.equal(collectionCards.length, 935);
+  assert.equal(collectionCards.length, 936);
   for (const star of Object.values(superstars)) assert.equal(decks[star.id]?.length, 60, `${star.name} deck`);
   assert.equal(SEASON_1_COMPLETION_SUPERSTAR, 'trish-stratus');
   assert.equal(tierReward(50, now)?.superstarId, 'trish-stratus');

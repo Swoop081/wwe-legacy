@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.43";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.43";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.44";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.44";
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -20,7 +20,7 @@ test("v0.13.65 adds Vertical Boston Crab as EVO1-075 shared Uncommon submission"
   });
   assert.equal(c.superstarId,null);
   assert.equal(CARD_NUMBER_BY_ID[c.id].cardCode,"EVO1-075");
-  assert.equal(CARD_IDS_BY_SET["evolution-series-1"].length,76);
+  assert.equal(CARD_IDS_BY_SET["evolution-series-1"].length,75);
   assert.ok(CARD_IDS_BY_SET["evolution-series-1"].includes(c.id));
 });
 

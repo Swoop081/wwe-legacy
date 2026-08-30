@@ -3432,6 +3432,18 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "SS1-152"
   },
   {
+    "id": "pescado",
+    "setId": "summerslam-series-1",
+    "cardNumber": 153,
+    "cardCode": "SS1-153"
+  },
+  {
+    "id": "top-rope-bulldog",
+    "setId": "summerslam-series-1",
+    "cardNumber": 154,
+    "cardCode": "SS1-154"
+  },
+  {
     "id": "northern-lights-suplex",
     "setId": "evolution-series-1",
     "cardNumber": 1,
@@ -3802,12 +3814,6 @@ export const CARD_NUMBER_MANIFEST = [
     "setId": "evolution-series-1",
     "cardNumber": 62,
     "cardCode": "EVO1-062"
-  },
-  {
-    "id": "arm-drag-counter",
-    "setId": "evolution-series-1",
-    "cardNumber": 63,
-    "cardCode": "EVO1-063"
   },
   {
     "id": "jawbreaker",

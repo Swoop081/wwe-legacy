@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.43';
-import { decks } from '../js/data/decks.js?v=1.1.43';
-import { superstars } from '../js/data/superstars.js?v=1.1.43';
-import { canCounter } from '../js/engine/rules.js?v=1.1.43';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.44';
+import { decks } from '../js/data/decks.js?v=1.1.44';
+import { superstars } from '../js/data/superstars.js?v=1.1.44';
+import { canCounter } from '../js/engine/rules.js?v=1.1.44';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const stars=Object.values(superstars);
@@ -54,7 +54,7 @@ test('v0.12.19 submission body areas use natural existing move counters',()=>{
   target('jawbreaker','neck-head');
   target('back-elbow','neck-head');
   target('arm-drag','arms');
-  target('arm-drag-counter','arms');
+  target('arm-drag','arms');
   target('drop-toe-hold','legs');
   target('dragon-screw','legs');
   target('enzuigiri','legs');

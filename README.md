@@ -1,3 +1,15 @@
+# WWE Legacy v1.1.44 — Global Card Studio Parity + Shared Move Batch + Arm Drag Merge
+
+**Current working baseline.** v1.1.44 supersedes v1.1.43.
+
+This release fixes the card-presentation mismatch at the shared renderer level, so the correction applies **everywhere collectible cards appear** rather than only in one modal or screen. The live renderer now uses the same 680×1000 Card Studio proportions, exact lower-plaque footprint, Card Studio condensed display/meta/number font stacks, rarity-star coordinates, Cost/Damage baselines, Method-dot size/spacing, move-type baselines and non-Move name/type baselines. Animated cards remain artwork-only layers: the authored frame/set treatment and live Card Studio-aligned plaque remain above them. Static cards continue to use the saved Card Studio base plate first and finished export only as fallback.
+
+The open shared-move batch is also included. **Pescado** (`SS1-153`) is a shared **2★ Uncommon** at Cost 5 / Damage 8 / Agility 2; it is an Aerial Move, grounds the opponent, uses the Running Aerial counter state and deals 1 self-damage to the attacker on Connect. **Top Rope Bulldog** (`SS1-154`) is a shared **3★ Rare** at Cost 6 / Damage 9 requiring Technical 2 + Agility 1; it is a Technical Grapple, grounds the opponent, ditches 1 opponent card and uses the Body Elevated counter state. Both remain booster-only.
+
+**Arm Drag Counter is retired as a separate card.** Its reversal coverage and offensive counter-attack behavior are merged into the existing `EVO1-007` **Arm Drag**. Arm Drag now counters Front Control Moves and Arm-targeting submissions, becomes a terminal counter-attack when used defensively, and grounds the opponent on Connect. All 35 authored deck references to the retired ID are migrated to Arm Drag while every deck remains exactly 60 pages and no deck exceeds the five-copy limit. `EVO1-063` is retained only as a reserved retired collector slot so later Evolution collector numbers do not change.
+
+Card Studio data now contains **1,546 card-like entries**: 936 collector cards, 515 Merch cards and 95 Variants. Validation: 95 Superstars / 95 decks / **841 gameplay cards** / 0 orphans / 0 rebuild issues; collector manifest **936/936** / 0 issues; counter-state and counter-density audits retain complete eight-state and four-submission-target deck coverage. Full no-assets suite: **933 passed / 97 historical failures / 97 skipped**, versus v1.1.43 at 924 / 97 / 97 — **9 new passes and 0 new carry-forward failures**.
+
 # WWE Legacy v1.1.43 — Complete Play-Pile Mats + Automatic Daily Launch Rewards
 
 **Current working baseline.** v1.1.43 supersedes v1.1.42.

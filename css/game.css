@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.43") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.44") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10795,3 +10795,151 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
 .ring-play-surface[data-ring-mat-set] .ring-ropes:before{inset:0;background:linear-gradient(90deg,transparent 0 33%,rgba(255,255,255,.12) 33% 33.25%,transparent 33.25% 66.5%,rgba(255,255,255,.09) 66.5% 66.75%,transparent 66.75%)}
 .ring-play-surface[data-ring-mat-set] .ring-ropes:after{top:50%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--ring-mat-secondary) 25%,rgba(255,255,255,.10)),transparent)}
 .ring-play-surface[data-ring-mat-set] .ring-centre-logo{opacity:.56!important;max-width:34%!important;max-height:40%!important}
+
+/* ========================================================================== */
+/* v1.1.44 — Global Card Studio visual parity.                                */
+/* The live game must not invent a second collectible-card design. Every      */
+/* surface uses the same 680×1000 geometry/font hierarchy as Card Studio.     */
+/* ========================================================================== */
+:root{
+  --studio-display-font:"Bahnschrift Condensed","Avenir Next Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --studio-meta-font:"Bahnschrift SemiCondensed","Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif;
+  --studio-number-font:"DIN Alternate","Bahnschrift SemiCondensed","Avenir Next Condensed","Arial Narrow",Arial,sans-serif;
+}
+
+/* One canonical card aspect everywhere, matching the Card Studio canvas. */
+.ccg-card{aspect-ratio:680/1000!important}
+.ccg-card-inner,.ccg-card-face{inset:0!important;width:100%!important;height:100%!important}
+
+/* Exact Card Studio lower identity plaque: x 5.2–94.8%, y 74.0–95.8% on Moves. */
+.ccg-card.is-layered-front .ccg-live-front-data{
+  font-family:var(--studio-meta-font)!important;
+  text-transform:uppercase!important;
+  letter-spacing:0!important;
+}
+.ccg-card.is-layered-front .ccg-live-front-data::before{
+  left:5.2%!important;right:5.2%!important;bottom:4.2%!important;height:21.8%!important;
+  border-radius:0!important;
+  background:linear-gradient(180deg,rgba(20,25,32,.95),rgba(3,5,9,.995))!important;
+  border:max(1px,.368cqw) solid var(--lf-border,var(--lf-accent,#e1bd61))!important;
+  box-shadow:none!important;
+}
+.ccg-card.is-layered-front .ccg-live-front-utility::before{height:18.6%!important}
+
+/* Card Studio set-name palette. */
+.ccg-card.is-layered-front .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:var(--lf-accent,#e1bd61);--lf-border:var(--lf-accent,#e1bd61)}
+.ccg-card.is-layered-front.set-summerslam-series-1 .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#ff9d38;--lf-border:#f6a253;--lf-accent:#ff9d38}
+.ccg-card.is-layered-front.set-evolution-series-1 .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#ff54d7;--lf-border:#ff54d7;--lf-accent:#ff54d7}
+.ccg-card.is-layered-front.set-smackdown-series-1 .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#75c8ff;--lf-border:#1597ff;--lf-accent:#75c8ff}
+.ccg-card.is-layered-front.set-raw-series-1 .ccg-live-front-data{--lf-name-top:#f7f7f8;--lf-name-bottom:#c7ccd2;--lf-border:#ef2637;--lf-accent:#c7ccd2}
+.ccg-card.is-layered-front.set-nxt-series-1 .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#f0d44f;--lf-border:#f0d44f;--lf-accent:#f0d44f}
+.ccg-card.is-layered-front.set-ruthless-aggression-series-1 .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#d84040;--lf-border:#a8b7c8;--lf-accent:#d84040}
+.ccg-card.is-layered-front.set-new-generation-series-1 .ccg-live-front-data{--lf-name-top:#fff6a8;--lf-name-bottom:#31e0d4;--lf-border:#ffdc00;--lf-accent:#31e0d4}
+.ccg-card.is-layered-front.set-golden-era-series-1 .ccg-live-front-data{--lf-name-top:#fff3b0;--lf-name-bottom:#e44236;--lf-border:#e4b63f;--lf-accent:#e44236}
+.ccg-card.is-layered-front.set-attitude-era-series-1 .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#ed2537;--lf-border:#d7dade;--lf-accent:#ed2537}
+.ccg-card.is-layered-front.set-survivor-series-series-1 .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#ff8a3d;--lf-border:#ff6b1b;--lf-accent:#ff8a3d}
+.ccg-card.is-layered-front.set-money-in-the-bank-series-1 .ccg-live-front-data{--lf-name-top:#f6fff2;--lf-name-bottom:#74ef40;--lf-border:#74ef40;--lf-accent:#74ef40}
+.ccg-card.is-layered-front.set-worlds-collide-series-1 .ccg-live-front-data{--lf-name-top:#f7fff1;--lf-name-bottom:#73ff42;--lf-border:#62f13f;--lf-accent:#73ff42}
+.ccg-card.is-layered-front.set-season-1-final-boss .ccg-live-front-data{--lf-name-top:#fff4c8;--lf-name-bottom:#ef3d4c;--lf-border:#efcf73;--lf-accent:#f1d079}
+.ccg-card.is-layered-front.set-season-1-last-time-is-now .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#d93434;--lf-border:#efcf73;--lf-accent:#f1d079}
+.ccg-card.is-layered-front.set-season-2-whos-next .ccg-live-front-data{--lf-name-top:#fff;--lf-name-bottom:#dfc160;--lf-border:#efcf73;--lf-accent:#f1d079}
+
+/* Name: Studio drawBottomIdentity() y=78.7% for Moves, 85.2% otherwise. */
+.ccg-card.is-layered-front .ccg-live-name{
+  left:50%!important;width:78%!important;padding:0!important;
+  font-family:var(--studio-display-font)!important;font-weight:900!important;
+  font-size:6.47cqw!important;line-height:1!important;letter-spacing:0!important;
+  color:transparent!important;
+  background:linear-gradient(180deg,var(--lf-name-top,#fff) 0%,var(--lf-name-top,#fff) 62%,var(--lf-name-bottom,#e1bd61) 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;
+  -webkit-text-stroke:.44cqw rgba(0,0,0,.96)!important;paint-order:stroke fill!important;
+  text-shadow:0 0 1.03cqw rgba(0,0,0,.78),0 0 .59cqw color-mix(in srgb,var(--lf-name-bottom,#e1bd61) 45%,transparent)!important;
+  overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important;
+}
+.ccg-card.is-layered-front .ccg-live-front-move .ccg-live-name{top:78.7%!important}
+.ccg-card.is-layered-front .ccg-live-front-utility .ccg-live-name{top:85.2%!important;font-size:7.2cqw!important}
+.ccg-card.is-layered-front .ccg-live-name.is-name-long{font-size:5.88cqw!important}
+.ccg-card.is-layered-front .ccg-live-name.is-name-xl{font-size:4.85cqw!important}
+.ccg-card.is-layered-front .ccg-live-name.is-marquee{text-align:center!important}
+.ccg-card.is-layered-front .ccg-live-name.is-marquee .ccg-live-name-text{animation:none!important;transform:none!important;display:inline!important}
+
+/* COST / DAMAGE use Studio's separate y coordinates rather than a flex stack. */
+.ccg-card.is-layered-front .ccg-live-stat{
+  top:0!important;height:100%!important;width:20%!important;transform:translateX(-50%)!important;
+  display:block!important;padding:0!important;background:none!important;border:0!important;
+}
+.ccg-card.is-layered-front .ccg-live-cost{left:16%!important}
+.ccg-card.is-layered-front .ccg-live-damage{left:84%!important}
+.ccg-card.is-layered-front .ccg-live-stat small{
+  position:absolute!important;left:50%!important;top:82.9%!important;transform:translate(-50%,-50%)!important;
+  margin:0!important;white-space:nowrap!important;
+  font-family:var(--studio-meta-font)!important;font-size:4.265cqw!important;line-height:1!important;font-weight:950!important;
+  letter-spacing:.162cqw!important;color:rgba(255,255,255,.80)!important;
+}
+.ccg-card.is-layered-front .ccg-live-stat b{
+  position:absolute!important;left:50%!important;top:88.4%!important;transform:translate(-50%,-50%)!important;
+  margin:0!important;white-space:nowrap!important;
+  font-family:var(--studio-number-font)!important;font-size:9.412cqw!important;line-height:1!important;font-weight:1000!important;
+  letter-spacing:0!important;color:#fff!important;text-shadow:none!important;
+}
+
+/* Method dots: Studio radius 17.4/680 and 10px inter-dot gap, centered at y=86.6%. */
+.ccg-card.is-layered-front .ccg-live-requirement{
+  left:50%!important;top:86.6%!important;width:49%!important;transform:translate(-50%,-50%)!important;
+  padding:0!important;height:auto!important;
+}
+.ccg-card.is-layered-front .ccg-method-dots{gap:1.471cqw!important}
+.ccg-card.is-layered-front .ccg-method-dot-group i{
+  width:5.118cqw!important;height:5.118cqw!important;
+  border:max(1px,.309cqw) solid rgba(255,255,255,.84)!important;
+  box-shadow:0 0 1.471cqw color-mix(in srgb,var(--method-dot) 72%,transparent)!important;
+}
+.ccg-card.is-layered-front .ccg-method-dot-group i::after{width:28%!important;height:28%!important;margin:14% 0 0 18%!important;background:rgba(255,255,255,.48)!important}
+
+/* MOVE • TYPE: exact Card Studio y/size with responsive two-line fallback. */
+.ccg-card.is-layered-front .ccg-live-type{
+  font-family:var(--studio-meta-font)!important;font-weight:950!important;letter-spacing:.147cqw!important;
+  color:var(--lf-accent,#e1bd61)!important;text-shadow:none!important;
+}
+.ccg-card.is-layered-front .ccg-live-front-move .ccg-live-type.has-requirement{
+  top:92.9%!important;width:49%!important;font-size:5cqw!important;line-height:.94!important;
+}
+.ccg-card.is-layered-front .ccg-live-front-move .ccg-live-type:not(.has-requirement){
+  top:89.5%!important;width:49%!important;font-size:5.882cqw!important;line-height:.94!important;
+}
+.ccg-card.is-layered-front .ccg-live-front-utility .ccg-live-type{
+  top:90.9%!important;width:70%!important;font-size:4.265cqw!important;line-height:1!important;
+}
+
+/* Rarity stars use the same 680×1000 coordinates as Studio (x=51, y=62+31n). */
+.ccg-card.is-layered-front .ccg-live-rarity{
+  left:7.5%!important;top:4.72%!important;width:5.15%!important;
+  font-family:Arial,sans-serif!important;font-size:3.529cqw!important;line-height:1.292!important;font-weight:900!important;
+  color:#f4c542!important;
+  -webkit-text-stroke:.44cqw rgba(28,18,2,.92)!important;paint-order:stroke fill!important;
+  text-shadow:0 0 1.18cqw rgba(255,202,55,.48),0 .2cqw .4cqw rgba(0,0,0,.75)!important;
+}
+
+/* Superstar cards use Card Studio's non-Move plaque and text baseline too. */
+.ccg-card.is-layered-front .ccg-superstar-nameplate{
+  left:5.2%!important;right:5.2%!important;bottom:4.2%!important;height:18.6%!important;
+  border:max(1px,.368cqw) solid var(--np-edge,var(--lf-border,#e1bd61))!important;
+  background:linear-gradient(180deg,rgba(20,25,32,.95),rgba(3,5,9,.995))!important;
+}
+.ccg-card.is-layered-front .ccg-superstar-nameplate strong{top:43.01%!important}
+.ccg-card.is-layered-front .ccg-superstar-nameplate small{
+  top:73.66%!important;font-family:var(--studio-meta-font)!important;font-size:4.265cqw!important;font-weight:950!important;letter-spacing:.147cqw!important;
+}
+
+/* Animation is artwork only: preserve the authored frame/logo/plaque hierarchy globally. */
+.ccg-card.has-active-animation .ccg-animated-card-surface{
+  left:4.8%!important;right:4.8%!important;top:4.8%!important;bottom:22.8%!important;
+  display:grid!important;place-items:center!important;background:transparent!important;overflow:hidden!important;
+}
+.ccg-card.type-move.has-active-animation .ccg-animated-card-surface{bottom:26%!important}
+.ccg-card.has-active-animation .ccg-animated-card-plate{
+  width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important;
+}
+.ccg-card.has-active-animation .ccg-live-front-data,
+.ccg-card.has-active-animation .ccg-superstar-nameplate{z-index:4!important}
+.ccg-card.has-active-animation .ccg-animated-set-logo{z-index:5!important}

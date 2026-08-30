@@ -1,3 +1,18 @@
+# v1.1.44 — Global Card Studio Parity + Shared Move Batch + Arm Drag Merge — 31 August 2026
+
+- Fixed the **global live collectible renderer** so cards across gameplay, packs, Deck Lab, Collection, inspectors, rewards, onboarding and other shared-card surfaces use the Card Studio presentation instead of a second runtime design.
+- Locked live card proportions to Card Studio's **680×1000** canvas and matched the authored plaque footprint, condensed display/meta/number font stacks, rarity-star coordinates, Cost/Damage baselines, Method-dot size/spacing, Move/type baseline and non-Move name/type hierarchy.
+- Animated media remains confined to the artwork bay. The authored frame, set logo and Card Studio-aligned plaque/text hierarchy remain above it; static cards continue to prefer saved Card Studio base plates.
+- Added **Pescado** (`SS1-153`) as a shared **2★ Uncommon** SummerSlam — Series 1 Move: Cost 5 / Damage 8 / Agility 2; Aerial; Running Aerial counter state; grounds opponent; attacker takes 1 self-damage on Connect. Booster-only.
+- Added **Top Rope Bulldog** (`SS1-154`) as a shared **3★ Rare** SummerSlam — Series 1 Move: Cost 6 / Damage 9 / Technical 2 + Agility 1; Technical Grapple; Body Elevated counter state; grounds opponent; opponent ditches 1. Booster-only.
+- Retired **Arm Drag Counter** as a separate gameplay/collector/Card Studio identity. Its Front Control and Arm-submission reversal coverage plus terminal offensive counter-attack behavior are merged into existing **Arm Drag** (`EVO1-007`).
+- Migrated all 35 authored deck references from the retired card to Arm Drag. Every deck remains exactly 60 pages, and no deck exceeds the five-copy limit.
+- Reserved retired collector number `EVO1-063` so later Evolution collector identities are not renumbered.
+- Regenerated Card Studio data: **1,546 card-like entries**, including **936 collector cards**, 515 Merch cards and 95 Variants across 16 sets.
+- Verification: **9/9** dedicated v1.1.44 assertions; **22/22** focused renderer/animation/counter regression; flow **95 Superstars / 0 issues**; rebuild **95 decks / 841 gameplay cards / 0 orphans / 0 issues**; card IDs **936/936 / 0 issues**; all released decks retain **8/8 physical counter-state** and **4/4 submission-target** coverage.
+- Full no-assets suite: **933 passed / 97 historical failures / 97 skipped**, exactly **9 new passes and 0 new failures** versus v1.1.43.
+- No artwork, screenshots or reference video are packaged in this release.
+
 # v1.1.43 — Complete Play-Pile Mats + Automatic Daily Launch Rewards — 31 August 2026
 
 - Rebuilt the Play Pile mat resolver so **all 16 defined WWE Legacy set IDs** have an explicit self-contained set mat; audit result is **0 missing mats**.

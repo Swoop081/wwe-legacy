@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.43";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.43";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.44";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.44";
 
 const brainbuster=allGameplayCards.find(c=>c.id==="brainbuster");
 const sideKick=allGameplayCards.find(c=>c.id==="side-kick");

@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=1.1.43';
-import { superstars } from '../js/data/superstars.js?v=1.1.43';
-import { decks } from '../js/data/decks.js?v=1.1.43';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.43';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.43';
-import { boosterEligible } from '../js/data/boosters.js?v=1.1.43';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.43';
-import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=1.1.43';
-await import('../js/data/superstar-nameplates.js?v=1.1.43');
+import { sets } from '../js/data/sets.js?v=1.1.44';
+import { superstars } from '../js/data/superstars.js?v=1.1.44';
+import { decks } from '../js/data/decks.js?v=1.1.44';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.44';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.44';
+import { boosterEligible } from '../js/data/boosters.js?v=1.1.44';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.44';
+import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=1.1.44';
+await import('../js/data/superstar-nameplates.js?v=1.1.44');
 
 const owen=Object.values(superstars).find(s=>s.id==='owen-hart');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
@@ -32,7 +32,7 @@ test('v0.13.80 adds Owen Hart as the seventh authored New Generation Superstar w
   assert.equal(owen.ability.name,'King of Harts'); assert.deepEqual(owen.ability.trigger,{type:'owenKingOfHarts',draw:1,maxPinUses:1});
   assert.equal(decks['owen-hart'].length,60); assert.equal(decks['owen-hart'].filter(c=>c.kind==='momentum').length,12);
   assert.deepEqual(decks['owen-hart'].slice(0,5).map(c=>c.id),['momentum-technical','momentum-agility','fisherman-suplex','dropkick-to-the-knee','schoolboy-roll-up']);
-  assert.equal(decks['owen-hart'].filter(c=>['standing-switch','rollover-counter','catch-the-foot','arm-drag-counter','jawbreaker','sidestep','dodge'].includes(c.id)).length,10);
+  assert.equal(decks['owen-hart'].filter(c=>['standing-switch','rollover-counter','catch-the-foot','arm-drag','jawbreaker','sidestep','dodge'].includes(c.id)).length,11);
 });
 
 test('v0.13.80 adds the six approved shared New Generation Commons/Uncommons as NG1-055 through NG1-060',()=>{

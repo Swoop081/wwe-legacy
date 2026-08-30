@@ -1,3 +1,36 @@
+# WWE Legacy v1.1.44 — Global Card Studio Parity + Shared Move Batch + Arm Drag Merge
+
+## Release identity
+- Version: **v1.1.44**
+- Date: **31 August 2026**
+- Base: **v1.1.43 — Complete Play-Pile Mats + Automatic Daily Launch Rewards**
+- Distribution: **verified no-assets code overlay**; repository artwork/animation assets remain untouched.
+- Physical iPhone smoke: **pending v1.1.44 user smoke**.
+
+## Certified changes
+- Shared collectible renderer now follows the Card Studio 680×1000 geometry globally across gameplay, packs, Deck Lab, collection, inspectors, rewards, onboarding and other surfaces that call the canonical collectible renderer.
+- Live layered fronts use Card Studio font stacks: condensed display names, semi-condensed metadata, and DIN/Bahnschrift-style stat numbers instead of the generic Inter runtime treatment.
+- Move plaque is locked to x 5.2–94.8%, y 74.0–95.8%; Move name y 78.7%; Cost/Damage labels y 82.9%; numbers y 88.4%; Method dots y 86.6%; required Move/type line y 92.9%. Non-Move name/type baselines are y 85.2% / 90.9%.
+- Animated media stays centered only in the artwork bay and cannot replace the authored border, set logo or Card Studio-aligned plaque/text hierarchy.
+- Added **Pescado** `SS1-153`: shared 2★ Uncommon, Cost 5 / Damage 8 / Agility 2, Aerial, Running Aerial counter state, grounds opponent, 1 self-damage on Connect, booster-only.
+- Added **Top Rope Bulldog** `SS1-154`: shared 3★ Rare, Cost 6 / Damage 9 / Technical 2 + Agility 1, Technical Grapple, Body Elevated counter state, grounds opponent, opponent ditches 1, booster-only.
+- Retired **Arm Drag Counter** as a separate gameplay/collector/Studio identity. Its Front Control + Arm-submission reversal coverage and offensive counter-attack behavior are merged into `EVO1-007` Arm Drag.
+- Migrated all 35 deck pages from the retired ID to Arm Drag; all 95 decks remain exactly 60 pages and the highest merged Arm Drag count is 4.
+- `EVO1-063` remains reserved as a retired collector number to preserve all later Evolution identities.
+
+## Verification
+- Dedicated v1.1.44 additions/parity/merge assertions: **9/9**.
+- Focused renderer/animation/counter regression suite: **22/22**.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 841 gameplay cards / 0 orphans / 0 issues**.
+- Collector/Card Studio ID audit: **936 cards / 936 manifest entries / 0 issues**.
+- Card Studio generated dataset: **1,546 cards** (936 collector / 515 Merch / 95 Variants), 16 sets.
+- Counter-state audit: all eight physical states retained.
+- Counter-density audit: all 73 released Superstar decks retain **8/8 physical-state coverage and 4/4 submission-target coverage**.
+- Full no-assets test suite: **1,127 total — 933 passed / 97 failed / 97 skipped**.
+- Baseline comparison against v1.1.43: **0 new failing test names; 9 additional passing assertions**.
+- The 97 failures are the same historical/asset-dependent carry-forward set present in v1.1.43.
+
 # WWE Legacy v1.1.43 — Complete Play-Pile Mats + Automatic Daily Launch Rewards
 
 ## Release identity

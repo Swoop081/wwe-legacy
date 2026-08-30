@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.1.43';
-import { superstars } from '../js/data/superstars.js?v=1.1.43';
-import { isPlayerVisibleSuperstar, isUnreleasedSetId, isLaunchLiveSetId } from '../js/data/release.js?v=1.1.43';
-import { boosterCreditsFor } from '../js/data/boosters.js?v=1.1.43';
+import { createProfile } from '../js/data/profile.js?v=1.1.44';
+import { superstars } from '../js/data/superstars.js?v=1.1.44';
+import { isPlayerVisibleSuperstar, isUnreleasedSetId, isLaunchLiveSetId } from '../js/data/release.js?v=1.1.44';
+import { boosterCreditsFor } from '../js/data/boosters.js?v=1.1.44';
 import {
   CHAMPIONSHIP_ROAD_LENGTH,
   CHAMPIONSHIP_ROAD_OPPONENTS,
@@ -16,7 +16,7 @@ import {
   selectChampionshipRoadSuperstar,
   startChampionshipRoad,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=1.1.43';
+} from '../js/data/championship-road.js?v=1.1.44';
 import {
   LIVE_EVENT_LENGTH,
   DAILY_LIVE_EVENT_SET_XP,
@@ -27,8 +27,8 @@ import {
   changeLiveEventTowerSuperstar,
   recordLiveEventTowerMatch,
   dailyLiveEventSetStatus
-} from '../js/data/live-events.js?v=1.1.43';
-import { seasonState } from '../js/data/seasons.js?v=1.1.43';
+} from '../js/data/live-events.js?v=1.1.44';
+import { seasonState } from '../js/data/seasons.js?v=1.1.44';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const now = new Date('2026-08-25T12:00:00');

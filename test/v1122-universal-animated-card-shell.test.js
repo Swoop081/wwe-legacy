@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.43";
-import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../js/data/animated-card-art.js?v=1.1.43";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.44";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../js/data/animated-card-art.js?v=1.1.44";
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
 const html=fs.readFileSync(new URL("../tools/card-art-studio.html",import.meta.url),"utf8");
@@ -11,7 +11,7 @@ const build=JSON.parse(fs.readFileSync(new URL("../build.json",import.meta.url),
 
 test("v1.1.23+ every gameplay card is animation-capable with a static fallback",()=>{
   assert.ok(Number(build.version.split(".")[2]) >= 23, `expected v1.1.23+ build, got ${build.version}`);
-  assert.equal(allGameplayCards.length,840);
+  assert.equal(allGameplayCards.length,841);
   for(const card of allGameplayCards){assert.equal(isAnimatedCardEligible(card),true,card.id);const p=canonicalAnimatedCardPaths(card);assert.ok(p);assert.match(p.relativeWebp,/-animated\.webp$/);assert.match(p.relativeGif,/-animated\.gif$/);}
 });
 

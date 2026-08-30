@@ -912,7 +912,6 @@ collectible-card,superstar-liv-morgan,Liv Morgan,liv-morgan,evolution-series-1,a
 collectible-card,superstar-becky-lynch,Becky Lynch,becky-lynch,evolution-series-1,assets/images/becky-lynch-superstar.webp,assets/images/becky-lynch-superstar-base-plate.webp,Full finished card plus matching base plate
 collectible-card,flair-chop,Flair Chop,,evolution-series-1,assets/images/flair-chop.webp,assets/images/flair-chop-base-plate.webp,Full finished card plus matching base plate
 collectible-card,catch-the-foot,Catch the Foot,,evolution-series-1,assets/images/catch-the-foot.webp,assets/images/catch-the-foot-base-plate.webp,Full finished card plus matching base plate
-collectible-card,arm-drag-counter,Arm Drag Counter,,evolution-series-1,assets/images/arm-drag-counter.webp,assets/images/arm-drag-counter-base-plate.webp,Full finished card plus matching base plate
 collectible-card,jawbreaker,Jawbreaker,,evolution-series-1,assets/images/jawbreaker.webp,assets/images/jawbreaker-base-plate.webp,Full finished card plus matching base plate
 collectible-card,bayley-diving-elbow,Bayley’s Diving Elbow,bayley,evolution-series-1,assets/images/bayley-s-diving-elbow-bayley.webp,assets/images/bayley-s-diving-elbow-bayley-base-plate.webp,Full finished card plus matching base plate
 collectible-card,bayley-to-belly,Bayley-to-Belly,bayley,evolution-series-1,assets/images/bayley-to-belly-bayley.webp,assets/images/bayley-to-belly-bayley-base-plate.webp,Full finished card plus matching base plate
@@ -1826,3 +1825,5 @@ merch-card,merch-trish-stratus-3-100-stratusfaction-guaranteed-dvd,100% Stratusf
 merch-card,merch-trish-stratus-4-trish-s-action-figure,Trish's Action Figure,trish-stratus,season-1-last-time-is-now,assets/images/trish-s-action-figure-trish-stratus.webp,assets/images/trish-s-action-figure-trish-stratus-base-plate.webp,Superstar-specific Merch
 merch-card,merch-trish-stratus-5-100-stratusfaction-shirt,100% Stratusfaction Shirt,trish-stratus,season-1-last-time-is-now,assets/images/100-stratusfaction-shirt-trish-stratus.webp,assets/images/100-stratusfaction-shirt-trish-stratus-base-plate.webp,Superstar-specific Merch
 collectible-card,matrix-slide,Matrix Slide,,smackdown-series-1,assets/images/matrix-slide.webp,assets/images/matrix-slide-base-plate.webp,Full finished card plus matching base plate; user reference image is not packaged
+collectible-card,pescado,Pescado,,summerslam-series-1,assets/images/pescado.webp,assets/images/pescado-base-plate.webp,Full finished card plus matching base plate; no artwork packaged
+collectible-card,top-rope-bulldog,Top Rope Bulldog,,summerslam-series-1,assets/images/top-rope-bulldog.webp,assets/images/top-rope-bulldog-base-plate.webp,Full finished card plus matching base plate; no artwork packaged

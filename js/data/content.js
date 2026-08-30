@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.43";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.43";
+import { enrichCounterState } from "./counter-states.js?v=1.1.44";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.44";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -227,6 +227,58 @@ export const allGameplayCards = [
     "effects": [],
     "counterState": "rear-control",
     "submissionTarget": "neck-head"
+  },
+  {
+    "id": "pescado",
+    "name": "Pescado",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Shared. Slingshot aerial attack. Grounds opponent. On Connect: attacker takes 1 damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 1,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "running-aerial"
+  },
+  {
+    "id": "top-rope-bulldog",
+    "name": "Top Rope Bulldog",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 6,
+    "damage": 9,
+    "requirements": {
+      "technical": 2,
+      "agility": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 3,
+    "rulesText": "Shared. Top-rope Grapple. Grounds opponent; opponent ditches 1.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discardOpponent",
+        "amount": 1
+      }
+    ],
+    "boosterOnly": true,
+    "counterState": "body-elevated"
   },
   {
     "id": "diving-crossbody",
@@ -3828,8 +3880,8 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared. May Counter a Front Control Move or an Arm-targeting Submission attempt.",
-    "groundOpponent": false,
+    "rulesText": "Shared. May Counter a Front Control Move or an Arm-targeting Submission attempt. If used as a Counter, this becomes a counter-attack and grounds the opponent on Connect.",
+    "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
@@ -9846,32 +9898,6 @@ export const allGameplayCards = [
     ],
     "counterSubmissionTargets": [
       "legs"
-    ]
-  },
-  {
-    "id": "arm-drag-counter",
-    "name": "Arm Drag Counter",
-    "kind": "move",
-    "setId": "evolution-series-1",
-    "cost": 2,
-    "damage": 3,
-    "requirements": {},
-    "moveType": "grapple",
-    "method": "technical",
-    "superstarId": null,
-    "rarity": 1,
-    "rulesText": "Counter a Front Control Move or an Arm-targeting Submission attempt. If used as a Counter, this becomes a counter-attack and grounds the opponent on Connect.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [],
-    "counterState": "front-control",
-    "counterStates": [
-      "front-control"
-    ],
-    "counterSubmissionTargets": [
-      "arms"
     ]
   },
   {

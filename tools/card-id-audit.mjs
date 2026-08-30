@@ -20,6 +20,9 @@ for(const entry of CARD_NUMBER_MANIFEST)(perSet[entry.setId]??=[]).push(entry.ca
 // so SVS1-013 through SVS1-018 remain intentionally reserved rather than renumbering every later SVS1 card.
 const reservedNumbersBySet={
   'survivor-series-series-1': new Set([13,14,15,16,17,18]),
+  // v1.1.44 merges the former Arm Drag Counter into EVO1-007 Arm Drag.
+  // Keep its retired collector slot reserved so every later Evolution identity stays stable.
+  'evolution-series-1': new Set([63]),
 };
 for(const [setId,numbers] of Object.entries(perSet)){
   numbers.sort((a,b)=>a-b);
