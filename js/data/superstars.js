@@ -6384,7 +6384,7 @@ export const superstars = {
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false,
-      "fixedPrintingTier": "ruby"
+      "fixedPrintingTier": "amethyst"
     },
     "special": {
       "type": "exclusiveTrademarkTutor",

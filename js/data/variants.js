@@ -1,14 +1,14 @@
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.27";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.28";
 // WWE Legacy five-tier collectible printing system.
 // Authored card data is the Sapphire balance baseline. Normal/Emerald step
-// down offensive strength; Ruby is +1 and Diamond is the final +2 chase. Cost, requirements,
+// down offensive strength; Ruby is +1 and Amethyst is the final +2 chase. Cost, requirements,
 // Counter states and authored secondary effects do not change by tier.
-export const CARD_TIERS = Object.freeze(["normal", "emerald", "sapphire", "ruby", "diamond"]);
-export const TIER_LABELS = Object.freeze({ normal: "Normal", emerald: "Emerald", sapphire: "Sapphire", ruby: "Ruby", diamond: "Diamond" });
-export const TIER_RANK = Object.freeze({ normal: 0, emerald: 1, sapphire: 2, ruby: 3, diamond: 4 });
-export const TIER_DAMAGE_OFFSETS = Object.freeze({ normal: -2, emerald: -1, sapphire: 0, ruby: 1, diamond: 2 });
+export const CARD_TIERS = Object.freeze(["normal", "emerald", "sapphire", "ruby", "amethyst"]);
+export const TIER_LABELS = Object.freeze({ normal: "Normal", emerald: "Emerald", sapphire: "Sapphire", ruby: "Ruby", amethyst: "Amethyst" });
+export const TIER_RANK = Object.freeze({ normal: 0, emerald: 1, sapphire: 2, ruby: 3, amethyst: 4 });
+export const TIER_DAMAGE_OFFSETS = Object.freeze({ normal: -2, emerald: -1, sapphire: 0, ruby: 1, amethyst: 2 });
 // Pull odds are separate from the underlying card's authored 1★–4★ rarity.
-export const TIER_PULL_WEIGHTS = Object.freeze({ normal: .645, emerald: .25, sapphire: .08, ruby: .02, diamond: .005 });
+export const TIER_PULL_WEIGHTS = Object.freeze({ normal: .645, emerald: .25, sapphire: .08, ruby: .02, amethyst: .005 });
 export const DEFAULT_AUTHORED_TIER = "sapphire";
 export const DEFAULT_STARTER_TIER = "normal";
 

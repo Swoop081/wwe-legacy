@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.27';
-import { decks } from '../js/data/decks.js?v=1.1.27';
-import { superstars } from '../js/data/superstars.js?v=1.1.27';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.27';
-import { createProfile, migrateProfile } from '../js/data/profile.js?v=1.1.27';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.28';
+import { decks } from '../js/data/decks.js?v=1.1.28';
+import { superstars } from '../js/data/superstars.js?v=1.1.28';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.28';
+import { createProfile, migrateProfile } from '../js/data/profile.js?v=1.1.28';
 
 const byId = Object.fromEntries(allGameplayCards.map(card => [card.id, card]));
 

@@ -1,6 +1,6 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.27";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.27";
-import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.27";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.28";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.28";
+import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.28";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-22T00:00:00";
 export const SEASON_END = "2026-09-21T00:00:00";
@@ -16,35 +16,35 @@ export const FEATURED_SET_IDS = ["raw-series-1", "smackdown-series-1", "nxt-seri
 
 // Season 1 prestige chase: Trish Stratus — Stratusfaction Guaranteed is assembled
 // across a 50-tier / 30-day road. Trish Stratus’ Season-exclusive identities are
-// Ruby-only: there are no Normal, Emerald, Sapphire or Diamond printings. Each of her
-// four exclusive Moves is awarded as five separate Ruby copies, with her Action,
-// Entrance and Ruby Superstar also earned on the road. Tier 50 then installs the best owned version of Trish’s
+// Amethyst-only: there are no Normal, Emerald, Sapphire or legacy fifth-tier printings. Each of her
+// four exclusive Moves is awarded as five separate Amethyst copies, with her Action,
+// Entrance and Amethyst Superstar also earned on the road. Tier 50 then installs the best owned version of Trish’s
 // authored deck so Season completion is immediately playable at maximum owned
 // printing quality.
 export const SEASON_1_CHASE_TIER_REWARDS = Object.freeze({
-  2:  { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "RUBY EXCLUSIVE MOVE", printingTier: "ruby" },
-  3:  { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  5:  { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  7:  { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "RUBY FINISHER", printingTier: "ruby" },
-  10: { cardId: "special-trish-stratus", name: "Stratusfaction Guaranteed", amount: 1, rewardType: "action", label: "RUBY ACTION", printingTier: "ruby" },
-  11: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "RUBY EXCLUSIVE MOVE", printingTier: "ruby" },
-  13: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  15: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  17: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "RUBY FINISHER", printingTier: "ruby" },
-  21: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "RUBY EXCLUSIVE MOVE", printingTier: "ruby" },
-  23: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  25: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  27: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "RUBY FINISHER", printingTier: "ruby" },
-  31: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "RUBY EXCLUSIVE MOVE", printingTier: "ruby" },
-  33: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  35: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  37: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "RUBY FINISHER", printingTier: "ruby" },
-  41: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "RUBY EXCLUSIVE MOVE", printingTier: "ruby" },
-  43: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  45: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "RUBY SIGNATURE · TRADEMARK", printingTier: "ruby" },
-  47: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "RUBY FINISHER", printingTier: "ruby" },
-  48: { cardId: "entrance-trish-stratus", name: "Time to Rock & Roll", amount: 1, rewardType: "entrance", label: "RUBY ENTRANCE", printingTier: "ruby" },
-  50: { cardId: "superstar-trish-stratus", name: "Trish Stratus — Stratusfaction Guaranteed", amount: 1, rewardType: "superstar", label: "RUBY SUPERSTAR", printingTier: "ruby", superstarId: SEASON_1_COMPLETION_SUPERSTAR }
+  2:  { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
+  3:  { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  5:  { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  7:  { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
+  10: { cardId: "special-trish-stratus", name: "Stratusfaction Guaranteed", amount: 1, rewardType: "action", label: "AMETHYST ACTION", printingTier: "amethyst" },
+  11: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
+  13: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  15: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  17: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
+  21: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
+  23: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  25: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  27: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
+  31: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
+  33: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  35: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  37: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
+  41: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
+  43: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  45: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
+  47: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
+  48: { cardId: "entrance-trish-stratus", name: "Time to Rock & Roll", amount: 1, rewardType: "entrance", label: "AMETHYST ENTRANCE", printingTier: "amethyst" },
+  50: { cardId: "superstar-trish-stratus", name: "Trish Stratus — Stratusfaction Guaranteed", amount: 1, rewardType: "superstar", label: "AMETHYST SUPERSTAR", printingTier: "amethyst", superstarId: SEASON_1_COMPLETION_SUPERSTAR }
 });
 // Backwards-compatible export name for older internal tooling. Season 1 is no
 // longer the Final Boss road.
@@ -171,7 +171,7 @@ export function claimSeasonTier(profile, tier, now = new Date()) {
   const reward = tierReward(n, now);
   if (reward.kind === "season-card") {
     if (reward.rewardType === "superstar") {
-      // Tier 50 completes Trish Stratus’ Ruby-only Season package. Shared cards are not
+      // Tier 50 completes Trish Stratus’ Amethyst-only Season package. Shared cards are not
       // gifted, but the game immediately assembles the strongest owned version
       // of Trish's authored 60-page blueprint and equips her Ruby Entrance.
       grantSuperstarIdentityUnlockPackage(profile, reward.superstarId, { tier: reward.printingTier ?? "ruby", celebrate: false });

@@ -1,12 +1,12 @@
-import { decks } from "./decks.js?v=1.1.27";
-import { collectionCards } from "./collection.js?v=1.1.27";
-import { superstars } from "./superstars.js?v=1.1.27";
-import { isUnreleasedSetId } from "./release.js?v=1.1.27";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.27";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.27";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.27";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.27";
-import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.27";
+import { decks } from "./decks.js?v=1.1.28";
+import { collectionCards } from "./collection.js?v=1.1.28";
+import { superstars } from "./superstars.js?v=1.1.28";
+import { isUnreleasedSetId } from "./release.js?v=1.1.28";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.28";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.28";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.28";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.28";
+import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.28";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
@@ -14,7 +14,7 @@ export const PROFILE_RECOVERY_META_KEY = "wa-modern-profile-v3-recovery-meta-v1"
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 43;
+export const PROFILE_VERSION = 44;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -79,7 +79,7 @@ export function underFinishOwnershipCap(profile, card, tierOrFoil = "normal") {
 
 export function addOwnedCard(profile, id, { tier = null, foil = null, amount = 1 } = {}) {
   profile.ownedCards ??= {};
-  profile.ownedCards[id] ??= { normal: 0, emerald: 0, sapphire: 0, ruby: 0, diamond: 0 };
+  profile.ownedCards[id] ??= { normal: 0, emerald: 0, sapphire: 0, ruby: 0, amethyst: 0 };
   const o = profile.ownedCards[id];
   // Old Foil calls map to Ruby only for legacy migration/certification. New live
   // code always supplies an explicit tier. Missing tier defaults to Normal.
@@ -748,7 +748,23 @@ export function migrateProfile(old) {
     owned.emerald = Math.max(0, Number(owned.emerald) || 0);
     owned.sapphire = Math.max(0, Number(owned.sapphire) || 0);
     owned.ruby = Math.max(0, Number(owned.ruby) || 0);
-    owned.diamond = Math.max(0, Number(owned.diamond) || 0);
+    owned.amethyst = Math.max(0, Number(owned.amethyst) || 0);
+  }
+
+  // v1.1.28: Diamond was the legacy name for the fifth printing. Preserve all
+  // earned copies as Amethyst, then collapse every fixed top-reward identity
+  // (including former fixed Ruby rewards) into its definitive Amethyst print.
+  for (const [id, owned] of Object.entries(p.ownedCards ?? {})) {
+    if (!owned || typeof owned !== "object") continue;
+    if (owned.diamond) { owned.amethyst = Math.min(cardOwnershipCap(cardById.get(id)), (Number(owned.amethyst)||0) + (Number(owned.diamond)||0)); delete owned.diamond; }
+    const card = cardById.get(id);
+    if (fixedPrintingTierFor(card) !== "amethyst") continue;
+    const total = Object.values(owned).reduce((sum,value)=>sum+Math.max(0,Number(value)||0),0);
+    p.ownedCards[id] = { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:Math.min(cardOwnershipCap(card),total) };
+  }
+  for (const saved of Object.values(p.savedDecks ?? {})) if (Array.isArray(saved)) for (const entry of saved) {
+    const id = typeof entry === "string" ? entry : entry?.id;
+    if (entry && typeof entry === "object" && fixedPrintingTierFor(cardById.get(id)) === "amethyst") entry.tier = "amethyst";
   }
 
   // v0.17.01 reward-printing migration: every major reward-exclusive

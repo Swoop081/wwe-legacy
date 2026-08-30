@@ -10148,12 +10148,12 @@ body[data-screen="season-complete"]{overflow:hidden;background:#05070a}.season-c
 .ccg-card.rarity-4 .ccg-card-front:after{animation-duration:3.9s}.ccg-card.is-ultra-rare .ccg-card-front:after{animation-duration:2.8s}
 @keyframes v110PremiumSweep{0%,34%{transform:translateX(-58%) rotate(7deg);opacity:0}45%{opacity:.9}64%,100%{transform:translateX(58%) rotate(7deg);opacity:0}}
 
-.ccg-card.tier-diamond .ccg-card-front,.ccg-card.tier-diamond .ccg-card-rules{border-color:rgba(229,249,255,.96)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.92),inset 0 0 22px rgba(130,221,255,.21),0 0 24px rgba(176,235,255,.70),0 0 52px rgba(164,130,255,.35)!important}
-.ccg-card.tier-diamond.is-tier-glow .ccg-card-inner{filter:drop-shadow(0 0 12px rgba(224,250,255,.98)) drop-shadow(0 0 26px rgba(114,208,255,.70)) drop-shadow(0 0 44px rgba(180,118,255,.38))}
-.ccg-card.tier-diamond .ccg-tier-overlay{opacity:.98!important;background:linear-gradient(128deg,transparent 16%,rgba(210,248,255,.10) 31%,rgba(255,255,255,.42) 48%,rgba(196,170,255,.20) 61%,transparent 78%)!important;animation:diamondTierSweep 2.6s ease-in-out infinite!important;mix-blend-mode:screen}
-@keyframes diamondTierSweep{0%,22%{transform:translateX(-22%);filter:hue-rotate(0deg)}58%{transform:translateX(18%);filter:hue-rotate(22deg)}100%{transform:translateX(-22%);filter:hue-rotate(0deg)}}
-.tier-stage.tier-diamond .booster-card-halo{filter:drop-shadow(0 0 36px rgba(205,247,255,.72)) drop-shadow(0 0 56px rgba(174,123,255,.32))}
-.tier-summary-symbol.tier-diamond{border-color:rgba(218,248,255,.88)!important;color:#effcff!important;background:linear-gradient(135deg,rgba(90,181,219,.24),rgba(171,104,223,.22))!important;text-shadow:0 0 9px rgba(213,249,255,.8)}
+.ccg-card.tier-amethyst .ccg-card-front,.ccg-card.tier-amethyst .ccg-card-rules{border-color:rgba(229,249,255,.96)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.92),inset 0 0 22px rgba(130,221,255,.21),0 0 24px rgba(176,235,255,.70),0 0 52px rgba(164,130,255,.35)!important}
+.ccg-card.tier-amethyst.is-tier-glow .ccg-card-inner{filter:drop-shadow(0 0 12px rgba(224,250,255,.98)) drop-shadow(0 0 26px rgba(114,208,255,.70)) drop-shadow(0 0 44px rgba(180,118,255,.38))}
+.ccg-card.tier-amethyst .ccg-tier-overlay{opacity:.98!important;background:linear-gradient(128deg,transparent 16%,rgba(210,248,255,.10) 31%,rgba(255,255,255,.42) 48%,rgba(196,170,255,.20) 61%,transparent 78%)!important;animation:amethystTierSweep 2.6s ease-in-out infinite!important;mix-blend-mode:screen}
+@keyframes amethystTierSweep{0%,22%{transform:translateX(-22%);filter:hue-rotate(0deg)}58%{transform:translateX(18%);filter:hue-rotate(22deg)}100%{transform:translateX(-22%);filter:hue-rotate(0deg)}}
+.tier-stage.tier-amethyst .booster-card-halo{filter:drop-shadow(0 0 36px rgba(205,247,255,.72)) drop-shadow(0 0 56px rgba(174,123,255,.32))}
+.tier-summary-symbol.tier-amethyst{border-color:rgba(218,248,255,.88)!important;color:#effcff!important;background:linear-gradient(135deg,rgba(90,181,219,.24),rgba(171,104,223,.22))!important;text-shadow:0 0 9px rgba(213,249,255,.8)}
 
 .daily-spin-home{margin:14px auto 4px;width:min(980px,calc(100% - 20px));display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,220px);grid-template-areas:"copy wheel" "button wheel";align-items:center;gap:8px 18px;padding:16px;border:1px solid rgba(230,185,67,.28);border-radius:18px;background:radial-gradient(circle at 82% 50%,rgba(222,174,48,.16),transparent 32%),linear-gradient(145deg,#111116,#070709 68%);box-shadow:0 18px 42px rgba(0,0,0,.34),inset 0 0 0 1px rgba(255,255,255,.025);overflow:hidden}
 .daily-spin-copy{grid-area:copy}.daily-spin-copy>span{font-size:.54rem;font-weight:1000;letter-spacing:.22em;color:#e6bb45}.daily-spin-copy h3{margin:4px 0 3px;font-size:clamp(1rem,4.7vw,1.45rem);font-style:italic;line-height:1}.daily-spin-copy p{margin:0;color:#aab1ba;font-size:.7rem}.daily-spin-home>.start-match{grid-area:button;justify-self:start;min-width:min(280px,100%)}
@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.27") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.28") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10312,6 +10312,16 @@ body[data-screen="splash"] #game>section{animation:none!important}
 .ccg-animated-card-plate.is-animation-ready{opacity:1!important}
 .ccg-card.is-layered-front .ccg-live-front-data,.ccg-superstar-nameplate,.ccg-card-title,.ccg-card-stats{z-index:4!important}
 @media (prefers-reduced-motion: reduce){.ccg-animated-card-surface{display:none!important}}
+
+/* v1.1.28 — plaque-aware animation bay and premium ready-only Daily Spin. */
+.ccg-card.type-move .ccg-animated-card-surface{top:12.5%!important;bottom:27.5%!important}
+.ccg-card.type-entrance .ccg-animated-card-surface,.ccg-card.type-action .ccg-animated-card-surface,.ccg-card.type-manager .ccg-animated-card-surface,.ccg-card.type-variant .ccg-animated-card-surface,.ccg-card.type-momentum .ccg-animated-card-surface{top:12.5%!important;bottom:23.5%!important}
+.ccg-animated-card-plate{object-fit:contain!important;object-position:center center!important}
+.ccg-card.type-merch .ccg-animated-card-plate{object-fit:cover!important}
+.daily-spin-ready-card{width:min(980px,calc(100% - 20px));margin:14px auto 10px;padding:17px 20px;display:grid;grid-template-columns:1fr auto;gap:3px 14px;text-align:left;border:1px solid #e9bf52;border-radius:16px;color:#fff;background:radial-gradient(circle at 86% 50%,rgba(255,211,88,.28),transparent 32%),linear-gradient(135deg,#19150d,#070709 70%);box-shadow:0 15px 40px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.08);font:inherit}.daily-spin-ready-card span{color:#edc65c;font-size:.55rem;font-weight:1000;letter-spacing:.2em}.daily-spin-ready-card strong{grid-column:1;font-size:1.15rem;font-style:italic}.daily-spin-ready-card small{grid-column:1;color:#aeb4bd}.daily-spin-ready-card b{grid-column:2;grid-row:1/4;align-self:center;color:#f1ca60}
+.daily-spin-modal{position:fixed;z-index:10000;inset:0;display:grid;place-items:center;padding:calc(18px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));background:radial-gradient(circle at 50% 40%,rgba(184,133,25,.22),transparent 42%),rgba(2,2,4,.96);backdrop-filter:blur(18px)}.daily-spin-modal-shell{width:min(580px,100%);display:grid;justify-items:center;gap:10px;text-align:center}.daily-spin-modal-shell>span{font-size:.58rem;letter-spacing:.22em;color:#e9bf52;font-weight:1000}.daily-spin-modal-shell h2{margin:0;font-size:clamp(2rem,10vw,4rem);font-style:italic}.daily-spin-modal-shell p{min-height:1.4em;color:#f3d67e;font-weight:900;letter-spacing:.08em}.daily-spin-premium-wheel-wrap{position:relative;width:min(76vw,430px);aspect-ratio:1}.daily-spin-premium-wheel{position:absolute;inset:4%;border-radius:50%;border:8px double #f2d278;background:conic-gradient(#c69324 0 60deg,#141417 60deg 120deg,#7f5415 120deg 180deg,#202027 180deg 240deg,#d8aa35 240deg 300deg,#0b0b0e 300deg);box-shadow:inset 0 0 0 7px #050506,inset 0 0 45px rgba(255,219,111,.35),0 0 0 5px #55400f,0 0 50px rgba(237,190,66,.35);transform:rotate(var(--spin-rotation));transition:transform 4.2s cubic-bezier(.08,.7,.06,1)}.daily-spin-premium-wheel>span{position:absolute;left:50%;top:50%;width:44%;transform-origin:0 0;transform:rotate(calc(var(--wedge) * var(--wedge-angle) + var(--wedge-angle)/2)) translate(15%,-50%);color:#fff;font-size:clamp(.48rem,2.4vw,.72rem);text-align:right;text-shadow:0 2px 5px #000}.daily-spin-modal .daily-spin-pointer{top:-1%;border-bottom-color:#fff}.daily-spin-modal .start-match,.daily-spin-modal .nav-button{width:min(420px,100%)}
+.legacy-season-rock{right:-5%!important;width:49%!important;height:174%!important;bottom:-35%!important;top:auto!important}.legacy-season-rock img{object-position:center bottom!important}
+.challenge-set-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}.challenge-set-logo img{max-width:100%!important;max-height:100%!important;object-fit:contain!important}
 /* Inspector back face is swapped directly to avoid mirrored animated fronts on iOS Safari. */
 .superstar-card-modal .ccg-card.is-flipped .ccg-card-inner{transform:none!important;-webkit-transform:none!important}
 .superstar-card-modal .ccg-card.is-flipped .ccg-card-front{display:none!important}

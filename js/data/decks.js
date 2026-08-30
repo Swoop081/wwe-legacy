@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.27";
+import { allGameplayCards } from "./content.js?v=1.1.28";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [

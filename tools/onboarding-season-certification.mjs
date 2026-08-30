@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, ownedCount, DEFAULT_PLAYER_ENTRANCE_ID, STARTING_MOMENTUM_COPIES } from '../js/data/profile.js?v=1.1.27';
-import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=1.1.27';
-import { claimAllSeasonTiers, seasonState } from '../js/data/seasons.js?v=1.1.27';
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, ownedCount, DEFAULT_PLAYER_ENTRANCE_ID, STARTING_MOMENTUM_COPIES } from '../js/data/profile.js?v=1.1.28';
+import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=1.1.28';
+import { claimAllSeasonTiers, seasonState } from '../js/data/seasons.js?v=1.1.28';
 
 const report = { starterPaths: [], welcomePaths: [], seasonCompletion: null };
 for (const sid of STARTER_CHOICES) {
@@ -25,8 +25,8 @@ claimAllSeasonTiers(p,new Date('2026-08-25T12:00:00'));
 const state = seasonState(p);
 const moveIds=['john-cena-protobomb','john-cena-five-knuckle-shuffle','john-cena-stf','john-cena-attitude-adjustment'];
 const oneIds=['john-cena-hustle-loyalty-respect','special-john-cena','entrance-john-cena','superstar-john-cena'];
-assert.ok(moveIds.every(id=>ownedCount(p,id,'ruby')===5));
-assert.ok(oneIds.every(id=>ownedCount(p,id,'ruby')===1));
+assert.ok(moveIds.every(id=>ownedCount(p,id,'amethyst')===5));
+assert.ok(oneIds.every(id=>ownedCount(p,id,'amethyst')===1));
 assert.equal(p.savedDecks['john-cena'].length,60);
 assert.equal(state.completionCelebrationPending,true);
 report.seasonCompletion={ tier:50, cenaUnlocked:p.unlockedSuperstars.includes('john-cena'), rubyExclusiveCopies:24, deckPages:p.savedDecks['john-cena'].length, dedicatedCelebrationPending:state.completionCelebrationPending };

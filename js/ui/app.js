@@ -1,45 +1,45 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.27";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.27";
-import { superstars } from "../data/superstars.js?v=1.1.27";
-import { decks } from "../data/decks.js?v=1.1.27";
-import { sets } from "../data/sets.js?v=1.1.27";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.27";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.27";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.27";
-import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.27";
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, claimWelcomeSuperstarPack, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.27";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.27";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.27";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.27";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.27";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.27";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.27";
-import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.27";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.27";
-import { totalMomentum } from "../engine/utils.js?v=1.1.27";
-import { healthZone } from "../engine/health.js?v=1.1.27";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.27";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.27";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.27";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.27";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.27";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.27";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.27";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.27";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.27";
-import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.27";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.27";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.27";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.27";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.27";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.27";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.27";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.27";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.27";
-import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.27";
-import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.27";
-import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.27";
-import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.27";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.28";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.28";
+import { superstars } from "../data/superstars.js?v=1.1.28";
+import { decks } from "../data/decks.js?v=1.1.28";
+import { sets } from "../data/sets.js?v=1.1.28";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.28";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.28";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.28";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.28";
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, claimWelcomeSuperstarPack, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.28";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.28";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.28";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.28";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.28";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.28";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.28";
+import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.28";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.28";
+import { totalMomentum } from "../engine/utils.js?v=1.1.28";
+import { healthZone } from "../engine/health.js?v=1.1.28";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.28";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.28";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.28";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.28";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.28";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.28";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.28";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.28";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.28";
+import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.28";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.28";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.28";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.28";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.28";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.28";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.28";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.28";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.28";
+import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.28";
+import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.28";
+import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.28";
+import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.28";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -123,6 +123,8 @@ let boosterInspectFlipped = false;
 let convertedPackCards = new Set();
 let duplicateConversionTimer = null;
 let dailySpinResultIndex = null;
+let dailySpinOpen = false;
+let dailySpinResolving = false;
 let survivorSelectedAttacker = null;
 let survivorSelectedTarget = null;
 let lastChromeScreen = null;
@@ -257,6 +259,7 @@ const superstarVisualMarkup = (id, name, cls = "") => {
   return `<img class="${cls} superstar-card-visual is-placeholder-art" src="${placeholder}" alt="${name} artwork pending">`;
 };
 const WWE_COM_MENU_PHOTOS = Object.freeze({
+  "cody-rhodes": "https://www.wwe.com/f/styles/wwe_talent_bg_l/public/all/2023/08/075_SS_08052023RF_41065--d2f064114cd191980d13368cea983c60.jpg",
   "roman-reigns": "https://www.wwe.com/f/styles/talent_champion_lg/public/2026/05/Roman_Reigns_PROFILE.png",
   "cm-punk": "https://www.wwe.com/f/styles/talent_champion_lg/public/2026/07/CMPUNK_PROFILE%202.png",
   "trish-stratus": "https://www.wwe.com/f/styles/talent_champion_lg/public/all/2023/05/Trish_Stratus_PROFILE--861c35b5400b94574024228d0c55c4bf.png",
@@ -1011,7 +1014,7 @@ function renderBoosters() {
   const standardCredits=boosterCreditsFor(profile,activeBoosterSetId);
   const packTitle=setInfo.name.toUpperCase();
   const packWrapperTitle="SERIES 1";
-  const packSubtitle="SERIES 1 · 4 CARDS + 1 MERCH · DIAMOND CHASE";
+  const packSubtitle="SERIES 1 · 4 CARDS + 1 MERCH · AMETHYST CHASE";
   const brand=setLogoMarkup(activeBoosterSetId,"pack-set-logo") || `<span class="pack-text-logo"><b>${setInfo.name.toUpperCase()}</b><small>SERIES 1</small></span>`;
   const packSetClass=`pack-set-${activeBoosterSetId}`;
 
@@ -1299,7 +1302,7 @@ function renderSeasonCompletionCelebration() {
   const rubyPackageComplete = rubyMovesComplete && rubyOneOfIds.every(id => ownedCount(profile,id,"ruby") >= 1);
   root.innerHTML = `<section class="season-completion-screen season-one-completion">
     <div class="season-completion-effects" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="season-completion-copy"><span>SEASON 1 COMPLETE · TIER 50</span><h1>STRATUSFACTION<br><b>GUARANTEED.</b></h1><p>You completed the Season Road and unlocked <strong>Trish Stratus</strong> with her Season-exclusive package at <strong>Ruby</strong>.</p><div class="season-completion-status"><span><small>RUBY EXCLUSIVES</small><b>${rubyPackageComplete ? '23 COPIES READY' : 'REWARD PACKAGE READY'}</b></span><span><small>AUTHORED DECK</small><b>${deckReady ? '60 / 60 READY' : 'BUILD FROM OWNED CARDS'}</b></span></div></div>
+    <div class="season-completion-copy"><span>SEASON 1 COMPLETE · TIER 50</span><h1>STRATUSFACTION<br><b>GUARANTEED.</b></h1><p>You completed the Season Road and unlocked <strong>Trish Stratus</strong> with her Season-exclusive package at <strong>Amethyst</strong>.</p><div class="season-completion-status"><span><small>AMETHYST EXCLUSIVES</small><b>${rubyPackageComplete ? '23 COPIES READY' : 'REWARD PACKAGE READY'}</b></span><span><small>AUTHORED DECK</small><b>${deckReady ? '60 / 60 READY' : 'BUILD FROM OWNED CARDS'}</b></span></div></div>
     <div class="season-completion-card">${seasonOneTrishCardMarkup("season-completion-cena-card")}<span class="season-completion-ruby">RUBY · SEASON REWARD</span></div>
     <div class="season-completion-package" aria-label="Trish Stratus Ruby reward package"><span><b>×5</b> STRATUSPHERE</span><span><b>×5</b> CHICK KICK</span><span><b>×5</b> AIR CANADA</span><span><b>×5</b> STRATUSFACTION</span><span><b>RUBY</b> STRATUSFACTION GUARANTEED</span><span><b>RUBY</b> TIME TO ROCK & ROLL</span><span><b>RUBY</b> TRISH STRATUS</span></div>
     <div class="season-completion-actions"><button id="season-complete-play" class="legacy-enter">PLAY AS TRISH STRATUS</button><button id="season-complete-deck" class="nav-button">OPEN TRISH IN DECK LAB</button><button id="season-complete-road" class="nav-button">VIEW COMPLETED SEASON ROAD</button></div>
@@ -1401,13 +1404,10 @@ function renderSeasons() {
 function renderChallenges() {
   const root = $("#game");
   const challenges = challengeState(profile);
-  const challengeSetOrder = [
-    "summerslam-series-1",
-    "evolution-series-1",
-    "golden-era-series-1",
-    "new-generation-series-1",
-    "attitude-era-series-1",
-  ];
+  const challengeSetOrder = Object.values(launchSetCollections)
+    .filter(set => !set.developmentOnly && set.type !== "season-exclusive" && set.lifecycleDefault !== "future")
+    .sort((a,b) => String(a.displayName).localeCompare(String(b.displayName)))
+    .map(set => set.id);
   const setRows = challengeSetOrder.map(setId => launchSetCollections[setId]).filter(Boolean).map(set => {
     const progress = collectionProgress(profile, set.id);
     const state = setProgressState(profile, set.id);
@@ -2059,7 +2059,7 @@ function splashPromoMarkup() {
     <div class="season-splash-copy">
       <span class="season-ad-kicker">SEASON 1 · STRATUSFACTION GUARANTEED</span>
       <strong class="season-ad-title">STRATUSFACTION<br>GUARANTEED.</strong>
-      <p>Climb the <b>50-tier Season Road</b> to assemble Trish Stratus’s complete <b>Ruby-only</b> reward package. Earn every Trish-exclusive card at its best printing, then unlock the Ruby Superstar at Tier 50 with her strongest owned deck assembled for you.</p>
+      <p>Climb the <b>50-tier Season Road</b> to assemble Trish Stratus’s complete <b>Amethyst-only</b> reward package. Earn every Trish-exclusive card at its best printing, then unlock the Amethyst Superstar at Tier 50 with her strongest owned deck assembled for you.</p>
     </div>
     <div class="season-splash-reward">
       <span class="season-splash-reward-kicker">SEASON COMPLETION SUPERSTAR</span>
@@ -2105,7 +2105,10 @@ function renderMainMenu() {
     : seasonProgress.tier === 0 ? `START → TIER 1` : `TIER ${seasonProgress.tier} → TIER ${nextSeasonTier}`;
   const tierProgressDetail = seasonProgress.tier >= SEASON_TIER_COUNT ? `TRISH STRATUS UNLOCKED` : `${tierXpRemaining} XP TO NEXT TIER`;
   const spinState = dailySpinState(profile,new Date());
-  const spinRotation = dailySpinResultIndex == null ? 0 : (1440 + (360 - (dailySpinResultIndex * 45 + 22.5)));
+  const wedgeAngle = 360 / DAILY_SPIN_WEDGES.length;
+  const spinRotation = dailySpinResultIndex == null ? 0 : (1800 + (360 - (dailySpinResultIndex * wedgeAngle + wedgeAngle / 2)));
+  const dailySpinReadyCard = spinState.available ? `<button id="daily-spin-button" class="daily-spin-ready-card"><span>DAILY SPIN</span><strong>YOUR FREE SPIN IS READY</strong><small>UP · Season XP · Boosters · Premium Merch</small><b>OPEN THE WHEEL ›</b></button>` : "";
+  const dailySpinModal = dailySpinOpen ? `<section class="daily-spin-modal ${dailySpinResolving?'is-resolving':''} ${dailySpinResultIndex!=null?'has-result':''}" role="dialog" aria-modal="true"><div class="daily-spin-modal-shell"><span>WWE LEGACY · DAILY REWARD</span><h2>SPIN TO WIN</h2><div class="daily-spin-premium-wheel-wrap"><i class="daily-spin-pointer"></i><div class="daily-spin-premium-wheel" style="--spin-rotation:${spinRotation}deg;--wedge-angle:${wedgeAngle}deg">${DAILY_SPIN_WEDGES.map((w,i)=>`<span style="--wedge:${i}"><b>${w.label}</b></span>`).join('')}<b class="daily-spin-hub"><img src="${assetUrl('assets/images/app-icon-192.png')}" alt="WWE Legacy"></b></div></div><p>${dailySpinResolving?'THE WHEEL IS IN MOTION…':dailySpinResultIndex!=null?message:'ONE PREMIUM REWARD · EVERY 24 HOURS'}</p><button id="daily-spin-go" class="start-match" ${dailySpinResolving||dailySpinResultIndex!=null?'disabled':''}>SPIN THE WHEEL</button>${dailySpinResolving?'':`<button id="daily-spin-close" class="nav-button">${dailySpinResultIndex!=null?'CLAIM & CLOSE':'CLOSE'}</button>`}</div></section>` : "";
 
   root.innerHTML = `<section class="main-menu-screen premium-screen legacy-home-v3">
     <section class="legacy-home-stage" aria-label="WWE Legacy home">
@@ -2125,6 +2128,7 @@ function renderMainMenu() {
       </div>
     </section>
 
+    ${dailySpinReadyCard}
     <button id="menu-season-overview" class="legacy-season-event ${attentionClass("seasons")}" aria-label="Open Season 1 hub">${attentionBadge("seasons")}
       <span class="legacy-season-rock">${seasonOneTrishRenderMarkup("legacy-season-cena")}</span>
       <span class="legacy-season-copy">
@@ -2138,12 +2142,6 @@ function renderMainMenu() {
 
     ${message ? `<p class="menu-message legacy-home-message">${message}</p>` : ""}
 
-    <section class="daily-spin-home ${spinState.available?'is-ready':'is-waiting'} ${dailySpinResultIndex!=null?'just-spun':''}">
-      <div class="daily-spin-copy"><span>DAILY SPIN</span><h3>${spinState.available?'YOUR FREE SPIN IS READY':'COME BACK FOR YOUR NEXT SPIN'}</h3><p>UP · Season XP · Boosters · Merch</p></div>
-      <div class="daily-spin-wheel-wrap"><i class="daily-spin-pointer"></i><div class="daily-spin-wheel" style="--spin-rotation:${spinRotation}deg">${DAILY_SPIN_WEDGES.map((w,i)=>`<span style="--wedge:${i}">${w.label}</span>`).join('')}<b class="daily-spin-hub"><img src="${assetUrl('assets/images/app-icon-192.png')}" alt="WWE Legacy"></b></div></div>
-      <button id="daily-spin-button" class="start-match" ${spinState.available?'':'disabled'}>${spinState.available?'SPIN':'READY IN '+formatDailyHoursMinutes(spinState.msRemaining)}</button>
-    </section>
-
     <section class="legacy-command-rack legacy-home-destinations" aria-label="WWE Legacy destinations">
       <button id="menu-decks" class="legacy-command-tile command-decks"><span class="legacy-command-photo">${menuSuperstarPhotoMarkup("seth-rollins","Seth Rollins")}</span><span class="legacy-command-glow"></span><span class="legacy-command-copy"><em>BUILD YOUR ROSTER</em>${homeHubSplitTitle("DECK", "LAB")}<small>Build · optimize · save</small><b>OPEN <i>›</i></b></span></button>
       <button id="menu-challenges" class="legacy-command-tile command-challenges ${attentionClass("challenges")}">${attentionBadge("challenges")}<span class="legacy-command-photo">${menuSuperstarPhotoMarkup("becky-lynch","Becky Lynch")}</span><span class="legacy-command-glow"></span><span class="legacy-command-copy"><em>EARN REWARDS</em>${homeHubSplitTitle("MY", "CHALLENGES")}<small>Daily · weekly · Season XP</small><b>OPEN <i>›</i></b></span></button>
@@ -2151,7 +2149,7 @@ function renderMainMenu() {
       <button id="menu-store" class="legacy-command-tile command-store"><span class="legacy-command-photo">${menuSuperstarPhotoMarkup("stone-cold-steve-austin","Stone Cold Steve Austin")}</span><span class="legacy-command-glow"></span><span class="legacy-command-copy"><em>DAILY ROTATION</em>${homeHubSplitTitle("MY", "STORE")}<small>Boosters · Superstar unlocks</small><b>OPEN <i>›</i></b></span></button>
       <button id="menu-owned-collection" class="legacy-command-tile command-collection"><span class="legacy-command-photo">${menuSuperstarPhotoMarkup("liv-morgan","Liv Morgan")}</span><span class="legacy-command-glow"></span><span class="legacy-command-copy"><em>${ownedCopies} OWNED COPIES</em>${homeHubSplitTitle("MY", "COLLECTION")}<small>Owned cards · favourites · tier upgrades</small><b>OPEN <i>›</i></b></span></button>
       <button id="menu-profile" class="legacy-command-tile command-profile"><span class="legacy-command-photo">${menuSuperstarPhotoMarkup(starter.id,starter.name)}</span><span class="legacy-command-glow"></span><span class="legacy-command-copy"><em>YOUR CAREER</em>${homeHubSplitTitle("MY", "LEGACY")}<small>Progress · records · profile</small><b>OPEN <i>›</i></b></span></button>
-    </section>
+    </section>${dailySpinModal}
   </section>`;
   $("#menu-season-overview")?.addEventListener("click", showSeasons);
   $("#menu-owned-collection")?.addEventListener("click", showOwnedCollection);
@@ -2161,7 +2159,9 @@ function renderMainMenu() {
   $("#menu-challenges")?.addEventListener("click", showChallenges);
   $("#menu-profile")?.addEventListener("click", showProfile);
   $("#menu-store")?.addEventListener("click", showStore);
-  $("#daily-spin-button")?.addEventListener("click",()=>{try{const reward=spinDaily(profile,Math.random,new Date());dailySpinResultIndex=reward.index;saveProfile(profile);message=reward.type==='merch'?`Daily Spin: ${reward.merchName}.`:reward.type==='booster'?`Daily Spin: 1 ${sets[reward.setId]?.name??'random'} booster.`:`Daily Spin: +${reward.amount} ${reward.type==='up'?'UP':'Season XP'}.`;}catch(e){message=e.message;}renderMainMenu();});
+  $("#daily-spin-button")?.addEventListener("click",()=>{dailySpinOpen=true;dailySpinResultIndex=null;message="";renderMainMenu();});
+  $("#daily-spin-close")?.addEventListener("click",()=>{if(dailySpinResolving)return;dailySpinOpen=false;dailySpinResultIndex=null;message="";renderMainMenu();});
+  $("#daily-spin-go")?.addEventListener("click",()=>{if(dailySpinResolving)return;try{const reward=spinDaily(profile,Math.random,new Date());dailySpinResultIndex=reward.index;dailySpinResolving=true;saveProfile(profile);message=reward.type==='merch'?`YOU WON ${reward.merchName.toUpperCase()}`:reward.type==='booster'?`YOU WON 1 ${(sets[reward.setId]?.name??'RANDOM').toUpperCase()} BOOSTER`:`YOU WON +${reward.amount} ${reward.type==='up'?'UP':'SEASON XP'}`;renderMainMenu();setTimeout(()=>{dailySpinResolving=false;renderMainMenu();},4300);}catch(e){message=e.message;dailySpinResolving=false;renderMainMenu();}});
   refreshSeasonClocks();
 }
 
@@ -2176,12 +2176,12 @@ function renderPlayMenu() {
   const kotrHub = kingOfTheRingState(profile);
   const reigningKingId = kotrHub.reigningKingId && superstarById[kotrHub.reigningKingId] ? kotrHub.reigningKingId : null;
   const reigningKingName = reigningKingId ? superstarById[reigningKingId].name : null;
-  const kotrDefaultPortrait = portraitMarkup("gunther","Gunther");
+  const kotrDefaultPortrait = portraitMarkup("stone-cold-steve-austin","Stone Cold Steve Austin");
   root.innerHTML = `<section class="play-menu-screen premium-screen legacy-play-v3">
     <header class="legacy-play-heading"><span>PLAY</span><h2>CHOOSE YOUR PATH</h2><p>Five ways to build your WWE Legacy.</p></header>
     <div class="legacy-mode-stack">
-      <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup(dailyTower?.event.heroId ?? "brock-lesnar", superstarById[dailyTower?.event.heroId]?.name ?? "Live Events")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · 1 RANDOM PACK ON CLEAR</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
-      <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · 1 RANDOM PACK EVERY 5 WINS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
+      <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · 1 RANDOM PACK ON CLEAR</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
+      <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("rhea-ripley","Rhea Ripley")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · 1 RANDOM PACK EVERY 5 WINS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
       <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr ${reigningKingId?'has-reigning-king':''}"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${reigningKingId ? portraitMarkup(reigningKingId,reigningKingName) : kotrDefaultPortrait}</span><span class="legacy-mode-copy"><em>${reigningKingName ? `♛ REIGNING KING · ${reigningKingName.toUpperCase()}` : '8 SUPERSTARS · SINGLE ELIMINATION'}</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>${reigningKingName?'RETURN TO THE THRONE':'ENTER THE TOURNAMENT'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>
       <article id="play-championship" role="button" tabindex="0" class="legacy-mode-banner mode-championship"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="legacy-mode-copy"><em>24 MATCHES · FOUR DIFFICULTIES</em>${modeLogoMarkup("championship",true)}<small>EASY → NORMAL → HARD → HARDCORE</small><b>START THE ROAD<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">24</span></article>
       <article id="play-survivor-series" role="button" tabindex="0" class="legacy-mode-banner mode-survivor-series"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("randy-orton","Randy Orton")}</span><span class="legacy-mode-copy"><em>4 VS 4 · CAPTURE THE ROSTER</em><strong class="mode-text-logo">SURVIVOR <b>SERIES</b></strong><small>WIN THE MATCH · TAKE THEIR SUPERSTAR · OWN ALL 8</small><b>${canEnterSurvivorSeries(profile)?'ENTER SURVIVOR SERIES':'4 SUPERSTARS REQUIRED'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">4V4</span></article>
@@ -2241,7 +2241,7 @@ function renderRules() {
   root.innerHTML = `<section class="rules-screen premium-screen">
     ${premiumHubHeading("GAME", "RULES", "OFFICIAL RULEBOOK", "Match flow · cards · modes · progression", "hub-legacy")}
     <section class="rules-hero">
-      <div class="rules-hero-copy"><span>MY LEGACY · OFFICIAL RULEBOOK</span><h2>Rules & How to Play</h2><p>The live WWE Legacy rules in one place. Card text can create explicit exceptions, and Normal / Emerald / Sapphire / Ruby / Diamond printings use their displayed tier values.</p></div>
+      <div class="rules-hero-copy"><span>MY LEGACY · OFFICIAL RULEBOOK</span><h2>Rules & How to Play</h2><p>The live WWE Legacy rules in one place. Card text can create explicit exceptions, and Normal / Emerald / Sapphire / Ruby / Amethyst printings use their displayed tier values.</p></div>
       <div class="rules-hero-stats"><span><b>60</b><small>DECK PAGES</small></span><span><b>5</b><small>LEAD OFF</small></span><span><b>4</b><small>METHODS</small></span><span><b>8</b><small>COUNTER STATES</small></span></div>
     </section>
     <section class="rules-jump-panel"><div class="section-title"><div><h3>Rulebook Menu</h3><small>Jump to a system, then expand any section for the full rule.</small></div><button id="rules-back" class="nav-button">Back to My Legacy</button></div><div class="rules-nav-grid">${nav}</div></section>
@@ -2696,6 +2696,10 @@ function cardArtFace(card, { eager = false } = {}) {
   const loading = eager ? "eager" : "lazy";
   const star = card.superstarId ? superstarById[card.superstarId] : null;
   const layered = layeredCardArtFor(card);
+  const approvedFinished = finishedCardArtFor(card);
+  if (approvedFinished && !isAnimatedCardEligible(card)) {
+    return `<img loading="${loading}" decoding="async" class="ccg-finished-card-art-image ccg-load-guard" src="${approvedFinished}" alt="${card.name}" data-finished-card-art="${card.id}" onload="this.classList.add('is-art-ready');" onerror="this.classList.remove('is-art-ready');this.onerror=null;this.style.display='none';this.closest('.ccg-card')?.classList.add('uses-rules-fallback','force-rules-face');">`;
+  }
   if (layered) {
     const finished = finishedCardArtFor(card);
     const legacyFinished = legacyFinishedCardArtFor(card);
@@ -2747,7 +2751,7 @@ function cardPlayRestrictionText(card) {
 
 function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null, extraClass = "", footer = "", flipAttr = "", interactive = true, eagerArt = false } = {}) {
   // Five print tiers share one underlying card identity. Sapphire is the authored
-  // balance value; Normal/Emerald step down while Ruby/Diamond step up at runtime.
+  // balance value; Normal/Emerald step down while Ruby/Amethyst step up at runtime.
   const resolvedTier = normalizeCardTier(card?.fixedPrintingTier ?? tier ?? card?.tier ?? (foil === true ? "ruby" : "normal"), "normal");
   card = applyCardTier(card, resolvedTier);
   const superstarFront = card.kind === "superstar";

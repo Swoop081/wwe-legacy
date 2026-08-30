@@ -1,5 +1,5 @@
-import { awardSeasonXp, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP } from "./seasons.js?v=1.1.27";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.27";
+import { awardSeasonXp, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP } from "./seasons.js?v=1.1.28";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.28";
 const DAY_MS = 86400000;
 const DAILY_POOL = [
   { key: 'win-match', label: 'Win a match', metric: 'wins', target: 1, reward: 0, xpReward: DAILY_CHALLENGE_XP },

@@ -179,13 +179,13 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     id: "season-challenges", group: "PROGRESSION", title: "Season, Challenges & Rewards",
     summary: "Matches, challenges and rewards feed the 50-tier, 30-day Season 1 road.",
     items: [
-      ["Season 1", "Season 1 runs for 30 days and contains 50 tiers at 100 XP per tier, for 5,000 XP total. Tier 50 awards the Ruby Trish Stratus — Stratusfaction Guaranteed Superstar identity."],
+      ["Season 1", "Season 1 runs for 30 days and contains 50 tiers at 100 XP per tier, for 5,000 XP total. Tier 50 awards the Amethyst Trish Stratus — Stratusfaction Guaranteed Superstar identity."],
       ["Match XP", "A match win awards 5 Season XP and a loss awards 0 Season XP."],
       ["Daily challenges", "Three Daily Challenges rotate each local day. Each completed Daily Challenge awards 10 Season XP and no booster."],
       ["Weekly challenges", "Three Weekly Challenges rotate each week. Each completed Weekly Challenge awards 25 Season XP plus 1 random released-set booster."],
       ["Daily free booster", "The Season page provides one free booster on a 24-hour timer. Claiming it opens the booster immediately."],
       ["Season reward gating", "Season booster tiers can only resolve to sets that are actually released at that time; future subsets cannot appear early."],
-      ["Season 1 chase", "Trish Stratus’ Season 1 cards are Ruby-only. The road awards 5 Ruby copies each of Stratusphere, Chick Kick, Air Canada and Stratusfaction, plus Stratusfaction Guaranteed and Time to Rock & Roll, culminating in the Ruby Trish Stratus Superstar at Tier 50. Completing the Season automatically assembles Trish’s strongest owned version of her authored deck."]
+      ["Season 1 chase", "Trish Stratus’ Season 1 cards are Amethyst-only. The road awards 5 Ruby copies each of Stratusphere, Chick Kick, Air Canada and Stratusfaction, plus Stratusfaction Guaranteed and Time to Rock & Roll, culminating in the Amethyst Trish Stratus Superstar at Tier 50. Completing the Season automatically assembles Trish’s strongest owned version of her authored deck."]
     ]
   },
   {

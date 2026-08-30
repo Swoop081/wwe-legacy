@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.27';
-import { SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.27';
-import { LAUNCH_THEME_TOWERS, LIVE_EVENT_ROTATION_POOL, activeLiveEventTowers, rotatingLiveEventTemplates } from '../js/data/live-events.js?v=1.1.27';
-import { SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.27';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.28';
+import { SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.28';
+import { LAUNCH_THEME_TOWERS, LIVE_EVENT_ROTATION_POOL, activeLiveEventTowers, rotatingLiveEventTemplates } from '../js/data/live-events.js?v=1.1.28';
+import { SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.28';
 
 const studio = fs.readFileSync(new URL('../js/tools/card-art-studio.js', import.meta.url), 'utf8');
 const studioHtml = fs.readFileSync(new URL('../tools/card-art-studio.html', import.meta.url), 'utf8');

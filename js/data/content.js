@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.27";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.27";
+import { enrichCounterState } from "./counter-states.js?v=1.1.28";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.28";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -4493,7 +4493,7 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "arm-extended",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "the-rock-belt-whip",
@@ -4530,7 +4530,7 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "weapon": true,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "the-rock-rock-bottom",
@@ -4560,7 +4560,7 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "body-elevated",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "the-rock-people-s-elbow",
@@ -4582,7 +4582,7 @@ export const allGameplayCards = [
     "finisher": true,
     "effects": [],
     "counterState": "arm-extended",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "chain-wrestling",
@@ -4777,7 +4777,7 @@ export const allGameplayCards = [
       "type": "peopleChampionship"
     },
     "oncePerMatch": true,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "manager-paul-bearer",
@@ -5216,7 +5216,7 @@ export const allGameplayCards = [
     },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "special-cody-rhodes",
@@ -5579,7 +5579,7 @@ export const allGameplayCards = [
       "draw": 1,
       "opponentAdrenaline": -1
     },
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "running-powerslam",
@@ -9448,7 +9448,7 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "body-elevated",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "goldberg-spear",
@@ -9486,7 +9486,7 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "torso-trapped",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "goldberg-jackhammer",
@@ -9510,7 +9510,7 @@ export const allGameplayCards = [
     "finisher": true,
     "effects": [],
     "counterState": "body-elevated",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "entrance-goldberg",
@@ -9526,7 +9526,7 @@ export const allGameplayCards = [
     },
     "preMatchAdrenaline": 2,
     "delayedTurn5": false,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "special-goldberg",
@@ -9543,7 +9543,7 @@ export const allGameplayCards = [
       "retainControl": true,
       "preserveStreak": true
     },
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "knees-up",
@@ -15386,7 +15386,7 @@ export const allGameplayCards = [
     "superstarId": "chyna",
     "trademark": true,
     "counterState": "running-aerial",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "kind": "move",
@@ -15416,7 +15416,7 @@ export const allGameplayCards = [
     "superstarId": "chyna",
     "trademark": true,
     "counterState": "rear-control",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "kind": "move",
@@ -15442,7 +15442,7 @@ export const allGameplayCards = [
     "counterState": "body-elevated",
     "searchOnConnectName": "Chyna Bomb",
     "searchOnConnectDiscount": 2,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "kind": "move",
@@ -15469,7 +15469,7 @@ export const allGameplayCards = [
     "superstarId": "chyna",
     "finisher": true,
     "counterState": "body-elevated",
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "kind": "action",
@@ -15492,7 +15492,7 @@ export const allGameplayCards = [
     "special": {
       "type": "breakTheBarrier"
     },
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "kind": "move",
@@ -15788,7 +15788,7 @@ export const allGameplayCards = [
     },
     "preMatchAdrenaline": 0,
     "delayedTurn5": false,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "entrance-kurt-angle",
@@ -19124,7 +19124,7 @@ export const allGameplayCards = [
       "bodyPart": "legs",
       "pressure": 1
     },
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "trish-stratus-chick-kick",
@@ -19158,7 +19158,7 @@ export const allGameplayCards = [
       "bodyPart": "back",
       "pressure": 1
     },
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "trish-stratus-air-canada",
@@ -19186,7 +19186,7 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 1
     },
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "trish-stratus-stratusfaction",
@@ -19212,7 +19212,7 @@ export const allGameplayCards = [
       "bodyPart": "arms",
       "pressure": 1
     },
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "special-trish-stratus",
@@ -19237,7 +19237,7 @@ export const allGameplayCards = [
       "discount": 2
     },
     "oneUse": true,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "entrance-trish-stratus",
@@ -19252,7 +19252,7 @@ export const allGameplayCards = [
     },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false,
-    "fixedPrintingTier": "ruby"
+    "fixedPrintingTier": "amethyst"
   },
   {
     "id": "sd1-blue-thunder-backbreaker",
