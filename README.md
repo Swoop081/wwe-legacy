@@ -1,14 +1,16 @@
-# WWE Legacy v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
+# WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
 
-**Current working baseline.** v1.1.37 supersedes v1.1.36.
+**Current working baseline.** v1.1.38 supersedes v1.1.37.
 
-Tatum Paxley’s exclusive move hierarchy has been corrected from the physical-iPhone/content audit. **Cemetery Drive** is now her 4★ Finisher rather than a Submission/Trademark. **Psycho Trap, Bridging German Suplex, and Diving Knee Drop** are all 3★ Trademarks.
+This release restores the saved Card Studio **base-plate front as the live source of truth** across Deck Lab, gameplay, packs, inspectors and other collectible surfaces. This fixes the regression where already-authored Superstar and Move cards could render as missing/reconstructed fronts even though their saved `*-base-plate.webp` files were installed.
 
-Balance and rules corrections: Cemetery Drive is Cost 9 / Damage 17 with no Method requirement, Grapple, Front Control, and +1 persistent Back damage. Psycho Trap is Cost 5 / Damage 8 / Technical 1. Bridging German Suplex is Cost 5 / Damage 8 / Technical 2 and is correctly a Rear-Control Grapple rather than a Diving Aerial grounded-only move. Diving Knee Drop is Cost 6 / Damage 10 / Agility 2 and remains a grounded-opponent Diving Aerial Trademark.
+Animated cards now follow one strict presentation rule. The saved static Card Studio card always remains underneath. Only after a linked/packaged animation successfully loads does the runtime place a **full-card set field** inside the authored border, then centre the animation in the artwork bay from the **bottom of the top border to the top of the plaque**. Move plaques begin at 74% card height; non-Move plaques begin at 77.2%, matching Card Studio geometry. The plaque/text and set logo remain above the animated artwork.
 
-Tatum’s authored 60-page deck now follows the standard three-Trademark / two-Finisher distribution: 3× Psycho Trap, 3× Bridging German Suplex, 3× Diving Knee Drop, 2× Cemetery Drive. Collector identities and artwork paths remain unchanged; existing Card Studio art can be re-exported against the corrected card data.
+SummerSlam animated cards now use the same blue → purple → orange SummerSlam field authored by Card Studio rather than the previous animation-bay-only blue/purple strip. Equivalent set-field treatments are supplied for the other current/legacy/reward sets.
 
-Verification: dedicated Tatum audit 3/3; flow audit 95 Superstars / 0 issues; rebuild validation 95 decks / 835 gameplay cards / 0 issues; card-ID audit 930/930 / 0 issues; full no-assets suite adds the three new passing assertions with no increase in historical failures.
+If no animation exists or every animation source fails, **nothing is rebuilt or swapped**: the exact saved static Card Studio base plate remains visible. Flat finished exports are retained only as a fallback when a base plate itself is absent. Superstar lower plaques are also returned to the same clean rectangular Card Studio footprint.
+
+Verification: v1.1.38 dedicated assertions 4/4; combined focused rendering/current-content suite 21/21; flow audit 95 Superstars / 0 issues; rebuild validation 95 decks / 835 gameplay cards / 0 orphans / 0 issues; card-ID audit 930/930 / 0 issues. Full no-assets suite: **909 passed / 97 failed / 97 skipped**, versus v1.1.37 at 905 / 97 / 97 — four new passes and **0 new carry-forward failures**.
 
 # WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
 

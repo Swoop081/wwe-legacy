@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.37";
-import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../js/data/animated-card-art.js?v=1.1.37";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.38";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../js/data/animated-card-art.js?v=1.1.38";
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
 const html=fs.readFileSync(new URL("../tools/card-art-studio.html",import.meta.url),"utf8");
@@ -19,9 +19,11 @@ test("v1.1.23+ animation stays inside the live artwork window while keeping the 
   assert.match(app,/function animatedCardSurfaceMarkup\(card\)/);
   assert.match(app,/data-animated-card-kind=/);
   assert.match(css,/\.ccg-animated-card-surface\{/);
-  assert.match(css,/left:4\.8%.*right:4\.8%.*top:4\.4%.*bottom:24\.6%/s);
-  assert.match(css,/\.ccg-card\.type-move \.ccg-animated-card-surface\{top:13\.4%!important;bottom:26\.4%/);
-  assert.doesNotMatch(css,/\.ccg-animation-set-logo\{/);
+  // v1.1.38 supersedes the old plaque-anchored bay: artwork starts below the
+  // top border and ends exactly at the Card Studio plaque boundary.
+  assert.match(css,/\.ccg-card\.has-active-animation \.ccg-animated-card-surface\{[\s\S]*top:4\.8%!important;[\s\S]*bottom:22\.8%!important/);
+  assert.match(css,/\.ccg-card\.type-move\.has-active-animation \.ccg-animated-card-surface\{bottom:26%!important\}/);
+  assert.match(css,/\.ccg-animated-set-logo/);
   assert.doesNotMatch(app,/function animatedCardChromeMarkup\(card\)/);
 });
 

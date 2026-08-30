@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { collectionCards } from '../js/data/collection.js?v=1.1.37';
-import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=1.1.37';
+import { collectionCards } from '../js/data/collection.js?v=1.1.38';
+import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=1.1.38';
 import {
   STARTER_CHOICES,
   WELCOME_SUPERSTAR_SET_IDS,
@@ -11,8 +11,8 @@ import {
   ownedCount,
   DEFAULT_PLAYER_ENTRANCE_ID,
   STARTING_MOMENTUM_COPIES
-} from '../js/data/profile.js?v=1.1.37';
-import { claimAllSeasonTiers, seasonState } from '../js/data/seasons.js?v=1.1.37';
+} from '../js/data/profile.js?v=1.1.38';
+import { claimAllSeasonTiers, seasonState } from '../js/data/seasons.js?v=1.1.38';
 
 const CENA_MOVES = ['john-cena-protobomb','john-cena-five-knuckle-shuffle','john-cena-stf','john-cena-attitude-adjustment'];
 const CENA_ONE_OFS = ['john-cena-hustle-loyalty-respect','special-john-cena','entrance-john-cena','superstar-john-cena'];

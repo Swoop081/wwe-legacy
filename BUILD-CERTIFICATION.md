@@ -1,35 +1,34 @@
-# WWE Legacy v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
+# WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
 
 ## Release identity
-- Version: **v1.1.37**
-- Title: **Tatum Paxley Finisher + Trademark Re-Audit**
+- Version: **v1.1.38**
+- Title: **Card Studio Runtime Parity + Set-Field Animation Fix**
 - Date: **30 August 2026**
-- Base: **v1.1.36 — Matrix Slide Shared Common Reversal**
-- Distribution: **no-assets code overlay**; no packaged image asset changed.
+- Base: **v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit**
+- Distribution: **no-assets code overlay**; existing repository artwork/animation assets are preserved.
 
-## Implemented changes
-- Reclassifies **Cemetery Drive (`NXT1-032`)** from a 3★ Technical Submission/Trademark into Tatum Paxley’s 4★ Finisher.
-- Cemetery Drive is now Cost 9 / Damage 17, Grapple, Front Control, no Method requirement, grounds the opponent, and applies +1 persistent Back damage on Connect. All old submission fields/leg-pressure behavior are removed.
-- **Psycho Trap (`NXT1-031`)** remains a Trademark but is rebalanced to Cost 5 / Damage 8 / Technical 1 and now applies Back rather than Arm body damage while retaining the Cemetery Drive tutor/discount setup.
-- **Bridging German Suplex (`NXT1-033`)** remains a Trademark, rebalanced to Cost 5 / Damage 8 / Technical 2, and corrected from an impossible Diving-Aerial/grounded-only definition to a Rear-Control Grapple that grounds the opponent.
-- **Diving Knee Drop (`NXT1-034`)** is downgraded from the old 4★ Finisher slot to a 3★ Trademark at Cost 6 / Damage 10 / Agility 2, retaining grounded-opponent Diving Aerial identity, +1 Adrenaline and +1 persistent Head damage.
-- Tatum’s 60-page authored deck is normalized to 3× each Trademark and 2× Cemetery Drive.
-- Collector numbers, card IDs and image paths are unchanged.
-
-## Audit basis
-- WWE’s 2026 match results repeatedly identify Cemetery Drive as Tatum Paxley’s match-ending move.
-- WWE 2K26 lists Cemetery Drive as her Finisher and places her aerial offense in the signature tier.
-- The WWE Legacy Cost/Damage pass aligns Cemetery Drive with the NXT finisher band and the three supporting cards with the existing NXT Trademark band.
+## Certified corrections
+- Canonical `*-base-plate.webp` Card Studio exports are the first live render source for every non-Momentum collectible.
+- Saved Superstar base plates are therefore picked up directly again in Deck Lab and all other collectible surfaces.
+- A flat canonical/legacy finished export is used only if the saved base plate fails to load.
+- Animation never replaces the static source. Animation activation occurs only after a linked/packaged animated asset loads successfully.
+- Animated set field spans the full inner card page, inside the authored frame and behind the plaque.
+- Animated media is centred between the bottom of the top border and the Card Studio plaque top: **4.8% → 74.0% for Moves**, **4.8% → 77.2% for non-Moves**.
+- Plaque/text overlays remain above animation; set logo is restored above the animated field.
+- SummerSlam uses its Card Studio blue/purple/orange field rather than the previous artwork-bay-only gradient.
+- If animation is missing/fails, the saved static card remains completely untouched.
+- Superstar live nameplates use the clean rectangular Card Studio lower-plaque footprint.
 
 ## Verification
-- Dedicated v1.1.37 Tatum audit assertions: **3 passed / 0 failed**.
+- Dedicated v1.1.38 assertions: **4 passed / 0 failed**.
+- Combined current rendering/content focused suite: **21 passed / 0 failed**.
 - Flow audit: **95 Superstars / 0 issues**.
 - Rebuild validation: **95 decks / 835 gameplay cards / 0 orphans / 0 issues**.
 - Card-ID audit: **930 collector cards / 930 manifest entries / 0 issues**.
-- Card-health audit: **170 Rare Trademarks**, average Cost 5.42 / Damage 8.21; corrected Tatum Trademarks remain inside the established band.
-- Counter-density audit: Tatum retains all **8 counter states / 4 submission-target coverage**, with 14 structural Counter pages / 15 effective reactive-defense pages.
-- Full no-assets suite: **905 passed / 97 failed / 97 skipped** versus v1.1.36 at 902 passed / 97 failed / 97 skipped. The three additional passes are the new Tatum assertions; **0 new carry-forward failures**.
-- Physical iPhone smoke: pending for the refreshed Card Studio/live-card labels once the corrected Tatum fronts are re-exported.
+- Full no-assets suite: **909 passed / 97 failed / 97 skipped**.
+- Baseline v1.1.37 full suite: **905 passed / 97 failed / 97 skipped**.
+- Result: **4 new passing assertions, 0 new carry-forward failures**.
+- Physical iPhone smoke: pending for saved Superstar fronts and animated-card framing.
 
 # WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
 

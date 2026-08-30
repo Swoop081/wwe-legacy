@@ -1,3 +1,17 @@
+# WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
+
+- Restores saved Card Studio **base plates** as the first runtime source for all non-Momentum collectible fronts. This directly fixes saved Superstar/Move fronts not appearing even though the repo contains their `*-base-plate.webp` files.
+- Flat canonical/legacy finished cards remain fallback-only when a base plate is genuinely unavailable.
+- Animated cards now activate their special presentation only after a real animation source loads. Missing/failed animation leaves the static Card Studio card untouched.
+- Adds a full inner-card **set background layer** behind animated media and the live plaque.
+- Centres animated artwork between the bottom of the top border and the top of the plaque: Moves use 4.8%–74.0%; all other animated collectible types use 4.8%–77.2%, matching Card Studio plaque geometry.
+- Plaque and text remain over the set field; the set logo is restored above the animation.
+- Corrects SummerSlam animated presentation to the Card Studio blue/purple/orange set field instead of the old blue-purple fill applied only inside the animation window.
+- Adds matching animated full-page set fields for Evolution, SmackDown, Raw, NXT, Ruthless Aggression, Golden Era, Attitude Era, New Generation, Survivor Series, Money in the Bank, Worlds Collide and Reward cards.
+- Superstar lower identity treatment uses the clean rectangular Card Studio plaque footprint instead of a separate clipped runtime name box.
+- No card balance, deck composition, rewards, progression, economy or mode logic changes.
+- Verification: dedicated v1.1.38 4/4; focused rendering/current-content 21/21; flow 95/0; rebuild 95 decks / 835 gameplay cards / 0 issues; card IDs 930/930; full suite **909 passed / 97 failed / 97 skipped**, with **0 new failures** versus v1.1.37.
+
 # WWE Legacy v1.1.30 — Card Presentation Corrections
 
 ## v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
