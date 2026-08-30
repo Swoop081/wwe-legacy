@@ -1,0 +1,58 @@
+diff --git a/js/ui/app.js b/js/ui/app.js
+index 984de7f..94e0865 100644
+--- a/js/ui/app.js
++++ b/js/ui/app.js
+@@ -2718,35 +2720,35 @@ function registerAnimatedCardPlates(scope = document) {
+ 
+ function cardArtFace(card, { eager = false } = {}) {
+   const loading = eager ? "eager" : "lazy";
+-  const star = card.superstarId ? superstarById[card.superstarId] : null;
++  if (card.kind === "momentum") {
++    // Momentum is a live UI card family rather than a static exported front.
++    return momentumMockupMarkup(card);
++  }
+   const layered = layeredCardArtFor(card);
+   const finished = finishedCardArtFor(card);
+   const legacyFinished = legacyFinishedCardArtFor(card);
+   const legacyCandidate = legacyFinished && legacyFinished !== finished ? legacyFinished : "";
+   const flatSuperstarClass = card.kind === "superstar" ? "c?.classList.add('has-flat-superstar-front');" : "";
+   const resetFlatSuperstarClass = card.kind === "superstar" ? "c?.classList.remove('has-flat-superstar-front');" : "";
+-  // v1.1.35 — the exported finished Card Studio front is the source of truth.
+-  // Legacy load-guard contract retained for base-plate fallback: ccg-layered-card-plate ccg-load-guard.
+-  // Runtime card-art failure contract retained: classList.add('uses-rules-fallback','force-rules-face').
+-  // Animation is an artwork-bay overlay; it must never force the static card
+-  // underneath back to a reconstructed layered front. If a canonical finished
+-  // front is genuinely absent, try the legacy finished export and then the
+-  // canonical base plate before finally exposing the rules face.
++  // v1.1.38 — Card Studio layered/base-plate exports are the canonical saved card
++  // assets in the live repository. Start there so Superstar cards and every other
++  // authored front use the artwork the user actually saved. A finished static
++  // export is only a fallback for cards that do not have a base plate.
++  if (layered) {
++    return `<img loading="${loading}" decoding="async" class="ccg-layered-card-plate ccg-load-guard" src="${layered}" alt="${card.name}" data-layered-card-art="${card.id}" data-flat-finished-art="${finished ?? ""}" data-legacy-finished-art="${legacyCandidate}" onload="this.classList.add('is-art-ready');const c=this.closest('.ccg-card');${resetFlatSuperstarClass}c?.classList.add('has-layered-asset');" onerror="this.classList.remove('is-art-ready');const c=this.closest('.ccg-card');c?.classList.remove('has-layered-asset');if(!this.dataset.flatFinishedTried&&this.dataset.flatFinishedArt){this.dataset.flatFinishedTried='1';${flatSuperstarClass}this.classList.remove('ccg-layered-card-plate');this.classList.add('ccg-finished-card-art-image');c?.classList.remove('is-layered-front');c?.classList.add('is-full-art-finished','static-finished-fallback');c?.querySelectorAll('.ccg-live-front-data,.ccg-superstar-nameplate')?.forEach(o=>o.style.display='none');this.src=this.dataset.flatFinishedArt;return;}if(!this.dataset.legacyFinishedTried&&this.dataset.legacyFinishedArt){this.dataset.legacyFinishedTried='1';${flatSuperstarClass}this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.style.display='none';${resetFlatSuperstarClass}c?.classList.remove('is-full-art-finished','is-full-art-move','is-layered-front','has-layered-asset');c?.classList.add('uses-rules-fallback','force-rules-face');">`;
++  }
+   if (finished) {
+-    return `<img loading="${loading}" decoding="async" class="ccg-finished-card-art-image ccg-load-guard" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" data-legacy-finished-art="${legacyCandidate}" data-layered-fallback-art="${layered ?? ""}" onload="this.classList.add('is-art-ready');if(this.dataset.layeredFallbackActive==='1'){this.closest('.ccg-card')?.classList.add('has-layered-asset');}" onerror="this.classList.remove('is-art-ready');const c=this.closest('.ccg-card');if(!this.dataset.legacyFinishedTried&&this.dataset.legacyFinishedArt){this.dataset.legacyFinishedTried='1';${flatSuperstarClass}this.src=this.dataset.legacyFinishedArt;return;}if(!this.dataset.layeredFallbackTried&&this.dataset.layeredFallbackArt){this.dataset.layeredFallbackTried='1';this.dataset.layeredFallbackActive='1';${resetFlatSuperstarClass}this.classList.remove('ccg-finished-card-art-image');this.classList.add('ccg-layered-card-plate');c?.classList.remove('is-full-art-finished');c?.classList.add('is-layered-front');const o=c?.querySelector('.ccg-layered-fallback-data');if(o)o.style.display='block';this.src=this.dataset.layeredFallbackArt;return;}this.onerror=null;this.style.display='none';c?.classList.remove('is-full-art-finished','is-full-art-move','is-layered-front','has-layered-asset');c?.classList.add('uses-rules-fallback','force-rules-face');">`;
++    return `<img loading="${loading}" decoding="async" class="ccg-finished-card-art-image ccg-load-guard" src="${finished}" alt="${card.name}" onload="this.classList.add('is-art-ready');" onerror="this.classList.remove('is-art-ready');this.onerror=null;this.style.display='none';const c=this.closest('.ccg-card');c?.classList.add('uses-rules-fallback','force-rules-face');">`;
++  }
++  const authored = artworkFor(card);
++  if (authored) {
++    return `<img loading="${loading}" decoding="async" class="ccg-authored-card-art-image ccg-load-guard" src="${authored}" alt="${card.name}" onload="this.classList.add('is-art-ready');" onerror="this.classList.remove('is-art-ready');this.onerror=null;this.style.display='none';const c=this.closest('.ccg-card');c?.classList.add('uses-rules-fallback','force-rules-face');">`;
+   }
+   if (card.kind === "superstar" && card.superstarId) {
++    const star = card.superstarId ? superstarById[card.superstarId] : null;
+     return superstarVisualMarkup(card.superstarId, star?.name ?? card.name, "ccg-superstar-art-image");
+   }
+-  if (card.kind === "momentum") {
+-    // Momentum is a live UI card family rather than a static exported front.
+-    return momentumMockupMarkup(card);
+-  }
+-  const art = artworkFor(card);
+-  const fallback = card.name;
+-  return art
+-    ? `<img loading="${loading}" decoding="async" class="ccg-authored-card-art-image ccg-load-guard" src="${art}" alt="${card.name}" onload="this.classList.add('is-art-ready');" onerror="this.classList.remove('is-art-ready');this.onerror=null;this.style.display='none';const c=this.closest('.ccg-card');c?.classList.add('uses-rules-fallback','force-rules-face');">`
+-    : `<span class="ccg-art-placeholder"><span class="pending-mark">WWE LEGACY</span><b>ARTWORK PENDING</b><small>${fallback}</small><em>${card.cardCode ?? card.id}</em></span>`;
++  return `<span class="ccg-art-placeholder"><span class="pending-mark">WWE LEGACY</span><b>ARTWORK PENDING</b><small>${card.name}</small><em>${card.cardCode ?? card.id}</em></span>`;
+ }
+ 
+ 
