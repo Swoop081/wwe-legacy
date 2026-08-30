@@ -1,0 +1,191 @@
+diff --git a/BUILD-CERTIFICATION.md b/BUILD-CERTIFICATION.md
+index ade39b1..68e67c7 100644
+--- a/BUILD-CERTIFICATION.md
++++ b/BUILD-CERTIFICATION.md
+@@ -1,35 +1,62 @@
+-# WWE Legacy v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
++# WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
+ 
+ ## Release identity
+-- Version: **v1.1.37**
+-- Title: **Tatum Paxley Finisher + Trademark Re-Audit**
++- Version: **v1.1.39**
++- Title: **Bret Hart Ringpost Figure Four**
+ - Date: **30 August 2026**
+-- Base: **v1.1.36 — Matrix Slide Shared Common Reversal**
+-- Distribution: **no-assets code overlay**; no packaged image asset changed.
++- Base: **v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix**
++- Distribution: **no-assets code overlay**; existing repository artwork/animation assets are preserved.
++
++## Certified addition
++- Adds `NG1-081` **Ringpost Figure Four** as a Bret Hart-exclusive 3★ Rare Trademark Submission.
++- Cost 6 / Damage 0 / Technical 2.
++- Grounded opponent only; targets Legs; +5 persistent Leg pressure per successful submission turn; on Connect, Bret’s next Sharpshooter costs 1 less this Control sequence.
++- Bret Hart's authored deck carries 3 copies and remains exactly 60 pages.
++- Replaces the shared Boston Crab plus one Back Suplex and one Elbow Drop; 2× Sharpshooter and the existing Momentum package are retained.
++- Existing New Generation collector numbers remain unchanged; the set extends cleanly to NG1-081.
++- Card Studio data includes the new card and canonical artwork paths; no artwork is packaged.
+ 
+-## Implemented changes
+-- Reclassifies **Cemetery Drive (`NXT1-032`)** from a 3★ Technical Submission/Trademark into Tatum Paxley’s 4★ Finisher.
+-- Cemetery Drive is now Cost 9 / Damage 17, Grapple, Front Control, no Method requirement, grounds the opponent, and applies +1 persistent Back damage on Connect. All old submission fields/leg-pressure behavior are removed.
+-- **Psycho Trap (`NXT1-031`)** remains a Trademark but is rebalanced to Cost 5 / Damage 8 / Technical 1 and now applies Back rather than Arm body damage while retaining the Cemetery Drive tutor/discount setup.
+-- **Bridging German Suplex (`NXT1-033`)** remains a Trademark, rebalanced to Cost 5 / Damage 8 / Technical 2, and corrected from an impossible Diving-Aerial/grounded-only definition to a Rear-Control Grapple that grounds the opponent.
+-- **Diving Knee Drop (`NXT1-034`)** is downgraded from the old 4★ Finisher slot to a 3★ Trademark at Cost 6 / Damage 10 / Agility 2, retaining grounded-opponent Diving Aerial identity, +1 Adrenaline and +1 persistent Head damage.
+-- Tatum’s 60-page authored deck is normalized to 3× each Trademark and 2× Cemetery Drive.
+-- Collector numbers, card IDs and image paths are unchanged.
+-
+-## Audit basis
+-- WWE’s 2026 match results repeatedly identify Cemetery Drive as Tatum Paxley’s match-ending move.
+-- WWE 2K26 lists Cemetery Drive as her Finisher and places her aerial offense in the signature tier.
+-- The WWE Legacy Cost/Damage pass aligns Cemetery Drive with the NXT finisher band and the three supporting cards with the existing NXT Trademark band.
++## Verification
++- Dedicated v1.1.39 assertions: **3 passed / 0 failed**.
++- Combined Bret / renderer / rarity focused sample: **21 passed / 0 failed / 1 historical skip**.
++- Flow audit: **95 Superstars / 0 issues**.
++- Rebuild validation: **95 decks / 836 gameplay cards / 0 orphans / 0 issues**.
++- Card-ID audit: **931 collector cards / 931 manifest entries / 0 issues**; New Generation is gap-free through `NG1-081`.
++- Card-health and counter-density audits: **0 issues**.
++- Full no-assets suite: **912 passed / 97 failed / 97 skipped**, versus v1.1.38 at 909 / 97 / 97 — **3 new passes and 0 new carry-forward failures**.
++- Physical iPhone smoke: pending.
++
++# WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
++
++## Release identity
++- Version: **v1.1.38**
++- Title: **Card Studio Runtime Parity + Set-Field Animation Fix**
++- Date: **30 August 2026**
++- Base: **v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit**
++- Distribution: **no-assets code overlay**; existing repository artwork/animation assets are preserved.
++
++## Certified corrections
++- Canonical `*-base-plate.webp` Card Studio exports are the first live render source for every non-Momentum collectible.
++- Saved Superstar base plates are therefore picked up directly again in Deck Lab and all other collectible surfaces.
++- A flat canonical/legacy finished export is used only if the saved base plate fails to load.
++- Animation never replaces the static source. Animation activation occurs only after a linked/packaged animated asset loads successfully.
++- Animated set field spans the full inner card page, inside the authored frame and behind the plaque.
++- Animated media is centred between the bottom of the top border and the Card Studio plaque top: **4.8% → 74.0% for Moves**, **4.8% → 77.2% for non-Moves**.
++- Plaque/text overlays remain above animation; set logo is restored above the animated field.
++- SummerSlam uses its Card Studio blue/purple/orange field rather than the previous artwork-bay-only gradient.
++- If animation is missing/fails, the saved static card remains completely untouched.
++- Superstar live nameplates use the clean rectangular Card Studio lower-plaque footprint.
+ 
+ ## Verification
+-- Dedicated v1.1.37 Tatum audit assertions: **3 passed / 0 failed**.
++- Dedicated v1.1.38 assertions: **4 passed / 0 failed**.
++- Combined current rendering/content focused suite: **21 passed / 0 failed**.
+ - Flow audit: **95 Superstars / 0 issues**.
+ - Rebuild validation: **95 decks / 835 gameplay cards / 0 orphans / 0 issues**.
+ - Card-ID audit: **930 collector cards / 930 manifest entries / 0 issues**.
+-- Card-health audit: **170 Rare Trademarks**, average Cost 5.42 / Damage 8.21; corrected Tatum Trademarks remain inside the established band.
+-- Counter-density audit: Tatum retains all **8 counter states / 4 submission-target coverage**, with 14 structural Counter pages / 15 effective reactive-defense pages.
+-- Full no-assets suite: **905 passed / 97 failed / 97 skipped** versus v1.1.36 at 902 passed / 97 failed / 97 skipped. The three additional passes are the new Tatum assertions; **0 new carry-forward failures**.
+-- Physical iPhone smoke: pending for the refreshed Card Studio/live-card labels once the corrected Tatum fronts are re-exported.
++- Full no-assets suite: **909 passed / 97 failed / 97 skipped**.
++- Baseline v1.1.37 full suite: **905 passed / 97 failed / 97 skipped**.
++- Result: **4 new passing assertions, 0 new carry-forward failures**.
++- Physical iPhone smoke: pending for saved Superstar fronts and animated-card framing.
+ 
+ # WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
+ 
+diff --git a/README.md b/README.md
+index f1f8c56..f08fde9 100644
+--- a/README.md
++++ b/README.md
+@@ -1,14 +1,28 @@
+-# WWE Legacy v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
++# WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
+ 
+-**Current working baseline.** v1.1.37 supersedes v1.1.36.
++**Current working baseline.** v1.1.39 supersedes v1.1.38.
+ 
+-Tatum Paxley’s exclusive move hierarchy has been corrected from the physical-iPhone/content audit. **Cemetery Drive** is now her 4★ Finisher rather than a Submission/Trademark. **Psycho Trap, Bridging German Suplex, and Diving Knee Drop** are all 3★ Trademarks.
++Adds **Ringpost Figure Four** as Bret Hart's new 3★ Rare Trademark submission in New Generation — Series 1. The card is `NG1-081`, Cost 6, Damage 0, requires Technical 2, is playable against a grounded opponent, targets the Legs, applies 5 persistent Leg submission pressure per successful turn, and makes Bret’s next Sharpshooter cost 1 less that Control sequence.
+ 
+-Balance and rules corrections: Cemetery Drive is Cost 9 / Damage 17 with no Method requirement, Grapple, Front Control, and +1 persistent Back damage. Psycho Trap is Cost 5 / Damage 8 / Technical 1. Bridging German Suplex is Cost 5 / Damage 8 / Technical 2 and is correctly a Rear-Control Grapple rather than a Diving Aerial grounded-only move. Diving Knee Drop is Cost 6 / Damage 10 / Agility 2 and remains a grounded-opponent Diving Aerial Trademark.
++Bret's authored 60-page deck now carries **3× Ringpost Figure Four**. The new Trademark replaces the shared Boston Crab plus one Back Suplex and one Elbow Drop, keeping the deck at exactly 60 pages while preserving Bret's existing 2× Sharpshooter Finisher package and 12 starting Momentum pages.
+ 
+-Tatum’s authored 60-page deck now follows the standard three-Trademark / two-Finisher distribution: 3× Psycho Trap, 3× Bridging German Suplex, 3× Diving Knee Drop, 2× Cemetery Drive. Collector identities and artwork paths remain unchanged; existing Card Studio art can be re-exported against the corrected card data.
++The new card is included in Card Studio with canonical blank artwork targets `assets/images/ringpost-figure-four-bret-hart.webp` and `assets/images/ringpost-figure-four-bret-hart-base-plate.webp`; no image asset is packaged in this no-assets overlay. New Generation — Series 1 expands from 80 to **81 collector cards** without renumbering any existing card.
+ 
+-Verification: dedicated Tatum audit 3/3; flow audit 95 Superstars / 0 issues; rebuild validation 95 decks / 835 gameplay cards / 0 issues; card-ID audit 930/930 / 0 issues; full no-assets suite adds the three new passing assertions with no increase in historical failures.
++Verification: v1.1.39 dedicated assertions 3/3; focused current suite 21/21 with 1 historical skip; flow 95/0; rebuild 95 decks / 836 gameplay cards / 0 issues; card IDs 931/931; full suite **912 passed / 97 failed / 97 skipped**, with **0 new failures** versus v1.1.38.
++
++# WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
++
++**Current working baseline.** v1.1.38 supersedes v1.1.37.
++
++This release restores the saved Card Studio **base-plate front as the live source of truth** across Deck Lab, gameplay, packs, inspectors and other collectible surfaces. This fixes the regression where already-authored Superstar and Move cards could render as missing/reconstructed fronts even though their saved `*-base-plate.webp` files were installed.
++
++Animated cards now follow one strict presentation rule. The saved static Card Studio card always remains underneath. Only after a linked/packaged animation successfully loads does the runtime place a **full-card set field** inside the authored border, then centre the animation in the artwork bay from the **bottom of the top border to the top of the plaque**. Move plaques begin at 74% card height; non-Move plaques begin at 77.2%, matching Card Studio geometry. The plaque/text and set logo remain above the animated artwork.
++
++SummerSlam animated cards now use the same blue → purple → orange SummerSlam field authored by Card Studio rather than the previous animation-bay-only blue/purple strip. Equivalent set-field treatments are supplied for the other current/legacy/reward sets.
++
++If no animation exists or every animation source fails, **nothing is rebuilt or swapped**: the exact saved static Card Studio base plate remains visible. Flat finished exports are retained only as a fallback when a base plate itself is absent. Superstar lower plaques are also returned to the same clean rectangular Card Studio footprint.
++
++Verification: v1.1.38 dedicated assertions 4/4; combined focused rendering/current-content suite 21/21; flow audit 95 Superstars / 0 issues; rebuild validation 95 decks / 835 gameplay cards / 0 orphans / 0 issues; card-ID audit 930/930 / 0 issues. Full no-assets suite: **909 passed / 97 failed / 97 skipped**, versus v1.1.37 at 905 / 97 / 97 — four new passes and **0 new carry-forward failures**.
+ 
+ # WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
+ 
+diff --git a/RELEASE-NOTES-v1.1.29.md b/RELEASE-NOTES-v1.1.29.md
+index 753cdc2..bfa7f36 100644
+--- a/RELEASE-NOTES-v1.1.29.md
++++ b/RELEASE-NOTES-v1.1.29.md
+@@ -1,3 +1,28 @@
++# WWE Legacy v1.1.39 — Bret Hart Ringpost Figure Four
++
++- Adds **Ringpost Figure Four** as `NG1-081`, a Bret Hart-exclusive **3★ Rare Trademark Submission** in New Generation — Series 1.
++- Cost 6 / Damage 0 / Technical 2; grounded opponent only; targets Legs; +5 persistent Leg pressure per successful turn; on Connect, Bret’s next Sharpshooter costs 1 less that Control sequence.
++- Adds 3 copies to Bret Hart's authored 60-page deck, replacing the shared Boston Crab, one Back Suplex and one Elbow Drop.
++- Retains Bret's 2× Sharpshooter Finisher package and existing 12-page Momentum structure.
++- New Generation — Series 1 expands from 80 to **81 collector cards** with no renumbering of existing cards.
++- Card Studio receives the new canonical card entry/art paths; no artwork is packaged.
++- No other Superstar, gameplay-engine, economy, reward, progression or mode logic changes.
++- Verification: dedicated v1.1.39 3/3; focused current suite 21/21 with 1 historical skip; flow 95/0; rebuild 95 decks / 836 gameplay cards / 0 issues; card IDs 931/931; full suite **912 passed / 97 failed / 97 skipped**, with **0 new failures** versus v1.1.38.
++
++# WWE Legacy v1.1.38 — Card Studio Runtime Parity + Set-Field Animation Fix
++
++- Restores saved Card Studio **base plates** as the first runtime source for all non-Momentum collectible fronts. This directly fixes saved Superstar/Move fronts not appearing even though the repo contains their `*-base-plate.webp` files.
++- Flat canonical/legacy finished cards remain fallback-only when a base plate is genuinely unavailable.
++- Animated cards now activate their special presentation only after a real animation source loads. Missing/failed animation leaves the static Card Studio card untouched.
++- Adds a full inner-card **set background layer** behind animated media and the live plaque.
++- Centres animated artwork between the bottom of the top border and the top of the plaque: Moves use 4.8%–74.0%; all other animated collectible types use 4.8%–77.2%, matching Card Studio plaque geometry.
++- Plaque and text remain over the set field; the set logo is restored above the animation.
++- Corrects SummerSlam animated presentation to the Card Studio blue/purple/orange set field instead of the old blue-purple fill applied only inside the animation window.
++- Adds matching animated full-page set fields for Evolution, SmackDown, Raw, NXT, Ruthless Aggression, Golden Era, Attitude Era, New Generation, Survivor Series, Money in the Bank, Worlds Collide and Reward cards.
++- Superstar lower identity treatment uses the clean rectangular Card Studio plaque footprint instead of a separate clipped runtime name box.
++- No card balance, deck composition, rewards, progression, economy or mode logic changes.
++- Verification: dedicated v1.1.38 4/4; focused rendering/current-content 21/21; flow 95/0; rebuild 95 decks / 835 gameplay cards / 0 issues; card IDs 930/930; full suite **909 passed / 97 failed / 97 skipped**, with **0 new failures** versus v1.1.37.
++
+ # WWE Legacy v1.1.30 — Card Presentation Corrections
+ 
+ ## v1.1.37 — Tatum Paxley Finisher + Trademark Re-Audit
+diff --git a/build.json b/build.json
+index 3c9ab3e..b7dd773 100644
+--- a/build.json
++++ b/build.json
+@@ -1,10 +1,10 @@
+ {
+-  "version": "1.1.37",
++  "version": "1.1.39",
+   "releasedAt": "2026-08-30",
+   "updatePolicy": "network-version-check",
+   "releaseChannel": "stable",
+   "featureFreeze": true,
+   "criticalFixOnly": false,
+-  "physicalIphoneSmoke": "pending-v1.1.37-user-smoke",
++  "physicalIphoneSmoke": "pending-v1.1.39-user-smoke",
+   "launchStatus": "released"
+ }
+diff --git a/package.json b/package.json
+index d3e941e..9fe5ffd 100644
+--- a/package.json
++++ b/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "wwe-legacy-ccg",
+-  "version": "1.1.37",
++  "version": "1.1.39",
+   "private": true,
+   "type": "module",
+   "scripts": {
