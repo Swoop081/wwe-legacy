@@ -1,0 +1,17 @@
+diff --git a/js/ui/app.js b/js/ui/app.js
+index 984de7f..94e0865 100644
+--- a/js/ui/app.js
++++ b/js/ui/app.js
+@@ -2649,7 +2649,11 @@ function animatedCardSurfaceMarkup(card) {
+   const plate = animatedCardPlateMarkup(card);
+   if (!plate) return "";
+   const kind = String(card?.kind || "card").replace(/[^a-z0-9_-]/gi, "").toLowerCase() || "card";
+-  return `<span class="ccg-animated-card-surface ccg-animated-card-surface-${kind}" data-animated-card-kind="${kind}" aria-hidden="true">${plate}</span>`;
++  // The animated treatment is additive: keep the authored Card Studio frame and
++  // live plaque, cover only the inner card field with that card's set theme, then
++  // center the animation inside the artwork bay. Nothing here replaces the static
++  // card until a real animated asset has successfully loaded.
++  return `<span class="ccg-animated-set-background" aria-hidden="true"></span><span class="ccg-animated-card-surface ccg-animated-card-surface-${kind}" data-animated-card-kind="${kind}" aria-hidden="true">${plate}</span>${setLogoMarkup(card?.setId,"ccg-animated-set-logo")}`;
+ }
+ 
+ function loadAnimatedCardPlate(img) {
