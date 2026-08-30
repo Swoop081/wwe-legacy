@@ -1,4 +1,10 @@
-# WWE Legacy v1.1.29 — Card Presentation Corrections
+# WWE Legacy v1.1.30 — Card Presentation Corrections
+
+## v1.1.30 — Trish Season Banner Framing Hotfix
+
+- Keeps Trish's requested 2× Home-screen scale.
+- Re-anchors her Season One banner render to the top-right so her full head remains visible.
+- Allows the lower portion of the render to crop naturally within the banner instead of cropping her face.
 
 - Merch photography now continues across the full card face behind its plaque; the previous solid reward-colour strip is removed.
 - Animated Merch is layered above the base plate and below the plaque.

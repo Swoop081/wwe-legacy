@@ -1,7 +1,7 @@
-# WWE Legacy v1.1.29 — Jake Roberts Trademark Audit
+# WWE Legacy v1.1.30 — Jake Roberts Trademark Audit
 
 ## Release identity
-- Version: **v1.1.29**
+- Version: **v1.1.30**
 - Title: **Onboarding Superstar Pack + Season Road Visual Overhaul**
 - Date: **30 August 2026**
 - Base: **v1.1.26 — Card Presentation Consistency Hotfix**
@@ -9,7 +9,7 @@
 
 ## Implemented changes
 
-### v1.1.29 Jake Roberts audit
+### v1.1.30 Jake Roberts audit
 - Removes Jake’s Gutwrench Gutbuster and Jake’s Running Knee Lift completely.
 - Jake’s personal move library intentionally contracts to Jake’s Short-Arm Clothesline and Jake’s DDT.
 - Replaces the eight removed deck pages with four shared Clotheslines, three Atomic Drops and one Neckbreaker.
@@ -69,5 +69,5 @@
 - Collector ID audit: **928 cards / 928 manifest entries / 0 issues**.
 - Flow audit: **95 Superstars / 0 issues**.
 - JavaScript syntax checks passed for live UI, profile and Superstar Pack module.
-- Cache/version stamp: **v1.1.29**.
+- Cache/version stamp: **v1.1.30**.
 - Physical iPhone visual smoke remains pending for uppercase Superstar nameplates, exact Superstar Pack branding, full-face Merch artwork, and the v1.1.25 onboarding/Season presentation surfaces.

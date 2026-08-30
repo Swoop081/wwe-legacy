@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.29") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.30") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10313,7 +10313,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
 .ccg-card.is-layered-front .ccg-live-front-data,.ccg-superstar-nameplate,.ccg-card-title,.ccg-card-stats{z-index:4!important}
 @media (prefers-reduced-motion: reduce){.ccg-animated-card-surface{display:none!important}}
 
-/* v1.1.29 — plaque-aware animation bay and premium ready-only Daily Spin. */
+/* v1.1.30 — plaque-aware animation bay and premium ready-only Daily Spin. */
 .ccg-card.type-move .ccg-animated-card-surface{top:12.5%!important;bottom:27.5%!important}
 .ccg-card.type-entrance .ccg-animated-card-surface,.ccg-card.type-action .ccg-animated-card-surface,.ccg-card.type-manager .ccg-animated-card-surface,.ccg-card.type-variant .ccg-animated-card-surface,.ccg-card.type-momentum .ccg-animated-card-surface{top:12.5%!important;bottom:23.5%!important}
 .ccg-animated-card-plate{object-fit:contain!important;object-position:center center!important}
@@ -10326,7 +10326,8 @@ body[data-screen="splash"] #game>section{animation:none!important}
 .daily-spin-ready-card{width:min(980px,calc(100% - 20px));margin:14px auto 10px;padding:17px 20px;display:grid;grid-template-columns:1fr auto;gap:3px 14px;text-align:left;border:1px solid #e9bf52;border-radius:16px;color:#fff;background:radial-gradient(circle at 86% 50%,rgba(255,211,88,.28),transparent 32%),linear-gradient(135deg,#19150d,#070709 70%);box-shadow:0 15px 40px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.08);font:inherit}.daily-spin-ready-card span{color:#edc65c;font-size:.55rem;font-weight:1000;letter-spacing:.2em}.daily-spin-ready-card strong{grid-column:1;font-size:1.15rem;font-style:italic}.daily-spin-ready-card small{grid-column:1;color:#aeb4bd}.daily-spin-ready-card b{grid-column:2;grid-row:1/4;align-self:center;color:#f1ca60}
 .daily-spin-modal{position:fixed;z-index:10000;inset:0;display:grid;place-items:center;padding:calc(18px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));background:radial-gradient(circle at 50% 40%,rgba(184,133,25,.22),transparent 42%),rgba(2,2,4,.96);backdrop-filter:blur(18px)}.daily-spin-modal-shell{width:min(580px,100%);display:grid;justify-items:center;gap:10px;text-align:center}.daily-spin-modal-shell>span{font-size:.58rem;letter-spacing:.22em;color:#e9bf52;font-weight:1000}.daily-spin-modal-shell h2{margin:0;font-size:clamp(2rem,10vw,4rem);font-style:italic}.daily-spin-modal-shell p{min-height:1.4em;color:#f3d67e;font-weight:900;letter-spacing:.08em}.daily-spin-premium-wheel-wrap{position:relative;width:min(76vw,430px);aspect-ratio:1}.daily-spin-premium-wheel{position:absolute;inset:4%;border-radius:50%;border:8px double #f2d278;background:conic-gradient(#c69324 0 60deg,#141417 60deg 120deg,#7f5415 120deg 180deg,#202027 180deg 240deg,#d8aa35 240deg 300deg,#0b0b0e 300deg);box-shadow:inset 0 0 0 7px #050506,inset 0 0 45px rgba(255,219,111,.35),0 0 0 5px #55400f,0 0 50px rgba(237,190,66,.35);transform:rotate(var(--spin-rotation));transition:transform 4.2s cubic-bezier(.08,.7,.06,1)}.daily-spin-premium-wheel>span{position:absolute;left:50%;top:50%;width:44%;transform-origin:0 0;transform:rotate(calc(var(--wedge) * var(--wedge-angle) + var(--wedge-angle)/2)) translate(15%,-50%);color:#fff;font-size:clamp(.48rem,2.4vw,.72rem);text-align:right;text-shadow:0 2px 5px #000}.daily-spin-modal .daily-spin-pointer{top:-1%;border-bottom-color:#fff}.daily-spin-modal .start-match,.daily-spin-modal .nav-button{width:min(420px,100%)}
 .legacy-season-rock{right:-5%!important;width:49%!important;height:174%!important;bottom:-35%!important;top:auto!important}.legacy-season-rock img{object-position:center bottom!important}
-.legacy-season-rock img.legacy-season-cena{transform:scale(2)!important;transform-origin:right bottom!important;object-fit:contain!important;object-position:right bottom!important}
+.legacy-season-rock:has(img.legacy-season-cena){top:0!important;bottom:auto!important;right:-5%!important;height:100%!important}
+.legacy-season-rock img.legacy-season-cena{transform:scale(2)!important;transform-origin:right top!important;object-fit:contain!important;object-position:right top!important}
 .deck-lab-roster-selector .selection-owned-superstar-card.tier-amethyst .ccg-card-inner{filter:drop-shadow(0 0 10px rgba(225,190,255,.95)) drop-shadow(0 0 24px rgba(153,75,255,.82)) drop-shadow(0 0 42px rgba(92,174,255,.42))!important}
 .deck-lab-roster-selector .select-superstar-card.selected{border-color:#c58cff!important;box-shadow:0 0 0 2px rgba(204,153,255,.9),0 0 28px rgba(148,76,255,.48)!important}
 .challenge-set-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}.challenge-set-logo img{max-width:100%!important;max-height:100%!important;object-fit:contain!important}

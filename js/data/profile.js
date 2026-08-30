@@ -1,12 +1,12 @@
-import { decks } from "./decks.js?v=1.1.29";
-import { collectionCards } from "./collection.js?v=1.1.29";
-import { superstars } from "./superstars.js?v=1.1.29";
-import { isUnreleasedSetId } from "./release.js?v=1.1.29";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.29";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.29";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.29";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.29";
-import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.29";
+import { decks } from "./decks.js?v=1.1.30";
+import { collectionCards } from "./collection.js?v=1.1.30";
+import { superstars } from "./superstars.js?v=1.1.30";
+import { isUnreleasedSetId } from "./release.js?v=1.1.30";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.30";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.30";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.30";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.30";
+import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.30";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
@@ -751,7 +751,7 @@ export function migrateProfile(old) {
     owned.amethyst = Math.max(0, Number(owned.amethyst) || 0);
   }
 
-  // v1.1.29: Diamond was the legacy name for the fifth printing. Preserve all
+  // v1.1.30: Diamond was the legacy name for the fifth printing. Preserve all
   // earned copies as Amethyst, then collapse every fixed top-reward identity
   // (including former fixed Ruby rewards) into its definitive Amethyst print.
   for (const [id, owned] of Object.entries(p.ownedCards ?? {})) {

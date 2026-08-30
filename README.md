@@ -1,6 +1,6 @@
-# WWE Legacy v1.1.29 — Jake Roberts Trademark Audit
+# WWE Legacy v1.1.30 — Jake Roberts Trademark Audit
 
-**Current working baseline.** v1.1.29 supersedes v1.1.26.
+**Current working baseline.** v1.1.30 supersedes v1.1.26.
 
 ## Jake Roberts audit
 
