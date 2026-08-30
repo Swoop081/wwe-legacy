@@ -1,5 +1,18 @@
 # WWE Legacy v1.1.30 — Card Presentation Corrections
 
+## v1.1.35 — Exact Card Front Runtime + Clean Play Cards + Trish Reframe
+
+- Removes the chamfered / cut-corner treatment from all six **Choose Your Path** mode banners, their in-card CTA tabs, and the full-width Next / Back controls. Play cards now use clean rectangular edges with normal rounded corners.
+- Corrects the physical-iPhone Home Season One framing again: the v1.1.33 top-right position pushed half of Trish Stratus' face outside the tile. The portrait is brought back inside the right edge and the excessive zoom is reduced so her complete face and hat are visible.
+- Fixes the collectible-card presentation regression that caused already-designed Card Studio fronts to stop matching the live game.
+- **Finished Card Studio fronts are now the runtime source of truth on every non-Momentum collectible surface**, including Deck Lab, gameplay hand, play pile, inspectors, collection, packs and mode card previews.
+- Universal animation support no longer makes the game choose the base-plate / reconstructed-overlay front by default. Animated media is confined to the existing artwork bay above the exact finished front, so authored frame, stars, set logo, plaque and typography stay unchanged.
+- Runtime fallback order is now canonical finished front → legacy finished Card Studio export → canonical base plate with live overlay → canonical rules face.
+- Exact finished fronts use `object-fit: contain` so an authored 680×1000 card is never cropped by the live renderer.
+- No packaged image assets, gameplay rules, decks, rewards, economy or modes change in this hotfix.
+- Verification: new v1.1.35 assertions 3/3; flow audit 95 Superstars / 0 issues; rebuild validation 95 decks / 834 gameplay cards / 0 orphans / 0 issues; card-ID audit 929 collector cards / 929 manifest entries / 0 issues. Full no-assets historical suite retains the exact same 100 asset-dependent / historical failures as v1.1.34, with **0 new carry-forward failures**.
+
+
 ## v1.1.34 — Seated Shotgun Dropkick
 
 - Adds **Seated Shotgun Dropkick** as the new shared Evolution 2★ Uncommon, collector number `EVO1-076`.
@@ -57,3 +70,13 @@
 - Animated cards retain their finished Card Studio stars, set logo, frame and plaque while animation is contained in the plaque-aware artwork bay.
 - SummerSlam animated Moves use a solid SummerSlam blue-purple set background.
 - Missing or failed animation restores the exact finished Card Studio front automatically.
+
+
+## v1.1.36 — Matrix Slide Shared Common Reversal
+- Adds **Matrix Slide** as `SD1-072`, a new shared **1★ Common** booster-only Counter card in SmackDown — Series 1.
+- Matrix Slide costs 1, deals 0 damage, has no Method requirement, and is Counter-only.
+- Its primary reversal state is **Arm Extended**. It also carries explicit exact-card coverage across the high Clothesline / Lariat family so aerial/elevated variants remain valid targets even when their exposed state is Running Aerial, Diving Aerial or Body Elevated.
+- Explicit family coverage includes standard, running, short-arm, corner, flying, springboard, leaping, flipping and Superstar-specific Clotheslines/Lariats, including Clothesline from Hell.
+- **Leg Lariat is intentionally excluded** because it is a leg-strike family move rather than the high arm Clothesline depicted by Matrix Slide.
+- The user's uploaded screenshot is reference-only and is not copied, imported or packaged. Card Studio exposes blank canonical targets at `assets/images/matrix-slide.webp` and `assets/images/matrix-slide-base-plate.webp` for later authoring.
+- No existing deck composition is changed in this pass.

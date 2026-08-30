@@ -1,5 +1,5 @@
-import { assetUrl } from "../config/build.js?v=1.1.34";
-import { superstars } from "./superstars.js?v=1.1.34";
+import { assetUrl } from "../config/build.js?v=1.1.36";
+import { superstars } from "./superstars.js?v=1.1.36";
 
 const ROOT="assets/images";
 const slug=value=>String(value??"").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
@@ -35,7 +35,15 @@ export const superstarHeadshotArtwork=Object.freeze(Object.fromEntries(starIds.m
 export function superstarHeadshotFor(superstarId){return superstarId?assetUrl(canonicalSuperstarPath(superstarId,"headshot")):null;}
 export function layeredCardArtFor(card){if(!card||card.kind==="momentum")return null;const path=canonicalBasePlatePath(card);return path?assetUrl(path):null;}
 export function finishedCardArtFor(card){if(!card)return null;const path=canonicalCardImagePath(card);return path?assetUrl(path):null;}
-export function legacyFinishedCardArtFor(_card){return null;}
+export function legacyFinishedCardArtFor(card){
+  if(!card)return null;
+  if(card.kind==="superstar"){
+    const id=card.superstarId??String(card.id??"").replace(/^superstar-/,"");
+    return id?assetUrl(`${ROOT}/card-custom-superstar-${id}.webp`):null;
+  }
+  const kind=slug(card.kind||"card"),id=slug(card.id||"");
+  return kind&&id?assetUrl(`${ROOT}/card-custom-${kind}-${id}.webp`):null;
+}
 export function moveCardArtFor(cardId){return cardId?assetUrl(`${ROOT}/${slug(cardId)}.webp`):null;}
 export const cardArtwork=Object.freeze({});
 export function artworkFor(card){if(!card)return null;const path=canonicalCardImagePath(card);return path?assetUrl(path):null;}

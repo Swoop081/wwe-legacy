@@ -1,6 +1,18 @@
-# WWE Legacy v1.1.34 — Seated Shotgun Dropkick
+# WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
 
-**Current working baseline.** v1.1.34 supersedes v1.1.33.
+Current package adds SD1-072 Matrix Slide as a shared Common Counter-only reversal with Arm Extended + exact Clothesline/Lariat family coverage. User reference imagery is not packaged.
+
+# WWE Legacy v1.1.35 — Exact Card Front Runtime + Clean Play Cards + Trish Reframe
+
+**Current working baseline.** v1.1.35 supersedes v1.1.34.
+
+## v1.1.35 presentation source-of-truth hotfix
+
+The six Play mode banners and the Next / Back controls no longer use chamfered or cut-off corners. Their outer frames are clean rectangles with ordinary rounded corners.
+
+The Home Season One Trish portrait is brought back inside the right edge after the v1.1.33 position visibly cut half of her face off on physical iPhone. The excessive 2× zoom is relaxed only on this compact Home tile so her complete face and hat are visible.
+
+Most importantly, the live game once again treats the **finished Card Studio front as authoritative**. Every non-Momentum collectible first renders its installed finished Card Studio WebP. Optional animation is layered only inside the artwork bay and cannot replace or reconstruct the authored frame, stars, set logo, plaque or typography. If a canonical finished front is absent, the fallback chain is legacy finished export → canonical base plate/live overlay → rules face.
 
 ## v1.1.34 shared Evolution move
 

@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.34";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.34";
+import { enrichCounterState } from "./counter-states.js?v=1.1.36";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.36";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -19594,6 +19594,52 @@ export const allGameplayCards = [
     "effects": [],
     "boosterOnly": true,
     "counterState": "diving-aerial"
+  },
+  {
+    "id": "matrix-slide",
+    "name": "Matrix Slide",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "defensiveOnly": true,
+    "rulesText": "Shared Counter-only reversal. Counter an Arm Extended Move or any Clothesline / Lariat-family Move. Leg Lariat is not part of this family.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "arm-extended"
+    ],
+    "countersCardIds": [
+      "leaping-clothesline",
+      "roman-reigns-corner-clotheslines",
+      "springboard-clothesline",
+      "gunther-burning-lariat",
+      "lariat",
+      "clothesline",
+      "short-arm-clothesline",
+      "flying-clothesline",
+      "mankind-clothesline",
+      "leaping-rope-clothesline",
+      "flipping-lariat",
+      "running-clothesline",
+      "clothesline-over-the-top-rope",
+      "corner-clothesline",
+      "kane-flying-clothesline",
+      "ultimate-warrior-clothesline",
+      "jake-roberts-short-arm-clothesline",
+      "jbl-clothesline-from-hell",
+      "ra1-turnbuckle-clothesline"
+    ]
   },
   {
     "id": "ra1-running-powerslam",

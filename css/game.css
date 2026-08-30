@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.34") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.36") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10588,4 +10588,55 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
     width:50%!important;
     height:105%!important;
   }
+}
+
+
+/* ========================================================================== */
+/* v1.1.35 — clean Play cards + exact Card Studio runtime fronts + Trish fix. */
+/* ========================================================================== */
+/* The Play hub no longer uses chamfered/cut-off corners anywhere. */
+.legacy-mode-banner,
+.play-mode-page-arrow,
+.legacy-mode-copy>b{
+  clip-path:none!important;
+  -webkit-clip-path:none!important;
+}
+.legacy-mode-banner{border-radius:6px!important}
+.play-mode-page-arrow{border-radius:6px!important}
+.legacy-mode-copy>b{border-radius:2px!important}
+
+/* Finished Card Studio exports are complete physical fronts. Never crop or
+   reconstruct them when a finished image is installed. Animation remains
+   confined to the artwork bay above this exact static front. */
+.ccg-card.is-full-art-finished .ccg-card-art img.ccg-finished-card-art-image{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+}
+.ccg-layered-fallback-data{position:absolute!important;inset:0!important;z-index:4!important;pointer-events:none!important}
+.ccg-layered-fallback-data>.ccg-live-front-data,
+.ccg-layered-fallback-data>.ccg-superstar-nameplate{display:block!important}
+
+/* Physical-iPhone correction: the v1.1.33 top-right anchor pushed half of
+   Trish's face beyond the tile edge. Bring her portrait lane back inside the
+   card and reduce only the excess zoom so her complete face and hat are seen. */
+.legacy-season-rock:has(img.legacy-season-cena){
+  top:-8%!important;
+  bottom:auto!important;
+  right:-1%!important;
+  width:47%!important;
+  height:112%!important;
+  opacity:1!important;
+}
+.legacy-season-rock img.legacy-season-cena{
+  transform:scale(1.62)!important;
+  transform-origin:right top!important;
+  object-fit:contain!important;
+  object-position:right top!important;
+}
+@media(max-width:390px){
+  .legacy-season-rock:has(img.legacy-season-cena){top:-7%!important;right:0!important;width:48%!important;height:111%!important}
+  .legacy-season-rock img.legacy-season-cena{transform:scale(1.58)!important}
 }

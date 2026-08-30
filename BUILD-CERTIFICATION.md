@@ -1,3 +1,36 @@
+# WWE Legacy v1.1.36 — Matrix Slide Shared Common Reversal
+
+Current package adds SD1-072 Matrix Slide as a shared Common Counter-only reversal with Arm Extended + exact Clothesline/Lariat family coverage. User reference imagery is not packaged.
+
+# WWE Legacy v1.1.35 — Exact Card Front Runtime + Clean Play Cards + Trish Reframe
+
+## Release identity
+- Version: **v1.1.35**
+- Title: **Exact Card Front Runtime + Clean Play Cards + Trish Reframe**
+- Date: **30 August 2026**
+- Base: **v1.1.34 — Seated Shotgun Dropkick**
+- Distribution: **no-assets code overlay**; no packaged image asset changed.
+
+## Implemented changes
+- Removes polygon/chamfer clipping from all six Play mode banners, their CTA tabs, and the full-width Next / Back buttons.
+- Reframes Home Season One Trish so the full face/hat remains inside the physical-iPhone tile instead of being cut by the right edge.
+- Restores finished Card Studio fronts as the primary live-game renderer for every non-Momentum collectible surface.
+- Universal animation remains available, but animation now overlays only the artwork bay above the exact finished static front.
+- Runtime fallback order: canonical finished front → legacy finished export → canonical base plate/live overlay → rules face.
+- Finished fronts are contained at their authored aspect ratio instead of being cropped.
+- No gameplay rules, card data, deck composition, progression, rewards, economy or mode logic changed.
+
+## Verification
+- v1.1.35 focused presentation assertions: **3 passed / 0 failed**.
+- Combined current Play / animation / card-source checks: all new/current assertions pass; one pre-existing v1.1.22 count assertion still expects the pre-Jake-audit total of 835 rather than the current 834.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 834 gameplay cards / 0 orphans / 0 issues**.
+- Card-ID audit: **929 collector cards / 929 manifest entries / 0 issues**.
+- Full no-assets suite comparison: v1.1.34 baseline = 100 historical/asset-dependent failures; v1.1.35 = the same 100, therefore **0 new carry-forward failures**.
+- Physical iPhone smoke: pending for Play corners, Trish framing and exact Card Studio-front rendering.
+
+## Carry-forward certification
+
 # WWE Legacy v1.1.34 — Seated Shotgun Dropkick
 
 ## Release identity
@@ -122,3 +155,12 @@
 - No packaged image assets are included or changed in v1.1.32.
 - Cache/version stamp: **v1.1.32**.
 - Physical iPhone visual smoke remains pending for the tightened three-cards-plus-navigation layout on both Play pages and the Money in the Bank page-card presentation.
+
+## v1.1.36 verification
+- Focused v1.1.34–v1.1.36 regression sample: **9 passed / 0 failed**.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 835 gameplay cards / 0 orphans / 0 issues**.
+- Card-ID audit: **930 collector cards / 930 manifest entries / 0 issues**; SmackDown Series 1 now runs through **SD1-072**.
+- Counter-state and counter-density audits complete successfully; Matrix Slide adds a sixth no-gate Arm Extended reversal while its explicit exact-card list covers non-Arm-Extended Clothesline/Lariat variants.
+- Full no-assets suite: **902 passed / 97 failed / 97 skipped** versus v1.1.35 baseline **896 passed / 100 failed / 97 skipped**; therefore **0 new carry-forward failures**.
+- Physical-iPhone smoke remains pending.

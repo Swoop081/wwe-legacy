@@ -1,7 +1,7 @@
-import { superstars } from "./superstars.js?v=1.1.34";
-import { collectionCards } from "./collection.js?v=1.1.34";
-import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=1.1.34";
-import { isPlayerReleasedSetId } from "./release.js?v=1.1.34";
+import { superstars } from "./superstars.js?v=1.1.36";
+import { collectionCards } from "./collection.js?v=1.1.36";
+import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=1.1.36";
+import { isPlayerReleasedSetId } from "./release.js?v=1.1.36";
 
 export const STORE_SET_ROTATION = [
   "summerslam-series-1", "golden-era-series-1", "attitude-era-series-1", "evolution-series-1",

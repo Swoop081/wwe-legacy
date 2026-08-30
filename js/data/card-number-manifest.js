@@ -1230,6 +1230,12 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "SD1-071"
   },
   {
+    "id": "matrix-slide",
+    "setId": "smackdown-series-1",
+    "cardNumber": 72,
+    "cardCode": "SD1-072"
+  },
+  {
     "id": "running-hip-attack",
     "setId": "money-in-the-bank-series-1",
     "cardNumber": 1,

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.34";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.36";
 
 const brainbuster=allGameplayCards.find(c=>c.id==="brainbuster");
 
