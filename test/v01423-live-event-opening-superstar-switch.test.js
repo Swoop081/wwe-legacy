@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { superstars } from '../js/data/superstars.js?v=1.1.40';
-import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=1.1.40';
-import { activeLiveEventTowers, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, recordLiveEventTowerMatch } from '../js/data/live-events.js?v=1.1.40';
+import { superstars } from '../js/data/superstars.js?v=1.1.43';
+import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=1.1.43';
+import { activeLiveEventTowers, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, recordLiveEventTowerMatch } from '../js/data/live-events.js?v=1.1.43';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');

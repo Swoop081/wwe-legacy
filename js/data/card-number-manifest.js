@@ -3414,6 +3414,24 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "SS1-149"
   },
   {
+    "id": "suplex",
+    "setId": "summerslam-series-1",
+    "cardNumber": 150,
+    "cardCode": "SS1-150"
+  },
+  {
+    "id": "top-rope-neckbreaker",
+    "setId": "summerslam-series-1",
+    "cardNumber": 151,
+    "cardCode": "SS1-151"
+  },
+  {
+    "id": "rear-naked-choke",
+    "setId": "summerslam-series-1",
+    "cardNumber": 152,
+    "cardCode": "SS1-152"
+  },
+  {
     "id": "northern-lights-suplex",
     "setId": "evolution-series-1",
     "cardNumber": 1,

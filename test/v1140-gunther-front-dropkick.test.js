@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.40";
-import { deckIds } from "../js/data/decks.js?v=1.1.40";
-import { superstars } from "../js/data/superstars.js?v=1.1.40";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.40";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.43";
+import { deckIds } from "../js/data/decks.js?v=1.1.43";
+import { superstars } from "../js/data/superstars.js?v=1.1.43";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.43";
 
 const byId=id=>allGameplayCards.find(card=>card.id===id);
 
@@ -34,6 +34,6 @@ test("v1.1.40 Gunther deck replaces shared Front Dropkick with his exclusive Tra
 
 test("v1.1.40 Gunther's Front Dropkick extends SummerSlam to SS1-149",()=>{
   assert.equal(CARD_NUMBER_BY_ID["gunther-front-dropkick"]?.cardCode,"SS1-149");
-  assert.equal(CARD_IDS_BY_SET["summerslam-series-1"].length,149);
-  assert.equal(CARD_IDS_BY_SET["summerslam-series-1"].at(-1),"gunther-front-dropkick");
+  assert.ok(CARD_IDS_BY_SET["summerslam-series-1"].length>=149);
+  assert.equal(CARD_IDS_BY_SET["summerslam-series-1"][148],"gunther-front-dropkick");
 });

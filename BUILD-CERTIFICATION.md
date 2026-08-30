@@ -1,3 +1,62 @@
+# WWE Legacy v1.1.43 — Complete Play-Pile Mats + Automatic Daily Launch Rewards
+
+## Release identity
+- Version: **v1.1.43**
+- Date: **31 August 2026**
+- Base: **v1.1.42 — Shared Top Rope Neckbreaker + Rear Naked Choke**
+- Distribution: **no-assets code overlay**; existing Card Studio and other repository artwork assets remain untouched.
+
+## Certified corrections
+- Adds `js/ui/play-pile-mats.js` with an explicit play-pile mat theme for **all 16 defined set IDs**.
+- The live pile mat is now CSS-rendered from set-specific canvas, accent and secondary variables, so it no longer disappears when the optional top-down ring artwork is absent.
+- The active presentation set continues to drive the centre set logo and mat identity.
+- RAW, SmackDown, NXT, Evolution, SummerSlam, Golden Era, New Generation, Attitude Era, Ruthless Aggression, Worlds Collide, Money in the Bank, Survivor Series and reward/development identities all resolve to a mat; audit result: **0 missing set mats**.
+- Returning-profile **PLAY NOW** on the Trish Season 1 launch poster now checks the free 24-hour Season booster automatically.
+- When available, the free booster is claimed and immediately enters the standard pack-opening experience without visiting Season/Open Packs first.
+- Completing that launch pack routes directly into **Daily Spin** when the free spin is available.
+- If the booster is unavailable but Daily Spin is ready, Daily Spin opens immediately; when neither reward is ready, the player continues to Home normally.
+- First-time welcome-Superstar setup remains ahead of recurring daily rewards.
+
+## Verification
+- v1.1.43 dedicated assertions: **3/3**.
+- Flow audit: **95 Superstars / 0 issues**.
+- Rebuild validation: **95 decks / 840 gameplay cards / 0 orphans / 0 issues**.
+- Card-ID audit: **935 collector cards / 935 manifest entries / 0 issues**.
+- Full no-assets test suite: **924 passed / 97 failed / 97 skipped**.
+- v1.1.42 baseline was 921 / 97 / 97, therefore this release adds **3 passes with 0 new carry-forward failures**.
+- Physical iPhone smoke: **pending v1.1.43 user smoke**.
+
+# WWE Legacy v1.1.42 — Shared Top Rope Neckbreaker + Rear Naked Choke
+
+## Release identity
+- Version: **v1.1.42**
+- Date: **30 August 2026**
+- Base: **v1.1.41 — Foundational Suplex**
+- Distribution: **no-assets code overlay**.
+
+## Certified additions
+- `top-rope-neckbreaker` — **SS1-151**, shared 3★ Rare; Cost 7 / Damage 11 / Technical 2 + Agility 1; Technical Grapple; grounds opponent; Stun 1; Body Elevated counter state.
+- `rear-naked-choke` — **SS1-152**, shared 2★ Uncommon Submission; Cost 6 / Technical 2; standing opponent only; +5 persistent Head pressure; Rear Control counter state.
+- Both cards are booster-only, so all authored Superstar decks remain unchanged at 60 pages.
+- Card Studio data regenerated with canonical finished/base-plate targets for both additions.
+- Verification: v1.1.42 dedicated assertions **3/3**; flow **95 Superstars / 0 issues**; rebuild validation **95 decks / 840 gameplay cards / 0 orphans / 0 issues**; card-ID audit **935/935 / 0 issues**; Card Studio **1,545 cards**; full no-assets suite **921 passed / 97 failed / 97 skipped**, with **0 new carry-forward failures** versus v1.1.41.
+
+# WWE Legacy v1.1.41 — Foundational Suplex
+
+## Release identity
+- Version: **v1.1.41**
+- Date: **30 August 2026**
+- Base: **v1.1.40 — Gunther’s Front Dropkick**
+- Distribution: **no-assets code overlay**.
+
+## Certified addition
+- Adds `suplex` as **SS1-150** in SummerSlam — Series 1.
+- 1★ Common shared Move; Cost 3 / Damage 4 / Technical 1.
+- Grapple; Grounds opponent; Body Elevated counter state.
+- Booster-only for v1.1.41; existing authored Superstar decks remain unchanged.
+- Card Studio data regenerated with canonical Suplex finished/base-plate paths.
+- Verification: v1.1.41 dedicated assertions **3/3**; flow **95 Superstars / 0 issues**; rebuild validation **95 decks / 838 gameplay cards / 0 orphans / 0 issues**; card-ID audit **933/933 / 0 issues**; full no-assets suite **918 passed / 97 failed / 97 skipped**, with **0 new carry-forward failures** versus v1.1.40.
+
 # WWE Legacy v1.1.40 — Gunther's Front Dropkick
 
 ## Release identity

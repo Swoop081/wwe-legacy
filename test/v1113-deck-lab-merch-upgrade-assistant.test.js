@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.1.40';
-import { MERCH_ITEMS, grantMerch, equipMerch, activeMerchItem, consumeActiveMerchMatch } from '../js/data/merch.js?v=1.1.40';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=1.1.40';
+import { createProfile } from '../js/data/profile.js?v=1.1.43';
+import { MERCH_ITEMS, grantMerch, equipMerch, activeMerchItem, consumeActiveMerchMatch } from '../js/data/merch.js?v=1.1.43';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=1.1.43';
 
 const appSource = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const rulesSource = fs.readFileSync(new URL('../js/data/game-rules.js', import.meta.url), 'utf8');

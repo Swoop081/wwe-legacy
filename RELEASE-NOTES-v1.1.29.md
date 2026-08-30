@@ -1,3 +1,31 @@
+# v1.1.43 — Complete Play-Pile Mats + Automatic Daily Launch Rewards — 31 August 2026
+
+- Rebuilt the Play Pile mat resolver so **all 16 defined WWE Legacy set IDs** have an explicit self-contained set mat; audit result is **0 missing mats**.
+- Replaced the fragile dependency on the optional top-down ring image with a CSS-rendered set canvas/rope field using per-set colours, while retaining the active set logo in the centre.
+- Changed the Trish Season 1 launch poster **PLAY NOW** flow for returning profiles to automatically check the rolling 24-hour free booster.
+- If the free booster is ready, it is claimed and enters the normal sealed-pack/rip/reveal flow immediately—no Season or Open Packs menu detour.
+- After that pack is completed, **Daily Spin launches automatically** when its 24-hour reward is available.
+- If no free pack is due but Daily Spin is ready, the spin opens immediately. If neither is due, PLAY NOW proceeds straight to Home.
+- Preserved first-time welcome setup ahead of recurring launch rewards.
+- No card stats, decks, collector IDs, booster collation, progression rewards or match rules changed.
+- Verification: 3/3 dedicated assertions; 95 Superstars / 0 flow issues; 95 decks / 840 gameplay cards / 0 validation issues; 935 collector cards / 935 manifest entries; full suite **924 passed / 97 historical failures / 97 skipped**, with **0 new failures** versus v1.1.42.
+
+# v1.1.42 — Shared Top Rope Neckbreaker + Rear Naked Choke — 30 August 2026
+
+- Added **Top Rope Neckbreaker** (`SS1-151`) as a shared **3★ Rare** SummerSlam — Series 1 Move: Cost 7 / Damage 11 / Technical 2 + Agility 1; Technical Grapple; grounds opponent; Stun 1; Body Elevated counter state.
+- Added **Rear Naked Choke** (`SS1-152`) as a shared **2★ Uncommon** SummerSlam — Series 1 Submission: Cost 6 / Technical 2; standing opponent only; +5 persistent Head pressure per successful turn; Rear Control counter state.
+- Both additions are booster-only, preserving all existing authored 60-page decks.
+- Regenerated Card Studio data and added dedicated v1.1.42 regression coverage.
+- Verification: 3/3 dedicated assertions; 95 Superstars / 0 flow issues; 95 decks / 840 gameplay cards / 0 validation issues; 935 collector cards / 935 manifest entries; Card Studio 1,545 cards; full suite 921 passed / 97 historical failures / 97 skipped, with 0 new failures.
+
+# v1.1.41 — Foundational Suplex — 30 August 2026
+
+- Added **Suplex** (`SS1-150`) to SummerSlam — Series 1 as a shared **1★ Common** Move.
+- Stats: Cost 3 / Damage 4 / Technical 1; Grapple; grounds opponent; Body Elevated counter state.
+- Kept the card booster-only for this release so no existing 60-page deck composition changes implicitly.
+- Regenerated Card Studio data and added dedicated v1.1.41 regression coverage.
+- Verification: 3/3 dedicated assertions; 95 Superstars / 0 flow issues; 95 decks / 838 gameplay cards / 0 validation issues; 933 collector cards / 933 manifest entries; full suite 918 passed / 97 historical failures / 97 skipped, with 0 new failures.
+
 # WWE Legacy v1.1.40 — Gunther's Front Dropkick
 
 - Adds **Gunther's Front Dropkick** as `SS1-149`, a Gunther-exclusive **3★ Rare Trademark** in SummerSlam — Series 1.

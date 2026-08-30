@@ -1,3 +1,25 @@
+# WWE Legacy v1.1.43 — Complete Play-Pile Mats + Automatic Daily Launch Rewards
+
+**Current working baseline.** v1.1.43 supersedes v1.1.42.
+
+This release hardens the in-match **Play Pile** presentation so no WWE Legacy set can lose its ring mat. Every defined set now has an explicit self-contained play-pile theme, rendered from set-specific canvas/accent variables rather than depending on the optional top-down ring image. The current set logo still sits at centre mat, while the procedural canvas/rope treatment remains visible even when a logo or optional artwork source fails. Coverage is **16 / 16 defined set IDs, 0 missing mats**.
+
+The Season 1 Trish Stratus launch poster now also becomes the automatic daily reward entry point for returning profiles. Pressing **PLAY NOW** checks the rolling 24-hour free booster first. If ready, that booster is claimed and taken directly into the normal pack-ripping flow. When the pack flow is finished, an available **Daily Spin** opens automatically. If no pack is ready but the spin is ready, the wheel opens immediately; if neither is ready, the player proceeds directly to Home. First-time welcome setup still takes priority before recurring rewards.
+
+Verification: dedicated v1.1.43 assertions **3/3**; flow **95 Superstars / 0 issues**; rebuild validation **95 decks / 840 gameplay cards / 0 orphans / 0 issues**; card-ID audit **935/935 / 0 issues**; full no-assets suite **924 passed / 97 historical failures / 97 skipped**, exactly **3 new passes and 0 new failures** versus v1.1.42.
+
+# WWE Legacy v1.1.42 — Shared Top Rope Neckbreaker + Rear Naked Choke
+
+**Current working baseline.** v1.1.42 supersedes v1.1.41.
+
+Adds two shared SummerSlam — Series 1 booster cards: **Top Rope Neckbreaker** (`SS1-151`), a **3★ Rare** Cost 7 / Damage 11 Technical Grapple requiring Technical 2 + Agility 1 that grounds and Stuns 1; and **Rear Naked Choke** (`SS1-152`), a **2★ Uncommon** standing Technical submission at Cost 6 / Technical 2 with **+5 persistent Head pressure** per successful maintain turn. Both are booster-only in this release, preserving every authored 60-page Superstar deck.
+
+# WWE Legacy v1.1.41 — Foundational Suplex
+
+**Current working baseline.** v1.1.41 supersedes v1.1.40.
+
+Adds **Suplex** as a foundational shared SummerSlam — Series 1 Move at **SS1-150**. It is a **1★ Common**, Cost **3** / Damage **4**, requires **Technical 1**, is a Grapple, grounds the opponent, and exposes the **Body Elevated** counter state. It is booster-only in this release so no authored 60-page Superstar deck is silently rewritten. Card Studio data is regenerated with canonical `assets/images/suplex.webp` and `assets/images/suplex-base-plate.webp` targets.
+
 # WWE Legacy v1.1.40 — Gunther's Front Dropkick
 
 **Current working baseline.** v1.1.40 supersedes v1.1.39.

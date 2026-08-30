@@ -47,8 +47,8 @@ test('v0.12.15 removes known 0.12.14 presentation misses', () => {
   assert.match(app, /ccg-rules-set-logo/);
 });
 
-import { superstars } from '../js/data/superstars.js?v=1.1.40';
-import { decks } from '../js/data/decks.js?v=1.1.40';
+import { superstars } from '../js/data/superstars.js?v=1.1.43';
+import { decks } from '../js/data/decks.js?v=1.1.43';
 
 function methodSupply(star) {
   const supply = { agility: 0, strength: 0, strike: 0, technical: 0 };

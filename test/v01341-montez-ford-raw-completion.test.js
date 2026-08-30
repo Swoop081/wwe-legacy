@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards, linkedGameplayCards } from '../js/data/content.js?v=1.1.40';
-import { collectionCards } from '../js/data/collection.js?v=1.1.40';
-import { decks } from '../js/data/decks.js?v=1.1.40';
-import { superstars } from '../js/data/superstars.js?v=1.1.40';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.40';
-import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=1.1.40';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.40';
+import { allGameplayCards, linkedGameplayCards } from '../js/data/content.js?v=1.1.43';
+import { collectionCards } from '../js/data/collection.js?v=1.1.43';
+import { decks } from '../js/data/decks.js?v=1.1.43';
+import { superstars } from '../js/data/superstars.js?v=1.1.43';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.43';
+import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=1.1.43';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.43';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const linked=id=>linkedGameplayCards.find(c=>c.id===id);

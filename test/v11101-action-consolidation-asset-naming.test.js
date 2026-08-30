@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.40';
-import { canonicalCardImagePath, canonicalBasePlatePath } from '../js/data/artwork.js?v=1.1.40';
-import { canPlaySupport } from '../js/engine/rules.js?v=1.1.40';
-import { decks } from '../js/data/decks.js?v=1.1.40';
-import { superstars } from '../js/data/superstars.js?v=1.1.40';
-import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.40';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.40';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.43';
+import { canonicalCardImagePath, canonicalBasePlatePath } from '../js/data/artwork.js?v=1.1.43';
+import { canPlaySupport } from '../js/engine/rules.js?v=1.1.43';
+import { decks } from '../js/data/decks.js?v=1.1.43';
+import { superstars } from '../js/data/superstars.js?v=1.1.43';
+import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.43';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.43';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 const migratedIds = ['crowd-support','what','people-championship','john-cena-hustle-loyalty-respect'];

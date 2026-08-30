@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.40";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.40";
+import { enrichCounterState } from "./counter-states.js?v=1.1.43";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.43";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -151,6 +151,82 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "body-elevated"
+  },
+  {
+    "id": "suplex",
+    "name": "Suplex",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 3,
+    "damage": 4,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "top-rope-neckbreaker",
+    "name": "Top Rope Neckbreaker",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "technical": 2,
+      "agility": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 3,
+    "rulesText": "Shared. Top-rope Grapple. Grounds opponent. Stun 1.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "rear-naked-choke",
+    "name": "Rear Naked Choke",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 6,
+    "damage": 0,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Standing opponent only. Submission. +5 persistent Head damage per successful turn.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 5
+    },
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "diving-crossbody",

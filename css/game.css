@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.40") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.43") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10771,3 +10771,27 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
 @media (prefers-reduced-motion:reduce){
   .ccg-animated-set-background,.ccg-animated-set-logo,.ccg-animated-card-surface{display:none!important}
 }
+
+/* v1.1.43 — Set-complete play-pile mats -----------------------------------
+   The pile canvas is rendered from set theme variables, so every set keeps a
+   visible mat even when optional artwork is absent or outside a no-assets overlay. */
+.ring-play-surface[data-ring-mat-set]{
+  --ring-mat-canvas:#10131a;
+  --ring-mat-accent:#d7b95b;
+  --ring-mat-secondary:#5c6f86;
+  background:
+    linear-gradient(90deg,transparent 0 7%,color-mix(in srgb,var(--ring-mat-accent) 8%,transparent) 7% 7.5%,transparent 7.5% 92.5%,color-mix(in srgb,var(--ring-mat-secondary) 8%,transparent) 92.5% 93%,transparent 93%),
+    linear-gradient(0deg,transparent 0 12%,rgba(255,255,255,.035) 12% 12.6%,transparent 12.6% 87.4%,rgba(255,255,255,.035) 87.4% 88%,transparent 88%),
+    radial-gradient(ellipse at 50% 45%,color-mix(in srgb,var(--ring-mat-accent) 17%,transparent),transparent 42%),
+    linear-gradient(135deg,color-mix(in srgb,var(--ring-mat-secondary) 18%,var(--ring-mat-canvas)),var(--ring-mat-canvas) 48%,color-mix(in srgb,var(--ring-mat-accent) 13%,var(--ring-mat-canvas)))!important;
+  border:1px solid color-mix(in srgb,var(--ring-mat-accent) 52%,rgba(255,255,255,.10))!important;
+  box-shadow:inset 0 0 0 3px color-mix(in srgb,var(--ring-mat-accent) 46%,transparent),inset 0 0 54px rgba(0,0,0,.42),0 14px 30px rgba(0,0,0,.34)!important;
+  background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important;
+}
+.ring-play-surface[data-ring-mat-set] .ring-ropes{
+  position:absolute;z-index:2;inset:7% 4%;border:3px solid color-mix(in srgb,var(--ring-mat-accent) 72%,#fff 8%);border-radius:8px;box-shadow:0 0 0 3px rgba(0,0,0,.24),inset 0 0 0 2px color-mix(in srgb,var(--ring-mat-secondary) 48%,transparent),inset 0 0 24px rgba(0,0,0,.16);pointer-events:none;opacity:.92
+}
+.ring-play-surface[data-ring-mat-set] .ring-ropes:before,.ring-play-surface[data-ring-mat-set] .ring-ropes:after{content:"";position:absolute;pointer-events:none;opacity:.52}
+.ring-play-surface[data-ring-mat-set] .ring-ropes:before{inset:0;background:linear-gradient(90deg,transparent 0 33%,rgba(255,255,255,.12) 33% 33.25%,transparent 33.25% 66.5%,rgba(255,255,255,.09) 66.5% 66.75%,transparent 66.75%)}
+.ring-play-surface[data-ring-mat-set] .ring-ropes:after{top:50%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--ring-mat-secondary) 25%,rgba(255,255,255,.10)),transparent)}
+.ring-play-surface[data-ring-mat-set] .ring-centre-logo{opacity:.56!important;max-width:34%!important;max-height:40%!important}

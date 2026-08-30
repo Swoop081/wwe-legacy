@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.40';
-import { decks } from '../js/data/decks.js?v=1.1.40';
-import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=1.1.40';
-import { canCounter } from '../js/engine/rules.js?v=1.1.40';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=1.1.40';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.43';
+import { decks } from '../js/data/decks.js?v=1.1.43';
+import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=1.1.43';
+import { canCounter } from '../js/engine/rules.js?v=1.1.43';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=1.1.43';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
