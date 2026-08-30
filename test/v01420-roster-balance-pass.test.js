@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.0.2';
-import { superstars } from '../js/data/superstars.js?v=1.0.2';
-import { decks } from '../js/data/decks.js?v=1.0.2';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.0.2';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.21';
+import { superstars } from '../js/data/superstars.js?v=1.1.21';
+import { decks } from '../js/data/decks.js?v=1.1.21';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.21';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -88,7 +88,7 @@ test('v0.14.20 Hustle, Loyalty, Respect is persistent and fires exactly once whe
   const support=injectHand(p,card('john-cena-hustle-loyalty-respect'));
   s.phase='ACTION'; s.playerInControl='p1';
   const ad0=p.adrenaline,handBeforePlay=p.hand.length;
-  assert.equal(g.playSupport('p1',support),true);
+  assert.equal(g.playAction('p1',support),true);
   assert.equal(p.events.hustleLoyaltyRespectUsed,undefined);
   assert.equal(p.adrenaline,ad0);
   p.hp=Math.floor(p.maxHp*.5);
@@ -107,7 +107,7 @@ test('v0.14.20 Hustle, Loyalty, Respect also fires immediately if Cena installs 
   const support=injectHand(p,card('john-cena-hustle-loyalty-respect'));
   p.hp=Math.floor(p.maxHp*.5); s.phase='ACTION'; s.playerInControl='p1';
   const ad0=p.adrenaline;
-  assert.equal(g.playSupport('p1',support),true);
+  assert.equal(g.playAction('p1',support),true);
   assert.equal(p.events.hustleLoyaltyRespectUsed,true);
   assert.equal(p.adrenaline,ad0+2);
 });

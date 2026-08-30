@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { canCounter, counterEligibility } from '../js/engine/rules.js?v=1.0.2';
+import { canCounter, counterEligibility } from '../js/engine/rules.js?v=1.1.21';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -33,8 +33,8 @@ test('v0.13.71 Live Event preview and shared route keep birthday boss last and o
   assert.match(css, /\.live-tower-route-copy strong,[\s\S]*\.live-tower-route-copy small\{[\s\S]*overflow:visible!important/);
 });
 
-test('v0.13.71 normal Move Counters cannot answer Actions/supports even if a physical state happens to match', () => {
-  const incomingUtility = { id:'crowd-support', name:'Crowd Support', kind:'support', counterState:'diving-aerial' };
+test('v0.13.71 normal Move Counters cannot answer Actions even if a physical state happens to match', () => {
+  const incomingUtility = { id:'crowd-support', name:'Crowd Support', kind:'action', counterState:'diving-aerial' };
   const senton = { id:'senton', name:'Senton', kind:'move', counterStates:['diving-aerial'], cost:3, requirements:{} };
   assert.equal(canCounter(incomingUtility, senton), false);
   const state = {

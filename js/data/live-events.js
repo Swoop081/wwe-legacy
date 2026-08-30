@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.0.2";
-import { superstars } from "./superstars.js?v=1.0.2";
-import { grantRandomBoosters } from "./boosters.js?v=1.0.2";
-import { awardSeasonXp } from "./seasons.js?v=1.0.2";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.21";
+import { superstars } from "./superstars.js?v=1.1.21";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.21";
+import { awardSeasonXp } from "./seasons.js?v=1.1.21";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -215,6 +215,93 @@ export const WEEKLY_TOWERS = Object.freeze([
   }
 ]);
 
+
+// v1.1.20 — Daily Live Events now rotate from the complete nine-set launch slate
+// plus the established specialist gauntlets. Exactly three are active per local
+// day. The rotation advances three positions daily, so an event that was active
+// yesterday is automatically on cooldown for the whole next day.
+export const LAUNCH_THEME_TOWERS = Object.freeze([
+  {
+    id: "current-raw",
+    name: "Current RAW",
+    kicker: "MONDAY NIGHT ROSTER",
+    description: "A five-match tower drawn from WWE Legacy Superstars currently appearing across the RAW roster.",
+    method: "strike", heroId: "seth-rollins", rewardSetId: "raw-series-1", logoMode: "raw",
+    opponentPool: ["roman-reigns","seth-rollins","sol-ruca","raquel-rodriguez","liv-morgan","montez-ford","bron-breakker","austin-theory","chad-gable","oba-femi","logan-paul","dominik-mysterio","rey-mysterio","becky-lynch","stephanie-vaquer","jey-uso","solo-sikoa","jacob-fatu","joe-hendry"]
+  },
+  {
+    id: "current-smackdown",
+    name: "Current SmackDown",
+    kicker: "FRIDAY NIGHT ROSTER",
+    description: "A five-match tower drawn from WWE Legacy Superstars currently appearing across the SmackDown roster.",
+    method: "technical", heroId: "cody-rhodes", rewardSetId: "smackdown-series-1", logoMode: "smackdown",
+    opponentPool: ["kevin-owens","cm-punk","gunther","finn-balor","chelsea-green","tiffany-stratton","nia-jax","paige","jacy-jayne","cody-rhodes","randy-orton","charlotte-flair","alexa-bliss","jade-cargill","sami-zayn","damian-priest","trick-williams"]
+  },
+  {
+    id: "current-nxt",
+    name: "Current NXT",
+    kicker: "THE NEXT GENERATION",
+    description: "Five matches against WWE Legacy's current NXT prospects, champions and breakout threats.",
+    method: "agility", heroId: "tony-dangelo", rewardSetId: "nxt-series-1", logoMode: "nxt",
+    opponentPool: ["kendal-grey","tony-dangelo","jaida-parker","kelani-jordan","mason-rook","tatum-paxley","lexis-king","zilla-fatu"]
+  },
+  {
+    id: "evolution-women",
+    name: "Evolution",
+    kicker: "WOMEN'S DIVISION ONLY",
+    description: "A women-only five-match tower spanning the launch roster.",
+    method: "technical", heroId: "rhea-ripley", rewardSetId: "evolution-series-1", logoMode: "legacy",
+    opponentPool: ["iyo-sky","bayley","paige","stephanie-vaquer","charlotte-flair","rhea-ripley","liv-morgan","becky-lynch","sol-ruca","raquel-rodriguez","roxanne-perez","tiffany-stratton","chelsea-green","blake-monroe","jacy-jayne","kendal-grey","jaida-parker","kelani-jordan","tatum-paxley"]
+  },
+  {
+    id: "summerslam-showcase",
+    name: "SummerSlam Showcase",
+    kicker: "THE BIGGEST PARTY OF THE SUMMER",
+    description: "A launch-set showcase built from SummerSlam Series 1.",
+    method: "strike", heroId: "cm-punk", rewardSetId: "summerslam-series-1", logoMode: "legacy",
+    opponentPool: ["cm-punk","seth-rollins","roman-reigns","kevin-owens","cody-rhodes","oba-femi","brock-lesnar","gunther"]
+  },
+  {
+    id: "golden-era-showcase",
+    name: "Golden Era",
+    kicker: "LEGENDS OF THE 1980s",
+    description: "Five matches against the Golden Era launch roster.",
+    method: "strength", heroId: "hulk-hogan", rewardSetId: "golden-era-series-1", logoMode: "legacy",
+    opponentPool: ["hulk-hogan","andre-the-giant","randy-savage","ultimate-warrior","rowdy-roddy-piper","ted-dibiase","jake-roberts","mr-perfect"]
+  },
+  {
+    id: "new-generation-showcase",
+    name: "New Generation",
+    kicker: "A NEW GENERATION",
+    description: "Five matches against the New Generation launch roster.",
+    method: "technical", heroId: "bret-hart", rewardSetId: "new-generation-series-1", logoMode: "legacy",
+    opponentPool: ["bret-hart","shawn-michaels","razor-ramon","diesel","doink-the-clown","yokozuna","owen-hart","british-bulldog"]
+  },
+  {
+    id: "attitude-era-showcase",
+    name: "Attitude Era",
+    kicker: "ATTITUDE IS EVERYTHING",
+    description: "Five matches against the Attitude Era launch roster.",
+    method: "strike", heroId: "stone-cold-steve-austin", rewardSetId: "attitude-era-series-1", logoMode: "legacy",
+    opponentPool: ["mankind","the-rock-attitude","kane","the-undertaker","stone-cold-steve-austin","triple-h","chris-jericho","kurt-angle"]
+  },
+  {
+    id: "ruthless-aggression-showcase",
+    name: "Ruthless Aggression",
+    kicker: "RUTHLESS AGGRESSION",
+    description: "Five matches against the Ruthless Aggression launch roster.",
+    method: "strength", heroId: "john-cena", rewardSetId: "ruthless-aggression-series-1", logoMode: "legacy",
+    opponentPool: ["john-cena","randy-orton","batista","jbl","eddie-guerrero","edge","jeff-hardy","rob-van-dam"]
+  }
+]);
+
+export const LIVE_EVENT_ROTATION_POOL = Object.freeze([
+  ...LAUNCH_THEME_TOWERS,
+  ...THREE_DAY_TOWERS,
+  ...WEEKLY_TOWERS
+]);
+export const LIVE_EVENT_COOLDOWN_DAYS = 1;
+
 // v0.13.82 — 24-hour Birthday Bash towers for the complete currently released launch roster.
 // Future authored Superstars remain omitted until their sets are promoted live.
 export const RELEASED_BIRTHDAY_ROSTER_IDS = Object.freeze([
@@ -379,14 +466,16 @@ export function liveEventRotation(now = new Date()) {
 }
 
 function primaryDailyTower(now) {
-  const rotation = liveEventRotation(now);
+  const start = localDayStart(now);
+  const nextAt = new Date(start.getTime());
+  nextAt.setDate(nextAt.getDate() + 1);
+  const template = rotatingLiveEventTemplates(now)[0];
+  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, daySerial(now) % LIVE_REWARD_FALLBACKS.length, now), now);
   return towerDescriptor({
-    key: `daily:${rotation.dayKey}:lead:${rotation.event.id}`,
-    event: rotation.event,
-    startsAt: rotation.startsAt,
-    nextAt: rotation.nextAt,
-    winUp: LIVE_EVENT_WIN_UP,
-    clearBoosters: LIVE_EVENT_CLEAR_BOOSTERS
+    key: `daily:${dateKey(start)}:slot-1:${event.id}`,
+    event, startsAt: start, nextAt,
+    cadence: "daily", cadenceLabel: "24 HOURS ONLY",
+    winUp: LIVE_EVENT_WIN_UP, clearBoosters: LIVE_EVENT_CLEAR_BOOSTERS
   });
 }
 function themedDailyTower(now, slot, templates, offset = 0) {
@@ -430,36 +519,33 @@ function rawLiveTower(profile, now = new Date()) {
   });
 }
 
-function birthdayTowers(now) {
-  const start = localDayStart(now);
-  const month = start.getMonth() + 1;
-  const day = start.getDate();
-  return BIRTHDAY_TOWERS.filter(template => {
-    if (template.month !== month || template.day !== day) return false;
-    const star = superstars[template.heroId] ?? Object.values(superstars).find(item => item.id === template.heroId);
-    return !!star && !isUnreleasedSetId(star.setId, now);
-  }).map(template => {
-    const nextAt = new Date(start.getTime());
-    nextAt.setDate(nextAt.getDate() + 1);
-    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, 0, now), now);
-    return towerDescriptor({ key: `birthday:${dateKey(start)}:${event.id}`, event, startsAt: start, nextAt, cadence: "birthday", cadenceLabel: "24 HOURS ONLY", winUp: 0, clearBoosters: 1 });
-  });
+function birthdayTowers(_now) {
+  // v1.1.20 — Birthday Bash is retired from the player-facing Live Events pool.
+  // Legacy definitions remain above only so old save/test references can deserialize safely.
+  return [];
+}
+
+export function rotatingLiveEventTemplates(now = new Date()) {
+  const serial = daySerial(now);
+  const pool = LIVE_EVENT_ROTATION_POOL;
+  if (pool.length < 3) return [...pool];
+  const startIndex = (serial * 3) % pool.length;
+  return [0,1,2].map(offset => pool[(startIndex + offset) % pool.length]);
 }
 
 export function activeLiveEventTowers(now = new Date(), profile = null) {
-  const rawLive = profile ? rawLiveTower(profile, now) : null;
-  const birthdays = birthdayTowers(now);
-  // v0.14.05: the Live Events hub always exposes exactly three rotating towers.
-  // Limited-time Birthday Bash / RAW LIVE towers take priority and displace a
-  // generic themed slot instead of growing the screen to four or five events.
-  const candidates = [
-    primaryDailyTower(now),
-    ...birthdays,
-    rawLive,
-    themedDailyTower(now, "feature-a", THREE_DAY_TOWERS, 0),
-    themedDailyTower(now, "feature-b", WEEKLY_TOWERS, 1)
-  ].filter(Boolean);
-  return candidates.slice(0, 3).map(tower => descriptorRemaining(tower, now));
+  const start = localDayStart(now);
+  const nextAt = new Date(start.getTime());
+  nextAt.setDate(nextAt.getDate() + 1);
+  return rotatingLiveEventTemplates(now).map((template,index) => {
+    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, (daySerial(now)+index) % LIVE_REWARD_FALLBACKS.length, now), now);
+    return descriptorRemaining(towerDescriptor({
+      key: `daily:${dateKey(start)}:slot-${index+1}:${event.id}`,
+      event, startsAt: start, nextAt,
+      cadence: "daily", cadenceLabel: "24 HOURS ONLY",
+      winUp: LIVE_EVENT_WIN_UP, clearBoosters: LIVE_EVENT_CLEAR_BOOSTERS
+    }), now);
+  });
 }
 export function liveEventTowerByKey(towerKey, now = new Date(), profile = null) {
   return activeLiveEventTowers(now, profile).find(tower => tower.key === towerKey) ?? null;

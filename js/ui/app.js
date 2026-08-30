@@ -1,40 +1,45 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.0.2";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.0.2";
-import { superstars } from "../data/superstars.js?v=1.0.2";
-import { decks } from "../data/decks.js?v=1.0.2";
-import { sets } from "../data/sets.js?v=1.0.2";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.0.2";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.0.2";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.0.2";
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.0.2";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.0.2";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.0.2";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.0.2";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.0.2";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.0.2";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.0.2";
-import { MatchEngine } from "../engine/MatchEngine.js?v=1.0.2";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.0.2";
-import { totalMomentum } from "../engine/utils.js?v=1.0.2";
-import { healthZone } from "../engine/health.js?v=1.0.2";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=1.0.2";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.0.2";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.0.2";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.0.2";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.0.2";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.0.2";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.0.2";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.0.2";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.0.2";
-import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.0.2";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.0.2";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.0.2";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.0.2";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.0.2";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.0.2";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.0.2";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.0.2";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.0.2";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.21";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.21";
+import { superstars } from "../data/superstars.js?v=1.1.21";
+import { decks } from "../data/decks.js?v=1.1.21";
+import { sets } from "../data/sets.js?v=1.1.21";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.21";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.21";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.21";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.21";
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.21";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.21";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.21";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.21";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.21";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.21";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.21";
+import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.21";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.21";
+import { totalMomentum } from "../engine/utils.js?v=1.1.21";
+import { healthZone } from "../engine/health.js?v=1.1.21";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.21";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.21";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.21";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.21";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.21";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.21";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.21";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.21";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.21";
+import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.21";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.21";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.21";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.21";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.21";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.21";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.21";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.21";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.21";
+import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.21";
+import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.21";
+import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.21";
+import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.21";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -42,7 +47,7 @@ function superstarNameplateMarkup(card) {
   const p = SUPERSTAR_NAMEPLATE_PROFILES[card.superstarId];
   if (!p) return "";
   const font = String(p.fontFamily ?? '"Avenir Next Condensed", Arial, sans-serif').replaceAll('"', "'");
-  const style = [`--np-font:${font}`,`--np-weight:${p.weight ?? 900}`,`--np-style:${p.italic ? 'italic' : 'normal'}`,`--np-tracking:${Number(p.tracking ?? 0)}px`,`--np-skew:${Number(p.skew ?? 0)}deg`,`--np-scale-x:${Number(p.scaleX ?? 1)}`,`--np-font-scale:${Number(p.fontScale ?? 1)}`,`--np-stroke:${Number(p.strokeWidth ?? 3)}px`,`--np-glow:${Number(p.glow ?? 6)}px`].join(';');
+  const style = [`--np-font:${font}`,`--np-weight:${p.weight ?? 900}`,`--np-style:normal`,`--np-tracking:${Number(p.tracking ?? 0)}px`,`--np-skew:${Number(p.skew ?? 0)}deg`,`--np-scale-x:${Number(p.scaleX ?? 1)}`,`--np-font-scale:${Number(p.fontScale ?? 1)}`,`--np-stroke:${Number(p.strokeWidth ?? 3)}px`,`--np-glow:${Number(p.glow ?? 6)}px`].join(';');
   return `<span class="ccg-superstar-nameplate" data-nameplate-superstar="${card.superstarId}" data-nameplate-style="${p.styleName ?? card.superstarId}" style="${style}"><strong>${card.name}</strong><small>SUPERSTAR</small></span>`;
 }
 
@@ -117,6 +122,9 @@ let boosterInspectIndex = null;
 let boosterInspectFlipped = false;
 let convertedPackCards = new Set();
 let duplicateConversionTimer = null;
+let dailySpinResultIndex = null;
+let survivorSelectedAttacker = null;
+let survivorSelectedTarget = null;
 let lastChromeScreen = null;
 let exhibitionConfirmed = { p1: false, p2: true };
 let selectDetailKeys = new Set();
@@ -196,7 +204,7 @@ const launchSetCollections = Object.fromEntries(Object.entries(setCollections).f
 function playerFacingCollectionCards() {
   // Season reward cards are part of the current player-facing catalogue from
   // day one. Ownership controls whether they are marked OWNED / NOT OWNED; it
-  // must never hide the authored Cena reward package from Catalogue filters.
+  // must never hide the authored Season 1 chase reward package from Catalogue filters.
   const rewardCards = collectionCards.filter(card => card.setId === "season-1-last-time-is-now");
   return [...launchCollectionCards, ...rewardCards];
 }
@@ -253,30 +261,12 @@ const menuSuperstarPhotoMarkup = (id, name, cls = "") => {
   return `<img class="${cls} superstar-render-visual official-menu-superstar-photo" src="${portrait}" alt="${name}" data-menu-superstar-photo="${id}" onerror="this.onerror=null;this.src='${superstarArtwork[id] ?? assetUrl("assets/images/card-temp-superstar-placeholder.svg")}';">`;
 };
 const finalBossRockMarkup = (cls = "") => `<img class="${cls} superstar-render-visual final-boss-rock-menu-art" src="${finalBossRockMenuArtwork}" alt="The Rock — Final Boss">`;
-const SEASON_ONE_CENA_CARD_ID = "superstar-john-cena";
-const SEASON_ONE_CENA_LAYERED_CARD = assetUrl("assets/images/card-layered-superstar-john-cena.webp");
-const SEASON_ONE_CENA_FLAT_CARD = assetUrl("assets/images/card-custom-superstar-john-cena.webp");
-const seasonOneCenaCardMarkup = (cls = "") => {
-  // Splash-specific direct physical-card renderer. The supplied 680x1000
-  // Cena WebP is the actual authored card plate, so do not nest it inside the
-  // generic .ccg-card shell. That shell created the black gutter/extra frame
-  // visible on iPhone. Draw the exact plate edge-to-edge and add only the
-  // runtime name/type text inside the plate's already-authored name bay.
-  const card = collectionById.get(SEASON_ONE_CENA_CARD_ID);
-  if (!card) return `<span class="season-one-cena-actual-card is-missing-authored-front ${cls}" data-season-cena-card="canonical-authored-card"><span class="season-one-cena-missing-front"><b>JOHN CENA</b><small>SEASON 1 SUPERSTAR CARD DATA MISSING</small><em>${SEASON_ONE_CENA_CARD_ID}</em></span></span>`;
-  const p = SUPERSTAR_NAMEPLATE_PROFILES[card.superstarId] ?? {};
-  const font = String(p.fontFamily ?? '"Bahnschrift Condensed", "Avenir Next Condensed", "Arial Narrow", Arial, sans-serif').replaceAll('"', "'");
-  const textStyle = [`--np-font:${font}`,`--np-weight:${p.weight ?? 950}`,`--np-style:${p.italic ? 'italic' : 'normal'}`,`--np-tracking:${Number(p.tracking ?? 0.415)}px`,`--np-skew:${Number(p.skew ?? 0)}deg`,`--np-scale-x:${Number(p.scaleX ?? 0.974)}`,`--np-font-scale:${Number(p.fontScale ?? 0.968)}`,`--np-stroke:${Number(p.strokeWidth ?? 1.8)}px`,`--np-glow:${Number(p.glow ?? 3)}px`].join(';');
-  const nameText = `<span class="season-one-cena-name-text" data-nameplate-superstar="john-cena" style="${textStyle}"><strong>${card.name}</strong><small>SUPERSTAR</small></span>`;
-  return `<span class="season-one-cena-actual-card season-one-cena-card ${cls}" data-season-cena-card="canonical-authored-card">
-    <img loading="eager" decoding="async" class="season-one-cena-exact-front" src="${SEASON_ONE_CENA_LAYERED_CARD}" alt="John Cena — The Last Time Is Now Superstar card" data-flat-finished-art="${SEASON_ONE_CENA_FLAT_CARD}" onload="const w=this.closest('.season-one-cena-actual-card');this.classList.add('is-art-ready');if(this.dataset.flatTried){w?.classList.add('uses-flat-cena-front')}else{w?.classList.remove('uses-flat-cena-front')}" onerror="this.classList.remove('is-art-ready');const w=this.closest('.season-one-cena-actual-card');if(!this.dataset.flatTried&&this.dataset.flatFinishedArt){this.dataset.flatTried='1';this.src=this.dataset.flatFinishedArt;return;}this.onerror=null;this.style.display='none';w?.classList.add('is-missing-authored-front');">
-    ${nameText}
-    <span class="season-one-cena-missing-front"><b>JOHN CENA</b><small>AUTHORED SUPERSTAR CARD ART NOT INSTALLED</small><em>Expected: card-layered-superstar-john-cena.webp or card-custom-superstar-john-cena.webp</em></span>
-  </span>`;
+const SEASON_ONE_TRISH_CARD_ID = "superstar-trish-stratus";
+const seasonOneTrishCardMarkup = (cls = "") => {
+  const card = collectionById.get(SEASON_ONE_TRISH_CARD_ID);
+  return card ? `<span class="season-one-cena-actual-card season-one-cena-card ${cls}">${collectibleCardMarkup(card,{extraClass:"season-one-trish-card",interactive:false,eagerArt:true})}</span>` : `<span class="season-one-cena-actual-card is-missing-authored-front ${cls}"><span class="season-one-cena-missing-front"><b>TRISH STRATUS</b><small>SEASON 1 SUPERSTAR CARD DATA MISSING</small></span></span>`;
 };
-
-const SEASON_ONE_CENA_RENDER = assetUrl("assets/images/art-wwe-menu-superstars-john-cena.webp");
-const seasonOneCenaRenderMarkup = (cls = "") => `<img class="${cls} season-one-cena-render superstar-render-visual official-wwe-cena-render" src="${SEASON_ONE_CENA_RENDER}" alt="John Cena" data-season-one-cena-render="wwe.com" onerror="this.onerror=null;this.src='${assetUrl("assets/images/card-temp-superstar-placeholder.svg")}';">`;
+const seasonOneTrishRenderMarkup = (cls = "") => menuSuperstarPhotoMarkup("trish-stratus","Trish Stratus",`${cls} season-one-cena-render`);
 const portraitMarkup = menuSuperstarPhotoMarkup;
 const superstarRenderMarkup = menuSuperstarPhotoMarkup;
 const GENERIC_SUPERSTAR_PLACEHOLDER = assetUrl("assets/images/card-temp-superstar-placeholder.svg");
@@ -284,23 +274,30 @@ const GENERIC_SUPERSTAR_PLACEHOLDER = assetUrl("assets/images/card-temp-supersta
 const SET_LOGO_ASSETS = {
   "survivor-series-series-1": assetUrl("assets/images/branding-survivor-series-series-1-survivor-series-wargames-houston-2026.png"),
   "summerslam-series-1": assetUrl("assets/images/art-summerslam-series-1-summerslam-2026-logo.png"),
-  "golden-era-series-1": assetUrl("assets/images/branding-golden-era-series-1-wwf-classic-block-card.svg"),
+  "golden-era-series-1": "https://loodibee.com/wp-content/uploads/World-Wrestling-Federation-WWF-Logo-1985-1998-3D.png",
   "attitude-era-series-1": assetUrl("assets/images/branding-attitude-era-series-1-wwf-scratch-logo-card.png"),
   "evolution-series-1": assetUrl("assets/images/art-evolution-series-1-evolution-logo.png"),
-  "season-1-final-boss": assetUrl("assets/images/art-season-1-final-boss-rewards-logo.png"),
-  "season-1-last-time-is-now": assetUrl("assets/images/art-season-1-final-boss-rewards-logo.png"),
-  "season-2-whos-next": assetUrl("assets/images/art-season-1-final-boss-rewards-logo.png"),
+  "season-1-final-boss": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
+  "season-1-last-time-is-now": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
+  "season-2-whos-next": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
+  "parked-chyna": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
   "raw-series-1": assetUrl("assets/images/branding-raw-series-1-raw-logo.webp"),
-  "new-generation-series-1": assetUrl("assets/images/branding-new-generation-series-1-new-generation-logo.svg"),
+  "new-generation-series-1": assetUrl("assets/images/branding-new-generation-series-1-new-generation-logo.png"),
   "worlds-collide-series-1": assetUrl("assets/images/branding-worlds-collide-series-1-worlds-collide-logo.webp"),
   "money-in-the-bank-series-1": assetUrl("assets/images/branding-money-in-the-bank-series-1-money-in-the-bank-logo.webp"),
-  "smackdown-series-1": assetUrl("assets/images/branding-smackdown-series-1-smackdown-logo-official.png")
+  "smackdown-series-1": assetUrl("assets/images/branding-smackdown-series-1-smackdown-logo-official.png"),
+  // v1.1.5 — exact approved live originals; no substitute text-logo fallback.
+  "nxt-series-1": "https://corporate.wwe.com/f/inline-images/NXT-logo.png",
+  "ruthless-aggression-series-1": "https://images.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/39850/1526513686-11744-2621/WWE_20Ruthless_20Aggression_20logo_large.png"
 };
+const SET_LOGO_FALLBACK_ASSETS = { "golden-era-series-1": assetUrl("assets/images/set-logos/golden-era-set-logo.png") };
 function setLogoMarkup(setId, className = "") {
   const src = SET_LOGO_ASSETS[setId];
   if (!src) return "";
   const label = sets[setId]?.displayName ?? sets[setId]?.name ?? "WWE set";
-  return `<img class="set-brand-logo ${className}" src="${src}" alt="${label}">`;
+  const fallback = SET_LOGO_FALLBACK_ASSETS[setId] ?? "";
+  const fallbackAttr = fallback ? ` data-fallback-src="${fallback}"` : "";
+  return `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" class="set-brand-logo ${className}" src="${src}"${fallbackAttr} alt="${label}" onerror="if(this.dataset.fallbackSrc&&!this.dataset.fallbackTried){this.dataset.fallbackTried='1';this.src=this.dataset.fallbackSrc;}else{this.classList.add('is-source-logo-unavailable');this.style.display='none';}">`;
 }
 
 function physicalBoosterPackMarkup({ setId, title = "WWE LEGACY", series = "SERIES 1", subtitle = "5 CARDS · RUBY CHASE", extraClass = "", opening = false } = {}) {
@@ -464,9 +461,9 @@ function setChrome({ hideTopbar = false } = {}) {
 
   const mobileNav = document.querySelector("#mobile-game-nav");
   if (mobileNav) {
-    const navScreens = new Set(["menu", "play-menu", "setup", "king-of-the-ring", "ladder", "championship", "collection", "catalogue", "boosters", "store", "challenges", "seasons", "deck-builder", "profile", "rules", "options"]);
+    const navScreens = new Set(["menu", "play-menu", "setup", "king-of-the-ring", "ladder", "championship", "collection", "catalogue", "boosters", "store", "challenges", "seasons", "deck-builder", "profile", "rules", "options", "survivor-series"]);
     mobileNav.hidden = !profile || !navScreens.has(screen);
-    const activeTarget = screen === "setup" || screen === "king-of-the-ring" || screen === "championship" ? "play-menu" : screen === "ladder" ? "challenges" : screen === "deck-builder" ? "deck-builder" : screen === "catalogue" ? "catalogue" : screen === "collection" ? "collection" : screen === "rules" ? "profile" : screen;
+    const activeTarget = screen === "setup" || screen === "king-of-the-ring" || screen === "championship" || screen === "survivor-series" ? "play-menu" : screen === "ladder" ? "challenges" : screen === "deck-builder" ? "deck-builder" : screen === "catalogue" ? "catalogue" : screen === "collection" ? "collection" : screen === "rules" ? "profile" : screen;
     const notices = attentionState();
     mobileNav.querySelectorAll("[data-mobile-nav]").forEach(button => {
       button.classList.toggle("is-active", button.dataset.mobileNav === activeTarget);
@@ -501,19 +498,31 @@ function showRules() {
   screen = "rules"; message = ""; renderRules();
 }
 
+function mergeMatchModifiers(...mods) {
+  const valid=mods.filter(Boolean); if(!valid.length)return null;
+  const out={name:valid.map(m=>m.name).filter(Boolean).join(" + ")||"Match Bonuses",ruleText:valid.map(m=>m.ruleText).filter(Boolean).join(" · "),startingMomentum:{p1:{},p2:{}},startingAdrenaline:{p1:0,p2:0},startingHpBonus:{p1:0,p2:0},startingHpLoss:{p1:0,p2:0},firstMoveDamageMultiplier:{}};
+  for(const m of valid){ for(const pid of ["p1","p2"]){ for(const [method,n] of Object.entries(m.startingMomentum?.[pid]??{}))out.startingMomentum[pid][method]=(out.startingMomentum[pid][method]??0)+(Number(n)||0); out.startingAdrenaline[pid]+=(Number(m.startingAdrenaline?.[pid])||0); out.startingHpBonus[pid]+=(Number(m.startingHpBonus?.[pid])||0); out.startingHpLoss[pid]+=(Number(m.startingHpLoss?.[pid])||0); const mult=Number(m.firstMoveDamageMultiplier?.[pid]); if(mult>0&&mult<1)out.firstMoveDamageMultiplier[pid]=out.firstMoveDamageMultiplier[pid]?Math.min(out.firstMoveDamageMultiplier[pid],mult):mult; }}
+  return out;
+}
+
 function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibition", modifier = null, eventMeta = null } = {}) {
   if (!profile) { screen = "starter"; renderStarter(); return; }
   const p1Star = superstarWithConfiguredEntrance(p1Id), p2Star = superstarById[p2Id];
   if (!p1Star || !p2Star) { message = "That Superstar is not active in this build."; renderSetup(); return; }
   const p1Deck = buildPlayableDeck(profile, p1Id), p2Deck = scaleCpuDeckToPlayer(p1Deck, decks[p2Id] ?? []);
   if (p1Deck.length !== 60 || p2Deck.length !== 60) { message = "One of these Superstar decks is not yet complete."; renderSetup(); return; }
+  const equippedVariantModifier = superstarVariantMatchModifier(profile,p1Id);
+  const equippedMerchModifier = merchMatchModifier(profile,p1Id);
+  const combinedModifier = mergeMatchModifiers(modifier,equippedVariantModifier,equippedMerchModifier);
   activeMode = mode;
   activeMatchContext = Object.freeze({
     mode,
     liveEventTowerKey: mode === "live-event" ? (eventMeta?.towerKey ?? activeLiveEventTowerKey ?? null) : null,
     championshipSuperstarId: mode === "championship" ? p1Id : null,
     p1Id,
-    p2Id
+    p2Id,
+    merchApplied: !!equippedMerchModifier,
+    survivorChallenge: mode === "survivor-series" ? (eventMeta?.survivorChallenge ?? null) : null
   });
   selection = { p1: p1Id, p2: p2Id };
   lastMatchup = { ...selection };
@@ -524,7 +533,7 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
   superstarOverlayId = null;
   superstarOverlayFlipped = false;
   matchPresentationSetId = eventMeta?.presentationSetId ?? eventMeta?.rewardSetId ?? randomMatchPresentationSet();
-  pendingMatch = { p1Id, p2Id, mode, p1Star, p2Star, p1Deck, p2Deck, brandSetId: matchPresentationSetId, modifier, eventMeta };
+  pendingMatch = { p1Id, p2Id, mode, p1Star, p2Star, p1Deck, p2Deck, brandSetId: matchPresentationSetId, modifier: combinedModifier, eventMeta };
   screen = "matchup";
   message = "";
   renderMatchupSplash();
@@ -986,7 +995,7 @@ function renderBoosters() {
   const standardCredits=boosterCreditsFor(profile,activeBoosterSetId);
   const packTitle=setInfo.name.toUpperCase();
   const packWrapperTitle="SERIES 1";
-  const packSubtitle="SERIES 1 · 5 CARDS · RUBY CHASE";
+  const packSubtitle="SERIES 1 · 4 CARDS + 1 MERCH · DIAMOND CHASE";
   const brand=setLogoMarkup(activeBoosterSetId,"pack-set-logo") || `<span class="pack-text-logo"><b>${setInfo.name.toUpperCase()}</b><small>SERIES 1</small></span>`;
   const packSetClass=`pack-set-${activeBoosterSetId}`;
 
@@ -994,7 +1003,7 @@ function renderBoosters() {
   const mobileNav=document.querySelector("#mobile-game-nav");
   if (mobileNav) mobileNav.hidden=packInProgress;
 
-  const rarityName = pull => (setCollections[pull?.card?.setId]?.rarityLabels ?? setInfo.rarityLabels)?.[pull?.card?.rarity ?? 1] ?? "Common";
+  const rarityName = pull => pull?.card?.ultraRare ? "Ultra Rare" : (setCollections[pull?.card?.setId]?.rarityLabels ?? setInfo.rarityLabels)?.[pull?.card?.rarity ?? 1] ?? (pull?.card?.kind === "merch" ? "Merch" : "Common");
   const upRewardTile = (p, extraClass="", actionAttr="") => `<button type="button" class="up-card-replacement ${extraClass}" ${actionAttr} aria-label="${`${tierLabel(p.tier)} duplicate`} converted to ${p.universePointsValue} Universe Points"><span>${p.tier && p.tier!=="normal" ? `${tierLabel(p.tier).toUpperCase()} DUPLICATE` : "DUPLICATE CONVERTED"}</span><strong>+${p.universePointsValue}</strong><b>UP</b><small>UNIVERSE POINTS</small></button>`;
   const summaryCard = (p,index,slotClass="") => `
     <article class="pack-summary-card actual-card-summary ${slotClass} rarity-${p.card.rarity} ${tierCssClass(p.tier)} ${p.universePointsValue?'is-up-converted':''}" data-pack-summary-inspect="${index}" role="button" tabindex="0" aria-label="Inspect ${p.card.name}">
@@ -1063,20 +1072,20 @@ function renderBoosters() {
       const incoming = u.pull?.card ?? cardById(u.cardId);
       const outgoing = cardById(u.removeId ?? u.cardId);
       const incomingTier = u.targetTier ?? u.pull?.tier ?? incoming?.tier ?? 'normal';
-      const label = u.type === 'entrance' ? 'ENTRANCE UPGRADE' : u.type === 'tier-upgrade' ? 'TIER UPGRADE' : incoming?.finisher ? 'FINISHER UPGRADE' : incoming?.trademark ? 'TRADEMARK UPGRADE' : incoming?.special ? 'SPECIAL UPGRADE' : 'RECOMMENDED BUILD';
+      const label = u.type === 'merch' ? 'MERCH SLOT READY' : u.type === 'entrance' ? 'ENTRANCE UPGRADE' : u.type === 'tier-upgrade' ? 'TIER UPGRADE' : incoming?.finisher ? 'FINISHER UPGRADE' : incoming?.trademark ? 'TRADEMARK UPGRADE' : incoming?.special ? 'SPECIAL UPGRADE' : 'RECOMMENDED BUILD';
       return `<article class="upgrade-row pack-upgrade-swap ${applied?'applied-upgrade-row':''}">
-        <header><div><span>${label}</span><b>${superstarById[u.superstarId]?.name ?? 'SUPERSTAR'} DECK</b></div>${applied?'<em>APPLIED</em>':''}</header>
+        <header><div><span>${label}</span><b>${superstarById[u.superstarId]?.name ?? 'SUPERSTAR'} ${u.type==='merch'?'LOADOUT':'DECK'}</b></div>${applied?'<em>APPLIED</em>':''}</header>
         <div class="upgrade-card-pair">
           <div class="upgrade-card-choice incoming"><small>NEW CARD</small>${incoming ? collectibleCardMarkup(incoming,{flipped:false,tier:incomingTier,extraClass:'upgrade-swap-card'}) : ''}<strong>${u.addName}</strong></div>
           <div class="upgrade-swap-arrow" aria-hidden="true">→</div>
-          <div class="upgrade-card-choice outgoing"><small>REPLACES</small>${outgoing ? collectibleCardMarkup(outgoing,{flipped:false,tier:outgoing?.tier ?? 'normal',extraClass:'upgrade-swap-card'}) : '<div class="upgrade-card-placeholder">CURRENT SLOT</div>'}<strong>${u.removeName}</strong></div>
+          <div class="upgrade-card-choice outgoing">${u.type==='merch'?'<small>CURRENT SLOT</small>':'<small>REPLACES</small>'}${outgoing ? collectibleCardMarkup(outgoing,{flipped:false,tier:outgoing?.tier ?? 'normal',extraClass:'upgrade-swap-card'}) : '<div class="upgrade-card-placeholder">CURRENT SLOT</div>'}<strong>${u.removeName}</strong></div>
         </div>
         <p>${u.reason}</p>
-        ${applied || manual ? '' : `<div class="upgrade-choice-actions"><button data-accept-upgrade="${index}" class="primary">${u.type==='entrance'?'EQUIP':u.type==='tier-upgrade'?'USE UPGRADE':'APPLY UPGRADE'}</button><button data-decline-upgrade="${index}" class="secondary">KEEP AS-IS</button></div>`}
+        ${applied || manual ? '' : `<div class="upgrade-choice-actions"><button data-accept-upgrade="${index}" class="primary">${u.type==='entrance'||u.type==='merch'?'EQUIP':u.type==='tier-upgrade'?'USE UPGRADE':'APPLY UPGRADE'}</button><button data-decline-upgrade="${index}" class="secondary">KEEP AS-IS</button></div>`}
       </article>`;
     };
     packArea=`<section class="upgrade-panel booster-modal-upgrades focused-pack-upgrades">
-      <div class="section-title"><div><span>DECK ASSISTANCE</span><h3>${pendingUpgrades.length ? `${pendingUpgrades.length} recommended replacement${pendingUpgrades.length===1?'':'s'}` : `${appliedPackUpgrades.length} upgrade${appliedPackUpgrades.length===1?'':'s'} applied`}</h3></div><span>${profile.deckAssistance==='auto'?'Auto-upgrade':manual?'Manual mode · suggestions only':'Choose what to change'}</span></div>
+      <div class="section-title"><div><span>DECK ASSISTANCE</span><h3>${pendingUpgrades.length ? `${pendingUpgrades.length} upgrade suggestion${pendingUpgrades.length===1?'':'s'}` : `${appliedPackUpgrades.length} upgrade${appliedPackUpgrades.length===1?'':'s'} applied`}</h3></div><span>${profile.deckAssistance==='auto'?'Auto-upgrade':manual?'Manual mode · suggestions only':'Choose what to change'}</span></div>
       ${appliedPackUpgrades.map((u)=>swapMarkup(u,true)).join('')}
       ${pendingUpgrades.map((u,i)=>swapMarkup(u,false,i)).join('')}
       ${pendingUpgrades.length && !manual ? `<button id="apply-all-upgrades" class="start-match pack-apply-all">APPLY ALL UPGRADES</button>` : ''}
@@ -1266,23 +1275,23 @@ function renderSeasonCompletionCelebration() {
   setChrome({ hideTopbar: true });
   const root = $("#game");
   const state = seasonState(profile);
-  const cenaDeck = profile?.savedDecks?.["john-cena"] ?? [];
-  const deckReady = Array.isArray(cenaDeck) && cenaDeck.length === 60;
-  const rubyMoveIds = ["john-cena-protobomb","john-cena-five-knuckle-shuffle","john-cena-stf","john-cena-attitude-adjustment"];
+  const trishDeck = profile?.savedDecks?.["trish-stratus"] ?? [];
+  const deckReady = Array.isArray(trishDeck) && trishDeck.length === 60;
+  const rubyMoveIds = ["trish-stratus-stratusphere","trish-stratus-chick-kick","trish-stratus-air-canada","trish-stratus-stratusfaction"];
   const rubyMovesComplete = rubyMoveIds.every(id => ownedCount(profile,id,"ruby") >= 5);
-  const rubyOneOfIds = ["john-cena-hustle-loyalty-respect","special-john-cena","entrance-john-cena","superstar-john-cena"];
+  const rubyOneOfIds = ["special-trish-stratus","entrance-trish-stratus","superstar-trish-stratus"];
   const rubyPackageComplete = rubyMovesComplete && rubyOneOfIds.every(id => ownedCount(profile,id,"ruby") >= 1);
   root.innerHTML = `<section class="season-completion-screen season-one-completion">
     <div class="season-completion-effects" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="season-completion-copy"><span>SEASON 1 COMPLETE · TIER 50</span><h1>THE LAST<br>TIME IS <b>NOW.</b></h1><p>You completed the Season Road and unlocked <strong>John Cena</strong> with his entire Season-exclusive package at <strong>Ruby</strong>.</p><div class="season-completion-status"><span><small>RUBY EXCLUSIVES</small><b>${rubyPackageComplete ? '24 / 24 COPIES READY' : 'REWARD PACKAGE READY'}</b></span><span><small>AUTHORED DECK</small><b>${deckReady ? '60 / 60 READY' : 'BUILD FROM OWNED CARDS'}</b></span></div></div>
-    <div class="season-completion-card">${seasonOneCenaCardMarkup("season-completion-cena-card")}<span class="season-completion-ruby">RUBY · SEASON REWARD</span></div>
-    <div class="season-completion-package" aria-label="John Cena Ruby reward package"><span><b>×5</b> PROTOBOMB</span><span><b>×5</b> FIVE KNUCKLE SHUFFLE</span><span><b>×5</b> STF</span><span><b>×5</b> ATTITUDE ADJUSTMENT</span><span><b>RUBY</b> HUSTLE, LOYALTY, RESPECT</span><span><b>RUBY</b> NEVER GIVE UP</span><span><b>RUBY</b> THE TIME IS NOW</span><span><b>RUBY</b> JOHN CENA</span></div>
-    <div class="season-completion-actions"><button id="season-complete-play" class="legacy-enter">PLAY AS JOHN CENA</button><button id="season-complete-deck" class="nav-button">OPEN CENA IN DECK LAB</button><button id="season-complete-road" class="nav-button">VIEW COMPLETED SEASON ROAD</button></div>
+    <div class="season-completion-copy"><span>SEASON 1 COMPLETE · TIER 50</span><h1>STRATUSFACTION<br><b>GUARANTEED.</b></h1><p>You completed the Season Road and unlocked <strong>Trish Stratus</strong> with her Season-exclusive package at <strong>Ruby</strong>.</p><div class="season-completion-status"><span><small>RUBY EXCLUSIVES</small><b>${rubyPackageComplete ? '23 COPIES READY' : 'REWARD PACKAGE READY'}</b></span><span><small>AUTHORED DECK</small><b>${deckReady ? '60 / 60 READY' : 'BUILD FROM OWNED CARDS'}</b></span></div></div>
+    <div class="season-completion-card">${seasonOneTrishCardMarkup("season-completion-cena-card")}<span class="season-completion-ruby">RUBY · SEASON REWARD</span></div>
+    <div class="season-completion-package" aria-label="Trish Stratus Ruby reward package"><span><b>×5</b> STRATUSPHERE</span><span><b>×5</b> CHICK KICK</span><span><b>×5</b> AIR CANADA</span><span><b>×5</b> STRATUSFACTION</span><span><b>RUBY</b> STRATUSFACTION GUARANTEED</span><span><b>RUBY</b> TIME TO ROCK & ROLL</span><span><b>RUBY</b> TRISH STRATUS</span></div>
+    <div class="season-completion-actions"><button id="season-complete-play" class="legacy-enter">PLAY AS TRISH STRATUS</button><button id="season-complete-deck" class="nav-button">OPEN TRISH IN DECK LAB</button><button id="season-complete-road" class="nav-button">VIEW COMPLETED SEASON ROAD</button></div>
   </section>`;
   const dismiss = () => { state.completionCelebrationPending = false; state.completionCelebrationSeen = true; saveProfile(profile); };
-  $("#season-complete-play")?.addEventListener("click",()=>{ dismiss(); selection.p1="john-cena"; selection.p2=null; screen="setup"; message="John Cena is ready. Choose Exhibition to put the Season 1 reward deck in the ring."; renderSetup(); });
-  $("#season-complete-deck")?.addEventListener("click",()=>{ dismiss(); showDeckBuilder("john-cena"); });
-  $("#season-complete-road")?.addEventListener("click",()=>{ dismiss(); screen="seasons"; message="Season 1 complete — John Cena and every exclusive reward are yours at Ruby."; renderSeasons(); });
+  $("#season-complete-play")?.addEventListener("click",()=>{ dismiss(); selection.p1="trish-stratus"; selection.p2=null; screen="setup"; message="Trish Stratus is ready. Choose Exhibition to put the Season 1 reward deck in the ring."; renderSetup(); });
+  $("#season-complete-deck")?.addEventListener("click",()=>{ dismiss(); showDeckBuilder("trish-stratus"); });
+  $("#season-complete-road")?.addEventListener("click",()=>{ dismiss(); screen="seasons"; message="Season 1 complete — Trish Stratus and every exclusive reward are yours at Ruby."; renderSeasons(); });
 }
 
 function renderSeasons() {
@@ -1308,7 +1317,7 @@ function renderSeasons() {
     const finalBossRewardClass = isFinalBossCard ? `final-boss-${String(reward.rewardType ?? "reward").replace(/[^a-z0-9-]+/gi, "-").toLowerCase()}` : "";
     const major = isFinalBossCard || tier % 10 === 0 || tier === SEASON_TIER_COUNT;
     const rewardTitle = isFinalBossCard ? `${String(reward.name).toUpperCase()}${(reward.amount ?? 1) > 1 ? ` ×${reward.amount}` : ''}` : reward.kind === "universe-points" ? `${reward.amount} UP` : `${reward.amount}× BOOSTER`;
-    const rewardSub = isFinalBossCard ? `${reward.label} · JOHN CENA` : reward.kind === "universe-points" ? `UNIVERSE POINTS` : setName;
+    const rewardSub = isFinalBossCard ? `${reward.label} · TRISH STRATUS` : reward.kind === "universe-points" ? `UNIVERSE POINTS` : setName;
     const rewardIcon = isFinalBossCard ? (reward.rewardType === "superstar" ? "star" : "cards") : reward.kind === "universe-points" ? "points" : "pack";
     return `<article id="season-tier-${tier}" class="season-road-node ${tier%2?'road-left':'road-right'} ${reached?'reached':''} ${claimed?'claimed':''} ${current?'current':''} ${major?'major':''} ${isFinalBossCard?'final-boss-node':''} ${finalBossRewardClass}"${isFinalBossCard ? ` data-final-boss-reward="${reward.rewardType}"` : ""}>
       <span class="season-road-connector" aria-hidden="true"></span><div class="season-road-tier"><small>TIER</small><b>${tier}</b></div>
@@ -1317,7 +1326,7 @@ function renderSeasons() {
   }).join('');
   root.innerHTML = `<section class="seasons-screen premium-screen season-road-redesign">
     <section class="season-anchor-shell">
-      <header class="season-road-hero"><div class="season-road-hero-copy"><span>WWE LEGACY · SEASON 1</span><h1><b>SEASON</b> <em>ONE</em></h1><p>THE LAST TIME IS NOW</p><div class="season-end-countdown"><small>SEASON ENDS IN</small><strong data-season-end-countdown>${seasonCountdown}</strong></div></div><div class="season-road-rock">${seasonOneCenaRenderMarkup("season-road-cena")}</div></header>
+      <header class="season-road-hero"><div class="season-road-hero-copy"><span>WWE LEGACY · SEASON 1</span><h1><b>SEASON</b> <em>ONE</em></h1><p>STRATUSFACTION GUARANTEED</p><div class="season-end-countdown"><small>SEASON ENDS IN</small><strong data-season-end-countdown>${seasonCountdown}</strong></div></div><div class="season-road-rock">${seasonOneTrishRenderMarkup("season-road-cena")}</div></header>
       <section class="season-road-command"><div><small>CURRENT TIER</small><strong>${progress.tier} / ${SEASON_TIER_COUNT}</strong><span>${progress.xp.toLocaleString()} / ${(SEASON_TIER_COUNT*XP_PER_TIER).toLocaleString()} XP</span></div><div><small>REWARDS READY</small><strong>${claimable.length}</strong><span>${progress.tier>=SEASON_TIER_COUNT?'ROAD COMPLETE':`NEXT · TIER ${progress.tier+1}`}</span></div><div><small>UNIVERSE POINTS</small><strong>${(profile.universePoints??0).toLocaleString()}</strong><span>UP</span></div></section>
       ${message ? `<p class="setup-message">${message}</p>` : ''}
       <section class="season-free-pack-cta season-free-pack-strip ${free.available ? 'ready' : 'waiting'}"><button id="claim-free-pack" class="season-free-pack-button" ${free.available?'':'disabled'}><strong data-free-pack-action>${free.available?'CLAIM FREE BOOSTER':`NEXT FREE BOOSTER IN ${formatDailyHoursMinutes(free.msRemaining)}`}</strong></button></section>
@@ -2014,17 +2023,17 @@ function setHeroSuperstars(setId) {
 }
 
 function splashPromoMarkup() {
-  return `<section class="season-one-ad season-one-splash-v2" aria-label="Season 1 John Cena promotion">
+  return `<section class="season-one-ad season-one-splash-v2" aria-label="Season 1 Trish Stratus promotion">
     <div class="season-ad-effects" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="season-splash-copy">
-      <span class="season-ad-kicker">SEASON 1 · THE LAST TIME IS NOW</span>
-      <strong class="season-ad-title">NEVER<br>GIVE UP.</strong>
-      <p>Climb the <b>50-tier Season Road</b> to assemble John Cena’s complete <b>Ruby-only</b> reward package. Earn every Cena-exclusive card at its best printing, then unlock the Ruby Superstar at Tier 50 with his strongest owned deck assembled for you.</p>
+      <span class="season-ad-kicker">SEASON 1 · STRATUSFACTION GUARANTEED</span>
+      <strong class="season-ad-title">STRATUSFACTION<br>GUARANTEED.</strong>
+      <p>Climb the <b>50-tier Season Road</b> to assemble Trish Stratus’s complete <b>Ruby-only</b> reward package. Earn every Trish-exclusive card at its best printing, then unlock the Ruby Superstar at Tier 50 with her strongest owned deck assembled for you.</p>
     </div>
     <div class="season-splash-reward">
       <span class="season-splash-reward-kicker">SEASON COMPLETION SUPERSTAR</span>
-      <div class="season-ad-rock">${seasonOneCenaCardMarkup("season-ad-cena")}</div>
-      <div class="season-splash-reward-name"><strong>JOHN CENA</strong><small>THE LAST TIME IS NOW · TIER 50</small></div>
+      <div class="season-ad-rock">${seasonOneTrishCardMarkup("season-ad-cena")}</div>
+      <div class="season-splash-reward-name"><strong>TRISH STRATUS</strong><small>SEASON 1 CHASE · TIER 50</small></div>
     </div>
     <span class="season-ad-watermark" aria-hidden="true">SEASON 1</span>
   </section>`;
@@ -2033,27 +2042,18 @@ function splashPromoMarkup() {
 function renderSplash() {
   setChrome({ hideTopbar: true });
   const root = $("#game");
-  const returning = !!profile;
-  const starter = returning ? superstarById[profile.starterId] : null;
-  const launchUnlocked = (profile?.unlockedSuperstars ?? []).filter(id => roster.some(star => star.id === id)).length;
-  root.innerHTML = `<section class="splash-screen premium-splash clean-launch-splash">
-    <div class="splash-glow"></div>
-    <div class="clean-splash-content">
-      <div class="clean-splash-brand">${launchBrandLogoMarkup(true)}</div>
-${splashPromoMarkup()}
-      <div class="clean-splash-profile">
-        <span>${returning ? "WELCOME BACK" : "NEW PLAYER"}</span>
-        <strong>${returning ? "Continue Your Legacy" : "Begin your WWE Legacy"}</strong>
-        <small>${returning ? `${launchUnlocked}/${roster.length} available Superstars unlocked · Season progress saved locally` : "Choose your first World Champion, receive their full starter deck, then discover the live Season 1 booster sets."}</small>
-      </div>
-      <button id="enter-legacy" class="legacy-enter">${returning ? "ENTER WWE LEGACY" : "START NEW LEGACY"}</button>
-      <small class="splash-local-note">Local single-player profile · no online account required</small>
+  root.innerHTML = `<section class="splash-screen launch-poster-splash" aria-label="WWE Legacy Season 1 launch screen">
+    <div class="launch-poster-frame">
+      <img class="launch-poster-image" src="./assets/images/season1-stratusfaction-launch-poster.jpg?v=${BUILD_VERSION}" alt="WWE Legacy Season 1. Get Some Stratusfaction. Reach Tier 50 before September 30.">
+      <button type="button" id="launch-poster-play" class="launch-poster-play-hotspot" aria-label="Play Now — enter WWE Legacy"></button>
     </div>
   </section>`;
 
-  $("#enter-legacy")?.addEventListener("click", () => {
+  // v1.1.17 — the visible PLAY NOW artwork is part of the supplied launch poster.
+  // This percentage-based hotspot stays aligned with the button as the poster scales.
+  $("#launch-poster-play")?.addEventListener("click", () => {
     if (profile) showMainMenu();
-    else { screen = "starter"; renderStarter(); }
+    else { screen = "starter"; message = ""; renderStarter(); }
   });
 }
 
@@ -2072,7 +2072,9 @@ function renderMainMenu() {
   const tierProgressLabel = seasonProgress.tier >= SEASON_TIER_COUNT
     ? `TIER ${SEASON_TIER_COUNT} COMPLETE`
     : seasonProgress.tier === 0 ? `START → TIER 1` : `TIER ${seasonProgress.tier} → TIER ${nextSeasonTier}`;
-  const tierProgressDetail = seasonProgress.tier >= SEASON_TIER_COUNT ? `JOHN CENA UNLOCKED` : `${tierXpRemaining} XP TO NEXT TIER`;
+  const tierProgressDetail = seasonProgress.tier >= SEASON_TIER_COUNT ? `TRISH STRATUS UNLOCKED` : `${tierXpRemaining} XP TO NEXT TIER`;
+  const spinState = dailySpinState(profile,new Date());
+  const spinRotation = dailySpinResultIndex == null ? 0 : (1440 + (360 - (dailySpinResultIndex * 45 + 22.5)));
 
   root.innerHTML = `<section class="main-menu-screen premium-screen legacy-home-v3">
     <section class="legacy-home-stage" aria-label="WWE Legacy home">
@@ -2093,17 +2095,23 @@ function renderMainMenu() {
     </section>
 
     <button id="menu-season-overview" class="legacy-season-event ${attentionClass("seasons")}" aria-label="Open Season 1 hub">${attentionBadge("seasons")}
-      <span class="legacy-season-rock">${seasonOneCenaRenderMarkup("legacy-season-cena")}</span>
+      <span class="legacy-season-rock">${seasonOneTrishRenderMarkup("legacy-season-cena")}</span>
       <span class="legacy-season-copy">
-        <em><i></i> THE LAST TIME IS NOW</em>
+        <em><i></i> STRATUSFACTION GUARANTEED</em>
         ${homeHubSplitTitle("SEASON", "ONE")}
         <span><b>${tierProgressLabel}</b><small>${tierProgressDetail}</small></span>
         <span class="legacy-season-progress season-home-progress"><i style="width:${seasonProgress.percent}%"></i></span>
-        <small class="legacy-season-foot">${seasonProgress.intoTier} / ${seasonProgress.needed} XP · TIER ${SEASON_TIER_COUNT} · JOHN CENA</small>
+        <small class="legacy-season-foot">${seasonProgress.intoTier} / ${seasonProgress.needed} XP · TIER ${SEASON_TIER_COUNT} · TRISH STRATUS</small>
       </span>
     </button>
 
     ${message ? `<p class="menu-message legacy-home-message">${message}</p>` : ""}
+
+    <section class="daily-spin-home ${spinState.available?'is-ready':'is-waiting'} ${dailySpinResultIndex!=null?'just-spun':''}">
+      <div class="daily-spin-copy"><span>DAILY SPIN</span><h3>${spinState.available?'YOUR FREE SPIN IS READY':'COME BACK FOR YOUR NEXT SPIN'}</h3><p>UP · Season XP · Boosters · Merch</p></div>
+      <div class="daily-spin-wheel-wrap"><i class="daily-spin-pointer"></i><div class="daily-spin-wheel" style="--spin-rotation:${spinRotation}deg">${DAILY_SPIN_WEDGES.map((w,i)=>`<span style="--wedge:${i}">${w.label}</span>`).join('')}<b class="daily-spin-hub"><img src="${assetUrl('assets/images/app-icon-192.png')}" alt="WWE Legacy"></b></div></div>
+      <button id="daily-spin-button" class="start-match" ${spinState.available?'':'disabled'}>${spinState.available?'SPIN':'READY IN '+formatDailyHoursMinutes(spinState.msRemaining)}</button>
+    </section>
 
     <section class="legacy-command-rack legacy-home-destinations" aria-label="WWE Legacy destinations">
       <button id="menu-decks" class="legacy-command-tile command-decks"><span class="legacy-command-photo">${menuSuperstarPhotoMarkup("seth-rollins","Seth Rollins")}</span><span class="legacy-command-glow"></span><span class="legacy-command-copy"><em>BUILD YOUR ROSTER</em>${homeHubSplitTitle("DECK", "LAB")}<small>Build · optimize · save</small><b>OPEN <i>›</i></b></span></button>
@@ -2122,6 +2130,7 @@ function renderMainMenu() {
   $("#menu-challenges")?.addEventListener("click", showChallenges);
   $("#menu-profile")?.addEventListener("click", showProfile);
   $("#menu-store")?.addEventListener("click", showStore);
+  $("#daily-spin-button")?.addEventListener("click",()=>{try{const reward=spinDaily(profile,Math.random,new Date());dailySpinResultIndex=reward.index;saveProfile(profile);message=reward.type==='merch'?`Daily Spin: ${reward.merchName}.`:reward.type==='booster'?`Daily Spin: 1 ${sets[reward.setId]?.name??'random'} booster.`:`Daily Spin: +${reward.amount} ${reward.type==='up'?'UP':'Season XP'}.`;}catch(e){message=e.message;}renderMainMenu();});
   refreshSeasonClocks();
 }
 
@@ -2138,12 +2147,13 @@ function renderPlayMenu() {
   const reigningKingName = reigningKingId ? superstarById[reigningKingId].name : null;
   const kotrDefaultPortrait = portraitMarkup("gunther","Gunther");
   root.innerHTML = `<section class="play-menu-screen premium-screen legacy-play-v3">
-    <header class="legacy-play-heading"><span>PLAY</span><h2>CHOOSE YOUR PATH</h2><p>Four ways to build your WWE Legacy.</p></header>
+    <header class="legacy-play-heading"><span>PLAY</span><h2>CHOOSE YOUR PATH</h2><p>Five ways to build your WWE Legacy.</p></header>
     <div class="legacy-mode-stack">
       <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup(dailyTower?.event.heroId ?? "brock-lesnar", superstarById[dailyTower?.event.heroId]?.name ?? "Live Events")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · 1 RANDOM PACK ON CLEAR</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
       <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · 1 RANDOM PACK EVERY 5 WINS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
       <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr ${reigningKingId?'has-reigning-king':''}"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${reigningKingId ? portraitMarkup(reigningKingId,reigningKingName) : kotrDefaultPortrait}</span><span class="legacy-mode-copy"><em>${reigningKingName ? `♛ REIGNING KING · ${reigningKingName.toUpperCase()}` : '8 SUPERSTARS · SINGLE ELIMINATION'}</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>${reigningKingName?'RETURN TO THE THRONE':'ENTER THE TOURNAMENT'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>
       <article id="play-championship" role="button" tabindex="0" class="legacy-mode-banner mode-championship"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="legacy-mode-copy"><em>24 MATCHES · FOUR DIFFICULTIES</em>${modeLogoMarkup("championship",true)}<small>EASY → NORMAL → HARD → HARDCORE</small><b>START THE ROAD<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">24</span></article>
+      <article id="play-survivor-series" role="button" tabindex="0" class="legacy-mode-banner mode-survivor-series"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("randy-orton","Randy Orton")}</span><span class="legacy-mode-copy"><em>4 VS 4 · CAPTURE THE ROSTER</em><strong class="mode-text-logo">SURVIVOR <b>SERIES</b></strong><small>WIN THE MATCH · TAKE THEIR SUPERSTAR · OWN ALL 8</small><b>${canEnterSurvivorSeries(profile)?'ENTER SURVIVOR SERIES':'4 SUPERSTARS REQUIRED'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">4V4</span></article>
     </div>
   </section>`;
   const wireModeCard = (selector, action) => { const el = $(selector); el?.addEventListener("click", action); el?.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); action(); } }); };
@@ -2151,6 +2161,35 @@ function renderPlayMenu() {
   wireModeCard("#play-exhibition", showSetup);
   wireModeCard("#play-kotr", showKingOfTheRing);
   wireModeCard("#play-championship", showChampionship);
+  wireModeCard("#play-survivor-series", showSurvivorSeries);
+}
+
+
+function showSurvivorSeries() {
+  if (!canEnterSurvivorSeries(profile)) { message = "Unlock at least 4 Superstars to enter Survivor Series."; renderPlayMenu(); return; }
+  screen = "survivor-series"; message = ""; survivorSelectedAttacker = null; survivorSelectedTarget = null; renderSurvivorSeries();
+}
+function renderSurvivorSeries() {
+  setChrome(); const root=$("#game"); let run=currentSurvivorSeriesRun(profile);
+  if (!run) {
+    const owned=orderedUnlockedSuperstars().slice(0,4);
+    root.innerHTML=`<section class="survivor-series-screen premium-screen">${premiumHubHeading("SURVIVOR","SERIES","4 VS 4 · CAPTURE THE ROSTER","Choose four owned Superstars · every win steals a Superstar","hub-survivor")}<section class="premium-panel survivor-setup"><h3>YOUR OPENING TEAM</h3><div class="survivor-team-preview">${owned.map(star=>`<article>${superstarPreviewCardMarkup(star.id,"survivor-mini-card")}<b>${star.name}</b></article>`).join("")}</div><p>The first four unlocked Superstars are selected for this run. Win matches to capture the opposing team until one side owns all eight.</p><button id="survivor-start" class="start-match">START 4 VS 4</button></section></section>`;
+    $("#survivor-start")?.addEventListener("click",()=>{try{startSurvivorSeries(profile,owned.map(s=>s.id),Math.random,new Date());saveProfile(profile);renderSurvivorSeries();}catch(e){message=e.message;renderSurvivorSeries();}}); return;
+  }
+  const boardOrder=run.boardOrder??[...run.p1,...run.p2];
+  const slots=[0,1,2,3,"logo",4,5,6,7].map(slot=>{
+    if(slot==="logo") return `<div class="survivor-board-center"><img src="${assetUrl('assets/images/app-icon-192.png')}" alt="WWE Legacy"></div>`;
+    const id=boardOrder[slot],star=superstarById[id],team=run.p1.includes(id)?"p1":"p2",selected=id===survivorSelectedAttacker||id===survivorSelectedTarget;
+    const selectable=run.status==='active'&&run.turn==='p1';
+    return `<button type="button" class="survivor-board-card team-${team} ${selected?'is-selected':''}" data-survivor-star="${id}" data-team="${team}" ${selectable?'':'disabled'}>${superstarPreviewCardMarkup(id,"survivor-grid-card")}<span>${team==='p1'?'YOUR TEAM':'OPPONENT'}</span><b>${star?.name??id}</b></button>`;
+  }).join('');
+  const complete=run.status==='complete';
+  const command=complete?`<section class="survivor-command complete"><span>${run.winner==='p1'?'SURVIVOR SERIES WON':'RUN COMPLETE'}</span><h2>${run.p1.length}–${run.p2.length}</h2><p>${run.winner==='p1'?'You captured all eight Superstars.':'The opposing team captured the full roster.'}</p><button id="survivor-new" class="start-match">NEW SURVIVOR SERIES</button></section>`:run.turn==='p1'?`<section class="survivor-command"><span>YOUR CHALLENGE · ROUND ${run.round}</span><h2>${run.p1.length} VS ${run.p2.length}</h2><p>Select one Superstar on your team, then choose any opposing Superstar to challenge.</p><button id="survivor-challenge" class="start-match" ${survivorSelectedAttacker&&survivorSelectedTarget?'':'disabled'}>CHALLENGE</button></section>`:`<section class="survivor-command"><span>PLAYER 2 CHALLENGES · ROUND ${run.round}</span><h2>${run.p1.length} VS ${run.p2.length}</h2><p>The opposing team chooses one of your Superstars next.</p><button id="survivor-cpu-challenge" class="start-match">REVEAL CHALLENGE</button></section>`;
+  root.innerHTML=`<section class="survivor-series-screen premium-screen">${premiumHubHeading("SURVIVOR","SERIES",`${run.p1.length} VS ${run.p2.length}`,"Win · capture · switch teams · own all 8","hub-survivor")}<section class="survivor-board" aria-label="Survivor Series 3 by 3 board">${slots}</section>${message?`<p class="setup-message">${message}</p>`:''}${command}</section>`;
+  root.querySelectorAll('[data-survivor-star]').forEach(btn=>btn.addEventListener('click',()=>{if(run.turn!=='p1')return;const id=btn.dataset.survivorStar,team=btn.dataset.team;if(team==='p1'){survivorSelectedAttacker=id;}else{survivorSelectedTarget=id;}renderSurvivorSeries();}));
+  $("#survivor-challenge")?.addEventListener("click",()=>{try{const challenge=setSurvivorChallenge(profile,{attackerId:survivorSelectedAttacker,targetId:survivorSelectedTarget});saveProfile(profile);startMatch(challenge.attackerId,challenge.targetId,{mode:'survivor-series',eventMeta:{survivorChallenge:challenge}});}catch(e){message=e.message;renderSurvivorSeries();}});
+  $("#survivor-cpu-challenge")?.addEventListener("click",()=>{try{const challenge=autoSurvivorChallenge(profile,Math.random);saveProfile(profile);startMatch(challenge.targetId,challenge.attackerId,{mode:'survivor-series',eventMeta:{survivorChallenge:challenge}});}catch(e){message=e.message;renderSurvivorSeries();}});
+  $("#survivor-new")?.addEventListener("click",()=>{resetSurvivorSeries(profile);saveProfile(profile);survivorSelectedAttacker=null;survivorSelectedTarget=null;renderSurvivorSeries();});
 }
 
 
@@ -2171,7 +2210,7 @@ function renderRules() {
   root.innerHTML = `<section class="rules-screen premium-screen">
     ${premiumHubHeading("GAME", "RULES", "OFFICIAL RULEBOOK", "Match flow · cards · modes · progression", "hub-legacy")}
     <section class="rules-hero">
-      <div class="rules-hero-copy"><span>MY LEGACY · OFFICIAL RULEBOOK</span><h2>Rules & How to Play</h2><p>The live WWE Legacy rules in one place. Card text can create explicit exceptions, and Normal / Emerald / Sapphire / Ruby printings use their displayed tier values.</p></div>
+      <div class="rules-hero-copy"><span>MY LEGACY · OFFICIAL RULEBOOK</span><h2>Rules & How to Play</h2><p>The live WWE Legacy rules in one place. Card text can create explicit exceptions, and Normal / Emerald / Sapphire / Ruby / Diamond printings use their displayed tier values.</p></div>
       <div class="rules-hero-stats"><span><b>60</b><small>DECK PAGES</small></span><span><b>5</b><small>LEAD OFF</small></span><span><b>4</b><small>METHODS</small></span><span><b>8</b><small>COUNTER STATES</small></span></div>
     </section>
     <section class="rules-jump-panel"><div class="section-title"><div><h3>Rulebook Menu</h3><small>Jump to a system, then expand any section for the full rule.</small></div><button id="rules-back" class="nav-button">Back to My Legacy</button></div><div class="rules-nav-grid">${nav}</div></section>
@@ -2211,6 +2250,12 @@ function renderProfile() {
     return `<article class="career-superstar-record"><span class="career-record-headshot">${portraitMarkup(star.id,star.name)}</span><div><strong>${star.name}</strong><small>${star.nickname}</small></div><span class="career-record-score"><b>${record.wins}–${record.losses}</b><small>${careerWinPercentage(record)}</small></span></article>`;
   }).join("");
   const achievementCards = achievements.map(achievement => `<article class="career-achievement ${achievement.earned ? "earned" : "locked"}"><span class="career-achievement-medal">${achievement.earned ? "★" : "◇"}</span><div><strong>${achievement.name}</strong><p>${achievement.description}</p></div><b>${achievement.earned ? "EARNED" : "LOCKED"}</b></article>`).join("");
+  const activeMerch = activeMerchItem(profile);
+  const activeMerchTargetId = activeMerchSuperstarId(profile);
+  const ownedMerch = MERCH_ITEMS.filter(item => Math.max(0, Number(profile.ownedMerch?.[item.id]) || 0) > 0).sort((a,b)=>(Number(b.rarity)||0)-(Number(a.rarity)||0)||a.name.localeCompare(b.name));
+  const merchCards = ownedMerch.length ? ownedMerch.map(item => { const owned=Math.max(0,Number(profile.ownedMerch?.[item.id])||0); const locked=item.superstarId&&!hasSuperstar(profile,item.superstarId); const directStar=item.superstarId?superstarById[item.superstarId]:null; const compatibility=directStar?merchEligibilityForSuperstar(directStar,item):{legal:true,reason:''}; const incompatible=!!directStar&&!compatibility.legal; const needsDeckLab=!item.superstarId; return `<article class="merch-inventory-card ${item.scope==='superstar'?'is-superstar-merch':'is-generic-merch'} ${locked||incompatible?'is-locked':''}"><div><span>${item.scope==='superstar'?'SUPERSTAR MERCH':'GENERIC MERCH'} · ${item.duration} MATCH${item.duration===1?'':'ES'}</span><strong>${item.name}</strong><p>${item.rulesText}</p>${item.superstarId?`<small>${incompatible?compatibility.reason:(superstarById[item.superstarId]?.name??item.superstarId)}</small>`:`<small>Choose the best eligible Superstar in Deck Lab</small>`}</div><b>×${owned}</b><button type="button" class="nav-button" data-equip-merch="${item.id}" ${activeMerch||locked||incompatible||needsDeckLab?'disabled':''}>${locked?'BASE SUPERSTAR REQUIRED':incompatible?'NOT COMPATIBLE':activeMerch?'MERCH ACTIVE':needsDeckLab?'USE DECK LAB':'EQUIP'}</button></article>`; }).join('') : `<div class="premium-empty-state"><strong>No Merch owned yet</strong><small>Every booster contains one guaranteed Merch card, and Daily Spin can award more.</small></div>`;
+  const ownedVariants = SUPERSTAR_VARIANTS.filter(v => profile.ownedSuperstarVariants?.[v.id]);
+  const variantCards = ownedVariants.length ? ownedVariants.map(v => { const equipped=profile.equippedSuperstarVariants?.[v.superstarId]===v.id; const unlocked=hasSuperstar(profile,v.superstarId); return `<article class="variant-inventory-card ${equipped?'is-equipped':''} ${unlocked?'':'is-locked'}"><div><span>ULTRA RARE · ${String(v.variantType??'variant').replaceAll('-',' ').toUpperCase()}</span><strong>${v.name}</strong><p>${v.rulesText}</p></div><button type="button" class="${equipped?'nav-button':'start-match'}" data-equip-variant="${v.id}" data-variant-star="${v.superstarId}" ${unlocked?'':'disabled'}>${equipped?'EQUIPPED':unlocked?'EQUIP':'BASE SUPERSTAR REQUIRED'}</button>${equipped?`<button type="button" class="ghost" data-clear-variant="${v.superstarId}">USE BASE CARD</button>`:''}</article>`; }).join('') : `<div class="premium-empty-state"><strong>No Superstar Variants owned yet</strong><small>Ultra Rare Variants can appear in the four gameplay-card booster slots.</small></div>`;
   root.innerHTML = `<section class="profile-screen premium-screen profile-premium profile-command-screen profile-compact-redesign">
     ${premiumHubHeading("MY", "LEGACY", "YOUR CAREER", "Records · Rulebook · save & backup", "hub-legacy")}
     <section class="profile-command-band profile-command-band-top">
@@ -2229,12 +2274,18 @@ function renderProfile() {
     <section class="premium-panel kotr-career-panel"><div class="section-title"><div><h3>King of the Ring</h3><small>Tournament history</small></div><span>${kotr.clears ?? 0} CROWN${(kotr.clears ?? 0)===1?'':'S'}</span></div>${kotr.reigningKingId && superstarById[kotr.reigningKingId] ? `<div class="kotr-career-king"><span class="kotr-career-portrait">${portraitMarkup(kotr.reigningKingId,superstarById[kotr.reigningKingId].name)}</span><div><small>♛ REIGNING KING</small><strong>${superstarById[kotr.reigningKingId].name}</strong><span>${kotr.reigningKingAt ? `Crowned ${new Date(kotr.reigningKingAt).toLocaleDateString()}` : 'Tournament champion'}</span></div><b>${kotr.clears ?? 0}<small>CAREER CROWNS</small></b></div>` : `<div class="kotr-career-empty"><span>♛</span><div><strong>No King crowned yet</strong><small>Win three straight matches in King of the Ring.</small></div></div>`}</section>
     <section class="premium-panel career-record-panel"><div class="section-title"><div><h3>Superstar Records</h3><small>Wins and losses with every unlocked Superstar</small></div><span>${profile.unlockedSuperstars.length} UNLOCKED</span></div><div class="career-superstar-records">${superstarRecords}</div></section>
     <section class="premium-panel career-achievements-panel"><div class="section-title"><div><h3>Achievements</h3><small>Career milestones and mode accomplishments</small></div><span>${earnedAchievements}/${achievements.length} EARNED</span></div><div class="career-achievement-grid">${achievementCards}</div></section>
+    <section class="premium-panel merch-loadout-panel"><div class="section-title"><div><h3>Merch Loadout</h3><small>One temporary boost at a time · effects never stack</small></div><span>${ownedMerch.reduce((sum,item)=>sum+(Number(profile.ownedMerch?.[item.id])||0),0)} STORED</span></div>${activeMerch?`<article class="active-merch-card"><span>ACTIVE MERCH · ${activeMerch.remainingMatches} MATCH${activeMerch.remainingMatches===1?'':'ES'} LEFT · ${superstarById[activeMerchTargetId]?.name??'ASSIGNED SUPERSTAR'}</span><strong>${activeMerch.name}</strong><p>${activeMerch.rulesText}</p><button id="discard-active-merch" class="nav-button">DISCARD ACTIVE MERCH</button></article>`:`<div class="active-merch-card is-empty"><span>NO ACTIVE MERCH</span><p>Assign one item to one eligible Superstar in Deck Lab. The consumable is not copied across multiple decks.</p></div>`}<div class="merch-inventory-grid">${merchCards}</div></section>
+    <section class="premium-panel variant-loadout-panel"><div class="section-title"><div><h3>Superstar Variants</h3><small>Premium skins · +5 HP · one bounded bonus ability</small></div><span>${ownedVariants.length} OWNED</span></div><div class="variant-inventory-grid">${variantCards}</div></section>
     <section class="legacy-settings premium-panel profile-tools-panel"><div class="section-title"><h3>Career Tools</h3><span>LOCAL SAVE</span></div><p class="career-tracking-note">Match record tracking began with WWE Legacy v${career.trackingSinceBuild ?? "0.12.78"}. Earlier wins and losses are not estimated.</p><div class="profile-actions"><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a></div>
       ${(() => { const meta = backupMetadata(); const rollback = loadImportRollback(); const persistence = profilePersistenceStatus(); const last = meta?.lastBackupAt ? new Date(meta.lastBackupAt).toLocaleString() : "No external backup yet"; const localState = persistence.mode === "volatile" ? "LOCAL SAVE NEEDS ATTENTION" : persistence.recovered ? "LOCAL SAVE RECOVERED" : "LOCAL SAVE PROTECTED"; return `<section class="save-backup-panel"><div class="save-backup-head"><div><span>SAVE & BACKUP</span><strong>Protect Your Legacy</strong><p>Your live profile saves automatically on this device and keeps a rolling last-known-good recovery copy. External backup uses one rolling file: <b>${SAVE_FILENAME}</b>. Back up again to the same Files location and replace that file instead of building a dated archive.</p><span class="save-local-health ${persistence.mode === "volatile" ? "is-warning" : "is-healthy"}"><b>${localState}</b><small>${persistence.message || "Local persistence ready."}</small></span></div><em>${last}</em></div><div class="save-backup-actions"><button id="export-save" class="start-match">BACK UP TO FILES</button><button id="import-save" class="nav-button">IMPORT FROM FILES</button>${rollback ? `<button id="restore-pre-import" class="nav-button save-rollback-button">UNDO LAST IMPORT</button>` : ""}</div>${pendingSaveImport ? `<div class="save-import-confirm"><span>BACKUP VALIDATED</span><strong>${pendingSaveImport.profile.unlockedSuperstars?.length ?? 0} Superstars · ${(pendingSaveImport.profile.universePoints ?? 0).toLocaleString()} UP</strong><p>${pendingSaveImport.sourceBuildVersion ? `Created by v${pendingSaveImport.sourceBuildVersion}` : "Legacy profile backup"}${pendingSaveImport.exportedAt ? ` · ${new Date(pendingSaveImport.exportedAt).toLocaleString()}` : ""}. Your current profile will be kept as a one-step rollback until the next import.</p><div><button id="cancel-import-save" class="nav-button">Cancel</button><button id="confirm-import-save" class="start-match">REPLACE CURRENT SAVE</button></div></div>` : ""}<small class="save-backup-note">On iPhone, the native share/file interface controls the final Files location. WWE Legacy always uses the same primary filename so you can replace the existing backup rather than create dated copies.</small></section>`; })()}
       <article class="option-row app-update-row"><div><strong>App Update</strong><p>${appUpdateState.available ? `Installed v${BUILD_VERSION} · Latest v${appUpdateState.latest}${appUpdateState.deferred ? " · waiting for match to finish" : ""}` : appUpdateState.error ? `Installed v${BUILD_VERSION} · latest version could not be checked` : `Installed v${BUILD_VERSION} · ${appUpdateState.checking ? "checking for update…" : "tap to verify the live build"}`}</p></div>${appUpdateState.available && !appUpdateState.deferred ? `<button id="apply-app-update" class="start-match">UPDATE NOW</button>` : `<button id="check-app-update" class="nav-button" ${appUpdateState.checking ? "disabled" : ""}>${appUpdateState.checking ? "CHECKING…" : "CHECK FOR UPDATE"}</button>`}</article>
       <article class="option-row danger-zone"><div><strong>Reset Progress</strong><p>Erase this device's WWE Legacy profile, collection, unlocked Superstars, Season progress, career record, achievements and saved decks.</p></div>${optionsResetArmed ? `<div class="reset-confirm-actions"><button id="cancel-reset-progress" class="nav-button">Cancel</button><button id="confirm-reset-progress" class="start-match danger">CONFIRM RESET</button></div>` : `<button id="reset-progress" class="nav-button danger">Reset Progress</button>`}</article>${optionsResetArmed ? `<p class="reset-warning"><b>Testing reset armed.</b> This cannot be undone on this device.</p>` : ""}<div class="option-row"><div><strong>Build</strong><p>WWE Legacy: Collectible Card Game v${BUILD_VERSION}</p></div></div></section>
   </section>`;
   $("#open-rulebook")?.addEventListener("click", showRules);
+  root.querySelectorAll("[data-equip-merch]").forEach(btn=>btn.addEventListener("click",()=>{try{const item=MERCH_BY_ID[btn.dataset.equipMerch];equipMerch(profile,btn.dataset.equipMerch,item?.superstarId??null);saveProfile(profile);message="Merch equipped for its assigned Superstar.";}catch(e){message=e.message;}renderProfile();}));
+  $("#discard-active-merch")?.addEventListener("click",()=>{const old=discardActiveMerch(profile);saveProfile(profile);message=old?"Active Merch discarded.":"No active Merch to discard.";renderProfile();});
+  root.querySelectorAll("[data-equip-variant]").forEach(btn=>btn.addEventListener("click",()=>{try{equipSuperstarVariant(profile,btn.dataset.variantStar,btn.dataset.equipVariant);saveProfile(profile);message=`${SUPERSTAR_VARIANT_BY_ID[btn.dataset.equipVariant]?.name??'Variant'} equipped.`;}catch(e){message=e.message;}renderProfile();}));
+  root.querySelectorAll("[data-clear-variant]").forEach(btn=>btn.addEventListener("click",()=>{profile.equippedSuperstarVariants??={};delete profile.equippedSuperstarVariants[btn.dataset.clearVariant];saveProfile(profile);message="Base Superstar presentation restored.";renderProfile();}));
   $("#export-save")?.addEventListener("click", async () => {
     try {
       const result = await exportSaveToFiles(profile);
@@ -2420,7 +2471,7 @@ function cardRulesText(card) {
   if (card.kind === "superstar") { const star=superstarById[card.superstarId]; const a=star?.ability; return playerFacingRulesText(`${a?.name ?? card.abilityName ?? "Superstar Ability"}: ${a?.text ?? card.abilityText ?? "Ability details pending."}`); }
   if (card.kind === "entrance") { const star=superstarById[card.superstarId]; return playerFacingRulesText(card.rulesText ?? star?.entrance?.rulesText ?? "Entrance effect pending."); }
   if (card.kind === "momentum") return `Gain ${card.amount ?? 1} permanent ${(card.method ?? "Momentum")[0].toUpperCase() + (card.method ?? "momentum").slice(1)} Momentum. Momentum is not spent when a Move is played.`;
-  if (["action", "support", "manager"].includes(card.kind)) return playerFacingRulesText(card.abilityText ?? card.effectText ?? card.rulesText ?? card.kind);
+  if (["action", "manager", "merch", "variant"].includes(card.kind)) return playerFacingRulesText(card.abilityText ?? card.effectText ?? card.rulesText ?? card.kind);
   return collectionText(card);
 }
 
@@ -2454,8 +2505,25 @@ function layeredFrontRequirementText(card) {
   if (!card || card.kind !== "move" || card.finisher) return "";
   return Object.entries(card.requirements ?? {})
     .filter(([, amount]) => Number(amount) > 0)
-    .map(([method, amount]) => `◆ ${Number(amount)} ${String(method).toUpperCase()}`)
-    .join("   •   ");
+    .map(([method, amount]) => `${Number(amount)} ${String(method).toUpperCase()}`)
+    .join(" · ");
+}
+function layeredFrontRequirementDotsMarkup(card) {
+  if (!card || card.kind !== "move" || card.finisher) return "";
+  const groups = Object.entries(card.requirements ?? {})
+    .filter(([, amount]) => Number(amount) > 0)
+    .map(([method, amount]) => {
+      const key = String(method).toLowerCase();
+      const dots = Array.from({ length: Number(amount) }, () => '<i aria-hidden="true"></i>').join("");
+      return `<span class="ccg-method-dot-group method-${key}" data-method="${key}">${dots}</span>`;
+    }).join("");
+  return groups ? `<span class="ccg-method-dots" aria-hidden="true">${groups}</span>` : "";
+}
+
+const PREMIUM_REWARD_SET_IDS = new Set(["season-1-final-boss","season-1-last-time-is-now","season-2-whos-next","parked-chyna"]);
+function isPremiumRewardCard(card) {
+  const setType = sets?.[card?.setId]?.type ?? "";
+  return PREMIUM_REWARD_SET_IDS.has(card?.setId) || setType === "future-reward" || setType === "season-exclusive";
 }
 
 function layeredFrontOverlayMarkup(card) {
@@ -2465,7 +2533,7 @@ function layeredFrontOverlayMarkup(card) {
   const nameClass = nameLength > 30 ? "is-name-xl" : nameLength > 22 ? "is-name-long" : "";
   const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : String(card.kind ?? "CARD").toUpperCase();
   if (card.kind === "move") {
-    const req = layeredFrontRequirementText(card);
+    const req = layeredFrontRequirementDotsMarkup(card);
     const moveType = String(card.moveType || card.method || "move").toUpperCase();
     return `<span class="ccg-live-front-data ccg-live-front-move" aria-hidden="true">
       <span class="ccg-live-rarity">${rarity}</span>
@@ -2476,10 +2544,11 @@ function layeredFrontOverlayMarkup(card) {
       <span class="ccg-live-type ${req ? "has-requirement" : ""}">MOVE • ${moveType}</span>
     </span>`;
   }
+  const utilityTypeLabel = card.kind === "merch" ? `MERCH • ${card.duration ?? 1} MATCH${Number(card.duration) === 1 ? "" : "ES"}` : typeLabel;
   return `<span class="ccg-live-front-data ccg-live-front-utility" aria-hidden="true">
     <span class="ccg-live-rarity">${rarity}</span>
     <strong class="ccg-live-name ${nameClass}" data-card-name-marquee="1"><span class="ccg-live-name-text">${card.name}</span></strong>
-    <span class="ccg-live-type">${typeLabel}</span>
+    <span class="ccg-live-type">${utilityTypeLabel}</span>
   </span>`;
 }
 
@@ -2515,10 +2584,73 @@ function scheduleCardNameMarquees() {
 }
 if (typeof MutationObserver !== "undefined" && typeof document !== "undefined") {
   const cardNameMarqueeObserver = new MutationObserver(records => {
-    if (records.some(record => record.addedNodes?.length)) scheduleCardNameMarquees();
+    if (records.some(record => record.addedNodes?.length)) { scheduleCardNameMarquees(); registerAnimatedCardPlates(document); }
   });
   cardNameMarqueeObserver.observe(document.documentElement, { childList: true, subtree: true });
   globalThis.addEventListener?.('resize', scheduleCardNameMarquees);
+  globalThis.queueMicrotask?.(() => registerAnimatedCardPlates(document));
+}
+
+
+function animatedUrlAttribute(value) {
+  return String(value || "").replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
+}
+
+function animatedCardPlateMarkup(card) {
+  if (!isAnimatedCardEligible(card)) return "";
+  const paths = canonicalAnimatedCardPaths(card);
+  if (!paths) return "";
+  return `<img class="ccg-animated-card-plate" alt="" aria-hidden="true" data-animated-linked="${animatedUrlAttribute(paths.linked)}" data-animated-webp="${animatedUrlAttribute(paths.webp)}" data-animated-gif="${animatedUrlAttribute(paths.gif)}">`;
+}
+
+function loadAnimatedCardPlate(img) {
+  if (!img || img.dataset.animationFailed === "1" || img.dataset.animationLoading === "1") return;
+  if (globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) return;
+  const linked = img.dataset.animatedLinked;
+  const webp = img.dataset.animatedWebp;
+  const gif = img.dataset.animatedGif;
+  const preferred = img.dataset.animationPreferred || linked || webp || gif;
+  if (!preferred) return;
+  img.dataset.animationLoading = "1";
+  img.onload = () => { img.dataset.animationLoading = "0"; img.dataset.animationPreferred = img.getAttribute("src") || preferred; img.classList.add("is-animation-ready"); };
+  img.onerror = () => {
+    const current=img.getAttribute("src");
+    if (linked && current === linked && webp) { img.src = webp; return; }
+    if (webp && current === webp && gif) { img.src = gif; return; }
+    if (linked && current === linked && !webp && gif) { img.src = gif; return; }
+    img.dataset.animationLoading = "0";
+    img.dataset.animationFailed = "1";
+    img.classList.remove("is-animation-ready");
+    img.removeAttribute("src");
+  };
+  img.src = preferred;
+}
+
+function unloadAnimatedCardPlate(img) {
+  if (!img || !img.getAttribute("src")) return;
+  img.classList.remove("is-animation-ready");
+  img.dataset.animationLoading = "0";
+  img.removeAttribute("src");
+}
+
+const animatedCardPlateObserver = typeof IntersectionObserver !== "undefined"
+  ? new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        const img = entry.target;
+        if (entry.isIntersecting && entry.intersectionRatio > 0) loadAnimatedCardPlate(img);
+        else unloadAnimatedCardPlate(img);
+      }
+    }, { rootMargin: "140px 140px", threshold: 0.01 })
+  : null;
+
+function registerAnimatedCardPlates(scope = document) {
+  if (typeof document === "undefined") return;
+  const images = scope.querySelectorAll?.(".ccg-animated-card-plate:not([data-animation-observed='1'])") ?? [];
+  images.forEach(img => {
+    img.dataset.animationObserved = "1";
+    if (animatedCardPlateObserver) animatedCardPlateObserver.observe(img);
+    else loadAnimatedCardPlate(img);
+  });
 }
 
 function cardArtFace(card, { eager = false } = {}) {
@@ -2531,7 +2663,8 @@ function cardArtFace(card, { eager = false } = {}) {
     const legacyCandidate = legacyFinished && legacyFinished !== finished ? legacyFinished : "";
     const flatSuperstarClass = card.kind === "superstar" ? "c?.classList.add('has-flat-superstar-front');" : "";
     const resetFlatSuperstarClass = card.kind === "superstar" ? "c?.classList.remove('has-flat-superstar-front');" : "";
-    return `<img loading="${loading}" decoding="async" class="ccg-layered-card-plate ccg-load-guard" src="${layered}" alt="${card.name}" data-layered-candidate="1" data-flat-finished-art="${finished ?? ""}" data-legacy-finished-art="${legacyCandidate}" onload="this.classList.add('is-art-ready');if(this.dataset.layeredCandidate==='1'){this.closest('.ccg-card')?.classList.add('has-layered-asset');}" onerror="this.classList.remove('is-art-ready');const c=this.closest('.ccg-card');const o=c?.querySelector('.ccg-live-front-data');this.dataset.layeredCandidate='0';c?.classList.remove('is-layered-front','has-layered-asset');if(o)o.style.display='none';if(!this.dataset.flatTried&&this.dataset.flatFinishedArt){this.dataset.flatTried='1';${flatSuperstarClass}this.src=this.dataset.flatFinishedArt;return;}${resetFlatSuperstarClass}if(!this.dataset.legacyTried&&this.dataset.legacyFinishedArt){this.dataset.legacyTried='1';this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.style.display='none';c?.classList.remove('is-full-art-finished','is-full-art-move');c?.classList.add('uses-rules-fallback','force-rules-face');">`;
+    const animatedPlate = animatedCardPlateMarkup(card);
+    return `<img loading="${loading}" decoding="async" class="ccg-layered-card-plate ccg-load-guard" src="${layered}" alt="${card.name}" data-layered-candidate="1" data-flat-finished-art="${finished ?? ""}" data-legacy-finished-art="${legacyCandidate}" onload="this.classList.add('is-art-ready');if(this.dataset.layeredCandidate==='1'){this.closest('.ccg-card')?.classList.add('has-layered-asset');}" onerror="this.classList.remove('is-art-ready');const c=this.closest('.ccg-card');const o=c?.querySelector('.ccg-live-front-data');this.dataset.layeredCandidate='0';c?.classList.remove('is-layered-front','has-layered-asset');if(o)o.style.display='none';if(!this.dataset.flatTried&&this.dataset.flatFinishedArt){this.dataset.flatTried='1';${flatSuperstarClass}this.src=this.dataset.flatFinishedArt;return;}${resetFlatSuperstarClass}if(!this.dataset.legacyTried&&this.dataset.legacyFinishedArt){this.dataset.legacyTried='1';this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.style.display='none';c?.classList.remove('is-full-art-finished','is-full-art-move');c?.classList.add('uses-rules-fallback','force-rules-face');">${animatedPlate}`;
   }
   if (card.kind === "superstar" && card.superstarId) {
     return superstarVisualMarkup(card.superstarId, star?.name ?? card.name, "ccg-superstar-art-image");
@@ -2575,8 +2708,8 @@ function cardPlayRestrictionText(card) {
 }
 
 function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null, extraClass = "", footer = "", flipAttr = "", interactive = true, eagerArt = false } = {}) {
-  // Four print tiers share one underlying card identity. Sapphire is the authored
-  // balance value; Normal/Emerald/Ruby are live runtime variants.
+  // Five print tiers share one underlying card identity. Sapphire is the authored
+  // balance value; Normal/Emerald step down while Ruby/Diamond step up at runtime.
   const resolvedTier = normalizeCardTier(card?.fixedPrintingTier ?? tier ?? card?.tier ?? (foil === true ? "ruby" : "normal"), "normal");
   card = applyCardTier(card, resolvedTier);
   const superstarFront = card.kind === "superstar";
@@ -2608,7 +2741,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
         : `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span><span class="ccg-card-title"><small>${typeLabel} · ${tierTag}</small><strong>${card.name}</strong></span><span class="ccg-card-stats">${cardFrontBottom(card)}</span>`;
   const rootTag = interactive ? "button" : "span";
   const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. ${tierLabel(resolvedTier)} printing. ${missingCustomFront ? "Card details shown because custom front artwork is not installed." : `Tap to ${displayFlipped ? "view artwork" : "view effects"}.`}"` : `aria-hidden="true"`;
-  return `<${rootTag} ${rootAttrs} data-card-tier="${resolvedTier}" class="ccg-card ${displayFlipped ? "is-flipped" : ""} ${missingCustomFront ? "uses-rules-fallback force-rules-face" : ""} ${setClass} ${typeClass} ${finisherClass} ${tierClass} ${resolvedTier !== "normal" ? "is-tier-glow" : ""} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront || layeredFront ? "is-full-art-finished" : ""} ${layeredFront ? "is-layered-front" : ""} ${tribalChiefLiveFront ? "has-tribal-chief-live-front" : ""} ${moveFront && (finishedFront || layeredFront) ? "is-full-art-move" : ""} ${extraClass}">
+  return `<${rootTag} ${rootAttrs} data-card-tier="${resolvedTier}" class="ccg-card ${displayFlipped ? "is-flipped" : ""} ${missingCustomFront ? "uses-rules-fallback force-rules-face" : ""} ${setClass} ${typeClass} ${finisherClass} rarity-${card.rarity ?? 1} ${card.ultraRare ? "is-ultra-rare" : ""} ${tierClass} ${resolvedTier !== "normal" ? "is-tier-glow" : ""} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront || layeredFront ? "is-full-art-finished" : ""} ${layeredFront ? "is-layered-front" : ""} ${tribalChiefLiveFront ? "has-tribal-chief-live-front" : ""} ${isPremiumRewardCard(card) ? "is-premium-reward-card" : ""} ${moveFront && (finishedFront || layeredFront) ? "is-full-art-move" : ""} ${extraClass}">
     <span class="ccg-card-inner">
       <span class="ccg-card-face ccg-card-front">${frontMarkup}${resolvedTier !== "normal" ? `<span class="ccg-tier-overlay" aria-hidden="true"></span>` : ""}</span>
       <span class="ccg-card-face ccg-card-rules ${setClass}">
@@ -2634,7 +2767,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
 function collectionText(card) {
   if (card.kind === "superstar") return `${card.hp} HP · ${card.abilityName}: ${card.abilityText}`;
   if (card.kind === "momentum") return `Gain 1 permanent ${card.method[0].toUpperCase() + card.method.slice(1)} Momentum. Move costs never spend Momentum.`;
-  if (["entrance", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
+  if (["entrance", "action", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
   const req = Object.entries(card.finisher ? {} : (card.requirements ?? {})).map(([m,n]) => `${n} ${m}`).join(", ");
   const stateReq = [card.requiresPosture ? `opponent ${card.requiresPosture}` : "", card.requiresLocation ? card.requiresLocation : ""].filter(Boolean).join(" · ");
   const method = card.method ? `Method ${card.method[0].toUpperCase() + card.method.slice(1)}` : "";
@@ -2658,7 +2791,7 @@ function renderCollection() {
   const baseCards = allSets ? visibleCards : visibleCards.filter(card => card.setId === activeCollectionSetId);
   const isOwned = card => CARD_TIERS.some(tier => ownedCount(profile, card.id, tier) > 0);
   const scopedCards = collectionView === "owned" ? baseCards.filter(isOwned) : baseCards;
-  const kinds = ["all","superstar","entrance","momentum","move","action","support","manager"];
+  const kinds = ["all","superstar","entrance","momentum","move","action","manager"];
   const query = collectionFilter.search.trim().toLowerCase();
   const acquisitionOrder = new Map(Object.keys(profile.ownedCards ?? {}).map((id, index) => [id, index]));
   const copiesOwned = card => CARD_TIERS.reduce((sum,tier)=>sum+ownedCount(profile,card.id,tier),0);
@@ -2749,7 +2882,7 @@ function renderCardCatalogue() {
   cataloguePage = Math.min(Math.max(1, cataloguePage), pageCount);
   const start = (cataloguePage - 1) * CATALOGUE_PAGE_SIZE;
   const pageCards = filtered.slice(start, start + CATALOGUE_PAGE_SIZE);
-  const kinds = ["all","superstar","entrance","momentum","move","action","support","manager"];
+  const kinds = ["all","superstar","entrance","momentum","move","action","manager"];
   const select = (value, label, selected) => `<option value="${value}" ${String(selected) === String(value) ? "selected" : ""}>${label}</option>`;
   const requirementOptions = selected => [select("any","Any",selected), ...[0,1,2,3].map(n => select(String(n),`= ${n}`,selected))].join("");
   const comparatorOptions = selected => [
@@ -2852,7 +2985,7 @@ function deckLabCardHasFront(card) {
 
 function renderDeckLabInspectOverlay() {
   if (!deckLabInspectCardId) return "";
-  const card = collectionById.get(deckLabInspectCardId);
+  const card = collectionById.get(deckLabInspectCardId) ?? MERCH_BY_ID[deckLabInspectCardId];
   if (!card) return "";
   const canFlip = deckLabCardHasFront(card);
   const instruction = canFlip
@@ -2873,7 +3006,7 @@ function bindDeckLabInspect(root) {
   });
   root.querySelectorAll("[data-flip-deck-lab-modal]").forEach(btn => btn.addEventListener("click", event => {
     event.stopPropagation();
-    const card = collectionById.get(deckLabInspectCardId);
+    const card = collectionById.get(deckLabInspectCardId) ?? MERCH_BY_ID[deckLabInspectCardId];
     if (!deckLabCardHasFront(card)) return;
     deckLabInspectFlipped = !deckLabInspectFlipped;
     renderDeckBuilder();
@@ -2929,6 +3062,10 @@ function renderDeckBuilder() {
   const recommendedEntrance = recommendedPlan.authoredEntranceId ? collectionById.get(recommendedPlan.authoredEntranceId) : null;
   const lead = deckDraft.slice(0, 5).map((entry, index) => ({ entry, index, card: collectionById.get(entry.id ?? entry) }));
   const deckCountClass = health.healthy ? "valid" : deckDraft.length === 60 ? "invalid" : "incomplete";
+  const activeMerchRecord = profile.activeMerch?.id ? MERCH_BY_ID[profile.activeMerch.id] ?? null : null;
+  const activeMerchTargetId = activeMerchSuperstarId(profile);
+  const activeMerchForStar = activeMerchItem(profile, deckBuilderStarId);
+  const activeMerchMatches = Math.max(0, Number(profile.activeMerch?.remainingMatches) || 0);
 
   if (deckLabPicker) {
     let title = "Choose Card", subtitle = "All owned cards are shown. Invalid choices stay visible but shaded.", cards = [], pickType = deckLabPicker.type;
@@ -2936,6 +3073,13 @@ function renderDeckBuilder() {
       title = "Change Entrance";
       subtitle = "Owned Entrances appear here. Superstar-specific Entrances are Very Rare booster pulls; incompatible Entrances remain visible but shaded.";
       cards = allOwnedEntrances(profile).map(card => ({ card, eligibility: entranceEligibilityForSuperstar(star, card) }));
+    } else if (pickType === "merch") {
+      title = "Choose Merch";
+      subtitle = `One active Merch slot · effects never stack · each card expires after 1, 3 or 5 completed eligible matches. Choose Generic Merch or ${star.name}-specific Merch.`;
+      cards = MERCH_ITEMS
+        .filter(card => Math.max(0, Number(profile.ownedMerch?.[card.id]) || 0) > 0)
+        .filter(card => card.scope === "generic" || card.superstarId === deckBuilderStarId)
+        .map(card => { const base=merchEligibilityForSuperstar(star,card); return { card, eligibility: activeMerchRecord ? { legal:false, reason:"The single Merch slot is already occupied. Discard or expire the active Merch first." } : base }; });
     } else if (pickType === "lead") {
       title = `Change Lead Off ${Number(deckLabPicker.slot) + 1}`;
       subtitle = "Choose any owned Move or Momentum page. Invalid Method or Superstar restrictions remain visible but shaded.";
@@ -2955,11 +3099,12 @@ function renderDeckBuilder() {
       <header class="deck-lab-picker-head"><button id="deck-picker-back" type="button" class="ghost">← Deck</button><div><span>DECK LAB · ${star.name.toUpperCase()}</span><h2>${title}</h2><p>${subtitle}</p></div><strong class="deck-lab-counter ${deckCountClass}">${deckDraft.length}/60</strong></header>
       <div class="deck-lab-picker-tools"><input id="deck-search" type="search" placeholder="Search owned cards" value="${deckBuilderFilter.replaceAll('"','&quot;')}"><label class="valid-only-toggle"><input id="deck-valid-only" type="checkbox" ${deckLabOnlyValid ? 'checked' : ''}><span>Only Show Valid</span></label></div>
       <section class="deck-lab-card-picker deck-lab-card-grid">${cards.length ? cards.map(({card, eligibility}) => {
-        const used = deckDraft.filter(e => (e.id ?? e) === card.id).length;
-        const owned = ownedTotal(profile, card.id);
+        const merchPick = pickType === "merch";
+        const used = merchPick ? 0 : deckDraft.filter(e => (e.id ?? e) === card.id).length;
+        const owned = merchPick ? Math.max(0, Number(profile.ownedMerch?.[card.id]) || 0) : ownedTotal(profile, card.id);
         const cap = card.kind === "momentum" ? 12 : 5;
-        const canAdd = eligibility.legal && deckDraft.length < 60 && used < Math.min(cap, owned);
-        const tailIndex = deckDraft.map(e => e.id ?? e).lastIndexOf(card.id);
+        const canAdd = !merchPick && eligibility.legal && deckDraft.length < 60 && used < Math.min(cap, owned);
+        const tailIndex = merchPick ? -1 : deckDraft.map(e => e.id ?? e).lastIndexOf(card.id);
         // Momentum distribution is part of deck construction, so a player must be
         // able to take a Method all the way to zero even when its final copy is
         // currently inside Lead Off 5. Removing a Lead Off Momentum page simply
@@ -2968,11 +3113,13 @@ function renderDeckBuilder() {
         const canRemove = pickType === "category" && (tailIndex >= 5 || (card.kind === "momentum" && tailIndex >= 0));
         const action = pickType === "entrance"
           ? `<button data-pick-entrance="${card.id}" class="deck-card-change primary" ${eligibility.legal ? '' : 'disabled'}>${card.id === deckLabEntranceId ? 'SELECTED' : 'CHANGE'}</button>`
+          : pickType === "merch"
+            ? `<button data-pick-merch="${card.id}" class="deck-card-change primary" ${eligibility.legal ? '' : 'disabled'}>EQUIP · ${card.duration} MATCH${Number(card.duration)===1?'':'ES'}</button>`
           : pickType === "lead"
             ? `<button data-pick-lead="${card.id}" class="deck-card-change primary" ${eligibility.legal ? '' : 'disabled'}>CHANGE</button>`
             : `<div class="deck-card-stepper"><button data-deck-remove-index="${tailIndex}" class="secondary" ${canRemove ? '' : 'disabled'} aria-label="Remove one ${card.name}">−</button><strong>${used}</strong><button data-add-deck="${card.id}" class="primary" ${canAdd ? '' : 'disabled'} aria-label="Add one ${card.name}">+</button></div>`;
         return `<article class="deck-lab-card-tile ${eligibility.legal ? 'is-valid' : 'is-invalid'}">
-          <div class="deck-lab-full-card">${collectibleCardMarkup(card,{tier:bestOwnedTierFor(card),extraClass:"deck-lab-picker-ccg",flipAttr:`data-deck-lab-inspect="${card.id}"`})}<span class="deck-card-owned-chip">${used}/${owned}</span>${eligibility.legal ? '' : `<span class="deck-card-invalid-chip">LOCKED</span>`}</div>
+          <div class="deck-lab-full-card">${collectibleCardMarkup(card,{tier:merchPick?'normal':bestOwnedTierFor(card),extraClass:"deck-lab-picker-ccg",flipAttr:`data-deck-lab-inspect="${card.id}"`})}<span class="deck-card-owned-chip">${merchPick?`×${owned}`:`${used}/${owned}`}</span>${eligibility.legal ? '' : `<span class="deck-card-invalid-chip">LOCKED</span>`}</div>
           ${eligibility.legal ? '' : `<div class="deck-card-invalid-reason">${eligibility.reason}</div>`}
           ${action}
         </article>`;
@@ -2984,6 +3131,19 @@ function renderDeckBuilder() {
     $("#deck-search")?.addEventListener("input", e => { deckBuilderFilter = e.target.value; renderDeckBuilder(); requestAnimationFrame(() => { const input = $("#deck-search"); input?.focus(); input?.setSelectionRange(input.value.length, input.value.length); }); });
     $("#deck-valid-only")?.addEventListener("change", e => { deckLabOnlyValid = e.target.checked; renderDeckBuilder(); });
     root.querySelectorAll("[data-pick-entrance]").forEach(btn => btn.addEventListener("click", () => { deckLabEntranceId = btn.dataset.pickEntrance; deckLabPicker = null; deckBuilderFilter = ""; message = `${collectionById.get(deckLabEntranceId)?.name ?? 'Entrance'} selected. Save the deck to keep this Entrance.`; renderDeckBuilder(); }));
+    root.querySelectorAll("[data-pick-merch]").forEach(btn => btn.addEventListener("click", () => {
+      try {
+        const item = MERCH_BY_ID[btn.dataset.pickMerch];
+        if (!item) throw new Error("Merch item not found.");
+        const eligibility=merchEligibilityForSuperstar(star,item);
+        if (!eligibility.legal) throw new Error(eligibility.reason);
+        equipMerch(profile, btn.dataset.pickMerch, deckBuilderStarId);
+        saveProfile(profile);
+        deckLabPicker = null; deckBuilderFilter = "";
+        message = `${item.name} equipped. ${item.duration} completed eligible match${Number(item.duration)===1?'':'es'} before expiry · Merch does not stack.`;
+      } catch (error) { message = error?.message ?? "Unable to equip Merch."; }
+      renderDeckBuilder();
+    }));
     root.querySelectorAll("[data-pick-lead]").forEach(btn => btn.addEventListener("click", () => { const before = deckDraft; deckDraft = replaceLeadOffSlot(profile, deckBuilderStarId, deckDraft, deckLabPicker.slot, btn.dataset.pickLead); if (deckDraft === before) message = "That card cannot replace this Lead Off slot with your current ownership/copy limits."; else message = `Lead Off ${Number(deckLabPicker.slot)+1} changed.`; deckLabPicker = null; deckBuilderFilter = ""; renderDeckBuilder(); }));
     root.querySelectorAll("[data-add-deck]").forEach(btn => btn.addEventListener("click", () => { const before = deckDraft.length; deckDraft = addCardToDraft(profile, deckBuilderStarId, deckDraft, btn.dataset.addDeck); message = deckDraft.length > before ? "Card added." : "That card cannot be added."; renderDeckBuilder(); }));
     root.querySelectorAll("[data-deck-remove-index]").forEach(btn => btn.addEventListener("click", () => {
@@ -3014,6 +3174,15 @@ function renderDeckBuilder() {
       <article class="deck-identity-card entrance-slot"><span>ENTRANCE</span><div class="deck-identity-visual">${entranceCard ? collectibleCardMarkup(entranceCard,{extraClass:"deck-lab-identity-card",flipAttr:`data-deck-lab-inspect="${entranceCard.id}"`}) : '<div class="portrait-placeholder">Entrance</div>'}</div><strong>${entranceCard?.name ?? star.entrance?.name ?? 'Entrance'}</strong><button id="change-entrance" type="button" class="nav-button">Change</button></article>
     </section>
 
+    <section class="deck-merch-loadout ${activeMerchRecord ? 'has-active-merch' : 'is-empty'}">
+      <div class="section-title"><div><h3>Merch Slot</h3><small>1 active item · non-stackable · expires after completed eligible matches</small></div><span>${activeMerchRecord ? `${activeMerchMatches} MATCH${activeMerchMatches===1?'':'ES'} LEFT` : 'EMPTY'}</span></div>
+      ${activeMerchRecord ? `<div class="deck-merch-active">
+        <div class="deck-merch-card">${collectibleCardMarkup(activeMerchRecord,{tier:'normal',extraClass:'deck-merch-ccg',flipAttr:`data-deck-lab-inspect="${activeMerchRecord.id}"`})}</div>
+        <div class="deck-merch-copy"><span>${activeMerchForStar ? 'ACTIVE FOR THIS SUPERSTAR' : `SLOT OCCUPIED · ${superstarById[activeMerchTargetId]?.name ?? activeMerchTargetId ?? 'ASSIGNED SUPERSTAR'}`}</span><strong>${activeMerchRecord.name}</strong><p>${activeMerchRecord.rulesText}</p><small>${activeMerchRecord.duration} match card · ${activeMerchMatches} remaining · assigned only to ${superstarById[activeMerchTargetId]?.name ?? 'one Superstar'} · one use consumed after each completed eligible match.</small></div>
+        <button id="discard-deck-merch" type="button" class="secondary">DISCARD ACTIVE MERCH</button>
+      </div>` : `<div class="deck-merch-empty"><div><span>FREE MERCH SLOT</span><strong>Add a temporary match boost</strong><p>Equip eligible Generic Merch or ${star.name}-specific Merch. Generic Merch is assigned to this Superstar only. Method boosts are blocked when this Superstar cannot legally use that Method.</p></div><button id="change-merch" type="button" class="primary">ADD MERCH</button></div>`}
+    </section>
+
     <section class="deck-recommended-plan">
       <div class="deck-recommended-head"><div><span>RECOMMENDED BUILD</span><h3>${recommendedPlan.matched}/60 MATCHED</h3><p>${recommendedPlan.missing ? `${recommendedPlan.missing} authored slot${recommendedPlan.missing===1?'':'s'} still use Collection replacements.` : 'Complete authored build achieved.'}</p></div><strong>${recommendedPlan.coverage}%</strong></div>
       <div class="deck-recommended-meter"><span style="width:${recommendedPlan.coverage}%"></span></div>
@@ -3035,6 +3204,8 @@ function renderDeckBuilder() {
   bindDeckLabInspect(root);
   $("#deck-lab-roster-back")?.addEventListener("click", () => { deckLabStage = "roster"; deckLabPicker = null; deckDraft = null; deckLabEntranceId = null; deckLabInspectCardId = null; deckLabInspectFlipped = false; message = ""; renderDeckBuilder(); });
   $("#change-entrance")?.addEventListener("click", () => { deckLabPicker = { type: "entrance" }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); });
+  $("#change-merch")?.addEventListener("click", () => { deckLabPicker = { type: "merch" }; deckLabOnlyValid = true; deckBuilderFilter = ""; renderDeckBuilder(); });
+  $("#discard-deck-merch")?.addEventListener("click", () => { const old = discardActiveMerch(profile); saveProfile(profile); message = old ? "Active Merch discarded. The single Merch slot is free." : "No active Merch to discard."; renderDeckBuilder(); });
   $("#use-recommended-entrance")?.addEventListener("click", () => { const id = recommendedEntranceId(profile, deckBuilderStarId); if (id) { deckLabEntranceId = id; message = `${collectionById.get(id)?.name ?? 'Entrance'} selected as the recommended Entrance. Save the deck to keep it.`; } renderDeckBuilder(); });
   root.querySelectorAll("[data-change-lead]").forEach(btn => btn.addEventListener("click", () => { deckLabPicker = { type: "lead", slot: Number(btn.dataset.changeLead) }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); }));
   root.querySelectorAll("[data-deck-category]").forEach(btn => btn.addEventListener("click", () => { deckLabPicker = { type: "category", category: btn.dataset.deckCategory }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); }));
@@ -3069,7 +3240,7 @@ function renderDeckBuilder() {
 
 function cardMeta(card) {
   if (card.kind === "momentum") return `${card.method.toUpperCase()} +${card.amount ?? 1}`;
-  if (["entrance", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
+  if (["entrance", "action", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
   const req = Object.entries(card.finisher ? {} : (card.requirements ?? {})).map(([m, n]) => `${n} ${m}`).join(" · ");
   const position = [
     card.requiresPosture ? `Foe: ${card.requiresPosture}` : "",
@@ -3096,8 +3267,7 @@ function cardLegal(playerId, card) {
     if (card.kind === "entrance") return canPlayEntrance(state, playerId, card);
     if (card.kind === "action" && card.special) return canPlaySpecial(state, playerId, card);
     if (card.kind === "action") return canPlayAction(state, playerId, card);
-    if (card.kind === "support") return canPlaySupport(state, playerId, card);
-    if (card.kind === "manager") return canPlayManager(state, playerId, card);
+      if (card.kind === "manager") return canPlayManager(state, playerId, card);
     if (card.kind === "move") return moveEligibility(state, playerId, card).legal;
   }
   if (state.phase === "COUNTER" && state.proposedMove?.defenderId === playerId) return counterEligibility(state, playerId, state.proposedMove.card, card).legal;
@@ -3125,7 +3295,6 @@ function cardReason(playerId, card) {
   }
   if (card.kind === "action" && card.pinEscape) return state.phase === "PIN_RESPONSE" ? "Escape pin" : "Pin-response Action only";
   if (card.kind === "action") { const p=state.players[playerId]; if (p.turn.actionPlayed >= 1) return "Action already played this turn"; if (p.actionLocked) return "Actions are currently locked"; const need=Math.max(0,card.cost??0),have=effectiveTotalMomentum(state,playerId); return have<need ? `Need ${need} Momentum + Attitude` : ""; }
-  if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
   if (card.kind === "manager") { const p = state.players[playerId]; if (p.activeManager) return "Manager already active"; if (card.superstarId && card.superstarId !== p.superstar?.id) return "Manager not compatible with this Superstar"; if (Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length && !card.allowedSuperstarIds.includes(p.superstar?.id)) return "Manager not compatible with this Superstar"; return ""; }
   if (card.kind === "move" && state.phase === "ACTION") return moveEligibility(state, playerId, card).reason ?? "";
   if (state.phase === "COUNTER") return counterEligibility(state, playerId, state.proposedMove.card, card).reason ?? "Counter";
@@ -3162,7 +3331,6 @@ function playCard(playerId, index) {
     else if (card.kind === "entrance") played = game.playEntrance(playerId, card);
     else if (card.kind === "action" && card.special) played = game.playSpecial(playerId, card);
     else if (card.kind === "action") played = game.playAction(playerId, card);
-    else if (card.kind === "support") played = game.playSupport(playerId, card);
     else if (card.kind === "manager") played = game.playManager(playerId, card);
     else played = game.declareMove(playerId, card);
     if (!played) { message = `${card.name} cannot be played in this window.`; render(); return; }
@@ -3395,13 +3563,13 @@ function currentPlayPile() {
 function shortCardMeta(card) {
   if (card.kind === "momentum") return `${card.method?.toUpperCase() ?? "MOMENTUM"} +${card.amount ?? 1}`;
   if (card.kind === "move") return [`COST ${card.cost ?? 0}`, `${card.damage ?? 0} DMG`, card.method?.toUpperCase(), MOVE_TYPE_LABELS[card.moveType]?.toUpperCase()].filter(Boolean).join(" · ");
-  return (card.abilityText ?? card.effectText ?? card.rulesText ?? card.kind).replace(/^Support —\s*/i, "");
+  return (card.abilityText ?? card.effectText ?? card.rulesText ?? card.kind);
 }
 
 function handCardMeta(card) {
   if (card.kind === "momentum") return `${card.method?.toUpperCase() ?? "MOMENTUM"} +${card.amount ?? 1}`;
   if (card.kind === "move") return [`C${card.cost ?? 0}`, `${card.damage ?? 0} DMG`, card.method?.toUpperCase(), MOVE_TYPE_LABELS[card.moveType]?.toUpperCase()].filter(Boolean).join(" · ");
-  return (card.abilityText ?? card.effectText ?? card.rulesText ?? card.kind).replace(/^Support —\s*/i, "");
+  return (card.abilityText ?? card.effectText ?? card.rulesText ?? card.kind);
 }
 
 function renderPlayPile() {
@@ -3440,7 +3608,7 @@ function renderHumanHand() {
     if ((state.phase === "COUNTER" || state.phase === "PIN_RESPONSE") && legal) priority = 0;
     else if (state.phase === "ACTION" && card.kind === "momentum" && legal && momentumAvailable) priority = 1;
     // Utility must stay visible before the damage stack so Actions are not buried.
-    else if (state.phase === "ACTION" && legal && ["action","special","support","manager"].includes(card.kind)) priority = 2;
+    else if (state.phase === "ACTION" && legal && ["action","special","manager"].includes(card.kind)) priority = 2;
     else if (state.phase === "ACTION" && legal && card.kind === "move") { priority = 3; damageRank = -(Number(card.damage) || 0); }
     else if (legal) priority = 4;
     else if (card.kind !== "momentum") priority = 5;
@@ -3514,7 +3682,7 @@ function renderCommandBar() {
     </div>
     <details class="match-menu"><summary>Match Menu</summary><div>
       ${!(state.phase === "MATCH_OVER" && (activeMode === "ladder" || activeMode === "king-of-the-ring" || activeMode === "championship" || activeMode === "live-event")) ? '<button id="reset-match" class="ghost">Restart</button>' : ""}
-      <button id="change-matchup" class="ghost">${activeMode === "ladder" ? "Money in the Bank" : activeMode === "king-of-the-ring" ? "King of the Ring Hub" : activeMode === "championship" ? "Championship Hub" : activeMode === "live-event" ? "Live Event Hub" : "Change Matchup"}</button>
+      <button id="change-matchup" class="ghost">${activeMode === "ladder" ? "Money in the Bank" : activeMode === "king-of-the-ring" ? "King of the Ring Hub" : activeMode === "championship" ? "Championship Hub" : activeMode === "live-event" ? "Live Event Hub" : activeMode === "survivor-series" ? "Survivor Series Hub" : "Change Matchup"}</button>
       <button id="browse-main-menu" class="ghost">Main Menu</button><button id="browse-collection" class="ghost">Collection</button><button id="browse-boosters" class="ghost">Boosters (${profile.boosterCredits ?? 0})</button><button id="browse-challenges" class="ghost">Challenges</button><button id="browse-decks" class="ghost">Deck Builder</button>
     </div></details>
   </section>`;
@@ -3528,7 +3696,7 @@ function logText(event) {
     ENTRANCE_EFFECT: () => `${event.cardName} triggered for ${n(event.playerId)}.`,
     BELL_RANG: () => `The bell rings! ${n(event.control)} has opening Control.`,
     MATCH_STARTED: () => `${n(event.control)} starts Turn 1 in Control.`, MATCH_MODIFIER_APPLIED: () => `${event.name}: ${event.ruleText || event.changes?.join(" · ") || "Live Event modifier applied."}`, MOMENTUM_PLAYED: () => `${n(event.playerId)} played ${event.method} Momentum.`,
-    ENTRANCE_PLAYED: () => `${n(event.playerId)} played Entrance ${event.cardId}.`, ACTION_PLAYED: () => `${n(event.playerId)} played ${cardNameFor(event.cardId)}.`, HEALTH_RESTORED: () => `${cardNameFor(event.cardId)} restores ${event.amount} HP to ${n(event.playerId)}.`, FIGHT_FOREVER: () => `Fight Forever restores ${event.playerHeal} HP to ${n(event.playerId)} and ${event.opponentHeal} HP to ${n(event.opponentId)}.`, SUPPORT_PLAYED: () => `${n(event.playerId)} put ${cardNameFor(event.cardId)} into play.`, SUPPORT_REPLACED: () => `${n(event.playerId)} discarded ${cardNameFor(event.cardId)}.`, MANAGER_PLAYED: () => `${n(event.playerId)} brought ${event.managerName} to ringside.`, MANAGER_ABILITY: () => `${event.managerName} assisted ${n(event.playerId)}.`, MOVE_DECLARED: () => `${n(event.playerId)} declared ${cardNameFor(event.cardId)}.`,
+    ENTRANCE_PLAYED: () => `${n(event.playerId)} played Entrance ${event.cardId}.`, ACTION_PLAYED: () => `${n(event.playerId)} played ${cardNameFor(event.cardId)}.`, HEALTH_RESTORED: () => `${cardNameFor(event.cardId)} restores ${event.amount} HP to ${n(event.playerId)}.`, FIGHT_FOREVER: () => `Fight Forever restores ${event.playerHeal} HP to ${n(event.playerId)} and ${event.opponentHeal} HP to ${n(event.opponentId)}.`, MANAGER_PLAYED: () => `${n(event.playerId)} brought ${event.managerName} to ringside.`, MANAGER_ABILITY: () => `${event.managerName} assisted ${n(event.playerId)}.`, MOVE_DECLARED: () => `${n(event.playerId)} declared ${cardNameFor(event.cardId)}.`,
     MOVE_COUNTERED: () => `${n(event.defenderId)} countered ${cardNameFor(event.incomingCardId)} with ${cardNameFor(event.counterCardId)}.`, AUTO_COUNTER: () => `${n(event.defenderId)} Auto Countered ${cardNameFor(event.incomingCardId)} by ditching ${event.cost} pages (use ${event.useNumber}); ${event.remaining} pages remained.`,
     COUNTER_PASSED: () => `${n(event.defenderId)} passed the counter window.`, MOVE_CONNECTED: () => `${cardNameFor(event.cardId)} connected for ${event.damage} damage${event.finisher ? " (FINISHER)" : ""}.`,
     CARDS_DRAWN: () => `${n(event.playerId)} drew ${event.cardIds.length} page${event.cardIds.length === 1 ? "" : "s"}.`, ACTION_DISCARD_RESOLVED: () => `${n(event.playerId)} ditched ${cardNameFor(event.cardId)} for ${cardNameFor(event.sourceCardId)}.`, SPECIAL_PLAYED: () => `${n(event.playerId)} triggered ${cardNameFor(event.cardId)}.`, SPECIAL_EFFECT: () => event.effect === "reduce-incoming-big" ? `${cardNameFor(event.cardId)} reduced the incoming Move by ${event.reducedBy ?? 0}.` : event.effect === "paul-heyman" ? `${cardNameFor(event.cardId)} found/armed F-5 with a -${event.discount ?? 0} Cost discount.` : `${cardNameFor(event.cardId)} resolved.`, CONTROL_PASSED: () => `${n(event.from)} passed Control to ${n(event.to)}.`, CONTROL_RETAINED: () => `${n(event.playerId)} connected and keeps Control.`, CRITICAL_EXHAUSTION: () => `${n(event.playerId)} is at 0 HP and cannot retain Control. Control passes to ${n(event.to)}.`,
@@ -3571,11 +3739,20 @@ function handleCompletedMatch() {
   const liveEventTowerKey = currentLiveEventMatchTowerKey();
   recordCompletedMatchChallenges(profile, state, HUMAN, matchMode);
   const result = state.winner === HUMAN ? "win" : "loss";
+  const merchUse = activeMatchContext?.merchApplied ? consumeActiveMerchMatch(profile) : null;
   recordCareerMatch(profile, { result, superstarId: state.players[HUMAN].superstar.id, mode: matchMode, finishType: state.finish?.type ?? "match" });
   const seasonXpReward = awardMatchSeasonXp(profile, result);
   queueTierUps(seasonXpReward.tierBefore, seasonXpReward.tierAfter, seasonXpReward.before, seasonXpReward.after);
   const seasonXpText = seasonXpReward.awarded ? ` +${seasonXpReward.awarded} Season XP.` : "";
   matchRewardSummary = { xp: seasonXpReward.awarded, packSetIds: [], note: "" };
+  if (merchUse?.item) matchRewardSummary.note = `${merchUse.item.name}: ${merchUse.remainingMatches} match${merchUse.remainingMatches===1?"":"es"} remaining.`;
+
+  if (matchMode === "survivor-series") {
+    const outcome = resolveSurvivorSeriesMatch(profile, result === "win");
+    const captured = superstarById[outcome.capturedId]?.name ?? outcome.capturedId;
+    message = outcome.status === "complete" ? (outcome.winner === "p1" ? `SURVIVOR SERIES WON! Your team owns all 8 Superstars after capturing ${captured}.${seasonXpText}` : `Survivor Series lost. The opposing team captured all 8 Superstars.${seasonXpText}`) : `${captured} captured. Teams are now ${outcome.p1}–${outcome.p2}. ${outcome.nextTurn === "p1" ? "Your challenge is next." : "Player 2 challenges next."}${seasonXpText}`;
+    refreshCareerAchievements(profile); saveProfile(profile); return;
+  }
 
   if (matchMode === "king-of-the-ring") {
     const outcome = recordKingOfTheRingMatch(profile, result, Math.random, new Date());
@@ -3699,7 +3876,7 @@ function tierUpRewardMarkup(event) {
   }
   const starCard = superstarCollectibleFor(reward.superstarId);
   const superstarRewardCard = starCard ? `<div class="tier-up-physical-card">${collectibleCardMarkup(starCard,{extraClass:"tier-up-superstar-card",interactive:false})}</div>` : `<div class="tier-up-physical-card">${superstarPreviewCardMarkup(reward.superstarId,"tier-up-superstar-card")}</div>`;
-  return `<div class="tier-up-reward tier-up-superstar-reward">${superstarRewardCard}<strong>JOHN CENA — THE LAST TIME IS NOW</strong><small>SEASON 1 COMPLETION REWARD UNLOCKED</small></div>`;
+  return `<div class="tier-up-reward tier-up-superstar-reward">${superstarRewardCard}<strong>TRISH STRATUS — SEASON 1 CHASE</strong><small>SEASON 1 COMPLETION REWARD UNLOCKED</small></div>`;
 }
 
 function tierUpMarkup(event) {
@@ -3787,7 +3964,7 @@ function render() {
     showTierUpCelebration();
     $("#results-reward")?.addEventListener("click", showBoosters);
     $("#apply-app-update")?.addEventListener("click", () => applyAppUpdate());
-    $("#results-continue")?.addEventListener("click", matchMode === "ladder" ? showLadder : matchMode === "king-of-the-ring" ? showKingOfTheRing : matchMode === "championship" ? showChampionship : matchMode === "live-event" ? (() => liveEventTowerKey ? showLiveEventTower(liveEventTowerKey) : showLiveEvents()) : showMainMenu);
+    $("#results-continue")?.addEventListener("click", matchMode === "ladder" ? showLadder : matchMode === "king-of-the-ring" ? showKingOfTheRing : matchMode === "championship" ? showChampionship : matchMode === "live-event" ? (() => liveEventTowerKey ? showLiveEventTower(liveEventTowerKey) : showLiveEvents()) : matchMode === "survivor-series" ? renderSurvivorSeries : showMainMenu);
     $("#results-rematch")?.addEventListener("click", restartMatch);
     return;
   }
@@ -3822,7 +3999,7 @@ function render() {
   $("#pass-action")?.addEventListener("click", passAction); $("#submission-pass-overlay")?.addEventListener("click", passAction); $("#submission-auto-counter")?.addEventListener("click", beginAutoCounter); $("#attempt-pin")?.addEventListener("click", attemptPin);
   $("#auto-counter-action")?.addEventListener("click", beginAutoCounter); $("#cancel-auto-counter")?.addEventListener("click", cancelAutoCounter); $("#confirm-auto-counter")?.addEventListener("click", confirmAutoCounter);
   $("#return-ring")?.addEventListener("click", returnToRing); $("#follow-outside")?.addEventListener("click", followOutside);
-  $("#reset-match")?.addEventListener("click", restartMatch); $("#change-matchup")?.addEventListener("click", () => { const mode = currentMatchMode(); if (mode === "ladder") return showLadder(); if (mode === "king-of-the-ring") return showKingOfTheRing(); if (mode === "championship") return showChampionship(); if (mode === "live-event") { const towerKey = currentLiveEventMatchTowerKey(); return towerKey ? showLiveEventTower(towerKey) : showLiveEvents(); } return showSetup(); }); $("#browse-main-menu")?.addEventListener("click", showMainMenu); $("#ladder-hub")?.addEventListener("click", showLadder); $("#kotr-hub")?.addEventListener("click", showKingOfTheRing); $("#championship-hub")?.addEventListener("click", showChampionship); $("#live-event-hub")?.addEventListener("click", showLiveEvents); $("#browse-collection")?.addEventListener("click", showCollection); $("#browse-boosters")?.addEventListener("click", showBoosters); $("#browse-challenges")?.addEventListener("click", showChallenges); $("#browse-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1)); $("#release-submission")?.addEventListener("click", releaseSubmission);
+  $("#reset-match")?.addEventListener("click", restartMatch); $("#change-matchup")?.addEventListener("click", () => { const mode = currentMatchMode(); if (mode === "ladder") return showLadder(); if (mode === "king-of-the-ring") return showKingOfTheRing(); if (mode === "championship") return showChampionship(); if (mode === "live-event") { const towerKey = currentLiveEventMatchTowerKey(); return towerKey ? showLiveEventTower(towerKey) : showLiveEvents(); } if (mode === "survivor-series") return renderSurvivorSeries(); return showSetup(); }); $("#browse-main-menu")?.addEventListener("click", showMainMenu); $("#ladder-hub")?.addEventListener("click", showLadder); $("#kotr-hub")?.addEventListener("click", showKingOfTheRing); $("#championship-hub")?.addEventListener("click", showChampionship); $("#live-event-hub")?.addEventListener("click", showLiveEvents); $("#browse-collection")?.addEventListener("click", showCollection); $("#browse-boosters")?.addEventListener("click", showBoosters); $("#browse-challenges")?.addEventListener("click", showChallenges); $("#browse-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1)); $("#release-submission")?.addEventListener("click", releaseSubmission);
   root.querySelectorAll("[data-ditch]").forEach(btn => btn.addEventListener("click", () => maintainSubmission(Number(btn.dataset.ditch))));
 }
 

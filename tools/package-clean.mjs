@@ -21,6 +21,7 @@ const rootFiles = [
   releaseNotesFile,
   "BUILD-CERTIFICATION.md",
   "ASSET-MIGRATION.csv",
+  "IMAGE-PATH-GUIDE.md",
 ].filter(Boolean);
 const rootDirs = ["assets", "css", "js", "test", "tools"];
 

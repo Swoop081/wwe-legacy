@@ -1,4 +1,4 @@
-import { applyCardTier, CARD_TIERS, normalizeCardTier, tierRank } from './variants.js?v=1.0.2';
+import { applyCardTier, CARD_TIERS, normalizeCardTier, tierRank } from './variants.js?v=1.1.21';
 
 const sortedTiers = cards => cards.map(c => normalizeCardTier(c?.tier, 'normal')).sort((a,b)=>tierRank(b)-tierRank(a));
 
@@ -7,7 +7,7 @@ export function cpuTierRole(card) {
   if (card.kind === 'momentum') return 'momentum';
   if (card.kind === 'manager') return 'manager';
   if (card.kind === 'entrance') return 'entrance';
-  if (card.kind === 'action' || card.kind === 'support') return card.special ? 'special' : 'utility';
+  if (card.kind === 'action') return card.special ? 'special' : 'utility';
   if (card.kind !== 'move') return card.kind ?? 'other';
   const isSubmission = !!card.submission || card.moveType === 'submission';
   if (card.finisher) return isSubmission ? 'finisher-submission' : 'finisher';

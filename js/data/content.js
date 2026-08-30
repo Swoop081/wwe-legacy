@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.0.2";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.0.2";
+import { enrichCounterState } from "./counter-states.js?v=1.1.21";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.21";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -458,14 +458,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "cody-rhodes",
     "rarity": 4,
-    "rulesText": "Cody-exclusive Finisher. Grounds opponent.",
+    "rulesText": "Cody-exclusive Finisher. Grounds opponent. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "front-control"
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "punch",
@@ -713,13 +717,17 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Shared; ground opponent",
+    "rulesText": "Shared; ground opponent. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "torso-trapped"
+    "counterState": "torso-trapped",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "powerbomb",
@@ -1248,13 +1256,17 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "New shared canonical card",
+    "rulesText": "New shared canonical card. On Connect: +1 persistent Head damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "leg-extended"
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "swinging-neckbreaker",
@@ -1368,13 +1380,17 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only.",
+    "rulesText": "Grounded opponent only. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "diving-aerial"
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "cm-punk-corner-running-knee",
@@ -1685,13 +1701,17 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "gunther",
     "rarity": 3,
-    "rulesText": "",
+    "rulesText": "On Connect: +1 persistent Head damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "boston-crab",
@@ -1996,14 +2016,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "brock-lesnar",
     "rarity": 4,
-    "rulesText": "Brock-exclusive Finisher. Grounds opponent. Stun 1.",
+    "rulesText": "Brock-exclusive Finisher. Grounds opponent. Stun 1. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "senton",
@@ -2064,13 +2088,17 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounds opponent.",
+    "rulesText": "Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "spinning-torture-rack-neckbreaker",
@@ -2179,14 +2207,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "kevin-owens",
     "rarity": 4,
-    "rulesText": "Finisher. Grounds opponent.",
+    "rulesText": "Finisher. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "front-control"
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "reverse-elbow",
@@ -2680,14 +2712,18 @@ export const allGameplayCards = [
       "kane"
     ],
     "rarity": 4,
-    "rulesText": "The Undertaker / Kane Finisher; ground opponent; Stun 1",
+    "rulesText": "The Undertaker / Kane Finisher; ground opponent; Stun 1. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "uppercut",
@@ -3279,14 +3315,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "ultimate-warrior",
     "rarity": 4,
-    "rulesText": "Warrior-exclusive Finisher. Grounded opponent only.",
+    "rulesText": "Warrior-exclusive Finisher. Grounded opponent only. On Connect: +1 persistent Chest damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "diving-aerial"
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "back-elbow",
@@ -3415,14 +3455,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "randy-savage",
     "rarity": 4,
-    "rulesText": "",
+    "rulesText": "On Connect: +1 persistent Head damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "diving-aerial"
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "chop",
@@ -3660,14 +3704,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "rhea-ripley",
     "rarity": 4,
-    "rulesText": "Rhea Ripley-exclusive Finisher. Grounds opponent.",
+    "rulesText": "Rhea Ripley-exclusive Finisher. Grounds opponent. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "arm-drag",
@@ -3855,14 +3903,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "liv-morgan",
     "rarity": 4,
-    "rulesText": "Liv Morgan-exclusive Finisher. Grounds opponent.",
+    "rulesText": "Liv Morgan-exclusive Finisher. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "front-control"
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "sunset-flip-powerbomb",
@@ -3926,14 +3978,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "bayley",
     "rarity": 4,
-    "rulesText": "Bayley-exclusive Finisher. Grounds opponent.",
+    "rulesText": "Bayley-exclusive Finisher. Grounds opponent. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "front-control"
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "running-knee-strike",
@@ -4065,7 +4121,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "charlotte-flair",
     "rarity": 4,
-    "rulesText": "Charlotte-exclusive Finisher. Grounded opponent only. Submission. +7 persistent Leg damage per successful turn.",
+    "rulesText": "Charlotte-exclusive Finisher. Grounded opponent only. Submission. +7 persistent Leg damage per successful turn. On Connect: opponent loses 1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -4075,7 +4131,12 @@ export const allGameplayCards = [
       "pressure": 7
     },
     "finisher": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "leg-extended",
     "submissionTarget": "legs"
   },
@@ -4165,14 +4226,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "paige",
     "rarity": 4,
-    "rulesText": "Paige-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Paige-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "dragon-screw",
@@ -4389,14 +4454,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "iyo-sky",
     "rarity": 4,
-    "rulesText": "IYO SKY-exclusive Finisher. Grounded opponent only.",
+    "rulesText": "IYO SKY-exclusive Finisher. Grounded opponent only. On Connect: +1 persistent Chest damage.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "diving-aerial"
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "the-rock-lay-the-smack-down",
@@ -4423,7 +4492,8 @@ export const allGameplayCards = [
         "amount": 1
       }
     ],
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "the-rock-belt-whip",
@@ -4459,7 +4529,8 @@ export const allGameplayCards = [
       "bodyPart": "back",
       "pressure": 1
     },
-    "weapon": true
+    "weapon": true,
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "the-rock-rock-bottom",
@@ -4488,7 +4559,8 @@ export const allGameplayCards = [
         "discount": 2
       }
     ],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "the-rock-people-s-elbow",
@@ -4509,7 +4581,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "chain-wrestling",
@@ -4656,13 +4729,14 @@ export const allGameplayCards = [
   {
     "id": "crowd-support",
     "name": "Crowd Support",
-    "kind": "support",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 1,
-    "rulesText": "Once per Control sequence after you connect with a Move, gain +1 Adrenaline.",
+    "rulesText": "Play once per match. For the rest of the match, once per Control sequence after you connect with a Move, gain +1 Adrenaline.",
     "effect": {
       "type": "crowdSupport"
-    }
+    },
+    "oncePerMatch": true
   },
   {
     "id": "open-can",
@@ -4681,26 +4755,29 @@ export const allGameplayCards = [
   {
     "id": "what",
     "name": "What?",
-    "kind": "support",
+    "kind": "action",
     "setId": "attitude-era-series-1",
     "rarity": 3,
     "superstarId": "stone-cold-steve-austin",
-    "rulesText": "Once per match after the opponent plays an Action, they lose 1 Adrenaline.",
+    "rulesText": "Play once per match. For the rest of the match, the first time the opponent plays an Action, they lose 1 Adrenaline.",
     "effect": {
       "type": "what"
-    }
+    },
+    "oncePerMatch": true
   },
   {
     "id": "people-championship",
     "name": "People's Championship",
-    "kind": "support",
+    "kind": "action",
     "setId": "season-1-final-boss",
     "rarity": 4,
     "superstarId": "the-rock",
-    "rulesText": "Once per match below 50% HP: gain +2 Adrenaline and draw 1.",
+    "rulesText": "Play once per match. The first time The Rock is at or below 50% HP, gain +2 Adrenaline and draw 1.",
     "effect": {
       "type": "peopleChampionship"
-    }
+    },
+    "oncePerMatch": true,
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "manager-paul-bearer",
@@ -5138,7 +5215,8 @@ export const allGameplayCards = [
       "strike": 1
     },
     "preMatchAdrenaline": 1,
-    "delayedTurn5": false
+    "delayedTurn5": false,
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "special-cody-rhodes",
@@ -5157,7 +5235,8 @@ export const allGameplayCards = [
         "Cody Cutter",
         "Cross Rhodes"
       ]
-    }
+    },
+    "oncePerMatch": true
   },
   {
     "id": "special-roman-reigns",
@@ -5245,7 +5324,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "kevin-owens",
-    "rulesText": "Once per match when the opponent plays an Action or Support: cancel it. The opponent keeps Control, but that Action or Support window is spent.",
+    "rulesText": "Once per match when the opponent plays an Action: cancel it. The opponent keeps Control, but that Action window is spent.",
     "special": {
       "type": "cancelOpponentUtility"
     }
@@ -5499,7 +5578,8 @@ export const allGameplayCards = [
       "type": "retainOnCounter",
       "draw": 1,
       "opponentAdrenaline": -1
-    }
+    },
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "running-powerslam",
@@ -6212,13 +6292,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "rey-mysterio",
     "rarity": 4,
-    "rulesText": "Rey Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +1 Damage.",
+    "rulesText": "Rey Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +1 Damage. On Connect: gain +1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "bonusDamageAfterNamed": {
       "name": "619",
       "damage": 1
@@ -6347,7 +6432,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "dominik-mysterio",
     "rarity": 4,
-    "rulesText": "Dominik Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +1 Damage.",
+    "rulesText": "Dominik Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +1 Damage. On Connect: +1 persistent Chest damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -6358,7 +6443,11 @@ export const allGameplayCards = [
       "name": "619",
       "damage": 1
     },
-    "counterState": "diving-aerial"
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-dominik-mysterio",
@@ -6526,14 +6615,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "penta",
     "rarity": 4,
-    "rulesText": "Penta-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Penta-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Chest damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-penta",
@@ -8449,7 +8542,7 @@ export const allGameplayCards = [
     "id": "randy-orton-draping-ddt",
     "name": "Draping DDT",
     "kind": "move",
-    "setId": "survivor-series-series-1",
+    "setId": "ruthless-aggression-series-1",
     "cost": 7,
     "damage": 10,
     "requirements": {
@@ -8478,7 +8571,7 @@ export const allGameplayCards = [
     "id": "randy-orton-rko",
     "name": "RKO",
     "kind": "move",
-    "setId": "survivor-series-series-1",
+    "setId": "ruthless-aggression-series-1",
     "cost": 9,
     "damage": 17,
     "requirements": {},
@@ -8504,7 +8597,7 @@ export const allGameplayCards = [
     "id": "randy-orton-punt-kick",
     "name": "Punt Kick",
     "kind": "move",
-    "setId": "survivor-series-series-1",
+    "setId": "ruthless-aggression-series-1",
     "cost": 8,
     "damage": 13,
     "requirements": {},
@@ -8530,7 +8623,7 @@ export const allGameplayCards = [
     "id": "entrance-randy-orton",
     "name": "Voices",
     "kind": "entrance",
-    "setId": "survivor-series-series-1",
+    "setId": "ruthless-aggression-series-1",
     "rarity": 4,
     "superstarId": "randy-orton",
     "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strike Momentum and +1 Adrenaline.",
@@ -8545,7 +8638,7 @@ export const allGameplayCards = [
     "id": "special-randy-orton",
     "name": "Outta Nowhere",
     "kind": "action",
-    "setId": "survivor-series-series-1",
+    "setId": "ruthless-aggression-series-1",
     "rarity": 4,
     "superstarId": "randy-orton",
     "rulesText": "Once per match, when the opponent attempts a Move: Randy may play RKO from hand as a Counter. If he does, RKO costs 5 less.",
@@ -9354,7 +9447,8 @@ export const allGameplayCards = [
         "discount": 2
       }
     ],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "goldberg-spear",
@@ -9391,7 +9485,8 @@ export const allGameplayCards = [
         "amount": 1
       }
     ],
-    "counterState": "torso-trapped"
+    "counterState": "torso-trapped",
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "goldberg-jackhammer",
@@ -9414,7 +9509,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "entrance-goldberg",
@@ -9429,7 +9525,8 @@ export const allGameplayCards = [
       "strike": 2
     },
     "preMatchAdrenaline": 2,
-    "delayedTurn5": false
+    "delayedTurn5": false,
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "special-goldberg",
@@ -9445,7 +9542,8 @@ export const allGameplayCards = [
       "draw": 1,
       "retainControl": true,
       "preserveStreak": true
-    }
+    },
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "knees-up",
@@ -10741,7 +10839,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "joe-hendry",
     "rarity": 3,
-    "rulesText": "Joe Hendry-exclusive Trademark. Grounds opponent. On Connect: draw 1 page, then ditch 1 page.",
+    "rulesText": "Joe Hendry-exclusive Trademark. Grounds opponent. On Connect: draw 1 page, then ditch 1 page. On Connect: +1 persistent Chest damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -10754,7 +10852,11 @@ export const allGameplayCards = [
         "discard": 1
       }
     ],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "joe-hendry-hendry-lock",
@@ -10796,14 +10898,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "joe-hendry",
     "rarity": 4,
-    "rulesText": "Joe Hendry-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Joe Hendry-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Chest damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-joe-hendry",
@@ -10931,14 +11037,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "roxanne-perez",
     "rarity": 4,
-    "rulesText": "Roxanne Perez-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Roxanne Perez-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Arm damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-roxanne-perez",
@@ -11070,14 +11180,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "austin-theory",
     "rarity": 4,
-    "rulesText": "Austin Theory-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Austin Theory-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Leg damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-austin-theory",
@@ -11544,13 +11658,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "dragon-lee",
     "rarity": 4,
-    "rulesText": "Dragon Lee-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Dragon Lee-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: gain +1 additional Adrenaline.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -11817,14 +11936,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "mr-iguana",
     "rarity": 4,
-    "rulesText": "Mr. Iguana-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Mr. Iguana-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-mr-iguana",
@@ -11954,7 +12077,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "bret-hart",
     "rarity": 4,
-    "rulesText": "Bret Hart-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +6 persistent Leg damage per successful turn.",
+    "rulesText": "Bret Hart-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +6 persistent Leg damage per successful turn. On Connect: gain +1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -11964,7 +12087,12 @@ export const allGameplayCards = [
       "bodyPart": "legs",
       "pressure": 6
     },
-    "effects": [],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "leg-extended",
     "submissionTarget": "legs"
   },
@@ -12232,14 +12360,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "razor-ramon",
     "rarity": 4,
-    "rulesText": "Razor Ramon-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Razor Ramon-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-razor-ramon",
@@ -12420,13 +12552,17 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent.",
+    "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "side-kick",
@@ -12737,13 +12873,17 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent.",
+    "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "gutwrench-suplex",
@@ -12760,13 +12900,17 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent.",
+    "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "torso-trapped"
+    "counterState": "torso-trapped",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "id": "michinoku-driver",
@@ -12829,13 +12973,17 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared.",
-    "groundOpponent": false,
+    "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Chest damage.",
+    "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "leg-extended"
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "rolling-elbow",
@@ -12898,7 +13046,7 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Standing opponent only. Submission. +4 persistent Head damage per successful turn.",
+    "rulesText": "Shared. Standing opponent only. Submission. +4 persistent Head damage per successful turn. On Connect: opponent loses 1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "standingOnly": true,
@@ -12908,7 +13056,12 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 4
     },
-    "effects": [],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "rear-control",
     "submissionTarget": "neck-head"
   },
@@ -13203,13 +13356,17 @@ export const allGameplayCards = [
     "superstarId": "doink-the-clown",
     "rarity": 4,
     "finisher": true,
-    "rulesText": "Doink the Clown-exclusive Finisher. No Method requirement. Diving Aerial. Grounded opponent only. Grounds opponent.",
+    "rulesText": "Doink the Clown-exclusive Finisher. No Method requirement. Diving Aerial. Grounded opponent only. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "diving-aerial"
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-doink-the-clown",
@@ -13580,13 +13737,17 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 1,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent.",
+    "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "leg-extended"
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "gutbuster",
@@ -13681,13 +13842,17 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent.",
+    "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "leg-extended"
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "owen-hart-enzuigiri",
@@ -13789,7 +13954,7 @@ export const allGameplayCards = [
     "superstarId": "owen-hart",
     "rarity": 4,
     "finisher": true,
-    "rulesText": "Owen Hart-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +7 persistent Legs damage per successful maintain turn.",
+    "rulesText": "Owen Hart-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +7 persistent Legs damage per successful maintain turn. On Connect: gain +1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -13798,7 +13963,12 @@ export const allGameplayCards = [
       "bodyPart": "legs",
       "pressure": 7
     },
-    "effects": [],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "leg-extended",
     "submissionTarget": "legs"
   },
@@ -13957,13 +14127,17 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Shared. Grounds opponent.",
+    "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Chest damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "full-nelson",
@@ -14089,13 +14263,17 @@ export const allGameplayCards = [
     "superstarId": "british-bulldog",
     "rarity": 4,
     "finisher": true,
-    "rulesText": "British Bulldog-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "British Bulldog-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Chest damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
   },
   {
     "id": "entrance-british-bulldog",
@@ -14276,7 +14454,8 @@ export const allGameplayCards = [
     "submission": {
       "bodyPart": "head",
       "pressure": 4
-    }
+    },
+    "submissionTarget": "neck-head"
   },
   {
     "kind": "move",
@@ -14385,12 +14564,17 @@ export const allGameplayCards = [
     "moveType": "submission",
     "method": null,
     "rarity": 4,
-    "rulesText": "Piper-exclusive Finisher. No Method requirement. Submission. +7 persistent Head damage per successful turn.",
+    "rulesText": "Piper-exclusive Finisher. No Method requirement. Submission. +7 persistent Head damage per successful turn. On Connect: opponent loses 1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "id": "rowdy-roddy-piper-sleeper-hold",
     "name": "Sleeper Hold",
     "setId": "golden-era-series-1",
@@ -14400,7 +14584,8 @@ export const allGameplayCards = [
     "submission": {
       "bodyPart": "head",
       "pressure": 7
-    }
+    },
+    "submissionTarget": "neck-head"
   },
   {
     "kind": "action",
@@ -14460,7 +14645,7 @@ export const allGameplayCards = [
     "moveType": "grapple",
     "method": "technical",
     "rarity": 3,
-    "rulesText": "DiBiase-exclusive Trademark. Grounds opponent. On Connect: draw 1 page, then ditch 1.",
+    "rulesText": "DiBiase-exclusive Trademark. Grounds opponent. On Connect: draw 1 page, then ditch 1. On Connect: +1 persistent Back damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -14477,7 +14662,11 @@ export const allGameplayCards = [
     "setId": "golden-era-series-1",
     "superstarId": "ted-dibiase",
     "trademark": true,
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
   },
   {
     "kind": "move",
@@ -14510,12 +14699,17 @@ export const allGameplayCards = [
     "moveType": "submission",
     "method": null,
     "rarity": 4,
-    "rulesText": "DiBiase-exclusive Finisher. No Method requirement. Submission. +7 persistent Head damage per successful turn.",
+    "rulesText": "DiBiase-exclusive Finisher. No Method requirement. Submission. +7 persistent Head damage per successful turn. On Connect: gain +1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "id": "ted-dibiase-million-dollar-dream",
     "name": "Million Dollar Dream",
     "setId": "golden-era-series-1",
@@ -14525,7 +14719,8 @@ export const allGameplayCards = [
     "submission": {
       "bodyPart": "head",
       "pressure": 7
-    }
+    },
+    "submissionTarget": "neck-head"
   },
   {
     "kind": "manager",
@@ -14599,7 +14794,7 @@ export const allGameplayCards = [
     "moveType": "strike",
     "method": "strike",
     "rarity": 3,
-    "rulesText": "Jake-exclusive Trademark. Does not ground. On Connect: Jake’s next Grapple costs 1 less this Control sequence.",
+    "rulesText": "Jake-exclusive Trademark. Does not ground. On Connect: Jake’s next Grapple costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -14616,7 +14811,11 @@ export const allGameplayCards = [
     "setId": "golden-era-series-1",
     "superstarId": "jake-roberts",
     "trademark": true,
-    "counterState": "leg-extended"
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "kind": "move",
@@ -14953,7 +15152,7 @@ export const allGameplayCards = [
     "moveType": "strike",
     "method": "strike",
     "rarity": 3,
-    "rulesText": "Triple H-exclusive Trademark. Does not ground. On Connect: next Grapple costs 1 less this Control sequence.",
+    "rulesText": "Triple H-exclusive Trademark. Does not ground. On Connect: next Grapple costs 1 less this Control sequence. On Connect: gain +1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -14962,6 +15161,10 @@ export const allGameplayCards = [
       {
         "type": "discountNextMoveType",
         "moveType": "grapple",
+        "amount": 1
+      },
+      {
+        "type": "gainAdrenaline",
         "amount": 1
       }
     ],
@@ -15167,12 +15370,17 @@ export const allGameplayCards = [
     "moveType": "submission",
     "method": null,
     "rarity": 4,
-    "rulesText": "Jericho-exclusive Finisher. No Method requirement. Grounded opponent only. +6 persistent Leg damage per successful turn.",
+    "rulesText": "Jericho-exclusive Finisher. No Method requirement. Grounded opponent only. +6 persistent Leg damage per successful turn. On Connect: opponent loses 1 additional Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "id": "chris-jericho-walls-of-jericho",
     "name": "Walls of Jericho",
     "setId": "attitude-era-series-1",
@@ -15182,7 +15390,8 @@ export const allGameplayCards = [
     "submission": {
       "bodyPart": "legs",
       "pressure": 6
-    }
+    },
+    "submissionTarget": "legs"
   },
   {
     "kind": "action",
@@ -15233,7 +15442,8 @@ export const allGameplayCards = [
     "setId": "parked-chyna",
     "superstarId": "chyna",
     "trademark": true,
-    "counterState": "running-aerial"
+    "counterState": "running-aerial",
+    "fixedPrintingTier": "ruby"
   },
   {
     "kind": "move",
@@ -15262,7 +15472,8 @@ export const allGameplayCards = [
     "setId": "parked-chyna",
     "superstarId": "chyna",
     "trademark": true,
-    "counterState": "rear-control"
+    "counterState": "rear-control",
+    "fixedPrintingTier": "ruby"
   },
   {
     "kind": "move",
@@ -15287,7 +15498,8 @@ export const allGameplayCards = [
     "trademark": true,
     "counterState": "body-elevated",
     "searchOnConnectName": "Chyna Bomb",
-    "searchOnConnectDiscount": 2
+    "searchOnConnectDiscount": 2,
+    "fixedPrintingTier": "ruby"
   },
   {
     "kind": "move",
@@ -15297,18 +15509,24 @@ export const allGameplayCards = [
     "moveType": "grapple",
     "method": null,
     "rarity": 4,
-    "rulesText": "Chyna-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "Chyna-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: opponent loses 1 additional Adrenaline.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "id": "chyna-bomb",
     "name": "Chyna Bomb",
     "setId": "parked-chyna",
     "superstarId": "chyna",
     "finisher": true,
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "fixedPrintingTier": "ruby"
   },
   {
     "kind": "action",
@@ -15330,7 +15548,8 @@ export const allGameplayCards = [
     "superstarId": "chyna",
     "special": {
       "type": "breakTheBarrier"
-    }
+    },
+    "fixedPrintingTier": "ruby"
   },
   {
     "kind": "move",
@@ -15427,12 +15646,17 @@ export const allGameplayCards = [
     "moveType": "submission",
     "method": null,
     "rarity": 4,
-    "rulesText": "Angle-exclusive Finisher. No Method requirement. Grounded opponent only. +7 persistent Leg damage per successful turn.",
+    "rulesText": "Angle-exclusive Finisher. No Method requirement. Grounded opponent only. +7 persistent Leg damage per successful turn. If Angle is behind on HP when this Connects, gain +1 Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "gainAdrenalineIfBehind",
+        "amount": 1
+      }
+    ],
     "id": "kurt-angle-ankle-lock",
     "name": "Ankle Lock",
     "setId": "attitude-era-series-1",
@@ -15442,7 +15666,8 @@ export const allGameplayCards = [
     "submission": {
       "bodyPart": "legs",
       "pressure": 7
-    }
+    },
+    "submissionTarget": "legs"
   },
   {
     "kind": "action",
@@ -15619,7 +15844,8 @@ export const allGameplayCards = [
       "strike": 1
     },
     "preMatchAdrenaline": 0,
-    "delayedTurn5": false
+    "delayedTurn5": false,
+    "fixedPrintingTier": "ruby"
   },
   {
     "id": "entrance-kurt-angle",
@@ -15698,14 +15924,18 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "the-rock-attitude",
     "rarity": 4,
-    "rulesText": "The Rock-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "rulesText": "The Rock-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "the-rock-attitude-people-s-elbow",
@@ -15783,8 +16013,7 @@ export const allGameplayCards = [
     "id": "john-cena-protobomb",
     "name": "Protobomb",
     "kind": "move",
-    "setId": "season-1-last-time-is-now",
-    "fixedPrintingTier": "ruby",
+    "setId": "ruthless-aggression-series-1",
     "cost": 6,
     "damage": 10,
     "requirements": {
@@ -15813,8 +16042,7 @@ export const allGameplayCards = [
     "id": "john-cena-five-knuckle-shuffle",
     "name": "Five Knuckle Shuffle",
     "kind": "move",
-    "setId": "season-1-last-time-is-now",
-    "fixedPrintingTier": "ruby",
+    "setId": "ruthless-aggression-series-1",
     "cost": 6,
     "damage": 10,
     "requirements": {
@@ -15843,8 +16071,7 @@ export const allGameplayCards = [
     "id": "john-cena-stf",
     "name": "STF",
     "kind": "move",
-    "setId": "season-1-last-time-is-now",
-    "fixedPrintingTier": "ruby",
+    "setId": "ruthless-aggression-series-1",
     "cost": 9,
     "damage": 0,
     "requirements": {},
@@ -15852,7 +16079,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "john-cena",
     "rarity": 4,
-    "rulesText": "John Cena-exclusive Finisher. Grounded opponent only. +7 persistent Leg damage per successful turn.",
+    "rulesText": "John Cena-exclusive Finisher. Grounded opponent only. +7 persistent Leg damage per successful turn. On Connect: +1 persistent Head damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -15863,14 +16090,18 @@ export const allGameplayCards = [
     "submission": {
       "bodyPart": "legs",
       "pressure": 7
-    }
+    },
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "submissionTarget": "legs"
   },
   {
     "id": "john-cena-attitude-adjustment",
     "name": "Attitude Adjustment",
     "kind": "move",
-    "setId": "season-1-last-time-is-now",
-    "fixedPrintingTier": "ruby",
+    "setId": "ruthless-aggression-series-1",
     "cost": 11,
     "damage": 18,
     "requirements": {},
@@ -15890,25 +16121,24 @@ export const allGameplayCards = [
   {
     "id": "john-cena-hustle-loyalty-respect",
     "name": "Hustle, Loyalty, Respect",
-    "kind": "support",
-    "setId": "season-1-last-time-is-now",
-    "fixedPrintingTier": "ruby",
+    "kind": "action",
+    "setId": "ruthless-aggression-series-1",
     "rarity": 4,
     "superstarId": "john-cena",
-    "rulesText": "Install this Support. The first time Cena drops to 50% HP or less, gain +2 Adrenaline and draw 2 pages.",
+    "rulesText": "Play once per match. The first time Cena drops to 50% HP or less, gain +2 Adrenaline and draw 2 pages.",
     "effect": {
       "type": "hustleLoyaltyRespect",
       "hpPct": 0.5,
       "adrenaline": 2,
       "draw": 2
-    }
+    },
+    "oncePerMatch": true
   },
   {
     "id": "entrance-john-cena",
     "name": "The Time Is Now",
     "kind": "entrance",
-    "setId": "season-1-last-time-is-now",
-    "fixedPrintingTier": "ruby",
+    "setId": "ruthless-aggression-series-1",
     "rarity": 4,
     "superstarId": "john-cena",
     "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
@@ -15923,8 +16153,7 @@ export const allGameplayCards = [
     "id": "special-john-cena",
     "name": "Never Give Up",
     "kind": "action",
-    "setId": "season-1-last-time-is-now",
-    "fixedPrintingTier": "ruby",
+    "setId": "ruthless-aggression-series-1",
     "cost": 0,
     "damage": 0,
     "requirements": {},
@@ -15944,15 +16173,3486 @@ export const allGameplayCards = [
       "draw": 2,
       "adrenaline": 2
     }
+  },
+  {
+    "id": "shinsuke-nakamura-inverted-exploder",
+    "name": "Inverted Exploder",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "shinsuke-nakamura",
+    "rarity": 3,
+    "rulesText": "Shinsuke Nakamura-exclusive Trademark. Running Aerial. Grounds opponent. On Connect: your next Landslide costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Landslide",
+        "amount": 1
+      }
+    ],
+    "counterState": "running-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "shinsuke-nakamura-landslide",
+    "name": "Landslide",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "shinsuke-nakamura",
+    "rarity": 3,
+    "rulesText": "Shinsuke Nakamura-exclusive Trademark. Grounds opponent. On Connect: your next Sliding German Suplex costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Sliding German Suplex",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "shinsuke-nakamura-sliding-german-suplex",
+    "name": "Sliding German Suplex",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "shinsuke-nakamura",
+    "rarity": 3,
+    "rulesText": "Shinsuke Nakamura-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: search/draw Kinshasa; it costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Kinshasa",
+        "discount": 1
+      }
+    ],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "shinsuke-nakamura-kinshasa",
+    "name": "Kinshasa",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "strike",
+    "method": null,
+    "superstarId": "shinsuke-nakamura",
+    "rarity": 4,
+    "rulesText": "Shinsuke Nakamura-exclusive Finisher. Ground your opponent. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "amount": 1
+    }
+  },
+  {
+    "id": "special-shinsuke-nakamura",
+    "name": "Strong Style",
+    "kind": "action",
+    "setId": "smackdown-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "shinsuke-nakamura",
+    "rulesText": "Once per match during Shinsuke Nakamura’s Control: search/draw one Shinsuke Nakamura-exclusive Trademark; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-shinsuke-nakamura",
+    "name": "The Rising Sun",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "shinsuke-nakamura",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "blake-monroe-glamour-ddt",
+    "name": "Glamour DDT",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strike": 1,
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "strike",
+    "superstarId": "blake-monroe",
+    "rarity": 3,
+    "rulesText": " On Connect: +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "blake-monroe-monroe-kick",
+    "name": "Monroe Kick",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 6,
+    "damage": 9,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "blake-monroe",
+    "rarity": 3,
+    "rulesText": "Blake Monroe-exclusive Trademark. Grounds opponent. On Connect: search/draw Top-Rope Double Stomp; it costs 3 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Top-Rope Double Stomp",
+        "discount": 3
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "blake-monroe-top-rope-double-stomp",
+    "name": "Top-Rope Double Stomp",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 8,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "blake-monroe",
+    "rarity": 4,
+    "rulesText": "Blake Monroe-exclusive Finisher. Grounded opponent only. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "blake-monroe-glamour-shot",
+    "name": "Glamour Shot",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "blake-monroe",
+    "rarity": 3,
+    "rulesText": "Vaquer-exclusive Trademark. On Connect: her next Technical Move costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextMethod",
+        "method": "technical",
+        "amount": 1
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-blake-monroe",
+    "name": "The Glamour",
+    "kind": "action",
+    "setId": "smackdown-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "blake-monroe",
+    "rulesText": "Once per match during Blake Monroe’s Control: look at the top 5 pages of your Playbook. You may reveal a Technical Move and put it into your hand.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "perfectRecord",
+      "look": 5
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-blake-monroe",
+    "name": "Glamour Arrival",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "blake-monroe",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "trick-williams-book-end",
+    "name": "Book End",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "trick-williams",
+    "rarity": 3,
+    "rulesText": "Trick Williams-exclusive Trademark. Grounds opponent. On Connect: gain +1 Adrenaline. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "torso-trapped",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "trick-williams-cyclone-boot",
+    "name": "Cyclone Boot",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 9,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "trick-williams",
+    "rarity": 3,
+    "rulesText": "Trick Williams-exclusive Trademark. Grounds opponent. On Connect: draw 1 page, then ditch 1 page. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "drawThenDiscardSelf",
+        "draw": 1,
+        "discard": 1
+      }
+    ],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "trick-williams-trick-knee",
+    "name": "Trick Knee",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "agility": 3
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "trick-williams",
+    "rarity": 3,
+    "rulesText": "Trick Williams-exclusive Trademark. Grounded opponent only. On Connect: +1 persistent Head damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "trick-williams-trick-shot",
+    "name": "Trick Shot",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 8,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "trick-williams",
+    "rarity": 4,
+    "rulesText": "Trick Williams-exclusive Finisher. No Method requirement. Grounded opponent only. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-trick-williams",
+    "name": "Trick Willy",
+    "kind": "action",
+    "setId": "smackdown-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "trick-williams",
+    "rulesText": "Once per match during Trick Williams’s Control: search/draw a shared agility or technical Move costing 4 or less; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 4,
+      "methods": [
+        "agility",
+        "technical"
+      ],
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-trick-williams",
+    "name": "Whoop That Trick",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "trick-williams",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "kind": "move",
+    "cost": 3,
+    "damage": 4,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "rarity": 3,
+    "rulesText": "Piper-exclusive Trademark. Does not ground. On Connect: opponent loses 1 additional Adrenaline. On Connect: +1 persistent Back damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "id": "jacy-jayne-cannonball-senton",
+    "name": "Cannonball Senton",
+    "setId": "smackdown-series-1",
+    "superstarId": "jacy-jayne",
+    "trademark": true,
+    "counterState": "front-control",
+    "opponentAdrenalineOnConnect": -1,
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "rarity": 3,
+    "rulesText": "Piper-exclusive Trademark. On Connect: draw 1 page, then ditch 1. On Connect: +1 persistent Head damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawThenDiscardSelf",
+        "draw": 1,
+        "discard": 1
+      }
+    ],
+    "id": "jacy-jayne-discus-boot",
+    "name": "Discus Boot",
+    "setId": "smackdown-series-1",
+    "superstarId": "jacy-jayne",
+    "trademark": true,
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 3,
+    "rulesText": "Piper-exclusive Trademark. Grounds opponent. On Connect: search/draw Running Knee Smash; it costs 2 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "id": "jacy-jayne-rolling-encore",
+    "name": "Rolling Encore",
+    "setId": "smackdown-series-1",
+    "superstarId": "jacy-jayne",
+    "trademark": true,
+    "counterState": "front-control",
+    "searchOnConnectName": "Running Knee Smash",
+    "searchOnConnectDiscount": 2,
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 8,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "submission",
+    "method": null,
+    "rarity": 4,
+    "rulesText": "Piper-exclusive Finisher. No Method requirement. Submission. +7 persistent Head damage per successful turn. On Connect: opponent loses 1 additional Adrenaline. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "id": "jacy-jayne-running-knee-smash",
+    "name": "Running Knee Smash",
+    "setId": "smackdown-series-1",
+    "superstarId": "jacy-jayne",
+    "finisher": true,
+    "counterState": "rear-control",
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 7
+    },
+    "submissionTarget": "neck-head",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-jacy-jayne",
+    "name": "Fatal Influence",
+    "kind": "action",
+    "setId": "smackdown-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "jacy-jayne",
+    "rulesText": "Once per match during Jacy Jayne’s Control: the next Move gets +2 Damage; after an Agility Move connects, draw 1.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "fullSpeed",
+      "damage": 2,
+      "agilityDraw": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-jacy-jayne",
+    "name": "Fatal Attraction",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "jacy-jayne",
+    "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strike": 1,
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "kendal-grey-olympic-takedown",
+    "name": "Olympic Takedown",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "kendal-grey",
+    "rarity": 3,
+    "rulesText": "Kendal Grey-exclusive Trademark. On Connect: your next Russian Leg Sweep costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Russian Leg Sweep",
+        "amount": 1
+      }
+    ],
+    "counterState": "torso-trapped",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "kendal-grey-rolling-german-suplex",
+    "name": "Rolling German Suplex",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "kendal-grey",
+    "rarity": 3,
+    "rulesText": "Kendal Grey-exclusive Trademark. Grounds opponent. On Connect: your next Ankle Lock costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Ankle Lock",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "kendal-grey-ankle-lock",
+    "name": "Ankle Lock",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "kendal-grey",
+    "rarity": 3,
+    "rulesText": "Kendal Grey-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: search/draw Olympic Slam; it costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Olympic Slam",
+        "discount": 1
+      }
+    ],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "kendal-grey-olympic-slam",
+    "name": "Olympic Slam",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 9,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "submission",
+    "method": null,
+    "superstarId": "kendal-grey",
+    "rarity": 4,
+    "rulesText": "Kendal Grey-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +6 persistent Leg damage per successful turn. On Connect: gain +1 additional Adrenaline. On Connect: +1 persistent Back damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 6
+    },
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-kendal-grey",
+    "name": "Grey Area",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "kendal-grey",
+    "rulesText": "Once per match during Kendal Grey’s Control: search/draw a Finisher or Trademark and gain 1 Strength discount this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "lastRites",
+      "strengthDiscount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-kendal-grey",
+    "name": "Mat Standard",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "kendal-grey",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1,
+      "strength": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "tony-dangelo-family-spinebuster",
+    "name": "Family Spinebuster",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "tony-dangelo",
+    "rarity": 3,
+    "rulesText": "Tony D’Angelo-exclusive Trademark. Grounds opponent. On Connect: your next Crowbar costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Crowbar",
+        "amount": 1
+      }
+    ],
+    "counterState": "torso-trapped",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "tony-dangelo-fisherman-buster",
+    "name": "Fisherman Buster",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 0,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": "tony-dangelo",
+    "rarity": 3,
+    "rulesText": "Tony D’Angelo-exclusive Trademark. Standing opponent only. Submission. +5 persistent Chest damage per successful turn. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "submission": {
+      "bodyPart": "chest",
+      "pressure": 5
+    },
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "back",
+    "standingOnly": true,
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "tony-dangelo-crowbar",
+    "name": "Crowbar",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "tony-dangelo",
+    "rarity": 3,
+    "rulesText": "Tony D’Angelo-exclusive Trademark. Grounds opponent. On Connect: search/draw Forget About It; it costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Forget About It",
+        "discount": 1
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "tony-dangelo-forget-about-it",
+    "name": "Forget About It",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "tony-dangelo",
+    "rarity": 4,
+    "rulesText": "Tony D’Angelo-exclusive Finisher. Ground your opponent. On Connect: opponent ditches 1 page.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [
+      {
+        "type": "discardOpponent",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-tony-dangelo",
+    "name": "Family Business",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "tony-dangelo",
+    "rulesText": "Once per match during Tony D’Angelo’s Control: search/draw a shared agility or technical Move costing 4 or less; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "roxanneProdigy",
+      "maxCost": 4,
+      "methods": [
+        "agility",
+        "technical"
+      ],
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-tony-dangelo",
+    "name": "The Don Arrives",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "tony-dangelo",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "jaida-parker-running-hip-attack",
+    "name": "Running Hip Attack",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "jaida-parker",
+    "rarity": 3,
+    "rulesText": "Jaida Parker-exclusive. Stun 1. Opponent loses 1 Adrenaline. On connect, search/draw Jaida Parker Driver; that searched Jaida Parker Driver costs 1 less during this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      },
+      {
+        "type": "search",
+        "name": "Jaida Parker Driver",
+        "discount": 1
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jaida-parker-samoan-drop",
+    "name": "Samoan Drop",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "jaida-parker",
+    "rarity": 3,
+    "rulesText": "Jaida Parker-exclusive Trademark. Grounds opponent. On Connect: search/draw Corner Spinebuster; it costs 3 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Corner Spinebuster",
+        "discount": 3
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jaida-parker-corner-spinebuster",
+    "name": "Corner Spinebuster",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "jaida-parker",
+    "rarity": 4,
+    "rulesText": "Jaida Parker-exclusive. Ground your opponent. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "amount": 1
+    }
+  },
+  {
+    "id": "jaida-parker-hipnotic",
+    "name": "Hipnotic",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": "jaida-parker",
+    "rarity": 3,
+    "rulesText": "Jaida Parker-exclusive. Grounds opponent. If Jaida Parker connected with another Agility Move earlier in this Control sequence, +1 Damage. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "priorConnectedMethodBonus": {
+      "method": "agility",
+      "damage": 1
+    },
+    "effects": [],
+    "counterState": "running-aerial",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-jaida-parker",
+    "name": "OTM Pressure",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "jaida-parker",
+    "rulesText": "Once per match during Jaida Parker’s Control: search/draw one Jaida Parker-exclusive Trademark; it costs 2 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 2
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-jaida-parker",
+    "name": "Miss Parker",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "jaida-parker",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strength": 1
+    },
+    "preMatchAdrenaline": 0,
+    "delayedTurn5": false
+  },
+  {
+    "id": "kelani-jordan-handspring-elbow",
+    "name": "Handspring Elbow",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "kelani-jordan",
+    "rarity": 3,
+    "rulesText": "Kelani Jordan-exclusive Trademark. Running Aerial. Grounds opponent. On Connect: your next Split-Legged Moonsault costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Split-Legged Moonsault",
+        "amount": 1
+      }
+    ],
+    "counterState": "running-aerial",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "kelani-jordan-split-legged-moonsault",
+    "name": "Split-Legged Moonsault",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "kelani-jordan",
+    "rarity": 3,
+    "rulesText": "Kelani Jordan-exclusive Trademark. Grounds opponent. On Connect: your next Springboard Cutter costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Springboard Cutter",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "kelani-jordan-springboard-cutter",
+    "name": "Springboard Cutter",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "kelani-jordan",
+    "rarity": 3,
+    "rulesText": "Kelani Jordan-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: search/draw 450 Splash; it costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "450 Splash",
+        "discount": 1
+      }
+    ],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "kelani-jordan-450-splash",
+    "name": "450 Splash",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "strike",
+    "method": null,
+    "superstarId": "kelani-jordan",
+    "rarity": 4,
+    "rulesText": "Kelani Jordan-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-kelani-jordan",
+    "name": "One of One",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "kelani-jordan",
+    "rulesText": "Once per match during Kelani Jordan’s Control: look at the top 6 pages of your Playbook. You may reveal a Technical Move and put it into your hand.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "perfectRecord",
+      "look": 6
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-kelani-jordan",
+    "name": "Standout Entrance",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "kelani-jordan",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "mason-rook-fallaway-slam",
+    "name": "Fallaway Slam",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "mason-rook",
+    "rarity": 3,
+    "rulesText": "Mason Rook-exclusive Trademark. Grounds opponent. On Connect: your next Mason Rook’s Big Boot costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Mason Rook’s Big Boot",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "mason-rook-corner-big-boot",
+    "name": "Corner Big Boot",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "mason-rook",
+    "rarity": 3,
+    "rulesText": "Mason Rook-exclusive Trademark. Grounds opponent. On Connect: your next Mason Rook’s Sidewalk Slam costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Mason Rook’s Sidewalk Slam",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "mason-rook-checkmate-slam",
+    "name": "Checkmate Slam",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "mason-rook",
+    "rarity": 3,
+    "rulesText": "Mason Rook-exclusive Trademark. Grounds opponent. On Connect: search/draw Sit-Out Powerbomb; it costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Sit-Out Powerbomb",
+        "discount": 1
+      }
+    ],
+    "counterState": "torso-trapped",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "mason-rook-sit-out-powerbomb",
+    "name": "Sit-Out Powerbomb",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 12,
+    "damage": 18,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "mason-rook",
+    "rarity": 4,
+    "rulesText": "Mason Rook-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-mason-rook",
+    "name": "Stone Wall",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "mason-rook",
+    "rulesText": "Once per match during Mason Rook’s Control: search/draw a shared strength or technical Move costing 5 or less; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 5,
+      "methods": [
+        "strength",
+        "technical"
+      ],
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-mason-rook",
+    "name": "Rook Takes The Board",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "mason-rook",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "tatum-paxley-psycho-trap",
+    "name": "Psycho Trap",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "tatum-paxley",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Tatum Paxley-exclusive Trademark. Grounds opponent. On Connect: search/draw Cemetery Drive; it costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "searchOnConnectName": "Cemetery Drive",
+    "searchOnConnectDiscount": 1,
+    "effects": [],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "tatum-paxley-cemetery-drive",
+    "name": "Cemetery Drive",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 0,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": "tatum-paxley",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Tatum Paxley-exclusive Trademark. Grounded opponent only. Submission. +7 persistent Leg damage per successful turn. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 7
+    },
+    "effects": [],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "tatum-paxley-bridging-german-suplex",
+    "name": "Bridging German Suplex",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "tatum-paxley",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Tatum Paxley-exclusive Trademark. Diving Aerial. Grounded opponent only. On Connect: search/draw Diving Knee Drop; it costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Diving Knee Drop",
+        "discount": 1
+      }
+    ],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "tatum-paxley-diving-knee-drop",
+    "name": "Diving Knee Drop",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 9,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "tatum-paxley",
+    "rarity": 4,
+    "finisher": true,
+    "rulesText": "Tatum Paxley-exclusive. Grounded opponent only. On Connect: gain +1 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-tatum-paxley",
+    "name": "Twisted Mind",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "tatum-paxley",
+    "rulesText": "Once per match during Tatum Paxley’s Control: the next Move gets +3 Damage; after an Agility Move connects, draw 1.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "fullSpeed",
+      "damage": 3,
+      "agilityDraw": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-tatum-paxley",
+    "name": "Eyes On You",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "tatum-paxley",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "rarity": 3,
+    "rulesText": "Lexis King-exclusive Trademark. On Connect: next Technical Move costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextMethod",
+        "method": "technical",
+        "amount": 1
+      }
+    ],
+    "id": "lexis-king-coronation-neckbreaker",
+    "name": "Coronation Neckbreaker",
+    "setId": "nxt-series-1",
+    "superstarId": "lexis-king",
+    "trademark": true,
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 3,
+    "rulesText": "Lexis King-exclusive. Ground your opponent. On Connect: draw 1 page.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
+    "id": "lexis-king-the-throne",
+    "name": "The Throne",
+    "setId": "nxt-series-1",
+    "superstarId": "lexis-king",
+    "trademark": true,
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "amount": 2
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "rarity": 3,
+    "rulesText": "Lexis King-exclusive Trademark. Does not ground. On Connect after a Technical Move: draw 1 page. On Connect: +1 persistent Head damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1,
+        "ifAfterMethod": "technical"
+      }
+    ],
+    "id": "lexis-king-superkick",
+    "name": "Superkick",
+    "setId": "nxt-series-1",
+    "superstarId": "lexis-king",
+    "trademark": true,
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 7,
+    "damage": 15,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "rarity": 4,
+    "rulesText": "Lexis King-exclusive Finisher. No Method requirement. Grounds opponent. An immediate Pin reduces the defender’s kickout chance by 15 percentage points. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "id": "lexis-king-king-s-landing",
+    "name": "King’s Landing",
+    "setId": "nxt-series-1",
+    "superstarId": "lexis-king",
+    "finisher": true,
+    "counterState": "front-control",
+    "pinKickoutPenalty": 15,
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-lexis-king",
+    "name": "King’s Decree",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "lexis-king",
+    "rulesText": "Once per match during Lexis King’s Control: search/draw a Finisher or Trademark and gain 2 Strength discount this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "lastRites",
+      "strengthDiscount": 2
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-lexis-king",
+    "name": "Royal Entrance",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "lexis-king",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +2 Adrenaline. The first Counter Lexis King plays each match costs 1 less Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1
+    },
+    "preMatchAdrenaline": 2,
+    "delayedTurn5": false,
+    "preMatchCounterDiscount": 1
+  },
+  {
+    "id": "zilla-fatu-samoan-spike",
+    "name": "Samoan Spike",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "zilla-fatu",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Zilla Fatu-exclusive Trademark. On Connect: Zilla Fatu’s next Strength Move costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextMethod",
+        "method": "strength",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "zilla-fatu-pop-up-samoan-drop",
+    "name": "Pop-Up Samoan Drop",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "zilla-fatu",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Zilla Fatu-exclusive Trademark. Grounds opponent. On Connect: search/draw Zilla Fatu’s Running Leg Drop; it costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Zilla Fatu’s Running Leg Drop",
+        "discount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "zilla-fatu-running-senton",
+    "name": "Running Senton",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "aerial",
+    "method": "strength",
+    "superstarId": "zilla-fatu",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Zilla Fatu-exclusive Trademark. Running Aerial. Grounded opponent only. On Connect: gain +1 Adrenaline. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "running-aerial",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "zilla-fatu-island-driver",
+    "name": "Island Driver",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 11,
+    "damage": 19,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "zilla-fatu",
+    "rarity": 4,
+    "finisher": true,
+    "rulesText": "Zilla Fatu-exclusive Finisher. No Method requirement. Diving Aerial. Grounded opponent only. Grounds opponent. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-zilla-fatu",
+    "name": "Bloodline Born",
+    "kind": "action",
+    "setId": "nxt-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "zilla-fatu",
+    "rulesText": "Once per match during Zilla Fatu’s Control: search/draw a shared strike or technical Move costing 5 or less; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "roxanneProdigy",
+      "maxCost": 5,
+      "methods": [
+        "strike",
+        "technical"
+      ],
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-zilla-fatu",
+    "name": "Samoan Legacy",
+    "kind": "entrance",
+    "setId": "nxt-series-1",
+    "rarity": 4,
+    "superstarId": "zilla-fatu",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "batista-batista-spinebuster",
+    "name": "Batista Spinebuster",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "batista",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Batista-exclusive Trademark. Grounds opponent. On Connect: Bulldog’s next Technical Move costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextMethod",
+        "method": "technical",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "batista-spear",
+    "name": "Spear",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "batista",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Batista-exclusive Trademark. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them −5 percentage points to their kickout chance. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control",
+    "pinKickoutPenalty": 5,
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "batista-demon-bomb",
+    "name": "Demon Bomb",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "batista",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Batista-exclusive Trademark. Grounds opponent. On Connect: search/draw Batista Bomb; it costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Batista Bomb",
+        "discount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "batista-batista-bomb",
+    "name": "Batista Bomb",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "batista",
+    "rarity": 4,
+    "finisher": true,
+    "rulesText": "Batista-exclusive Finisher. Ground your opponent. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "amount": 1
+    }
+  },
+  {
+    "id": "special-batista",
+    "name": "Unleashed",
+    "kind": "action",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "batista",
+    "rulesText": "Once per match during Batista’s Control: search/draw one Batista-exclusive Trademark; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-batista",
+    "name": "I Walk Alone",
+    "kind": "entrance",
+    "setId": "ruthless-aggression-series-1",
+    "rarity": 4,
+    "superstarId": "batista",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "jbl-fallaway-slam",
+    "name": "Fallaway Slam",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "jbl",
+    "rarity": 3,
+    "rulesText": "JBL-exclusive Trademark. Grounds opponent. On Connect: your next JBL’s Big Boot costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "JBL’s Big Boot",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jbl-big-boot",
+    "name": "Big Boot",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "jbl",
+    "rarity": 3,
+    "rulesText": "JBL-exclusive Trademark. Grounds opponent. On Connect: your next JBL’s Sidewalk Slam costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "JBL’s Sidewalk Slam",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jbl-last-call-powerbomb",
+    "name": "Last Call Powerbomb",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "jbl",
+    "rarity": 3,
+    "rulesText": "JBL-exclusive Trademark. Grounds opponent. On Connect: search/draw Clothesline from Hell; it costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Clothesline from Hell",
+        "discount": 1
+      }
+    ],
+    "counterState": "torso-trapped",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jbl-clothesline-from-hell",
+    "name": "Clothesline from Hell",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 12,
+    "damage": 18,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "jbl",
+    "rarity": 4,
+    "rulesText": "JBL-exclusive Finisher. No Method requirement. Grounds opponent. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-jbl",
+    "name": "Wrestling God",
+    "kind": "action",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "jbl",
+    "rulesText": "Once per match during JBL’s Control: look at the top 7 pages of your Playbook. You may reveal a Technical Move and put it into your hand.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "perfectRecord",
+      "look": 7
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-jbl",
+    "name": "Longhorn Limousine",
+    "kind": "entrance",
+    "setId": "ruthless-aggression-series-1",
+    "rarity": 4,
+    "superstarId": "jbl",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 3,
+    "rulesText": "Jericho-exclusive Trademark. Grounds opponent. On Connect: next Aerial Move costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextMoveType",
+        "moveType": "aerial",
+        "amount": 1
+      }
+    ],
+    "id": "eddie-guerrero-three-amigos",
+    "name": "Three Amigos",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "eddie-guerrero",
+    "trademark": true,
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 5,
+    "damage": 9,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "rarity": 3,
+    "rulesText": "Jericho-exclusive Trademark. Grounded opponent only. If Jericho Connected with a Grapple earlier this Control sequence, draw 1 page. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1,
+        "ifAfterMoveType": "grapple"
+      }
+    ],
+    "id": "eddie-guerrero-hurricanrana",
+    "name": "Hurricanrana",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "eddie-guerrero",
+    "trademark": true,
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 3,
+    "rulesText": "Jericho-exclusive Trademark. Grounds opponent. On Connect: search/draw Frog Splash; it costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "id": "eddie-guerrero-lasso-from-el-paso",
+    "name": "Lasso from El Paso",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "eddie-guerrero",
+    "trademark": true,
+    "counterState": "rear-control",
+    "searchOnConnectName": "Frog Splash",
+    "searchOnConnectDiscount": 1,
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 9,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "submission",
+    "method": null,
+    "rarity": 4,
+    "rulesText": "Jericho-exclusive Finisher. No Method requirement. Grounded opponent only. +6 persistent Leg damage per successful turn. On Connect: opponent loses 1 additional Adrenaline. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "id": "eddie-guerrero-frog-splash",
+    "name": "Frog Splash",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "eddie-guerrero",
+    "finisher": true,
+    "counterState": "leg-extended",
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 6
+    },
+    "submissionTarget": "legs",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-eddie-guerrero",
+    "name": "Lie, Cheat & Steal",
+    "kind": "action",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "eddie-guerrero",
+    "rulesText": "Once per match during Eddie Guerrero’s Control: search/draw a shared agility or strike Move costing 5 or less; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 5,
+      "methods": [
+        "agility",
+        "strike"
+      ],
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-eddie-guerrero",
+    "name": "Viva La Raza",
+    "kind": "entrance",
+    "setId": "ruthless-aggression-series-1",
+    "rarity": 4,
+    "superstarId": "eddie-guerrero",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "rarity": 3,
+    "rulesText": "Edge-exclusive Trademark. On Connect: next Technical Move costs 1 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextMethod",
+        "method": "technical",
+        "amount": 1
+      }
+    ],
+    "id": "edge-edge-o-matic",
+    "name": "Edge-O-Matic",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "edge",
+    "trademark": true,
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 3,
+    "rulesText": "Edge-exclusive. Ground your opponent. On Connect: opponent loses 1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "id": "edge-edgecution",
+    "name": "Edgecution",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "edge",
+    "trademark": true,
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "amount": 2
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "rarity": 3,
+    "rulesText": "Edge-exclusive Trademark. Does not ground. On Connect after a Technical Move: draw 1 page. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1,
+        "ifAfterMethod": "technical"
+      }
+    ],
+    "id": "edge-impaler-ddt",
+    "name": "Impaler DDT",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "edge",
+    "trademark": true,
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "kind": "move",
+    "cost": 7,
+    "damage": 15,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "rarity": 4,
+    "rulesText": "Edge-exclusive Finisher. No Method requirement. Grounds opponent. An immediate Pin reduces the defender’s kickout chance by 15 percentage points. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "id": "edge-spear",
+    "name": "Spear",
+    "setId": "ruthless-aggression-series-1",
+    "superstarId": "edge",
+    "finisher": true,
+    "counterState": "front-control",
+    "pinKickoutPenalty": 15,
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-edge",
+    "name": "Rated-R Opportunity",
+    "kind": "action",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "edge",
+    "rulesText": "Once per match during Edge’s Control: the next Move gets +2 Damage; after an Agility Move connects, draw 2.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "fullSpeed",
+      "damage": 2,
+      "agilityDraw": 2
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-edge",
+    "name": "Metalingus",
+    "kind": "entrance",
+    "setId": "ruthless-aggression-series-1",
+    "rarity": 4,
+    "superstarId": "edge",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +2 Adrenaline. The first Counter Edge plays each match costs 1 less Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1
+    },
+    "preMatchAdrenaline": 2,
+    "delayedTurn5": false,
+    "preMatchCounterDiscount": 1
+  },
+  {
+    "id": "jeff-hardy-whisper-in-the-wind",
+    "name": "Whisper in the Wind",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "jeff-hardy",
+    "rarity": 3,
+    "rulesText": "Jeff Hardy-exclusive Trademark. Running Aerial. Grounds opponent. On Connect: your next Twist of Fate costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Twist of Fate",
+        "amount": 1
+      }
+    ],
+    "counterState": "running-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jeff-hardy-twist-of-fate",
+    "name": "Twist of Fate",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "jeff-hardy",
+    "rarity": 3,
+    "rulesText": "Jeff Hardy-exclusive Trademark. Grounds opponent. On Connect: your next Poetry in Motion costs 1 less this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Poetry in Motion",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jeff-hardy-poetry-in-motion",
+    "name": "Poetry in Motion",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "jeff-hardy",
+    "rarity": 3,
+    "rulesText": "Jeff Hardy-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: search/draw Swanton Bomb; it costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Swanton Bomb",
+        "discount": 1
+      }
+    ],
+    "counterState": "diving-aerial",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "jeff-hardy-swanton-bomb",
+    "name": "Swanton Bomb",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "strike",
+    "method": null,
+    "superstarId": "jeff-hardy",
+    "rarity": 4,
+    "rulesText": "Jeff Hardy-exclusive Finisher. Grounded opponent only. On Connect: draw 1 page.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-jeff-hardy",
+    "name": "Extreme Risk",
+    "kind": "action",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "jeff-hardy",
+    "rulesText": "Once per match during Jeff Hardy’s Control: search/draw a Finisher or Trademark and gain 1 Strength discount this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "lastRites",
+      "strengthDiscount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-jeff-hardy",
+    "name": "No More Words",
+    "kind": "entrance",
+    "setId": "ruthless-aggression-series-1",
+    "rarity": 4,
+    "superstarId": "jeff-hardy",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "rob-van-dam-rolling-thunder",
+    "name": "Rolling Thunder",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "rob-van-dam",
+    "rarity": 3,
+    "rulesText": "Rob Van Dam-exclusive. Stun 1. Opponent loses 1 Adrenaline. On connect, search/draw Rob Van Dam Driver; that searched Rob Van Dam Driver costs 1 less during this Control sequence. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      },
+      {
+        "type": "search",
+        "name": "Rob Van Dam Driver",
+        "discount": 1
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "rob-van-dam-van-daminator",
+    "name": "Van Daminator",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "rob-van-dam",
+    "rarity": 3,
+    "rulesText": "Rob Van Dam-exclusive Trademark. Grounds opponent. On Connect: search/draw Split-Legged Moonsault; it costs 3 less this Control sequence. On Connect: +1 persistent Leg damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Split-Legged Moonsault",
+        "discount": 3
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "rob-van-dam-split-legged-moonsault",
+    "name": "Split-Legged Moonsault",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "rob-van-dam",
+    "rarity": 4,
+    "rulesText": "Rob Van Dam-exclusive. Grounded opponent only. On Connect: draw 1 page.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
+    "counterState": "body-elevated",
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "rob-van-dam-five-star-frog-splash",
+    "name": "Five-Star Frog Splash",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": "rob-van-dam",
+    "rarity": 3,
+    "rulesText": "Rob Van Dam-exclusive. Grounds opponent. If Rob Van Dam connected with another Agility Move earlier in this Control sequence, +1 Damage. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "priorConnectedMethodBonus": {
+      "method": "agility",
+      "damage": 1
+    },
+    "effects": [],
+    "counterState": "running-aerial",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "special-rob-van-dam",
+    "name": "Whole F’n Show",
+    "kind": "action",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "rob-van-dam",
+    "rulesText": "Once per match during Rob Van Dam’s Control: search/draw a shared agility or strike Move costing 5 or less; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "roxanneProdigy",
+      "maxCost": 5,
+      "methods": [
+        "agility",
+        "strike"
+      ],
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "entrance-rob-van-dam",
+    "name": "One of a Kind",
+    "kind": "entrance",
+    "setId": "ruthless-aggression-series-1",
+    "rarity": 4,
+    "superstarId": "rob-van-dam",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strength": 1
+    },
+    "preMatchAdrenaline": 0,
+    "delayedTurn5": false
+  },
+  {
+    "id": "trish-stratus-stratusphere",
+    "name": "Stratusphere",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strike": 1,
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "strike",
+    "superstarId": "trish-stratus",
+    "rarity": 3,
+    "rulesText": " On Connect: +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    },
+    "fixedPrintingTier": "ruby"
+  },
+  {
+    "id": "trish-stratus-chick-kick",
+    "name": "Chick Kick",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 6,
+    "damage": 9,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "trish-stratus",
+    "rarity": 3,
+    "rulesText": "Trish Stratus-exclusive Trademark. Grounds opponent. On Connect: search/draw Air Canada; it costs 3 less this Control sequence. On Connect: +1 persistent Back damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Air Canada",
+        "discount": 3
+      }
+    ],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    },
+    "fixedPrintingTier": "ruby"
+  },
+  {
+    "id": "trish-stratus-air-canada",
+    "name": "Air Canada",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "trish-stratus",
+    "rarity": 3,
+    "rulesText": "Trish Stratus-exclusive Trademark. Grounded opponent only. On Connect: +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "fixedPrintingTier": "ruby"
+  },
+  {
+    "id": "trish-stratus-stratusfaction",
+    "name": "Stratusfaction",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 9,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "trish-stratus",
+    "rarity": 4,
+    "rulesText": "Trish Stratus-exclusive Finisher. No Method requirement. On Connect: +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    },
+    "fixedPrintingTier": "ruby"
+  },
+  {
+    "id": "special-trish-stratus",
+    "name": "Stratusfaction Guaranteed",
+    "kind": "action",
+    "setId": "season-1-last-time-is-now",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "trish-stratus",
+    "rulesText": "Once per match during Trish Stratus’s Control: search/draw one Trish Stratus-exclusive Trademark; it costs 2 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 2
+    },
+    "oneUse": true,
+    "fixedPrintingTier": "ruby"
+  },
+  {
+    "id": "entrance-trish-stratus",
+    "name": "Time to Rock & Roll",
+    "kind": "entrance",
+    "setId": "season-1-last-time-is-now",
+    "rarity": 4,
+    "superstarId": "trish-stratus",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false,
+    "fixedPrintingTier": "ruby"
+  },
+  {
+    "id": "sd1-blue-thunder-backbreaker",
+    "name": "Blue Thunder Backbreaker",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 2,
+    "rulesText": "Shared SmackDown move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "sd1-ringside-knee-lift",
+    "name": "Ringside Knee Lift",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "rarity": 2,
+    "rulesText": "On Connect: opponent loses 1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "boosterOnly": true,
+    "counterState": "leg-extended"
+  },
+  {
+    "id": "sd1-apron-enzuigiri",
+    "name": "Apron Enzuigiri",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "rarity": 2,
+    "rulesText": "Shared SmackDown move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "sd1-snap-dragon-suplex",
+    "name": "Snap Dragon Suplex",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 2,
+    "rulesText": "Shared SmackDown move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "front-control"
+  },
+  {
+    "id": "sd1-middle-rope-splash",
+    "name": "Middle-Rope Splash",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "rarity": 2,
+    "rulesText": "Shared SmackDown move.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "nxt1-amateur-fireman-carry",
+    "name": "Amateur Fireman Carry",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 1,
+    "rulesText": "Shared NXT move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "nxt1-corner-body-avalanche",
+    "name": "Corner Body Avalanche",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "strike",
+    "method": "strength",
+    "rarity": 2,
+    "rulesText": "Shared NXT move.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "nxt1-spinning-sole-kick",
+    "name": "Spinning Sole Kick",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "rarity": 1,
+    "rulesText": "Shared NXT move.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "leg-extended"
+  },
+  {
+    "id": "nxt1-bridging-half-nelson-suplex",
+    "name": "Bridging Half Nelson Suplex",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "rarity": 2,
+    "rulesText": "Shared NXT move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "front-control"
+  },
+  {
+    "id": "nxt1-springboard-crossbody",
+    "name": "Springboard Crossbody",
+    "kind": "move",
+    "setId": "nxt-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "rarity": 2,
+    "rulesText": "Ground your opponent. On Connect: gain +1 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
+    "boosterOnly": true,
+    "counterState": "running-aerial"
+  },
+  {
+    "id": "ra1-ruthless-spinebuster",
+    "name": "Ruthless Spinebuster",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "rarity": 2,
+    "rulesText": "Shared Ruthless Aggression move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "torso-trapped"
+  },
+  {
+    "id": "ra1-turnbuckle-clothesline",
+    "name": "Turnbuckle Clothesline",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "rarity": 2,
+    "rulesText": "Shared Ruthless Aggression move.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "ra1-sit-out-powerbomb",
+    "name": "Sit-Out Powerbomb",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "rarity": 2,
+    "rulesText": "Shared Ruthless Aggression move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "ra1-diving-leg-drop",
+    "name": "Diving Leg Drop",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "rarity": 2,
+    "rulesText": "Shared Ruthless Aggression move.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "ra1-running-powerslam",
+    "name": "Running Powerslam",
+    "kind": "move",
+    "setId": "ruthless-aggression-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "rarity": 2,
+    "rulesText": "Shared Ruthless Aggression move. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "counterState": "torso-trapped"
   }
 ];
-allGameplayCards.forEach(card => {
-  const rewardTier = rewardPrintingTierForSet(card.setId);
-  if (rewardTier) card.fixedPrintingTier = rewardTier;
-  enrichCounterState(card);
-});
-
-// Linked/generated gameplay cards are intentionally outside allGameplayCards and the canonical collector manifest.
+allGameplayCards.forEach(card => { const rewardTier=rewardPrintingTierForSet(card.setId); if(rewardTier) card.fixedPrintingTier=rewardTier; enrichCounterState(card); });
 export const linkedGameplayCards = [
   {
     "id": "linked-street-profits-revelation",

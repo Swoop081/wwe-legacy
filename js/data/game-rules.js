@@ -54,7 +54,6 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Momentum", "Momentum pages add +1 of their printed Method and are discarded after being played; the Momentum they granted remains for the match."],
       ["Actions", "Actions are utility and character cards. You may include multiple different Actions in a deck. Normal Actions use your Action window and the normal limit is 1 per turn; reactive or one-use Actions instead follow the specific timing printed on the card."],
       ["Triggered Actions", "When a one-use or reactive card becomes eligible because its trigger occurs, the human player is offered a clear choice to use it or decline. Declining does not consume the card or its once-per-match use; the card remains available for a later valid trigger. Mandatory effects from a card already played still resolve automatically."],
-      ["Supports", "Supports use their authored effect and the normal limit is 1 Support per turn."],
       ["Managers", "A Manager occupies the active Manager slot and follows the timing and effect printed on that card."],
       ["Entrances", "Entrances sit outside the 60-page deck. Your selected Entrance resolves automatically at its authored pre-match or first-Control timing; Entrances are not played from the hand."],
       ["Superstar cards", "The Superstar identity card defines HP, Method Limits, ability and associated deck identity. It is not one of the 60 deck pages."]
@@ -130,6 +129,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Ownership", "You can only save copies you actually own. Standard five-copy cards track Normal, Emerald, Sapphire and Ruby separately, while deck legality still allows at most 5 total copies of that card identity."],
       ["Superstar legality", "Deck Lab enforces Superstar-exclusive cards, allowed-Superstar families, Method Limits and any card-specific restrictions."],
       ["Entrance", "A legal deck also needs one owned compatible Entrance selected outside the 60 pages."],
+      ["Merch slot", "Deck Lab also has one active Merch slot outside the 60-page deck. Merch never stacks. Each Merch card lasts 1, 3 or 5 completed eligible matches, consuming one match of duration after each completed match in which its effect applies. Generic Merch is assigned to one eligible unlocked Superstar when equipped; it is not copied across multiple decks. Superstar-specific Merch can only be equipped for that unlocked Superstar. Momentum-granting Merch is illegal if that Superstar has a 0 limit for the Method or if the Merch bonus itself exceeds a finite Method limit."],
       ["Recommended decks", "Your first Superstar receives the complete authored 60-page onboarding deck. Later Superstar unlocks grant only the Superstar identity plus at most one authored Finisher, one Trademark and one Action; they do not grant a complete deck, shared filler, or the Superstar-specific Entrance. Deck Lab compares your Collection against the authored 60-page recommended build, uses owned recommended cards first, fills gaps only with legal shared cards you already own, and recommends missing authored cards and the Superstar-specific Entrance as you collect them. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap."]
     ]
   },
@@ -157,7 +157,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Duplicate conversion", "Each printing tier tracks ownership separately with a five-copy cap. A sixth Normal, Emerald, Sapphire or Ruby copy converts to Universe Points. Overflow value remains based on the card’s intrinsic rarity: Common 1 UP, Uncommon 2 UP, Rare 3 UP and Very Rare 4 UP."],
       ["Released sets only", "Only currently released player-facing sets can be opened or awarded from live reward pools. Future subset boosters remain unavailable until their release pass goes live."],
       ["Universal booster cards", "A small number of shared WWE Legacy staples may appear in any currently released set booster while retaining one collector identity. Once Too Often is the first universal booster card."],
-      ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build and prefers the strongest owned printing tier for each card."]
+      ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build and prefers the strongest owned printing tier for each card. If a booster reveals usable Merch while the single Merch slot is empty, Deck Assistance can flag one equip suggestion. Superstar-specific Merch targets its owner; Generic Merch is scored against the actual effect and your eligible unlocked roster, then suggested once for the best legal fit."]
     ]
   },
   {
@@ -179,13 +179,13 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     id: "season-challenges", group: "PROGRESSION", title: "Season, Challenges & Rewards",
     summary: "Matches, challenges and rewards feed the 50-tier, 30-day Season 1 road.",
     items: [
-      ["Season 1", "Season 1 runs for 30 days and contains 50 tiers at 100 XP per tier, for 5,000 XP total. Tier 50 awards the Ruby John Cena — The Last Time Is Now Superstar identity."],
+      ["Season 1", "Season 1 runs for 30 days and contains 50 tiers at 100 XP per tier, for 5,000 XP total. Tier 50 awards the Ruby Trish Stratus — Stratusfaction Guaranteed Superstar identity."],
       ["Match XP", "A match win awards 5 Season XP and a loss awards 0 Season XP."],
       ["Daily challenges", "Three Daily Challenges rotate each local day. Each completed Daily Challenge awards 10 Season XP and no booster."],
       ["Weekly challenges", "Three Weekly Challenges rotate each week. Each completed Weekly Challenge awards 25 Season XP plus 1 random released-set booster."],
       ["Daily free booster", "The Season page provides one free booster on a 24-hour timer. Claiming it opens the booster immediately."],
       ["Season reward gating", "Season booster tiers can only resolve to sets that are actually released at that time; future subsets cannot appear early."],
-      ["Season 1 chase", "John Cena’s Season 1 cards are Ruby-only. The road awards 5 Ruby copies each of Protobomb, Five Knuckle Shuffle, STF and Attitude Adjustment, plus Ruby Hustle, Loyalty, Respect, Never Give Up and The Time Is Now, culminating in the Ruby John Cena Superstar at Tier 50. Completing the Season automatically assembles Cena’s strongest owned version of his authored deck."]
+      ["Season 1 chase", "Trish Stratus’ Season 1 cards are Ruby-only. The road awards 5 Ruby copies each of Stratusphere, Chick Kick, Air Canada and Stratusfaction, plus Stratusfaction Guaranteed and Time to Rock & Roll, culminating in the Ruby Trish Stratus Superstar at Tier 50. Completing the Season automatically assembles Trish’s strongest owned version of her authored deck."]
     ]
   },
   {

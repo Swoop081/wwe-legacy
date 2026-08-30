@@ -24,5 +24,7 @@ test("v0.13.97 export filenames come from the canonical destination path",()=>{
   assert.match(source,/const target=destinationFor\(card\)\.split\(\"\/\"\)\.pop\(\)/);
   assert.match(source,/name:exportFilename\(card,\"webp\"\)/);
   assert.match(source,/name:exportFilename\(card,\"png\"\)/);
-  assert.match(source,/assets\/images\/card-\$\{mode\}-\$\{kind\}-\$\{exportId\(card\)\}\.webp/);
+  assert.match(source,/card\.basePlatePath/);
+  assert.match(source,/card\.finishedPath/);
+  assert.doesNotMatch(source,/assets\/images\/card-\$\{mode\}-\$\{kind\}-\$\{exportId\(card\)\}\.webp/);
 });

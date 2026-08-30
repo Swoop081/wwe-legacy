@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=1.0.2';
-import { decks } from '../js/data/decks.js?v=1.0.2';
-import { createProfile, addOwnedCard, ownedCount, cardOwnershipCap } from '../js/data/profile.js?v=1.0.2';
-import { applyCardTier, CARD_TIERS, DEFAULT_STARTER_TIER, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=1.0.2';
-import { scaleCpuDeckToPlayer } from '../js/data/cpu-tier-scaling.js?v=1.0.2';
-import { LAUNCH_LIVE_SET_IDS, BANKED_PLAYER_SET_IDS } from '../js/data/release.js?v=1.0.2';
-import { activeLiveEventTowers } from '../js/data/live-events.js?v=1.0.2';
-import { SEASON_1 } from '../js/data/seasons.js?v=1.0.2';
-import { COLLECTION_MILESTONES, RUBY_MILESTONES } from '../js/data/set-progression.js?v=1.0.2';
+import { collectionCards } from '../js/data/collection.js?v=1.1.21';
+import { decks } from '../js/data/decks.js?v=1.1.21';
+import { createProfile, addOwnedCard, ownedCount, cardOwnershipCap } from '../js/data/profile.js?v=1.1.21';
+import { applyCardTier, CARD_TIERS, DEFAULT_STARTER_TIER, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=1.1.21';
+import { scaleCpuDeckToPlayer } from '../js/data/cpu-tier-scaling.js?v=1.1.21';
+import { LAUNCH_LIVE_SET_IDS, BANKED_PLAYER_SET_IDS } from '../js/data/release.js?v=1.1.21';
+import { activeLiveEventTowers } from '../js/data/live-events.js?v=1.1.21';
+import { SEASON_1 } from '../js/data/seasons.js?v=1.1.21';
+import { COLLECTION_MILESTONES, RUBY_MILESTONES } from '../js/data/set-progression.js?v=1.1.21';
 import fs from 'node:fs';
-import { CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS } from '../js/data/championship-road.js?v=1.0.2';
+import { CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS } from '../js/data/championship-road.js?v=1.1.21';
 
 const byId = new Map(collectionCards.map(c=>[c.id,c]));
 
@@ -124,12 +124,12 @@ test('v0.13.87 public Season roadmap is empty and current UI does not advertise 
   assert.equal(app.includes('RAW IS HERE'),false);
 });
 
-test('v0.13.87 Card Art Studio marks New Generation Live and RAW Banked with no release date roadmap', () => {
+test('v1.1.2 Card Art Studio derives current set status dynamically from canonical set metadata', () => {
+  const studio=fs.readFileSync(new URL('../js/tools/card-art-studio-data.js', import.meta.url),'utf8');
+  assert.match(studio,/"id":"new-generation-series-1","name":"New Generation","displayName":"New Generation — Series 1","developmentOnly":false/);
+  assert.match(studio,/"id":"raw-series-1","name":"Raw","displayName":"Raw — Series 1","developmentOnly":false/);
   const html=fs.readFileSync(new URL('../tools/card-art-studio.html', import.meta.url),'utf8');
-  assert.match(html,/New Generation — Series 1 · Live/);
-  assert.match(html,/Raw — Series 1 · Banked/);
-  assert.doesNotMatch(html,/Raw — Series 1 · Releases/i);
-  assert.doesNotMatch(html,/New Generation — Series 1 · Releases/i);
+  assert.doesNotMatch(html,/Releases\s+\d/i);
 });
 
 test('v0.13.87 collection keeps four overall milestones and four Ruby chase milestones', () => {

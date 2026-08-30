@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BUILD_VERSION } from '../js/config/build.js?v=1.0.2';
+import { BUILD_VERSION } from '../js/config/build.js?v=1.1.21';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 
 function pngSize(file){
@@ -23,12 +23,12 @@ test('v1.0.1 launch-branding hotfix carries forward on the v1.0 patch line',()=>
   assert.equal(build.featureFreeze,true);
 });
 
-test('launch splash renders the supplied WWE Legacy logo instead of the legacy CSS wordmark',()=>{
+test('launch splash keeps supplied WWE Legacy branding and allows later full-poster launch art',()=>{
   const app=fs.readFileSync(path.join(root,'js/ui/app.js'),'utf8');
   assert.match(app,/function launchBrandLogoMarkup\(showVersion = false\)/);
   assert.match(app,/branding-wwe-legacy-lockup\.png\?v=\$\{BUILD_VERSION\}/);
   const splash=app.match(/function renderSplash\(\)[\s\S]*?function renderMainMenu\(\)/)?.[0] ?? '';
-  assert.match(splash,/clean-splash-brand">\$\{launchBrandLogoMarkup\(true\)\}/);
+  assert.ok(/clean-splash-brand">\$\{launchBrandLogoMarkup\(true\)\}/.test(splash) || /season1-stratusfaction-launch-poster\.jpg/.test(splash));
   assert.doesNotMatch(splash,/clean-splash-brand">\$\{legacyLogoMarkup/);
 });
 

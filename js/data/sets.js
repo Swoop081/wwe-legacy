@@ -64,14 +64,24 @@ export const sets = {
     "type": "brand-subset",
     "displayName": "SmackDown — Series 1",
     "shortCode": "SD1",
-    "lifecycleDefault": "future",
-    "developmentOnly": true,
+    "lifecycleDefault": "featured",
+    "developmentOnly": false,
     "lifecycleLabels": {
       "future": "Future",
       "featured": "Featured",
       "vaulted": "Vaulted",
       "returning": "Returning"
-    }
+    },
+    "plannedSuperstarIds": [
+      "danhausen",
+      "tiffany-stratton",
+      "chelsea-green",
+      "damian-priest",
+      "shinsuke-nakamura",
+      "blake-monroe",
+      "trick-williams",
+      "jacy-jayne"
+    ]
   },
   "money-in-the-bank-series-1": {
     "id": "money-in-the-bank-series-1",
@@ -112,14 +122,24 @@ export const sets = {
     "type": "brand-subset",
     "displayName": "Raw — Series 1",
     "shortCode": "RAW1",
-    "lifecycleDefault": "future",
+    "lifecycleDefault": "featured",
     "developmentOnly": false,
     "lifecycleLabels": {
       "future": "Future",
       "featured": "Featured",
       "vaulted": "Vaulted",
       "returning": "Returning"
-    }
+    },
+    "plannedSuperstarIds": [
+      "logan-paul",
+      "sol-ruca",
+      "chad-gable",
+      "raquel-rodriguez",
+      "joe-hendry",
+      "roxanne-perez",
+      "austin-theory",
+      "montez-ford"
+    ]
   },
   "season-1-final-boss": {
     "id": "season-1-final-boss",
@@ -139,8 +159,8 @@ export const sets = {
     "name": "Season 1",
     "series": 1,
     "type": "season-exclusive",
-    "displayName": "Season 1 — The Last Time Is Now",
-    "shortCode": "S1LTN",
+    "displayName": "Season 1 — Stratusfaction",
+    "shortCode": "S1TRISH",
     "lifecycleDefault": "exclusive",
     "developmentOnly": false,
     "season": 1,
@@ -240,6 +260,59 @@ export const sets = {
       "kurt-angle"
     ],
     "lifecycleLabels": {
+      "featured": "Featured",
+      "vaulted": "Vaulted",
+      "returning": "Returning"
+    }
+  },
+  "nxt-series-1": {
+    "id": "nxt-series-1",
+    "name": "NXT",
+    "series": 1,
+    "type": "brand-subset",
+    "displayName": "NXT — Series 1",
+    "shortCode": "NXT1",
+    "lifecycleDefault": "featured",
+    "developmentOnly": false,
+    "plannedSuperstarIds": [
+      "kendal-grey",
+      "tony-dangelo",
+      "jaida-parker",
+      "kelani-jordan",
+      "mason-rook",
+      "tatum-paxley",
+      "lexis-king",
+      "zilla-fatu"
+    ],
+    "lifecycleLabels": {
+      "future": "Future",
+      "featured": "Featured",
+      "vaulted": "Vaulted",
+      "returning": "Returning"
+    }
+  },
+  "ruthless-aggression-series-1": {
+    "id": "ruthless-aggression-series-1",
+    "name": "Ruthless Aggression",
+    "series": 1,
+    "type": "era-subset",
+    "displayName": "Ruthless Aggression — Series 1",
+    "shortCode": "RA1",
+    "lifecycleDefault": "featured",
+    "developmentOnly": false,
+    "eraWindow": "2002-2008",
+    "plannedSuperstarIds": [
+      "john-cena",
+      "randy-orton",
+      "batista",
+      "jbl",
+      "eddie-guerrero",
+      "edge",
+      "jeff-hardy",
+      "rob-van-dam"
+    ],
+    "lifecycleLabels": {
+      "future": "Future",
       "featured": "Featured",
       "vaulted": "Vaulted",
       "returning": "Returning"

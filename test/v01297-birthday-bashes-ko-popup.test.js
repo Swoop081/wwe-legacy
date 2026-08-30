@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=1.0.2';
-import { allGameplayCards } from '../js/data/content.js?v=1.0.2';
-import { decks } from '../js/data/decks.js?v=1.0.2';
-import { superstars } from '../js/data/superstars.js?v=1.0.2';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=1.0.2';
-import { createProfile } from '../js/data/profile.js?v=1.0.2';
+import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=1.1.21';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.21';
+import { decks } from '../js/data/decks.js?v=1.1.21';
+import { superstars } from '../js/data/superstars.js?v=1.1.21';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=1.1.21';
+import { createProfile } from '../js/data/profile.js?v=1.1.21';
 
 const released = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id).sort();
 const byId = id => allGameplayCards.find(c=>c.id===id);
@@ -17,20 +17,13 @@ test.skip('v0.13.82 Birthday Bash calendar contains the complete authored 32-Sup
   assert.ok(BIRTHDAY_TOWERS.every(t=>t.name.endsWith('Birthday Bash')));
 });
 
-test('v0.12.97 each Birthday Bash places the birthday Superstar in Challenger 5',()=>{
-  for (const event of BIRTHDAY_TOWERS.filter(event=>released.includes(event.bossId))) {
-    const now = new Date(2027,event.month-1,event.day,10,0,0);
-    const tower = activeLiveEventTowers(now).find(t=>t.event.id===event.id);
-    assert.ok(tower,event.id);
-    const p=createProfile('cm-punk');
-    const playerId = event.bossId==='cm-punk' ? 'roman-reigns' : 'cm-punk';
-    if (!p.unlockedSuperstars.includes(playerId)) p.unlockedSuperstars.push(playerId);
-    const run=startLiveEventTower(p,tower.key,playerId,released,()=>0.31,now);
-    assert.equal(run.opponents.length,5,event.id);
-    assert.equal(run.opponents[4],event.bossId,`${event.id} boss is Challenger 5`);
+test('v1.1.20 legacy Birthday definitions are retained only for save compatibility and never enter the active rotation',()=>{
+  assert.ok(BIRTHDAY_TOWERS.length>0);
+  for (const event of BIRTHDAY_TOWERS.slice(0,8)) {
+    const now=new Date(2027,event.month-1,event.day,10,0,0);
+    assert.equal(activeLiveEventTowers(now).some(t=>t.event.id===event.id),false,event.id);
   }
 });
-
 test('v0.12.97 Pop-Up Powerbomb is Kevin Owens-exclusive Rare Trademark with rewritten KO rules',()=>{
   const card=byId('pop-up-powerbomb');
   assert.equal(card.superstarId,'kevin-owens');

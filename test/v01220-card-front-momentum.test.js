@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.0.2';
-import { canCounter } from '../js/engine/rules.js?v=1.0.2';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.21';
+import { canCounter } from '../js/engine/rules.js?v=1.1.21';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -45,10 +45,11 @@ test('v0.12.57 Momentum cards retain canonical colours while retiring the fire m
   assert.doesNotMatch(studio,/function drawMomentumFlame\(/);
 });
 
-test('Card Art Studio keeps Cost and Damage dominant and mobile-readable',()=>{
+test('Card Art Studio keeps Cost and Damage dominant and mobile-readable without nested boxes',()=>{
   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
-  assert.ok(studio.includes('cardFont(META_STACK,17.5,950)'));
-  assert.ok(studio.includes('cardFont(NUMBER_STACK,78,1000)'));
-  assert.ok(studio.includes('drawMoveStatFigure(w*.155,"COST"'));
-  assert.ok(studio.includes('drawMoveStatFigure(w*.845,"DAMAGE"'));
+  assert.ok(!studio.includes('const statBox=(cx,label,value)=>'));
+  assert.ok(studio.includes('cardFont(NUMBER_STACK,64,1000)'));
+  assert.ok(studio.includes('statFigure(w*.16,"COST",card.cost??0)'));
+  assert.ok(studio.includes('statFigure(w*.84,"DAMAGE",card.damage??0)'));
+  assert.ok(studio.includes('fillRect(panelLeft,panelTop,panelWidth'));
 });

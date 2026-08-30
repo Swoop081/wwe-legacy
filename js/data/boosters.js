@@ -1,14 +1,19 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=1.0.2";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.0.2";
-import { duplicateUniversePointsFor } from "./store.js?v=1.0.2";
-import { sets } from "./sets.js?v=1.0.2";
-import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.0.2";
-import { CARD_TIERS, TIER_PULL_WEIGHTS, rollCardTier } from "./variants.js?v=1.0.2";
+import { cardsForSet, collectionCards } from "./collection.js?v=1.1.21";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.1.21";
+import { duplicateUniversePointsFor } from "./store.js?v=1.1.21";
+import { sets } from "./sets.js?v=1.1.21";
+import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.1.21";
+import { CARD_TIERS, TIER_PULL_WEIGHTS, rollCardTier } from "./variants.js?v=1.1.21";
+import { grantMerch, rollMerch } from "./merch.js?v=1.1.21";
+import { grantSuperstarVariant, rollSuperstarVariant } from "./superstar-variants.js?v=1.1.21";
 
 export const BOOSTER_SIZE = 5;
+export const BOOSTER_GAMEPLAY_SLOTS = 4;
+export const BOOSTER_MERCH_SLOTS = 1;
+export const SUPERSTAR_VARIANT_CHANCE = .005;
 export const MAX_VERY_RARE_PULLS = 1;
 export const MAX_NON_NORMAL_PRINTINGS = 2;
-export const MAX_SAPPHIRE_OR_RUBY_PRINTINGS = 1;
+export const MAX_SAPPHIRE_OR_RUBY_PRINTINGS = 1; // includes Diamond in v1.1
 export const RARITY_WEIGHTS = Object.freeze({ 1: .5, 2: .3, 3: .15, 4: .05 });
 export const SUPERSTAR_PITY_PACKS = 100;
 export const SUPERSTAR_CHASE_CHANCE = .02;
@@ -120,6 +125,7 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
   const superstarCard = superstarHit
     ? unownedSuperstars[Math.min(unownedSuperstars.length - 1, Math.floor(rng() * unownedSuperstars.length))]
     : null;
+  const variantCard = rng() < SUPERSTAR_VARIANT_CHANCE ? rollSuperstarVariant(profile, setId, rng) : null;
 
   const normalBase = base.filter(card => card.kind !== "superstar" && (card.kind !== "entrance" || underOwnershipCap(profile, card)));
   const pack = [];
@@ -131,11 +137,14 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
   let nonNormalPrintings = 0;
   let sapphireOrRubyPrintings = 0;
 
-  for (let i = 0; i < BOOSTER_SIZE; i += 1) {
+  for (let i = 0; i < BOOSTER_GAMEPLAY_SLOTS; i += 1) {
     let card = null;
     let pullTier = "normal";
 
-    if (i === 0 && superstarCard) {
+    if (i === BOOSTER_GAMEPLAY_SLOTS - 1 && variantCard) {
+      card = variantCard;
+      pullTier = "normal";
+    } else if (i === 0 && superstarCard) {
       card = superstarCard;
       pullTier = rollCardTier(rng);
     } else {
@@ -158,19 +167,24 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
     }
 
     if (!card) continue;
+    if (card.kind === "variant") {
+      const added = grantSuperstarVariant(profile, card);
+      pack.push({ card, tier: null, isNewCard: added, isVariant: true, replacedNormal: false, superstarUnlocked: false, overflowCopies: 0, duplicateUnitValue: 0, universePointsValue: 0, universePointsCredited: true, ownershipBefore: added ? 0 : 1, ownershipCap: 1 });
+      continue;
+    }
     const availableTiers = CARD_TIERS.filter(tier => underTierOwnershipCap(profile, card, tier));
     if (availableTiers.length && !availableTiers.includes(pullTier)) pullTier = rollCardTier(rng, availableTiers, TIER_PULL_WEIGHTS);
     // v0.14.05 premium-print collation: no more than two colored printings in
     // a five-card booster, and at most one of those may be Sapphire or Ruby.
     // Any excess premium result resolves to Normal rather than rerolling into
     // another colored tier.
-    const highPremium = pullTier === "sapphire" || pullTier === "ruby";
+    const highPremium = pullTier === "sapphire" || pullTier === "ruby" || pullTier === "diamond";
     if (pullTier !== "normal" && (nonNormalPrintings >= MAX_NON_NORMAL_PRINTINGS || (highPremium && sapphireOrRubyPrintings >= MAX_SAPPHIRE_OR_RUBY_PRINTINGS))) {
       pullTier = "normal";
     }
     if (pullTier !== "normal") {
       nonNormalPrintings += 1;
-      if (pullTier === "sapphire" || pullTier === "ruby") sapphireOrRubyPrintings += 1;
+      if (pullTier === "sapphire" || pullTier === "ruby" || pullTier === "diamond") sapphireOrRubyPrintings += 1;
     }
     const beforeTotal = totalOwnedCopies(profile, card.id);
     const wasUnlocked = card.kind === "superstar" && profile.unlockedSuperstars?.includes(card.superstarId);
@@ -200,6 +214,10 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
       ownershipCap: result.cap
     });
   }
+
+  const merch = rollMerch(setId, rng);
+  grantMerch(profile, merch, 1);
+  pack.push({ card: merch, tier: null, isNewCard: (profile.ownedMerch?.[merch.id] ?? 0) === 1, isMerch: true, replacedNormal: false, superstarUnlocked: false, overflowCopies: 0, duplicateUnitValue: 0, universePointsValue: 0, universePointsCredited: true, ownershipBefore: Math.max(0,(profile.ownedMerch?.[merch.id] ?? 1)-1), ownershipCap: null });
 
   if (pendingSuperstarUnlockId) grantSuperstarUnlockPackage(profile, pendingSuperstarUnlockId);
   recordSuperstarChase(profile, superstarAdded);

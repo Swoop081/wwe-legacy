@@ -266,11 +266,11 @@ export const superstars = {
   "johnCena": {
     "id": "john-cena",
     "name": "John Cena",
-    "nickname": "The Last Time Is Now",
-    "setId": "season-1-last-time-is-now",
-    "era": "The Last Time Is Now",
+    "nickname": "The Champ",
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
     "developmentOnly": false,
-    "seasonExclusive": true,
+    "seasonExclusive": false,
     "cardId": "superstar-john-cena",
     "entranceId": "entrance-john-cena",
     "specialId": "special-john-cena",
@@ -316,7 +316,7 @@ export const superstars = {
       "id": "entrance-john-cena",
       "name": "The Time Is Now",
       "kind": "entrance",
-      "setId": "season-1-last-time-is-now",
+      "setId": "ruthless-aggression-series-1",
       "rarity": 4,
       "superstarId": "john-cena",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
@@ -1786,7 +1786,10 @@ export const superstars = {
     },
     "special": {
       "type": "counterTutorNamedAny",
-      "names": ["Dis-arm-her", "Manhandle Slam"],
+      "names": [
+        "Dis-arm-her",
+        "Manhandle Slam"
+      ],
       "amount": 2
     }
   },
@@ -3002,10 +3005,10 @@ export const superstars = {
     "id": "randy-orton",
     "name": "Randy Orton",
     "nickname": "The Viper",
-    "setId": "survivor-series-series-1",
-    "era": null,
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
     "seasonExclusive": false,
-    "developmentOnly": true,
+    "developmentOnly": false,
     "cardId": "superstar-randy-orton",
     "entranceId": "entrance-randy-orton",
     "specialId": "special-randy-orton",
@@ -3047,7 +3050,7 @@ export const superstars = {
       "id": "entrance-randy-orton",
       "name": "Voices",
       "kind": "entrance",
-      "setId": "survivor-series-series-1",
+      "setId": "ruthless-aggression-series-1",
       "rarity": 4,
       "superstarId": "randy-orton",
       "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strike Momentum and +1 Adrenaline.",
@@ -5073,5 +5076,1322 @@ export const superstars = {
       "delayedTurn5": false
     },
     "special": null
+  },
+  "shinsukeNakamura": {
+    "id": "shinsuke-nakamura",
+    "name": "Shinsuke Nakamura",
+    "nickname": "The King of Strong Style",
+    "setId": "smackdown-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-shinsuke-nakamura",
+    "entranceId": "entrance-shinsuke-nakamura",
+    "specialId": "special-shinsuke-nakamura",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "running-forearm",
+      "hurricanrana"
+    ],
+    "signatures": [
+      "shinsuke-nakamura-inverted-exploder",
+      "shinsuke-nakamura-landslide",
+      "shinsuke-nakamura-sliding-german-suplex",
+      "shinsuke-nakamura-kinshasa"
+    ],
+    "archetype": "agility-strike-showstopper",
+    "hp": 64,
+    "methodLimits": {
+      "agility": null,
+      "strike": 4,
+      "technical": 3,
+      "strength": 1
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 4,
+      "technical": 2
+    },
+    "ability": {
+      "name": "The King of Strong Style",
+      "text": "Shinsuke Nakamura uses The King of Strong Style to reinforce this deck’s agility strike showstopper identity.",
+      "trigger": {
+        "type": "agilityAfterStrike",
+        "maxUses": 3,
+        "draw": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-shinsuke-nakamura",
+      "name": "The Rising Sun",
+      "kind": "entrance",
+      "setId": "smackdown-series-1",
+      "rarity": 4,
+      "superstarId": "shinsuke-nakamura",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    }
+  },
+  "blakeMonroe": {
+    "id": "blake-monroe",
+    "name": "Blake Monroe",
+    "nickname": "The Glamour",
+    "setId": "smackdown-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-blake-monroe",
+    "entranceId": "entrance-blake-monroe",
+    "specialId": "special-blake-monroe",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "punch",
+      "blake-monroe-glamour-shot",
+      "dropkick"
+    ],
+    "signatures": [
+      "blake-monroe-glamour-ddt",
+      "blake-monroe-monroe-kick",
+      "blake-monroe-top-rope-double-stomp",
+      "blake-monroe-glamour-shot"
+    ],
+    "archetype": "reviewed-starter",
+    "hp": 63,
+    "methodLimits": {
+      "agility": null,
+      "strength": 0,
+      "strike": 2,
+      "technical": null
+    },
+    "starterMomentum": {
+      "agility": 5,
+      "strike": 2,
+      "technical": 5
+    },
+    "ability": {
+      "name": "The Glamour",
+      "text": "Blake Monroe uses The Glamour to reinforce this deck’s reviewed starter identity.",
+      "trigger": {
+        "type": "agilityAfterTechnical",
+        "maxUses": 3,
+        "adrenaline": 1,
+        "draw": 1
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-blake-monroe",
+      "name": "Glamour Arrival",
+      "kind": "entrance",
+      "setId": "smackdown-series-1",
+      "rarity": 4,
+      "superstarId": "blake-monroe",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "perfectRecord",
+      "look": 5
+    },
+    "developmentOnly": false
+  },
+  "trickWilliams": {
+    "id": "trick-williams",
+    "name": "Trick Williams",
+    "nickname": "Whoop That Trick",
+    "setId": "smackdown-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-trick-williams",
+    "entranceId": "entrance-trick-williams",
+    "specialId": "special-trick-williams",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "running-forearm",
+      "hurricanrana"
+    ],
+    "signatures": [
+      "trick-williams-book-end",
+      "trick-williams-cyclone-boot",
+      "trick-williams-trick-knee",
+      "trick-williams-trick-shot"
+    ],
+    "archetype": "agility-strike-take-flight",
+    "hp": 60,
+    "methodLimits": {
+      "agility": null,
+      "strike": 4,
+      "strength": 3,
+      "technical": 2
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 3,
+      "strength": 2,
+      "technical": 1
+    },
+    "ability": {
+      "name": "Whoop That Trick",
+      "text": "Trick Williams uses Whoop That Trick to reinforce this deck’s agility strike take flight identity.",
+      "trigger": {
+        "type": "montezTakeFlight",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-trick-williams",
+      "name": "Whoop That Trick",
+      "kind": "entrance",
+      "setId": "smackdown-series-1",
+      "rarity": 4,
+      "superstarId": "trick-williams",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 4,
+      "methods": [
+        "agility",
+        "technical"
+      ],
+      "discount": 1
+    },
+    "developmentOnly": false
+  },
+  "jacyJayne": {
+    "id": "jacy-jayne",
+    "name": "Jacy Jayne",
+    "nickname": "Fatal Influence",
+    "setId": "smackdown-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-jacy-jayne",
+    "entranceId": "entrance-jacy-jayne",
+    "specialId": "special-jacy-jayne",
+    "leadOffIds": [
+      "momentum-strike",
+      "momentum-technical",
+      "punch",
+      "running-knee",
+      "atomic-drop"
+    ],
+    "signatures": [
+      "jacy-jayne-cannonball-senton",
+      "jacy-jayne-discus-boot",
+      "jacy-jayne-rolling-encore",
+      "jacy-jayne-running-knee-smash"
+    ],
+    "archetype": "strike-technical-disruptor",
+    "hp": 65,
+    "methodLimits": {
+      "strike": null,
+      "technical": 4,
+      "strength": 2,
+      "agility": 0
+    },
+    "starterMomentum": {
+      "strike": 6,
+      "technical": 4,
+      "strength": 2
+    },
+    "ability": {
+      "name": "Fatal Influence",
+      "text": "Jacy Jayne uses Fatal Influence to reinforce this deck’s strike technical disruptor identity.",
+      "trigger": {
+        "type": "connectMethodDamage",
+        "method": "strike",
+        "minDamage": 4,
+        "discardOpponent": 1,
+        "maxUses": 3
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-jacy-jayne",
+      "name": "Fatal Attraction",
+      "kind": "entrance",
+      "setId": "smackdown-series-1",
+      "rarity": 4,
+      "superstarId": "jacy-jayne",
+      "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strike": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "fullSpeed",
+      "damage": 2,
+      "agilityDraw": 1
+    }
+  },
+  "kendalGrey": {
+    "id": "kendal-grey",
+    "name": "Kendal Grey",
+    "nickname": "The Amateur Ace",
+    "setId": "nxt-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-kendal-grey",
+    "entranceId": "entrance-kendal-grey",
+    "specialId": "special-kendal-grey",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strength",
+      "russian-leg-sweep",
+      "snap-suplex",
+      "european-uppercut"
+    ],
+    "signatures": [
+      "kendal-grey-olympic-takedown",
+      "kendal-grey-rolling-german-suplex",
+      "kendal-grey-ankle-lock",
+      "kendal-grey-olympic-slam"
+    ],
+    "archetype": "technical-three-method-sequencer",
+    "hp": 64,
+    "methodLimits": {
+      "technical": null,
+      "strength": 3,
+      "strike": 3,
+      "agility": 2
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "strength": 3,
+      "strike": 3
+    },
+    "ability": {
+      "name": "The Amateur Ace",
+      "text": "Kendal Grey uses The Amateur Ace to reinforce this deck’s technical three method sequencer identity.",
+      "trigger": {
+        "type": "differentMethod",
+        "maxUses": 3,
+        "draw": 2
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-kendal-grey",
+      "name": "Mat Standard",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "kendal-grey",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "strength": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "lastRites",
+      "strengthDiscount": 1
+    }
+  },
+  "tonyDangelo": {
+    "id": "tony-dangelo",
+    "name": "Tony D’Angelo",
+    "nickname": "The Don of NXT",
+    "setId": "nxt-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-tony-dangelo",
+    "entranceId": "entrance-tony-dangelo",
+    "specialId": "special-tony-dangelo",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "momentum-technical",
+      "fallaway-slam",
+      "punch"
+    ],
+    "signatures": [
+      "tony-dangelo-family-spinebuster",
+      "tony-dangelo-fisherman-buster",
+      "tony-dangelo-crowbar",
+      "tony-dangelo-forget-about-it"
+    ],
+    "archetype": "strength-strike-bad-guy",
+    "hp": 64,
+    "methodLimits": {
+      "strength": null,
+      "strike": 4,
+      "technical": 3,
+      "agility": 1
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "strike": 5,
+      "technical": 1
+    },
+    "ability": {
+      "name": "The Don of NXT",
+      "text": "Tony D’Angelo uses The Don of NXT to reinforce this deck’s strength strike bad guy identity.",
+      "trigger": {
+        "type": "connectMethodCost",
+        "method": "strength",
+        "minCost": 5,
+        "maxUses": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 1
+    },
+    "entrance": {
+      "id": "entrance-tony-dangelo",
+      "name": "The Don Arrives",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "tony-dangelo",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "roxanneProdigy",
+      "maxCost": 4,
+      "methods": [
+        "agility",
+        "technical"
+      ],
+      "discount": 1
+    }
+  },
+  "jaidaParker": {
+    "id": "jaida-parker",
+    "name": "Jaida Parker",
+    "nickname": "Miss Parker",
+    "setId": "nxt-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-jaida-parker",
+    "entranceId": "entrance-jaida-parker",
+    "specialId": "special-jaida-parker",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "chop",
+      "arm-drag"
+    ],
+    "signatures": [
+      "jaida-parker-running-hip-attack",
+      "jaida-parker-samoan-drop",
+      "jaida-parker-corner-spinebuster",
+      "jaida-parker-hipnotic"
+    ],
+    "archetype": "agility-strike-technical-hybrid-lucha",
+    "hp": 65,
+    "methodLimits": {
+      "agility": null,
+      "strength": 1,
+      "strike": 4,
+      "technical": 3
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 4,
+      "technical": 2
+    },
+    "ability": {
+      "name": "Miss Parker",
+      "text": "Jaida Parker uses Miss Parker to reinforce this deck’s agility strike technical hybrid lucha identity.",
+      "trigger": {
+        "type": "pentaZeroFearZeroMercy",
+        "maxUses": 2,
+        "bonusDamage": 2,
+        "adrenaline": 0
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-jaida-parker",
+      "name": "Miss Parker",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "jaida-parker",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "strength": 1
+      },
+      "preMatchAdrenaline": 0,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 2
+    },
+    "developmentOnly": false
+  },
+  "kelaniJordan": {
+    "id": "kelani-jordan",
+    "name": "Kelani Jordan",
+    "nickname": "The Standout",
+    "setId": "nxt-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-kelani-jordan",
+    "entranceId": "entrance-kelani-jordan",
+    "specialId": "special-kelani-jordan",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "running-forearm",
+      "hurricanrana"
+    ],
+    "signatures": [
+      "kelani-jordan-handspring-elbow",
+      "kelani-jordan-split-legged-moonsault",
+      "kelani-jordan-springboard-cutter",
+      "kelani-jordan-450-splash"
+    ],
+    "archetype": "agility-strike-showstopper",
+    "hp": 64,
+    "methodLimits": {
+      "agility": null,
+      "strike": 4,
+      "technical": 3,
+      "strength": 1
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 4,
+      "technical": 2
+    },
+    "ability": {
+      "name": "The Standout",
+      "text": "Kelani Jordan uses The Standout to reinforce this deck’s agility strike showstopper identity.",
+      "trigger": {
+        "type": "agilityAfterStrike",
+        "maxUses": 3,
+        "draw": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-kelani-jordan",
+      "name": "Standout Entrance",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "kelani-jordan",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "perfectRecord",
+      "look": 6
+    }
+  },
+  "masonRook": {
+    "id": "mason-rook",
+    "name": "Mason Rook",
+    "nickname": "The Stone Wall",
+    "setId": "nxt-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-mason-rook",
+    "entranceId": "entrance-mason-rook",
+    "specialId": "special-mason-rook",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "big-boot",
+      "sidewalk-slam",
+      "punch"
+    ],
+    "signatures": [
+      "mason-rook-fallaway-slam",
+      "mason-rook-corner-big-boot",
+      "mason-rook-checkmate-slam",
+      "mason-rook-sit-out-powerbomb"
+    ],
+    "archetype": "strength-strike-big-daddy-cool",
+    "hp": 69,
+    "methodLimits": {
+      "strength": null,
+      "strike": 4,
+      "technical": 2,
+      "agility": 1
+    },
+    "starterMomentum": {
+      "strength": 7,
+      "strike": 4,
+      "technical": 1
+    },
+    "ability": {
+      "name": "The Stone Wall",
+      "text": "Mason Rook uses The Stone Wall to reinforce this deck’s strength strike big daddy cool identity.",
+      "trigger": {
+        "type": "takeDamage",
+        "minDamage": 8,
+        "maxUses": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 1
+    },
+    "entrance": {
+      "id": "entrance-mason-rook",
+      "name": "Rook Takes The Board",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "mason-rook",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 5,
+      "methods": [
+        "strength",
+        "technical"
+      ],
+      "discount": 1
+    }
+  },
+  "tatumPaxley": {
+    "id": "tatum-paxley",
+    "name": "Tatum Paxley",
+    "nickname": "The Twisted Competitor",
+    "setId": "nxt-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-tatum-paxley",
+    "entranceId": "entrance-tatum-paxley",
+    "specialId": "special-tatum-paxley",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "headlock-takeover",
+      "monkey-flip",
+      "eye-rake"
+    ],
+    "signatures": [
+      "tatum-paxley-psycho-trap",
+      "tatum-paxley-cemetery-drive",
+      "tatum-paxley-bridging-german-suplex",
+      "tatum-paxley-diving-knee-drop"
+    ],
+    "archetype": "technical-agility-trickster",
+    "hp": 63,
+    "methodLimits": {
+      "technical": null,
+      "agility": 4,
+      "strike": 2,
+      "strength": 0
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "agility": 4,
+      "strike": 2
+    },
+    "ability": {
+      "name": "The Twisted Competitor",
+      "text": "Tatum Paxley uses The Twisted Competitor to reinforce this deck’s technical agility trickster identity.",
+      "trigger": {
+        "type": "counterDraw",
+        "maxUses": 2,
+        "draw": 2,
+        "adrenaline": 1
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-tatum-paxley",
+      "name": "Eyes On You",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "tatum-paxley",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "agility": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "fullSpeed",
+      "damage": 3,
+      "agilityDraw": 1
+    }
+  },
+  "lexisKing": {
+    "id": "lexis-king",
+    "name": "Lexis King",
+    "nickname": "The King",
+    "setId": "nxt-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-lexis-king",
+    "entranceId": "entrance-lexis-king",
+    "specialId": "special-lexis-king",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strike",
+      "fisherman-suplex",
+      "standing-dropkick",
+      "knee-breaker"
+    ],
+    "signatures": [
+      "lexis-king-coronation-neckbreaker",
+      "lexis-king-the-throne",
+      "lexis-king-superkick",
+      "lexis-king-king-s-landing"
+    ],
+    "archetype": "elite-technical-counter",
+    "hp": 66,
+    "methodLimits": {
+      "technical": null,
+      "strike": 4,
+      "agility": 3,
+      "strength": 2
+    },
+    "starterMomentum": {
+      "technical": 7,
+      "strike": 3,
+      "agility": 2
+    },
+    "ability": {
+      "name": "The King",
+      "text": "Lexis King uses The King to reinforce this deck’s elite technical counter identity.",
+      "trigger": {
+        "type": "perfectExecution",
+        "discount": 2,
+        "draw": 1,
+        "adrenaline": 1,
+        "drawMaxUses": 3
+      }
+    },
+    "entrance": {
+      "id": "entrance-lexis-king",
+      "name": "Royal Entrance",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "lexis-king",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +2 Adrenaline. The first Counter Lexis King plays each match costs 1 less Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1
+      },
+      "preMatchAdrenaline": 2,
+      "delayedTurn5": false,
+      "preMatchCounterDiscount": 1
+    },
+    "special": {
+      "type": "lastRites",
+      "strengthDiscount": 2
+    }
+  },
+  "zillaFatu": {
+    "id": "zilla-fatu",
+    "name": "Zilla Fatu",
+    "nickname": "The Samoan Destroyer",
+    "setId": "nxt-series-1",
+    "era": null,
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-zilla-fatu",
+    "entranceId": "entrance-zilla-fatu",
+    "specialId": "special-zilla-fatu",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "forearm-club",
+      "running-shoulder-block",
+      "body-slam"
+    ],
+    "signatures": [
+      "zilla-fatu-samoan-spike",
+      "zilla-fatu-pop-up-samoan-drop",
+      "zilla-fatu-running-senton",
+      "zilla-fatu-island-driver"
+    ],
+    "archetype": "super-heavyweight-powerhouse",
+    "hp": 71,
+    "methodLimits": {
+      "strength": null,
+      "strike": 3,
+      "technical": 1,
+      "agility": 0
+    },
+    "starterMomentum": {
+      "strength": 8,
+      "strike": 3,
+      "technical": 1
+    },
+    "ability": {
+      "name": "The Samoan Destroyer",
+      "text": "Zilla Fatu uses The Samoan Destroyer to reinforce this deck’s super heavyweight powerhouse identity.",
+      "trigger": {
+        "type": "superHeavyweightGroundResist",
+        "maxUses": 2
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-zilla-fatu",
+      "name": "Samoan Legacy",
+      "kind": "entrance",
+      "setId": "nxt-series-1",
+      "rarity": 4,
+      "superstarId": "zilla-fatu",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "roxanneProdigy",
+      "maxCost": 5,
+      "methods": [
+        "strike",
+        "technical"
+      ],
+      "discount": 1
+    }
+  },
+  "batista": {
+    "id": "batista",
+    "name": "Batista",
+    "nickname": "The Animal",
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-batista",
+    "entranceId": "entrance-batista",
+    "specialId": "special-batista",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-technical",
+      "hammerlock-takedown",
+      "running-shoulder-block",
+      "side-suplex"
+    ],
+    "signatures": [
+      "batista-batista-spinebuster",
+      "batista-spear",
+      "batista-demon-bomb",
+      "batista-batista-bomb"
+    ],
+    "archetype": "strength-technical-hybrid",
+    "hp": 67,
+    "methodLimits": {
+      "strength": null,
+      "technical": 4,
+      "strike": 2,
+      "agility": 2
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "technical": 4,
+      "strike": 1,
+      "agility": 1
+    },
+    "ability": {
+      "name": "The Animal",
+      "text": "Batista uses The Animal to reinforce this deck’s strength technical hybrid identity.",
+      "trigger": {
+        "type": "bulldogPowerAndTechnique",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-batista",
+      "name": "I Walk Alone",
+      "kind": "entrance",
+      "setId": "ruthless-aggression-series-1",
+      "rarity": 4,
+      "superstarId": "batista",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    }
+  },
+  "jbl": {
+    "id": "jbl",
+    "name": "JBL",
+    "nickname": "The Wrestling God",
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-jbl",
+    "entranceId": "entrance-jbl",
+    "specialId": "special-jbl",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "big-boot",
+      "sidewalk-slam",
+      "punch"
+    ],
+    "signatures": [
+      "jbl-fallaway-slam",
+      "jbl-big-boot",
+      "jbl-last-call-powerbomb",
+      "jbl-clothesline-from-hell"
+    ],
+    "archetype": "strength-strike-big-daddy-cool",
+    "hp": 69,
+    "methodLimits": {
+      "strength": null,
+      "strike": 4,
+      "technical": 2,
+      "agility": 1
+    },
+    "starterMomentum": {
+      "strength": 7,
+      "strike": 4,
+      "technical": 1
+    },
+    "ability": {
+      "name": "The Wrestling God",
+      "text": "JBL uses The Wrestling God to reinforce this deck’s strength strike big daddy cool identity.",
+      "trigger": {
+        "type": "takeDamage",
+        "minDamage": 8,
+        "maxUses": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 1
+    },
+    "entrance": {
+      "id": "entrance-jbl",
+      "name": "Longhorn Limousine",
+      "kind": "entrance",
+      "setId": "ruthless-aggression-series-1",
+      "rarity": 4,
+      "superstarId": "jbl",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "perfectRecord",
+      "look": 7
+    }
+  },
+  "eddieGuerrero": {
+    "id": "eddie-guerrero",
+    "name": "Eddie Guerrero",
+    "nickname": "Latino Heat",
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-eddie-guerrero",
+    "entranceId": "entrance-eddie-guerrero",
+    "specialId": "special-eddie-guerrero",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "bulldog",
+      "enzuigiri",
+      "dropkick"
+    ],
+    "signatures": [
+      "eddie-guerrero-three-amigos",
+      "eddie-guerrero-hurricanrana",
+      "eddie-guerrero-lasso-from-el-paso",
+      "eddie-guerrero-frog-splash"
+    ],
+    "archetype": "technical-agility-combo",
+    "hp": 64,
+    "methodLimits": {
+      "technical": null,
+      "agility": 5,
+      "strike": 3,
+      "strength": 0
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "agility": 4,
+      "strike": 2
+    },
+    "ability": {
+      "name": "Latino Heat",
+      "text": "Eddie Guerrero uses Latino Heat to reinforce this deck’s technical agility combo identity.",
+      "trigger": {
+        "type": "jerichoY2J",
+        "discount": 1,
+        "adrenaline": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-eddie-guerrero",
+      "name": "Viva La Raza",
+      "kind": "entrance",
+      "setId": "ruthless-aggression-series-1",
+      "rarity": 4,
+      "superstarId": "eddie-guerrero",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "agility": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 5,
+      "methods": [
+        "agility",
+        "strike"
+      ],
+      "discount": 1
+    }
+  },
+  "edge": {
+    "id": "edge",
+    "name": "Edge",
+    "nickname": "The Rated-R Superstar",
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-edge",
+    "entranceId": "entrance-edge",
+    "specialId": "special-edge",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strike",
+      "fisherman-suplex",
+      "standing-dropkick",
+      "knee-breaker"
+    ],
+    "signatures": [
+      "edge-edge-o-matic",
+      "edge-edgecution",
+      "edge-impaler-ddt",
+      "edge-spear"
+    ],
+    "archetype": "elite-technical-counter",
+    "hp": 66,
+    "methodLimits": {
+      "technical": null,
+      "strike": 4,
+      "agility": 3,
+      "strength": 2
+    },
+    "starterMomentum": {
+      "technical": 7,
+      "strike": 3,
+      "agility": 2
+    },
+    "ability": {
+      "name": "The Rated-R Superstar",
+      "text": "Edge uses The Rated-R Superstar to reinforce this deck’s elite technical counter identity.",
+      "trigger": {
+        "type": "perfectExecution",
+        "discount": 2,
+        "draw": 1,
+        "adrenaline": 1,
+        "drawMaxUses": 3
+      }
+    },
+    "entrance": {
+      "id": "entrance-edge",
+      "name": "Metalingus",
+      "kind": "entrance",
+      "setId": "ruthless-aggression-series-1",
+      "rarity": 4,
+      "superstarId": "edge",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +2 Adrenaline. The first Counter Edge plays each match costs 1 less Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1
+      },
+      "preMatchAdrenaline": 2,
+      "delayedTurn5": false,
+      "preMatchCounterDiscount": 1
+    },
+    "special": {
+      "type": "fullSpeed",
+      "damage": 2,
+      "agilityDraw": 2
+    }
+  },
+  "jeffHardy": {
+    "id": "jeff-hardy",
+    "name": "Jeff Hardy",
+    "nickname": "The Charismatic Enigma",
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-jeff-hardy",
+    "entranceId": "entrance-jeff-hardy",
+    "specialId": "special-jeff-hardy",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "running-forearm",
+      "hurricanrana"
+    ],
+    "signatures": [
+      "jeff-hardy-whisper-in-the-wind",
+      "jeff-hardy-twist-of-fate",
+      "jeff-hardy-poetry-in-motion",
+      "jeff-hardy-swanton-bomb"
+    ],
+    "archetype": "agility-strike-showstopper",
+    "hp": 64,
+    "methodLimits": {
+      "agility": null,
+      "strike": 4,
+      "technical": 3,
+      "strength": 1
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 4,
+      "technical": 2
+    },
+    "ability": {
+      "name": "The Charismatic Enigma",
+      "text": "Jeff Hardy uses The Charismatic Enigma to reinforce this deck’s agility strike showstopper identity.",
+      "trigger": {
+        "type": "agilityAfterStrike",
+        "maxUses": 3,
+        "draw": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-jeff-hardy",
+      "name": "No More Words",
+      "kind": "entrance",
+      "setId": "ruthless-aggression-series-1",
+      "rarity": 4,
+      "superstarId": "jeff-hardy",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "lastRites",
+      "strengthDiscount": 1
+    }
+  },
+  "robVanDam": {
+    "id": "rob-van-dam",
+    "name": "Rob Van Dam",
+    "nickname": "The Whole F’n Show",
+    "setId": "ruthless-aggression-series-1",
+    "era": "Ruthless Aggression",
+    "seasonExclusive": false,
+    "cardId": "superstar-rob-van-dam",
+    "entranceId": "entrance-rob-van-dam",
+    "specialId": "special-rob-van-dam",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "chop",
+      "arm-drag"
+    ],
+    "signatures": [
+      "rob-van-dam-rolling-thunder",
+      "rob-van-dam-van-daminator",
+      "rob-van-dam-split-legged-moonsault",
+      "rob-van-dam-five-star-frog-splash"
+    ],
+    "archetype": "agility-strike-technical-hybrid-lucha",
+    "hp": 65,
+    "methodLimits": {
+      "agility": null,
+      "strength": 1,
+      "strike": 4,
+      "technical": 3
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 4,
+      "technical": 2
+    },
+    "ability": {
+      "name": "The Whole F’n Show",
+      "text": "Rob Van Dam uses The Whole F’n Show to reinforce this deck’s agility strike technical hybrid lucha identity.",
+      "trigger": {
+        "type": "pentaZeroFearZeroMercy",
+        "maxUses": 2,
+        "bonusDamage": 2,
+        "adrenaline": 0
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-rob-van-dam",
+      "name": "One of a Kind",
+      "kind": "entrance",
+      "setId": "ruthless-aggression-series-1",
+      "rarity": 4,
+      "superstarId": "rob-van-dam",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "strength": 1
+      },
+      "preMatchAdrenaline": 0,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "roxanneProdigy",
+      "maxCost": 5,
+      "methods": [
+        "agility",
+        "strike"
+      ],
+      "discount": 1
+    },
+    "developmentOnly": false
+  },
+  "trishStratus": {
+    "id": "trish-stratus",
+    "name": "Trish Stratus",
+    "nickname": "Stratusfaction Guaranteed",
+    "setId": "season-1-last-time-is-now",
+    "era": null,
+    "seasonExclusive": true,
+    "cardId": "superstar-trish-stratus",
+    "entranceId": "entrance-trish-stratus",
+    "specialId": "special-trish-stratus",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "punch",
+      "trish-stratus-air-canada",
+      "dropkick"
+    ],
+    "signatures": [
+      "trish-stratus-stratusphere",
+      "trish-stratus-chick-kick",
+      "trish-stratus-air-canada",
+      "trish-stratus-stratusfaction"
+    ],
+    "archetype": "reviewed-starter",
+    "hp": 63,
+    "methodLimits": {
+      "agility": null,
+      "strength": 0,
+      "strike": 2,
+      "technical": null
+    },
+    "starterMomentum": {
+      "agility": 5,
+      "strike": 2,
+      "technical": 5
+    },
+    "ability": {
+      "name": "Stratusfaction Guaranteed",
+      "text": "Trish Stratus uses Stratusfaction Guaranteed to reinforce this deck’s reviewed starter identity.",
+      "trigger": {
+        "type": "agilityAfterTechnical",
+        "maxUses": 3,
+        "adrenaline": 1,
+        "draw": 1
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-trish-stratus",
+      "name": "Time to Rock & Roll",
+      "kind": "entrance",
+      "setId": "season-1-last-time-is-now",
+      "rarity": 4,
+      "superstarId": "trish-stratus",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false,
+      "fixedPrintingTier": "ruby"
+    },
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 2
+    },
+    "developmentOnly": false
   }
 };

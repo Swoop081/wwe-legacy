@@ -32,7 +32,7 @@ export function reconstructCurrentPlayPile(state, {
     }
     return null;
   };
-  const utilityTypes = new Set(["MOMENTUM_PLAYED","ACTION_PLAYED","SUPPORT_PLAYED","MANAGER_PLAYED","SPECIAL_PLAYED","PIN_ESCAPED_SPECIAL"]);
+  const utilityTypes = new Set(["MOMENTUM_PLAYED","ACTION_PLAYED","MANAGER_PLAYED","SPECIAL_PLAYED","PIN_ESCAPED_SPECIAL"]);
 
   for (let i = startIndex; i < (state.log?.length ?? 0); i++) {
     const event = state.log[i];

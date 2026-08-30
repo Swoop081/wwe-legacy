@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=1.0.2';
-import { createProfile } from '../js/data/profile.js?v=1.0.2';
-import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=1.0.2';
-import { superstars } from '../js/data/superstars.js?v=1.0.2';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=1.0.2';
+import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=1.1.21';
+import { createProfile } from '../js/data/profile.js?v=1.1.21';
+import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=1.1.21';
+import { superstars } from '../js/data/superstars.js?v=1.1.21';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=1.1.21';
 
 const eligible = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id);
 
@@ -15,21 +15,18 @@ test('v0.13.54 exposes three simultaneous 24-hour towers with no consecutive-nam
   const tomorrow = activeLiveEventTowers(new Date('2026-08-19T07:45:00'));
   assert.equal(towers.length,3);
   assert.deepEqual(towers.map(t=>t.cadence),['daily','daily','daily']);
-  assert.equal(towers[0].event.id,'powerhouse-collision');
   assert.ok(towers.every(t=>t.msRemaining>0 && t.msRemaining<=24*60*60*1000));
   assert.equal(new Set(towers.map(t=>t.nextAt.getTime())).size,1);
   const tomorrowNames = new Set(tomorrow.map(t=>t.event.name));
   for (const tower of towers) assert.equal(tomorrowNames.has(tower.event.name),false,`${tower.event.name} repeated on the next day`);
 });
 
-test('v0.12.97 Brock Lesnar Birthday Bash appears on July 12 for 24 hours only',()=>{
-  const birthday = activeLiveEventTowers(new Date('2027-07-12T10:00:00')).find(t=>t.cadence==='birthday');
-  assert.ok(birthday);
-  assert.equal(birthday.event.id,'brock-lesnar-birthday-bash');
-  assert.equal(birthday.event.name,'Brock Lesnar Birthday Bash');
-  assert.equal(birthday.event.bossId,'brock-lesnar');
-  assert.equal(birthday.cadenceLabel,'24 HOURS ONLY');
-  assert.equal(activeLiveEventTowers(new Date('2027-07-13T10:00:00')).some(t=>t.cadence==='birthday'),false);
+test('v1.1.20 retires Birthday Bash from the three daily Live Event slots',()=>{
+  for (const date of ['2027-07-12T10:00:00','2027-07-13T10:00:00']) {
+    const towers=activeLiveEventTowers(new Date(date));
+    assert.equal(towers.length,3);
+    assert.equal(towers.some(t=>t.cadence==='birthday'||/birthday-bash/.test(t.event.id)),false);
+  }
 });
 
 test('v0.12.96 concurrent tower state is isolated by tower key',()=>{

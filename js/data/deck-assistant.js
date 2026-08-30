@@ -1,8 +1,9 @@
-import { decks } from "./decks.js?v=1.0.2";
-import { collectionCards } from "./collection.js?v=1.0.2";
-import { superstars } from "./superstars.js?v=1.0.2";
-import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=1.0.2";
-import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, normalizeCardTier, tierDamageOffsetFor, tierLabel, tierRank } from "./variants.js?v=1.0.2";
+import { decks } from "./decks.js?v=1.1.21";
+import { collectionCards } from "./collection.js?v=1.1.21";
+import { superstars } from "./superstars.js?v=1.1.21";
+import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.21";
+import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, normalizeCardTier, tierDamageOffsetFor, tierLabel, tierRank } from "./variants.js?v=1.1.21";
+import { MERCH_BY_ID, equipMerch, merchEligibilityForSuperstar } from "./merch.js?v=1.1.21";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -83,6 +84,53 @@ function hasHigherUnusedTier(profile,draft,id) {
   return tiersHighToLow.find(tier => tierRank(tier)>tierRank(current) && countTier(draft,id,tier)<ownedTier(profile,id,tier)) ?? null;
 }
 
+function merchEffectFitScore(star, item) {
+  const effect=item?.effect??{};
+  const authored=decks[star?.id]??[];
+  if(effect.type==="momentum"){
+    const method=effect.method;
+    const methodMoves=authored.filter(card=>card?.kind==="move"&&card?.method===method);
+    const requirementWeight=methodMoves.reduce((sum,card)=>sum+Math.max(0,Number(card?.requirements?.[method])||0),0);
+    const starter=Math.max(0,Number(star?.starterMomentum?.[method])||0);
+    const limit=star?.methodLimits?.[method];
+    const openEnded=limit==null?24:Math.max(0,Number(limit)||0)*6;
+    return 1000 + starter*12 + methodMoves.length*18 + requirementWeight*9 + openEnded;
+  }
+  if(effect.type==="hp") return 1000 + Math.max(0,80-Math.max(1,Number(star?.hp)||60))*8;
+  if(effect.type==="shield") return 1000 + Math.max(0,82-Math.max(1,Number(star?.hp)||60))*7;
+  if(effect.type==="adrenaline"){
+    const moves=authored.filter(card=>card?.kind==="move");
+    const avgCost=moves.length?moves.reduce((sum,card)=>sum+Math.max(0,Number(card?.cost)||0),0)/moves.length:0;
+    const premiumMoves=moves.filter(card=>card?.trademark||card?.finisher).length;
+    return 1000 + Math.round(avgCost*25) + premiumMoves*8;
+  }
+  return 1000;
+}
+
+export function bestMerchTarget(profile,item,unlockedIds=null){
+  if(!profile||!item)return null;
+  const unlocked=(unlockedIds??profile.unlockedSuperstars??[]).filter(id=>starById.has(id));
+  const candidates=(item.superstarId?[item.superstarId]:unlocked)
+    .filter(id=>unlocked.includes(id))
+    .map((id,index)=>{const star=starById.get(id),eligibility=merchEligibilityForSuperstar(star,item);return {id,index,star,eligibility,score:eligibility.legal?merchEffectFitScore(star,item):-Infinity};})
+    .filter(row=>row.eligibility.legal)
+    .sort((a,b)=>b.score-a.score||a.index-b.index||a.star.name.localeCompare(b.star.name));
+  return candidates[0]??null;
+}
+
+function merchRecommendationReason(target,item){
+  const effect=item?.effect??{};
+  if(effect.type==="momentum"){
+    const label=String(effect.method??"").replace(/^./,c=>c.toUpperCase());
+    const methodMoves=(decks[target.id]??[]).filter(card=>card?.kind==="move"&&card?.method===effect.method).length;
+    return `${target.star.name} is the best legal fit for +${effect.amount??1} ${label} Momentum across your unlocked roster (${methodMoves} authored ${label} Move${methodMoves===1?"":"s"}).`;
+  }
+  if(effect.type==="hp") return `${target.star.name} is the best fit for this HP boost across your eligible unlocked roster.`;
+  if(effect.type==="shield") return `${target.star.name} is the best fit for this defensive shield across your eligible unlocked roster.`;
+  if(effect.type==="adrenaline") return `${target.star.name} is the best fit for this Adrenaline boost based on the cost profile of the authored deck.`;
+  return `${target.star.name} is the best eligible fit for this Merch.`;
+}
+
 export function findPackUpgrades(profile, pack = []) {
   if (!profile || !Array.isArray(pack) || !pack.length) return [];
   const unlocked = (profile.unlockedSuperstars ?? []).filter(id => starById.has(id));
@@ -106,7 +154,27 @@ export function findPackUpgrades(profile, pack = []) {
       }
       continue;
     }
-    if (card.kind === "superstar") continue;
+    // v1.1.14 — every usable Merch pull can produce one best-fit suggestion.
+    // Generic Merch is assigned to exactly one unlocked Superstar; it is never
+    // cloned into multiple decks. Method-granting Merch must pass the same hard
+    // Superstar Method compatibility check used by manual Deck Lab equip.
+    if (card.kind === "merch") {
+      if (!profile.activeMerch?.id && !upgrades.some(row=>row.type==="merch") && Math.max(0, Number(profile.ownedMerch?.[card.id]) || 0) > 0) {
+        const target=bestMerchTarget(profile,card,unlocked);
+        if(target){
+          const specific=!!card.superstarId;
+          upgrades.push({
+            type:"merch", superstarId:target.id, pull, cardId:card.id, removeId:null,
+            reason:specific
+              ? `${card.name} is ${target.star.name}-specific Merch and is legal for that Superstar. Your single Merch slot is empty, so it can be equipped for ${card.duration} completed match${Number(card.duration)===1?"":"es"}.`
+              : `${merchRecommendationReason(target,card)} Equip it once to ${target.star.name}; the single consumable Merch item is not copied to any other deck and lasts ${card.duration} completed eligible match${Number(card.duration)===1?"":"es"}.`,
+            addName:card.name, removeName:"Empty Merch Slot"
+          });
+        }
+      }
+      continue;
+    }
+    if (["superstar","variant"].includes(card.kind)) continue;
     for (const sid of unlocked) {
       let draft = working.get(sid);
       if (!draft) continue;
@@ -140,6 +208,15 @@ export function applyUpgrade(profile, upgrade) {
   if (!profile || !upgrade?.superstarId) return false;
   const sid = upgrade.superstarId;
   if (upgrade.type === "entrance") return setSelectedEntrance(profile, sid, upgrade.cardId);
+  if (upgrade.type === "merch") {
+    const item = MERCH_BY_ID[upgrade.cardId];
+    const star = starById.get(sid);
+    if (!item || !star || profile.activeMerch?.id) return false;
+    if (!(profile.unlockedSuperstars ?? []).includes(sid)) return false;
+    if (!merchEligibilityForSuperstar(star,item).legal) return false;
+    if (Math.max(0, Number(profile.ownedMerch?.[item.id]) || 0) < 1) return false;
+    try { equipMerch(profile, item.id, sid); return true; } catch { return false; }
+  }
   const saved = profile?.savedDecks?.[sid];
   if (!Array.isArray(saved) || saved.length !== 60) return false;
   const draft = saved.map(normalizedEntry);

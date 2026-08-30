@@ -1,19 +1,19 @@
-import { decks } from "./decks.js?v=1.0.2";
-import { collectionCards } from "./collection.js?v=1.0.2";
-import { superstars } from "./superstars.js?v=1.0.2";
-import { isUnreleasedSetId } from "./release.js?v=1.0.2";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.0.2";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.0.2";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.0.2";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.0.2";
+import { decks } from "./decks.js?v=1.1.21";
+import { collectionCards } from "./collection.js?v=1.1.21";
+import { superstars } from "./superstars.js?v=1.1.21";
+import { isUnreleasedSetId } from "./release.js?v=1.1.21";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.21";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.21";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.21";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.21";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
 export const PROFILE_RECOVERY_META_KEY = "wa-modern-profile-v3-recovery-meta-v1";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
-export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
+export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 42;
+export const PROFILE_VERSION = 43;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -27,7 +27,9 @@ const blankSetCounters = () => ({
   "new-generation-series-1": 0,
   "worlds-collide-series-1": 0,
   "money-in-the-bank-series-1": 0,
-  "smackdown-series-1": 0
+  "smackdown-series-1": 0,
+  "nxt-series-1": 0,
+  "ruthless-aggression-series-1": 0
 });
 const defaultSetProgress = () => ({
   "summerslam-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
@@ -35,10 +37,12 @@ const defaultSetProgress = () => ({
   "attitude-era-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
   "evolution-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
   "new-generation-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "raw-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
+  "raw-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
   "worlds-collide-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
   "money-in-the-bank-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
-  "smackdown-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] }
+  "smackdown-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "nxt-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "ruthless-aggression-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] }
 });
 const defaultSeasonState = () => ({ xp: 0, claimedTiers: [], freePackLastClaimAt: null, freePacksClaimed: 0, matchXpEarned: 0, challengeXpEarned: 0 });
 const cardById = new Map(collectionCards.map(c => [c.id, c]));
@@ -74,7 +78,7 @@ export function underFinishOwnershipCap(profile, card, tierOrFoil = "normal") {
 
 export function addOwnedCard(profile, id, { tier = null, foil = null, amount = 1 } = {}) {
   profile.ownedCards ??= {};
-  profile.ownedCards[id] ??= { normal: 0, emerald: 0, sapphire: 0, ruby: 0 };
+  profile.ownedCards[id] ??= { normal: 0, emerald: 0, sapphire: 0, ruby: 0, diamond: 0 };
   const o = profile.ownedCards[id];
   // Old Foil calls map to Ruby only for legacy migration/certification. New live
   // code always supplies an explicit tier. Missing tier defaults to Normal.
@@ -308,6 +312,12 @@ export function createProfile(starterId) {
     packsSinceSuperstarUnlockBySet: blankSetCounters(),
     ladder: { activeRun: null, clears: 0, bestRung: 0, completionPackCredits: 0, completionPackCreditsBySet: blankSetCounters(), firstClearSuperstarPending: false },
     kingOfTheRing: { activeRun: null, clears: 0, bestRound: 0, reigningKingId: null, reigningKingAt: null },
+    survivorSeries: { activeRun: null, clears: 0 },
+    dailySpin: { lastSpinAt: null, nextSpinAt: null, totalSpins: 0, lastReward: null },
+    ownedMerch: {},
+    activeMerch: null,
+    ownedSuperstarVariants: {},
+    equippedSuperstarVariants: {},
     championshipRoad: { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [] },
     weeklyLiveEvents: { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [] },
     liveEventTowers: { states: {}, totalClears: 0, completedKeys: [] },
@@ -348,7 +358,7 @@ export function claimWelcomeSuperstar(p, setId, rng = Math.random) {
   if (!p) throw new Error("Profile required");
   const state = welcomeSuperstarState(p);
   if (state.claimed) return { ...state, alreadyClaimed: true };
-  if (!WELCOME_SUPERSTAR_SET_IDS.includes(setId)) throw new Error("Choose Evolution, New Generation, Golden Era, Attitude Era or SummerSlam");
+  if (!WELCOME_SUPERSTAR_SET_IDS.includes(setId)) throw new Error("Choose one of the available WWE Legacy launch sets");
   const candidates = welcomeSuperstarCandidates(p, setId);
   if (!candidates.length) throw new Error("No eligible Welcome Superstars are available for that set");
   const index = Math.max(0, Math.min(candidates.length - 1, Math.floor(rng() * candidates.length)));
@@ -686,6 +696,20 @@ export function migrateProfile(old) {
   p.selectedEntrances ??= {};
   p.deckNeedsCards ??= {};
   p.seasons ??= {};
+  p.survivorSeries ??= { activeRun: null, clears: 0 };
+  p.dailySpin ??= { lastSpinAt: null, nextSpinAt: null, totalSpins: 0, lastReward: null };
+  p.ownedMerch ??= {};
+  p.activeMerch ??= null;
+  p.ownedSuperstarVariants ??= {};
+  p.equippedSuperstarVariants ??= {};
+  for (const owned of Object.values(p.ownedCards ?? {})) {
+    if (!owned || typeof owned !== "object") continue;
+    owned.normal = Math.max(0, Number(owned.normal) || 0);
+    owned.emerald = Math.max(0, Number(owned.emerald) || 0);
+    owned.sapphire = Math.max(0, Number(owned.sapphire) || 0);
+    owned.ruby = Math.max(0, Number(owned.ruby) || 0);
+    owned.diamond = Math.max(0, Number(owned.diamond) || 0);
+  }
 
   // v0.17.01 reward-printing migration: every major reward-exclusive
   // collectible is Ruby-only. Collapse any previously-earned Normal/Emerald/

@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=1.0.2";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=1.0.2";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=1.1.21";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=1.1.21";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.pendingTopDeckTutorChoice?.playerId)return state.pendingTopDeckTutorChoice.playerId;if(state.phase==="TRIGGER_RESPONSE")return state.pendingTriggeredSpecial?.playerId??null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -34,7 +34,6 @@ function cpuPlayableAfterAutoCounter(state,pid,card){
  if(card?.kind==='momentum')return canPlayMomentum(sim,pid,card);
  if(card?.kind==='action'&&card?.special)return canPlaySpecial(sim,pid,card);
  if(card?.kind==='action')return canPlayAction(sim,pid,card);
- if(card?.kind==='support')return canPlaySupport(sim,pid,card);
  if(card?.kind==='manager')return canPlayManager(sim,pid,card);
   return false;
 }
@@ -187,6 +186,10 @@ function cpuActionPriority(state,pid,card){
    const best=targets.reduce((score,x)=>Math.max(score,x.method==='technical'?moveScore(state,pid,x):22),0);
    return 42+(!legal.length?22:0)+(p.hand.length<=4?10:0)+Math.min(30,Math.floor(best/3));
  }
+ if(ef.type==='crowdSupport')return (p.persistentActions?.['crowdSupport']||p.support?.effect?.type==='crowdSupport')?-Infinity:40;
+ if(ef.type==='what')return (p.persistentActions?.['what']||p.support?.effect?.type==='what')?-Infinity:42;
+ if(ef.type==='peopleChampionship')return (p.persistentActions?.['peopleChampionship']||p.support?.effect?.type==='peopleChampionship')?-Infinity:(p.hp<=p.maxHp*.5?58:34);
+ if(ef.type==='hustleLoyaltyRespect')return (p.persistentActions?.['hustleLoyaltyRespect']||p.support?.effect?.type==='hustleLoyaltyRespect')?-Infinity:(p.hp<=p.maxHp*.5?60:36);
  return -Infinity;
 }
 function cpuBestAction(state,pid,minScore=1){
@@ -456,7 +459,7 @@ function cpuChooseOffense(state,pid,moves){
  return moveScore(state,pid,top)-moveScore(state,pid,alternative)<=10?alternative:top;
 }
 function cpuDiscardPreservationScore(card){
- let score=0;if(!card)return score;if(card.special)score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.effect?.type==='onceTooOften')score+=105;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);if(card.submission)score+=Math.max(0,card.submission.pressure??0)*8;const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=75;else if(card.kind==='action')score+=card.oneUse?65:42;else if(card.kind==='support')score+=34;else if(card.kind==='momentum')score+=8;return score;
+ let score=0;if(!card)return score;if(card.special)score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.effect?.type==='onceTooOften')score+=105;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);if(card.submission)score+=Math.max(0,card.submission.pressure??0)*8;const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=75;else if(card.kind==='action')score+=card.oneUse?65:42;else if(card.kind==='momentum')score+=8;return score;
 }
 function cpuRepeatThreat(state,pid,incoming){
  const p=state.players[pid];let score=0;if(incoming.finisher)score+=80;if(incoming.trademark)score+=28;if(incoming.submission){if(incomingSubmissionWouldTap(state,pid,incoming))score+=90;else if(incomingSubmissionIsCritical(state,pid,incoming))score+=55;}const damage=Math.max(0,incoming.damage??0);score+=damage>=12?35:damage>=8?22:damage>=6?10:0;if(damage>=p.hp)score+=80;if(p.hp<=Math.ceil(p.maxHp*.3))score+=12;return score;
@@ -493,7 +496,6 @@ function cpuTriggeredSpecialChoice(state,pid){
      if(card.kind==='momentum')return canPlayMomentum(actionState,pid,card);
      if(card.special)return canPlaySpecial(actionState,pid,card);
      if(card.kind==='action')return canPlayAction(actionState,pid,card);
-     if(card.kind==='support')return canPlaySupport(actionState,pid,card);
      if(card.kind==='manager')return canPlayManager(actionState,pid,card);
      return false;
    });
@@ -542,8 +544,6 @@ export function cpuDecision(game,pid="p2"){
    const manager=cpuManagerChoice(s,pid);if(manager)return{type:"manager",card:manager};
    const sp=cpuSpecialChoice(s,pid,movesNow);if(sp)return{type:"special",card:sp};
    const setupAction=cpuPreMoveAction(s,pid);if(setupAction)return{type:"action",card:setupAction};
-   const setupSupport=p.hand.find(x=>canPlaySupport(s,pid,x)&&(!p.support||p.support.id!==x.id));
-   if(setupSupport&&movesNow.length)return{type:"support",card:setupSupport};
    if(!movesNow.length){
      const enabling=cpuEnablingAction(s,pid);if(enabling)return{type:"action",card:enabling};
      const plannedMomentum=cpuBestMomentum(s,pid);if(plannedMomentum)return{type:"momentum",card:plannedMomentum};
@@ -555,9 +555,8 @@ export function cpuDecision(game,pid="p2"){
    if(chosenMove)return{type:"move",card:chosenMove};
    const utilityManager=cpuManagerChoice(s,pid);if(utilityManager)return{type:"manager",card:utilityManager};
    const utilityAction=cpuBestAction(s,pid,18);if(utilityAction)return{type:"action",card:utilityAction};
-   const utilitySupport=p.hand.find(x=>canPlaySupport(s,pid,x));if(utilitySupport)return{type:"support",card:utilitySupport};
    return{type:"pass"};
  }
  return null;
 }
-export function executeCpuDecision(game,d,pid="p2"){if(!d)return false;if(d.type==="triggerSpecial")return game.resolveTriggeredSpecial(pid,!!d.use);if(d.type==="counter")return game.counter(pid,d.card);if(d.type==="autoCounter")return game.autoCounter(pid,d.indices);if(d.type==="passCounter")return game.passCounter(pid);if(d.type==="pinEscape")return game.playPinEscape(pid,d.card);if(d.type==="passPin")return game.passPinResponse(pid);if(d.type==="passSubmissionResponse")return game.passSubmissionResponse(pid);if(d.type==="maintain")return game.maintainSubmission(pid,d.index);if(d.type==="release")return game.releaseSubmission(pid);if(d.type==="pin")return game.attemptPin(pid);if(d.type==="endPost")return game.endPostMove(pid);if(d.type==="momentum")return game.playMomentum(pid,d.card);if(d.type==="move")return game.declareMove(pid,d.card);if(d.type==="action")return game.playAction(pid,d.card);if(d.type==="support")return game.playSupport(pid,d.card);if(d.type==="manager")return game.playManager(pid,d.card);if(d.type==="special")return game.playSpecial(pid,d.card);if(d.type==="actionDiscard")return game.resolveActionDiscard(pid,d.index);if(d.type==="topDeckTutorChoice")return game.resolveTopDeckTutorChoice(pid,d.cardId);if(d.type==="pass")return game.passTurn(pid);return false;}
+export function executeCpuDecision(game,d,pid="p2"){if(!d)return false;if(d.type==="triggerSpecial")return game.resolveTriggeredSpecial(pid,!!d.use);if(d.type==="counter")return game.counter(pid,d.card);if(d.type==="autoCounter")return game.autoCounter(pid,d.indices);if(d.type==="passCounter")return game.passCounter(pid);if(d.type==="pinEscape")return game.playPinEscape(pid,d.card);if(d.type==="passPin")return game.passPinResponse(pid);if(d.type==="passSubmissionResponse")return game.passSubmissionResponse(pid);if(d.type==="maintain")return game.maintainSubmission(pid,d.index);if(d.type==="release")return game.releaseSubmission(pid);if(d.type==="pin")return game.attemptPin(pid);if(d.type==="endPost")return game.endPostMove(pid);if(d.type==="momentum")return game.playMomentum(pid,d.card);if(d.type==="move")return game.declareMove(pid,d.card);if(d.type==="action")return game.playAction(pid,d.card);if(d.type==="manager")return game.playManager(pid,d.card);if(d.type==="special")return game.playSpecial(pid,d.card);if(d.type==="actionDiscard")return game.resolveActionDiscard(pid,d.index);if(d.type==="topDeckTutorChoice")return game.resolveTopDeckTutorChoice(pid,d.cardId);if(d.type==="pass")return game.passTurn(pid);return false;}

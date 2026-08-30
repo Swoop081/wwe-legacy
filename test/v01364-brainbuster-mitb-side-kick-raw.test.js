@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.0.2";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.0.2";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.21";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.21";
 
 const brainbuster=allGameplayCards.find(c=>c.id==="brainbuster");
 const sideKick=allGameplayCards.find(c=>c.id==="side-kick");
@@ -40,6 +40,6 @@ test("v0.13.64 adds Side Kick as RAW1-071 shared Common",()=>{
 
 test("v0.13.64 Card Studio exposes Brainbuster under MITB and Side Kick under RAW",()=>{
   const studio=fs.readFileSync(new URL("../js/tools/card-art-studio-data.js",import.meta.url),"utf8");
-  assert.match(studio,/"id":"brainbuster","name":"Brainbuster","kind":"move","setId":"money-in-the-bank-series-1","cardNumber":38,"cardCode":"MITB1-038"/);
-  assert.match(studio,/"id":"side-kick","name":"Side Kick","kind":"move","setId":"raw-series-1","cardNumber":71,"cardCode":"RAW1-071"/);
+  assert.match(studio,/"id":"brainbuster","name":"Brainbuster","kind":"move","source":"collector","setId":"money-in-the-bank-series-1","cardNumber":38,"cardCode":"MITB1-038"/);
+  assert.match(studio,/"id":"side-kick","name":"Side Kick","kind":"move","source":"collector","setId":"raw-series-1","cardNumber":71,"cardCode":"RAW1-071"/);
 });

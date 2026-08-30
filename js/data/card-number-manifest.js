@@ -1,369 +1,1233 @@
 export const CARD_NUMBER_MANIFEST = [
   {
-    "id": "northern-lights-suplex",
-    "setId": "evolution-series-1",
+    "id": "bret-hart-inverted-atomic-drop",
+    "setId": "new-generation-series-1",
     "cardNumber": 1,
-    "cardCode": "EVO1-001"
+    "cardCode": "NG1-001"
   },
   {
-    "id": "rhea-ripley-electric-chair-facebuster",
-    "setId": "evolution-series-1",
+    "id": "bret-hart-pendulum-backbreaker",
+    "setId": "new-generation-series-1",
     "cardNumber": 2,
-    "cardCode": "EVO1-002"
+    "cardCode": "NG1-002"
   },
   {
-    "id": "rhea-ripley-reverse-alabama-slam",
-    "setId": "evolution-series-1",
+    "id": "bret-hart-second-rope-elbow-drop",
+    "setId": "new-generation-series-1",
     "cardNumber": 3,
-    "cardCode": "EVO1-003"
+    "cardCode": "NG1-003"
   },
   {
-    "id": "razor-s-edge",
-    "setId": "evolution-series-1",
+    "id": "bret-hart-sharpshooter",
+    "setId": "new-generation-series-1",
     "cardNumber": 4,
-    "cardCode": "EVO1-004"
+    "cardCode": "NG1-004"
   },
   {
-    "id": "rhea-ripley-prism-trap",
-    "setId": "evolution-series-1",
+    "id": "entrance-bret-hart",
+    "setId": "new-generation-series-1",
     "cardNumber": 5,
-    "cardCode": "EVO1-005"
+    "cardCode": "NG1-005"
   },
   {
-    "id": "rhea-ripley-riptide",
-    "setId": "evolution-series-1",
+    "id": "special-bret-hart",
+    "setId": "new-generation-series-1",
     "cardNumber": 6,
-    "cardCode": "EVO1-006"
+    "cardCode": "NG1-006"
   },
   {
-    "id": "arm-drag",
-    "setId": "evolution-series-1",
+    "id": "superstar-bret-hart",
+    "setId": "new-generation-series-1",
     "cardNumber": 7,
-    "cardCode": "EVO1-007"
+    "cardCode": "NG1-007"
   },
   {
-    "id": "becky-lynch-diamond-dust",
-    "setId": "evolution-series-1",
+    "id": "shawn-michaels-flying-forearm",
+    "setId": "new-generation-series-1",
     "cardNumber": 8,
-    "cardCode": "EVO1-008"
+    "cardCode": "NG1-008"
   },
   {
-    "id": "becky-lynch-diving-leg-drop",
-    "setId": "evolution-series-1",
+    "id": "shawn-michaels-teardrop-suplex",
+    "setId": "new-generation-series-1",
     "cardNumber": 9,
-    "cardCode": "EVO1-009"
+    "cardCode": "NG1-009"
   },
   {
-    "id": "becky-lynch-dis-arm-her",
-    "setId": "evolution-series-1",
+    "id": "shawn-michaels-top-rope-elbow-drop",
+    "setId": "new-generation-series-1",
     "cardNumber": 10,
-    "cardCode": "EVO1-010"
+    "cardCode": "NG1-010"
   },
   {
-    "id": "becky-lynch-manhandle-slam",
-    "setId": "evolution-series-1",
+    "id": "shawn-michaels-sweet-chin-music",
+    "setId": "new-generation-series-1",
     "cardNumber": 11,
-    "cardCode": "EVO1-011"
+    "cardCode": "NG1-011"
   },
   {
-    "id": "hurricanrana",
-    "setId": "evolution-series-1",
+    "id": "entrance-shawn-michaels",
+    "setId": "new-generation-series-1",
     "cardNumber": 12,
-    "cardCode": "EVO1-012"
+    "cardCode": "NG1-012"
   },
   {
-    "id": "liv-morgan-jersey-codebreaker",
-    "setId": "evolution-series-1",
+    "id": "special-shawn-michaels",
+    "setId": "new-generation-series-1",
     "cardNumber": 13,
-    "cardCode": "EVO1-013"
+    "cardCode": "NG1-013"
   },
   {
-    "id": "liv-morgan-oblivion",
-    "setId": "evolution-series-1",
+    "id": "superstar-shawn-michaels",
+    "setId": "new-generation-series-1",
     "cardNumber": 14,
-    "cardCode": "EVO1-014"
+    "cardCode": "NG1-014"
   },
   {
-    "id": "sunset-flip-powerbomb",
-    "setId": "evolution-series-1",
+    "id": "razor-ramon-fallaway-slam",
+    "setId": "new-generation-series-1",
     "cardNumber": 15,
-    "cardCode": "EVO1-015"
+    "cardCode": "NG1-015"
   },
   {
-    "id": "crossface",
-    "setId": "evolution-series-1",
+    "id": "razor-ramon-abdominal-stretch",
+    "setId": "new-generation-series-1",
     "cardNumber": 16,
-    "cardCode": "EVO1-016"
+    "cardCode": "NG1-016"
   },
   {
-    "id": "bayley-rose-plant",
-    "setId": "evolution-series-1",
+    "id": "razor-ramon-bulldog",
+    "setId": "new-generation-series-1",
     "cardNumber": 17,
-    "cardCode": "EVO1-017"
+    "cardCode": "NG1-017"
   },
   {
-    "id": "running-knee-strike",
-    "setId": "evolution-series-1",
+    "id": "razor-ramon-razors-edge",
+    "setId": "new-generation-series-1",
     "cardNumber": 18,
-    "cardCode": "EVO1-018"
+    "cardCode": "NG1-018"
   },
   {
-    "id": "middle-rope-stunner",
-    "setId": "evolution-series-1",
+    "id": "entrance-razor-ramon",
+    "setId": "new-generation-series-1",
     "cardNumber": 19,
-    "cardCode": "EVO1-019"
+    "cardCode": "NG1-019"
   },
   {
-    "id": "fallaway-slam",
-    "setId": "evolution-series-1",
+    "id": "special-razor-ramon",
+    "setId": "new-generation-series-1",
     "cardNumber": 20,
-    "cardCode": "EVO1-020"
+    "cardCode": "NG1-020"
   },
   {
-    "id": "spear",
-    "setId": "evolution-series-1",
+    "id": "superstar-razor-ramon",
+    "setId": "new-generation-series-1",
     "cardNumber": 21,
-    "cardCode": "EVO1-021"
+    "cardCode": "NG1-021"
   },
   {
-    "id": "charlotte-flair-natural-selection",
-    "setId": "evolution-series-1",
+    "id": "diesel-snake-eyes",
+    "setId": "new-generation-series-1",
     "cardNumber": 22,
-    "cardCode": "EVO1-022"
+    "cardCode": "NG1-022"
   },
   {
-    "id": "charlotte-flair-figure-eight-leglock",
-    "setId": "evolution-series-1",
+    "id": "diesel-big-boot",
+    "setId": "new-generation-series-1",
     "cardNumber": 23,
-    "cardCode": "EVO1-023"
+    "cardCode": "NG1-023"
   },
   {
-    "id": "paige-rope-hung-knee-strikes",
-    "setId": "evolution-series-1",
+    "id": "diesel-sidewalk-slam",
+    "setId": "new-generation-series-1",
     "cardNumber": 24,
-    "cardCode": "EVO1-024"
+    "cardCode": "NG1-024"
   },
   {
-    "id": "paige-paige-turner",
-    "setId": "evolution-series-1",
+    "id": "diesel-jackknife-powerbomb",
+    "setId": "new-generation-series-1",
     "cardNumber": 25,
-    "cardCode": "EVO1-025"
+    "cardCode": "NG1-025"
   },
   {
-    "id": "paige-pto",
-    "setId": "evolution-series-1",
+    "id": "entrance-diesel",
+    "setId": "new-generation-series-1",
     "cardNumber": 26,
-    "cardCode": "EVO1-026"
+    "cardCode": "NG1-026"
   },
   {
-    "id": "paige-ram-paige",
-    "setId": "evolution-series-1",
+    "id": "special-diesel",
+    "setId": "new-generation-series-1",
     "cardNumber": 27,
-    "cardCode": "EVO1-027"
+    "cardCode": "NG1-027"
   },
   {
-    "id": "dragon-screw",
-    "setId": "evolution-series-1",
+    "id": "superstar-diesel",
+    "setId": "new-generation-series-1",
     "cardNumber": 28,
-    "cardCode": "EVO1-028"
+    "cardCode": "NG1-028"
   },
   {
-    "id": "reverse-suplex",
-    "setId": "evolution-series-1",
+    "id": "monkey-flip",
+    "setId": "new-generation-series-1",
     "cardNumber": 29,
-    "cardCode": "EVO1-029"
+    "cardCode": "NG1-029"
   },
   {
-    "id": "stephanie-vaquer-svb",
-    "setId": "evolution-series-1",
+    "id": "headlock-takeover",
+    "setId": "new-generation-series-1",
     "cardNumber": 30,
-    "cardCode": "EVO1-030"
+    "cardCode": "NG1-030"
   },
   {
-    "id": "stephanie-vaquer-devils-kiss",
-    "setId": "evolution-series-1",
+    "id": "eye-rake",
+    "setId": "new-generation-series-1",
     "cardNumber": 31,
-    "cardCode": "EVO1-031"
+    "cardCode": "NG1-031"
   },
   {
-    "id": "stephanie-vaquer-vaquer-inferno",
-    "setId": "evolution-series-1",
+    "id": "hair-pull-takedown",
+    "setId": "new-generation-series-1",
     "cardNumber": 32,
-    "cardCode": "EVO1-032"
+    "cardCode": "NG1-032"
   },
   {
-    "id": "meteora",
-    "setId": "evolution-series-1",
+    "id": "schoolboy-roll-up",
+    "setId": "new-generation-series-1",
     "cardNumber": 33,
-    "cardCode": "EVO1-033"
+    "cardCode": "NG1-033"
   },
   {
-    "id": "double-stomp",
-    "setId": "evolution-series-1",
+    "id": "reverse-chinlock",
+    "setId": "new-generation-series-1",
     "cardNumber": 34,
-    "cardCode": "EVO1-034"
+    "cardCode": "NG1-034"
   },
   {
-    "id": "iyo-sky-bullet-train-attack",
-    "setId": "evolution-series-1",
+    "id": "doink-drop-toe-hold",
+    "setId": "new-generation-series-1",
     "cardNumber": 35,
-    "cardCode": "EVO1-035"
+    "cardCode": "NG1-035"
   },
   {
-    "id": "iyo-sky-over-the-moonsault",
-    "setId": "evolution-series-1",
+    "id": "doink-stump-puller",
+    "setId": "new-generation-series-1",
     "cardNumber": 36,
-    "cardCode": "EVO1-036"
+    "cardCode": "NG1-036"
   },
   {
-    "id": "entrance-rhea-ripley",
-    "setId": "evolution-series-1",
+    "id": "doink-flying-body-press",
+    "setId": "new-generation-series-1",
     "cardNumber": 37,
-    "cardCode": "EVO1-037"
+    "cardCode": "NG1-037"
   },
   {
-    "id": "entrance-becky-lynch",
-    "setId": "evolution-series-1",
+    "id": "doink-whoopee-cushion",
+    "setId": "new-generation-series-1",
     "cardNumber": 38,
-    "cardCode": "EVO1-038"
+    "cardCode": "NG1-038"
   },
   {
-    "id": "entrance-liv-morgan",
-    "setId": "evolution-series-1",
+    "id": "entrance-doink-the-clown",
+    "setId": "new-generation-series-1",
     "cardNumber": 39,
-    "cardCode": "EVO1-039"
+    "cardCode": "NG1-039"
   },
   {
-    "id": "entrance-bayley",
-    "setId": "evolution-series-1",
+    "id": "special-doink-the-clown",
+    "setId": "new-generation-series-1",
     "cardNumber": 40,
-    "cardCode": "EVO1-040"
+    "cardCode": "NG1-040"
   },
   {
-    "id": "entrance-charlotte-flair",
-    "setId": "evolution-series-1",
+    "id": "superstar-doink-the-clown",
+    "setId": "new-generation-series-1",
     "cardNumber": 41,
-    "cardCode": "EVO1-041"
+    "cardCode": "NG1-041"
   },
   {
-    "id": "entrance-paige",
-    "setId": "evolution-series-1",
+    "id": "forearm-club",
+    "setId": "new-generation-series-1",
     "cardNumber": 42,
-    "cardCode": "EVO1-042"
+    "cardCode": "NG1-042"
   },
   {
-    "id": "entrance-stephanie-vaquer",
-    "setId": "evolution-series-1",
+    "id": "running-shoulder-block",
+    "setId": "new-generation-series-1",
     "cardNumber": 43,
-    "cardCode": "EVO1-043"
+    "cardCode": "NG1-043"
   },
   {
-    "id": "entrance-iyo-sky",
-    "setId": "evolution-series-1",
+    "id": "side-suplex",
+    "setId": "new-generation-series-1",
     "cardNumber": 44,
-    "cardCode": "EVO1-044"
+    "cardCode": "NG1-044"
   },
   {
-    "id": "special-rhea-ripley",
-    "setId": "evolution-series-1",
+    "id": "club-to-the-back",
+    "setId": "new-generation-series-1",
     "cardNumber": 45,
-    "cardCode": "EVO1-045"
+    "cardCode": "NG1-045"
   },
   {
-    "id": "special-becky-lynch",
-    "setId": "evolution-series-1",
+    "id": "running-body-avalanche",
+    "setId": "new-generation-series-1",
     "cardNumber": 46,
-    "cardCode": "EVO1-046"
+    "cardCode": "NG1-046"
   },
   {
-    "id": "special-liv-morgan",
-    "setId": "evolution-series-1",
+    "id": "nerve-hold",
+    "setId": "new-generation-series-1",
     "cardNumber": 47,
-    "cardCode": "EVO1-047"
+    "cardCode": "NG1-047"
   },
   {
-    "id": "special-bayley",
-    "setId": "evolution-series-1",
+    "id": "yokozuna-savate-kick",
+    "setId": "new-generation-series-1",
     "cardNumber": 48,
-    "cardCode": "EVO1-048"
+    "cardCode": "NG1-048"
   },
   {
-    "id": "special-charlotte-flair",
-    "setId": "evolution-series-1",
+    "id": "yokozuna-belly-to-belly-suplex",
+    "setId": "new-generation-series-1",
     "cardNumber": 49,
-    "cardCode": "EVO1-049"
+    "cardCode": "NG1-049"
   },
   {
-    "id": "special-paige",
-    "setId": "evolution-series-1",
+    "id": "yokozuna-running-leg-drop",
+    "setId": "new-generation-series-1",
     "cardNumber": 50,
-    "cardCode": "EVO1-050"
+    "cardCode": "NG1-050"
   },
   {
-    "id": "special-stephanie-vaquer",
-    "setId": "evolution-series-1",
+    "id": "yokozuna-banzai-drop",
+    "setId": "new-generation-series-1",
     "cardNumber": 51,
-    "cardCode": "EVO1-051"
+    "cardCode": "NG1-051"
   },
   {
-    "id": "special-iyo-sky",
-    "setId": "evolution-series-1",
+    "id": "entrance-yokozuna",
+    "setId": "new-generation-series-1",
     "cardNumber": 52,
-    "cardCode": "EVO1-052"
+    "cardCode": "NG1-052"
   },
   {
-    "id": "superstar-iyo-sky",
-    "setId": "evolution-series-1",
+    "id": "special-yokozuna",
+    "setId": "new-generation-series-1",
     "cardNumber": 53,
-    "cardCode": "EVO1-053"
+    "cardCode": "NG1-053"
   },
   {
-    "id": "superstar-bayley",
-    "setId": "evolution-series-1",
+    "id": "superstar-yokozuna",
+    "setId": "new-generation-series-1",
     "cardNumber": 54,
-    "cardCode": "EVO1-054"
+    "cardCode": "NG1-054"
   },
   {
-    "id": "superstar-paige",
-    "setId": "evolution-series-1",
+    "id": "fisherman-suplex",
+    "setId": "new-generation-series-1",
     "cardNumber": 55,
-    "cardCode": "EVO1-055"
+    "cardCode": "NG1-055"
   },
   {
-    "id": "superstar-stephanie-vaquer",
-    "setId": "evolution-series-1",
+    "id": "wheel-kick",
+    "setId": "new-generation-series-1",
     "cardNumber": 56,
-    "cardCode": "EVO1-056"
+    "cardCode": "NG1-056"
   },
   {
-    "id": "superstar-charlotte-flair",
-    "setId": "evolution-series-1",
+    "id": "gutbuster",
+    "setId": "new-generation-series-1",
     "cardNumber": 57,
-    "cardCode": "EVO1-057"
+    "cardCode": "NG1-057"
   },
   {
-    "id": "superstar-rhea-ripley",
-    "setId": "evolution-series-1",
+    "id": "dropkick-to-the-knee",
+    "setId": "new-generation-series-1",
     "cardNumber": 58,
-    "cardCode": "EVO1-058"
+    "cardCode": "NG1-058"
   },
   {
-    "id": "superstar-liv-morgan",
-    "setId": "evolution-series-1",
+    "id": "bridging-german-suplex",
+    "setId": "new-generation-series-1",
     "cardNumber": 59,
-    "cardCode": "EVO1-059"
+    "cardCode": "NG1-059"
   },
   {
-    "id": "superstar-becky-lynch",
-    "setId": "evolution-series-1",
+    "id": "step-up-enzuigiri",
+    "setId": "new-generation-series-1",
     "cardNumber": 60,
-    "cardCode": "EVO1-060"
+    "cardCode": "NG1-060"
   },
   {
-    "id": "flair-chop",
-    "setId": "evolution-series-1",
+    "id": "owen-hart-enzuigiri",
+    "setId": "new-generation-series-1",
     "cardNumber": 61,
-    "cardCode": "EVO1-061"
+    "cardCode": "NG1-061"
+  },
+  {
+    "id": "owen-hart-dragon-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 62,
+    "cardCode": "NG1-062"
+  },
+  {
+    "id": "owen-hart-missile-dropkick",
+    "setId": "new-generation-series-1",
+    "cardNumber": 63,
+    "cardCode": "NG1-063"
+  },
+  {
+    "id": "owen-hart-sharpshooter",
+    "setId": "new-generation-series-1",
+    "cardNumber": 64,
+    "cardCode": "NG1-064"
+  },
+  {
+    "id": "entrance-owen-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 65,
+    "cardCode": "NG1-065"
+  },
+  {
+    "id": "special-owen-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 66,
+    "cardCode": "NG1-066"
+  },
+  {
+    "id": "superstar-owen-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 67,
+    "cardCode": "NG1-067"
+  },
+  {
+    "id": "standing-dropkick",
+    "setId": "new-generation-series-1",
+    "cardNumber": 68,
+    "cardCode": "NG1-068"
+  },
+  {
+    "id": "hammerlock-takedown",
+    "setId": "new-generation-series-1",
+    "cardNumber": 69,
+    "cardCode": "NG1-069"
+  },
+  {
+    "id": "running-knee-lift",
+    "setId": "new-generation-series-1",
+    "cardNumber": 70,
+    "cardCode": "NG1-070"
+  },
+  {
+    "id": "shoulder-breaker",
+    "setId": "new-generation-series-1",
+    "cardNumber": 71,
+    "cardCode": "NG1-071"
+  },
+  {
+    "id": "front-powerslam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 72,
+    "cardCode": "NG1-072"
+  },
+  {
+    "id": "full-nelson",
+    "setId": "new-generation-series-1",
+    "cardNumber": 73,
+    "cardCode": "NG1-073"
+  },
+  {
+    "id": "british-bulldog-delayed-vertical-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 74,
+    "cardCode": "NG1-074"
+  },
+  {
+    "id": "british-bulldog-crucifix",
+    "setId": "new-generation-series-1",
+    "cardNumber": 75,
+    "cardCode": "NG1-075"
+  },
+  {
+    "id": "british-bulldog-military-press-slam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 76,
+    "cardCode": "NG1-076"
+  },
+  {
+    "id": "british-bulldog-running-powerslam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 77,
+    "cardCode": "NG1-077"
+  },
+  {
+    "id": "entrance-british-bulldog",
+    "setId": "new-generation-series-1",
+    "cardNumber": 78,
+    "cardCode": "NG1-078"
+  },
+  {
+    "id": "special-british-bulldog",
+    "setId": "new-generation-series-1",
+    "cardNumber": 79,
+    "cardCode": "NG1-079"
+  },
+  {
+    "id": "superstar-british-bulldog",
+    "setId": "new-generation-series-1",
+    "cardNumber": 80,
+    "cardCode": "NG1-080"
+  },
+  {
+    "id": "goldberg-military-press-powerslam",
+    "setId": "season-2-whos-next",
+    "cardNumber": 1,
+    "cardCode": "S2WN-001"
+  },
+  {
+    "id": "goldberg-spear",
+    "setId": "season-2-whos-next",
+    "cardNumber": 2,
+    "cardCode": "S2WN-002"
+  },
+  {
+    "id": "goldberg-jackhammer",
+    "setId": "season-2-whos-next",
+    "cardNumber": 3,
+    "cardCode": "S2WN-003"
+  },
+  {
+    "id": "entrance-goldberg",
+    "setId": "season-2-whos-next",
+    "cardNumber": 4,
+    "cardCode": "S2WN-004"
+  },
+  {
+    "id": "special-goldberg",
+    "setId": "season-2-whos-next",
+    "cardNumber": 5,
+    "cardCode": "S2WN-005"
+  },
+  {
+    "id": "superstar-goldberg",
+    "setId": "season-2-whos-next",
+    "cardNumber": 6,
+    "cardCode": "S2WN-006"
+  },
+  {
+    "id": "bron-breakker-gorilla-press-powerslam",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 1,
+    "cardCode": "SVS1-001"
+  },
+  {
+    "id": "bron-breakker-breakkers-spear",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 2,
+    "cardCode": "SVS1-002"
+  },
+  {
+    "id": "bron-breakker-steiner-recliner",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 3,
+    "cardCode": "SVS1-003"
+  },
+  {
+    "id": "entrance-bron-breakker",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 4,
+    "cardCode": "SVS1-004"
+  },
+  {
+    "id": "special-bron-breakker",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 5,
+    "cardCode": "SVS1-005"
+  },
+  {
+    "id": "superstar-bron-breakker",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 6,
+    "cardCode": "SVS1-006"
+  },
+  {
+    "id": "drew-mcintyre-glasgow-kiss",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 7,
+    "cardCode": "SVS1-007"
+  },
+  {
+    "id": "drew-mcintyre-future-shock-ddt",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 8,
+    "cardCode": "SVS1-008"
+  },
+  {
+    "id": "drew-mcintyre-claymore",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 9,
+    "cardCode": "SVS1-009"
+  },
+  {
+    "id": "entrance-drew-mcintyre",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 10,
+    "cardCode": "SVS1-010"
+  },
+  {
+    "id": "special-drew-mcintyre",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 11,
+    "cardCode": "SVS1-011"
+  },
+  {
+    "id": "superstar-drew-mcintyre",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 12,
+    "cardCode": "SVS1-012"
+  },
+  {
+    "id": "sami-zayn-exploder-turnbuckle",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 19,
+    "cardCode": "SVS1-019"
+  },
+  {
+    "id": "sami-zayn-blue-thunder-bomb",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 20,
+    "cardCode": "SVS1-020"
+  },
+  {
+    "id": "sami-zayn-helluva-kick",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 21,
+    "cardCode": "SVS1-021"
+  },
+  {
+    "id": "entrance-sami-zayn",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 22,
+    "cardCode": "SVS1-022"
+  },
+  {
+    "id": "special-sami-zayn",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 23,
+    "cardCode": "SVS1-023"
+  },
+  {
+    "id": "superstar-sami-zayn",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 24,
+    "cardCode": "SVS1-024"
+  },
+  {
+    "id": "jacob-fatu-pop-up-samoan-drop",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 25,
+    "cardCode": "SVS1-025"
+  },
+  {
+    "id": "jacob-fatu-moonsault",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 26,
+    "cardCode": "SVS1-026"
+  },
+  {
+    "id": "jacob-fatu-tongan-death-grip",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 27,
+    "cardCode": "SVS1-027"
+  },
+  {
+    "id": "entrance-jacob-fatu",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 28,
+    "cardCode": "SVS1-028"
+  },
+  {
+    "id": "special-jacob-fatu",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 29,
+    "cardCode": "SVS1-029"
+  },
+  {
+    "id": "superstar-jacob-fatu",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 30,
+    "cardCode": "SVS1-030"
+  },
+  {
+    "id": "shoulder-block",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 31,
+    "cardCode": "SVS1-031"
+  },
+  {
+    "id": "shining-wizard",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 32,
+    "cardCode": "SVS1-032"
+  },
+  {
+    "id": "double-underhook-facebuster",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 33,
+    "cardCode": "SVS1-033"
+  },
+  {
+    "id": "elbow-to-back-of-head",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 34,
+    "cardCode": "SVS1-034"
+  },
+  {
+    "id": "hip-toss",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 35,
+    "cardCode": "SVS1-035"
+  },
+  {
+    "id": "solo-sikoa-spinning-solo",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 36,
+    "cardCode": "SVS1-036"
+  },
+  {
+    "id": "solo-sikoa-samoan-spike",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 37,
+    "cardCode": "SVS1-037"
+  },
+  {
+    "id": "entrance-solo-sikoa",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 38,
+    "cardCode": "SVS1-038"
+  },
+  {
+    "id": "special-solo-sikoa",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 39,
+    "cardCode": "SVS1-039"
+  },
+  {
+    "id": "superstar-solo-sikoa",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 40,
+    "cardCode": "SVS1-040"
+  },
+  {
+    "id": "jade-cargill-jaded",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 41,
+    "cardCode": "SVS1-041"
+  },
+  {
+    "id": "entrance-jade-cargill",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 42,
+    "cardCode": "SVS1-042"
+  },
+  {
+    "id": "special-jade-cargill",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 43,
+    "cardCode": "SVS1-043"
+  },
+  {
+    "id": "superstar-jade-cargill",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 44,
+    "cardCode": "SVS1-044"
+  },
+  {
+    "id": "nia-jax-avalanche-samoan-drop",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 45,
+    "cardCode": "SVS1-045"
+  },
+  {
+    "id": "nia-jax-annihilator",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 46,
+    "cardCode": "SVS1-046"
+  },
+  {
+    "id": "entrance-nia-jax",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 47,
+    "cardCode": "SVS1-047"
+  },
+  {
+    "id": "special-nia-jax",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 48,
+    "cardCode": "SVS1-048"
+  },
+  {
+    "id": "superstar-nia-jax",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 49,
+    "cardCode": "SVS1-049"
+  },
+  {
+    "id": "my-name-is-paul-heyman",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 50,
+    "cardCode": "SVS1-050"
+  },
+  {
+    "id": "death-valley-driver",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 51,
+    "cardCode": "SVS1-051"
+  },
+  {
+    "id": "leg-kick",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 52,
+    "cardCode": "SVS1-052"
+  },
+  {
+    "id": "wheelbarrow-suplex",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 53,
+    "cardCode": "SVS1-053"
+  },
+  {
+    "id": "hangman-armbar",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 54,
+    "cardCode": "SVS1-054"
+  },
+  {
+    "id": "pump-kick",
+    "setId": "smackdown-series-1",
+    "cardNumber": 1,
+    "cardCode": "SD1-001"
+  },
+  {
+    "id": "inverted-ddt",
+    "setId": "smackdown-series-1",
+    "cardNumber": 2,
+    "cardCode": "SD1-002"
+  },
+  {
+    "id": "octopus-hold",
+    "setId": "smackdown-series-1",
+    "cardNumber": 3,
+    "cardCode": "SD1-003"
+  },
+  {
+    "id": "danhausen-very-nice-knee-vil",
+    "setId": "smackdown-series-1",
+    "cardNumber": 4,
+    "cardCode": "SD1-004"
+  },
+  {
+    "id": "danhausen-triple-d",
+    "setId": "smackdown-series-1",
+    "cardNumber": 5,
+    "cardCode": "SD1-005"
+  },
+  {
+    "id": "entrance-danhausen",
+    "setId": "smackdown-series-1",
+    "cardNumber": 6,
+    "cardCode": "SD1-006"
+  },
+  {
+    "id": "special-danhausen",
+    "setId": "smackdown-series-1",
+    "cardNumber": 7,
+    "cardCode": "SD1-007"
+  },
+  {
+    "id": "superstar-danhausen",
+    "setId": "smackdown-series-1",
+    "cardNumber": 8,
+    "cardCode": "SD1-008"
+  },
+  {
+    "id": "cutter",
+    "setId": "smackdown-series-1",
+    "cardNumber": 9,
+    "cardCode": "SD1-009"
+  },
+  {
+    "id": "front-kick",
+    "setId": "smackdown-series-1",
+    "cardNumber": 10,
+    "cardCode": "SD1-010"
+  },
+  {
+    "id": "snap-suplex",
+    "setId": "smackdown-series-1",
+    "cardNumber": 11,
+    "cardCode": "SD1-011"
+  },
+  {
+    "id": "finlay-roll",
+    "setId": "smackdown-series-1",
+    "cardNumber": 12,
+    "cardCode": "SD1-012"
+  },
+  {
+    "id": "tiffany-stratton-handspring-back-elbow",
+    "setId": "smackdown-series-1",
+    "cardNumber": 13,
+    "cardCode": "SD1-013"
+  },
+  {
+    "id": "tiffany-stratton-prettiest-moonsault-ever",
+    "setId": "smackdown-series-1",
+    "cardNumber": 14,
+    "cardCode": "SD1-014"
+  },
+  {
+    "id": "entrance-tiffany-stratton",
+    "setId": "smackdown-series-1",
+    "cardNumber": 15,
+    "cardCode": "SD1-015"
+  },
+  {
+    "id": "special-tiffany-stratton",
+    "setId": "smackdown-series-1",
+    "cardNumber": 16,
+    "cardCode": "SD1-016"
+  },
+  {
+    "id": "superstar-tiffany-stratton",
+    "setId": "smackdown-series-1",
+    "cardNumber": 17,
+    "cardCode": "SD1-017"
+  },
+  {
+    "id": "chelsea-green-im-prettier",
+    "setId": "smackdown-series-1",
+    "cardNumber": 18,
+    "cardCode": "SD1-018"
+  },
+  {
+    "id": "chelsea-green-green-with-envy",
+    "setId": "smackdown-series-1",
+    "cardNumber": 19,
+    "cardCode": "SD1-019"
+  },
+  {
+    "id": "entrance-chelsea-green",
+    "setId": "smackdown-series-1",
+    "cardNumber": 20,
+    "cardCode": "SD1-020"
+  },
+  {
+    "id": "special-chelsea-green",
+    "setId": "smackdown-series-1",
+    "cardNumber": 21,
+    "cardCode": "SD1-021"
+  },
+  {
+    "id": "superstar-chelsea-green",
+    "setId": "smackdown-series-1",
+    "cardNumber": 22,
+    "cardCode": "SD1-022"
+  },
+  {
+    "id": "damian-priest-south-of-heaven",
+    "setId": "smackdown-series-1",
+    "cardNumber": 23,
+    "cardCode": "SD1-023"
+  },
+  {
+    "id": "damian-priest-razors-edge",
+    "setId": "smackdown-series-1",
+    "cardNumber": 24,
+    "cardCode": "SD1-024"
+  },
+  {
+    "id": "damian-priest-hit-the-lights",
+    "setId": "smackdown-series-1",
+    "cardNumber": 25,
+    "cardCode": "SD1-025"
+  },
+  {
+    "id": "entrance-damian-priest",
+    "setId": "smackdown-series-1",
+    "cardNumber": 26,
+    "cardCode": "SD1-026"
+  },
+  {
+    "id": "special-damian-priest",
+    "setId": "smackdown-series-1",
+    "cardNumber": 27,
+    "cardCode": "SD1-027"
+  },
+  {
+    "id": "superstar-damian-priest",
+    "setId": "smackdown-series-1",
+    "cardNumber": 28,
+    "cardCode": "SD1-028"
+  },
+  {
+    "id": "dropkick-to-the-back",
+    "setId": "smackdown-series-1",
+    "cardNumber": 29,
+    "cardCode": "SD1-029"
+  },
+  {
+    "id": "elbow",
+    "setId": "smackdown-series-1",
+    "cardNumber": 30,
+    "cardCode": "SD1-030"
+  },
+  {
+    "id": "running-knees-to-the-back",
+    "setId": "smackdown-series-1",
+    "cardNumber": 31,
+    "cardCode": "SD1-031"
+  },
+  {
+    "id": "throw-into-ringpost",
+    "setId": "smackdown-series-1",
+    "cardNumber": 32,
+    "cardCode": "SD1-032"
+  },
+  {
+    "id": "corner-barrage",
+    "setId": "smackdown-series-1",
+    "cardNumber": 33,
+    "cardCode": "SD1-033"
+  },
+  {
+    "id": "second-rope-leg-drop",
+    "setId": "smackdown-series-1",
+    "cardNumber": 34,
+    "cardCode": "SD1-034"
+  },
+  {
+    "id": "chops-in-the-corner",
+    "setId": "smackdown-series-1",
+    "cardNumber": 35,
+    "cardCode": "SD1-035"
+  },
+  {
+    "id": "kick-to-the-back",
+    "setId": "smackdown-series-1",
+    "cardNumber": 36,
+    "cardCode": "SD1-036"
+  },
+  {
+    "id": "reverse-chin-lock",
+    "setId": "smackdown-series-1",
+    "cardNumber": 37,
+    "cardCode": "SD1-037"
+  },
+  {
+    "id": "springboard-roundhouse-kick",
+    "setId": "smackdown-series-1",
+    "cardNumber": 38,
+    "cardCode": "SD1-038"
+  },
+  {
+    "id": "shinsuke-nakamura-inverted-exploder",
+    "setId": "smackdown-series-1",
+    "cardNumber": 39,
+    "cardCode": "SD1-039"
+  },
+  {
+    "id": "shinsuke-nakamura-landslide",
+    "setId": "smackdown-series-1",
+    "cardNumber": 40,
+    "cardCode": "SD1-040"
+  },
+  {
+    "id": "shinsuke-nakamura-sliding-german-suplex",
+    "setId": "smackdown-series-1",
+    "cardNumber": 41,
+    "cardCode": "SD1-041"
+  },
+  {
+    "id": "shinsuke-nakamura-kinshasa",
+    "setId": "smackdown-series-1",
+    "cardNumber": 42,
+    "cardCode": "SD1-042"
+  },
+  {
+    "id": "special-shinsuke-nakamura",
+    "setId": "smackdown-series-1",
+    "cardNumber": 43,
+    "cardCode": "SD1-043"
+  },
+  {
+    "id": "entrance-shinsuke-nakamura",
+    "setId": "smackdown-series-1",
+    "cardNumber": 44,
+    "cardCode": "SD1-044"
+  },
+  {
+    "id": "blake-monroe-glamour-ddt",
+    "setId": "smackdown-series-1",
+    "cardNumber": 45,
+    "cardCode": "SD1-045"
+  },
+  {
+    "id": "blake-monroe-monroe-kick",
+    "setId": "smackdown-series-1",
+    "cardNumber": 46,
+    "cardCode": "SD1-046"
+  },
+  {
+    "id": "blake-monroe-top-rope-double-stomp",
+    "setId": "smackdown-series-1",
+    "cardNumber": 47,
+    "cardCode": "SD1-047"
+  },
+  {
+    "id": "blake-monroe-glamour-shot",
+    "setId": "smackdown-series-1",
+    "cardNumber": 48,
+    "cardCode": "SD1-048"
+  },
+  {
+    "id": "special-blake-monroe",
+    "setId": "smackdown-series-1",
+    "cardNumber": 49,
+    "cardCode": "SD1-049"
+  },
+  {
+    "id": "entrance-blake-monroe",
+    "setId": "smackdown-series-1",
+    "cardNumber": 50,
+    "cardCode": "SD1-050"
+  },
+  {
+    "id": "trick-williams-book-end",
+    "setId": "smackdown-series-1",
+    "cardNumber": 51,
+    "cardCode": "SD1-051"
+  },
+  {
+    "id": "trick-williams-cyclone-boot",
+    "setId": "smackdown-series-1",
+    "cardNumber": 52,
+    "cardCode": "SD1-052"
+  },
+  {
+    "id": "trick-williams-trick-knee",
+    "setId": "smackdown-series-1",
+    "cardNumber": 53,
+    "cardCode": "SD1-053"
+  },
+  {
+    "id": "trick-williams-trick-shot",
+    "setId": "smackdown-series-1",
+    "cardNumber": 54,
+    "cardCode": "SD1-054"
+  },
+  {
+    "id": "special-trick-williams",
+    "setId": "smackdown-series-1",
+    "cardNumber": 55,
+    "cardCode": "SD1-055"
+  },
+  {
+    "id": "entrance-trick-williams",
+    "setId": "smackdown-series-1",
+    "cardNumber": 56,
+    "cardCode": "SD1-056"
+  },
+  {
+    "id": "jacy-jayne-cannonball-senton",
+    "setId": "smackdown-series-1",
+    "cardNumber": 57,
+    "cardCode": "SD1-057"
+  },
+  {
+    "id": "jacy-jayne-discus-boot",
+    "setId": "smackdown-series-1",
+    "cardNumber": 58,
+    "cardCode": "SD1-058"
+  },
+  {
+    "id": "jacy-jayne-rolling-encore",
+    "setId": "smackdown-series-1",
+    "cardNumber": 59,
+    "cardCode": "SD1-059"
+  },
+  {
+    "id": "jacy-jayne-running-knee-smash",
+    "setId": "smackdown-series-1",
+    "cardNumber": 60,
+    "cardCode": "SD1-060"
+  },
+  {
+    "id": "special-jacy-jayne",
+    "setId": "smackdown-series-1",
+    "cardNumber": 61,
+    "cardCode": "SD1-061"
+  },
+  {
+    "id": "entrance-jacy-jayne",
+    "setId": "smackdown-series-1",
+    "cardNumber": 62,
+    "cardCode": "SD1-062"
+  },
+  {
+    "id": "sd1-blue-thunder-backbreaker",
+    "setId": "smackdown-series-1",
+    "cardNumber": 63,
+    "cardCode": "SD1-063"
+  },
+  {
+    "id": "sd1-ringside-knee-lift",
+    "setId": "smackdown-series-1",
+    "cardNumber": 64,
+    "cardCode": "SD1-064"
+  },
+  {
+    "id": "sd1-apron-enzuigiri",
+    "setId": "smackdown-series-1",
+    "cardNumber": 65,
+    "cardCode": "SD1-065"
+  },
+  {
+    "id": "sd1-snap-dragon-suplex",
+    "setId": "smackdown-series-1",
+    "cardNumber": 66,
+    "cardCode": "SD1-066"
+  },
+  {
+    "id": "sd1-middle-rope-splash",
+    "setId": "smackdown-series-1",
+    "cardNumber": 67,
+    "cardCode": "SD1-067"
+  },
+  {
+    "id": "superstar-shinsuke-nakamura",
+    "setId": "smackdown-series-1",
+    "cardNumber": 68,
+    "cardCode": "SD1-068"
+  },
+  {
+    "id": "superstar-blake-monroe",
+    "setId": "smackdown-series-1",
+    "cardNumber": 69,
+    "cardCode": "SD1-069"
+  },
+  {
+    "id": "superstar-trick-williams",
+    "setId": "smackdown-series-1",
+    "cardNumber": 70,
+    "cardCode": "SD1-070"
+  },
+  {
+    "id": "superstar-jacy-jayne",
+    "setId": "smackdown-series-1",
+    "cardNumber": 71,
+    "cardCode": "SD1-071"
   },
   {
     "id": "running-hip-attack",
@@ -568,6 +1432,414 @@ export const CARD_NUMBER_MANIFEST = [
     "setId": "money-in-the-bank-series-1",
     "cardNumber": 34,
     "cardCode": "MITB1-034"
+  },
+  {
+    "id": "trash-can-to-the-back",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 35,
+    "cardCode": "MITB1-035"
+  },
+  {
+    "id": "chair-to-the-gut",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 36,
+    "cardCode": "MITB1-036"
+  },
+  {
+    "id": "splash",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 37,
+    "cardCode": "MITB1-037"
+  },
+  {
+    "id": "brainbuster",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 38,
+    "cardCode": "MITB1-038"
+  },
+  {
+    "id": "tilt-a-whirl-headscissors",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 1,
+    "cardCode": "WC1-001"
+  },
+  {
+    "id": "619",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 2,
+    "cardCode": "WC1-002"
+  },
+  {
+    "id": "rey-mysterio-mysterio-express",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 3,
+    "cardCode": "WC1-003"
+  },
+  {
+    "id": "rey-mysterio-west-coast-pop",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 4,
+    "cardCode": "WC1-004"
+  },
+  {
+    "id": "entrance-rey-mysterio",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 5,
+    "cardCode": "WC1-005"
+  },
+  {
+    "id": "special-rey-mysterio",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 6,
+    "cardCode": "WC1-006"
+  },
+  {
+    "id": "superstar-rey-mysterio",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 7,
+    "cardCode": "WC1-007"
+  },
+  {
+    "id": "drop-toe-hold",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 8,
+    "cardCode": "WC1-008"
+  },
+  {
+    "id": "low-blow",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 9,
+    "cardCode": "WC1-009"
+  },
+  {
+    "id": "three-amigos",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 10,
+    "cardCode": "WC1-010"
+  },
+  {
+    "id": "dominik-mysterio-frog-splash",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 11,
+    "cardCode": "WC1-011"
+  },
+  {
+    "id": "entrance-dominik-mysterio",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 12,
+    "cardCode": "WC1-012"
+  },
+  {
+    "id": "special-dominik-mysterio",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 13,
+    "cardCode": "WC1-013"
+  },
+  {
+    "id": "superstar-dominik-mysterio",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 14,
+    "cardCode": "WC1-014"
+  },
+  {
+    "id": "backstabber",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 15,
+    "cardCode": "WC1-015"
+  },
+  {
+    "id": "tope-con-hilo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 16,
+    "cardCode": "WC1-016"
+  },
+  {
+    "id": "penta-the-sacrifice",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 17,
+    "cardCode": "WC1-017"
+  },
+  {
+    "id": "penta-driver",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 18,
+    "cardCode": "WC1-018"
+  },
+  {
+    "id": "penta-mexican-destroyer",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 19,
+    "cardCode": "WC1-019"
+  },
+  {
+    "id": "entrance-penta",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 20,
+    "cardCode": "WC1-020"
+  },
+  {
+    "id": "special-penta",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 21,
+    "cardCode": "WC1-021"
+  },
+  {
+    "id": "superstar-penta",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 22,
+    "cardCode": "WC1-022"
+  },
+  {
+    "id": "el-grande-americano-jumping-headbutt",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 23,
+    "cardCode": "WC1-023"
+  },
+  {
+    "id": "el-grande-americano-loaded-mask-headbutt",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 24,
+    "cardCode": "WC1-024"
+  },
+  {
+    "id": "entrance-el-grande-americano",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 25,
+    "cardCode": "WC1-025"
+  },
+  {
+    "id": "special-el-grande-americano",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 26,
+    "cardCode": "WC1-026"
+  },
+  {
+    "id": "superstar-el-grande-americano",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 27,
+    "cardCode": "WC1-027"
+  },
+  {
+    "id": "mexican-surfboard",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 28,
+    "cardCode": "WC1-028"
+  },
+  {
+    "id": "penta-handstand-dropkick",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 29,
+    "cardCode": "WC1-029"
+  },
+  {
+    "id": "apron-german-suplex",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 30,
+    "cardCode": "WC1-030"
+  },
+  {
+    "id": "scissors-kick",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 31,
+    "cardCode": "WC1-031"
+  },
+  {
+    "id": "senton-splash",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 32,
+    "cardCode": "WC1-032"
+  },
+  {
+    "id": "spinning-back-kick",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 33,
+    "cardCode": "WC1-033"
+  },
+  {
+    "id": "spanish-fly",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 34,
+    "cardCode": "WC1-034"
+  },
+  {
+    "id": "stomp-to-the-arm",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 35,
+    "cardCode": "WC1-035"
+  },
+  {
+    "id": "top-rope-splash",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 36,
+    "cardCode": "WC1-036"
+  },
+  {
+    "id": "lola-vice-running-hip-attack",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 37,
+    "cardCode": "WC1-037"
+  },
+  {
+    "id": "lola-vice-spinning-heel-kick",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 38,
+    "cardCode": "WC1-038"
+  },
+  {
+    "id": "lola-vice-triangle-choke",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 39,
+    "cardCode": "WC1-039"
+  },
+  {
+    "id": "lola-vice-305",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 40,
+    "cardCode": "WC1-040"
+  },
+  {
+    "id": "entrance-lola-vice",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 41,
+    "cardCode": "WC1-041"
+  },
+  {
+    "id": "special-lola-vice",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 42,
+    "cardCode": "WC1-042"
+  },
+  {
+    "id": "superstar-lola-vice",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 43,
+    "cardCode": "WC1-043"
+  },
+  {
+    "id": "dragon-lee-operation-dragon",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 44,
+    "cardCode": "WC1-044"
+  },
+  {
+    "id": "dragon-lee-incinerator",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 45,
+    "cardCode": "WC1-045"
+  },
+  {
+    "id": "dragon-lee-double-foot-stomp",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 46,
+    "cardCode": "WC1-046"
+  },
+  {
+    "id": "dragon-lee-dragon-driver",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 47,
+    "cardCode": "WC1-047"
+  },
+  {
+    "id": "entrance-dragon-lee",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 48,
+    "cardCode": "WC1-048"
+  },
+  {
+    "id": "special-dragon-lee",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 49,
+    "cardCode": "WC1-049"
+  },
+  {
+    "id": "superstar-dragon-lee",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 50,
+    "cardCode": "WC1-050"
+  },
+  {
+    "id": "vikingo-mexican-destroyer",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 51,
+    "cardCode": "WC1-051"
+  },
+  {
+    "id": "vikingo-twisting-450-splash",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 52,
+    "cardCode": "WC1-052"
+  },
+  {
+    "id": "vikingo-top-rope-poison-rana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 53,
+    "cardCode": "WC1-053"
+  },
+  {
+    "id": "vikingo-el-cuerno-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 54,
+    "cardCode": "WC1-054"
+  },
+  {
+    "id": "entrance-hijo-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 55,
+    "cardCode": "WC1-055"
+  },
+  {
+    "id": "special-hijo-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 56,
+    "cardCode": "WC1-056"
+  },
+  {
+    "id": "superstar-hijo-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 57,
+    "cardCode": "WC1-057"
+  },
+  {
+    "id": "mr-iguana-iguanarana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 58,
+    "cardCode": "WC1-058"
+  },
+  {
+    "id": "mr-iguana-pongase-verde",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 59,
+    "cardCode": "WC1-059"
+  },
+  {
+    "id": "mr-iguana-muta-lock",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 60,
+    "cardCode": "WC1-060"
+  },
+  {
+    "id": "mr-iguana-chalino-driver",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 61,
+    "cardCode": "WC1-061"
+  },
+  {
+    "id": "entrance-mr-iguana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 62,
+    "cardCode": "WC1-062"
+  },
+  {
+    "id": "special-mr-iguana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 63,
+    "cardCode": "WC1-063"
+  },
+  {
+    "id": "superstar-mr-iguana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 64,
+    "cardCode": "WC1-064"
   },
   {
     "id": "running-powerslam",
@@ -804,6 +2076,306 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "RAW1-039"
   },
   {
+    "id": "leg-lariat",
+    "setId": "raw-series-1",
+    "cardNumber": 40,
+    "cardCode": "RAW1-040"
+  },
+  {
+    "id": "european-uppercut",
+    "setId": "raw-series-1",
+    "cardNumber": 41,
+    "cardCode": "RAW1-041"
+  },
+  {
+    "id": "joe-hendry-freak-of-nature",
+    "setId": "raw-series-1",
+    "cardNumber": 42,
+    "cardCode": "RAW1-042"
+  },
+  {
+    "id": "joe-hendry-hendry-slam",
+    "setId": "raw-series-1",
+    "cardNumber": 43,
+    "cardCode": "RAW1-043"
+  },
+  {
+    "id": "joe-hendry-hendry-lock",
+    "setId": "raw-series-1",
+    "cardNumber": 44,
+    "cardCode": "RAW1-044"
+  },
+  {
+    "id": "joe-hendry-standing-ovation",
+    "setId": "raw-series-1",
+    "cardNumber": 45,
+    "cardCode": "RAW1-045"
+  },
+  {
+    "id": "entrance-joe-hendry",
+    "setId": "raw-series-1",
+    "cardNumber": 46,
+    "cardCode": "RAW1-046"
+  },
+  {
+    "id": "special-joe-hendry",
+    "setId": "raw-series-1",
+    "cardNumber": 47,
+    "cardCode": "RAW1-047"
+  },
+  {
+    "id": "superstar-joe-hendry",
+    "setId": "raw-series-1",
+    "cardNumber": 48,
+    "cardCode": "RAW1-048"
+  },
+  {
+    "id": "roxanne-perez-russian-leg-sweep",
+    "setId": "raw-series-1",
+    "cardNumber": 49,
+    "cardCode": "RAW1-049"
+  },
+  {
+    "id": "roxanne-perez-meteora",
+    "setId": "raw-series-1",
+    "cardNumber": 50,
+    "cardCode": "RAW1-050"
+  },
+  {
+    "id": "roxanne-perez-rok-lock",
+    "setId": "raw-series-1",
+    "cardNumber": 51,
+    "cardCode": "RAW1-051"
+  },
+  {
+    "id": "roxanne-perez-pop-rox",
+    "setId": "raw-series-1",
+    "cardNumber": 52,
+    "cardCode": "RAW1-052"
+  },
+  {
+    "id": "entrance-roxanne-perez",
+    "setId": "raw-series-1",
+    "cardNumber": 53,
+    "cardCode": "RAW1-053"
+  },
+  {
+    "id": "special-roxanne-perez",
+    "setId": "raw-series-1",
+    "cardNumber": 54,
+    "cardCode": "RAW1-054"
+  },
+  {
+    "id": "superstar-roxanne-perez",
+    "setId": "raw-series-1",
+    "cardNumber": 55,
+    "cardCode": "RAW1-055"
+  },
+  {
+    "id": "austin-theory-ataxia",
+    "setId": "raw-series-1",
+    "cardNumber": 56,
+    "cardCode": "RAW1-056"
+  },
+  {
+    "id": "austin-theory-rolling-thunder-blockbuster",
+    "setId": "raw-series-1",
+    "cardNumber": 57,
+    "cardCode": "RAW1-057"
+  },
+  {
+    "id": "austin-theory-patella-brainbuster",
+    "setId": "raw-series-1",
+    "cardNumber": 58,
+    "cardCode": "RAW1-058"
+  },
+  {
+    "id": "austin-theory-a-town-down",
+    "setId": "raw-series-1",
+    "cardNumber": 59,
+    "cardCode": "RAW1-059"
+  },
+  {
+    "id": "entrance-austin-theory",
+    "setId": "raw-series-1",
+    "cardNumber": 60,
+    "cardCode": "RAW1-060"
+  },
+  {
+    "id": "special-austin-theory",
+    "setId": "raw-series-1",
+    "cardNumber": 61,
+    "cardCode": "RAW1-061"
+  },
+  {
+    "id": "manager-maxxine-dupri",
+    "setId": "raw-series-1",
+    "cardNumber": 62,
+    "cardCode": "RAW1-062"
+  },
+  {
+    "id": "superstar-austin-theory",
+    "setId": "raw-series-1",
+    "cardNumber": 63,
+    "cardCode": "RAW1-063"
+  },
+  {
+    "id": "montez-ford-spinebuster",
+    "setId": "raw-series-1",
+    "cardNumber": 64,
+    "cardCode": "RAW1-064"
+  },
+  {
+    "id": "montez-ford-blockbuster",
+    "setId": "raw-series-1",
+    "cardNumber": 65,
+    "cardCode": "RAW1-065"
+  },
+  {
+    "id": "montez-ford-450-splash",
+    "setId": "raw-series-1",
+    "cardNumber": 66,
+    "cardCode": "RAW1-066"
+  },
+  {
+    "id": "montez-ford-from-the-heavens",
+    "setId": "raw-series-1",
+    "cardNumber": 67,
+    "cardCode": "RAW1-067"
+  },
+  {
+    "id": "special-angelo-dawkins",
+    "setId": "raw-series-1",
+    "cardNumber": 68,
+    "cardCode": "RAW1-068"
+  },
+  {
+    "id": "entrance-montez-ford",
+    "setId": "raw-series-1",
+    "cardNumber": 69,
+    "cardCode": "RAW1-069"
+  },
+  {
+    "id": "superstar-montez-ford",
+    "setId": "raw-series-1",
+    "cardNumber": 70,
+    "cardCode": "RAW1-070"
+  },
+  {
+    "id": "side-kick",
+    "setId": "raw-series-1",
+    "cardNumber": 71,
+    "cardCode": "RAW1-071"
+  },
+  {
+    "id": "snapmare",
+    "setId": "raw-series-1",
+    "cardNumber": 72,
+    "cardCode": "RAW1-072"
+  },
+  {
+    "id": "scoop-slam",
+    "setId": "raw-series-1",
+    "cardNumber": 73,
+    "cardCode": "RAW1-073"
+  },
+  {
+    "id": "chop-block",
+    "setId": "raw-series-1",
+    "cardNumber": 74,
+    "cardCode": "RAW1-074"
+  },
+  {
+    "id": "spinning-backfist",
+    "setId": "raw-series-1",
+    "cardNumber": 75,
+    "cardCode": "RAW1-075"
+  },
+  {
+    "id": "single-leg-dropkick",
+    "setId": "raw-series-1",
+    "cardNumber": 76,
+    "cardCode": "RAW1-076"
+  },
+  {
+    "id": "back-rake",
+    "setId": "raw-series-1",
+    "cardNumber": 77,
+    "cardCode": "RAW1-077"
+  },
+  {
+    "id": "arm-wrench",
+    "setId": "raw-series-1",
+    "cardNumber": 78,
+    "cardCode": "RAW1-078"
+  },
+  {
+    "id": "knee-lift",
+    "setId": "raw-series-1",
+    "cardNumber": 79,
+    "cardCode": "RAW1-079"
+  },
+  {
+    "id": "t-bone-suplex",
+    "setId": "raw-series-1",
+    "cardNumber": 80,
+    "cardCode": "RAW1-080"
+  },
+  {
+    "id": "gutwrench-suplex",
+    "setId": "raw-series-1",
+    "cardNumber": 81,
+    "cardCode": "RAW1-081"
+  },
+  {
+    "id": "michinoku-driver",
+    "setId": "raw-series-1",
+    "cardNumber": 82,
+    "cardCode": "RAW1-082"
+  },
+  {
+    "id": "pumphandle-slam",
+    "setId": "raw-series-1",
+    "cardNumber": 83,
+    "cardCode": "RAW1-083"
+  },
+  {
+    "id": "bicycle-kick",
+    "setId": "raw-series-1",
+    "cardNumber": 84,
+    "cardCode": "RAW1-084"
+  },
+  {
+    "id": "rolling-elbow",
+    "setId": "raw-series-1",
+    "cardNumber": 85,
+    "cardCode": "RAW1-085"
+  },
+  {
+    "id": "springboard-forearm",
+    "setId": "raw-series-1",
+    "cardNumber": 86,
+    "cardCode": "RAW1-086"
+  },
+  {
+    "id": "dragon-sleeper",
+    "setId": "raw-series-1",
+    "cardNumber": 87,
+    "cardCode": "RAW1-087"
+  },
+  {
+    "id": "camel-clutch",
+    "setId": "raw-series-1",
+    "cardNumber": 88,
+    "cardCode": "RAW1-088"
+  },
+  {
+    "id": "slingshot-suplex",
+    "setId": "raw-series-1",
+    "cardNumber": 89,
+    "cardCode": "RAW1-089"
+  },
+  {
     "id": "the-rock-lay-the-smack-down",
     "setId": "season-1-final-boss",
     "cardNumber": 1,
@@ -852,214 +2424,88 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "S1FB-008"
   },
   {
-    "id": "pump-kick",
-    "setId": "smackdown-series-1",
+    "id": "trish-stratus-stratusphere",
+    "setId": "season-1-last-time-is-now",
     "cardNumber": 1,
-    "cardCode": "SD1-001"
+    "cardCode": "S1TRISH-001"
   },
   {
-    "id": "inverted-ddt",
-    "setId": "smackdown-series-1",
+    "id": "trish-stratus-chick-kick",
+    "setId": "season-1-last-time-is-now",
     "cardNumber": 2,
-    "cardCode": "SD1-002"
+    "cardCode": "S1TRISH-002"
   },
   {
-    "id": "octopus-hold",
-    "setId": "smackdown-series-1",
+    "id": "trish-stratus-air-canada",
+    "setId": "season-1-last-time-is-now",
     "cardNumber": 3,
-    "cardCode": "SD1-003"
+    "cardCode": "S1TRISH-003"
   },
   {
-    "id": "danhausen-very-nice-knee-vil",
-    "setId": "smackdown-series-1",
+    "id": "trish-stratus-stratusfaction",
+    "setId": "season-1-last-time-is-now",
     "cardNumber": 4,
-    "cardCode": "SD1-004"
+    "cardCode": "S1TRISH-004"
   },
   {
-    "id": "danhausen-triple-d",
-    "setId": "smackdown-series-1",
+    "id": "special-trish-stratus",
+    "setId": "season-1-last-time-is-now",
     "cardNumber": 5,
-    "cardCode": "SD1-005"
+    "cardCode": "S1TRISH-005"
   },
   {
-    "id": "entrance-danhausen",
-    "setId": "smackdown-series-1",
+    "id": "entrance-trish-stratus",
+    "setId": "season-1-last-time-is-now",
     "cardNumber": 6,
-    "cardCode": "SD1-006"
+    "cardCode": "S1TRISH-006"
   },
   {
-    "id": "special-danhausen",
-    "setId": "smackdown-series-1",
+    "id": "superstar-trish-stratus",
+    "setId": "season-1-last-time-is-now",
     "cardNumber": 7,
-    "cardCode": "SD1-007"
+    "cardCode": "S1TRISH-007"
   },
   {
-    "id": "superstar-danhausen",
-    "setId": "smackdown-series-1",
-    "cardNumber": 8,
-    "cardCode": "SD1-008"
+    "id": "chyna-bomb",
+    "setId": "parked-chyna",
+    "cardNumber": 1,
+    "cardCode": "PCH-001"
   },
   {
-    "id": "cutter",
-    "setId": "smackdown-series-1",
-    "cardNumber": 9,
-    "cardCode": "SD1-009"
+    "id": "chyna-gorilla-press-slam",
+    "setId": "parked-chyna",
+    "cardNumber": 2,
+    "cardCode": "PCH-002"
   },
   {
-    "id": "front-kick",
-    "setId": "smackdown-series-1",
-    "cardNumber": 10,
-    "cardCode": "SD1-010"
+    "id": "chyna-handspring-back-elbow",
+    "setId": "parked-chyna",
+    "cardNumber": 3,
+    "cardCode": "PCH-003"
   },
   {
-    "id": "snap-suplex",
-    "setId": "smackdown-series-1",
-    "cardNumber": 11,
-    "cardCode": "SD1-011"
+    "id": "chyna-inverted-ddt",
+    "setId": "parked-chyna",
+    "cardNumber": 4,
+    "cardCode": "PCH-004"
   },
   {
-    "id": "finlay-roll",
-    "setId": "smackdown-series-1",
-    "cardNumber": 12,
-    "cardCode": "SD1-012"
+    "id": "entrance-chyna",
+    "setId": "parked-chyna",
+    "cardNumber": 5,
+    "cardCode": "PCH-005"
   },
   {
-    "id": "tiffany-stratton-handspring-back-elbow",
-    "setId": "smackdown-series-1",
-    "cardNumber": 13,
-    "cardCode": "SD1-013"
+    "id": "special-chyna",
+    "setId": "parked-chyna",
+    "cardNumber": 6,
+    "cardCode": "PCH-006"
   },
   {
-    "id": "tiffany-stratton-prettiest-moonsault-ever",
-    "setId": "smackdown-series-1",
-    "cardNumber": 14,
-    "cardCode": "SD1-014"
-  },
-  {
-    "id": "entrance-tiffany-stratton",
-    "setId": "smackdown-series-1",
-    "cardNumber": 15,
-    "cardCode": "SD1-015"
-  },
-  {
-    "id": "special-tiffany-stratton",
-    "setId": "smackdown-series-1",
-    "cardNumber": 16,
-    "cardCode": "SD1-016"
-  },
-  {
-    "id": "superstar-tiffany-stratton",
-    "setId": "smackdown-series-1",
-    "cardNumber": 17,
-    "cardCode": "SD1-017"
-  },
-  {
-    "id": "chelsea-green-im-prettier",
-    "setId": "smackdown-series-1",
-    "cardNumber": 18,
-    "cardCode": "SD1-018"
-  },
-  {
-    "id": "chelsea-green-green-with-envy",
-    "setId": "smackdown-series-1",
-    "cardNumber": 19,
-    "cardCode": "SD1-019"
-  },
-  {
-    "id": "entrance-chelsea-green",
-    "setId": "smackdown-series-1",
-    "cardNumber": 20,
-    "cardCode": "SD1-020"
-  },
-  {
-    "id": "special-chelsea-green",
-    "setId": "smackdown-series-1",
-    "cardNumber": 21,
-    "cardCode": "SD1-021"
-  },
-  {
-    "id": "superstar-chelsea-green",
-    "setId": "smackdown-series-1",
-    "cardNumber": 22,
-    "cardCode": "SD1-022"
-  },
-  {
-    "id": "damian-priest-south-of-heaven",
-    "setId": "smackdown-series-1",
-    "cardNumber": 23,
-    "cardCode": "SD1-023"
-  },
-  {
-    "id": "damian-priest-razors-edge",
-    "setId": "smackdown-series-1",
-    "cardNumber": 24,
-    "cardCode": "SD1-024"
-  },
-  {
-    "id": "damian-priest-hit-the-lights",
-    "setId": "smackdown-series-1",
-    "cardNumber": 25,
-    "cardCode": "SD1-025"
-  },
-  {
-    "id": "entrance-damian-priest",
-    "setId": "smackdown-series-1",
-    "cardNumber": 26,
-    "cardCode": "SD1-026"
-  },
-  {
-    "id": "special-damian-priest",
-    "setId": "smackdown-series-1",
-    "cardNumber": 27,
-    "cardCode": "SD1-027"
-  },
-  {
-    "id": "superstar-damian-priest",
-    "setId": "smackdown-series-1",
-    "cardNumber": 28,
-    "cardCode": "SD1-028"
-  },
-  {
-    "id": "dropkick-to-the-back",
-    "setId": "smackdown-series-1",
-    "cardNumber": 29,
-    "cardCode": "SD1-029"
-  },
-  {
-    "id": "elbow",
-    "setId": "smackdown-series-1",
-    "cardNumber": 30,
-    "cardCode": "SD1-030"
-  },
-  {
-    "id": "running-knees-to-the-back",
-    "setId": "smackdown-series-1",
-    "cardNumber": 31,
-    "cardCode": "SD1-031"
-  },
-  {
-    "id": "throw-into-ringpost",
-    "setId": "smackdown-series-1",
-    "cardNumber": 32,
-    "cardCode": "SD1-032"
-  },
-  {
-    "id": "corner-barrage",
-    "setId": "smackdown-series-1",
-    "cardNumber": 33,
-    "cardCode": "SD1-033"
-  },
-  {
-    "id": "second-rope-leg-drop",
-    "setId": "smackdown-series-1",
-    "cardNumber": 34,
-    "cardCode": "SD1-034"
-  },
-  {
-    "id": "chops-in-the-corner",
-    "setId": "smackdown-series-1",
-    "cardNumber": 35,
-    "cardCode": "SD1-035"
+    "id": "superstar-chyna",
+    "setId": "parked-chyna",
+    "cardNumber": 7,
+    "cardCode": "PCH-007"
   },
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -1860,546 +3306,6 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "SS1-133"
   },
   {
-    "id": "bron-breakker-gorilla-press-powerslam",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 1,
-    "cardCode": "SVS1-001"
-  },
-  {
-    "id": "bron-breakker-breakkers-spear",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 2,
-    "cardCode": "SVS1-002"
-  },
-  {
-    "id": "bron-breakker-steiner-recliner",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 3,
-    "cardCode": "SVS1-003"
-  },
-  {
-    "id": "entrance-bron-breakker",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 4,
-    "cardCode": "SVS1-004"
-  },
-  {
-    "id": "special-bron-breakker",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 5,
-    "cardCode": "SVS1-005"
-  },
-  {
-    "id": "superstar-bron-breakker",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 6,
-    "cardCode": "SVS1-006"
-  },
-  {
-    "id": "drew-mcintyre-glasgow-kiss",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 7,
-    "cardCode": "SVS1-007"
-  },
-  {
-    "id": "drew-mcintyre-future-shock-ddt",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 8,
-    "cardCode": "SVS1-008"
-  },
-  {
-    "id": "drew-mcintyre-claymore",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 9,
-    "cardCode": "SVS1-009"
-  },
-  {
-    "id": "entrance-drew-mcintyre",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 10,
-    "cardCode": "SVS1-010"
-  },
-  {
-    "id": "special-drew-mcintyre",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 11,
-    "cardCode": "SVS1-011"
-  },
-  {
-    "id": "superstar-drew-mcintyre",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 12,
-    "cardCode": "SVS1-012"
-  },
-  {
-    "id": "randy-orton-draping-ddt",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 13,
-    "cardCode": "SVS1-013"
-  },
-  {
-    "id": "randy-orton-rko",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 14,
-    "cardCode": "SVS1-014"
-  },
-  {
-    "id": "randy-orton-punt-kick",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 15,
-    "cardCode": "SVS1-015"
-  },
-  {
-    "id": "entrance-randy-orton",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 16,
-    "cardCode": "SVS1-016"
-  },
-  {
-    "id": "special-randy-orton",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 17,
-    "cardCode": "SVS1-017"
-  },
-  {
-    "id": "superstar-randy-orton",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 18,
-    "cardCode": "SVS1-018"
-  },
-  {
-    "id": "sami-zayn-exploder-turnbuckle",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 19,
-    "cardCode": "SVS1-019"
-  },
-  {
-    "id": "sami-zayn-blue-thunder-bomb",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 20,
-    "cardCode": "SVS1-020"
-  },
-  {
-    "id": "sami-zayn-helluva-kick",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 21,
-    "cardCode": "SVS1-021"
-  },
-  {
-    "id": "entrance-sami-zayn",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 22,
-    "cardCode": "SVS1-022"
-  },
-  {
-    "id": "special-sami-zayn",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 23,
-    "cardCode": "SVS1-023"
-  },
-  {
-    "id": "superstar-sami-zayn",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 24,
-    "cardCode": "SVS1-024"
-  },
-  {
-    "id": "jacob-fatu-pop-up-samoan-drop",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 25,
-    "cardCode": "SVS1-025"
-  },
-  {
-    "id": "jacob-fatu-moonsault",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 26,
-    "cardCode": "SVS1-026"
-  },
-  {
-    "id": "jacob-fatu-tongan-death-grip",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 27,
-    "cardCode": "SVS1-027"
-  },
-  {
-    "id": "entrance-jacob-fatu",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 28,
-    "cardCode": "SVS1-028"
-  },
-  {
-    "id": "special-jacob-fatu",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 29,
-    "cardCode": "SVS1-029"
-  },
-  {
-    "id": "superstar-jacob-fatu",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 30,
-    "cardCode": "SVS1-030"
-  },
-  {
-    "id": "shoulder-block",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 31,
-    "cardCode": "SVS1-031"
-  },
-  {
-    "id": "shining-wizard",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 32,
-    "cardCode": "SVS1-032"
-  },
-  {
-    "id": "double-underhook-facebuster",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 33,
-    "cardCode": "SVS1-033"
-  },
-  {
-    "id": "elbow-to-back-of-head",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 34,
-    "cardCode": "SVS1-034"
-  },
-  {
-    "id": "hip-toss",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 35,
-    "cardCode": "SVS1-035"
-  },
-  {
-    "id": "solo-sikoa-spinning-solo",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 36,
-    "cardCode": "SVS1-036"
-  },
-  {
-    "id": "solo-sikoa-samoan-spike",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 37,
-    "cardCode": "SVS1-037"
-  },
-  {
-    "id": "entrance-solo-sikoa",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 38,
-    "cardCode": "SVS1-038"
-  },
-  {
-    "id": "special-solo-sikoa",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 39,
-    "cardCode": "SVS1-039"
-  },
-  {
-    "id": "superstar-solo-sikoa",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 40,
-    "cardCode": "SVS1-040"
-  },
-  {
-    "id": "jade-cargill-jaded",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 41,
-    "cardCode": "SVS1-041"
-  },
-  {
-    "id": "entrance-jade-cargill",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 42,
-    "cardCode": "SVS1-042"
-  },
-  {
-    "id": "special-jade-cargill",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 43,
-    "cardCode": "SVS1-043"
-  },
-  {
-    "id": "superstar-jade-cargill",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 44,
-    "cardCode": "SVS1-044"
-  },
-  {
-    "id": "nia-jax-avalanche-samoan-drop",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 45,
-    "cardCode": "SVS1-045"
-  },
-  {
-    "id": "nia-jax-annihilator",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 46,
-    "cardCode": "SVS1-046"
-  },
-  {
-    "id": "entrance-nia-jax",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 47,
-    "cardCode": "SVS1-047"
-  },
-  {
-    "id": "special-nia-jax",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 48,
-    "cardCode": "SVS1-048"
-  },
-  {
-    "id": "superstar-nia-jax",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 49,
-    "cardCode": "SVS1-049"
-  },
-  {
-    "id": "my-name-is-paul-heyman",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 50,
-    "cardCode": "SVS1-050"
-  },
-  {
-    "id": "tilt-a-whirl-headscissors",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 1,
-    "cardCode": "WC1-001"
-  },
-  {
-    "id": "619",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 2,
-    "cardCode": "WC1-002"
-  },
-  {
-    "id": "rey-mysterio-mysterio-express",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 3,
-    "cardCode": "WC1-003"
-  },
-  {
-    "id": "rey-mysterio-west-coast-pop",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 4,
-    "cardCode": "WC1-004"
-  },
-  {
-    "id": "entrance-rey-mysterio",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 5,
-    "cardCode": "WC1-005"
-  },
-  {
-    "id": "special-rey-mysterio",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 6,
-    "cardCode": "WC1-006"
-  },
-  {
-    "id": "superstar-rey-mysterio",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 7,
-    "cardCode": "WC1-007"
-  },
-  {
-    "id": "drop-toe-hold",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 8,
-    "cardCode": "WC1-008"
-  },
-  {
-    "id": "low-blow",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 9,
-    "cardCode": "WC1-009"
-  },
-  {
-    "id": "three-amigos",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 10,
-    "cardCode": "WC1-010"
-  },
-  {
-    "id": "dominik-mysterio-frog-splash",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 11,
-    "cardCode": "WC1-011"
-  },
-  {
-    "id": "entrance-dominik-mysterio",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 12,
-    "cardCode": "WC1-012"
-  },
-  {
-    "id": "special-dominik-mysterio",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 13,
-    "cardCode": "WC1-013"
-  },
-  {
-    "id": "superstar-dominik-mysterio",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 14,
-    "cardCode": "WC1-014"
-  },
-  {
-    "id": "backstabber",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 15,
-    "cardCode": "WC1-015"
-  },
-  {
-    "id": "tope-con-hilo",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 16,
-    "cardCode": "WC1-016"
-  },
-  {
-    "id": "penta-the-sacrifice",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 17,
-    "cardCode": "WC1-017"
-  },
-  {
-    "id": "penta-driver",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 18,
-    "cardCode": "WC1-018"
-  },
-  {
-    "id": "penta-mexican-destroyer",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 19,
-    "cardCode": "WC1-019"
-  },
-  {
-    "id": "entrance-penta",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 20,
-    "cardCode": "WC1-020"
-  },
-  {
-    "id": "special-penta",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 21,
-    "cardCode": "WC1-021"
-  },
-  {
-    "id": "superstar-penta",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 22,
-    "cardCode": "WC1-022"
-  },
-  {
-    "id": "el-grande-americano-jumping-headbutt",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 23,
-    "cardCode": "WC1-023"
-  },
-  {
-    "id": "el-grande-americano-loaded-mask-headbutt",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 24,
-    "cardCode": "WC1-024"
-  },
-  {
-    "id": "entrance-el-grande-americano",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 25,
-    "cardCode": "WC1-025"
-  },
-  {
-    "id": "special-el-grande-americano",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 26,
-    "cardCode": "WC1-026"
-  },
-  {
-    "id": "superstar-el-grande-americano",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 27,
-    "cardCode": "WC1-027"
-  },
-  {
-    "id": "mexican-surfboard",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 28,
-    "cardCode": "WC1-028"
-  },
-  {
-    "id": "penta-handstand-dropkick",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 29,
-    "cardCode": "WC1-029"
-  },
-  {
-    "id": "apron-german-suplex",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 30,
-    "cardCode": "WC1-030"
-  },
-  {
-    "id": "scissors-kick",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 31,
-    "cardCode": "WC1-031"
-  },
-  {
-    "id": "senton-splash",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 32,
-    "cardCode": "WC1-032"
-  },
-  {
-    "id": "spinning-back-kick",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 33,
-    "cardCode": "WC1-033"
-  },
-  {
-    "id": "spanish-fly",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 34,
-    "cardCode": "WC1-034"
-  },
-  {
-    "id": "goldberg-military-press-powerslam",
-    "setId": "season-2-whos-next",
-    "cardNumber": 1,
-    "cardCode": "S2WN-001"
-  },
-  {
-    "id": "goldberg-spear",
-    "setId": "season-2-whos-next",
-    "cardNumber": 2,
-    "cardCode": "S2WN-002"
-  },
-  {
-    "id": "goldberg-jackhammer",
-    "setId": "season-2-whos-next",
-    "cardNumber": 3,
-    "cardCode": "S2WN-003"
-  },
-  {
-    "id": "entrance-goldberg",
-    "setId": "season-2-whos-next",
-    "cardNumber": 4,
-    "cardCode": "S2WN-004"
-  },
-  {
-    "id": "special-goldberg",
-    "setId": "season-2-whos-next",
-    "cardNumber": 5,
-    "cardCode": "S2WN-005"
-  },
-  {
-    "id": "superstar-goldberg",
-    "setId": "season-2-whos-next",
-    "cardNumber": 6,
-    "cardCode": "S2WN-006"
-  },
-  {
     "id": "knees-up",
     "setId": "summerslam-series-1",
     "cardNumber": 134,
@@ -2424,24 +3330,6 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "SS1-137"
   },
   {
-    "id": "catch-the-foot",
-    "setId": "evolution-series-1",
-    "cardNumber": 62,
-    "cardCode": "EVO1-062"
-  },
-  {
-    "id": "arm-drag-counter",
-    "setId": "evolution-series-1",
-    "cardNumber": 63,
-    "cardCode": "EVO1-063"
-  },
-  {
-    "id": "jawbreaker",
-    "setId": "evolution-series-1",
-    "cardNumber": 64,
-    "cardCode": "EVO1-064"
-  },
-  {
     "id": "brock-lesnar-brocks-german",
     "setId": "summerslam-series-1",
     "cardNumber": 138,
@@ -2464,6 +3352,432 @@ export const CARD_NUMBER_MANIFEST = [
     "setId": "summerslam-series-1",
     "cardNumber": 141,
     "cardCode": "SS1-141"
+  },
+  {
+    "id": "cody-rhodes-what-do-you-want-to-talk-about",
+    "setId": "summerslam-series-1",
+    "cardNumber": 142,
+    "cardCode": "SS1-142"
+  },
+  {
+    "id": "oba-femi-running-elbow",
+    "setId": "summerslam-series-1",
+    "cardNumber": 143,
+    "cardCode": "SS1-143"
+  },
+  {
+    "id": "brock-lesnar-eat-sleep-conquer-repeat",
+    "setId": "summerslam-series-1",
+    "cardNumber": 144,
+    "cardCode": "SS1-144"
+  },
+  {
+    "id": "once-too-often",
+    "setId": "summerslam-series-1",
+    "cardNumber": 145,
+    "cardCode": "SS1-145"
+  },
+  {
+    "id": "kevin-owens-avalanche-fishermans-buster",
+    "setId": "summerslam-series-1",
+    "cardNumber": 146,
+    "cardCode": "SS1-146"
+  },
+  {
+    "id": "kevin-owens-swanton-bomb",
+    "setId": "summerslam-series-1",
+    "cardNumber": 147,
+    "cardCode": "SS1-147"
+  },
+  {
+    "id": "biel-toss",
+    "setId": "summerslam-series-1",
+    "cardNumber": 148,
+    "cardCode": "SS1-148"
+  },
+  {
+    "id": "northern-lights-suplex",
+    "setId": "evolution-series-1",
+    "cardNumber": 1,
+    "cardCode": "EVO1-001"
+  },
+  {
+    "id": "rhea-ripley-electric-chair-facebuster",
+    "setId": "evolution-series-1",
+    "cardNumber": 2,
+    "cardCode": "EVO1-002"
+  },
+  {
+    "id": "rhea-ripley-reverse-alabama-slam",
+    "setId": "evolution-series-1",
+    "cardNumber": 3,
+    "cardCode": "EVO1-003"
+  },
+  {
+    "id": "razor-s-edge",
+    "setId": "evolution-series-1",
+    "cardNumber": 4,
+    "cardCode": "EVO1-004"
+  },
+  {
+    "id": "rhea-ripley-prism-trap",
+    "setId": "evolution-series-1",
+    "cardNumber": 5,
+    "cardCode": "EVO1-005"
+  },
+  {
+    "id": "rhea-ripley-riptide",
+    "setId": "evolution-series-1",
+    "cardNumber": 6,
+    "cardCode": "EVO1-006"
+  },
+  {
+    "id": "arm-drag",
+    "setId": "evolution-series-1",
+    "cardNumber": 7,
+    "cardCode": "EVO1-007"
+  },
+  {
+    "id": "becky-lynch-diamond-dust",
+    "setId": "evolution-series-1",
+    "cardNumber": 8,
+    "cardCode": "EVO1-008"
+  },
+  {
+    "id": "becky-lynch-diving-leg-drop",
+    "setId": "evolution-series-1",
+    "cardNumber": 9,
+    "cardCode": "EVO1-009"
+  },
+  {
+    "id": "becky-lynch-dis-arm-her",
+    "setId": "evolution-series-1",
+    "cardNumber": 10,
+    "cardCode": "EVO1-010"
+  },
+  {
+    "id": "becky-lynch-manhandle-slam",
+    "setId": "evolution-series-1",
+    "cardNumber": 11,
+    "cardCode": "EVO1-011"
+  },
+  {
+    "id": "hurricanrana",
+    "setId": "evolution-series-1",
+    "cardNumber": 12,
+    "cardCode": "EVO1-012"
+  },
+  {
+    "id": "liv-morgan-jersey-codebreaker",
+    "setId": "evolution-series-1",
+    "cardNumber": 13,
+    "cardCode": "EVO1-013"
+  },
+  {
+    "id": "liv-morgan-oblivion",
+    "setId": "evolution-series-1",
+    "cardNumber": 14,
+    "cardCode": "EVO1-014"
+  },
+  {
+    "id": "sunset-flip-powerbomb",
+    "setId": "evolution-series-1",
+    "cardNumber": 15,
+    "cardCode": "EVO1-015"
+  },
+  {
+    "id": "crossface",
+    "setId": "evolution-series-1",
+    "cardNumber": 16,
+    "cardCode": "EVO1-016"
+  },
+  {
+    "id": "bayley-rose-plant",
+    "setId": "evolution-series-1",
+    "cardNumber": 17,
+    "cardCode": "EVO1-017"
+  },
+  {
+    "id": "running-knee-strike",
+    "setId": "evolution-series-1",
+    "cardNumber": 18,
+    "cardCode": "EVO1-018"
+  },
+  {
+    "id": "middle-rope-stunner",
+    "setId": "evolution-series-1",
+    "cardNumber": 19,
+    "cardCode": "EVO1-019"
+  },
+  {
+    "id": "fallaway-slam",
+    "setId": "evolution-series-1",
+    "cardNumber": 20,
+    "cardCode": "EVO1-020"
+  },
+  {
+    "id": "spear",
+    "setId": "evolution-series-1",
+    "cardNumber": 21,
+    "cardCode": "EVO1-021"
+  },
+  {
+    "id": "charlotte-flair-natural-selection",
+    "setId": "evolution-series-1",
+    "cardNumber": 22,
+    "cardCode": "EVO1-022"
+  },
+  {
+    "id": "charlotte-flair-figure-eight-leglock",
+    "setId": "evolution-series-1",
+    "cardNumber": 23,
+    "cardCode": "EVO1-023"
+  },
+  {
+    "id": "paige-rope-hung-knee-strikes",
+    "setId": "evolution-series-1",
+    "cardNumber": 24,
+    "cardCode": "EVO1-024"
+  },
+  {
+    "id": "paige-paige-turner",
+    "setId": "evolution-series-1",
+    "cardNumber": 25,
+    "cardCode": "EVO1-025"
+  },
+  {
+    "id": "paige-pto",
+    "setId": "evolution-series-1",
+    "cardNumber": 26,
+    "cardCode": "EVO1-026"
+  },
+  {
+    "id": "paige-ram-paige",
+    "setId": "evolution-series-1",
+    "cardNumber": 27,
+    "cardCode": "EVO1-027"
+  },
+  {
+    "id": "dragon-screw",
+    "setId": "evolution-series-1",
+    "cardNumber": 28,
+    "cardCode": "EVO1-028"
+  },
+  {
+    "id": "reverse-suplex",
+    "setId": "evolution-series-1",
+    "cardNumber": 29,
+    "cardCode": "EVO1-029"
+  },
+  {
+    "id": "stephanie-vaquer-svb",
+    "setId": "evolution-series-1",
+    "cardNumber": 30,
+    "cardCode": "EVO1-030"
+  },
+  {
+    "id": "stephanie-vaquer-devils-kiss",
+    "setId": "evolution-series-1",
+    "cardNumber": 31,
+    "cardCode": "EVO1-031"
+  },
+  {
+    "id": "stephanie-vaquer-vaquer-inferno",
+    "setId": "evolution-series-1",
+    "cardNumber": 32,
+    "cardCode": "EVO1-032"
+  },
+  {
+    "id": "meteora",
+    "setId": "evolution-series-1",
+    "cardNumber": 33,
+    "cardCode": "EVO1-033"
+  },
+  {
+    "id": "double-stomp",
+    "setId": "evolution-series-1",
+    "cardNumber": 34,
+    "cardCode": "EVO1-034"
+  },
+  {
+    "id": "iyo-sky-bullet-train-attack",
+    "setId": "evolution-series-1",
+    "cardNumber": 35,
+    "cardCode": "EVO1-035"
+  },
+  {
+    "id": "iyo-sky-over-the-moonsault",
+    "setId": "evolution-series-1",
+    "cardNumber": 36,
+    "cardCode": "EVO1-036"
+  },
+  {
+    "id": "entrance-rhea-ripley",
+    "setId": "evolution-series-1",
+    "cardNumber": 37,
+    "cardCode": "EVO1-037"
+  },
+  {
+    "id": "entrance-becky-lynch",
+    "setId": "evolution-series-1",
+    "cardNumber": 38,
+    "cardCode": "EVO1-038"
+  },
+  {
+    "id": "entrance-liv-morgan",
+    "setId": "evolution-series-1",
+    "cardNumber": 39,
+    "cardCode": "EVO1-039"
+  },
+  {
+    "id": "entrance-bayley",
+    "setId": "evolution-series-1",
+    "cardNumber": 40,
+    "cardCode": "EVO1-040"
+  },
+  {
+    "id": "entrance-charlotte-flair",
+    "setId": "evolution-series-1",
+    "cardNumber": 41,
+    "cardCode": "EVO1-041"
+  },
+  {
+    "id": "entrance-paige",
+    "setId": "evolution-series-1",
+    "cardNumber": 42,
+    "cardCode": "EVO1-042"
+  },
+  {
+    "id": "entrance-stephanie-vaquer",
+    "setId": "evolution-series-1",
+    "cardNumber": 43,
+    "cardCode": "EVO1-043"
+  },
+  {
+    "id": "entrance-iyo-sky",
+    "setId": "evolution-series-1",
+    "cardNumber": 44,
+    "cardCode": "EVO1-044"
+  },
+  {
+    "id": "special-rhea-ripley",
+    "setId": "evolution-series-1",
+    "cardNumber": 45,
+    "cardCode": "EVO1-045"
+  },
+  {
+    "id": "special-becky-lynch",
+    "setId": "evolution-series-1",
+    "cardNumber": 46,
+    "cardCode": "EVO1-046"
+  },
+  {
+    "id": "special-liv-morgan",
+    "setId": "evolution-series-1",
+    "cardNumber": 47,
+    "cardCode": "EVO1-047"
+  },
+  {
+    "id": "special-bayley",
+    "setId": "evolution-series-1",
+    "cardNumber": 48,
+    "cardCode": "EVO1-048"
+  },
+  {
+    "id": "special-charlotte-flair",
+    "setId": "evolution-series-1",
+    "cardNumber": 49,
+    "cardCode": "EVO1-049"
+  },
+  {
+    "id": "special-paige",
+    "setId": "evolution-series-1",
+    "cardNumber": 50,
+    "cardCode": "EVO1-050"
+  },
+  {
+    "id": "special-stephanie-vaquer",
+    "setId": "evolution-series-1",
+    "cardNumber": 51,
+    "cardCode": "EVO1-051"
+  },
+  {
+    "id": "special-iyo-sky",
+    "setId": "evolution-series-1",
+    "cardNumber": 52,
+    "cardCode": "EVO1-052"
+  },
+  {
+    "id": "superstar-iyo-sky",
+    "setId": "evolution-series-1",
+    "cardNumber": 53,
+    "cardCode": "EVO1-053"
+  },
+  {
+    "id": "superstar-bayley",
+    "setId": "evolution-series-1",
+    "cardNumber": 54,
+    "cardCode": "EVO1-054"
+  },
+  {
+    "id": "superstar-paige",
+    "setId": "evolution-series-1",
+    "cardNumber": 55,
+    "cardCode": "EVO1-055"
+  },
+  {
+    "id": "superstar-stephanie-vaquer",
+    "setId": "evolution-series-1",
+    "cardNumber": 56,
+    "cardCode": "EVO1-056"
+  },
+  {
+    "id": "superstar-charlotte-flair",
+    "setId": "evolution-series-1",
+    "cardNumber": 57,
+    "cardCode": "EVO1-057"
+  },
+  {
+    "id": "superstar-rhea-ripley",
+    "setId": "evolution-series-1",
+    "cardNumber": 58,
+    "cardCode": "EVO1-058"
+  },
+  {
+    "id": "superstar-liv-morgan",
+    "setId": "evolution-series-1",
+    "cardNumber": 59,
+    "cardCode": "EVO1-059"
+  },
+  {
+    "id": "superstar-becky-lynch",
+    "setId": "evolution-series-1",
+    "cardNumber": 60,
+    "cardCode": "EVO1-060"
+  },
+  {
+    "id": "flair-chop",
+    "setId": "evolution-series-1",
+    "cardNumber": 61,
+    "cardCode": "EVO1-061"
+  },
+  {
+    "id": "catch-the-foot",
+    "setId": "evolution-series-1",
+    "cardNumber": 62,
+    "cardCode": "EVO1-062"
+  },
+  {
+    "id": "arm-drag-counter",
+    "setId": "evolution-series-1",
+    "cardNumber": 63,
+    "cardCode": "EVO1-063"
+  },
+  {
+    "id": "jawbreaker",
+    "setId": "evolution-series-1",
+    "cardNumber": 64,
+    "cardCode": "EVO1-064"
   },
   {
     "id": "bayley-diving-elbow",
@@ -2514,300 +3828,6 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "EVO1-072"
   },
   {
-    "id": "cody-rhodes-what-do-you-want-to-talk-about",
-    "setId": "summerslam-series-1",
-    "cardNumber": 142,
-    "cardCode": "SS1-142"
-  },
-  {
-    "id": "oba-femi-running-elbow",
-    "setId": "summerslam-series-1",
-    "cardNumber": 143,
-    "cardCode": "SS1-143"
-  },
-  {
-    "id": "brock-lesnar-eat-sleep-conquer-repeat",
-    "setId": "summerslam-series-1",
-    "cardNumber": 144,
-    "cardCode": "SS1-144"
-  },
-  {
-    "id": "once-too-often",
-    "setId": "summerslam-series-1",
-    "cardNumber": 145,
-    "cardCode": "SS1-145"
-  },
-  {
-    "id": "kevin-owens-avalanche-fishermans-buster",
-    "setId": "summerslam-series-1",
-    "cardNumber": 146,
-    "cardCode": "SS1-146"
-  },
-  {
-    "id": "kevin-owens-swanton-bomb",
-    "setId": "summerslam-series-1",
-    "cardNumber": 147,
-    "cardCode": "SS1-147"
-  },
-  {
-    "id": "trash-can-to-the-back",
-    "setId": "money-in-the-bank-series-1",
-    "cardNumber": 35,
-    "cardCode": "MITB1-035"
-  },
-  {
-    "id": "chair-to-the-gut",
-    "setId": "money-in-the-bank-series-1",
-    "cardNumber": 36,
-    "cardCode": "MITB1-036"
-  },
-  {
-    "id": "splash",
-    "setId": "money-in-the-bank-series-1",
-    "cardNumber": 37,
-    "cardCode": "MITB1-037"
-  },
-  {
-    "id": "biel-toss",
-    "setId": "summerslam-series-1",
-    "cardNumber": 148,
-    "cardCode": "SS1-148"
-  },
-  {
-    "id": "leg-lariat",
-    "setId": "raw-series-1",
-    "cardNumber": 40,
-    "cardCode": "RAW1-040"
-  },
-  {
-    "id": "stomp-to-the-arm",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 35,
-    "cardCode": "WC1-035"
-  },
-  {
-    "id": "top-rope-splash",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 36,
-    "cardCode": "WC1-036"
-  },
-  {
-    "id": "kick-to-the-back",
-    "setId": "smackdown-series-1",
-    "cardNumber": 36,
-    "cardCode": "SD1-036"
-  },
-  {
-    "id": "reverse-chin-lock",
-    "setId": "smackdown-series-1",
-    "cardNumber": 37,
-    "cardCode": "SD1-037"
-  },
-  {
-    "id": "death-valley-driver",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 51,
-    "cardCode": "SVS1-051"
-  },
-  {
-    "id": "leg-kick",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 52,
-    "cardCode": "SVS1-052"
-  },
-  {
-    "id": "wheelbarrow-suplex",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 53,
-    "cardCode": "SVS1-053"
-  },
-  {
-    "id": "hangman-armbar",
-    "setId": "survivor-series-series-1",
-    "cardNumber": 54,
-    "cardCode": "SVS1-054"
-  },
-  {
-    "id": "european-uppercut",
-    "setId": "raw-series-1",
-    "cardNumber": 41,
-    "cardCode": "RAW1-041"
-  },
-  {
-    "id": "joe-hendry-freak-of-nature",
-    "setId": "raw-series-1",
-    "cardNumber": 42,
-    "cardCode": "RAW1-042"
-  },
-  {
-    "id": "joe-hendry-hendry-slam",
-    "setId": "raw-series-1",
-    "cardNumber": 43,
-    "cardCode": "RAW1-043"
-  },
-  {
-    "id": "joe-hendry-hendry-lock",
-    "setId": "raw-series-1",
-    "cardNumber": 44,
-    "cardCode": "RAW1-044"
-  },
-  {
-    "id": "joe-hendry-standing-ovation",
-    "setId": "raw-series-1",
-    "cardNumber": 45,
-    "cardCode": "RAW1-045"
-  },
-  {
-    "id": "entrance-joe-hendry",
-    "setId": "raw-series-1",
-    "cardNumber": 46,
-    "cardCode": "RAW1-046"
-  },
-  {
-    "id": "special-joe-hendry",
-    "setId": "raw-series-1",
-    "cardNumber": 47,
-    "cardCode": "RAW1-047"
-  },
-  {
-    "id": "superstar-joe-hendry",
-    "setId": "raw-series-1",
-    "cardNumber": 48,
-    "cardCode": "RAW1-048"
-  },
-  {
-    "id": "roxanne-perez-russian-leg-sweep",
-    "setId": "raw-series-1",
-    "cardNumber": 49,
-    "cardCode": "RAW1-049"
-  },
-  {
-    "id": "roxanne-perez-meteora",
-    "setId": "raw-series-1",
-    "cardNumber": 50,
-    "cardCode": "RAW1-050"
-  },
-  {
-    "id": "roxanne-perez-rok-lock",
-    "setId": "raw-series-1",
-    "cardNumber": 51,
-    "cardCode": "RAW1-051"
-  },
-  {
-    "id": "roxanne-perez-pop-rox",
-    "setId": "raw-series-1",
-    "cardNumber": 52,
-    "cardCode": "RAW1-052"
-  },
-  {
-    "id": "entrance-roxanne-perez",
-    "setId": "raw-series-1",
-    "cardNumber": 53,
-    "cardCode": "RAW1-053"
-  },
-  {
-    "id": "special-roxanne-perez",
-    "setId": "raw-series-1",
-    "cardNumber": 54,
-    "cardCode": "RAW1-054"
-  },
-  {
-    "id": "superstar-roxanne-perez",
-    "setId": "raw-series-1",
-    "cardNumber": 55,
-    "cardCode": "RAW1-055"
-  },
-  {
-    "id": "austin-theory-ataxia",
-    "setId": "raw-series-1",
-    "cardNumber": 56,
-    "cardCode": "RAW1-056"
-  },
-  {
-    "id": "austin-theory-rolling-thunder-blockbuster",
-    "setId": "raw-series-1",
-    "cardNumber": 57,
-    "cardCode": "RAW1-057"
-  },
-  {
-    "id": "austin-theory-patella-brainbuster",
-    "setId": "raw-series-1",
-    "cardNumber": 58,
-    "cardCode": "RAW1-058"
-  },
-  {
-    "id": "austin-theory-a-town-down",
-    "setId": "raw-series-1",
-    "cardNumber": 59,
-    "cardCode": "RAW1-059"
-  },
-  {
-    "id": "entrance-austin-theory",
-    "setId": "raw-series-1",
-    "cardNumber": 60,
-    "cardCode": "RAW1-060"
-  },
-  {
-    "id": "special-austin-theory",
-    "setId": "raw-series-1",
-    "cardNumber": 61,
-    "cardCode": "RAW1-061"
-  },
-  {
-    "id": "manager-maxxine-dupri",
-    "setId": "raw-series-1",
-    "cardNumber": 62,
-    "cardCode": "RAW1-062"
-  },
-  {
-    "id": "superstar-austin-theory",
-    "setId": "raw-series-1",
-    "cardNumber": 63,
-    "cardCode": "RAW1-063"
-  },
-  {
-    "id": "montez-ford-spinebuster",
-    "setId": "raw-series-1",
-    "cardNumber": 64,
-    "cardCode": "RAW1-064"
-  },
-  {
-    "id": "montez-ford-blockbuster",
-    "setId": "raw-series-1",
-    "cardNumber": 65,
-    "cardCode": "RAW1-065"
-  },
-  {
-    "id": "montez-ford-450-splash",
-    "setId": "raw-series-1",
-    "cardNumber": 66,
-    "cardCode": "RAW1-066"
-  },
-  {
-    "id": "montez-ford-from-the-heavens",
-    "setId": "raw-series-1",
-    "cardNumber": 67,
-    "cardCode": "RAW1-067"
-  },
-  {
-    "id": "special-angelo-dawkins",
-    "setId": "raw-series-1",
-    "cardNumber": 68,
-    "cardCode": "RAW1-068"
-  },
-  {
-    "id": "entrance-montez-ford",
-    "setId": "raw-series-1",
-    "cardNumber": 69,
-    "cardCode": "RAW1-069"
-  },
-  {
-    "id": "superstar-montez-ford",
-    "setId": "raw-series-1",
-    "cardNumber": 70,
-    "cardCode": "RAW1-070"
-  },
-  {
     "id": "spinning-heel-kick",
     "setId": "evolution-series-1",
     "cardNumber": 73,
@@ -2820,784 +3840,10 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "EVO1-074"
   },
   {
-    "id": "lola-vice-running-hip-attack",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 37,
-    "cardCode": "WC1-037"
-  },
-  {
-    "id": "lola-vice-spinning-heel-kick",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 38,
-    "cardCode": "WC1-038"
-  },
-  {
-    "id": "lola-vice-triangle-choke",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 39,
-    "cardCode": "WC1-039"
-  },
-  {
-    "id": "lola-vice-305",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 40,
-    "cardCode": "WC1-040"
-  },
-  {
-    "id": "entrance-lola-vice",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 41,
-    "cardCode": "WC1-041"
-  },
-  {
-    "id": "special-lola-vice",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 42,
-    "cardCode": "WC1-042"
-  },
-  {
-    "id": "superstar-lola-vice",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 43,
-    "cardCode": "WC1-043"
-  },
-  {
-    "id": "dragon-lee-operation-dragon",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 44,
-    "cardCode": "WC1-044"
-  },
-  {
-    "id": "dragon-lee-incinerator",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 45,
-    "cardCode": "WC1-045"
-  },
-  {
-    "id": "dragon-lee-double-foot-stomp",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 46,
-    "cardCode": "WC1-046"
-  },
-  {
-    "id": "dragon-lee-dragon-driver",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 47,
-    "cardCode": "WC1-047"
-  },
-  {
-    "id": "entrance-dragon-lee",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 48,
-    "cardCode": "WC1-048"
-  },
-  {
-    "id": "special-dragon-lee",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 49,
-    "cardCode": "WC1-049"
-  },
-  {
-    "id": "superstar-dragon-lee",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 50,
-    "cardCode": "WC1-050"
-  },
-  {
-    "id": "vikingo-mexican-destroyer",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 51,
-    "cardCode": "WC1-051"
-  },
-  {
-    "id": "vikingo-twisting-450-splash",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 52,
-    "cardCode": "WC1-052"
-  },
-  {
-    "id": "vikingo-top-rope-poison-rana",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 53,
-    "cardCode": "WC1-053"
-  },
-  {
-    "id": "vikingo-el-cuerno-del-vikingo",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 54,
-    "cardCode": "WC1-054"
-  },
-  {
-    "id": "entrance-hijo-del-vikingo",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 55,
-    "cardCode": "WC1-055"
-  },
-  {
-    "id": "special-hijo-del-vikingo",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 56,
-    "cardCode": "WC1-056"
-  },
-  {
-    "id": "superstar-hijo-del-vikingo",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 57,
-    "cardCode": "WC1-057"
-  },
-  {
-    "id": "mr-iguana-iguanarana",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 58,
-    "cardCode": "WC1-058"
-  },
-  {
-    "id": "mr-iguana-pongase-verde",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 59,
-    "cardCode": "WC1-059"
-  },
-  {
-    "id": "mr-iguana-muta-lock",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 60,
-    "cardCode": "WC1-060"
-  },
-  {
-    "id": "mr-iguana-chalino-driver",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 61,
-    "cardCode": "WC1-061"
-  },
-  {
-    "id": "entrance-mr-iguana",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 62,
-    "cardCode": "WC1-062"
-  },
-  {
-    "id": "special-mr-iguana",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 63,
-    "cardCode": "WC1-063"
-  },
-  {
-    "id": "superstar-mr-iguana",
-    "setId": "worlds-collide-series-1",
-    "cardNumber": 64,
-    "cardCode": "WC1-064"
-  },
-  {
-    "id": "bret-hart-inverted-atomic-drop",
-    "setId": "new-generation-series-1",
-    "cardNumber": 1,
-    "cardCode": "NG1-001"
-  },
-  {
-    "id": "bret-hart-pendulum-backbreaker",
-    "setId": "new-generation-series-1",
-    "cardNumber": 2,
-    "cardCode": "NG1-002"
-  },
-  {
-    "id": "bret-hart-second-rope-elbow-drop",
-    "setId": "new-generation-series-1",
-    "cardNumber": 3,
-    "cardCode": "NG1-003"
-  },
-  {
-    "id": "bret-hart-sharpshooter",
-    "setId": "new-generation-series-1",
-    "cardNumber": 4,
-    "cardCode": "NG1-004"
-  },
-  {
-    "id": "entrance-bret-hart",
-    "setId": "new-generation-series-1",
-    "cardNumber": 5,
-    "cardCode": "NG1-005"
-  },
-  {
-    "id": "special-bret-hart",
-    "setId": "new-generation-series-1",
-    "cardNumber": 6,
-    "cardCode": "NG1-006"
-  },
-  {
-    "id": "superstar-bret-hart",
-    "setId": "new-generation-series-1",
-    "cardNumber": 7,
-    "cardCode": "NG1-007"
-  },
-  {
-    "id": "shawn-michaels-flying-forearm",
-    "setId": "new-generation-series-1",
-    "cardNumber": 8,
-    "cardCode": "NG1-008"
-  },
-  {
-    "id": "shawn-michaels-teardrop-suplex",
-    "setId": "new-generation-series-1",
-    "cardNumber": 9,
-    "cardCode": "NG1-009"
-  },
-  {
-    "id": "shawn-michaels-top-rope-elbow-drop",
-    "setId": "new-generation-series-1",
-    "cardNumber": 10,
-    "cardCode": "NG1-010"
-  },
-  {
-    "id": "shawn-michaels-sweet-chin-music",
-    "setId": "new-generation-series-1",
-    "cardNumber": 11,
-    "cardCode": "NG1-011"
-  },
-  {
-    "id": "entrance-shawn-michaels",
-    "setId": "new-generation-series-1",
-    "cardNumber": 12,
-    "cardCode": "NG1-012"
-  },
-  {
-    "id": "special-shawn-michaels",
-    "setId": "new-generation-series-1",
-    "cardNumber": 13,
-    "cardCode": "NG1-013"
-  },
-  {
-    "id": "superstar-shawn-michaels",
-    "setId": "new-generation-series-1",
-    "cardNumber": 14,
-    "cardCode": "NG1-014"
-  },
-  {
-    "id": "razor-ramon-fallaway-slam",
-    "setId": "new-generation-series-1",
-    "cardNumber": 15,
-    "cardCode": "NG1-015"
-  },
-  {
-    "id": "razor-ramon-abdominal-stretch",
-    "setId": "new-generation-series-1",
-    "cardNumber": 16,
-    "cardCode": "NG1-016"
-  },
-  {
-    "id": "razor-ramon-bulldog",
-    "setId": "new-generation-series-1",
-    "cardNumber": 17,
-    "cardCode": "NG1-017"
-  },
-  {
-    "id": "razor-ramon-razors-edge",
-    "setId": "new-generation-series-1",
-    "cardNumber": 18,
-    "cardCode": "NG1-018"
-  },
-  {
-    "id": "entrance-razor-ramon",
-    "setId": "new-generation-series-1",
-    "cardNumber": 19,
-    "cardCode": "NG1-019"
-  },
-  {
-    "id": "special-razor-ramon",
-    "setId": "new-generation-series-1",
-    "cardNumber": 20,
-    "cardCode": "NG1-020"
-  },
-  {
-    "id": "superstar-razor-ramon",
-    "setId": "new-generation-series-1",
-    "cardNumber": 21,
-    "cardCode": "NG1-021"
-  },
-  {
-    "id": "diesel-snake-eyes",
-    "setId": "new-generation-series-1",
-    "cardNumber": 22,
-    "cardCode": "NG1-022"
-  },
-  {
-    "id": "diesel-big-boot",
-    "setId": "new-generation-series-1",
-    "cardNumber": 23,
-    "cardCode": "NG1-023"
-  },
-  {
-    "id": "diesel-sidewalk-slam",
-    "setId": "new-generation-series-1",
-    "cardNumber": 24,
-    "cardCode": "NG1-024"
-  },
-  {
-    "id": "diesel-jackknife-powerbomb",
-    "setId": "new-generation-series-1",
-    "cardNumber": 25,
-    "cardCode": "NG1-025"
-  },
-  {
-    "id": "entrance-diesel",
-    "setId": "new-generation-series-1",
-    "cardNumber": 26,
-    "cardCode": "NG1-026"
-  },
-  {
-    "id": "special-diesel",
-    "setId": "new-generation-series-1",
-    "cardNumber": 27,
-    "cardCode": "NG1-027"
-  },
-  {
-    "id": "superstar-diesel",
-    "setId": "new-generation-series-1",
-    "cardNumber": 28,
-    "cardCode": "NG1-028"
-  },
-  {
-    "id": "brainbuster",
-    "setId": "money-in-the-bank-series-1",
-    "cardNumber": 38,
-    "cardCode": "MITB1-038"
-  },
-  {
-    "id": "side-kick",
-    "setId": "raw-series-1",
-    "cardNumber": 71,
-    "cardCode": "RAW1-071"
-  },
-  {
     "id": "vertical-boston-crab",
     "setId": "evolution-series-1",
     "cardNumber": 75,
     "cardCode": "EVO1-075"
-  },
-  {
-    "id": "springboard-roundhouse-kick",
-    "setId": "smackdown-series-1",
-    "cardNumber": 38,
-    "cardCode": "SD1-038"
-  },
-  {
-    "id": "snapmare",
-    "setId": "raw-series-1",
-    "cardNumber": 72,
-    "cardCode": "RAW1-072"
-  },
-  {
-    "id": "scoop-slam",
-    "setId": "raw-series-1",
-    "cardNumber": 73,
-    "cardCode": "RAW1-073"
-  },
-  {
-    "id": "chop-block",
-    "setId": "raw-series-1",
-    "cardNumber": 74,
-    "cardCode": "RAW1-074"
-  },
-  {
-    "id": "spinning-backfist",
-    "setId": "raw-series-1",
-    "cardNumber": 75,
-    "cardCode": "RAW1-075"
-  },
-  {
-    "id": "single-leg-dropkick",
-    "setId": "raw-series-1",
-    "cardNumber": 76,
-    "cardCode": "RAW1-076"
-  },
-  {
-    "id": "back-rake",
-    "setId": "raw-series-1",
-    "cardNumber": 77,
-    "cardCode": "RAW1-077"
-  },
-  {
-    "id": "arm-wrench",
-    "setId": "raw-series-1",
-    "cardNumber": 78,
-    "cardCode": "RAW1-078"
-  },
-  {
-    "id": "knee-lift",
-    "setId": "raw-series-1",
-    "cardNumber": 79,
-    "cardCode": "RAW1-079"
-  },
-  {
-    "id": "t-bone-suplex",
-    "setId": "raw-series-1",
-    "cardNumber": 80,
-    "cardCode": "RAW1-080"
-  },
-  {
-    "id": "gutwrench-suplex",
-    "setId": "raw-series-1",
-    "cardNumber": 81,
-    "cardCode": "RAW1-081"
-  },
-  {
-    "id": "michinoku-driver",
-    "setId": "raw-series-1",
-    "cardNumber": 82,
-    "cardCode": "RAW1-082"
-  },
-  {
-    "id": "pumphandle-slam",
-    "setId": "raw-series-1",
-    "cardNumber": 83,
-    "cardCode": "RAW1-083"
-  },
-  {
-    "id": "bicycle-kick",
-    "setId": "raw-series-1",
-    "cardNumber": 84,
-    "cardCode": "RAW1-084"
-  },
-  {
-    "id": "rolling-elbow",
-    "setId": "raw-series-1",
-    "cardNumber": 85,
-    "cardCode": "RAW1-085"
-  },
-  {
-    "id": "springboard-forearm",
-    "setId": "raw-series-1",
-    "cardNumber": 86,
-    "cardCode": "RAW1-086"
-  },
-  {
-    "id": "dragon-sleeper",
-    "setId": "raw-series-1",
-    "cardNumber": 87,
-    "cardCode": "RAW1-087"
-  },
-  {
-    "id": "camel-clutch",
-    "setId": "raw-series-1",
-    "cardNumber": 88,
-    "cardCode": "RAW1-088"
-  },
-  {
-    "id": "slingshot-suplex",
-    "setId": "raw-series-1",
-    "cardNumber": 89,
-    "cardCode": "RAW1-089"
-  },
-  {
-    "id": "monkey-flip",
-    "setId": "new-generation-series-1",
-    "cardNumber": 29,
-    "cardCode": "NG1-029"
-  },
-  {
-    "id": "headlock-takeover",
-    "setId": "new-generation-series-1",
-    "cardNumber": 30,
-    "cardCode": "NG1-030"
-  },
-  {
-    "id": "eye-rake",
-    "setId": "new-generation-series-1",
-    "cardNumber": 31,
-    "cardCode": "NG1-031"
-  },
-  {
-    "id": "hair-pull-takedown",
-    "setId": "new-generation-series-1",
-    "cardNumber": 32,
-    "cardCode": "NG1-032"
-  },
-  {
-    "id": "schoolboy-roll-up",
-    "setId": "new-generation-series-1",
-    "cardNumber": 33,
-    "cardCode": "NG1-033"
-  },
-  {
-    "id": "reverse-chinlock",
-    "setId": "new-generation-series-1",
-    "cardNumber": 34,
-    "cardCode": "NG1-034"
-  },
-  {
-    "id": "doink-drop-toe-hold",
-    "setId": "new-generation-series-1",
-    "cardNumber": 35,
-    "cardCode": "NG1-035"
-  },
-  {
-    "id": "doink-stump-puller",
-    "setId": "new-generation-series-1",
-    "cardNumber": 36,
-    "cardCode": "NG1-036"
-  },
-  {
-    "id": "doink-flying-body-press",
-    "setId": "new-generation-series-1",
-    "cardNumber": 37,
-    "cardCode": "NG1-037"
-  },
-  {
-    "id": "doink-whoopee-cushion",
-    "setId": "new-generation-series-1",
-    "cardNumber": 38,
-    "cardCode": "NG1-038"
-  },
-  {
-    "id": "entrance-doink-the-clown",
-    "setId": "new-generation-series-1",
-    "cardNumber": 39,
-    "cardCode": "NG1-039"
-  },
-  {
-    "id": "special-doink-the-clown",
-    "setId": "new-generation-series-1",
-    "cardNumber": 40,
-    "cardCode": "NG1-040"
-  },
-  {
-    "id": "superstar-doink-the-clown",
-    "setId": "new-generation-series-1",
-    "cardNumber": 41,
-    "cardCode": "NG1-041"
-  },
-  {
-    "id": "forearm-club",
-    "setId": "new-generation-series-1",
-    "cardNumber": 42,
-    "cardCode": "NG1-042"
-  },
-  {
-    "id": "running-shoulder-block",
-    "setId": "new-generation-series-1",
-    "cardNumber": 43,
-    "cardCode": "NG1-043"
-  },
-  {
-    "id": "side-suplex",
-    "setId": "new-generation-series-1",
-    "cardNumber": 44,
-    "cardCode": "NG1-044"
-  },
-  {
-    "id": "club-to-the-back",
-    "setId": "new-generation-series-1",
-    "cardNumber": 45,
-    "cardCode": "NG1-045"
-  },
-  {
-    "id": "running-body-avalanche",
-    "setId": "new-generation-series-1",
-    "cardNumber": 46,
-    "cardCode": "NG1-046"
-  },
-  {
-    "id": "nerve-hold",
-    "setId": "new-generation-series-1",
-    "cardNumber": 47,
-    "cardCode": "NG1-047"
-  },
-  {
-    "id": "yokozuna-savate-kick",
-    "setId": "new-generation-series-1",
-    "cardNumber": 48,
-    "cardCode": "NG1-048"
-  },
-  {
-    "id": "yokozuna-belly-to-belly-suplex",
-    "setId": "new-generation-series-1",
-    "cardNumber": 49,
-    "cardCode": "NG1-049"
-  },
-  {
-    "id": "yokozuna-running-leg-drop",
-    "setId": "new-generation-series-1",
-    "cardNumber": 50,
-    "cardCode": "NG1-050"
-  },
-  {
-    "id": "yokozuna-banzai-drop",
-    "setId": "new-generation-series-1",
-    "cardNumber": 51,
-    "cardCode": "NG1-051"
-  },
-  {
-    "id": "entrance-yokozuna",
-    "setId": "new-generation-series-1",
-    "cardNumber": 52,
-    "cardCode": "NG1-052"
-  },
-  {
-    "id": "special-yokozuna",
-    "setId": "new-generation-series-1",
-    "cardNumber": 53,
-    "cardCode": "NG1-053"
-  },
-  {
-    "id": "superstar-yokozuna",
-    "setId": "new-generation-series-1",
-    "cardNumber": 54,
-    "cardCode": "NG1-054"
-  },
-  {
-    "id": "fisherman-suplex",
-    "setId": "new-generation-series-1",
-    "cardNumber": 55,
-    "cardCode": "NG1-055"
-  },
-  {
-    "id": "wheel-kick",
-    "setId": "new-generation-series-1",
-    "cardNumber": 56,
-    "cardCode": "NG1-056"
-  },
-  {
-    "id": "gutbuster",
-    "setId": "new-generation-series-1",
-    "cardNumber": 57,
-    "cardCode": "NG1-057"
-  },
-  {
-    "id": "dropkick-to-the-knee",
-    "setId": "new-generation-series-1",
-    "cardNumber": 58,
-    "cardCode": "NG1-058"
-  },
-  {
-    "id": "bridging-german-suplex",
-    "setId": "new-generation-series-1",
-    "cardNumber": 59,
-    "cardCode": "NG1-059"
-  },
-  {
-    "id": "step-up-enzuigiri",
-    "setId": "new-generation-series-1",
-    "cardNumber": 60,
-    "cardCode": "NG1-060"
-  },
-  {
-    "id": "owen-hart-enzuigiri",
-    "setId": "new-generation-series-1",
-    "cardNumber": 61,
-    "cardCode": "NG1-061"
-  },
-  {
-    "id": "owen-hart-dragon-suplex",
-    "setId": "new-generation-series-1",
-    "cardNumber": 62,
-    "cardCode": "NG1-062"
-  },
-  {
-    "id": "owen-hart-missile-dropkick",
-    "setId": "new-generation-series-1",
-    "cardNumber": 63,
-    "cardCode": "NG1-063"
-  },
-  {
-    "id": "owen-hart-sharpshooter",
-    "setId": "new-generation-series-1",
-    "cardNumber": 64,
-    "cardCode": "NG1-064"
-  },
-  {
-    "id": "entrance-owen-hart",
-    "setId": "new-generation-series-1",
-    "cardNumber": 65,
-    "cardCode": "NG1-065"
-  },
-  {
-    "id": "special-owen-hart",
-    "setId": "new-generation-series-1",
-    "cardNumber": 66,
-    "cardCode": "NG1-066"
-  },
-  {
-    "id": "superstar-owen-hart",
-    "setId": "new-generation-series-1",
-    "cardNumber": 67,
-    "cardCode": "NG1-067"
-  },
-  {
-    "id": "standing-dropkick",
-    "setId": "new-generation-series-1",
-    "cardNumber": 68,
-    "cardCode": "NG1-068"
-  },
-  {
-    "id": "hammerlock-takedown",
-    "setId": "new-generation-series-1",
-    "cardNumber": 69,
-    "cardCode": "NG1-069"
-  },
-  {
-    "id": "running-knee-lift",
-    "setId": "new-generation-series-1",
-    "cardNumber": 70,
-    "cardCode": "NG1-070"
-  },
-  {
-    "id": "shoulder-breaker",
-    "setId": "new-generation-series-1",
-    "cardNumber": 71,
-    "cardCode": "NG1-071"
-  },
-  {
-    "id": "front-powerslam",
-    "setId": "new-generation-series-1",
-    "cardNumber": 72,
-    "cardCode": "NG1-072"
-  },
-  {
-    "id": "full-nelson",
-    "setId": "new-generation-series-1",
-    "cardNumber": 73,
-    "cardCode": "NG1-073"
-  },
-  {
-    "id": "british-bulldog-delayed-vertical-suplex",
-    "setId": "new-generation-series-1",
-    "cardNumber": 74,
-    "cardCode": "NG1-074"
-  },
-  {
-    "id": "british-bulldog-crucifix",
-    "setId": "new-generation-series-1",
-    "cardNumber": 75,
-    "cardCode": "NG1-075"
-  },
-  {
-    "id": "british-bulldog-military-press-slam",
-    "setId": "new-generation-series-1",
-    "cardNumber": 76,
-    "cardCode": "NG1-076"
-  },
-  {
-    "id": "british-bulldog-running-powerslam",
-    "setId": "new-generation-series-1",
-    "cardNumber": 77,
-    "cardCode": "NG1-077"
-  },
-  {
-    "id": "entrance-british-bulldog",
-    "setId": "new-generation-series-1",
-    "cardNumber": 78,
-    "cardCode": "NG1-078"
-  },
-  {
-    "id": "special-british-bulldog",
-    "setId": "new-generation-series-1",
-    "cardNumber": 79,
-    "cardCode": "NG1-079"
-  },
-  {
-    "id": "superstar-british-bulldog",
-    "setId": "new-generation-series-1",
-    "cardNumber": 80,
-    "cardCode": "NG1-080"
   },
   {
     "id": "back-body-drop",
@@ -4602,94 +4848,736 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "AE1-083"
   },
   {
-    "id": "chyna-bomb",
-    "setId": "parked-chyna",
+    "id": "kendal-grey-olympic-takedown",
+    "setId": "nxt-series-1",
     "cardNumber": 1,
-    "cardCode": "PCH-001"
+    "cardCode": "NXT1-001"
   },
   {
-    "id": "chyna-gorilla-press-slam",
-    "setId": "parked-chyna",
+    "id": "kendal-grey-rolling-german-suplex",
+    "setId": "nxt-series-1",
     "cardNumber": 2,
-    "cardCode": "PCH-002"
+    "cardCode": "NXT1-002"
   },
   {
-    "id": "chyna-handspring-back-elbow",
-    "setId": "parked-chyna",
+    "id": "kendal-grey-ankle-lock",
+    "setId": "nxt-series-1",
     "cardNumber": 3,
-    "cardCode": "PCH-003"
+    "cardCode": "NXT1-003"
   },
   {
-    "id": "chyna-inverted-ddt",
-    "setId": "parked-chyna",
+    "id": "kendal-grey-olympic-slam",
+    "setId": "nxt-series-1",
     "cardNumber": 4,
-    "cardCode": "PCH-004"
+    "cardCode": "NXT1-004"
   },
   {
-    "id": "entrance-chyna",
-    "setId": "parked-chyna",
+    "id": "special-kendal-grey",
+    "setId": "nxt-series-1",
     "cardNumber": 5,
-    "cardCode": "PCH-005"
+    "cardCode": "NXT1-005"
   },
   {
-    "id": "special-chyna",
-    "setId": "parked-chyna",
+    "id": "entrance-kendal-grey",
+    "setId": "nxt-series-1",
     "cardNumber": 6,
-    "cardCode": "PCH-006"
+    "cardCode": "NXT1-006"
   },
   {
-    "id": "superstar-chyna",
-    "setId": "parked-chyna",
+    "id": "tony-dangelo-family-spinebuster",
+    "setId": "nxt-series-1",
     "cardNumber": 7,
-    "cardCode": "PCH-007"
+    "cardCode": "NXT1-007"
+  },
+  {
+    "id": "tony-dangelo-fisherman-buster",
+    "setId": "nxt-series-1",
+    "cardNumber": 8,
+    "cardCode": "NXT1-008"
+  },
+  {
+    "id": "tony-dangelo-crowbar",
+    "setId": "nxt-series-1",
+    "cardNumber": 9,
+    "cardCode": "NXT1-009"
+  },
+  {
+    "id": "tony-dangelo-forget-about-it",
+    "setId": "nxt-series-1",
+    "cardNumber": 10,
+    "cardCode": "NXT1-010"
+  },
+  {
+    "id": "special-tony-dangelo",
+    "setId": "nxt-series-1",
+    "cardNumber": 11,
+    "cardCode": "NXT1-011"
+  },
+  {
+    "id": "entrance-tony-dangelo",
+    "setId": "nxt-series-1",
+    "cardNumber": 12,
+    "cardCode": "NXT1-012"
+  },
+  {
+    "id": "jaida-parker-running-hip-attack",
+    "setId": "nxt-series-1",
+    "cardNumber": 13,
+    "cardCode": "NXT1-013"
+  },
+  {
+    "id": "jaida-parker-samoan-drop",
+    "setId": "nxt-series-1",
+    "cardNumber": 14,
+    "cardCode": "NXT1-014"
+  },
+  {
+    "id": "jaida-parker-corner-spinebuster",
+    "setId": "nxt-series-1",
+    "cardNumber": 15,
+    "cardCode": "NXT1-015"
+  },
+  {
+    "id": "jaida-parker-hipnotic",
+    "setId": "nxt-series-1",
+    "cardNumber": 16,
+    "cardCode": "NXT1-016"
+  },
+  {
+    "id": "special-jaida-parker",
+    "setId": "nxt-series-1",
+    "cardNumber": 17,
+    "cardCode": "NXT1-017"
+  },
+  {
+    "id": "entrance-jaida-parker",
+    "setId": "nxt-series-1",
+    "cardNumber": 18,
+    "cardCode": "NXT1-018"
+  },
+  {
+    "id": "kelani-jordan-handspring-elbow",
+    "setId": "nxt-series-1",
+    "cardNumber": 19,
+    "cardCode": "NXT1-019"
+  },
+  {
+    "id": "kelani-jordan-split-legged-moonsault",
+    "setId": "nxt-series-1",
+    "cardNumber": 20,
+    "cardCode": "NXT1-020"
+  },
+  {
+    "id": "kelani-jordan-springboard-cutter",
+    "setId": "nxt-series-1",
+    "cardNumber": 21,
+    "cardCode": "NXT1-021"
+  },
+  {
+    "id": "kelani-jordan-450-splash",
+    "setId": "nxt-series-1",
+    "cardNumber": 22,
+    "cardCode": "NXT1-022"
+  },
+  {
+    "id": "special-kelani-jordan",
+    "setId": "nxt-series-1",
+    "cardNumber": 23,
+    "cardCode": "NXT1-023"
+  },
+  {
+    "id": "entrance-kelani-jordan",
+    "setId": "nxt-series-1",
+    "cardNumber": 24,
+    "cardCode": "NXT1-024"
+  },
+  {
+    "id": "mason-rook-fallaway-slam",
+    "setId": "nxt-series-1",
+    "cardNumber": 25,
+    "cardCode": "NXT1-025"
+  },
+  {
+    "id": "mason-rook-corner-big-boot",
+    "setId": "nxt-series-1",
+    "cardNumber": 26,
+    "cardCode": "NXT1-026"
+  },
+  {
+    "id": "mason-rook-checkmate-slam",
+    "setId": "nxt-series-1",
+    "cardNumber": 27,
+    "cardCode": "NXT1-027"
+  },
+  {
+    "id": "mason-rook-sit-out-powerbomb",
+    "setId": "nxt-series-1",
+    "cardNumber": 28,
+    "cardCode": "NXT1-028"
+  },
+  {
+    "id": "special-mason-rook",
+    "setId": "nxt-series-1",
+    "cardNumber": 29,
+    "cardCode": "NXT1-029"
+  },
+  {
+    "id": "entrance-mason-rook",
+    "setId": "nxt-series-1",
+    "cardNumber": 30,
+    "cardCode": "NXT1-030"
+  },
+  {
+    "id": "tatum-paxley-psycho-trap",
+    "setId": "nxt-series-1",
+    "cardNumber": 31,
+    "cardCode": "NXT1-031"
+  },
+  {
+    "id": "tatum-paxley-cemetery-drive",
+    "setId": "nxt-series-1",
+    "cardNumber": 32,
+    "cardCode": "NXT1-032"
+  },
+  {
+    "id": "tatum-paxley-bridging-german-suplex",
+    "setId": "nxt-series-1",
+    "cardNumber": 33,
+    "cardCode": "NXT1-033"
+  },
+  {
+    "id": "tatum-paxley-diving-knee-drop",
+    "setId": "nxt-series-1",
+    "cardNumber": 34,
+    "cardCode": "NXT1-034"
+  },
+  {
+    "id": "special-tatum-paxley",
+    "setId": "nxt-series-1",
+    "cardNumber": 35,
+    "cardCode": "NXT1-035"
+  },
+  {
+    "id": "entrance-tatum-paxley",
+    "setId": "nxt-series-1",
+    "cardNumber": 36,
+    "cardCode": "NXT1-036"
+  },
+  {
+    "id": "lexis-king-coronation-neckbreaker",
+    "setId": "nxt-series-1",
+    "cardNumber": 37,
+    "cardCode": "NXT1-037"
+  },
+  {
+    "id": "lexis-king-the-throne",
+    "setId": "nxt-series-1",
+    "cardNumber": 38,
+    "cardCode": "NXT1-038"
+  },
+  {
+    "id": "lexis-king-superkick",
+    "setId": "nxt-series-1",
+    "cardNumber": 39,
+    "cardCode": "NXT1-039"
+  },
+  {
+    "id": "lexis-king-king-s-landing",
+    "setId": "nxt-series-1",
+    "cardNumber": 40,
+    "cardCode": "NXT1-040"
+  },
+  {
+    "id": "special-lexis-king",
+    "setId": "nxt-series-1",
+    "cardNumber": 41,
+    "cardCode": "NXT1-041"
+  },
+  {
+    "id": "entrance-lexis-king",
+    "setId": "nxt-series-1",
+    "cardNumber": 42,
+    "cardCode": "NXT1-042"
+  },
+  {
+    "id": "zilla-fatu-samoan-spike",
+    "setId": "nxt-series-1",
+    "cardNumber": 43,
+    "cardCode": "NXT1-043"
+  },
+  {
+    "id": "zilla-fatu-pop-up-samoan-drop",
+    "setId": "nxt-series-1",
+    "cardNumber": 44,
+    "cardCode": "NXT1-044"
+  },
+  {
+    "id": "zilla-fatu-running-senton",
+    "setId": "nxt-series-1",
+    "cardNumber": 45,
+    "cardCode": "NXT1-045"
+  },
+  {
+    "id": "zilla-fatu-island-driver",
+    "setId": "nxt-series-1",
+    "cardNumber": 46,
+    "cardCode": "NXT1-046"
+  },
+  {
+    "id": "special-zilla-fatu",
+    "setId": "nxt-series-1",
+    "cardNumber": 47,
+    "cardCode": "NXT1-047"
+  },
+  {
+    "id": "entrance-zilla-fatu",
+    "setId": "nxt-series-1",
+    "cardNumber": 48,
+    "cardCode": "NXT1-048"
+  },
+  {
+    "id": "nxt1-amateur-fireman-carry",
+    "setId": "nxt-series-1",
+    "cardNumber": 49,
+    "cardCode": "NXT1-049"
+  },
+  {
+    "id": "nxt1-corner-body-avalanche",
+    "setId": "nxt-series-1",
+    "cardNumber": 50,
+    "cardCode": "NXT1-050"
+  },
+  {
+    "id": "nxt1-spinning-sole-kick",
+    "setId": "nxt-series-1",
+    "cardNumber": 51,
+    "cardCode": "NXT1-051"
+  },
+  {
+    "id": "nxt1-bridging-half-nelson-suplex",
+    "setId": "nxt-series-1",
+    "cardNumber": 52,
+    "cardCode": "NXT1-052"
+  },
+  {
+    "id": "nxt1-springboard-crossbody",
+    "setId": "nxt-series-1",
+    "cardNumber": 53,
+    "cardCode": "NXT1-053"
+  },
+  {
+    "id": "superstar-kendal-grey",
+    "setId": "nxt-series-1",
+    "cardNumber": 54,
+    "cardCode": "NXT1-054"
+  },
+  {
+    "id": "superstar-tony-dangelo",
+    "setId": "nxt-series-1",
+    "cardNumber": 55,
+    "cardCode": "NXT1-055"
+  },
+  {
+    "id": "superstar-jaida-parker",
+    "setId": "nxt-series-1",
+    "cardNumber": 56,
+    "cardCode": "NXT1-056"
+  },
+  {
+    "id": "superstar-kelani-jordan",
+    "setId": "nxt-series-1",
+    "cardNumber": 57,
+    "cardCode": "NXT1-057"
+  },
+  {
+    "id": "superstar-mason-rook",
+    "setId": "nxt-series-1",
+    "cardNumber": 58,
+    "cardCode": "NXT1-058"
+  },
+  {
+    "id": "superstar-tatum-paxley",
+    "setId": "nxt-series-1",
+    "cardNumber": 59,
+    "cardCode": "NXT1-059"
+  },
+  {
+    "id": "superstar-lexis-king",
+    "setId": "nxt-series-1",
+    "cardNumber": 60,
+    "cardCode": "NXT1-060"
+  },
+  {
+    "id": "superstar-zilla-fatu",
+    "setId": "nxt-series-1",
+    "cardNumber": 61,
+    "cardCode": "NXT1-061"
+  },
+  {
+    "id": "randy-orton-draping-ddt",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 1,
+    "cardCode": "RA1-001"
+  },
+  {
+    "id": "randy-orton-rko",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 2,
+    "cardCode": "RA1-002"
+  },
+  {
+    "id": "randy-orton-punt-kick",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 3,
+    "cardCode": "RA1-003"
+  },
+  {
+    "id": "entrance-randy-orton",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 4,
+    "cardCode": "RA1-004"
+  },
+  {
+    "id": "special-randy-orton",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 5,
+    "cardCode": "RA1-005"
   },
   {
     "id": "john-cena-protobomb",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 1,
-    "cardCode": "S1LTN-001"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 6,
+    "cardCode": "RA1-006"
   },
   {
     "id": "john-cena-five-knuckle-shuffle",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 2,
-    "cardCode": "S1LTN-002"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 7,
+    "cardCode": "RA1-007"
   },
   {
     "id": "john-cena-stf",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 3,
-    "cardCode": "S1LTN-003"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 8,
+    "cardCode": "RA1-008"
   },
   {
     "id": "john-cena-attitude-adjustment",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 4,
-    "cardCode": "S1LTN-004"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 9,
+    "cardCode": "RA1-009"
   },
   {
     "id": "john-cena-hustle-loyalty-respect",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 5,
-    "cardCode": "S1LTN-005"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 10,
+    "cardCode": "RA1-010"
   },
   {
     "id": "entrance-john-cena",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 6,
-    "cardCode": "S1LTN-006"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 11,
+    "cardCode": "RA1-011"
   },
   {
     "id": "special-john-cena",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 7,
-    "cardCode": "S1LTN-007"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 12,
+    "cardCode": "RA1-012"
+  },
+  {
+    "id": "batista-batista-spinebuster",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 13,
+    "cardCode": "RA1-013"
+  },
+  {
+    "id": "batista-spear",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 14,
+    "cardCode": "RA1-014"
+  },
+  {
+    "id": "batista-demon-bomb",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 15,
+    "cardCode": "RA1-015"
+  },
+  {
+    "id": "batista-batista-bomb",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 16,
+    "cardCode": "RA1-016"
+  },
+  {
+    "id": "special-batista",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 17,
+    "cardCode": "RA1-017"
+  },
+  {
+    "id": "entrance-batista",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 18,
+    "cardCode": "RA1-018"
+  },
+  {
+    "id": "jbl-fallaway-slam",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 19,
+    "cardCode": "RA1-019"
+  },
+  {
+    "id": "jbl-big-boot",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 20,
+    "cardCode": "RA1-020"
+  },
+  {
+    "id": "jbl-last-call-powerbomb",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 21,
+    "cardCode": "RA1-021"
+  },
+  {
+    "id": "jbl-clothesline-from-hell",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 22,
+    "cardCode": "RA1-022"
+  },
+  {
+    "id": "special-jbl",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 23,
+    "cardCode": "RA1-023"
+  },
+  {
+    "id": "entrance-jbl",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 24,
+    "cardCode": "RA1-024"
+  },
+  {
+    "id": "eddie-guerrero-three-amigos",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 25,
+    "cardCode": "RA1-025"
+  },
+  {
+    "id": "eddie-guerrero-hurricanrana",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 26,
+    "cardCode": "RA1-026"
+  },
+  {
+    "id": "eddie-guerrero-lasso-from-el-paso",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 27,
+    "cardCode": "RA1-027"
+  },
+  {
+    "id": "eddie-guerrero-frog-splash",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 28,
+    "cardCode": "RA1-028"
+  },
+  {
+    "id": "special-eddie-guerrero",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 29,
+    "cardCode": "RA1-029"
+  },
+  {
+    "id": "entrance-eddie-guerrero",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 30,
+    "cardCode": "RA1-030"
+  },
+  {
+    "id": "edge-edge-o-matic",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 31,
+    "cardCode": "RA1-031"
+  },
+  {
+    "id": "edge-edgecution",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 32,
+    "cardCode": "RA1-032"
+  },
+  {
+    "id": "edge-impaler-ddt",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 33,
+    "cardCode": "RA1-033"
+  },
+  {
+    "id": "edge-spear",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 34,
+    "cardCode": "RA1-034"
+  },
+  {
+    "id": "special-edge",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 35,
+    "cardCode": "RA1-035"
+  },
+  {
+    "id": "entrance-edge",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 36,
+    "cardCode": "RA1-036"
+  },
+  {
+    "id": "jeff-hardy-whisper-in-the-wind",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 37,
+    "cardCode": "RA1-037"
+  },
+  {
+    "id": "jeff-hardy-twist-of-fate",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 38,
+    "cardCode": "RA1-038"
+  },
+  {
+    "id": "jeff-hardy-poetry-in-motion",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 39,
+    "cardCode": "RA1-039"
+  },
+  {
+    "id": "jeff-hardy-swanton-bomb",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 40,
+    "cardCode": "RA1-040"
+  },
+  {
+    "id": "special-jeff-hardy",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 41,
+    "cardCode": "RA1-041"
+  },
+  {
+    "id": "entrance-jeff-hardy",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 42,
+    "cardCode": "RA1-042"
+  },
+  {
+    "id": "rob-van-dam-rolling-thunder",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 43,
+    "cardCode": "RA1-043"
+  },
+  {
+    "id": "rob-van-dam-van-daminator",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 44,
+    "cardCode": "RA1-044"
+  },
+  {
+    "id": "rob-van-dam-split-legged-moonsault",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 45,
+    "cardCode": "RA1-045"
+  },
+  {
+    "id": "rob-van-dam-five-star-frog-splash",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 46,
+    "cardCode": "RA1-046"
+  },
+  {
+    "id": "special-rob-van-dam",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 47,
+    "cardCode": "RA1-047"
+  },
+  {
+    "id": "entrance-rob-van-dam",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 48,
+    "cardCode": "RA1-048"
+  },
+  {
+    "id": "ra1-ruthless-spinebuster",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 49,
+    "cardCode": "RA1-049"
+  },
+  {
+    "id": "ra1-turnbuckle-clothesline",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 50,
+    "cardCode": "RA1-050"
+  },
+  {
+    "id": "ra1-sit-out-powerbomb",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 51,
+    "cardCode": "RA1-051"
+  },
+  {
+    "id": "ra1-diving-leg-drop",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 52,
+    "cardCode": "RA1-052"
+  },
+  {
+    "id": "ra1-running-powerslam",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 53,
+    "cardCode": "RA1-053"
   },
   {
     "id": "superstar-john-cena",
-    "setId": "season-1-last-time-is-now",
-    "cardNumber": 8,
-    "cardCode": "S1LTN-008"
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 54,
+    "cardCode": "RA1-054"
+  },
+  {
+    "id": "superstar-randy-orton",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 55,
+    "cardCode": "RA1-055"
+  },
+  {
+    "id": "superstar-batista",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 56,
+    "cardCode": "RA1-056"
+  },
+  {
+    "id": "superstar-jbl",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 57,
+    "cardCode": "RA1-057"
+  },
+  {
+    "id": "superstar-eddie-guerrero",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 58,
+    "cardCode": "RA1-058"
+  },
+  {
+    "id": "superstar-edge",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 59,
+    "cardCode": "RA1-059"
+  },
+  {
+    "id": "superstar-jeff-hardy",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 60,
+    "cardCode": "RA1-060"
+  },
+  {
+    "id": "superstar-rob-van-dam",
+    "setId": "ruthless-aggression-series-1",
+    "cardNumber": 61,
+    "cardCode": "RA1-061"
   }
 ];
 export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));

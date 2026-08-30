@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.0.2';
-import { superstars } from '../js/data/superstars.js?v=1.0.2';
-import { decks } from '../js/data/decks.js?v=1.0.2';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.0.2';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.21';
+import { superstars } from '../js/data/superstars.js?v=1.1.21';
+import { decks } from '../js/data/decks.js?v=1.1.21';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.21';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const cena=superstars.johnCena;
@@ -49,7 +49,7 @@ test('v0.14.21 Hustle Loyalty Respect comeback draws two pages exactly once',()=
   const s=g.state(),p=s.players.p1;
   const support={...hlr,instanceId:'test-hlr'}; p.hand.push(support);
   s.phase='ACTION'; s.playerInControl='p1';
-  assert.equal(g.playSupport('p1',support),true);
+  assert.equal(g.playAction('p1',support),true);
   p.hp=Math.floor(p.maxHp*.5);
   const before=p.hand.length,ad=p.adrenaline;
   assert.equal(g._triggerHustleLoyaltyRespect('p1'),true);

@@ -25,7 +25,7 @@ test('v0.13.27 Season 1 presentation is brighter and reward CTAs are materially 
 test('v0.13.27 Final Boss milestones carry reward-type classes for distinct colour treatment', () => {
   assert.match(app, /finalBossRewardClass = isFinalBossCard/);
   assert.match(app, /data-final-boss-reward=/);
-  for (const type of ['exclusive-move','support','signature','finisher','action','entrance','superstar']) {
+  for (const type of ['exclusive-move','signature','finisher','action','entrance','superstar']) {
     assert.match(css, new RegExp(`final-boss-${type}`));
   }
 });

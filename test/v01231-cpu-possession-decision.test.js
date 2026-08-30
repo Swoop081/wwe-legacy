@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.0.2';
-import { decks } from '../js/data/decks.js?v=1.0.2';
-import { allGameplayCards } from '../js/data/content.js?v=1.0.2';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.0.2';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.0.2';
-import { submissionThreshold } from '../js/engine/rules.js?v=1.0.2';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=1.0.2';
+import { superstars } from '../js/data/superstars.js?v=1.1.21';
+import { decks } from '../js/data/decks.js?v=1.1.21';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.21';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.21';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.21';
+import { submissionThreshold } from '../js/engine/rules.js?v=1.1.21';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=1.1.21';
 
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -29,11 +29,11 @@ test('v0.12.31 CPU sequences useful Actions before an already-legal Move',()=>{
   assert.equal(d?.card?.id,'fire-up');
 });
 
-test('v0.12.31 CPU installs Support before attacking instead of waiting until the sequence is empty',()=>{
+test('v1.1.1 CPU plays migrated persistent Action before attacking instead of waiting until the sequence is empty',()=>{
   const {game,p}=actionState();
   p.hand=[byId.get('crowd-support'),byId.get('punch')];
   const d=cpuDecision(game,'p2');
-  assert.equal(d?.type,'support');
+  assert.equal(d?.type,'action');
   assert.equal(d?.card?.id,'crowd-support');
 });
 

@@ -1,0 +1,20 @@
+import { superstars } from "./superstars.js?v=1.1.21";
+import { isPlayerVisibleSuperstar } from "./release.js?v=1.1.21";
+const unique=arr=>[...new Set(arr)];
+export const SURVIVOR_SERIES_TEAM_SIZE=4;
+export function survivorSeriesState(profile){profile.survivorSeries??={activeRun:null,clears:0};return profile.survivorSeries;}
+export function canEnterSurvivorSeries(profile){return unique(profile?.unlockedSuperstars??[]).filter(id=>superstars[Object.keys(superstars).find(k=>superstars[k].id===id)]).length>=SURVIVOR_SERIES_TEAM_SIZE;}
+function visibleIds(now=new Date()){return Object.values(superstars).filter(s=>isPlayerVisibleSuperstar(s,now)&&!s.developmentOnly).map(s=>s.id);}
+export function startSurvivorSeries(profile,playerIds=null,rng=Math.random,now=new Date()){
+ if(!canEnterSurvivorSeries(profile))throw new Error("Unlock at least 4 Superstars to enter Survivor Series.");
+ const owned=unique(profile.unlockedSuperstars??[]).filter(id=>visibleIds(now).includes(id));const p1=unique(playerIds??owned.slice(0,4)).filter(id=>owned.includes(id)).slice(0,4);if(p1.length!==4)throw new Error("Choose 4 unlocked Superstars.");
+ const cpuPool=visibleIds(now).filter(id=>!p1.includes(id));const p2=[];while(cpuPool.length&&p2.length<4){const i=Math.max(0,Math.min(cpuPool.length-1,Math.floor(rng()*cpuPool.length)));p2.push(cpuPool.splice(i,1)[0]);}if(p2.length!==4)throw new Error("Not enough opponents are available.");
+ const boardOrder=[p1[0],p2[0],p1[1],p2[1],p1[2],p2[2],p1[3],p2[3]];
+ const run={status:"active",turn:"p1",p1,p2,boardOrder,round:1,pendingChallenge:null,history:[],startedAt:now.toISOString(),winner:null};survivorSeriesState(profile).activeRun=run;return run;
+}
+export function currentSurvivorSeriesRun(profile){return survivorSeriesState(profile).activeRun;}
+export function setSurvivorChallenge(profile,{attackerId,targetId}){const run=currentSurvivorSeriesRun(profile);if(!run||run.status!=="active")throw new Error("No active Survivor Series game.");const own=run[run.turn],opp=run[run.turn==="p1"?"p2":"p1"];if(!own.includes(attackerId))throw new Error("Choose a Superstar from the challenging team.");if(!opp.includes(targetId))throw new Error("Choose a Superstar from the opposing team.");run.pendingChallenge={turn:run.turn,attackerId,targetId};return run.pendingChallenge;}
+export function autoSurvivorChallenge(profile,rng=Math.random){const run=currentSurvivorSeriesRun(profile);if(!run||run.turn!=="p2")throw new Error("It is not Player 2's challenge turn.");const pick=a=>a[Math.max(0,Math.min(a.length-1,Math.floor(rng()*a.length)))];return setSurvivorChallenge(profile,{attackerId:pick(run.p2),targetId:pick(run.p1)});}
+export function resolveSurvivorSeriesMatch(profile,humanWon){const run=currentSurvivorSeriesRun(profile),c=run?.pendingChallenge;if(!run||!c)throw new Error("No Survivor Series challenge is awaiting a result.");const playerWinner=!!humanWon;const winnerSide=playerWinner?"p1":"p2",loserSide=playerWinner?"p2":"p1";const loserId=playerWinner?(c.turn==="p1"?c.targetId:c.attackerId):(c.turn==="p1"?c.attackerId:c.targetId);run[loserSide]=run[loserSide].filter(id=>id!==loserId);if(!run[winnerSide].includes(loserId))run[winnerSide].push(loserId);run.history.push({round:run.round,challengeTurn:c.turn,attackerId:c.attackerId,targetId:c.targetId,winnerSide,capturedId:loserId});run.pendingChallenge=null;run.turn=c.turn==="p1"?"p2":"p1";run.round+=1;if(run.p1.length===8||run.p2.length===8){run.status="complete";run.winner=run.p1.length===8?"p1":"p2";if(run.winner==="p1")survivorSeriesState(profile).clears=(Number(survivorSeriesState(profile).clears)||0)+1;}return {status:run.status,winner:run.winner,capturedId:loserId,p1:run.p1.length,p2:run.p2.length,nextTurn:run.turn};}
+export function resetSurvivorSeries(profile){survivorSeriesState(profile).activeRun=null;}
+export function survivorSeriesGrid(profile){const run=currentSurvivorSeriesRun(profile);if(!run)return[];const cards=[...run.p1.map(id=>({superstarId:id,team:"p1"})),...run.p2.map(id=>({superstarId:id,team:"p2"}))];return cards;}

@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.0.2';
-import { grantBooster, openBooster, MAX_NON_NORMAL_PRINTINGS, MAX_SAPPHIRE_OR_RUBY_PRINTINGS, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=1.0.2';
-import { activeLiveEventTowers } from '../js/data/live-events.js?v=1.0.2';
+import { createProfile } from '../js/data/profile.js?v=1.1.21';
+import { grantBooster, openBooster, MAX_NON_NORMAL_PRINTINGS, MAX_SAPPHIRE_OR_RUBY_PRINTINGS, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=1.1.21';
+import { activeLiveEventTowers } from '../js/data/live-events.js?v=1.1.21';
 const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
-test('v0.14.05 Live Events exposes exactly three rotating towers and MITB follows them',()=>{const p=createProfile('roman-reigns');const a=activeLiveEventTowers(new Date('2026-08-23T12:00:00'),p);assert.equal(a.length,3);const b=activeLiveEventTowers(new Date('2027-07-12T12:00:00'),p);assert.equal(b.length,3);assert.ok(b.some(t=>t.cadence==='birthday'));assert.ok(app.includes('${cards}${mitbCard}'));});
+test('v0.14.05 Live Events exposes exactly three rotating towers and MITB follows them',()=>{const p=createProfile('roman-reigns');const a=activeLiveEventTowers(new Date('2026-08-23T12:00:00'),p);assert.equal(a.length,3);const b=activeLiveEventTowers(new Date('2027-07-12T12:00:00'),p);assert.equal(b.length,3);assert.equal(b.some(t=>t.cadence==='birthday'||/birthday-bash/.test(t.event.id)),false);assert.ok(app.includes('${cards}${mitbCard}'));});
 test('v0.14.05 premium printing collation caps colored pulls and keeps pity 100',()=>{assert.equal(MAX_NON_NORMAL_PRINTINGS,2);assert.equal(MAX_SAPPHIRE_OR_RUBY_PRINTINGS,1);assert.equal(SUPERSTAR_PITY_PACKS,100);const p=createProfile('roman-reigns');grantBooster(p,1,'new-generation-series-1');const pack=openBooster(p,()=>0.99,'new-generation-series-1',new Date('2026-08-23T12:00:00'));assert.ok(pack.filter(x=>x.tier!=='normal').length<=2);assert.ok(pack.filter(x=>x.tier==='sapphire'||x.tier==='ruby').length<=1);});
 test('v0.14.05 Auto Counter preserves hand rail position and defeated cards get a tick',()=>{assert.ok(app.includes('autoCounterHandScrollLeft'));assert.ok(app.includes("rail?.scrollLeft ?? 0"));assert.ok(app.includes('live-tower-defeated-check'));assert.ok(css.includes('.live-tower-defeated-check'));});
 test('v0.14.05 Cena physical card centering rules remain explicit',()=>{assert.ok(app.includes('seasonOneCenaCardMarkup'));assert.ok(css.includes('place-items:center!important'));assert.ok(css.includes('justify-self:center!important'));});

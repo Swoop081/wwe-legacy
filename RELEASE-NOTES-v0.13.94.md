@@ -1,3 +1,26 @@
+# WWE Legacy v1.1.21 — Linked Animated URL CORS Fallback
+
+- Fixes Card Art Studio direct animated URLs when a host allows normal GIF/WebP display but blocks JavaScript raw-byte `fetch()` with CORS.
+- Studio now validates direct `.gif` / `.webp` links through a normal image load first. A successful display is saved immediately as a **Linked Animation** for the selected Entrance, Action or Finisher; CORS is not required.
+- Linked animation URLs persist per card in same-origin browser storage, are restored when the card is reselected, have a dedicated animated preview and can be removed with **Remove Linked Animation**.
+- Raw fetch/export is optional: hosts that allow CORS also enable **Export Animated Artwork**; hosts that block CORS keep linked playback working instead of showing the old `Failed to fetch` failure.
+- Live runtime preference order is now **linked URL → packaged animated WebP → packaged GIF → static base plate**. If a linked host later fails, the game falls through automatically.
+- No gameplay, Live Events, Merch, Trish, card-value, deck, economy, roster, booster, progression or save-schema changes from v1.1.20.
+- Certification: focused **9/9** across v1.1.20+v1.1.21; full suite **1,067 / 901 passed / 72 inherited historical failures / 94 skipped**, with **0 added or removed failure names** vs v1.1.20; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930 / 0 issues**; flow **95 / 0 issues**.
+
+# WWE Legacy v1.1.20 — Live Events + Trish Corrections + Authored Merch + Animated URL Import
+
+- Consolidates all tabled work after v1.1.19 into one build.
+- Live Events now show exactly **3 towers per local day** from a combined launch-theme + specialist pool, with a **1-day cooldown** preventing an event from appearing on consecutive days.
+- Adds Current RAW, Current SmackDown, Current NXT, women-only Evolution, SummerSlam, Golden Era, New Generation, Attitude Era and Ruthless Aggression launch-theme towers. Existing Submission Specialists, High Risk Showcase, Fight Night, Giants & Monsters, Legends Collide, Champions Clash, Method Masterclass and Evolution Showcase remain in rotation.
+- **Birthday Bash is retired** from active Live Events; its old definitions remain only for compatibility with historical references/saves.
+- Corrects Trish Stratus: **Air Canada** is now the 3★ Trademark at C6/D10/Technical 2; **Stratusfaction** is the 4★ Finisher at C9/D17/no Method requirement. Season reward labels and lead-off references are corrected too.
+- Superstar Merch now supports authored identity ladders. Level 1 defaults to a **Funko Pop** for every Superstar. Trish's five items are Trish Stratus Funko Pop, Trish's Big Shots Pillow, 100% Stratusfaction Guaranteed DVD, Trish's Action Figure and 100% Stratusfaction Shirt.
+- Merch fronts now show **MERCH · N MATCHES** while effect/rules text stays on the normal card back. Merch base-plate export clears the plaque footprint to true transparency so no opaque artwork block sits underneath the live plaque.
+- Card Art Studio gains **Animated Artwork URL** import for direct GIF/animated-WebP media URLs. It preserves the original animated bytes rather than flattening them; CORS-blocked hosts can still use the local file picker.
+- v1.1.19 animation eligibility remains Entrance / Action / Finisher only.
+- Certification: v1.1.20 focused **5/5**; full suite **1,063 / 897 passed / 72 inherited historical failures / 94 skipped**, with **0 added or removed failure names** vs v1.1.19; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930 / 0 issues**; flow **95 / 0 issues**.
+
 ## v0.99.00 — Critical-Fix-Only Release Candidate
 
 - Promotes the feature-frozen v0.90.00 branch into the final **critical-fix-only** stage before v1.0. No gameplay, balance, economy, reward, progression or save-schema change is included.
@@ -592,3 +615,230 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Verification: dedicated v1.0.2 regression **4/4**; focused inherited sample **15/15**; full overlay suite **969 discovered / 865 passed / 94 skipped / 10 expected missing gameplay-art assertions only**; Rules Matrix **23/23**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; printed-effect audit **706/0**; collector/card-ID audit **782/782 / 0 issues**; save durability **6/6**; static iPhone checks **20/20**; long-session **600 matches / 0 stalls**.
 - Final gameplay balance rerun after the intended Submission-defense correction: **41 Superstars / 16,400 matches / 0 stalls / 26.86 average turns**. Doink the Clown **38.25%** and Rowdy Roddy Piper **35.50%** are now low hard outliers. No compensating balance changes were silently added; this consequence is recorded for a later explicit balance decision.
 - Ruby Cena remains elite and stable at **3,200 matches / 60.75% / 0 stalls**.
+
+## v1.0.3 — Card Identity + Doink/Piper Balance
+
+- Repairs the v1.0.2 Doink/Piper hard-low balance results through **non-Submission pin-damage routes** rather than inflating their Submission pressure.
+- **Doink:** 2× Reverse Chinlock → 2× Alabama Slam. Stump Puller, HP and The Joke’s on You! remain unchanged. Final full-roster rate: **46.63%**.
+- **Piper:** 2× Neckbreaker → 2× Alabama Slam and 1× Atomic Drop → 1× Running Big Boot, while retaining all 4× Running Knee copies. Sleeper Hold pressure remains unchanged. Final full-roster rate: **42.88%**, no longer a hard outlier.
+- Introduces a priority card-identity invariant: different-name exact mechanical clones are no longer allowed when they are **same-set duplicates**, carry a **rarity mismatch**, or involve a **Superstar-exclusive/signature Move**. Same-name reprints and basic cross-set Common templates remain valid.
+- **Brainbuster** is differentiated from Alabama Slam with **+1 persistent Head damage on Connect** while retaining C6 / D10 / Technical 2 / Grapple / grounds-opponent.
+- Differentiates the remaining priority same-set/rarity/signature exact-clone groups with restrained thematic secondary effects using existing supported mechanics; no new engine effect type or save field is introduced.
+- Verification: v1.0.3 targeted tests **4/4**; full overlay suite **973 discovered / 869 passed / 94 skipped / 10 expected missing-art assertions only**; Rules Matrix **23/23**; validation **76 Superstars / 76 decks / 706 gameplay cards / 0 issues**; printed effects **706/706**; card IDs **782/782**; save durability **6/6**; iPhone static UI **20/20**; long session **600 / 0 stalls**.
+- Final released-roster audit: **41 Superstars / 16,400 matches / 0 stalls / 26.80 average turns / 0 hard outliers**. Ruby Cena: **3,200 / 60.41% / 0 stalls**.
+- Profile schema remains **v42** and the approved black/gold WWE Legacy launch branding/web-app icons remain unchanged. Distribution remains a verified **app-icon/branding overlay package**.
+
+
+---
+
+# v1.1.0 — Major Expansion: Ruthless / Trish / Premium Asset Reset
+
+**Released:** 29 August 2026
+
+- Expands the player-facing set structure to nine sets: RAW, SmackDown, NXT, Evolution, SummerSlam, Golden Era, New Generation, Attitude Era and Ruthless Aggression. Hall of Fame is retired; other future authored sets remain banked.
+- Completes SmackDown Series 1 at eight Superstars and launches NXT Series 1 with eight Superstars.
+- Adds Ruthless Aggression Series 1: John Cena, Randy Orton, Batista, JBL, Eddie Guerrero, Edge, Jeff Hardy and Rob Van Dam. Cena moves out of Season 1; Randy moves out of the banked Survivor Series set with the vacated collector-code range reserved rather than renumbering later cards.
+- Replaces the Season 1 Cena chase with **Trish Stratus** and updates the reward road/presentation to Trish's completion package and **STRATUSFACTION GUARANTEED** identity.
+- Adds **Survivor Series** 4v4 capture mode with the WWE Legacy logo at the center of a 3×3 board, alternating challenge turns and 8–0 victory condition.
+- Adds **Daily Spin**: one free eight-segment spin per 24 hours with stored-result animation and meaningful progression/economy/pack/Merch rewards.
+- Adds **Merch** consumables. Every booster is exactly **4 collectible cards + 1 guaranteed Merch card**. There are 515 authored Merch cards: 40 generic and exactly five stronger Superstar-specific items for each of 95 Superstars. Merch lasts 1/3/5 matches, one item may be active, and Merch never stacks.
+- Adds **95 Ultra Rare Superstar Variants**. Variants require the base Superstar to equip, do not create separate roster identities/decks, grant +5 HP and one bounded premium extra ability/passive.
+- Adds **Diamond** as the fifth/final printing tier: Normal → Emerald → Sapphire → Ruby → Diamond.
+- Completes the premium card-presentation pass with stronger runtime tier glows/effects and canonical base-plate paths for every non-Momentum collector card.
+- Resets gameplay-art naming to readable kebab-case `assets/images/` paths. `ASSET-MIGRATION.csv` contains 1,825 logical rows resolving to 3,270 unique gameplay-art file targets; `IMAGE-PATH-GUIDE.md` is the naming source of truth for the user's full GitHub image-library rebuild.
+- Final balance corrections: Trick Williams swaps 2× Dropkick to 2× Running Big Boot; Danhausen swaps 3× DDT to 3× Brainbuster and 2× Big Boot to 2× Running Big Boot. Jeff Hardy's Swanton Bomb and Rob Van Dam's Split-Legged Moonsault are correctly flagged grounded-opponent-only.
+- Final released-roster certification: **73 Superstars / 52,560 matches / 0 stalls / 26.31 average turns / 0 hard outliers**. Trick finishes at 45.49%; Danhausen 43.54%.
+- Validation: **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**. Collector audit: **930/930 / 0 issues**. Printed-effect audit: **835/835**. Rules Matrix **23/23**. Save durability **6/6**. Static iPhone viewport certification **20/20**. Long-session certification **600 matches / 0 stalls**.
+- Profile schema advances to **v43**. Official black/gold WWE Legacy launch branding/app icons remain unchanged.
+- Distribution remains a code/data/branding overlay. Full gameplay art is intentionally omitted because the GitHub image library is being rebuilt from the canonical v1.1 paths. Physical-iPhone v1.1 smoke certification remains pending until that artwork is uploaded.
+
+
+## v1.1.1 — Action Consolidation + Search-Friendly Asset Naming
+
+- Retires **Support** as a player-facing card type. The four existing Support identities — Crowd Support, What?, People’s Championship and Hustle, Loyalty, Respect — are migrated in place to **Action** cards with the same IDs, ownership and core effects.
+- Migrated persistent effects now consume the normal one-Action-per-turn channel and are limited to one play of that card per match.
+- Removes Support from Deck Lab / Collection filters, rules copy and Card Art Studio categories.
+- Renames Trick Williams’s Action from **Whoop That Trick** to **Trick Willy** so the Entrance alone owns **Whoop That Trick**.
+- Locks Action image naming to `<actual-name>-action-<superstar-id>.webp` for Superstar Actions and `<actual-name>-action.webp` for generic Actions. Base plates use the same stem plus `-base-plate`.
+- Updates the canonical asset migration manifest before the new GitHub artwork rebuild begins.
+- Certification: dedicated v1.1.1 invariants **6/6**; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930**; printed effects **835/835**; Rules Matrix **23/23**; save durability **6/6**; iPhone static viewport checks **20/20**; long session **600 matches / 0 stalls**.
+- Nine released recommended decks already use one or more migrated persistent Actions, so v1.1.1 receives a fresh full-roster balance gate rather than carrying v1.1.0 forward.
+- Final balance corrections caused by the unified Action economy: André the Giant swaps 1× Double Underhook Suplex → 1× Military Press Slam; Montez Ford preserves his Lead Off Dropkick and swaps the other 2× Dropkick → 2× Running Big Boot.
+- Final v1.1.1 roster certification: **73 Superstars / 52,560 matches / 0 stalls / 26.27 average turns / 0 hard outliers**. André finishes at 58.61%; Montez at 41.60%.
+- Historical all-version test comparison finds the exact same 72 superseded-contract failures as v1.1.0 and **0 new historical-suite failures**.
+
+## v1.1.2 — Card Studio Superstar Library + Printing Plates
+
+- Makes a base/printing plate mandatory for **every collectible/card-like item**, including Superstar cards, Moves, Actions, Entrances, Managers, Momentum, Merch and Superstar Variants.
+- Confirms **1,540/1,540** card-like items have unique non-empty base-plate targets: 930 collector cards, 515 Merch cards and 95 Superstar Variants. All **95/95 Superstar cards** have dedicated `<superstar-id>-superstar-base-plate.webp` targets.
+- Expands Card Studio to the complete **1,540-item** card ecosystem instead of collector cards alone.
+- Adds a Superstar-first **Complete Superstar Library** filter combining that Superstar's collector card, recommended-deck pages, exclusive/specific cards, Actions/Entrances, five linked Merch cards and Variant cards. Adds specific-only and recommended-deck-only scope filters.
+- Adds card-type filtering for Superstar, Superstar Variant, Move, Entrance, Manager, Action, Momentum and Merch. Support remains retired.
+- Adds an on-screen Superstar library summary with total / deck / Action / Merch / Variant counts.
+- Changes Studio production export paths to the canonical runtime/migration paths: readable finished front, matching `-base-plate.webp`, and `<superstar-id>-headshot.webp`. Deprecated `card-layered-*` and `card-custom-*` export namespaces are removed.
+- Updates `ASSET-MIGRATION.csv`, `IMAGE-PATH-GUIDE.md` and packaging so the image-path guide ships with the overlay.
+- No gameplay, deck, balance, economy, booster, progression, release-state or profile-schema change; profile schema remains **v43**. The certified v1.1.1 **73-Superstar / 52,560-match / 0-stall / 0-hard-outlier** balance result therefore carries forward.
+- Verification: dedicated v1.1.2 tests **5/5**; focused current Studio/Action group **14/14**; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930**; printed effects **835/835**; plate audit **1,540/1,540**; canonical Studio/manifest path audit **1,540/1,540 / 0 mismatches**.
+- Historical corpus: **996 tests / 830 passed / 72 superseded-contract failures / 94 skipped**. The failing-test names are the exact same 72 retained historical contracts as v1.1.1, so v1.1.2 introduces **0 new historical-suite regressions**.
+
+
+
+## v1.1.3 — Premium Card Frame + Reward Redesign + Set Logos
+- Supersedes **v1.1.2 — Card Studio Superstar Library + Printing Plates** as the current working baseline.
+- Locks a focused presentation/art-system pass for the rebuilt gameplay image library.
+- Standard card redesign target is now explicitly the **lower information banner / plaque only**: card name, cost, damage, requirement and type line receive a more premium layout with larger iPhone-first typography.
+- Explicitly preserves the existing **rarity stars** and **top set-name / set-logo area placement**.
+- Adds a separate **reward-card premium frame direction**, including logo/branding integration for earned/reward cards.
+- Locks the supplied **Ruthless Aggression** branding as the approved set-logo source and adds the canonical runtime target `assets/images/set-logos/ruthless-aggression-set-logo.webp`.
+- Locks the **official WWE.com NXT logo** as the approved NXT branding source and adds the canonical runtime target `assets/images/set-logos/nxt-set-logo.webp`.
+- Both set logos are expected as transparent-background **WEBP** runtime assets.
+- No gameplay, economy, deck or roster structure changes; v1.1.2 certification carries forward.
+- Packaging: artwork-reset overlay only; use `ASSET-MIGRATION.csv` and `IMAGE-PATH-GUIDE.md` as the source of truth when rebuilding the GitHub artwork library.
+
+## v1.1.4 — Premium Card Frame + Reward Identity + Set Logos
+- Implements the presentation work that v1.1.3 only specified; v1.1.3 itself did not contain the runtime card/reward redesign or the new set-logo wiring.
+- Rebuilds the Layered-card lower information area as an angular glass/metal plaque while preserving the existing rarity-star rail and upper set/show identity area. Card name, Cost, Damage, Method requirement and Move/type hierarchy are now separated for better iPhone readability.
+- Gives Season/future Reward cards a dedicated `is-premium-reward-card` family with gold/red earned-card trim, a distinct lower plaque and WWE Legacy Reward source lockup. This is presentation-only.
+- Adds **NXT — Series 1** as a first-class Studio theme using WWE Corporate's current silver NXT logo source: `https://corporate.wwe.com/f/inline-images/NXT-logo.png`.
+- Adds **Ruthless Aggression — Series 1** as a first-class Studio theme using the project-approved HobbyDB logo source supplied by the user.
+- Card Art Studio now includes dedicated NXT and Ruthless Aggression backgrounds, frame palettes, logo sizing, and an export-safe remote-logo load path with embedded fallback rendering if a source cannot be reached.
+- Corrects stale v1.1.2 build/package/cache markers carried by the v1.1.3 package and aligns the browser module graph to **v1.1.4**.
+- No gameplay, economy, decks, roster structure, card values, booster odds or progression rules changed.
+- Focused v1.1.4 presentation certification: **14/14 passed**. Core validation: **95 Superstars / 95 decks / 835 gameplay cards / 0 issues / 0 orphans**. Collector ID audit and flow audit: **0 issues**.
+- Historical suite comparison: uploaded v1.1.3 baseline had **74** retained failures; v1.1.4 has **72**, with **0 new failing historical contracts** and two stale baseline failures resolved by version/cache alignment.
+
+## v1.1.5 — Clean Card Plaque + Reward Logo + Exact Set Branding
+- Supersedes the v1.1.4 lower-card treatment after physical visual review found the nested boxes, chamfered plaque top and decorative lines too busy.
+- Replaces the lower information area with **one clean rectangular band**. There are no cut/diagonal plaque corners, no decorative top slashes, and no Cost/Damage boxes inside the plaque.
+- Keeps Cost and Damage as large standalone figures, with requirement and Move/type text cleanly aligned in the same single band.
+- Removes the duplicate/overflowing Reward source copy from the bottom of Reward cards.
+- Adds `assets/images/branding-wwe-legacy-reward-logo.png`, built from the existing WWE Legacy lockup with **REWARD** underneath, and uses it in the normal top-right set-logo zone for Reward cards.
+- Removes the v1.1.4 generated-text fallback versions of the NXT and Ruthless Aggression marks. Card Studio now attempts the exact approved WWE Corporate NXT source and project-approved HobbyDB Ruthless Aggression source even in local-file use; if the source cannot be loaded, it does not invent a substitute logo.
+- Reward Card Studio frames are unified to premium gold/red rather than inheriting a bright set-specific outer border.
+- No gameplay, economy, deck, roster, card-value, booster, progression or save-schema changes.
+- Certification: focused v1.1.5 presentation/superseded-plaque tests **10/10 passed**; rebuild validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues / 0 orphans**; collector ID and flow audits **0 issues**; historical suite **1,006 discovered / 840 passed / 72 retained historical-contract failures / 94 skipped**, with **0 new failing names versus v1.1.4**.
+
+
+## v1.1.8 — Secondary Label Readability + Golden Era Transparency (30 Aug 2026)
+- Extends the v1.1.7 readability pass to every non-move card family: **SUPERSTAR, ACTION, ENTRANCE, MANAGER, MOMENTUM, MERCH and SUPERSTAR VARIANT** secondary/type labels now use the same doubled small-text treatment rather than the old undersized footer typography.
+- Live layered utility-card type labels are doubled from 2.35cqw to 4.7cqw; live Superstar nameplate secondary labels are doubled from 2.6cqw to 5.2cqw with matching stronger weight.
+- Replaces the Golden Era square/checker-background source with a true-transparent local PNG derived from the exact project-approved classic blue/white/orange WWF reference.
+- Removes the generated gold-only Golden Era Studio override completely. Golden Era now uses the same visible-alpha trimming and apparent-size envelope as Attitude Era / New Generation (`maxW .235 / maxH .105`) inside the shared top-right safe zone.
+- No gameplay, economy, deck, card-value, move-requirement, roster, booster, progression or save-schema changes.
+- Certification: focused v1.1.7 + v1.1.8 presentation assertions **11/11 passed**; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**; full suite **1,020 discovered / 854 passed / 72 retained historical failures / 94 skipped**, with **0 new failing names versus v1.1.7**.
+
+## v1.1.7 — Card Readability + Era Logo Correction (30 Aug 2026)
+- Doubles Method-dot size and removes Method-group spacing differences; all requirement dots now form one evenly spaced centered sequence.
+- Lifts the lower move-card plaque clear of the bottom border and removes the plaque shadow/bleed.
+- Doubles the COST/DAMAGE label typography while retaining the large numeric figures.
+- Doubles MOVE/type typography and makes Studio wrapping content-aware: the line stays single-line when it fits and wraps only when necessary.
+- Corrects Attitude Era logo presentation by trimming transparent source padding and matching the approved New Generation apparent-size envelope/right-corner anchor.
+- Replaces the incorrect Golden Era logo with the approved blue/white/orange classic WWF mark matching the supplied reference.
+- Removes the obsolete Golden Era export-safe fallback so local/file-protocol Studio mode cannot reintroduce the superseded logo.
+- No gameplay, economy, deck, card-value, roster, booster, progression or save-schema changes.
+- Certification: **1,015 tests discovered / 849 passed / 72 retained historical failures / 94 skipped**, with **0 new failing names vs v1.1.6**; rebuild validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector-ID and flow audits **0 issues**.
+
+## v1.1.6 — Logo Safe Zone + Method Requirement Dots + Reward Consistency (29 Aug 2026)
+- Standardised every Card Art Studio top-right set/event logo into one protected safe zone mirroring the rarity-star inset on the left.
+- Reduced NXT and SmackDown logo scale and tightened all current set-logo profiles so no mark touches the card frame.
+- Removed the stale Trish Season 1 Reward-logo source and forced all Reward-family sets to the WWE Legacy REWARD mark, including export-safe/file-protocol Studio use.
+- Replaced text-heavy front Method requirements with colour-coded dots: Strength orange, Strike red, Technical green, Agility blue. Mixed requirements render grouped dots in authored order.
+- Rules-side requirement text remains unchanged for full readability. No gameplay/economy/card-value changes.
+
+## v1.1.9 — Golden Era Hi-Res Logo (30 Aug 2026)
+
+- Replaces the low-resolution Golden Era primary logo source with the higher-resolution transparent **WWF 1985–1998 3D** PNG from Loodibee.
+- Keeps the v1.1.8 local transparent Golden Era PNG as a one-time offline/source-failure fallback only.
+- Retains the exact v1.1.8 visible-alpha cropping, `.235 × .105` apparent-size profile and 7.5% right / 5.2% top protected safe zone.
+- No gameplay, economy, card-value, move-requirement, deck, roster, booster, progression or save-schema changes.
+- Certification: focused presentation assertions **14/14 passed**; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**; full suite **1,023 discovered / 857 passed / 72 retained historical failures / 94 skipped**, with **0 new failing names versus v1.1.8**.
+
+## v1.1.10 — New Generation Logo Hotfix (30 Aug 2026)
+
+- Repairs the New Generation logo regression where physical-iPhone rendering could leave only a narrow blue backing block in the protected top-right logo area.
+- Replaces the fragile New Generation SVG runtime dependency with a packaged high-resolution transparent PNG rendered from the same approved yellow/blue WWF New Generation vector artwork.
+- Card Art Studio file/local export now uses an embedded PNG data URI rather than the SVG data URI, preventing Safari from partially rendering the SVG during canvas composition/export.
+- Live UI and Card Art Studio both use the same packaged PNG. The legacy SVG is retained only as source/reference artwork, not as the runtime logo.
+- New Generation logo scale and placement are unchanged: `.235 × .105` apparent-size envelope inside the 7.5% right / 5.2% top protected safe zone.
+- No gameplay, economy, card-value, move-requirement, deck, roster, booster, progression or save-schema changes.
+
+## v1.1.11 — Upright Superstar Name Consistency — 30 August 2026
+
+- Standardized every Superstar name to upright/non-italic typography across live layered cards, Card Art Studio, generated Superstar previews and the Season 1 Cena splash.
+- Removed all authored `italic: true` Superstar nameplate flags and hardened runtime/Studio renderers so legacy profile metadata cannot reintroduce italics.
+- Preserved Superstar-specific font family, weight, tracking, scale, stroke, glow and colour treatments.
+- Presentation-only hotfix; no gameplay, economy, card values, deck, roster, booster, progression or save-schema changes.
+
+## v1.1.12 — Merch Footer Background Hotfix — 30 August 2026
+
+- Fixed Merch card product photography with white source backgrounds painting a large white block behind/below the lower identity plaque.
+- Card Art Studio now clips Merch photography at the lower identity-panel boundary (`77.2%` card height), leaving the set template visible in the footer/gutter while the plaque overlays cleanly.
+- No changes to Merch effects, rarity, duration, ownership, gameplay, economy, card values, decks, progression, save schema or roster structure.
+
+
+## v1.1.13 — Deck Lab Merch + Upgrade Assistant — 30 August 2026
+
+- Adds a dedicated **Merch Slot** to each Superstar's Deck Lab editor, outside the 60-page deck and Entrance selection.
+- Preserves the locked Merch contract: only **one active Merch item** at a time, Merch **never stacks**, and cards expire after **1, 3 or 5 completed eligible matches**, consuming one match only when the effect was actually eligible/applied.
+- Deck Lab's Merch picker shows owned Generic Merch plus Merch specific to the selected Superstar. Superstar-specific Merch cannot be equipped for a different Superstar.
+- Deck Lab shows the active Merch card, rules text and matches remaining, and allows the player to discard the active item to free the slot.
+- Booster **Deck Assistance / Upgrade Assistant** now recognizes newly pulled Superstar-specific Merch when the associated Superstar is already unlocked and the single Merch slot is empty.
+- Ask mode presents an **EQUIP** suggestion; Auto-upgrade can equip it automatically; Manual mode leaves it as a suggestion only.
+- Merch suggestions are suppressed if the Superstar is not unlocked or another Merch item is already active.
+- No card values, deck size/copy rules, booster odds, economy values, Superstar roster, progression or save-schema structure changed.
+- Certification: dedicated v1.1.13 Merch/Deck Lab/Assistant assertions **4/4 passed**; focused Merch + recent presentation checks **23/23 passed**; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**; full suite **1,038 discovered / 872 passed / 72 retained historical failures / 94 skipped**, with the exact same inherited 72 failure names as v1.1.12.
+
+
+## v1.1.14 — Merch Compatibility + Smart Recommendations — 30 August 2026
+
+- Generic Merch is now assigned to **one eligible unlocked Superstar** when equipped; the single consumable is never copied across multiple decks.
+- Upgrade Assistant now recommends newly pulled **Generic Merch** when the global Merch slot is empty, choosing one best legal fit based on the card's actual effect.
+- Method Momentum Merch uses a shared hard compatibility rule across Deck Lab, manual equip, Ask Me and Auto-upgrade: a Superstar with a `0` Method limit cannot equip that Method's Merch, and a Merch bonus cannot exceed a finite Method limit.
+- Generic Method boosts are ranked using the Superstar's authored deck Method usage, requirements and starter Momentum; HP/Shield/Adrenaline use effect-specific fit scoring.
+- If no unlocked Superstar can legally use a Generic Merch pull, no recommendation is shown.
+- Illegal equip attempts do not consume inventory. Existing 1/3/5-match expiry and non-stacking rules remain unchanged.
+
+## v1.1.15 — Plaque Shadow Hotfix — 30 August 2026
+
+- Removes the remaining Card Art Studio dark fade/vignette that sat behind the lower information plaque and made the plaque appear to cast a wide shade into the artwork.
+- Set artwork now runs cleanly to the plaque boundary; the plaque itself is the only dark rectangle in the footer area.
+- Retains the existing clean rectangular plaque geometry, border clearance, enlarged labels, Method dots and all v1.1.14 Merch behavior.
+- Presentation-only hotfix; no gameplay, economy, card-value, deck, roster, booster, progression or save-schema changes.
+- Certification: dedicated plaque assertions **2/2 passed**; focused plaque/readability checks **11/11 passed**; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**; full suite **1,045 discovered / 879 passed / 72 retained historical failures / 94 skipped**, with **0 added or removed failure names versus v1.1.14**.
+
+## v1.1.16 — Money in the Bank Plaque Shading Hotfix — 30 August 2026
+
+- Removes the remaining **Money in the Bank-specific translucent shading band** above the lower information plaque. This was part of the MITB background template itself rather than the global plaque-shadow layer removed in v1.1.15.
+- MITB artwork now runs cleanly to the plaque edge while retaining its purple/green gradient, radial glow, diagonal line system, frame and logo identity.
+- No gameplay, Merch, economy, card-value, deck, roster, booster, progression or save-schema changes.
+- Certification: dedicated MITB assertions **2/2 passed**; combined v1.1.15/v1.1.16 plaque assertions **4/4 passed**; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**; full suite **1,047 discovered / 881 passed / 72 retained historical failures / 94 skipped**, with the exact same 72 failure names as v1.1.15.
+
+## v1.1.17 — Season 1 Launch Poster — 30 August 2026
+
+- Replaces the previous constructed launch/splash UI with the supplied full-screen **WWE Legacy · Get Some Stratusfaction · Reach Tier 50 before September 30** promotional artwork.
+- Adds the poster locally at `assets/images/season1-stratusfaction-launch-poster.jpg` so launch does not depend on a remote image.
+- Preserves the complete poster without cropping; a blurred/darkened full-bleed copy fills excess space on taller/narrower displays.
+- The red **PLAY NOW** artwork now has a responsive percentage-based invisible HTML button over it. Returning profiles enter the Home Hub; new installs retain starter/onboarding before Home.
+- Removes the old rendered splash profile block and separate ENTER WWE LEGACY / START NEW LEGACY CTA from the active launch screen.
+- No gameplay, Merch, card values, decks, economy, booster odds, progression, roster or save-schema changes.
+- Certification: dedicated launch-poster assertions **4/4 passed**; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**; full suite **1,051 discovered / 885 passed / 72 retained historical failures / 94 skipped**, with the exact same 72 failure names as v1.1.16.
+
+## v1.1.18 — Card Art Studio 1px Position Nudges — 30 August 2026
+
+- Adds **−1 px / +1 px precision buttons** to both Horizontal and Vertical artwork-position sliders in Card Art Studio.
+- Sliders remain the coarse positioning control; the new buttons provide exact final alignment for HUD headshots and card artwork.
+- Each click snaps the displayed coordinate to its integer pixel position and moves it exactly one pixel in the requested direction.
+- Horizontal buttons move left/right; Vertical buttons move up/down. Controls work in both Card Front and HUD Headshot modes and retain their independent saved layouts.
+- No card, gameplay, economy, Merch, deck, roster, progression or save-schema changes.
+- Certification: dedicated precision-position assertions **3/3 passed**; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**; full suite **1,054 discovered / 888 passed / 72 retained historical failures / 94 skipped**, with the exact same 72 failure names as v1.1.17.
+
+## v1.1.19 — Animated Entrance / Action / Finisher Cards — 30 August 2026
+
+- Adds the animated-card foundation with a locked content rule: **Entrances, Actions and Finishers are animation-eligible**; ordinary Moves and other card families remain static.
+- Current authored eligibility is **314 cards**: 96 Entrances, 120 Actions and 98 Finishers.
+- Runtime prefers animated WebP and falls back to GIF, while the existing static base plate remains underneath as a no-animation/error fallback.
+- Animated assets load only near/inside the viewport and unload when off-screen; reduced-motion users retain the static presentation.
+- Live card data remains layered above the animation so names, rarity, stats, Method dots and type labels stay current and are not baked into animated media.
+- Card Art Studio adds an Animated Card workflow for eligible cards, accepts GIF/animated WebP sources and preserves the original animated file instead of flattening it through canvas export.
+- Canonical animated filenames are `assets/images/<image-key>-animated.webp` or `.gif`.
+- No gameplay, card values, Merch rules, deck structure, economy, roster, boosters, progression or save-schema changes.

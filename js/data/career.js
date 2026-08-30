@@ -6,6 +6,7 @@ export const CAREER_MODES = Object.freeze([
   { id: "live-event", label: "Live Event" },
   { id: "ladder", label: "Money in the Bank" },
   { id: "king-of-the-ring", label: "King of the Ring" },
+  { id: "survivor-series", label: "Survivor Series" },
   { id: "championship", label: "Championship Road" },
 ]);
 
