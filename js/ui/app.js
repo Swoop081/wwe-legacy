@@ -1,46 +1,46 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.45";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.45";
-import { superstars } from "../data/superstars.js?v=1.1.45";
-import { decks } from "../data/decks.js?v=1.1.45";
-import { sets } from "../data/sets.js?v=1.1.45";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.45";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.45";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.45";
-import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.45";
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, claimWelcomeSuperstarPack, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.45";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.45";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.45";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.45";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.45";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.45";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.45";
-import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.45";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.45";
-import { totalMomentum } from "../engine/utils.js?v=1.1.45";
-import { healthZone } from "../engine/health.js?v=1.1.45";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.45";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.45";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.45";
-import { playPileMatStyle } from "./play-pile-mats.js?v=1.1.45";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.45";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.45";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.45";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.45";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.45";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.45";
-import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.45";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.45";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.45";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.45";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.45";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.45";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.45";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.45";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.45";
-import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.45";
-import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.45";
-import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.45";
-import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.45";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.46";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.46";
+import { superstars } from "../data/superstars.js?v=1.1.46";
+import { decks } from "../data/decks.js?v=1.1.46";
+import { sets } from "../data/sets.js?v=1.1.46";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.46";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.46";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.46";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.46";
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, claimWelcomeSuperstarPack, welcomeSuperstarState, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.46";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.46";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.46";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.46";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.46";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.46";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.46";
+import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.46";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.46";
+import { totalMomentum } from "../engine/utils.js?v=1.1.46";
+import { healthZone } from "../engine/health.js?v=1.1.46";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.46";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.46";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.46";
+import { playPileMatStyle } from "./play-pile-mats.js?v=1.1.46";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.46";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.46";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.46";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.46";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.46";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.46";
+import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.46";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.46";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.46";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.46";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.46";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.46";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.46";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.46";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.46";
+import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.46";
+import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.46";
+import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.46";
+import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.46";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -2695,6 +2695,72 @@ function layeredSuperstarRarityMarkup(card) {
   return `<svg class="ccg-live-superstar-rarity" viewBox="0 0 680 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">${liveFrontRaritySvg(card)}</svg>`;
 }
 
+// v1.1.46 — the live collectible face is painted by Canvas using the same
+// 680×1000 coordinates and Canvas text routines as Card Art Studio. SVG/CSS
+// approximations are retained only as inert compatibility markup for older
+// tests/builds; they are not the visible face on a layered Card Studio asset.
+const CARD_STUDIO_RUNTIME_DISPLAY_STACK='"Bahnschrift Condensed", "Avenir Next Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif';
+const CARD_STUDIO_RUNTIME_META_STACK='"Bahnschrift SemiCondensed", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+const CARD_STUDIO_RUNTIME_NUMBER_STACK='"DIN Alternate", "Bahnschrift SemiCondensed", "Avenir Next Condensed", "Arial Narrow", Arial, sans-serif';
+const CARD_STUDIO_RUNTIME_KIND_LABELS={superstar:"SUPERSTAR",variant:"SUPERSTAR VARIANT",move:"MOVE",entrance:"ENTRANCE",manager:"MANAGER",action:"ACTION",momentum:"MOMENTUM",merch:"MERCH"};
+const CARD_STUDIO_RUNTIME_METHOD_META={strength:{color:"#ff8a1f"},strike:{color:"#ef3f4e"},technical:{color:"#36c86f"},agility:{color:"#2fa8ff"}};
+const CARD_STUDIO_RUNTIME_DEFAULT_THEME={border:"#e1bd61",nameTop:"#ffffff",nameBottom:"#e1bd61",stroke:"#08080b",glow:"rgba(225,189,97,.52)",accent:"#e1bd61",accent2:"#ffffff"};
+const CARD_STUDIO_RUNTIME_THEMES={
+  "survivor-series-series-1":{border:"#ff6b1b",nameTop:"#ffffff",nameBottom:"#ff8a3d",stroke:"#041329",glow:"rgba(255,107,27,.58)",accent:"#ff6b1b",accent2:"#d8dee8"},
+  "smackdown-series-1":{border:"#1597ff",nameTop:"#ffffff",nameBottom:"#75c8ff",stroke:"#031326",glow:"rgba(21,151,255,.62)",accent:"#1597ff",accent2:"#ffffff"},
+  "money-in-the-bank-series-1":{border:"#74ef40",nameTop:"#f6fff2",nameBottom:"#74ef40",stroke:"#13051c",glow:"rgba(117,239,65,.60)",accent:"#74ef40",accent2:"#a855f7"},
+  "worlds-collide-series-1":{border:"#62f13f",nameTop:"#f7fff1",nameBottom:"#73ff42",stroke:"#040504",glow:"rgba(84,255,57,.58)",accent:"#62f13f",accent2:"#e5b642"},
+  "raw-series-1":{border:"#ef2637",nameTop:"#f7f7f8",nameBottom:"#c7ccd2",stroke:"#110305",glow:"rgba(238,30,48,.60)",accent:"#ef2637",accent2:"#bfc5cc"},
+  "summerslam-series-1":{border:"#f6a253",nameTop:"#ffffff",nameBottom:"#ff9d38",stroke:"#071b36",glow:"rgba(93,210,255,.62)",accent:"#67b9ff",accent2:"#f6a253"},
+  "evolution-series-1":{border:"#ff54d7",nameTop:"#ffffff",nameBottom:"#ff54d7",stroke:"#351044",glow:"rgba(76,221,255,.55)",accent:"#ff8ee8",accent2:"#8b6cff"},
+  "season-1-final-boss":{border:"#ef3d4c",nameTop:"#fff4c8",nameBottom:"#ef3d4c",stroke:"#260307",glow:"rgba(228,183,76,.50)",accent:"#f04a56",accent2:"#e8bd65"},
+  "season-1-last-time-is-now":{border:"#1d56a6",nameTop:"#ffffff",nameBottom:"#d93434",stroke:"#07111f",glow:"rgba(29,86,166,.52)",accent:"#1d56a6",accent2:"#d93434"},
+  "season-2-whos-next":{border:"#dfc160",nameTop:"#ffffff",nameBottom:"#dfc160",stroke:"#08090a",glow:"rgba(223,193,96,.54)",accent:"#dfc160",accent2:"#d6dde4"},
+  "new-generation-series-1":{border:"#ffdc00",nameTop:"#fff6a8",nameBottom:"#31e0d4",stroke:"#160b36",glow:"rgba(238,59,159,.58)",accent:"#ffdc00",accent2:"#31e0d4"},
+  "golden-era-series-1":{border:"#e4b63f",nameTop:"#fff3b0",nameBottom:"#e44236",stroke:"#160b08",glow:"rgba(228,182,63,.58)",accent:"#e4b63f",accent2:"#e44236"},
+  "attitude-era-series-1":{border:"#d7dade",nameTop:"#ffffff",nameBottom:"#ed2537",stroke:"#050505",glow:"rgba(237,37,55,.56)",accent:"#ed2537",accent2:"#d7dade"},
+  "nxt-series-1":{border:"#f0d44f",nameTop:"#ffffff",nameBottom:"#f0d44f",stroke:"#050505",glow:"rgba(240,212,79,.54)",accent:"#f0d44f",accent2:"#ffffff"},
+  "ruthless-aggression-series-1":{border:"#a8b7c8",nameTop:"#ffffff",nameBottom:"#d84040",stroke:"#07101b",glow:"rgba(216,64,64,.48)",accent:"#d84040",accent2:"#a8b7c8"},
+  "merch-generic":{border:"#e1bd61",nameTop:"#ffffff",nameBottom:"#e1bd61",stroke:"#08080b",glow:"rgba(225,189,97,.48)",accent:"#e1bd61",accent2:"#ffffff"}
+};
+const CARD_STUDIO_RUNTIME_REWARD_SETS=new Set(["season-1-final-boss","season-1-last-time-is-now","season-2-whos-next","parked-chyna"]);
+function cardStudioInkPayload(card){
+  if(!card)return "";
+  return encodeURIComponent(JSON.stringify({id:card.id,name:card.name,kind:card.kind,setId:card.setId,superstarId:card.superstarId??null,rarity:card.rarity??1,cost:card.cost??0,damage:card.damage??0,requirements:card.requirements??{},finisher:Boolean(card.finisher),moveType:card.moveType??card.method??"move",duration:card.duration??1}));
+}
+function layeredCardStudioInkMarkup(card){
+  if(!card||card.kind==="momentum")return "";
+  return `<canvas class="ccg-card-studio-ink" width="680" height="1000" data-card-studio-ink="${cardStudioInkPayload(card)}" aria-hidden="true"></canvas>`;
+}
+function cardStudioRuntimeTheme(card){return CARD_STUDIO_RUNTIME_THEMES[card?.setId]??CARD_STUDIO_RUNTIME_DEFAULT_THEME;}
+function cardStudioRuntimeFont(stack,size,weight){return `${weight} ${size}px ${stack}`;}
+function cardStudioTrackedWidth(ctx,text,tracking){const chars=[...String(text)];return chars.reduce((n,ch)=>n+ctx.measureText(ch).width,0)+Math.max(0,chars.length-1)*tracking;}
+function cardStudioDrawTrackedText(ctx,text,x,y,tracking,{stroke=false}={}){const chars=[...String(text)],total=cardStudioTrackedWidth(ctx,text,tracking);let cursor=x-total/2;for(const ch of chars){const cw=ctx.measureText(ch).width;if(stroke)ctx.strokeText(ch,cursor+cw/2,y);else ctx.fillText(ch,cursor+cw/2,y);cursor+=cw+tracking;}}
+function cardStudioFittedNameFont(ctx,text,maxWidth,maxPx,minPx){let px=maxPx;while(px>minPx){ctx.font=cardStudioRuntimeFont(CARD_STUDIO_RUNTIME_DISPLAY_STACK,px,900);if(ctx.measureText(text).width<=maxWidth)break;px-=2;}return px;}
+function cardStudioMoveRequirementGroups(card){if(card?.kind!=="move"||card?.finisher)return [];return Object.entries(card.requirements||{}).filter(([,amount])=>Number(amount)>0).map(([method,amount])=>({method:String(method).toLowerCase(),amount:Number(amount)}));}
+function cardStudioDrawRequirementDots(ctx,card,cx,y){const groups=cardStudioMoveRequirementGroups(card);if(!groups.length)return false;const r=17.4,gap=10,dots=groups.flatMap(group=>Array.from({length:group.amount},()=>group.method));const width=dots.length*(r*2)+Math.max(0,dots.length-1)*gap;let x=cx-width/2+r;ctx.save();for(const method of dots){const meta=CARD_STUDIO_RUNTIME_METHOD_META[method]||{color:"#fff"};ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=meta.color;ctx.shadowColor=meta.color;ctx.shadowBlur=10;ctx.fill();ctx.lineWidth=2.1;ctx.strokeStyle="rgba(255,255,255,.84)";ctx.stroke();ctx.beginPath();ctx.arc(x-r*.26,y-r*.28,r*.28,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,.48)";ctx.shadowBlur=0;ctx.fill();x+=r*2+gap;}ctx.restore();return true;}
+function cardStudioDrawResponsiveMoveType(ctx,text,cx,y,maxWidth,fontPx,tracking,fill){const full=String(text||"").toUpperCase();ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle=fill;ctx.font=cardStudioRuntimeFont(CARD_STUDIO_RUNTIME_META_STACK,fontPx,950);if(cardStudioTrackedWidth(ctx,full,tracking)<=maxWidth){cardStudioDrawTrackedText(ctx,full,cx,y,tracking);ctx.restore();return false;}const parts=full.split(" • ");if(parts.length<2){cardStudioDrawTrackedText(ctx,full,cx,y,tracking);ctx.restore();return false;}const lineGap=fontPx*.82;cardStudioDrawTrackedText(ctx,parts[0],cx,y-lineGap*.48,tracking);cardStudioDrawTrackedText(ctx,`• ${parts.slice(1).join(" • ")}`,cx,y+lineGap*.52,tracking);ctx.restore();return true;}
+function cardStudioDrawRarityStars(ctx,card){const rarity=Math.max(1,Math.min(4,Number(card.rarity)||1));ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";ctx.font=`900 24px Arial, sans-serif`;ctx.lineJoin="round";for(let i=0;i<rarity;i++){const x=51,y=62+i*31;ctx.lineWidth=3;ctx.strokeStyle="rgba(28,18,2,.92)";ctx.shadowColor="rgba(0,0,0,.75)";ctx.shadowBlur=5;ctx.strokeText("★",x,y);const gold=ctx.createLinearGradient(x,y-12,x,y+12);gold.addColorStop(0,"#fff2a6");gold.addColorStop(.46,"#f4c542");gold.addColorStop(1,"#b97608");ctx.fillStyle=gold;ctx.shadowColor="rgba(255,202,55,.48)";ctx.shadowBlur=8;ctx.fillText("★",x,y);}ctx.restore();}
+function cardStudioSuperstarNameText(card){const p=SUPERSTAR_NAMEPLATE_PROFILES[card?.superstarId];return p?.preserveCase?String(card?.name??""):String(card?.name??"").toUpperCase();}
+function cardStudioDrawSuperstarName(ctx,card,text,x,y,maxWidth,set){const p=SUPERSTAR_NAMEPLATE_PROFILES[card?.superstarId]??{};let px=54*Number(p.fontScale??1),tracking=Number(p.tracking??0),scaleX=Number(p.scaleX??1),skew=Math.tan(Number(p.skew??0)*Math.PI/180);const weight=Number(p.weight??900),family=p.fontFamily??CARD_STUDIO_RUNTIME_DISPLAY_STACK;while(px>23){ctx.font=`${weight} ${px}px ${family}`;const width=cardStudioTrackedWidth(ctx,text,tracking)*scaleX;if(width<=maxWidth)break;px-=1.5;}ctx.save();ctx.translate(x,y);ctx.transform(1,0,skew,1,0,0);ctx.scale(scaleX,1);ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineJoin="round";ctx.lineWidth=Number(p.strokeWidth??3.1);ctx.strokeStyle=set.stroke||"rgba(0,0,0,.96)";ctx.shadowColor="rgba(0,0,0,.82)";ctx.shadowBlur=7;cardStudioDrawTrackedText(ctx,text,0,0,tracking,{stroke:true});const ng=ctx.createLinearGradient(0,-26,0,18);ng.addColorStop(0,set.nameTop);ng.addColorStop(.62,set.nameTop);ng.addColorStop(1,set.nameBottom);ctx.fillStyle=ng;ctx.shadowColor=set.glow;ctx.shadowBlur=Number(p.glow??6);cardStudioDrawTrackedText(ctx,text,0,0,tracking);ctx.restore();}
+function paintCardStudioInk(canvas,card){
+  if(!canvas||!card)return;
+  const ctx=canvas.getContext("2d");if(!ctx)return;ctx.clearRect(0,0,680,1000);
+  const set=cardStudioRuntimeTheme(card),isMove=card.kind==="move",isSuperstar=card.kind==="superstar",isReward=CARD_STUDIO_RUNTIME_REWARD_SETS.has(card.setId),text=isSuperstar?cardStudioSuperstarNameText(card):String(card.name??"").toUpperCase();
+  ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
+  const nameY=isMove?787:852;
+  if(isSuperstar){cardStudioDrawSuperstarName(ctx,card,text,340,nameY,544,set);}else{cardStudioFittedNameFont(ctx,text,530.4,isMove?44:49,23);ctx.lineJoin="round";ctx.lineWidth=3;ctx.strokeStyle="rgba(0,0,0,.96)";ctx.shadowColor="rgba(0,0,0,.78)";ctx.shadowBlur=7;ctx.strokeText(text,340,nameY);const ng=ctx.createLinearGradient(0,nameY-24,0,nameY+18);ng.addColorStop(0,"#ffffff");ng.addColorStop(.62,set.nameTop||"#ffffff");ng.addColorStop(1,isReward?"#f0cf72":set.nameBottom);ctx.fillStyle=ng;ctx.shadowColor=isReward?"rgba(240,207,114,.28)":set.glow;ctx.shadowBlur=4;ctx.fillText(text,340,nameY);}
+  ctx.shadowColor="transparent";ctx.shadowBlur=0;
+  if(isMove){const statFigure=(cx,label,value)=>{ctx.save();ctx.textAlign="center";ctx.fillStyle=isReward?"#f2d27b":"rgba(255,255,255,.80)";ctx.font=cardStudioRuntimeFont(CARD_STUDIO_RUNTIME_META_STACK,29,950);cardStudioDrawTrackedText(ctx,label,cx,829,1.1);ctx.fillStyle="#fff";ctx.font=cardStudioRuntimeFont(CARD_STUDIO_RUNTIME_NUMBER_STACK,64,1000);ctx.fillText(String(value),cx,884);ctx.restore();};statFigure(108.8,"COST",card.cost??0);statFigure(571.2,"DAMAGE",card.damage??0);const hasReq=cardStudioDrawRequirementDots(ctx,card,340,866);const moveType=String(card.moveType||"move").toUpperCase(),moveLine=`MOVE • ${moveType}`,moveFill=isReward?"#f1d079":set.nameBottom;cardStudioDrawResponsiveMoveType(ctx,moveLine,340,hasReq?929:895,333.2,hasReq?34:40,1.0,moveFill);}else{const type=card.kind==="merch"?`MERCH • ${card.duration??1} MATCH${Number(card.duration)===1?"":"ES"}`:(CARD_STUDIO_RUNTIME_KIND_LABELS[card.kind]||String(card.kind||"CARD").toUpperCase());ctx.fillStyle=isReward?"#f1d079":set.nameBottom;ctx.font=cardStudioRuntimeFont(CARD_STUDIO_RUNTIME_META_STACK,29,950);cardStudioDrawTrackedText(ctx,type,340,909,1.0);}
+  ctx.restore();cardStudioDrawRarityStars(ctx,card);
+}
+function renderCardStudioInkLayers(scope=document){
+  if(typeof document==="undefined")return;
+  const canvases=scope.querySelectorAll?.("canvas.ccg-card-studio-ink:not([data-card-studio-painted='1'])")??[];
+  canvases.forEach(canvas=>{try{const raw=decodeURIComponent(canvas.dataset.cardStudioInk||"");if(!raw)return;const card=JSON.parse(raw);paintCardStudioInk(canvas,card);canvas.dataset.cardStudioPainted="1";}catch(error){console.warn("WWE Legacy Card Studio live face failed",error);}});
+}
+
+
 function tribalChiefFrontOverlayMarkup(card) {
   if (!card || card.id !== "special-roman-reigns") return "";
   return `<span class="ccg-tribal-chief-front-data" aria-hidden="true">
@@ -2727,11 +2793,11 @@ function scheduleCardNameMarquees() {
 }
 if (typeof MutationObserver !== "undefined" && typeof document !== "undefined") {
   const cardNameMarqueeObserver = new MutationObserver(records => {
-    if (records.some(record => record.addedNodes?.length)) { scheduleCardNameMarquees(); registerAnimatedCardPlates(document); }
+    if (records.some(record => record.addedNodes?.length)) { scheduleCardNameMarquees(); registerAnimatedCardPlates(document); renderCardStudioInkLayers(document); }
   });
   cardNameMarqueeObserver.observe(document.documentElement, { childList: true, subtree: true });
   globalThis.addEventListener?.('resize', scheduleCardNameMarquees);
-  globalThis.queueMicrotask?.(() => registerAnimatedCardPlates(document));
+  globalThis.queueMicrotask?.(() => { registerAnimatedCardPlates(document); renderCardStudioInkLayers(document); });
 }
 
 
@@ -2905,7 +2971,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
   const frontMarkup = forcedFinishedFront
     ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${layeredFallbackData}`
     : layeredFront
-      ? `<span class="ccg-card-art ${superstarFront ? "ccg-superstar-full-art" : moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${superstarFront ? `${superstarNameplateMarkup(card)}${layeredSuperstarRarityMarkup(card)}` : layeredFrontOverlayMarkup(card)}`
+      ? `<span class="ccg-card-art ${superstarFront ? "ccg-superstar-full-art" : moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${superstarFront ? `${superstarNameplateMarkup(card)}${layeredSuperstarRarityMarkup(card)}` : layeredFrontOverlayMarkup(card)}${layeredCardStudioInkMarkup(card)}`
     : superstarFront
     ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card,{eager:eagerArt})}</span>${superstarNameplateMarkup(card)}`
       : tribalChiefLiveFront && finishedFront

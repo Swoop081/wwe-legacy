@@ -10990,3 +10990,21 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
 }
 .ccg-card.has-active-animation .ccg-live-front-svg,
 .ccg-card.has-active-animation .ccg-live-superstar-rarity{z-index:4!important}
+
+/* ========================================================================== */
+/* v1.1.46 — Card Studio Canvas is the live printed face.                     */
+/* The base plate already contains the authored frame, set field, logo and    */
+/* blank plaque. Paint only the exact Card Studio ink over it.                */
+/* ========================================================================== */
+.ccg-card.is-layered-front .ccg-live-front-svg,
+.ccg-card.is-layered-front .ccg-live-superstar-rarity,
+.ccg-card.is-layered-front .ccg-superstar-nameplate{
+  display:none!important;
+}
+.ccg-card.is-layered-front .ccg-card-studio-ink{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  display:block!important;z-index:4!important;pointer-events:none!important;
+  opacity:1!important;visibility:visible!important;background:transparent!important;
+}
+.ccg-card.is-layered-front:not(.has-layered-asset) .ccg-card-studio-ink{visibility:hidden!important}
+.ccg-card.has-active-animation .ccg-card-studio-ink{z-index:4!important}
