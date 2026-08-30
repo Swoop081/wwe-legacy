@@ -1,0 +1,72 @@
+name: WWE Legacy Release Overlay
+
+on:
+  push:
+    paths:
+      - '.release/READY'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wwe-legacy-release-overlay
+  cancel-in-progress: false
+
+jobs:
+  apply-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply complete release overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t patches < <(find .release -maxdepth 1 -type f -name '*.patch' | sort)
+          if [ "${#patches[@]}" -eq 0 ]; then
+            echo "No release patches found."
+            exit 1
+          fi
+          for patch in "${patches[@]}"; do
+            echo "Applying ${patch}"
+            git apply --check "${patch}"
+            git apply "${patch}"
+          done
+
+      - name: Stamp release version and regenerate Card Studio data
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run stamp-cache
+          npm run generate-studio
+
+      - name: Verify release
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test \
+            test/v1139-bret-hart-ringpost-figure-four.test.js \
+            test/v1138-card-studio-runtime-animation-layering.test.js \
+            test/v1135-presentation-source-of-truth.test.js \
+            test/v01356-bret-hart-new-generation.test.js \
+            test/v01381-british-bulldog-new-generation.test.js \
+            test/v01274-exclusive-rarity-policy.test.js
+          npm run flow
+          npm run validate
+          npm run card-ids
+
+      - name: Publish verified release to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION=$(node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')).version")
+          rm -rf .release
+          git config user.name "WWE Legacy Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "No release changes to commit."; exit 1; }
+          git commit -m "WWE Legacy v${VERSION} — release overlay"
+          git push origin HEAD:main
