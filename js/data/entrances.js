@@ -1,1 +1,1 @@
-import { allGameplayCards } from "./content.js?v=1.1.23"; export const entrances=Object.fromEntries(allGameplayCards.filter(c=>c.kind==="entrance").map(c=>[c.id,c]));
+import { allGameplayCards } from "./content.js?v=1.1.24"; export const entrances=Object.fromEntries(allGameplayCards.filter(c=>c.kind==="entrance").map(c=>[c.id,c]));

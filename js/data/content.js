@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.23";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.23";
+import { enrichCounterState } from "./counter-states.js?v=1.1.24";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.24";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",

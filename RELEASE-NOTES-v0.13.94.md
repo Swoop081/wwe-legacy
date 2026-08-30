@@ -1,3 +1,13 @@
+# WWE Legacy v1.1.24 — Launch Poster Centering Hotfix
+
+- Fixes the Season 1 launch poster being shifted right on iPhone.
+- Root cause was inherited legacy `.splash-screen` padding still applying to the new full-viewport poster screen.
+- The launch poster surface is now fixed to the real viewport with zero margin/padding and explicit horizontal/vertical centering.
+- The poster frame also has zero margin/transform so the 768×1376 artwork remains uncropped and centered with equal side space whenever letterboxing is required.
+- PLAY NOW remains poster-relative and scales with the same centered frame.
+- Certification: launch/animation focused checks **9/9 passed**; full suite **1,072 / 906 passed / 72 inherited historical failures / 94 skipped** with **0 added or removed failure names**; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**.
+- No gameplay, animation, Merch, balance, roster, economy, progression or save-schema changes.
+
 # WWE Legacy v1.1.23 — Animated Art Window Hotfix
 
 - Repairs the new universal animated-card presentation so linked GIF/WebP media behaves as the **moving artwork layer only** rather than visually replacing the full collectible card shell.

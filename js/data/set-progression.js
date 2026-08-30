@@ -1,7 +1,7 @@
-import { cardsForSet } from './collection.js?v=1.1.23';
-import { ownedCount } from './profile.js?v=1.1.23';
-import { grantRandomBoosters } from './boosters.js?v=1.1.23';
-import { CARD_TIERS } from './variants.js?v=1.1.23';
+import { cardsForSet } from './collection.js?v=1.1.24';
+import { ownedCount } from './profile.js?v=1.1.24';
+import { grantRandomBoosters } from './boosters.js?v=1.1.24';
+import { CARD_TIERS } from './variants.js?v=1.1.24';
 
 export const SET_LIFECYCLES = ['featured','vaulted','returning'];
 export const COLLECTION_MILESTONES = [

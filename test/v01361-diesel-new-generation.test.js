@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=1.1.23";
-import { superstars } from "../js/data/superstars.js?v=1.1.23";
-import { decks } from "../js/data/decks.js?v=1.1.23";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.23";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.23";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=1.1.23";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.23";
-import { canPlaySpecial } from "../js/engine/rules.js?v=1.1.23";
+import { sets } from "../js/data/sets.js?v=1.1.24";
+import { superstars } from "../js/data/superstars.js?v=1.1.24";
+import { decks } from "../js/data/decks.js?v=1.1.24";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.24";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.24";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=1.1.24";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.24";
+import { canPlaySpecial } from "../js/engine/rules.js?v=1.1.24";
 
 const diesel=Object.values(superstars).find(s=>s.id==="diesel");
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));

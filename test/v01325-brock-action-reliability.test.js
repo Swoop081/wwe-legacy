@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.23';
-import { superstars } from '../js/data/superstars.js?v=1.1.23';
-import { decks } from '../js/data/decks.js?v=1.1.23';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.23';
-import { canPlayAction, canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=1.1.23';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.24';
+import { superstars } from '../js/data/superstars.js?v=1.1.24';
+import { decks } from '../js/data/decks.js?v=1.1.24';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.24';
+import { canPlayAction, canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=1.1.24';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
