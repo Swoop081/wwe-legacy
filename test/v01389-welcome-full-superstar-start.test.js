@@ -9,9 +9,9 @@ import {
   welcomeSuperstarCandidates,
   freshNormalDeckBlueprint,
   ownedCount
-} from '../js/data/profile.js?v=1.1.24';
-import { validateDeckDraft, selectedEntranceId } from '../js/data/deck-builder.js?v=1.1.24';
-import { superstars } from '../js/data/superstars.js?v=1.1.24';
+} from '../js/data/profile.js?v=1.1.25';
+import { validateDeckDraft, selectedEntranceId } from '../js/data/deck-builder.js?v=1.1.25';
+import { superstars } from '../js/data/superstars.js?v=1.1.25';
 
 const starById = new Map(Object.values(superstars).map(star => [star.id, star]));
 
@@ -78,7 +78,7 @@ test('v0.13.89 fresh Normal deck materializer preserves 60 pages and five-copy c
   }
 });
 
-test('v0.13.89 Welcome UI promises a full Normal deck and five selectable live sets', () => {
+test.skip('v0.13.89 Welcome UI promises a full Normal deck and five selectable live sets — superseded by v1.1.25 random Superstar Pack onboarding', () => {
   const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
   assert.match(app, /complete 60-page Normal deck/);
   assert.match(app, /1 RANDOM SUPERSTAR · FULL NORMAL DECK/);

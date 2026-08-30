@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.24";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.24";
+import { enrichCounterState } from "./counter-states.js?v=1.1.25";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.25";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -9843,7 +9843,8 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "bayley",
     "rarity": 3,
-    "rulesText": "Bayley-exclusive. Ground opponent. On Connect, search/draw Rose Plant; it costs 4 less this Control sequence.",
+    "trademark": true,
+    "rulesText": "Bayley-exclusive Trademark. Ground opponent. On Connect, search/draw Rose Plant; it costs 4 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,

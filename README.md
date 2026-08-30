@@ -1,27 +1,39 @@
-# WWE Legacy v1.1.23 — Universal Animated Card Shell
+# WWE Legacy v1.1.25 — Onboarding Superstar Pack + Season Road Visual Overhaul
 
-**Current working baseline.** v1.1.23 supersedes v1.1.21.
+**Current working baseline.** v1.1.25 supersedes v1.1.24.
 
-## What changed
+## New-player flow
 
-Every collectible card can now optionally have an animated version. Animation is no longer restricted to Entrances, Actions and Finishers.
+The approved **CM Punk / Roman Reigns** starter choice remains unchanged and still grants the selected starter's complete deck.
 
-Runtime order remains:
+After that choice, the old era/set Welcome selector is replaced by one random **Superstar Pack**. A Superstar Pack is a reusable WWE Legacy reward type containing exactly five Normal identity cards for one released Superstar:
 
-**Linked animation URL → packaged animated WebP → packaged GIF → existing static front/base plate.**
+- Superstar
+- Entrance
+- one Finisher
+- one Trademark
+- one Action
 
-The important renderer change is that animated media is now only the **moving artwork layer inside the normal WWE Legacy card shell**. It cannot replace the whole card. The normal card dimensions, border/frame, rarity stars, protected top-right set logo, lower information plaque and live text remain above it.
+The onboarding pack excludes already-owned Superstars. It does not create a second complete 60-page deck; the player builds that Superstar's wider deck through normal collection progression and Deck Lab.
 
-This directly fixes the first Roman's Spear linked-GIF test where the raw GIF swallowed the frame/logo and caused the large live text to collide with the plaque.
+The current pack library supports **72/72 released player-visible Superstars** before exclusions.
 
-Card inspectors also use a direct front/back face swap instead of relying on an iOS Safari 3D backface for the enlarged card, preventing the rules side from appearing as a mirrored animated front.
+## Home / Season portraits
 
-## Card Art Studio
+Home and Season panels that previously showed broken image placeholders now prefer WWE.com profile artwork for the featured Superstars used by those panels, while retaining the existing local-art and generic-placeholder fallback chain.
 
-The Animated Card controls are now available for **every selected card**. GIF and animated WebP local files and direct linked URLs continue to work, with the normal static version always retained as fallback.
+## Season Road
+
+The 50-tier Season Road now uses large full-width reward rectangles at roughly twice the old mobile row height. Each tier has a large tier-number slab and shows the reward itself:
+
+- actual collectible card for card rewards
+- physical booster packet for booster rewards
+- WWE Legacy UP medallion for Universe Points
+
+The existing reward values, XP thresholds and claim rules are unchanged.
 
 ## Carry-forward
 
-All v1.1.21 linked-animation CORS fallback behavior and all v1.1.20 Live Events, Trish, Merch and prior card-presentation/gameplay systems remain unchanged.
+v1.1.24 launch-poster centering, v1.1.23 animated-art window behavior, v1.1.20+ Live Events / Trish / Merch work, and all existing gameplay systems carry forward unless specifically noted in `BUILD-CERTIFICATION.md`.
 
-See `BUILD-CERTIFICATION.md` for validation results.
+See `BUILD-CERTIFICATION.md` and the canonical release-notes file for certification details.

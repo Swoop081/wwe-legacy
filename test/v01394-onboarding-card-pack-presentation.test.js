@@ -14,7 +14,7 @@ test('v0.13.96 starter choice renders actual Normal Superstar cards for Punk and
   assert.match(css, /\.starter-superstar-card-face \.ccg-card/);
 });
 
-test('v0.13.96 Welcome era choice renders the five physical set packs as selectors', () => {
+test.skip('v0.13.96 Welcome era choice renders the five physical set packs as selectors — superseded by v1.1.25 random Superstar Pack onboarding', () => {
   assert.match(app, /welcome-pack-screen/);
   assert.match(app, /welcome-pack-choice-grid/);
   assert.match(app, /physicalBoosterPackMarkup\(\{setId,title:set\?\.name/);

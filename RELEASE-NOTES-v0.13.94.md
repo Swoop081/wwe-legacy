@@ -1,3 +1,13 @@
+# WWE Legacy v1.1.25 — Onboarding Superstar Pack + Season Road Visual Overhaul
+
+- Keeps the initial **CM Punk / Roman Reigns** starter choice and full starter deck unchanged, then replaces the old five-era Welcome choice with one random **Superstar Pack**.
+- Superstar Packs are now a reusable reward primitive. A pack grants exactly five Normal identity cards for one released Superstar: **Superstar + Entrance + 1 Finisher + 1 Trademark + 1 Action**. The onboarding pack excludes already-owned Superstars and does not manufacture a second full 60-page deck.
+- The reusable pack library covers **72/72 currently released player-visible Superstars** before exclusions. Shared identity moves are supported; **Bayley-to-Belly** is now Bayley's 3★ Trademark (existing C5/D8/Strength 2/effect unchanged) so Bayley has a complete five-card pack package.
+- Home/Season portrait surfaces that were showing broken `?` images now prefer WWE.com profile art for Roman Reigns, CM Punk, Trish Stratus, Seth Rollins, Becky Lynch, Rhea Ripley, Stone Cold Steve Austin and Liv Morgan, with the existing local-art fallback chain retained.
+- Season Road tiers are rebuilt as large full-width reward rectangles at roughly twice the previous mobile row height. Tier numbers are much larger and every tier now shows the reward visually: the actual collectible card, correct physical booster packet, or dedicated gold WWE Legacy UP medallion.
+- Existing 50-tier reward values, claim state, Season XP, booster odds, Merch, Live Events, animation and save-schema behavior remain unchanged.
+- Certification: focused **11/11**; full suite **1,078 / 909 passed / 72 inherited historical failures / 97 skipped**, with **0 added or removed failing names** vs v1.1.24. Validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; pack coverage **72/72 released Superstars**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**.
+
 # WWE Legacy v1.1.24 — Launch Poster Centering Hotfix
 
 - Fixes the Season 1 launch poster being shifted right on iPhone.

@@ -1,11 +1,12 @@
-import { decks } from "./decks.js?v=1.1.24";
-import { collectionCards } from "./collection.js?v=1.1.24";
-import { superstars } from "./superstars.js?v=1.1.24";
-import { isUnreleasedSetId } from "./release.js?v=1.1.24";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.24";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.24";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.24";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.24";
+import { decks } from "./decks.js?v=1.1.25";
+import { collectionCards } from "./collection.js?v=1.1.25";
+import { superstars } from "./superstars.js?v=1.1.25";
+import { isUnreleasedSetId } from "./release.js?v=1.1.25";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.25";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.25";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.25";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.25";
+import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.25";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
@@ -328,7 +329,7 @@ export function createProfile(starterId) {
     storePurchases: [],
     pendingUnlockCelebrations: [],
     onboarding: { complete: false, step: 0 },
-    welcomeSuperstar: { claimed: false, setId: null, superstarId: null },
+    welcomeSuperstar: { claimed: false, setId: null, superstarId: null, packType: null, cardIds: [] },
     createdAt: new Date().toISOString()
   };
   // Every new Legacy begins with a reusable baseline Entrance plus enough of
@@ -396,6 +397,45 @@ export function claimWelcomeSuperstar(p, setId, rng = Math.random) {
   p.selectedEntrances ??= {};
   if (totalOwnedCopies(p, DEFAULT_PLAYER_ENTRANCE_ID) > 0) p.selectedEntrances[star.id] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   p.welcomeSuperstar = { claimed: true, setId, superstarId: star.id, deckReady: true };
+  return { ...p.welcomeSuperstar, alreadyClaimed: false };
+}
+
+export function grantSuperstarPack(p, rng = Math.random, { celebrate = false, excludeOwned = true } = {}) {
+  if (!p) throw new Error("Profile required");
+  const pack = drawRandomSuperstarPack(rng, { excludeSuperstarIds: excludeOwned ? (p.unlockedSuperstars ?? []) : [] });
+  const sid = pack.superstarId;
+  p.unlockedSuperstars ??= [];
+  const newlyUnlocked = !p.unlockedSuperstars.includes(sid);
+  if (newlyUnlocked) p.unlockedSuperstars.push(sid);
+  const grantedCardIds = [];
+  for (const id of pack.cardIds) {
+    const result = addOwnedCard(p, id, { tier: DEFAULT_STARTER_TIER, amount: 1 });
+    if (result.added > 0) grantedCardIds.push(id);
+  }
+  p.selectedEntrances ??= {};
+  if (pack.slots?.entrance && totalOwnedCopies(p, pack.slots.entrance) > 0) p.selectedEntrances[sid] = pack.slots.entrance;
+  p.savedDecks ??= {};
+  delete p.savedDecks[sid];
+  p.deckNeedsCards ??= {};
+  p.deckNeedsCards[sid] = recommendedOwnedMissingCount(p, sid);
+  if (newlyUnlocked && celebrate) queueSuperstarUnlockCelebration(p, sid);
+  return { ...pack, newlyUnlocked, grantedCardIds, deckReady: false, recommendedMissing: p.deckNeedsCards[sid] };
+}
+
+export function claimWelcomeSuperstarPack(p, rng = Math.random) {
+  if (!p) throw new Error("Profile required");
+  const state = welcomeSuperstarState(p);
+  if (state.claimed) return { ...state, alreadyClaimed: true };
+  const result = grantSuperstarPack(p, rng, { celebrate: false, excludeOwned: true });
+  p.welcomeSuperstar = {
+    claimed: true,
+    setId: result.setId,
+    superstarId: result.superstarId,
+    packType: result.type,
+    cardIds: [...result.cardIds],
+    slots: { ...result.slots },
+    deckReady: false
+  };
   return { ...p.welcomeSuperstar, alreadyClaimed: false };
 }
 

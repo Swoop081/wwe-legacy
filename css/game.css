@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.24") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.25") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -10320,3 +10320,101 @@ body[data-screen="splash"] #game>section{animation:none!important}
 .ccg-card.is-layered-front .ccg-live-front-move .ccg-live-type:not(.has-requirement){top:92.2%!important;width:48%!important;font-size:4.7cqw!important;line-height:.92!important}
 .ccg-card.is-layered-front .ccg-live-front-move .ccg-live-stat{top:83.1%!important}
 
+
+/* ========================================================================== */
+/* v1.1.25 — Superstar Pack onboarding + large visual Season reward tiers.    */
+/* ========================================================================== */
+
+.superstar-pack-opening-screen,.superstar-pack-reveal-screen{
+  min-height:100dvh!important;
+  padding:calc(16px + env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom))!important;
+  background:radial-gradient(circle at 50% 33%,rgba(212,168,69,.17),transparent 32%),linear-gradient(180deg,#08090d,#050508)!important;
+}
+.superstar-pack-opening-screen .starter-hero,.superstar-pack-reveal-screen .starter-hero{max-width:680px!important}
+.superstar-pack-sealed{
+  position:relative;
+  width:min(74vw,340px);
+  aspect-ratio:.68;
+  margin:14px auto 8px;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:7px;
+  overflow:hidden;
+  border:3px solid #e5bb54;
+  border-radius:22px;
+  color:#fff;
+  background:radial-gradient(circle at 50% 25%,rgba(245,202,102,.30),transparent 28%),linear-gradient(145deg,#2b080d 0%,#6d101c 54%,#11070a 100%);
+  box-shadow:0 26px 60px rgba(0,0,0,.52),0 0 32px rgba(224,177,70,.18),inset 0 0 0 2px rgba(255,255,255,.09);
+  text-align:center;
+  cursor:pointer;
+}
+.superstar-pack-sealed:before,.superstar-pack-sealed:after{content:"";position:absolute;left:0;right:0;height:22px;background:repeating-linear-gradient(90deg,#c69327 0 8px,#f3d279 8px 16px,#8e661c 16px 22px);opacity:.82}
+.superstar-pack-sealed:before{top:0}.superstar-pack-sealed:after{bottom:0}
+.superstar-pack-foil{position:absolute;inset:0;background:linear-gradient(120deg,transparent 26%,rgba(255,255,255,.12) 39%,transparent 53%);transform:translateX(-60%);pointer-events:none}
+.superstar-pack-sealed .superstar-pack-brand{position:relative;z-index:2;transform:scale(.82);transform-origin:center}
+.superstar-pack-sealed>b{position:relative;z-index:2;font-size:clamp(2.25rem,10vw,3.45rem);line-height:.78;letter-spacing:-.055em;font-style:italic;font-weight:1000;color:#fff;text-shadow:0 4px 14px rgba(0,0,0,.8)}
+.superstar-pack-sealed>small{position:relative;z-index:2;font-size:.54rem;letter-spacing:.16em;color:#f2cc72;font-weight:1000}
+.superstar-pack-sealed>em{position:relative;z-index:2;font-size:.50rem;letter-spacing:.08em;color:#ddd;font-style:normal}
+.superstar-pack-sealed>i{position:absolute;z-index:3;left:14%;right:14%;bottom:38px;min-height:46px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(180deg,#f0c95e,#b98724);color:#110b03;font-style:normal;font-weight:1000;font-size:.72rem;letter-spacing:.07em;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.superstar-pack-footnote{max-width:540px;margin:8px auto 0;text-align:center;color:#929aa6;font-size:.64rem;line-height:1.45}
+.superstar-pack-winner{position:relative;max-width:620px;width:100%;min-height:160px;margin:6px auto 12px;display:grid;grid-template-columns:150px minmax(0,1fr);align-items:center;gap:12px;overflow:hidden;border:1px solid rgba(239,197,84,.46);border-radius:20px;background:radial-gradient(circle at 12% 20%,rgba(238,194,75,.18),transparent 36%),linear-gradient(145deg,#20160c,#0a0b0f 62%);box-shadow:0 18px 38px rgba(0,0,0,.32)}
+.superstar-pack-headshot{align-self:stretch;display:grid;align-items:end;overflow:hidden}
+.superstar-pack-headshot .official-menu-superstar-photo{width:100%;height:170px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 12px 18px rgba(0,0,0,.46))}
+.superstar-pack-winner>div{display:grid;gap:4px;padding-right:16px}.superstar-pack-winner small{font-size:.42rem;letter-spacing:.16em;color:#edc45d;font-weight:1000}.superstar-pack-winner strong{font-size:1.55rem;line-height:.9;font-style:italic;font-weight:1000;text-transform:uppercase}.superstar-pack-winner em{font-size:.58rem;font-style:normal;color:#8d98a7;text-transform:uppercase}
+.superstar-pack-card-row{width:100%;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(112px,1fr);gap:8px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory}
+.superstar-pack-card{display:grid;gap:5px;justify-items:center;scroll-snap-align:start}.superstar-pack-card>span{font-size:.40rem;letter-spacing:.12em;color:#e5bd55;font-weight:1000}.superstar-pack-card .welcome-pack-ccg{width:112px!important;max-width:112px!important}
+
+/* Season Road: large visual reward rectangles rather than compressed text rows. */
+body[data-screen="seasons"] .season-reward-road{gap:10px!important;padding:8px 0 20px!important}
+body[data-screen="seasons"] .season-road-spine{left:43px!important;width:4px!important;top:10px!important;bottom:10px!important}
+body[data-screen="seasons"] .season-road-node,
+body[data-screen="seasons"] .season-road-node.road-left,
+body[data-screen="seasons"] .season-road-node.road-right{
+  width:100%!important;
+  max-width:100%!important;
+  min-height:128px!important;
+  justify-self:stretch!important;
+  grid-template-columns:82px 82px minmax(0,1fr)!important;
+  gap:10px!important;
+  padding:10px 12px!important;
+  border-radius:18px!important;
+  align-items:center!important;
+}
+body[data-screen="seasons"] .season-road-node.major{min-height:140px!important}
+body[data-screen="seasons"] .season-road-connector{display:none!important}
+body[data-screen="seasons"] .season-road-tier{
+  width:74px!important;
+  height:106px!important;
+  border-radius:16px!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:2px!important;
+  position:relative!important;
+  z-index:2!important;
+}
+body[data-screen="seasons"] .season-road-tier small{font-size:.38rem!important;letter-spacing:.14em!important}
+body[data-screen="seasons"] .season-road-tier b{font-size:2.2rem!important;line-height:.82!important;letter-spacing:-.055em!important}
+body[data-screen="seasons"] .season-road-reward-visual{width:78px;height:106px;display:grid;place-items:center;overflow:hidden;position:relative}
+body[data-screen="seasons"] .season-reward-card .season-tier-mini-card{width:68px!important;max-width:68px!important;filter:drop-shadow(0 8px 12px rgba(0,0,0,.36))}
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack{width:68px!important;height:100px!important;min-width:68px!important;min-height:100px!important;transform:none!important;margin:0!important;filter:drop-shadow(0 8px 12px rgba(0,0,0,.36))}
+body[data-screen="seasons"] .season-reward-pack .pack-wrapper-face{padding:8px 5px!important}
+body[data-screen="seasons"] .season-reward-pack .pack-series-name,body[data-screen="seasons"] .season-reward-pack .pack-contents-line{font-size:.26rem!important}
+body[data-screen="seasons"] .season-reward-up{width:78px!important;height:78px!important;align-self:center;border-radius:50%;display:grid!important;place-content:center!important;gap:0!important;border:3px solid #f0c34d;background:radial-gradient(circle at 35% 25%,#fff0a5 0 7%,#e3ad2a 8% 42%,#6a4511 72%,#1a1206 100%);box-shadow:0 0 22px rgba(239,190,62,.24),inset 0 0 0 3px rgba(34,20,3,.78);color:#160e02;text-align:center}
+body[data-screen="seasons"] .season-reward-up small{font-size:.19rem!important;letter-spacing:.08em!important;font-weight:1000}.season-reward-up b{font-size:1.38rem!important;line-height:.9!important}.season-reward-up strong{font-size:.48rem!important;letter-spacing:.08em!important}
+body[data-screen="seasons"] .season-road-reward{grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;width:100%!important;min-width:0!important;align-items:center!important}
+body[data-screen="seasons"] .season-road-reward>div{display:grid!important;gap:5px!important;min-width:0!important}
+body[data-screen="seasons"] .season-road-reward strong{font-size:.88rem!important;line-height:1!important;white-space:normal!important;display:block!important;overflow:visible!important}
+body[data-screen="seasons"] .season-road-reward small{font-size:.52rem!important;line-height:1.12!important;color:#9ba3b1!important}
+body[data-screen="seasons"] .season-road-reward em{font-size:.46rem!important;letter-spacing:.07em!important;white-space:nowrap!important;justify-self:end!important}
+body[data-screen="seasons"] .season-road-reward button{min-height:48px!important;padding:8px 11px!important;font-size:.54rem!important;justify-self:end!important;white-space:nowrap!important}
+
+@media(max-width:390px){
+  body[data-screen="seasons"] .season-road-node,body[data-screen="seasons"] .season-road-node.road-left,body[data-screen="seasons"] .season-road-node.road-right{grid-template-columns:72px 72px minmax(0,1fr)!important;gap:8px!important;min-height:122px!important;padding:9px!important}
+  body[data-screen="seasons"] .season-road-tier{width:66px!important;height:100px!important}.season-road-tier b{font-size:2.0rem!important}
+  body[data-screen="seasons"] .season-road-reward-visual{width:68px;height:100px}.season-reward-card .season-tier-mini-card{width:62px!important;max-width:62px!important}
+  body[data-screen="seasons"] .season-reward-pack .physical-booster-pack{width:62px!important;height:94px!important;min-width:62px!important;min-height:94px!important}
+  body[data-screen="seasons"] .season-reward-up{width:68px!important;height:68px!important}.season-reward-up b{font-size:1.2rem!important}
+  body[data-screen="seasons"] .season-road-reward strong{font-size:.76rem!important}.season-road-reward small{font-size:.46rem!important}.season-road-reward em{font-size:.40rem!important}
+  .superstar-pack-card-row{grid-auto-columns:104px}.superstar-pack-card .welcome-pack-ccg{width:104px!important;max-width:104px!important}
+}

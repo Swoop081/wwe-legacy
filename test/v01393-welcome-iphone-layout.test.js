@@ -14,7 +14,7 @@ test.skip('v0.13.93 Welcome era choice uses compact set identity rather than fak
   assert.match(css, /\.welcome-set-choice:nth-child\(5\)\{grid-column:1\/-1/);
 });
 
-test('v0.13.93 Welcome Superstar reveal gives the actual card a full iPhone hero stage', () => {
+test.skip('v0.13.93 Welcome Superstar reveal gives the actual card a full iPhone hero stage — superseded by v1.1.25 five-card Superstar Pack reveal', () => {
   assert.match(app, /welcome-reveal-screen/);
   assert.match(app, /welcome-superstar-card-wrap/);
   assert.match(css, /\.welcome-reveal-screen\{height:100svh!important;min-height:100svh!important/);
