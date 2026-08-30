@@ -1,3 +1,23 @@
+# WWE Legacy v1.1.27 — Jake Roberts Trademark Audit
+
+## v1.1.27 — Jake Roberts Trademark Audit
+
+- Removes `GE1-061 Jake’s Gutwrench Gutbuster` and `GE1-062 Jake’s Running Knee Lift` completely from gameplay data, Collection, Card Studio, asset migration and collector numbering.
+- Jake Roberts intentionally has two fewer personal Trademark moves than the prior uniform Legend template: Jake’s Short-Arm Clothesline and Jake’s DDT remain his only personal moves for now.
+- Replaces the eight removed deck pages with existing authentic shared offense: +4 Clothesline, +3 Atomic Drop and +1 Neckbreaker.
+- Jake remains on a legal 60-page deck; Clothesline finishes at four copies while Atomic Drop and Neckbreaker each finish at five. His approved reactive-defense density remains 10 pages.
+- Golden Era collector numbering closes the removed-card gap and now runs `GE1-001` through `GE1-082`.
+
+# WWE Legacy v1.1.26 — Card Presentation Consistency Hotfix
+
+## v1.1.26 — Card Presentation Consistency Hotfix
+
+- Live-game Superstar card nameplates now render every Superstar name in full uppercase, including `CM PUNK` and `ROMAN REIGNS` on first-time onboarding.
+- Keeps the existing live-game nameplate font, sizing, spacing, colour, stroke and layout unchanged.
+- Replaces the styled-text logo inside the sealed onboarding Superstar Pack with the exact approved WWE Legacy launch lockup asset.
+- Extends Merch animated artwork across the full card face so it continues behind and underneath the lower plaque instead of stopping at the plaque boundary.
+- No card data, gameplay, onboarding grants, Season Road rewards, economy values or image assets change.
+
 # WWE Legacy v1.1.25 — Onboarding Superstar Pack + Season Road Visual Overhaul
 
 - Keeps the initial **CM Punk / Roman Reigns** starter choice and full starter deck unchanged, then replaces the old five-era Welcome choice with one random **Superstar Pack**.

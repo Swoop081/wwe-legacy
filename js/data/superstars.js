@@ -4709,8 +4709,6 @@ export const superstars = {
     ],
     "signatures": [
       "jake-roberts-short-arm-clothesline",
-      "jake-roberts-running-knee-lift",
-      "jake-roberts-gutwrench-gutbuster",
       "jake-roberts-ddt"
     ],
     "archetype": "technical-strike-setup",

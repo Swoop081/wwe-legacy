@@ -4206,148 +4206,136 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "GE1-060"
   },
   {
-    "id": "jake-roberts-gutwrench-gutbuster",
+    "id": "jake-roberts-short-arm-clothesline",
     "setId": "golden-era-series-1",
     "cardNumber": 61,
     "cardCode": "GE1-061"
   },
   {
-    "id": "jake-roberts-running-knee-lift",
+    "id": "manager-virgil",
     "setId": "golden-era-series-1",
     "cardNumber": 62,
     "cardCode": "GE1-062"
   },
   {
-    "id": "jake-roberts-short-arm-clothesline",
+    "id": "mr-perfect-dropkick",
     "setId": "golden-era-series-1",
     "cardNumber": 63,
     "cardCode": "GE1-063"
   },
   {
-    "id": "manager-virgil",
+    "id": "mr-perfect-knee-lift",
     "setId": "golden-era-series-1",
     "cardNumber": 64,
     "cardCode": "GE1-064"
   },
   {
-    "id": "mr-perfect-dropkick",
+    "id": "mr-perfect-neck-snap",
     "setId": "golden-era-series-1",
     "cardNumber": 65,
     "cardCode": "GE1-065"
   },
   {
-    "id": "mr-perfect-knee-lift",
+    "id": "mr-perfect-perfect-plex",
     "setId": "golden-era-series-1",
     "cardNumber": 66,
     "cardCode": "GE1-066"
   },
   {
-    "id": "mr-perfect-neck-snap",
+    "id": "rowdy-roddy-piper-bulldog",
     "setId": "golden-era-series-1",
     "cardNumber": 67,
     "cardCode": "GE1-067"
   },
   {
-    "id": "mr-perfect-perfect-plex",
+    "id": "rowdy-roddy-piper-eye-poke",
     "setId": "golden-era-series-1",
     "cardNumber": 68,
     "cardCode": "GE1-068"
   },
   {
-    "id": "rowdy-roddy-piper-bulldog",
+    "id": "rowdy-roddy-piper-punch-combination",
     "setId": "golden-era-series-1",
     "cardNumber": 69,
     "cardCode": "GE1-069"
   },
   {
-    "id": "rowdy-roddy-piper-eye-poke",
+    "id": "rowdy-roddy-piper-sleeper-hold",
     "setId": "golden-era-series-1",
     "cardNumber": 70,
     "cardCode": "GE1-070"
   },
   {
-    "id": "rowdy-roddy-piper-punch-combination",
+    "id": "special-jake-roberts",
     "setId": "golden-era-series-1",
     "cardNumber": 71,
     "cardCode": "GE1-071"
   },
   {
-    "id": "rowdy-roddy-piper-sleeper-hold",
+    "id": "special-mr-perfect",
     "setId": "golden-era-series-1",
     "cardNumber": 72,
     "cardCode": "GE1-072"
   },
   {
-    "id": "special-jake-roberts",
+    "id": "special-rowdy-roddy-piper",
     "setId": "golden-era-series-1",
     "cardNumber": 73,
     "cardCode": "GE1-073"
   },
   {
-    "id": "special-mr-perfect",
+    "id": "special-ted-dibiase",
     "setId": "golden-era-series-1",
     "cardNumber": 74,
     "cardCode": "GE1-074"
   },
   {
-    "id": "special-rowdy-roddy-piper",
+    "id": "superstar-jake-roberts",
     "setId": "golden-era-series-1",
     "cardNumber": 75,
     "cardCode": "GE1-075"
   },
   {
-    "id": "special-ted-dibiase",
+    "id": "superstar-mr-perfect",
     "setId": "golden-era-series-1",
     "cardNumber": 76,
     "cardCode": "GE1-076"
   },
   {
-    "id": "superstar-jake-roberts",
+    "id": "superstar-rowdy-roddy-piper",
     "setId": "golden-era-series-1",
     "cardNumber": 77,
     "cardCode": "GE1-077"
   },
   {
-    "id": "superstar-mr-perfect",
+    "id": "superstar-ted-dibiase",
     "setId": "golden-era-series-1",
     "cardNumber": 78,
     "cardCode": "GE1-078"
   },
   {
-    "id": "superstar-rowdy-roddy-piper",
+    "id": "ted-dibiase-backbreaker",
     "setId": "golden-era-series-1",
     "cardNumber": 79,
     "cardCode": "GE1-079"
   },
   {
-    "id": "superstar-ted-dibiase",
+    "id": "ted-dibiase-million-dollar-dream",
     "setId": "golden-era-series-1",
     "cardNumber": 80,
     "cardCode": "GE1-080"
   },
   {
-    "id": "ted-dibiase-backbreaker",
+    "id": "ted-dibiase-million-dollar-fist-drop",
     "setId": "golden-era-series-1",
     "cardNumber": 81,
     "cardCode": "GE1-081"
   },
   {
-    "id": "ted-dibiase-million-dollar-dream",
+    "id": "ted-dibiase-piledriver",
     "setId": "golden-era-series-1",
     "cardNumber": 82,
     "cardCode": "GE1-082"
-  },
-  {
-    "id": "ted-dibiase-million-dollar-fist-drop",
-    "setId": "golden-era-series-1",
-    "cardNumber": 83,
-    "cardCode": "GE1-083"
-  },
-  {
-    "id": "ted-dibiase-piledriver",
-    "setId": "golden-era-series-1",
-    "cardNumber": 84,
-    "cardCode": "GE1-084"
   },
   {
     "id": "kick-to-the-gut",

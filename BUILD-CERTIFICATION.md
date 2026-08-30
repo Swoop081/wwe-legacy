@@ -1,13 +1,27 @@
-# WWE Legacy v1.1.25 — Onboarding Superstar Pack + Season Road Visual Overhaul
+# WWE Legacy v1.1.27 — Jake Roberts Trademark Audit
 
 ## Release identity
-- Version: **v1.1.25**
+- Version: **v1.1.27**
 - Title: **Onboarding Superstar Pack + Season Road Visual Overhaul**
 - Date: **30 August 2026**
-- Base: **v1.1.24 — Launch Poster Centering Hotfix**
+- Base: **v1.1.26 — Card Presentation Consistency Hotfix**
 - Distribution: **no-assets code overlay**; no packaged image asset changed in this release.
 
 ## Implemented changes
+
+### v1.1.27 Jake Roberts audit
+- Removes Jake’s Gutwrench Gutbuster and Jake’s Running Knee Lift completely.
+- Jake’s personal move library intentionally contracts to Jake’s Short-Arm Clothesline and Jake’s DDT.
+- Replaces the eight removed deck pages with four shared Clotheslines, three Atomic Drops and one Neckbreaker.
+- Jake remains at 60 pages and all non-Momentum copies remain within the five-copy ceiling.
+- Golden Era contracts from 84 to 82 collector cards and is renumbered gap-free through `GE1-082`.
+- Global gameplay/collector counts contract from 835/930 to **833/928**.
+
+### v1.1.26 presentation corrections
+- Live-game Superstar card names render in full uppercase while preserving the existing nameplate typography and layout.
+- The sealed onboarding Superstar Pack uses the exact approved `branding-wwe-legacy-lockup.png` launch identity asset.
+- Merch animated artwork fills the card face and continues behind the lower plaque; the plaque remains an overlay.
+- No gameplay, card data, reward, economy or packaged image asset changes.
 
 ### New-player onboarding
 - Keeps the approved first choice between **CM Punk** and **Roman Reigns** unchanged, including the complete starter deck grant.
@@ -46,14 +60,14 @@
 - No booster odds, economy values, Season XP thresholds, Merch rules, animation rules, Live Event rules or card printing tiers change.
 
 ## Certification
-- Focused v1.1.25 + launch/animation carry-forward assertions: **11/11 passed**.
-- Full suite: **1,078 discovered / 909 passed / 72 retained historical-contract failures / 97 skipped**.
-- Compared with v1.1.24's inherited failure-name set: **0 added failing names / 0 removed failing names**.
+- Focused v1.1.26 presentation + v1.1.25 onboarding carry-forward assertions: **13/13 passed**.
+- No-assets package-context full suite: **1,077 discovered / 902 passed / 78 retained failures / 97 skipped**.
+- The attached v1.1.25 no-assets baseline produces the same **78** package-context failures; v1.1.26 adds **0 new failing contracts**.
 - The three additional skips are obsolete pre-v1.1.25 player-facing Welcome-era/full-second-deck presentation contracts explicitly superseded by Superstar Pack onboarding.
-- Rebuild validation: **95 Superstars / 95 decks / 835 gameplay cards / 0 orphans / 0 issues**.
+- Rebuild validation: **95 Superstars / 95 decks / 833 gameplay cards / 0 orphans / 0 issues**.
 - Superstar Pack coverage: **72 / 72 released player-visible Superstars pack-ready** before profile exclusions.
-- Collector ID audit: **930 cards / 930 manifest entries / 0 issues**.
+- Collector ID audit: **928 cards / 928 manifest entries / 0 issues**.
 - Flow audit: **95 Superstars / 0 issues**.
 - JavaScript syntax checks passed for live UI, profile and Superstar Pack module.
-- Cache/version stamp: **v1.1.25**.
-- Physical iPhone visual smoke remains pending for the new onboarding pack/reveal, WWE.com portrait replacement surfaces and the enlarged Season tier panels.
+- Cache/version stamp: **v1.1.27**.
+- Physical iPhone visual smoke remains pending for uppercase Superstar nameplates, exact Superstar Pack branding, full-face Merch artwork, and the v1.1.25 onboarding/Season presentation surfaces.

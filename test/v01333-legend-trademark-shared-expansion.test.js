@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.25';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.25';
-import { deckIds } from '../js/data/decks.js?v=1.1.25';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.27';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.27';
+import { deckIds } from '../js/data/decks.js?v=1.1.27';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const count=(ids,id)=>ids.filter(x=>x===id).length;

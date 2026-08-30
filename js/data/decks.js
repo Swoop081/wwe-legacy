@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.25";
+import { allGameplayCards } from "./content.js?v=1.1.27";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -4237,14 +4237,14 @@ export const deckIds={
     "jake-roberts-short-arm-clothesline",
     "jake-roberts-short-arm-clothesline",
     "jake-roberts-short-arm-clothesline",
-    "jake-roberts-running-knee-lift",
-    "jake-roberts-running-knee-lift",
-    "jake-roberts-running-knee-lift",
-    "jake-roberts-running-knee-lift",
-    "jake-roberts-gutwrench-gutbuster",
-    "jake-roberts-gutwrench-gutbuster",
-    "jake-roberts-gutwrench-gutbuster",
-    "jake-roberts-gutwrench-gutbuster",
+    "clothesline",
+    "clothesline",
+    "clothesline",
+    "clothesline",
+    "atomic-drop",
+    "atomic-drop",
+    "atomic-drop",
+    "neckbreaker",
     "jake-roberts-ddt",
     "jake-roberts-ddt",
     "jake-roberts-ddt",

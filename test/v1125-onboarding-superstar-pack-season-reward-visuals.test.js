@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, STARTER_CHOICES, claimWelcomeSuperstarPack, welcomeSuperstarState, ownedCount } from "../js/data/profile.js?v=1.1.25";
-import { superstarPackCandidates, SUPERSTAR_PACK_SIZE } from "../js/data/superstar-packs.js?v=1.1.25";
-import { collectionCards } from "../js/data/collection.js?v=1.1.25";
+import { createProfile, STARTER_CHOICES, claimWelcomeSuperstarPack, welcomeSuperstarState, ownedCount } from "../js/data/profile.js?v=1.1.27";
+import { superstarPackCandidates, SUPERSTAR_PACK_SIZE } from "../js/data/superstar-packs.js?v=1.1.27";
+import { collectionCards } from "../js/data/collection.js?v=1.1.27";
 
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
@@ -11,7 +11,7 @@ const build=JSON.parse(fs.readFileSync(new URL("../build.json",import.meta.url),
 const cardById=new Map(collectionCards.map(card=>[card.id,card]));
 
 test("v1.1.25 keeps the CM Punk / Roman Reigns starter choice",()=>{
-  assert.equal(build.version,"1.1.25");
+  assert.match(build.version,/^1\.1\.(?:2[5-9]|[3-9]\d)$/);
   assert.deepEqual(STARTER_CHOICES,["cm-punk","roman-reigns"]);
   assert.match(app,/Choose Your Champion/);
 });

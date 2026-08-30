@@ -1,5 +1,5 @@
-import { enrichCounterState } from "./counter-states.js?v=1.1.25";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.25";
+import { enrichCounterState } from "./counter-states.js?v=1.1.27";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.27";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -14784,64 +14784,6 @@ export const allGameplayCards = [
     "counterState": "arm-extended",
     "searchOnConnectName": "Jake’s DDT",
     "searchOnConnectDiscount": 1
-  },
-  {
-    "kind": "move",
-    "cost": 4,
-    "damage": 7,
-    "requirements": {
-      "strike": 1
-    },
-    "moveType": "strike",
-    "method": "strike",
-    "rarity": 3,
-    "rulesText": "Jake-exclusive Trademark. Does not ground. On Connect: Jake’s next Grapple costs 1 less this Control sequence. On Connect: +1 persistent Head damage.",
-    "groundOpponent": false,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [
-      {
-        "type": "discountNextMoveType",
-        "moveType": "grapple",
-        "amount": 1
-      }
-    ],
-    "id": "jake-roberts-running-knee-lift",
-    "name": "Jake’s Running Knee Lift",
-    "setId": "golden-era-series-1",
-    "superstarId": "jake-roberts",
-    "trademark": true,
-    "counterState": "leg-extended",
-    "bodyDamage": {
-      "bodyPart": "head",
-      "pressure": 1
-    }
-  },
-  {
-    "kind": "move",
-    "cost": 5,
-    "damage": 8,
-    "requirements": {
-      "technical": 1,
-      "strength": 1
-    },
-    "moveType": "grapple",
-    "method": "technical",
-    "rarity": 3,
-    "rulesText": "Jake-exclusive Trademark. Grounds opponent. On Connect: opponent loses 1 additional Adrenaline.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [],
-    "id": "jake-roberts-gutwrench-gutbuster",
-    "name": "Jake’s Gutwrench Gutbuster",
-    "setId": "golden-era-series-1",
-    "superstarId": "jake-roberts",
-    "trademark": true,
-    "counterState": "torso-trapped",
-    "opponentAdrenalineOnConnect": -1
   },
   {
     "kind": "move",
