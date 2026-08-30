@@ -1,44 +1,36 @@
-# WWE Legacy v1.1.22 — Build Certification
+# WWE Legacy v1.1.23 — Animated Art Window Hotfix Certification
 
 ## Release identity
-- Version: **v1.1.22**
-- Title: **Universal Animation + Merch Transparency**
+- Version: **v1.1.23**
+- Title: **Animated Art Window Hotfix**
 - Date: **30 August 2026**
-- Base: **v1.1.21 — Linked Animated URL CORS Fallback**
-- Scope: presentation/workflow correction only; universal optional animation plus final Merch base-plate alpha enforcement.
+- Base: **v1.1.22 — Universal Animated Card Shell**
+- Scope: repair the universal animation presentation so linked GIF/WebP artwork stays inside the intended artwork area instead of visually replacing the full collectible card shell.
 
 ## Implemented changes
 
-### Merch final alpha clear
-- Merch layered/base-plate export now clears the live plaque rectangle using `destination-out` as the **final canvas composition operation**.
-- The clear is performed after template, artwork, veil, set logo and frame work, preventing any later canvas draw from reintroducing opaque pixels underneath the live plaque.
-- A small antialias-safe expansion is used without touching the outer card frame.
+### Runtime animated card presentation
+- Animated-card rendering no longer adds a second live rarity/logo chrome layer.
+- The runtime now treats animated GIF/WebP media as the **moving artwork layer only**.
+- Animation is clipped into an interior artwork window, while the normal card frame, border, set logo, rarity stars and lower plaque remain the underlying canonical card face.
+- Move, merch, superstar and other card families use tuned vertical clip bounds so animation does not run down through the lower plaque.
+- Static card art/base-plate fallback behavior remains unchanged if no animation is present or an animation source fails.
 
-### Universal optional animation
-- `isAnimatedCardEligible()` now accepts every collectible card identity.
-- Linked URL → packaged animated WebP → packaged GIF → static artwork remains the runtime fallback order.
-- Card Art Studio exposes local animated file upload and linked URL import for every selected collectible card.
-- Animation remains optional; no card requires an animated asset.
+### Card Art Studio guidance
+- Studio copy now explicitly tells the user that animation is clipped into the artwork window only and that the standard shell remains intact.
+- Existing linked-URL, local GIF/WebP and static-fallback workflows remain unchanged.
 
-### Physical-card shell retained during animation
-- Animated media is clipped to the artwork window rather than covering the full card.
-- Live rarity stars and the correct set/reward logo are restored above active animation.
-- The existing lower information plaque and live name/stat/type overlays remain outside/above the animated window.
-- Full-screen inspectors render the back directly rather than mirroring the rules text through a 3D transform.
-- Large no-requirement Move type text is constrained inside the plaque.
+### Cache/versioning
+- Runtime and Studio cache-busting were advanced to **v1.1.23** so the hotfix is fetched cleanly on deployment.
 
-## Carry-forward
-- All v1.1.21 linked-animation CORS behavior remains intact.
-- All v1.1.20 Live Events, Trish move corrections and authored Merch rules remain intact.
-- No gameplay, card values, move requirements, decks, economy, roster, booster odds, progression, Merch effects or save schema changed.
-
-## Certification
-- Focused v1.1.19→v1.1.22 animation / Merch / inspector assertions: **20/20 passed**.
-- Full suite: **1,074 discovered / 908 passed / 72 retained historical-contract failures / 94 skipped**.
-- Direct comparison with v1.1.21: **0 added failing names / 0 removed failing names**; inherited 72-failure set is identical.
+## Certification actually run for this package
+- Focused animation regression tests: **8/8 passed**.
+  - `test/v1119-animated-card-system.test.js`
+  - `test/v1122-universal-animated-card-shell.test.js` (updated for v1.1.23 behavior)
+- These focused tests cover universal eligibility, canonical animated path generation, runtime animation markup, artwork-window clipping rules, non-mirrored inspector back behavior and Card Art Studio animation availability/copy.
+- Full suite: **1,071 discovered / 905 passed / 72 retained historical-contract failures / 94 skipped**.
+- Direct comparison with v1.1.22: **0 added failing names / 0 removed failing names**; the inherited 72-failure set is identical.
 - Rebuild validation: **95 Superstars / 95 decks / 835 gameplay cards / 0 orphans / 0 issues**.
 - Collector ID audit: **930 cards / 930 manifest entries / 0 issues**.
 - Flow audit: **95 Superstars / 0 issues**.
-- Browser JavaScript syntax checks: **passed** for live UI, animated-art helper and Card Art Studio.
-- Cache/version stamp: **v1.1.22** with no stale v1.1.21 markers.
-- Physical visual/interaction smoke: **pending-v1.1.22-user-smoke**, specifically Merch alpha beneath the plaque, animated card shell/frame/logo preservation, and linked animation playback across non-Entrance/Action/Finisher card types.
+- Physical iPhone smoke: **pending-v1.1.23-user-smoke**.

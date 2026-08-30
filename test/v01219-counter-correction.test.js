@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.22';
-import { decks } from '../js/data/decks.js?v=1.1.22';
-import { superstars } from '../js/data/superstars.js?v=1.1.22';
-import { canCounter } from '../js/engine/rules.js?v=1.1.22';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.23';
+import { decks } from '../js/data/decks.js?v=1.1.23';
+import { superstars } from '../js/data/superstars.js?v=1.1.23';
+import { canCounter } from '../js/engine/rules.js?v=1.1.23';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const stars=Object.values(superstars);

@@ -1,4 +1,15 @@
-# WWE Legacy v1.1.22 — Linked Animated URL CORS Fallback
+# WWE Legacy v1.1.23 — Animated Art Window Hotfix
+
+- Repairs the new universal animated-card presentation so linked GIF/WebP media behaves as the **moving artwork layer only** rather than visually replacing the full collectible card shell.
+- Animated media is now clipped inside the intended interior artwork window, preserving the normal card aspect ratio, outer frame, border treatment and lower identity plaque.
+- Removes the extra live animation chrome layer from runtime card fronts, so cards keep the canonical built-in set logo / rarity presentation instead of trying to draw a second overlay on top.
+- Card-family clip bounds are tuned so animation does not spill down behind the move/merch plaque area.
+- Card Art Studio help copy now explicitly explains that animation is clipped into the artwork window while the standard shell stays intact.
+- Cache/version stamping advances to **v1.1.23** for clean deployment pickup.
+- Certification: focused animation assertions **8/8 passed**; full suite **1,071 discovered / 905 passed / 72 retained historical failures / 94 skipped**, with **0 added or removed failure names** vs v1.1.22; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930 / 0 issues**; flow **95 / 0 issues**.
+- No gameplay, balance, economy, save-schema, roster, progression or reward changes from v1.1.22.
+
+# WWE Legacy v1.1.21 — Linked Animated URL CORS Fallback
 
 - Fixes Card Art Studio direct animated URLs when a host allows normal GIF/WebP display but blocks JavaScript raw-byte `fetch()` with CORS.
 - Studio now validates direct `.gif` / `.webp` links through a normal image load first. A successful display is saved immediately as a **Linked Animation** for the selected Entrance, Action or Finisher; CORS is not required.
@@ -6,7 +17,7 @@
 - Raw fetch/export is optional: hosts that allow CORS also enable **Export Animated Artwork**; hosts that block CORS keep linked playback working instead of showing the old `Failed to fetch` failure.
 - Live runtime preference order is now **linked URL → packaged animated WebP → packaged GIF → static base plate**. If a linked host later fails, the game falls through automatically.
 - No gameplay, Live Events, Merch, Trish, card-value, deck, economy, roster, booster, progression or save-schema changes from v1.1.20.
-- Certification: focused **9/9** across v1.1.20+v1.1.22; full suite **1,067 / 901 passed / 72 inherited historical failures / 94 skipped**, with **0 added or removed failure names** vs v1.1.20; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930 / 0 issues**; flow **95 / 0 issues**.
+- Certification: focused **9/9** across v1.1.20+v1.1.21; full suite **1,067 / 901 passed / 72 inherited historical failures / 94 skipped**, with **0 added or removed failure names** vs v1.1.20; validation **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector audit **930/930 / 0 issues**; flow **95 / 0 issues**.
 
 # WWE Legacy v1.1.20 — Live Events + Trish Corrections + Authored Merch + Animated URL Import
 
@@ -843,9 +854,12 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Canonical animated filenames are `assets/images/<image-key>-animated.webp` or `.gif`.
 - No gameplay, card values, Merch rules, deck structure, economy, roster, boosters, progression or save-schema changes.
 
+## v1.1.23 — Universal Animated Card Shell — 30 August 2026
 
-## v1.1.22 — Universal Animation + Merch Alpha Finalisation
-- Every collectible card may optionally use a linked or packaged animated GIF/WebP; static art remains the automatic fallback.
-- Animated media is constrained to the artwork window so it cannot replace the physical card dimensions, border, set logo, rarity stars or live plaque/text.
-- Card Art Studio exposes animation import/link/export for all card types.
-- Merch layered base-plate export now performs a final destination-out alpha clear over the full live plaque footprint after all other composition, preventing any image/background pixels from surviving behind the live plaque.
+- Expands optional animated artwork support from Entrance/Action/Finisher-only to **every collectible card**.
+- Keeps the fallback order **linked URL → animated WebP → animated GIF → static front/base plate**.
+- Raw animation is now clipped into the normal card artwork window rather than replacing the entire card, preserving card dimensions, frame, rarity stars, protected top-right set logo and lower plaque/live text.
+- Enlarged card inspectors use a direct canonical rules-face swap so iOS Safari cannot show a mirrored animated front as the back.
+- Card Art Studio exposes Animated Card controls for every selected card.
+- No gameplay, economy, deck, roster, Merch, Live Event, card-value, booster, progression or save-schema changes.
+- Certification: focused animation/URL assertions **17/17 passed**; dedicated v1.1.23 assertions **4/4 passed**; full isolated suite **1,071 / 905 passed / 72 inherited failures / 94 skipped** with the exact same inherited failure-name set as v1.1.21; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**.

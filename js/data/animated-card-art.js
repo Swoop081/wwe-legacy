@@ -1,9 +1,8 @@
-import { assetUrl } from "../config/build.js?v=1.1.22";
-import { canonicalImageKeyForCard } from "./artwork.js?v=1.1.22";
+import { assetUrl } from "../config/build.js?v=1.1.23";
+import { canonicalImageKeyForCard } from "./artwork.js?v=1.1.23";
 
 // v1.1.22 — Every collectible card may optionally use animated artwork.
-// Animation is never required: linked/packaged animation falls back to the
-// ordinary static artwork/base plate when absent, unavailable or reduced-motion is requested.
+// Animation is opt-in per card; the existing static front/base plate is always the fallback.
 export function isAnimatedCardEligible(card){
   return Boolean(card && card.id);
 }

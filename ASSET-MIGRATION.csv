@@ -1311,7 +1311,7 @@ superstar-variant,variant-rob-van-dam-01,Rob Van Dam — Career Spotlight,rob-va
 superstar-variant,variant-trish-stratus-01,Trish Stratus — Premium Edition,trish-stratus,season-1-last-time-is-now,assets/images/trish-stratus-premium-edition-trish-stratus.webp,assets/images/trish-stratus-premium-edition-trish-stratus-base-plate.webp,Ultra Rare Superstar Variant
 launch-poster,season-1-stratusfaction-launch,Season 1 Stratusfaction Launch Poster,,season-1-last-time-is-now,assets/images/season1-stratusfaction-launch-poster.jpg,,v1.1.17 full launch screen; PLAY NOW hotspot is poster-relative
 # v1.1.19 animated-card convention,,,,,,,
-# Entrance/Action/Finisher optional animated base plate: assets/images/<image-key>-animated.webp (preferred) or -animated.gif; keep existing -base-plate.webp as static fallback.,,,,,,,
+# Any collectible card may optionally use assets/images/<image-key>-animated.webp (preferred) or -animated.gif; existing static front/base-plate remains the fallback.,,,,,,,
 merch-card,merch-generic-001-wwe-legacy-t-shirt,WWE Legacy T-Shirt,,,assets/images/wwe-legacy-t-shirt.webp,assets/images/wwe-legacy-t-shirt-base-plate.webp,Generic Merch
 merch-card,merch-generic-002-replica-championship,Replica Championship,,,assets/images/replica-championship.webp,assets/images/replica-championship-base-plate.webp,Generic Merch
 merch-card,merch-generic-003-collector-figure,Collector Figure,,,assets/images/collector-figure.webp,assets/images/collector-figure-base-plate.webp,Generic Merch

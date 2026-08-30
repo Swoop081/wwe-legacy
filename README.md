@@ -1,27 +1,27 @@
-# WWE Legacy v1.1.22 — Universal Animation + Merch Transparency
+# WWE Legacy v1.1.23 — Universal Animated Card Shell
 
-**Current working baseline.** v1.1.22 supersedes v1.1.21.
+**Current working baseline.** v1.1.23 supersedes v1.1.21.
 
 ## What changed
 
-### Merch base-plate transparency finalisation
-- Merch base-plate export now performs a **final destination-out alpha clear** over the entire live plaque footprint after every template, artwork, veil, logo and frame composition step.
-- No product-photo background, set treatment, shadow or prior plaque pixel can survive underneath the live Merch plaque.
-- The live card renderer remains responsible for the clean rectangular Merch plaque and `MERCH · N MATCHES` front label.
+Every collectible card can now optionally have an animated version. Animation is no longer restricted to Entrances, Actions and Finishers.
 
-### Optional animation for every collectible card
-- Every card may now have a linked or packaged animated GIF/WebP version.
-- Static artwork remains the automatic fallback when no animation exists, the source fails, the card is off-screen, or reduced motion is enabled.
-- Card Art Studio exposes animated file/URL controls for **all card types**, rather than only Entrances, Actions and Finishers.
+Runtime order remains:
 
-### Animated cards retain the normal physical card
-- Animated media is now treated as the **artwork layer**, clipped inside the card artwork window.
-- It no longer replaces the full card image.
-- Normal card aspect ratio, border/frame, rarity stars, top-right set logo, lower plaque, Cost/Damage, Method dots and card name/type remain live above the animation.
-- Full-screen card inspectors show the back as a direct non-mirrored rules face.
+**Linked animation URL → packaged animated WebP → packaged GIF → existing static front/base plate.**
+
+The important renderer change is that animated media is now only the **moving artwork layer inside the normal WWE Legacy card shell**. It cannot replace the whole card. The normal card dimensions, border/frame, rarity stars, protected top-right set logo, lower information plaque and live text remain above it.
+
+This directly fixes the first Roman's Spear linked-GIF test where the raw GIF swallowed the frame/logo and caused the large live text to collide with the plaque.
+
+Card inspectors also use a direct front/back face swap instead of relying on an iOS Safari 3D backface for the enlarged card, preventing the rules side from appearing as a mirrored animated front.
+
+## Card Art Studio
+
+The Animated Card controls are now available for **every selected card**. GIF and animated WebP local files and direct linked URLs continue to work, with the normal static version always retained as fallback.
 
 ## Carry-forward
 
-All v1.1.21/v1.1.20 systems remain intact, including linked-animation CORS fallback, three-per-day Live Events, Trish's corrected Air Canada/Stratusfaction roles, authored Trish Merch, smart Merch compatibility, and all existing card presentation/gameplay systems.
+All v1.1.21 linked-animation CORS fallback behavior and all v1.1.20 Live Events, Trish, Merch and prior card-presentation/gameplay systems remain unchanged.
 
 See `BUILD-CERTIFICATION.md` for validation results.
