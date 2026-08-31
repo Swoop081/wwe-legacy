@@ -1,4 +1,4 @@
-WWE Legacy v1.1.48 retry 4
+WWE Legacy v1.1.48 retry 5
 Shared Dynamic Card Face Renderer
-Chunked payload verified; deploy ignores stale documentation context.
-Trigger: 2026-08-31T09:21+10:00
+Live app renderer migration is now applied by deterministic source transform.
+Trigger: 2026-08-31T09:24+10:00
