@@ -1,0 +1,155 @@
+/* WWE Legacy v1.1.53 — running-fix stability pass. */
+
+/* -------------------------------------------------------------------------
+   Superstar rarity presentation
+   The moving rarity sheen/tier overlay was travelling in from the right and
+   back across full-art Superstar faces. Superstar artwork is already a complete
+   authored 680×1000 front, so keep rarity lighting on the perimeter only.
+   ------------------------------------------------------------------------- */
+.ccg-card.is-full-art-superstar .ccg-tier-overlay,
+.ccg-card.kind-superstar .ccg-tier-overlay,
+.ccg-card[data-kind="superstar"] .ccg-tier-overlay{
+  display:none!important;
+  animation:none!important;
+  transition:none!important;
+  transform:none!important;
+}
+.ccg-card.is-full-art-superstar .ccg-card-front:after,
+.ccg-card.kind-superstar .ccg-card-front:after,
+.ccg-card[data-kind="superstar"] .ccg-card-front:after{
+  display:none!important;
+  animation:none!important;
+  transition:none!important;
+}
+.ccg-card.is-full-art-superstar .ccg-card-front{
+  transition:none!important;
+}
+.ccg-card.is-full-art-superstar:has(.tier-emerald) .ccg-card-front,
+.ccg-card.is-full-art-superstar.tier-emerald .ccg-card-front{
+  box-shadow:0 0 0 2px rgba(64,222,130,.78),0 0 15px rgba(64,222,130,.42)!important;
+}
+.ccg-card.is-full-art-superstar:has(.tier-sapphire) .ccg-card-front,
+.ccg-card.is-full-art-superstar.tier-sapphire .ccg-card-front{
+  box-shadow:0 0 0 2px rgba(77,162,255,.84),0 0 17px rgba(77,162,255,.48)!important;
+}
+.ccg-card.is-full-art-superstar:has(.tier-ruby) .ccg-card-front,
+.ccg-card.is-full-art-superstar.tier-ruby .ccg-card-front{
+  box-shadow:0 0 0 2px rgba(244,62,78,.86),0 0 18px rgba(244,62,78,.50)!important;
+}
+.ccg-card.is-full-art-superstar:has(.tier-amethyst) .ccg-card-front,
+.ccg-card.is-full-art-superstar.tier-amethyst .ccg-card-front{
+  box-shadow:0 0 0 2px rgba(188,91,255,.9),0 0 20px rgba(174,68,255,.56)!important;
+}
+
+/* -------------------------------------------------------------------------
+   Season reward road stability
+   The road is a catalogue/list surface, not a Card Studio. Full interactive CCG
+   faces and animated foil pack components are replaced at runtime with light,
+   static reward thumbnails. Keep the row itself cheap to paint and isolate each
+   visual so leaving the Season screen cannot retain a large GPU layer tree.
+   ------------------------------------------------------------------------- */
+body[data-screen="seasons"] .season-road-node{
+  contain:layout paint style!important;
+}
+body[data-screen="seasons"] .season-road-reward-visual{
+  contain:strict!important;
+  isolation:isolate!important;
+}
+body[data-screen="seasons"] .season-road-reward-visual *,
+body[data-screen="seasons"] .season-pack-lightweight *{
+  animation:none!important;
+  transition:none!important;
+}
+
+body[data-screen="seasons"] .season-reward-static-card{
+  display:block!important;
+  width:68px!important;
+  height:100px!important;
+  max-width:68px!important;
+  max-height:100px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:auto!important;
+  border-radius:5px!important;
+  filter:drop-shadow(0 7px 9px rgba(0,0,0,.34));
+}
+
+/* Lightweight physical Season-reward pack. The real set logo is the visual
+   focus and is deliberately larger than the supporting SERIES 1 copy. */
+body[data-screen="seasons"] .season-pack-lightweight{
+  --season-pack-a:#11151e;
+  --season-pack-b:#05070b;
+  position:relative!important;
+  display:grid!important;
+  grid-template-rows:8px 1fr 8px!important;
+  width:68px!important;
+  height:100px!important;
+  margin:auto!important;
+  overflow:hidden!important;
+  clip-path:polygon(3% 0,97% 0,100% 3%,100% 97%,97% 100%,3% 100%,0 97%,0 3%);
+  background:linear-gradient(145deg,var(--season-pack-a),var(--season-pack-b))!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:0 7px 12px rgba(0,0,0,.38),inset 0 0 18px rgba(255,255,255,.05)!important;
+}
+body[data-screen="seasons"] .season-pack-lightweight:before,
+body[data-screen="seasons"] .season-pack-lightweight:after{
+  content:"";
+  display:block;
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.48) 0 2px,rgba(255,255,255,.18) 2px 4px,rgba(0,0,0,.22) 4px 6px);
+}
+body[data-screen="seasons"] .season-pack-lightweight-inner{
+  min-width:0!important;
+  min-height:0!important;
+  padding:5px 4px 4px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  background:linear-gradient(108deg,transparent 18%,rgba(255,255,255,.10) 46%,transparent 69%);
+}
+body[data-screen="seasons"] .season-pack-set-logo{
+  display:block!important;
+  width:58px!important;
+  height:43px!important;
+  max-width:58px!important;
+  max-height:43px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.72));
+}
+body[data-screen="seasons"] .season-pack-set-logo.is-unavailable{display:none!important}
+body[data-screen="seasons"] .season-pack-logo-fallback{
+  display:none;
+  width:58px;
+  min-height:34px;
+  place-items:center;
+  text-align:center;
+  font-family:"Arial Black","Arial Narrow",Arial,sans-serif;
+  font-size:.49rem;
+  line-height:.88;
+  font-style:italic;
+  font-weight:1000;
+  letter-spacing:-.055em;
+  color:#fff;
+  text-shadow:0 2px 4px #000;
+}
+body[data-screen="seasons"] .season-pack-set-logo.is-unavailable + .season-pack-logo-fallback{display:grid!important}
+body[data-screen="seasons"] .season-pack-series{
+  font-size:.28rem!important;
+  line-height:1!important;
+  letter-spacing:.16em!important;
+  font-weight:1000!important;
+  color:rgba(255,255,255,.84)!important;
+  text-shadow:0 1px 3px #000!important;
+}
+
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-raw-series-1{--season-pack-a:#b40f22;--season-pack-b:#09090c}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-smackdown-series-1{--season-pack-a:#087aca;--season-pack-b:#04142e}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-nxt-series-1{--season-pack-a:#434a50;--season-pack-b:#050607}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-evolution-series-1{--season-pack-a:#7c2871;--season-pack-b:#160f28}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-summerslam-series-1{--season-pack-a:#e2693c;--season-pack-b:#10386d}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-golden-era-series-1{--season-pack-a:#79530e;--season-pack-b:#101d43}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-new-generation-series-1{--season-pack-a:#b6338a;--season-pack-b:#17235d}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-attitude-era-series-1{--season-pack-a:#4a4e52;--season-pack-b:#08090a}
+body[data-screen="seasons"] .season-pack-lightweight.pack-set-ruthless-aggression-series-1{--season-pack-a:#75111b;--season-pack-b:#121316}
