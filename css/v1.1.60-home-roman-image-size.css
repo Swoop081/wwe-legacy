@@ -1,0 +1,10 @@
+/* WWE Legacy v1.1.60 — Home Roman image size only.
+   v1.1.59 scaled the wrapper, which was clipped by the stage geometry and did
+   not produce a visible portrait-size change on iPhone. Scale the actual Roman
+   portrait image instead, anchored to the bottom-right. */
+
+.legacy-home-stage .legacy-stage-superstar > img[data-menu-superstar-photo="roman-reigns"],
+.legacy-home-stage .legacy-stage-superstar > img.official-menu-superstar-photo[data-menu-superstar-photo="roman-reigns"]{
+  transform:scale(1.03)!important;
+  transform-origin:right bottom!important;
+}
