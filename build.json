@@ -1,10 +1,10 @@
 {
-  "version": "1.1.60",
+  "version": "1.1.61",
   "releasedAt": "2026-08-31",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.60-home-roman-confirmation",
+  "physicalIphoneSmoke": "pending-v1.1.61-home-stat-shortcuts-confirmation",
   "launchStatus": "released"
 }
