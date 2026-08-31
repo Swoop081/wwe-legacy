@@ -1,4 +1,5 @@
 import { superstars } from "./superstars.js?v=1.1.48";
+import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.66";
 import { sets } from "./sets.js?v=1.1.48";
 import { allGameplayCards } from "./content.js?v=1.1.48";
 import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=1.1.48";
