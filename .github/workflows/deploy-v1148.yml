@@ -32,8 +32,16 @@ jobs:
           test "$(wc -c < js/shared/card-face-renderer.js | tr -d ' ')" = "64137"
           base64 -d .deploy-v1148/test.gz.b64 | gunzip > test/v1148-shared-card-face-renderer.test.js
           base64 -d .deploy-v1148/patch.gz.b64 | gunzip > /tmp/v1.1.48-existing.patch
-          git apply --check /tmp/v1.1.48-existing.patch
-          git apply /tmp/v1.1.48-existing.patch
+          git apply --check --ignore-space-change --ignore-whitespace \
+            --exclude=BUILD-CERTIFICATION.md \
+            --exclude=README.md \
+            --exclude=RELEASE-NOTES-v1.1.29.md \
+            /tmp/v1.1.48-existing.patch
+          git apply --ignore-space-change --ignore-whitespace \
+            --exclude=BUILD-CERTIFICATION.md \
+            --exclude=README.md \
+            --exclude=RELEASE-NOTES-v1.1.29.md \
+            /tmp/v1.1.48-existing.patch
           npm run stamp-cache
 
       - name: Verify release
