@@ -1,0 +1,96 @@
+/* WWE Legacy v1.1.56 — consolidated post-v1.1.52 tabled fixes. */
+
+/* Superstar rarity must stay fixed to the perimeter. No sweep, translation,
+   breathing band or travelling highlight is allowed over Superstar artwork. */
+.ccg-card.is-full-art-superstar .ccg-tier-overlay,
+.ccg-card.kind-superstar .ccg-tier-overlay,
+.ccg-card[data-kind="superstar"] .ccg-tier-overlay,
+.ccg-card.is-full-art-superstar .ccg-tier-overlay::before,
+.ccg-card.is-full-art-superstar .ccg-tier-overlay::after,
+.ccg-card.is-full-art-superstar:not(.has-active-animation) .ccg-card-front::before,
+.ccg-card.is-full-art-superstar .ccg-card-front::after{
+  animation:none!important;
+  transition:none!important;
+  transform:none!important;
+}
+.ccg-card.is-full-art-superstar:not(.has-active-animation) .ccg-card-front::before{
+  opacity:.24!important;
+  background:
+    radial-gradient(ellipse at 26% 16%,rgba(255,255,255,.32) 0,rgba(255,255,255,.08) 18%,transparent 42%),
+    linear-gradient(118deg,transparent 13%,rgba(255,255,255,.04) 30%,rgba(207,236,255,.16) 46%,rgba(255,255,255,.04) 61%,transparent 82%)!important;
+}
+
+/* The Season road uses the same shared Card Studio card face as the rest of the
+   game. On iOS, do not leave an already-requested eager reward image invisible
+   behind the generic ccg-load-guard while WebKit finishes decoding it. */
+body[data-screen="seasons"] .season-reward-card .ccg-card-art img.ccg-load-guard,
+body[data-screen="seasons"] .season-reward-card .ccg-card-art img.ccg-load-guard.is-art-ready{
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transition:none!important;
+}
+body[data-screen="seasons"] .season-reward-card .ccg-layered-card-plate,
+body[data-screen="seasons"] .season-reward-card .ccg-finished-card-art-image,
+body[data-screen="seasons"] .season-reward-card .ccg-authored-card-art-image,
+body[data-screen="seasons"] .season-reward-card .ccg-superstar-art-image{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+}
+
+/* Season physical packs always retain a readable set identity. The real shared
+   set logo remains first choice; this fallback is visible only if that source
+   is absent or fails. */
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack .pack-brand-lockup{
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  width:92%!important;
+  min-height:34px!important;
+  margin:0 auto!important;
+}
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack .pack-set-logo,
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack .set-brand-logo{
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  width:auto!important;
+  height:auto!important;
+  max-width:90%!important;
+  max-height:38px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack .pack-set-logo.is-source-logo-unavailable,
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack .pack-set-logo.is-unavailable,
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack .set-brand-logo.is-source-logo-unavailable,
+body[data-screen="seasons"] .season-reward-pack .physical-booster-pack .set-brand-logo.is-unavailable{
+  display:none!important;
+}
+body[data-screen="seasons"] .pack-v1156-brand-fallback{
+  position:relative!important;
+  z-index:1!important;
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  min-height:29px!important;
+  padding:2px 3px!important;
+  color:#fff!important;
+  font-family:"Arial Black","Arial Narrow",Arial,sans-serif!important;
+  font-size:7px!important;
+  line-height:.92!important;
+  font-style:italic!important;
+  font-weight:1000!important;
+  letter-spacing:-.035em!important;
+  text-align:center!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 2px #000,0 0 5px rgba(255,255,255,.24)!important;
+}
+body[data-screen="seasons"] .physical-booster-pack.is-v1156-logo-live .pack-v1156-brand-fallback{
+  display:none!important;
+}
