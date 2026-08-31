@@ -1,0 +1,43 @@
+/* WWE Legacy v1.1.57 — Home Trish alignment only.
+   The Season One tile now uses the same bottom/right portrait-lane geometry as
+   the Home command tiles below it. This replaces the older top-anchored scale
+   and per-viewport nudges that left Trish visibly short of the right edge. */
+
+#menu-season-overview .legacy-season-rock{
+  position:absolute!important;
+  z-index:1!important;
+  top:auto!important;
+  right:-7%!important;
+  bottom:-34%!important;
+  width:53%!important;
+  height:168%!important;
+  opacity:1!important;
+  overflow:visible!important;
+  pointer-events:none!important;
+  filter:drop-shadow(0 14px 18px rgba(0,0,0,.58))!important;
+}
+
+#menu-season-overview .legacy-season-rock img.legacy-season-cena,
+#menu-season-overview .legacy-season-rock img.official-menu-superstar-photo{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:translate(18%,3.5%)!important;
+  transform-origin:center bottom!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 23%,#000 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 23%,#000 100%)!important;
+}
+
+/* Match the narrow-iPhone command-tile lane without changing the portrait's
+   internal alignment. The transparent-canvas compensation stays constant. */
+@media(max-width:390px){
+  #menu-season-overview .legacy-season-rock{
+    right:-10%!important;
+    width:57%!important;
+  }
+}
