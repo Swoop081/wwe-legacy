@@ -1,10 +1,10 @@
 {
-  "version": "1.1.62",
+  "version": "1.1.63",
   "releasedAt": "2026-08-31",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.62-home-cena-legacy-confirmation",
+  "physicalIphoneSmoke": "pending-v1.1.63-play-path-portrait-confirmation",
   "launchStatus": "released"
 }
