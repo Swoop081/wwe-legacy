@@ -1,0 +1,8 @@
+/* WWE Legacy v1.1.59 — Home Roman Reigns size only.
+   Increase the existing Home hero portrait by exactly 3% while keeping the
+   current right/bottom anchor and all surrounding Home geometry unchanged. */
+#menu-stage .legacy-stage-superstar,
+.legacy-stage-superstar:has(img[src*="roman-reigns"]){
+  transform:scale(1.03)!important;
+  transform-origin:right bottom!important;
+}
