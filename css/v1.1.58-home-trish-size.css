@@ -1,0 +1,41 @@
+/* WWE Legacy v1.1.58 — Home Trish size correction only.
+   Keep the v1.1.57 right/bottom portrait lane, but compensate for the extra
+   transparent canvas in the Trish menu asset so her visible body matches the
+   apparent scale of Seth Rollins and Becky Lynch below. */
+
+#menu-season-overview .legacy-season-rock{
+  right:-7%!important;
+  bottom:-34%!important;
+  width:53%!important;
+  height:168%!important;
+}
+
+#menu-season-overview .legacy-season-rock img.legacy-season-cena,
+#menu-season-overview .legacy-season-rock img.official-menu-superstar-photo{
+  inset:auto!important;
+  left:auto!important;
+  right:-4%!important;
+  top:auto!important;
+  bottom:-2%!important;
+  width:122%!important;
+  height:122%!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:none!important;
+  transform-origin:center bottom!important;
+}
+
+@media(max-width:390px){
+  #menu-season-overview .legacy-season-rock{
+    right:-10%!important;
+    width:57%!important;
+  }
+  #menu-season-overview .legacy-season-rock img.legacy-season-cena,
+  #menu-season-overview .legacy-season-rock img.official-menu-superstar-photo{
+    right:-3%!important;
+    width:121%!important;
+    height:121%!important;
+  }
+}
