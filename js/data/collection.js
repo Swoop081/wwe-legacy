@@ -14,6 +14,8 @@ const starCards = orderedStars.map(s => ({
   subtitle: s.nickname,
   rarity: 4,
   setId: s.setId,
+  rulesText: s.ability?.text ?? "",
+  ability: s.ability ?? null,
   ...(rewardPrintingTierForSet(s.setId) ? { fixedPrintingTier: rewardPrintingTierForSet(s.setId) } : {}),
   era: s.era ?? null,
 }));
