@@ -5,6 +5,7 @@ import fs from 'node:fs';
 const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
 const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
+const shared=fs.readFileSync(new URL('../js/shared/card-face-renderer.js',import.meta.url),'utf8');
 const build=JSON.parse(fs.readFileSync(new URL('../build.json',import.meta.url),'utf8'));
 const pkg=JSON.parse(fs.readFileSync(new URL('../package.json',import.meta.url),'utf8'));
 
@@ -22,8 +23,8 @@ test('v1.1.5 uses one clean rectangular lower band with no nested stat boxes',()
   assert.match(block,/\.ccg-live-stat\{[\s\S]*?border:0;[\s\S]*?background:none/);
   assert.match(block,/\.ccg-live-front-data::after\{display:none/);
   assert.doesNotMatch(studio,/const statBox=/);
-  assert.match(studio,/fillRect\(panelLeft,panelTop,panelWidth/);
-  assert.match(studio,/strokeRect\(panelLeft,panelTop,panelWidth/);
+  assert.match(shared,/fillRect\(left,top,pw,bottom-top\)/);
+  assert.match(shared,/strokeRect\(left,top,pw,bottom-top\)/);
 });
 
 test('Reward cards use the new WWE Legacy REWARD logo and no extra bottom source text',()=>{

@@ -7,6 +7,7 @@ const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
 const build=JSON.parse(fs.readFileSync(new URL("../build.json",import.meta.url),"utf8"));
 const pkg=JSON.parse(fs.readFileSync(new URL("../package.json",import.meta.url),"utf8"));
+const shared=fs.readFileSync(new URL("../js/shared/card-face-renderer.js",import.meta.url),"utf8");
 
 test("v1.1.7-or-later markers retain the v1.1.7 presentation contract",()=>{
   assert.ok(Number(build.version.split(".").join(""))>=117);
@@ -29,7 +30,7 @@ test("Golden Era uses the approved blue-white-orange classic WWF mark",()=>{
 });
 
 test("Method dots are doubled and every dot uses identical spacing regardless of colour group",()=>{
-  assert.match(studio,/r=17\.4\*s,gap=10\*s,dots=groups\.flatMap/);
+  assert.match(shared,/r=17\.4\*s,gap=10\*s,dots=groups\.flatMap/);
   assert.doesNotMatch(studio,/within=6\.2\*s,between=12\.5\*s/);
   assert.match(css,/\.ccg-method-dots\{display:flex;align-items:center;justify-content:center;gap:1\.15cqw;width:100%\}/);
   assert.match(css,/\.ccg-method-dot-group\{display:contents\}/);
@@ -40,16 +41,15 @@ test("Method dots are doubled and every dot uses identical spacing regardless of
 test("move plaque sits clear of the bottom border with no panel shadow bleed",()=>{
   assert.match(css,/bottom:4\.2%;height:21\.8%/);
   assert.match(css,/\.ccg-live-front-data::before\{[\s\S]*?box-shadow:none/);
-  assert.match(studio,/panelBottom=h\*\.958,panelTop=isMove\?h\*\.740:h\*\.772/);
-  assert.match(studio,/ctx\.shadowOffsetX=0;ctx\.shadowOffsetY=0/);
+  assert.match(shared,/bottom=height\*\.958,top=isMove\?height\*\.740:height\*\.772/);
+  assert.match(shared,/ctx\.shadowColor="transparent"/);
 });
 
 test("COST DAMAGE and move type are larger while move type wraps only when it cannot fit",()=>{
-  assert.match(studio,/cardFont\(META_STACK,29,950\)/);
+  assert.match(shared,/size:29\*s/);
   assert.match(css,/ccg-live-stat small\{[^}]*font-size:4\.7cqw/);
-  assert.match(studio,/function drawResponsiveMoveType\(text,cx,y,maxWidth,fontPx,tracking,fill\)/);
-  assert.match(studio,/trackedWidth\(full,tracking\*s\)<=maxWidth/);
-  assert.match(studio,/hasReq\?34:40/);
+  assert.match(shared,/vectorMeasure\(line,fontSize,1\*s,1\)<=maxW/);
+  assert.match(shared,/fontSize=\(hasReq\?34:40\)\*s/);
   assert.match(css,/ccg-live-front-move \.ccg-live-type\.has-requirement\{[^}]*font-size:5\.3cqw/);
   assert.match(css,/white-space:normal;font-size:5\.3cqw/);
 });

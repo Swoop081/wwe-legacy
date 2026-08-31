@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.45';
-import { canCounter } from '../js/engine/rules.js?v=1.1.45';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.48';
+import { canCounter } from '../js/engine/rules.js?v=1.1.48';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -47,9 +47,10 @@ test('v0.12.57 Momentum cards retain canonical colours while retiring the fire m
 
 test('Card Art Studio keeps Cost and Damage dominant and mobile-readable without nested boxes',()=>{
   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
+  const shared=fs.readFileSync(new URL('../js/shared/card-face-renderer.js',import.meta.url),'utf8');
   assert.ok(!studio.includes('const statBox=(cx,label,value)=>'));
-  assert.ok(studio.includes('cardFont(NUMBER_STACK,64,1000)'));
-  assert.ok(studio.includes('statFigure(w*.16,"COST",card.cost??0)'));
-  assert.ok(studio.includes('statFigure(w*.84,"DAMAGE",card.damage??0)'));
-  assert.ok(studio.includes('fillRect(panelLeft,panelTop,panelWidth'));
+  assert.match(shared,/size:64\*s/);
+  assert.match(shared,/stat\(width\*\.16,"COST",card\.cost\?\?0\)/);
+  assert.match(shared,/stat\(width\*\.84,"DAMAGE",card\.damage\?\?0\)/);
+  assert.match(shared,/ctx\.fillRect\(left,top,pw,bottom-top\)/);
 });

@@ -4,6 +4,7 @@ import fs from "node:fs";
 const studio=fs.readFileSync(new URL("../js/tools/card-art-studio.js",import.meta.url),"utf8");
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
+const shared=fs.readFileSync(new URL("../js/shared/card-face-renderer.js",import.meta.url),"utf8");
 
 test("all Studio set logos use the protected top-right safe zone",()=>{
   assert.match(studio,/safeRight=w\*\(1-\.075\),safeTop=h\*\.052/);
@@ -29,6 +30,6 @@ test("front requirements render Momentum-colour dots instead of method words",()
   assert.match(css,/method-strike\{--method-dot:#ef3f4e\}/);
   assert.match(css,/method-technical\{--method-dot:#36c86f\}/);
   assert.match(css,/method-agility\{--method-dot:#2fa8ff\}/);
-  assert.match(studio,/drawRequirementDots\(card,w\*\.5,h\*\.(?:875|866)\)/);
+  assert.match(shared,/drawRequirementDots\(ctx,card,cx,height\*\.866/);
   assert.doesNotMatch(studio,/fittedMetaFont\(req,w\*\.47,23,16\)/);
 });

@@ -1,15 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.45';
-import { SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.45';
-import { LAUNCH_THEME_TOWERS, LIVE_EVENT_ROTATION_POOL, activeLiveEventTowers, rotatingLiveEventTemplates } from '../js/data/live-events.js?v=1.1.45';
-import { SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.45';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.48';
+import { SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.48';
+import { LAUNCH_THEME_TOWERS, LIVE_EVENT_ROTATION_POOL, activeLiveEventTowers, rotatingLiveEventTemplates } from '../js/data/live-events.js?v=1.1.48';
+import { SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.48';
 
 const studio = fs.readFileSync(new URL('../js/tools/card-art-studio.js', import.meta.url), 'utf8');
 const studioHtml = fs.readFileSync(new URL('../tools/card-art-studio.html', import.meta.url), 'utf8');
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const build = JSON.parse(fs.readFileSync(new URL('../build.json', import.meta.url), 'utf8'));
+const shared = fs.readFileSync(new URL('../js/shared/card-face-renderer.js', import.meta.url), 'utf8');
 
 test('v1.1.20 rotates exactly three Live Events daily with a full one-day cooldown and no Birthday Bash', () => {
   assert.ok(Number(build.version.split('.')[2]) >= 20, `expected v1.1.20+ build, got ${build.version}`);
@@ -62,8 +63,7 @@ test('v1.1.20 Trish has the authored five-item Merch ladder and Funko Pop is lev
 });
 
 test('v1.1.20 Merch fronts show match expiry while rules remain on the back and layered Merch plate export is transparent under the plaque', () => {
-  assert.match(app, /card\.kind === "merch" \? `MERCH • \$\{card\.duration \?\? 1\} MATCH/);
-  assert.match(studio, /card\.kind==="merch"\?`MERCH • \$\{card\.duration\?\?1\} MATCH/);
+  assert.match(shared, /card\.kind==="merch"\?`MERCH • \$\{card\.duration\?\?1\} MATCH/);
   assert.match(studio, /state\.renderPlateOnly&&card\.kind==="merch"/);
   assert.match(studio, /ctx\.clearRect\(panelLeft,panelTop,panelWidth,panelBottom-panelTop\)/);
   assert.match(app, /card\.abilityText \?\? card\.effectText \?\? card\.rulesText/);

@@ -10,9 +10,8 @@ test('v1.1.12 Merch art is clipped above the lower identity plaque',()=>{
 });
 
 test('v1.1.12 Merch correction preserves the existing utility plaque geometry',()=>{
-  const studio=read('js/tools/card-art-studio.js');
-  assert.match(studio,/panelTop=isMove\?h\*\.740:h\*\.772/);
-  assert.match(studio,/panelBottom=h\*\.958/);
+  const shared=read('js/shared/card-face-renderer.js');
+  assert.match(shared,/bottom=height\*\.958,top=isMove\?height\*\.740:height\*\.772/);
 });
 
 test('v1.1.12 does not add a white footer fill or extra Merch plaque box',()=>{

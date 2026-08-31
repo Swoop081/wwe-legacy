@@ -1,4 +1,4 @@
-// WWE Legacy Card Art Studio — v1.1.10
+// WWE Legacy Card Art Studio — v1.1.48
 // Unified creator for active and previewed WWE Legacy collectible fronts.
 // STUDIO_CARDS is generated from the canonical collector manifest and loaded first by the Studio HTML.
 const SETS = {"survivor-series-series-1":{"label":"Survivor Series — Series 1","border":"#ff6b1b","nameTop":"#ffffff","nameBottom":"#ff8a3d","stroke":"#041329","glow":"rgba(255,107,27,.58)","accent":"#ff6b1b","accent2":"#d8dee8"},"smackdown-series-1":{"label":"SmackDown — Series 1","border":"#1597ff","nameTop":"#ffffff","nameBottom":"#75c8ff","stroke":"#031326","glow":"rgba(21,151,255,.62)","accent":"#1597ff","accent2":"#ffffff"},"money-in-the-bank-series-1":{"label":"Money in the Bank — Series 1","border":"#74ef40","nameTop":"#f6fff2","nameBottom":"#74ef40","stroke":"#13051c","glow":"rgba(117,239,65,.60)","accent":"#74ef40","accent2":"#a855f7"},"worlds-collide-series-1":{"label":"Worlds Collide — Series 1","border":"#62f13f","nameTop":"#f7fff1","nameBottom":"#73ff42","stroke":"#040504","glow":"rgba(84,255,57,.58)","accent":"#62f13f","accent2":"#e5b642"},"raw-series-1":{"label":"Raw — Series 1","border":"#ef2637","nameTop":"#f7f7f8","nameBottom":"#c7ccd2","stroke":"#110305","glow":"rgba(238,30,48,.60)","accent":"#ef2637","accent2":"#bfc5cc"},"summerslam-series-1":{"label":"SummerSlam — Series 1","border":"#f6a253","nameTop":"#ffffff","nameBottom":"#ff9d38","stroke":"#071b36","glow":"rgba(93,210,255,.62)","accent":"#67b9ff","accent2":"#f6a253"},"evolution-series-1":{"label":"Evolution — Series 1","border":"#ff54d7","nameTop":"#ffffff","nameBottom":"#ff54d7","stroke":"#351044","glow":"rgba(76,221,255,.55)","accent":"#ff8ee8","accent2":"#8b6cff"},"season-1-final-boss":{"label":"Rewards / Season 1 Final Boss","border":"#ef3d4c","nameTop":"#fff4c8","nameBottom":"#ef3d4c","stroke":"#260307","glow":"rgba(228,183,76,.50)","accent":"#f04a56","accent2":"#e8bd65"},"season-1-last-time-is-now":{"label":"Rewards / Season 1 — The Last Time Is Now","border":"#1d56a6","nameTop":"#ffffff","nameBottom":"#d93434","stroke":"#07111f","glow":"rgba(29,86,166,.52)","accent":"#1d56a6","accent2":"#d93434"},"season-2-whos-next":{"label":"Season 2 Rewards / Who’s Next?","border":"#dfc160","nameTop":"#ffffff","nameBottom":"#dfc160","stroke":"#08090a","glow":"rgba(223,193,96,.54)","accent":"#dfc160","accent2":"#d6dde4"},"new-generation-series-1":{"label":"New Generation — Series 1","border":"#ffdc00","nameTop":"#fff6a8","nameBottom":"#31e0d4","stroke":"#160b36","glow":"rgba(238,59,159,.58)","accent":"#ffdc00","accent2":"#31e0d4"},"golden-era-series-1":{"label":"Golden Era — Series 1","border":"#e4b63f","nameTop":"#fff3b0","nameBottom":"#e44236","stroke":"#160b08","glow":"rgba(228,182,63,.58)","accent":"#e4b63f","accent2":"#e44236"},"attitude-era-series-1":{"label":"Attitude Era — Series 1","border":"#d7dade","nameTop":"#ffffff","nameBottom":"#ed2537","stroke":"#050505","glow":"rgba(237,37,55,.56)","accent":"#ed2537","accent2":"#d7dade"}};
@@ -41,7 +41,7 @@ const LINKED_ANIMATION_STORAGE_KEY="wweLegacyAnimatedCardLinks.v1";
 function linkedAnimationMap(){try{const raw=localStorage.getItem(LINKED_ANIMATION_STORAGE_KEY);if(!raw)return {};const parsed=JSON.parse(raw);return parsed&&typeof parsed==="object"&&!Array.isArray(parsed)?parsed:{};}catch{return {};}}
 function savedLinkedAnimation(card=currentCard()){if(!card?.id)return "";return String(linkedAnimationMap()[card.id]||"").trim();}
 function saveLinkedAnimation(card,url){if(!card?.id)return false;try{const map=linkedAnimationMap(),value=String(url||"").trim();if(value)map[card.id]=value;else delete map[card.id];localStorage.setItem(LINKED_ANIMATION_STORAGE_KEY,JSON.stringify(map));return true;}catch{return false;}}
-const BUILD_VERSION="1.1.46";
+const BUILD_VERSION="1.1.48";
 function assetUrl(path){
   if(/^https?:\/\//i.test(String(path||""))) return String(path);
   const url=new URL(`../${path}`,document.location.href);
@@ -107,7 +107,7 @@ async function animatedUrlSelected(rawUrl){
 function removeLinkedAnimation(){const card=currentCard();if(!card)return;saveLinkedAnimation(card,"");state.animatedLinkedUrl="";state.animatedFile=null;state.animatedExtension=null;const input=$("#animated-art-url");if(input)input.value="";updateAnimationControls();animatedStatus("Linked animation removed. The game will use packaged animated art if present, otherwise the static base plate.",true);}
 
 function exportAnimatedArtwork(){const card=currentCard();if(!isAnimationEligible(card)||!state.animatedFile)return animatedStatus("Choose a card and animated source first.",false);const name=animatedDestinationFor(card).split("/").pop();download(state.animatedFile,name);animatedStatus(`Saved ${name}. Install it at ${animatedDestinationFor(card)}. The ordinary Base Plate remains the static fallback.`,true);}
-function currentSet(){const card=currentCard();if(card?.kind==="merch"&&!card?.setId)return SETS["merch-generic"];return SETS[card?.setId]||SETS[$("#set-select").value]||{label:"WWE Legacy",...DEFAULT_STUDIO_THEME};}
+function currentSet(){const card=currentCard(),id=(card?.kind==="merch"&&!card?.setId)?"merch-generic":(card?.setId||$("#set-select").value),local=SETS[id]||{label:"WWE Legacy",...DEFAULT_STUDIO_THEME},shared=globalThis.WWELegacyCardFaceRenderer?.themeForSet?.(id);return shared?{...local,...shared,label:local.label}:local;}
 function exportId(card){return card?.kind==="superstar"?(card.superstarId||card.id.replace(/^superstar-/,"")):card?.artKey||card?.id;}
 function isHeadshotMode(){return $("#export-target")?.value==="headshot";}
 function isLayeredFormat(){const card=currentCard();return !isHeadshotMode() && !!card && $("#front-format")?.value==="layered";}
@@ -250,38 +250,15 @@ function drawResponsiveMoveType(text,cx,y,maxWidth,fontPx,tracking,fill){
 }
 function drawBottomIdentity(){
   const card=currentCard();if(!card)return;
-  const set=currentSet(),w=canvas.width,h=canvas.height,s=scale(),isMove=card.kind==="move",isSuperstar=card.kind==="superstar",isReward=studioRewardSet(card),text=isSuperstar?superstarNameText(card):card.name.toUpperCase();
-  const panelBottom=h*.958,panelTop=isMove?h*.740:h*.772,panelLeft=w*.052,panelWidth=w*.896;
-  ctx.save();ctx.shadowColor="transparent";ctx.shadowBlur=0;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
-  // v1.1.15 — No shading, vignette or cast shadow may extend outside the lower plaque.
-  const plate=ctx.createLinearGradient(0,panelTop,0,panelBottom);
-  if(isReward){plate.addColorStop(0,"rgba(38,13,17,.96)");plate.addColorStop(1,"rgba(4,4,7,.995)");}
-  else{plate.addColorStop(0,"rgba(20,25,32,.95)");plate.addColorStop(1,"rgba(3,5,9,.995)");}
+  const renderer=globalThis.WWELegacyCardFaceRenderer;if(!renderer)throw new Error("Shared Card Studio face renderer is not loaded.");
+  const set=currentSet(),w=canvas.width,h=canvas.height;
   if(state.renderPlateOnly&&card.kind==="merch"){
-    // Merch base plates leave the live plaque footprint as true alpha. Product
-    // photography/set art must never bake an opaque rectangle underneath it.
-    ctx.clearRect(panelLeft,panelTop,panelWidth,panelBottom-panelTop);ctx.restore();return;
+    const panelBottom=h*.958,panelTop=h*.772,panelLeft=w*.052,panelWidth=w*.896;
+    ctx.clearRect(panelLeft,panelTop,panelWidth,panelBottom-panelTop);return;
   }
-  ctx.fillStyle=plate;ctx.fillRect(panelLeft,panelTop,panelWidth,panelBottom-panelTop);
-  ctx.strokeStyle=isReward?"#efcf73":(set.border||set.accent);ctx.lineWidth=2.5*s;ctx.strokeRect(panelLeft,panelTop,panelWidth,panelBottom-panelTop);
-  if(state.renderPlateOnly){ctx.restore();return;}
-  ctx.textAlign="center";ctx.textBaseline="middle";
-  const nameY=isMove?h*.787:h*.852;
-  if(isSuperstar){drawSuperstarName(text,w*.5,nameY,w*.80,set,superstarNameplateProfile(card));}
-  else{fittedNameFont(text,w*.78,isMove?44:49,23);ctx.lineJoin="round";ctx.lineWidth=3.0*s;ctx.strokeStyle="rgba(0,0,0,.96)";ctx.shadowColor="rgba(0,0,0,.78)";ctx.shadowBlur=7*s;ctx.strokeText(text,w*.5,nameY);const ng=ctx.createLinearGradient(0,nameY-24*s,0,nameY+18*s);ng.addColorStop(0,"#ffffff");ng.addColorStop(.62,set.nameTop||"#ffffff");ng.addColorStop(1,isReward?"#f0cf72":set.nameBottom);ctx.fillStyle=ng;ctx.shadowColor=isReward?"rgba(240,207,114,.28)":set.glow;ctx.shadowBlur=4*s;ctx.fillText(text,w*.5,nameY);}
-  ctx.shadowColor="transparent";ctx.shadowBlur=0;
-  if(isMove){
-    const statFigure=(cx,label,value)=>{ctx.save();ctx.textAlign="center";ctx.fillStyle=isReward?"#f2d27b":"rgba(255,255,255,.80)";ctx.font=cardFont(META_STACK,29,950);drawTrackedText(label,cx,h*.829,1.1*s);ctx.fillStyle="#fff";ctx.font=cardFont(NUMBER_STACK,64,1000);ctx.fillText(String(value),cx,h*.884);ctx.restore();};
-    statFigure(w*.16,"COST",card.cost??0);statFigure(w*.84,"DAMAGE",card.damage??0);
-    const hasReq=drawRequirementDots(card,w*.5,h*.866);
-    const moveType=String(card.moveType||card.method||"move").toUpperCase(),moveLine=`MOVE • ${moveType}`,moveFill=isReward?"#f1d079":set.nameBottom;
-    drawResponsiveMoveType(moveLine,w*.5,hasReq?h*.929:h*.895,w*.49,hasReq?34:40,1.0,moveFill);
-  }else{
-    const type=card.kind==="merch"?`MERCH • ${card.duration??1} MATCH${Number(card.duration)===1?"":"ES"}`:(KIND_LABELS[card.kind]||String(card.kind||"CARD").toUpperCase());ctx.fillStyle=isReward?"#f1d079":set.nameBottom;ctx.font=cardFont(META_STACK,29,950);drawTrackedText(type,w*.5,h*.909,1.0*s);
-  }
-  ctx.restore();
+  renderer.drawFace(ctx,card,{width:w,height:h,theme:set,nameplateProfile:superstarNameplateProfile(card),drawPlaque:true,drawInk:!state.renderPlateOnly,drawStars:false});
 }
-function drawFrameOverlay(){const card=currentCard(),set=currentSet(),reward=studioRewardSet(card);frame(ctx,canvas.width,canvas.height,reward?"#efcf73":(set.border||set.accent),reward?"#b51f31":set.accent2);if(!state.renderPlateOnly)drawRarityStars();}
+function drawFrameOverlay(){const card=currentCard(),set=currentSet(),reward=studioRewardSet(card);frame(ctx,canvas.width,canvas.height,reward?"#efcf73":(set.border||set.accent),reward?"#b51f31":set.accent2);if(!state.renderPlateOnly){const renderer=globalThis.WWELegacyCardFaceRenderer;if(!renderer)throw new Error("Shared Card Studio face renderer is not loaded.");renderer.drawRarityStars(ctx,card,{width:canvas.width,height:canvas.height});}}
 function drawHeadshot(){const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);drawArt();}
 function draw(){if(isHeadshotMode()){drawHeadshot();return;}if(!state.exportingPlate)state.renderPlateOnly=previewPlateOnly();drawTemplate();const momentumMock=drawMomentumMockup();drawArt();const veil=ctx.createLinearGradient(0,0,0,canvas.height);veil.addColorStop(0,"rgba(0,0,0,.05)");veil.addColorStop(.63,"rgba(0,0,0,0)");veil.addColorStop(1,"rgba(0,0,0,.22)");ctx.fillStyle=veil;ctx.fillRect(0,0,canvas.width,canvas.height);if(!momentumMock){drawSetLogo();drawBottomIdentity();}drawFrameOverlay();}
 function studioFallbackLogoData(id){return "";}

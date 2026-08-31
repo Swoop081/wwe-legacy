@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.45";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.45";
-import { decks } from "../js/data/decks.js?v=1.1.45";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.48";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.48";
+import { decks } from "../js/data/decks.js?v=1.1.48";
 
 const pescado=allGameplayCards.find(card=>card.id==="pescado");
 
