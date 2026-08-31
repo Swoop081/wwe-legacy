@@ -1,0 +1,239 @@
+/* WWE Legacy v1.1.52 — global Superstar containment + Season reward-road polish. */
+
+/* -------------------------------------------------------------------------
+   Superstar cards: the exported 680×1000 card is the entire authored front.
+   Never crop its left/right frame edges. This is deliberately global so the
+   same full border is preserved in Deck Lab, Collection, Catalogue, Store,
+   pack/selection surfaces, overlays and every other collectible-card context.
+   ------------------------------------------------------------------------- */
+.ccg-card.is-full-art-superstar .ccg-card-art,
+.ccg-card.is-full-art-superstar .ccg-superstar-full-art{
+  background:#050506!important;
+}
+.ccg-card.is-full-art-superstar .ccg-superstar-full-art img,
+.ccg-card.is-full-art-superstar .ccg-superstar-full-art img.superstar-card-visual{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+
+/* -------------------------------------------------------------------------
+   Season 1 reward road: the full reward rectangle now carries the bright tier
+   colour. The old little number capsule is removed and the numeral becomes the
+   full-height visual anchor for the row.
+   ------------------------------------------------------------------------- */
+body[data-screen="seasons"] .season-road-node{
+  --season-tier-a:#b45bff;
+  --season-tier-b:#7130d8;
+  opacity:1!important;
+  color:#fff!important;
+  border-color:rgba(226,188,255,.62)!important;
+  background:linear-gradient(135deg,var(--season-tier-a) 0%,var(--season-tier-b) 100%)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.22),0 8px 20px rgba(0,0,0,.22)!important;
+  overflow:hidden!important;
+}
+body[data-screen="seasons"] .season-road-node.reached,
+body[data-screen="seasons"] .season-road-node.current{
+  opacity:1!important;
+  filter:none!important;
+}
+body[data-screen="seasons"] .season-road-node.current{
+  border-color:#f0c8ff!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.27),0 0 0 2px rgba(232,190,255,.28),0 0 26px rgba(178,82,255,.34)!important;
+}
+body[data-screen="seasons"] .season-road-node.claimed{
+  border-color:rgba(201,255,224,.72)!important;
+}
+body[data-screen="seasons"] .season-road-node.major{
+  --season-tier-a:#ffdc72;
+  --season-tier-b:#c98a16;
+  color:#130c02!important;
+  border-color:rgba(255,232,151,.82)!important;
+}
+
+body[data-screen="seasons"] .season-road-node.final-boss-exclusive-move{
+  --season-tier-a:#ffac55;
+  --season-tier-b:#ef652d;
+  color:#160905!important;
+  border-color:rgba(255,205,157,.86)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-support{
+  --season-tier-a:#75ecff;
+  --season-tier-b:#23add8;
+  color:#041218!important;
+  border-color:rgba(180,247,255,.88)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-signature{
+  --season-tier-a:#ffe176;
+  --season-tier-b:#c78b1c;
+  color:#140d02!important;
+  border-color:rgba(255,237,161,.9)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-finisher{
+  --season-tier-a:#ff7b82;
+  --season-tier-b:#d92d42;
+  color:#fff!important;
+  border-color:rgba(255,180,184,.9)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-action{
+  --season-tier-a:#d47bff;
+  --season-tier-b:#8337c8;
+  color:#fff!important;
+  border-color:rgba(231,185,255,.9)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-entrance{
+  --season-tier-a:#88a2ff;
+  --season-tier-b:#3d59d9;
+  color:#fff!important;
+  border-color:rgba(190,202,255,.9)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-superstar{
+  --season-tier-a:#fff09a;
+  --season-tier-b:#d49b24;
+  color:#130d02!important;
+  border-color:rgba(255,239,160,.95)!important;
+}
+
+/* Remove the separate rounded number box and let the number use the row height. */
+body[data-screen="seasons"] .season-road-tier,
+body[data-screen="seasons"] .season-road-node.major .season-road-tier,
+body[data-screen="seasons"] .season-road-node.final-boss-node .season-road-tier{
+  align-self:stretch!important;
+  width:78px!important;
+  height:auto!important;
+  min-height:106px!important;
+  display:grid!important;
+  place-items:center!important;
+  align-content:center!important;
+  padding:0!important;
+  margin:0!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:inherit!important;
+}
+body[data-screen="seasons"] .season-road-tier small{
+  display:none!important;
+}
+body[data-screen="seasons"] .season-road-tier b{
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  font-family:"Arial Narrow","Avenir Next Condensed",Arial,sans-serif!important;
+  font-size:4.85rem!important;
+  font-weight:1000!important;
+  line-height:.78!important;
+  letter-spacing:-.09em!important;
+  transform:scaleX(.78)!important;
+  transform-origin:center!important;
+  color:inherit!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.28)!important;
+}
+body[data-screen="seasons"] .season-road-reward strong,
+body[data-screen="seasons"] .season-road-reward small,
+body[data-screen="seasons"] .season-road-reward em{
+  color:inherit!important;
+  text-shadow:0 1px 5px rgba(0,0,0,.32)!important;
+}
+body[data-screen="seasons"] .season-road-reward small{opacity:.78!important}
+body[data-screen="seasons"] .season-road-reward em{opacity:.82!important}
+body[data-screen="seasons"] .season-road-reward button{
+  background:rgba(5,7,12,.72)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.26)!important;
+}
+
+/* -------------------------------------------------------------------------
+   Branded physical booster wrappers. Season rewards already use the exact same
+   physicalBoosterPackMarkup() component as Packs/Store; these set skins make
+   every launch-set reward visibly its real set rather than a generic dark foil.
+   ------------------------------------------------------------------------- */
+.physical-booster-pack.pack-set-raw-series-1{
+  --pack-glint:rgba(255,82,92,.48);--pack-edge:rgba(238,45,58,.58);
+  background:repeating-linear-gradient(115deg,transparent 0 16%,rgba(255,255,255,.055) 16.5% 17%,transparent 17.5% 33%),radial-gradient(circle at 72% 22%,rgba(255,52,67,.42),transparent 28%),linear-gradient(145deg,#07080b 0%,#321016 48%,#a30f20 100%)!important;
+}
+.physical-booster-pack.pack-set-smackdown-series-1{
+  --pack-glint:rgba(89,196,255,.52);--pack-edge:rgba(72,161,255,.58);
+  background:repeating-linear-gradient(160deg,transparent 0 15%,rgba(120,210,255,.07) 15.5% 16%,transparent 16.5% 31%),radial-gradient(circle at 70% 20%,rgba(61,188,255,.38),transparent 29%),linear-gradient(145deg,#031126 0%,#063d82 52%,#0874c9 100%)!important;
+}
+.physical-booster-pack.pack-set-nxt-series-1{
+  --pack-glint:rgba(242,246,250,.46);--pack-edge:rgba(215,224,232,.55);
+  background:linear-gradient(120deg,transparent 0 35%,rgba(255,255,255,.10) 46%,transparent 57%),radial-gradient(circle at 68% 22%,rgba(224,233,240,.20),transparent 28%),linear-gradient(145deg,#030405 0%,#242a2f 48%,#08090b 100%)!important;
+}
+.physical-booster-pack.pack-set-evolution-series-1{
+  --pack-glint:rgba(255,159,232,.50);--pack-edge:rgba(221,106,206,.52);
+  background:radial-gradient(circle at 70% 20%,rgba(255,117,215,.36),transparent 26%),radial-gradient(circle at 25% 72%,rgba(51,216,255,.16),transparent 25%),linear-gradient(145deg,#43143e 0%,#271335 50%,#090b12 100%)!important;
+}
+.physical-booster-pack.pack-set-summerslam-series-1{
+  --pack-glint:rgba(107,219,255,.48);--pack-edge:rgba(255,129,76,.52);
+  background:repeating-linear-gradient(-12deg,transparent 0 15%,rgba(118,220,255,.07) 15.5% 16%,transparent 16.5% 31%),radial-gradient(circle at 70% 22%,rgba(255,142,64,.35),transparent 29%),linear-gradient(145deg,#07172b 0%,#153d70 48%,#d95b36 100%)!important;
+}
+.physical-booster-pack.pack-set-golden-era-series-1{
+  --pack-glint:rgba(255,224,121,.52);--pack-edge:rgba(239,200,76,.58);
+  background:radial-gradient(circle at 72% 22%,rgba(255,220,98,.32),transparent 26%),radial-gradient(circle at 22% 76%,rgba(210,50,42,.18),transparent 28%),linear-gradient(145deg,#08142f 0%,#142e65 48%,#6b1c16 100%)!important;
+}
+.physical-booster-pack.pack-set-new-generation-series-1{
+  --pack-glint:rgba(92,239,226,.50);--pack-edge:rgba(230,83,184,.58);
+  background:radial-gradient(circle at 18% 76%,rgba(68,236,218,.32),transparent 28%),radial-gradient(circle at 76% 20%,rgba(241,70,172,.42),transparent 30%),linear-gradient(145deg,#0a0e39 0%,#34266f 48%,#61256e 100%)!important;
+}
+.physical-booster-pack.pack-set-attitude-era-series-1{
+  --pack-glint:rgba(235,238,241,.48);--pack-edge:rgba(219,55,65,.54);
+  background:repeating-linear-gradient(75deg,transparent 0 19%,rgba(255,255,255,.045) 19.5% 20%,transparent 20.5% 39%),radial-gradient(circle at 69% 20%,rgba(238,238,238,.18),transparent 25%),linear-gradient(145deg,#050607 0%,#272a2e 50%,#471016 100%)!important;
+}
+.physical-booster-pack.pack-set-ruthless-aggression-series-1{
+  --pack-glint:rgba(239,73,83,.50);--pack-edge:rgba(225,62,72,.58);
+  background:linear-gradient(118deg,transparent 0 39%,rgba(220,226,232,.09) 48%,transparent 58%),radial-gradient(circle at 71% 20%,rgba(236,48,59,.36),transparent 28%),linear-gradient(145deg,#060607 0%,#24262a 44%,#661018 100%)!important;
+}
+
+/* RAW's old local logo filename no longer exists in the repository. Keep the
+   pack branded even when that legacy img reports an error. */
+.physical-booster-pack.pack-set-raw-series-1 .pack-brand-lockup:has(.pack-set-logo.is-source-logo-unavailable)::after{
+  content:"RAW";
+  display:block;
+  font-family:"Arial Black","Arial Narrow",Arial,sans-serif;
+  font-size:1.25rem;
+  font-style:italic;
+  font-weight:1000;
+  letter-spacing:-.08em;
+  color:#fff;
+  text-shadow:0 2px 7px #000;
+}
+
+/* Mini Season packs need the real set lockup to stay legible at reward-road size. */
+body[data-screen="seasons"] .season-reward-pack .pack-brand-lockup{
+  width:92%!important;
+  min-height:29%!important;
+  margin-bottom:2%!important;
+}
+body[data-screen="seasons"] .season-reward-pack .pack-brand-lockup img{
+  width:100%!important;
+  max-height:50px!important;
+  object-fit:contain!important;
+}
+body[data-screen="seasons"] .season-reward-pack .pack-series-name{
+  font-size:.66rem!important;
+}
+body[data-screen="seasons"] .season-reward-pack .pack-contents-line{
+  font-size:.26rem!important;
+  letter-spacing:.08em!important;
+}
+
+@media(max-width:600px){
+  body[data-screen="seasons"] .season-road-tier,
+  body[data-screen="seasons"] .season-road-node.major .season-road-tier,
+  body[data-screen="seasons"] .season-road-node.final-boss-node .season-road-tier{
+    width:74px!important;
+    min-height:104px!important;
+  }
+  body[data-screen="seasons"] .season-road-tier b{
+    font-size:4.55rem!important;
+  }
+}
