@@ -36,12 +36,42 @@ jobs:
             --exclude=BUILD-CERTIFICATION.md \
             --exclude=README.md \
             --exclude=RELEASE-NOTES-v1.1.29.md \
+            --exclude=js/ui/app.js \
             /tmp/v1.1.48-existing.patch
           git apply --ignore-space-change --ignore-whitespace \
             --exclude=BUILD-CERTIFICATION.md \
             --exclude=README.md \
             --exclude=RELEASE-NOTES-v1.1.29.md \
+            --exclude=js/ui/app.js \
             /tmp/v1.1.48-existing.patch
+          python - <<'PY'
+          from pathlib import Path
+          path=Path('js/ui/app.js')
+          text=path.read_text()
+          start=text.index('// v1.1.46 — the live collectible face is painted by Canvas using the same')
+          end=text.index('function renderCardStudioInkLayers(scope=document){', start)
+          replacement='''// v1.1.48 — Card Studio and the live game share one dynamic face renderer.
+          // The runtime only owns payload/DOM plumbing; all visible plaque typography,
+          // rarity stars and Method dots are drawn by js/shared/card-face-renderer.js.
+          function cardStudioInkPayload(card){
+            if(!card)return "";
+            return encodeURIComponent(JSON.stringify({id:card.id,name:card.name,kind:card.kind,setId:card.setId,superstarId:card.superstarId??null,rarity:card.rarity??1,cost:card.cost??0,damage:card.damage??0,requirements:card.requirements??{},finisher:Boolean(card.finisher),moveType:card.moveType??card.method??"move",duration:card.duration??1}));
+          }
+          function layeredCardStudioInkMarkup(card){
+            if(!card||card.kind==="momentum")return "";
+            return `<canvas class="ccg-card-studio-ink" width="680" height="1000" data-card-studio-ink="${cardStudioInkPayload(card)}" aria-hidden="true"></canvas>`;
+          }
+          function cardStudioRuntimeTheme(card){return globalThis.WWELegacyCardFaceRenderer?.themeForSet?.(card?.setId)??{};}
+          function paintCardStudioInk(canvas,card){
+            if(!canvas||!card)return;
+            const ctx=canvas.getContext("2d");if(!ctx)return;ctx.clearRect(0,0,680,1000);
+            const renderer=globalThis.WWELegacyCardFaceRenderer;
+            if(!renderer)throw new Error("Shared Card Studio face renderer is not loaded.");
+            renderer.drawFace(ctx,card,{width:680,height:1000,theme:cardStudioRuntimeTheme(card),nameplateProfile:SUPERSTAR_NAMEPLATE_PROFILES[card?.superstarId]??null,drawPlaque:false,drawInk:true,drawStars:true});
+          }
+          '''
+          path.write_text(text[:start]+replacement+text[end:])
+          PY
           npm run stamp-cache
 
       - name: Verify release
