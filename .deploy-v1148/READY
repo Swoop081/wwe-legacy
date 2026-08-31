@@ -1,4 +1,4 @@
-WWE Legacy v1.1.48 retry 3
+WWE Legacy v1.1.48 retry 4
 Shared Dynamic Card Face Renderer
-Renderer payload staged as seven verified chunks.
-Trigger: 2026-08-31T09:18+10:00
+Chunked payload verified; deploy ignores stale documentation context.
+Trigger: 2026-08-31T09:21+10:00
