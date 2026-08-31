@@ -1,0 +1,8 @@
+/* WWE Legacy v1.1.63 — Play page portrait headroom only.
+   Lower the page-one Superstar portraits slightly inside their existing cards
+   so the top of each head has more breathing room. No card geometry changes. */
+
+.play-path-card .play-path-image{
+  position:relative!important;
+  top:8px!important;
+}
