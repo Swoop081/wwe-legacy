@@ -1,0 +1,165 @@
+/* WWE Legacy v1.1.54 — feedback correction pass.
+   Static rarity presence for Superstar cards, brighter Season reward road,
+   readable Season copy, and Trish reward-card information overlays. */
+
+/* Full-art Superstar cards keep their authored artwork unobstructed, but regain
+   a clearly visible STATIC rarity rim/glow. No animated sweep is permitted. */
+.ccg-card.is-full-art-superstar.tier-emerald .ccg-tier-overlay,
+.ccg-card.is-full-art-superstar.tier-sapphire .ccg-tier-overlay,
+.ccg-card.is-full-art-superstar.tier-ruby .ccg-tier-overlay,
+.ccg-card.is-full-art-superstar.tier-amethyst .ccg-tier-overlay{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  opacity:1!important;
+  transform:none!important;
+  animation:none!important;
+  background:none!important;
+  pointer-events:none!important;
+  mix-blend-mode:screen!important;
+  z-index:4!important;
+}
+.ccg-card.is-full-art-superstar.tier-emerald .ccg-tier-overlay{
+  box-shadow:inset 0 0 0 2px rgba(108,255,171,.98),inset 0 0 18px rgba(30,225,113,.76),0 0 18px rgba(42,226,120,.66)!important;
+}
+.ccg-card.is-full-art-superstar.tier-sapphire .ccg-tier-overlay{
+  box-shadow:inset 0 0 0 2px rgba(123,211,255,.98),inset 0 0 19px rgba(46,139,255,.78),0 0 19px rgba(42,128,255,.68)!important;
+}
+.ccg-card.is-full-art-superstar.tier-ruby .ccg-tier-overlay{
+  box-shadow:inset 0 0 0 2px rgba(255,142,154,.98),inset 0 0 20px rgba(255,57,84,.80),0 0 20px rgba(239,44,67,.70)!important;
+}
+.ccg-card.is-full-art-superstar.tier-amethyst .ccg-tier-overlay{
+  box-shadow:inset 0 0 0 2px rgba(230,250,255,.98),inset 0 0 16px rgba(105,211,255,.82),inset 0 0 30px rgba(179,105,255,.56),0 0 20px rgba(166,113,255,.74)!important;
+}
+.ccg-card.is-full-art-superstar.tier-emerald .ccg-card-front{box-shadow:0 0 24px rgba(38,220,116,.55),0 9px 20px rgba(0,0,0,.30)!important}
+.ccg-card.is-full-art-superstar.tier-sapphire .ccg-card-front{box-shadow:0 0 25px rgba(48,137,255,.58),0 9px 20px rgba(0,0,0,.30)!important}
+.ccg-card.is-full-art-superstar.tier-ruby .ccg-card-front{box-shadow:0 0 27px rgba(239,44,67,.62),0 9px 20px rgba(0,0,0,.30)!important}
+.ccg-card.is-full-art-superstar.tier-amethyst .ccg-card-front{box-shadow:0 0 27px rgba(174,123,255,.68),0 0 14px rgba(133,222,255,.50),0 9px 20px rgba(0,0,0,.30)!important}
+.ccg-card.is-full-art-superstar .ccg-tier-overlay::before,
+.ccg-card.is-full-art-superstar .ccg-tier-overlay::after{animation:none!important;display:none!important}
+
+/* Season reward road: use the bright identity colour across the actual tier
+   rectangle, rather than leaving the main reward row dark. */
+body[data-screen="seasons"] .season-road-node{
+  --season-tier-a:#c95dff;
+  --season-tier-b:#7d35df;
+  background:linear-gradient(105deg,var(--season-tier-a) 0%,var(--season-tier-b) 100%)!important;
+  border-color:rgba(255,255,255,.34)!important;
+  opacity:1!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 8px 22px rgba(0,0,0,.30)!important;
+}
+body[data-screen="seasons"] .season-road-node.major{--season-tier-a:#ffe071;--season-tier-b:#c98712}
+body[data-screen="seasons"] .season-road-node.final-boss-exclusive-move{--season-tier-a:#ff9f43;--season-tier-b:#dc4d18}
+body[data-screen="seasons"] .season-road-node.final-boss-support{--season-tier-a:#57ecff;--season-tier-b:#087cb4}
+body[data-screen="seasons"] .season-road-node.final-boss-signature{--season-tier-a:#ffe36f;--season-tier-b:#c58a12}
+body[data-screen="seasons"] .season-road-node.final-boss-finisher{--season-tier-a:#ff667e;--season-tier-b:#b21835}
+body[data-screen="seasons"] .season-road-node.final-boss-action{--season-tier-a:#d07cff;--season-tier-b:#752bd1}
+body[data-screen="seasons"] .season-road-node.final-boss-entrance{--season-tier-a:#66b5ff;--season-tier-b:#205fd4}
+body[data-screen="seasons"] .season-road-node.final-boss-superstar{--season-tier-a:#fff18e;--season-tier-b:#d39a1d}
+
+/* All text on the bright Season rows must stay high-contrast. */
+body[data-screen="seasons"] .season-road-node,
+body[data-screen="seasons"] .season-road-tier,
+body[data-screen="seasons"] .season-road-tier b,
+body[data-screen="seasons"] .season-road-reward,
+body[data-screen="seasons"] .season-road-reward strong,
+body[data-screen="seasons"] .season-road-reward small,
+body[data-screen="seasons"] .season-road-reward em{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.72)!important;
+}
+body[data-screen="seasons"] .season-road-reward em{opacity:.94!important}
+body[data-screen="seasons"] .season-road-node.major .season-road-tier b,
+body[data-screen="seasons"] .season-road-node.major .season-road-reward strong,
+body[data-screen="seasons"] .season-road-node.final-boss-signature .season-road-reward strong,
+body[data-screen="seasons"] .season-road-node.final-boss-superstar .season-road-reward strong{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+
+/* v1.1.53 clean Trish base plates remain the artwork source. v1.1.54 restores
+   a compact live-information plaque over those authored plates. */
+body[data-screen="seasons"] .season-reward-static-card-v1153{
+  position:relative!important;
+  overflow:hidden!important;
+}
+body[data-screen="seasons"] .season-reward-card-v1154-overlay{
+  position:absolute!important;
+  left:4.5%!important;
+  right:4.5%!important;
+  bottom:4.8%!important;
+  z-index:6!important;
+  display:grid!important;
+  gap:1px!important;
+  padding:4px 5px!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  border-radius:3px!important;
+  background:rgba(0,0,0,.92)!important;
+  color:#fff!important;
+  box-shadow:0 1px 5px rgba(0,0,0,.65)!important;
+  pointer-events:none!important;
+  text-align:left!important;
+  line-height:1.02!important;
+}
+body[data-screen="seasons"] .season-reward-card-v1154-title{
+  display:block!important;
+  overflow:hidden!important;
+  color:#fff!important;
+  font-size:7px!important;
+  font-weight:950!important;
+  letter-spacing:.01em!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+  text-shadow:none!important;
+}
+body[data-screen="seasons"] .season-reward-card-v1154-meta{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:3px!important;
+  color:#fff!important;
+  font-size:5.5px!important;
+  font-weight:850!important;
+  letter-spacing:.025em!important;
+  text-transform:uppercase!important;
+  text-shadow:none!important;
+}
+body[data-screen="seasons"] .season-reward-card-v1154-stats{
+  display:inline-flex!important;
+  gap:3px!important;
+  white-space:nowrap!important;
+  color:#fff!important;
+}
+
+/* Season pack branding should remain visible within the small physical-pack
+   thumbnail rather than collapsing into an empty wrapper. */
+body[data-screen="seasons"] .season-reward-pack .pack-brand-lockup{
+  position:relative!important;
+  width:92%!important;
+  min-height:30%!important;
+}
+body[data-screen="seasons"] .season-reward-pack .pack-set-logo,
+body[data-screen="seasons"] .season-reward-pack .set-brand-logo{
+  display:block;
+  max-width:92%!important;
+  max-height:38px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+body[data-screen="seasons"] .pack-v1154-brand-fallback{
+  display:grid!important;
+  place-items:center!important;
+  width:92%!important;
+  min-height:28px!important;
+  margin:0 auto!important;
+  padding:2px 3px!important;
+  color:#fff!important;
+  font-size:7px!important;
+  line-height:.94!important;
+  font-weight:1000!important;
+  letter-spacing:.045em!important;
+  text-align:center!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 2px #000,0 0 5px rgba(255,255,255,.22)!important;
+}
