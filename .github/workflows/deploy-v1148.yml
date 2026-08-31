@@ -91,7 +91,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(node -p \"JSON.parse(require('fs').readFileSync('build.json','utf8')).version\")" = "1.1.48"
+          grep -q '"version": "1.1.48"' build.json
           rm -rf .deploy-v1148
           rm -f .github/workflows/deploy-v1148.yml
           git config user.name "WWE Legacy Release Bot"
