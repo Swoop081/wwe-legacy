@@ -51,7 +51,7 @@ const LINKED_ANIMATION_STORAGE_KEY="wweLegacyAnimatedCardLinks.v1";
 function linkedAnimationMap(){try{const raw=localStorage.getItem(LINKED_ANIMATION_STORAGE_KEY);if(!raw)return {};const parsed=JSON.parse(raw);return parsed&&typeof parsed==="object"&&!Array.isArray(parsed)?parsed:{};}catch{return {};}}
 function savedLinkedAnimation(card=currentCard()){if(!card?.id)return "";return String(linkedAnimationMap()[card.id]||"").trim();}
 function saveLinkedAnimation(card,url){if(!card?.id)return false;try{const map=linkedAnimationMap(),value=String(url||"").trim();if(value)map[card.id]=value;else delete map[card.id];localStorage.setItem(LINKED_ANIMATION_STORAGE_KEY,JSON.stringify(map));return true;}catch{return false;}}
-const BUILD_VERSION="1.1.95";
+const BUILD_VERSION="1.1.96";
 function assetUrl(path){
   if(/^https?:\/\//i.test(String(path||""))) return String(path);
   const url=new URL(`../${path}`,document.location.href);
@@ -224,7 +224,7 @@ const SET_LOGO_SAFE_PROFILES={
 function drawSetLogo(){
   const card=currentCard(),id=card?.setId||$("#set-select").value,im=state.setLogos.get(id);if(!im)return;
   const w=canvas.width,h=canvas.height,isReward=studioRewardSet(card);
-  const safeRight=w*(1-.075),safeTop=h*.052;
+  const safeRight=w*(1-.088),safeTop=h*.072;
   const profile=isReward?{maxW:.285,maxH:.12}:(SET_LOGO_SAFE_PROFILES[id]||{maxW:.255,maxH:.105});
   drawImageContainTopRight(im,{right:safeRight,top:safeTop,maxW:w*profile.maxW,maxH:h*profile.maxH});
 }
@@ -249,7 +249,7 @@ function drawRequirementDots(card,cx,y){const groups=moveRequirementGroups(card)
 function superstarNameplateProfile(card=currentCard()){return card?.kind==="superstar"?(globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES?.[card.superstarId]??null):null;}
 function superstarNameText(card=currentCard()){const p=superstarNameplateProfile(card);return p?.preserveCase?String(card?.name??""):String(card?.name??"").toUpperCase();}
 function drawSuperstarName(text,x,y,maxWidth,set,profile){const s=scale(),p=profile??{};let px=54*Number(p.fontScale??1),tracking=Number(p.tracking??0)*s,scaleX=Number(p.scaleX??1),skew=Math.tan(Number(p.skew??0)*Math.PI/180);const weight=Number(p.weight??900),style="",family=p.fontFamily??DISPLAY_STACK;while(px>23){ctx.font=`${style}${weight} ${px*s}px ${family}`;const width=trackedWidth(text,tracking)*scaleX;if(width<=maxWidth)break;px-=1.5;}ctx.save();ctx.translate(x,y);ctx.transform(1,0,skew,1,0,0);ctx.scale(scaleX,1);ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineJoin="round";ctx.lineWidth=Number(p.strokeWidth??3.1)*s;ctx.strokeStyle=set.stroke||"rgba(0,0,0,.96)";ctx.shadowColor="rgba(0,0,0,.82)";ctx.shadowBlur=7*s;drawTrackedText(text,0,0,tracking,{stroke:true});const ng=ctx.createLinearGradient(0,-26*s,0,18*s);ng.addColorStop(0,set.nameTop);ng.addColorStop(.62,set.nameTop);ng.addColorStop(1,set.nameBottom);ctx.fillStyle=ng;ctx.shadowColor=set.glow;ctx.shadowBlur=Number(p.glow??6)*s;drawTrackedText(text,0,0,tracking);ctx.restore();}
-function drawRarityStars(){const card=currentCard();if(!card)return;const rarity=Math.max(1,Math.min(4,Number(card.rarity)||1)),w=canvas.width,h=canvas.height,s=scale();ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";ctx.font=`900 ${24*s}px Arial, sans-serif`;ctx.lineJoin="round";for(let i=0;i<rarity;i++){const x=51*s,y=62*s+i*31*s;ctx.lineWidth=3*s;ctx.strokeStyle="rgba(28,18,2,.92)";ctx.shadowColor="rgba(0,0,0,.75)";ctx.shadowBlur=5*s;ctx.strokeText("★",x,y);const gold=ctx.createLinearGradient(x,y-12*s,x,y+12*s);gold.addColorStop(0,"#fff2a6");gold.addColorStop(.46,"#f4c542");gold.addColorStop(1,"#b97608");ctx.fillStyle=gold;ctx.shadowColor="rgba(255,202,55,.48)";ctx.shadowBlur=8*s;ctx.fillText("★",x,y);}ctx.restore();}
+function drawRarityStars(){const card=currentCard();if(!card)return;const rarity=Math.max(1,Math.min(4,Number(card.rarity)||1)),w=canvas.width,h=canvas.height,s=scale();ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";ctx.font=`900 ${24*s}px Arial, sans-serif`;ctx.lineJoin="round";for(let i=0;i<rarity;i++){const x=65*s,y=80*s+i*31*s;ctx.lineWidth=3*s;ctx.strokeStyle="rgba(28,18,2,.92)";ctx.shadowColor="rgba(0,0,0,.75)";ctx.shadowBlur=5*s;ctx.strokeText("★",x,y);const gold=ctx.createLinearGradient(x,y-12*s,x,y+12*s);gold.addColorStop(0,"#fff2a6");gold.addColorStop(.46,"#f4c542");gold.addColorStop(1,"#b97608");ctx.fillStyle=gold;ctx.shadowColor="rgba(255,202,55,.48)";ctx.shadowBlur=8*s;ctx.fillText("★",x,y);}ctx.restore();}
 function drawMoveStatFigure(cx,label,value){const s=scale(),h=canvas.height;ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillStyle="rgba(255,255,255,.78)";ctx.font=cardFont(META_STACK,17.5,950);drawTrackedText(label,cx,h*.856,1.25*s);ctx.fillStyle="#ffffff";ctx.strokeStyle="#ffffff";ctx.lineJoin="round";ctx.lineWidth=1.35*s;ctx.font=cardFont(NUMBER_STACK,78,1000);ctx.strokeText(String(value),cx,h*.902);ctx.fillText(String(value),cx,h*.902);ctx.restore();}
 function studioRewardSet(card){return ["season-1-final-boss","season-1-last-time-is-now","season-2-whos-next","parked-chyna"].includes(card?.setId);}
 function drawResponsiveMoveType(text,cx,y,maxWidth,fontPx,tracking,fill){
@@ -280,7 +280,7 @@ function drawPhysicalPrintingFrame(){
   ctx.strokeStyle=meta.highlight;ctx.globalAlpha=.92;ctx.lineWidth=2*s;ctx.stroke();
   ctx.restore();
 }
-function drawFrameOverlay(){const card=currentCard(),set=currentSet(),reward=studioRewardSet(card);frame(ctx,canvas.width,canvas.height,reward?"#efcf73":(set.border||set.accent),reward?"#b51f31":set.accent2);if(!state.renderPlateOnly){drawPhysicalPrintingFrame();const renderer=globalThis.WWELegacyCardFaceRenderer;if(!renderer)throw new Error("Shared Card Studio face renderer is not loaded.");renderer.drawRarityStars(ctx,card,{width:canvas.width,height:canvas.height});}}
+function drawFrameOverlay(){const card=currentCard();if(!state.renderPlateOnly){drawPhysicalPrintingFrame();const renderer=globalThis.WWELegacyCardFaceRenderer;if(!renderer)throw new Error("Shared Card Studio face renderer is not loaded.");renderer.drawRarityStars(ctx,card,{width:canvas.width,height:canvas.height});}}
 function drawHeadshot(){const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);drawArt();}
 function draw(){if(isHeadshotMode()){drawHeadshot();return;}if(!state.exportingPlate)state.renderPlateOnly=previewPlateOnly();drawTemplate();const momentumMock=drawMomentumMockup();drawArt();const veil=ctx.createLinearGradient(0,0,0,canvas.height);veil.addColorStop(0,"rgba(0,0,0,.05)");veil.addColorStop(.63,"rgba(0,0,0,0)");veil.addColorStop(1,"rgba(0,0,0,.22)");ctx.fillStyle=veil;ctx.fillRect(0,0,canvas.width,canvas.height);if(!momentumMock){drawSetLogo();drawBottomIdentity();}drawFrameOverlay();}
 function studioFallbackLogoData(id){return "";}

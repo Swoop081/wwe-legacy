@@ -1,0 +1,90 @@
+/* WWE Legacy v1.1.96 — Card Frame Safe-Zone Hotfix
+   Physical iPhone findings:
+   - rules backs sat under the new physical frame,
+   - stars/set identity were too close to the physical edge,
+   - legacy Card Studio border could show through at rounded corners. */
+
+.ccg-card{
+  --print-frame-width:6.25cqw!important;
+  --print-frame-radius:4.45cqw;
+}
+.ccg-card-face{
+  border-radius:var(--print-frame-radius)!important;
+  border-color:transparent!important;
+}
+.ccg-print-frame{
+  border-radius:var(--print-frame-radius)!important;
+  border-width:var(--print-frame-width)!important;
+  overflow:hidden!important;
+  clip-path:inset(0 round var(--print-frame-radius))!important;
+  -webkit-clip-path:inset(0 round var(--print-frame-radius))!important;
+}
+
+/* Compatibility cover for already-exported fronts that still contain the
+   retired legacy border. The wider physical frame consumes the old perimeter
+   rather than allowing its corner arcs to peek through. */
+.ccg-card-front,
+.ccg-card-rules{
+  clip-path:inset(0 round var(--print-frame-radius))!important;
+  -webkit-clip-path:inset(0 round var(--print-frame-radius))!important;
+}
+
+/* Existing finished/layered plates move inward by less than 1% on each edge.
+   This gives baked set logos a little more air from the new frame while the
+   enlarged physical frame continues to cover their retired outer border. */
+.ccg-card.is-full-art-finished .ccg-finished-card-art-image,
+.ccg-card.is-layered-front .ccg-layered-card-plate{
+  width:98.5%!important;
+  height:98.5%!important;
+  left:.75%!important;
+  top:.75%!important;
+  position:absolute!important;
+  object-fit:fill!important;
+  object-position:center center!important;
+}
+
+/* Dynamic rarity stars use the same physical safe zone as Card Studio. */
+.ccg-card.is-layered-front .ccg-live-rarity{
+  left:9.55%!important;
+  top:7.1%!important;
+  width:5.2%!important;
+}
+
+/* Rules backs must begin inside the physical frame rather than underneath it.
+   Tighten typography/spacing slightly so the extra safe padding does not cost
+   usable rules capacity. */
+.ccg-card-rules{
+  padding:calc(var(--print-frame-width) + 1.05cqw)!important;
+}
+.ccg-rules-head{
+  padding-bottom:5px!important;
+  margin-bottom:6px!important;
+}
+.ccg-rules-head small{font-size:.45rem!important}
+.ccg-rules-head strong{font-size:.82rem!important;line-height:1.03!important}
+.ccg-rules-head em{font-size:.46rem!important;margin-top:3px!important}
+.ccg-rules-body{
+  font-size:clamp(.52rem,2.05vw,.68rem)!important;
+  line-height:1.25!important;
+  -webkit-line-clamp:11!important;
+}
+.ccg-rules-requirements,
+.ccg-rules-restriction,
+.ccg-rules-reference{
+  margin-top:5px!important;
+  padding-top:5px!important;
+  font-size:.47rem!important;
+  line-height:1.18!important;
+}
+.ccg-rules-foot{
+  padding-top:5px!important;
+  font-size:.44rem!important;
+}
+
+/* The pack reveal and card inspector are the two iPhone surfaces where the
+   problem was most visible. Keep the complete rules back inside one card. */
+.single-card-reveal-stage .ccg-card-rules,
+.superstar-card-modal .ccg-card-rules,
+.booster-card-inspect-modal .ccg-card-rules{
+  overflow:hidden!important;
+}

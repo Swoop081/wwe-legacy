@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { superstars } from '../js/data/superstars.js?v=1.1.95';
-import { decks } from '../js/data/decks.js?v=1.1.95';
+import { superstars } from '../js/data/superstars.js?v=1.1.96';
+import { decks } from '../js/data/decks.js?v=1.1.96';
 
 test('v1.1.79 balance lab covers the complete 97-Superstar recommendation roster',()=>{
   const ids=Object.values(superstars).filter(s=>s.id!=='aj-styles'&&Array.isArray(decks[s.id])&&decks[s.id].length===60);

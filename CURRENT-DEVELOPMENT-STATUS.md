@@ -181,3 +181,12 @@ Permanent report:
 - No gameplay/economy/balance changes.
 - Physical iPhone smoke must be rerun against v1.1.95 after deployment.
 
+## v1.1.96 — iPhone Card Frame Safe-Zone Hotfix (2026-09-02)
+- Physical iPhone screenshots confirmed rules-back clipping, front star/set-logo edge crowding, and the retired Card Studio border showing beneath the new physical frame at all four corners.
+- Rules backs now use the physical-frame safe zone plus slightly tighter typography/spacing.
+- Physical frame geometry standardized at 6.25cqw width / 4.45cqw radius for current live cards.
+- Existing finished/layered fronts receive a 98.5% centered compatibility inset; dynamic stars move inward to the same visual safe zone.
+- Card Studio set-logo anchor changed to 8.8% right / 7.2% top safe padding; rarity stars move from x51/y62 to x65/y80 on the 680×1000 canvas.
+- Card Studio no longer bakes the retired legacy `frame()` underneath the new physical printing frame.
+- No gameplay/economy/balance changes.
+

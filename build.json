@@ -1,11 +1,11 @@
 {
-  "version": "1.1.95",
+  "version": "1.1.96",
   "releasedAt": "2026-09-01",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.95-user-smoke",
+  "physicalIphoneSmoke": "in-progress-v1.1.96-user-smoke",
   "launchStatus": "released",
-  "name": "v1.1.95 \u2014 iPhone Infinite Update Reload Hotfix"
+  "name": "v1.1.96 \u2014 iPhone Card Frame Safe-Zone Hotfix"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.1.95",
+  "version": "1.1.96",
   "policy": "Default release gate contains evergreen gameplay/data contracts and current-baseline tests only. Historical version snapshots are preserved but do not gate current releases.",
   "currentTests": [
     "test/v1182-watchlist-aj-october-card-studio.test.js",
@@ -21,7 +21,8 @@
     "test/v1172-trish-merch-booster-pool.test.js",
     "test/v1177-collection-ownership-cap.test.js",
     "test/v1178-amethyst-superstar-entrance-collation.test.js",
-    "test/v1195-iphone-update-reload-loop-hotfix.test.js"
+    "test/v1195-iphone-update-reload-loop-hotfix.test.js",
+    "test/v1196-card-frame-safe-zone-hotfix.test.js"
   ],
   "historicalSuiteCommand": "npm run test:historical",
   "knownHistoricalDebt": [

@@ -218,3 +218,9 @@
 - Added a hard guard against repeated auto-navigation to the same build.
 - No gameplay values changed.
 
+## v1.1.96 — iPhone Card Frame Safe-Zone Hotfix — 2 September 2026
+- Zoomed/compacted rules backs into the new physical-frame safe area.
+- Pulled rarity stars and set identity inward.
+- Removed legacy Card Studio border from new exports and covered the retired perimeter on existing live fronts.
+- No gameplay values changed.
+
