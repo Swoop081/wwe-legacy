@@ -1,6 +1,6 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.48";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.48";
-import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.48";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.86";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.86";
+import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.86";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-22T00:00:00";
 export const SEASON_END = "2026-09-21T00:00:00";
@@ -11,7 +11,6 @@ export const MATCH_XP = { win: 5, loss: 0 };
 export const DAILY_CHALLENGE_XP = 10;
 export const WEEKLY_CHALLENGE_XP = 25;
 export const SEASON_1_COMPLETION_SUPERSTAR = "trish-stratus";
-export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
 export const FEATURED_SET_IDS = ["raw-series-1", "smackdown-series-1", "nxt-series-1", "evolution-series-1", "summerslam-series-1", "golden-era-series-1", "new-generation-series-1", "attitude-era-series-1", "ruthless-aggression-series-1"];
 
 // Season 1 prestige chase: Trish Stratus — Stratusfaction Guaranteed is assembled
@@ -21,6 +20,9 @@ export const FEATURED_SET_IDS = ["raw-series-1", "smackdown-series-1", "nxt-seri
 // Entrance and Amethyst Superstar also earned on the road. Tier 50 then installs the best owned version of Trish’s
 // authored deck so Season completion is immediately playable at maximum owned
 // printing quality.
+// Merch is deliberately NOT awarded on this 50-tier road. Trish-specific
+// Merch remains in the universal one-Merch-per-booster pool and is collected
+// independently from the premium Amethyst Rewards chase.
 export const SEASON_1_CHASE_TIER_REWARDS = Object.freeze({
   2:  { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
   3:  { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },

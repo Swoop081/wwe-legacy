@@ -1,3 +1,5 @@
+import { FUTURE_ROADMAP_SUPERSTARS } from "./future-roadmap-v1.1.74.js?v=1.1.87";
+import { AJ_STYLES_SUPERSTAR } from "./aj-styles-v1.1.80.js?v=1.1.87";
 export const superstars = {
   "iyoSky": {
     "id": "iyo-sky",
@@ -945,7 +947,6 @@ export const superstars = {
     ],
     "signatures": [
       "flair-chop",
-      "spear",
       "charlotte-flair-natural-selection",
       "charlotte-flair-figure-eight-leglock",
       "charlotte-flair-spear"
@@ -1653,7 +1654,7 @@ export const superstars = {
     "special": {
       "type": "reduceIncomingBig",
       "minDamage": 8,
-      "reduce": 5,
+      "reduce": 2,
       "methodMomentum": "strength"
     }
   },
@@ -1747,7 +1748,7 @@ export const superstars = {
       "becky-lynch-bexploder"
     ],
     "archetype": "reviewed-starter",
-    "hp": 69,
+    "hp": 65,
     "methodLimits": {
       "agility": 1,
       "strength": 2,
@@ -1816,6 +1817,7 @@ export const superstars = {
     ],
     "signatures": [
       "logan-paul-knockout-punch",
+      "logan-paul-prime-splash",
       "logan-paul-paulverizer"
     ],
     "archetype": "strike-agility-showman",
@@ -1967,11 +1969,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Olympic Pedigree",
-      "text": "The first time Chad connects with a Technical Move, gain +1 Agility Momentum. The first time each match Chad connects with a Technical Move immediately after a Strength Move in the same Control sequence, draw 1 page.",
+      "text": "The first time Chad connects with a Technical Move, gain +1 Agility Momentum. The first 2 times each match Chad connects with a Technical Move immediately after a Strength Move in the same Control sequence, draw 2 pages and gain +1 Adrenaline.",
       "trigger": {
         "type": "gableOlympicPedigree",
         "agilityOnFirstTechnical": 1,
-        "drawAfterStrengthTechnical": 1,
+        "drawAfterStrengthTechnical": 2,
+        "adrenalineAfterStrengthTechnical": 1,
         "drawUses": 2
       },
       "maxUses": 2
@@ -2086,7 +2089,7 @@ export const superstars = {
       "rey-mysterio-west-coast-pop"
     ],
     "archetype": "agility-technical-lucha-underdog",
-    "hp": 57,
+    "hp": 59,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -2100,14 +2103,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Ultimate Underdog",
-      "text": "The first time each match Rey successfully kicks out of a Pin, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first 2 times each match Rey successfully kicks out of a Pin, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "reyUltimateUnderdog",
-        "maxUses": 1,
+        "maxUses": 2,
         "draw": 1,
-        "firstAdrenaline": 1
+        "adrenaline": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-rey-mysterio",
@@ -2222,7 +2225,7 @@ export const superstars = {
       "penta-mexican-destroyer"
     ],
     "archetype": "agility-strike-technical-hybrid-lucha",
-    "hp": 65,
+    "hp": 63,
     "methodLimits": {
       "agility": null,
       "strength": 1,
@@ -2236,11 +2239,11 @@ export const superstars = {
     },
     "ability": {
       "name": "Zero Fear, Zero Mercy",
-      "text": "The first 2 times each match Penta connects with a Strike Move immediately after a Technical Move in the same Control sequence, that Strike deals +2 Damage.",
+      "text": "The first 2 times each match Penta connects with a Strike Move immediately after a Technical Move in the same Control sequence, that Strike deals +1 Damage.",
       "trigger": {
         "type": "pentaZeroFearZeroMercy",
         "maxUses": 2,
-        "bonusDamage": 2,
+        "bonusDamage": 1,
         "adrenaline": 0
       },
       "maxUses": 2
@@ -2265,8 +2268,8 @@ export const superstars = {
       "type": "fearlessAssault",
       "afterMethod": "agility",
       "nextMethod": "strike",
-      "discount": 2,
-      "bonusDamage": 2
+      "discount": 1,
+      "bonusDamage": 1
     }
   },
   "elGrandeAmericano": {
@@ -2306,14 +2309,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Masked Opportunist",
-      "text": "The first 2 times each match El Grande Americano connects with a Move whose Method differs from the immediately previous Move he connected with during the same Control sequence, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first time each match El Grande Americano connects with a Move whose Method differs from the immediately previous Move he connected with during the same Control sequence, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "differentMethod",
-        "maxUses": 2,
+        "maxUses": 1,
         "draw": 1,
         "adrenaline": 1
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-el-grande-americano",
@@ -2706,13 +2709,13 @@ export const superstars = {
     "methodLimits": {
       "agility": null,
       "strength": 4,
-      "technical": 1,
+      "technical": 2,
       "strike": 1
     },
     "starterMomentum": {
-      "agility": 7,
+      "agility": 6,
       "strength": 4,
-      "technical": 1
+      "technical": 2
     },
     "ability": {
       "name": "Tiffy Time",
@@ -3026,7 +3029,7 @@ export const superstars = {
       "randy-orton-punt-kick"
     ],
     "archetype": "technical-control-sudden-finish",
-    "hp": 65,
+    "hp": 67,
     "methodLimits": {
       "technical": null,
       "strength": 4,
@@ -3288,6 +3291,8 @@ export const superstars = {
     ],
     "signatures": [
       "pump-kick",
+      "jade-cargill-reverse-alabama-slam",
+      "jade-cargill-eye-of-the-storm",
       "jade-cargill-jaded"
     ],
     "archetype": "dominant-power-athlete-jaded-sequencing",
@@ -3694,7 +3699,7 @@ export const superstars = {
       "montez-ford-from-the-heavens"
     ],
     "archetype": "agility-strike-take-flight",
-    "hp": 60,
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strike": 4,
@@ -3709,10 +3714,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Take Flight",
-      "text": "Once per Control sequence, after Montez connects with a non-Aerial Move, his next Aerial Move costs 1 less this Control sequence.",
+      "text": "Once per Control sequence, after Montez connects with a non-Aerial Move, his next Aerial Move costs 2 less this Control sequence. The first 2 times each match this triggers, draw 1 page.",
       "trigger": {
         "type": "montezTakeFlight",
-        "discount": 1
+        "discount": 2,
+        "draw": 1,
+        "drawMaxUses": 2
       }
     },
     "entrance": {
@@ -3759,7 +3766,7 @@ export const superstars = {
       "lola-vice-305"
     ],
     "archetype": "strike-technical-mma-counter-striker",
-    "hp": 61,
+    "hp": 62,
     "methodLimits": {
       "strike": null,
       "technical": 4,
@@ -3773,12 +3780,13 @@ export const superstars = {
     },
     "ability": {
       "name": "Counter Striker",
-      "text": "Once per Control sequence, after Lola successfully Counters an opponent’s Move, gain +1 Adrenaline; her next Strike Move costs 1 less and deals +1 Damage this Control sequence.",
+      "text": "Once per Control sequence, after Lola successfully Counters an opponent’s Move, draw 2 pages and gain +1 Adrenaline; her next Strike Move costs 2 less and deals +2 Damage this Control sequence.",
       "trigger": {
         "type": "lolaCounterStriker",
-        "discount": 1,
-        "damage": 1,
-        "adrenaline": 1
+        "discount": 2,
+        "damage": 2,
+        "adrenaline": 1,
+        "draw": 2
       }
     },
     "entrance": {
@@ -4038,9 +4046,10 @@ export const superstars = {
       "agility": 2
     },
     "starterMomentum": {
-      "technical": 6,
+      "technical": 5,
       "strength": 3,
-      "strike": 3
+      "strike": 2,
+      "agility": 2
     },
     "ability": {
       "name": "Excellence of Execution",
@@ -4371,7 +4380,7 @@ export const superstars = {
       "yokozuna-banzai-drop"
     ],
     "archetype": "super-heavyweight-powerhouse",
-    "hp": 71,
+    "hp": 70,
     "methodLimits": {
       "strength": null,
       "strike": 3,
@@ -4385,12 +4394,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Super Heavyweight",
-      "text": "The first 2 times each match an opponent Connects with a non-Finisher Move that would ground Yokozuna, Yokozuna remains standing.",
+      "text": "The first time each match an opponent Connects with a non-Finisher Move that would ground Yokozuna, Yokozuna remains standing.",
       "trigger": {
         "type": "superHeavyweightGroundResist",
-        "maxUses": 2
+        "maxUses": 1
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-yokozuna",
@@ -4453,10 +4462,11 @@ export const superstars = {
     },
     "ability": {
       "name": "King of Harts",
-      "text": "The first time each Control sequence Owen connects with a Technical or Agility Move after connecting with a different Method, draw 1 page. The first time each match Owen fails a Pin attempt, Owen retains Control.",
+      "text": "The first time each Control sequence Owen connects with a Technical or Agility Move after connecting with a different Method, draw 2 pages and gain +1 Adrenaline. The first time each match Owen fails a Pin attempt, Owen retains Control.",
       "trigger": {
         "type": "owenKingOfHarts",
-        "draw": 1,
+        "draw": 2,
+        "adrenaline": 1,
         "maxPinUses": 1
       }
     },
@@ -4591,12 +4601,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Hot Rod",
-      "text": "The first 3 times each match Piper Connects with a Strike Move dealing 4+ Damage, the opponent ditches 1 page.",
+      "text": "The first 3 times each match Piper Connects with a Strike Move dealing 4+ Damage, draw 1 page, gain +1 Adrenaline and the opponent ditches 1 page.",
       "trigger": {
         "type": "connectMethodDamage",
         "method": "strike",
         "minDamage": 4,
         "discardOpponent": 1,
+        "draw": 1,
+        "adrenaline": 1,
         "maxUses": 3
       },
       "maxUses": 3
@@ -4660,13 +4672,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Everybody Has a Price",
-      "text": "The first 3 times each match DiBiase Connects with a Technical Move costing 4+, draw 1 page and the opponent loses 1 Adrenaline.",
+      "text": "The first 3 times each match DiBiase Connects with a Technical Move costing 3+, draw 1 page, gain +1 Adrenaline, and the opponent loses 1 Adrenaline.",
       "trigger": {
         "type": "connectMethodCost",
         "method": "technical",
-        "minCost": 4,
+        "minCost": 3,
         "draw": 1,
         "opponentAdrenaline": -1,
+        "adrenaline": 1,
         "maxUses": 3
       }
     },
@@ -4686,9 +4699,9 @@ export const superstars = {
     },
     "special": {
       "type": "millionDollarChampionship",
-      "trademarkDiscount": 2,
+      "trademarkDiscount": 3,
       "finisherName": "Million Dollar Dream",
-      "finisherDiscount": 1
+      "finisherDiscount": 2
     }
   },
   "jakeRoberts": {
@@ -5055,10 +5068,10 @@ export const superstars = {
     },
     "ability": {
       "name": "Olympic Gold Medalist",
-      "text": "The first time each Control sequence Angle Connects with a Technical Move immediately after another connected Technical Move, draw 1 page.",
+      "text": "The first time each Control sequence Angle Connects with a Technical Move immediately after another connected Technical Move, draw 2 pages.",
       "trigger": {
         "type": "angleOlympicGold",
-        "draw": 1
+        "draw": 2
       }
     },
     "entrance": {
@@ -5116,14 +5129,15 @@ export const superstars = {
     },
     "ability": {
       "name": "The King of Strong Style",
-      "text": "Shinsuke Nakamura uses The King of Strong Style to reinforce this deck’s agility strike showstopper identity.",
+      "text": "The first 2 times Shinsuke connects with an Agility Move after connecting with a Strike Move in the same Control sequence, draw 1 page, gain +2 Adrenaline and the opponent loses 1 Adrenaline.",
       "trigger": {
         "type": "agilityAfterStrike",
-        "maxUses": 3,
+        "maxUses": 2,
         "draw": 1,
-        "adrenaline": 1
+        "adrenaline": 2,
+        "opponentAdrenaline": -1
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-shinsuke-nakamura",
@@ -5183,11 +5197,11 @@ export const superstars = {
     },
     "ability": {
       "name": "The Glamour",
-      "text": "Blake Monroe uses The Glamour to reinforce this deck’s reviewed starter identity.",
+      "text": "The first 3 times Blake connects with an Agility Move immediately after a Technical Move in the same Control sequence, draw 1 page and the opponent loses 1 Adrenaline.",
       "trigger": {
         "type": "agilityAfterTechnical",
         "maxUses": 3,
-        "adrenaline": 1,
+        "opponentAdrenaline": -1,
         "draw": 1
       },
       "maxUses": 3
@@ -5322,15 +5336,15 @@ export const superstars = {
     },
     "ability": {
       "name": "Fatal Influence",
-      "text": "Jacy Jayne uses Fatal Influence to reinforce this deck’s strike technical disruptor identity.",
+      "text": "The first 2 times each match Jacy connects with a Strike Move dealing 4+ damage, the opponent ditches 1 random page.",
       "trigger": {
         "type": "connectMethodDamage",
         "method": "strike",
         "minDamage": 4,
         "discardOpponent": 1,
-        "maxUses": 3
+        "maxUses": 2
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-jacy-jayne",
@@ -5350,7 +5364,7 @@ export const superstars = {
     "special": {
       "type": "fullSpeed",
       "damage": 2,
-      "agilityDraw": 1
+      "agilityDraw": 0
     }
   },
   "kendalGrey": {
@@ -5392,13 +5406,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Amateur Ace",
-      "text": "Kendal Grey uses The Amateur Ace to reinforce this deck’s technical three method sequencer identity.",
+      "text": "The first 2 times Kendal connects with a Move whose Method differs from the previous Move she connected with, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "differentMethod",
-        "maxUses": 3,
-        "draw": 2
+        "maxUses": 2,
+        "draw": 1,
+        "adrenaline": 1
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-kendal-grey",
@@ -5459,15 +5474,15 @@ export const superstars = {
     },
     "ability": {
       "name": "The Don of NXT",
-      "text": "Tony D’Angelo uses The Don of NXT to reinforce this deck’s strength strike bad guy identity.",
+      "text": "The first 2 times Tony connects with a Strength Move costing 6+, gain +1 Adrenaline.",
       "trigger": {
         "type": "connectMethodCost",
         "method": "strength",
-        "minCost": 5,
-        "maxUses": 1,
+        "minCost": 6,
+        "maxUses": 2,
         "adrenaline": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-tony-dangelo",
@@ -5532,12 +5547,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Miss Parker",
-      "text": "Jaida Parker uses Miss Parker to reinforce this deck’s agility strike technical hybrid lucha identity.",
+      "text": "The first 2 times Jaida connects with an Agility Move costing 5+, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
-        "type": "pentaZeroFearZeroMercy",
+        "type": "connectMethodCost",
+        "method": "agility",
+        "minCost": 5,
         "maxUses": 2,
-        "bonusDamage": 2,
-        "adrenaline": 0
+        "draw": 1,
+        "adrenaline": 1
       },
       "maxUses": 2
     },
@@ -5601,14 +5618,15 @@ export const superstars = {
     },
     "ability": {
       "name": "The Standout",
-      "text": "Kelani Jordan uses The Standout to reinforce this deck’s agility strike showstopper identity.",
+      "text": "The first 2 times Kelani connects with a Move requiring Agility 2+, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
-        "type": "agilityAfterStrike",
-        "maxUses": 3,
+        "type": "agilityRequirement",
+        "minRequirement": 2,
+        "maxUses": 2,
         "draw": 1,
         "adrenaline": 1
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-kelani-jordan",
@@ -5669,14 +5687,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Stone Wall",
-      "text": "Mason Rook uses The Stone Wall to reinforce this deck’s strength strike big daddy cool identity.",
+      "text": "The first 2 times Mason takes 7+ damage from one connected Move, gain +1 Adrenaline.",
       "trigger": {
         "type": "takeDamage",
-        "minDamage": 8,
-        "maxUses": 1,
+        "minDamage": 7,
+        "maxUses": 2,
         "adrenaline": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-mason-rook",
@@ -5742,14 +5760,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Twisted Competitor",
-      "text": "Tatum Paxley uses The Twisted Competitor to reinforce this deck’s technical agility trickster identity.",
+      "text": "The first 3 times Tatum successfully Counters a Move, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "counterDraw",
-        "maxUses": 2,
-        "draw": 2,
+        "maxUses": 3,
+        "draw": 1,
         "adrenaline": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-tatum-paxley",
@@ -5811,13 +5829,13 @@ export const superstars = {
     },
     "ability": {
       "name": "The King",
-      "text": "Lexis King uses The King to reinforce this deck’s elite technical counter identity.",
+      "text": "Once per Control sequence after Lexis successfully Counters a Move, his next Technical Move costs 1 less. The first 2 times this triggers each match, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "perfectExecution",
-        "discount": 2,
+        "discount": 1,
         "draw": 1,
         "adrenaline": 1,
-        "drawMaxUses": 3
+        "drawMaxUses": 2
       }
     },
     "entrance": {
@@ -5879,12 +5897,12 @@ export const superstars = {
     },
     "ability": {
       "name": "The Samoan Destroyer",
-      "text": "Zilla Fatu uses The Samoan Destroyer to reinforce this deck’s super heavyweight powerhouse identity.",
+      "text": "The first 3 times an opponent connects with a non-Finisher Move that would ground Zilla, Zilla remains standing.",
       "trigger": {
         "type": "superHeavyweightGroundResist",
-        "maxUses": 2
+        "maxUses": 3
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-zilla-fatu",
@@ -5951,10 +5969,10 @@ export const superstars = {
     },
     "ability": {
       "name": "The Animal",
-      "text": "Batista uses The Animal to reinforce this deck’s strength technical hybrid identity.",
+      "text": "Once per Control sequence after Batista connects with a Technical Move, his next Strength Move costs 2 less.",
       "trigger": {
         "type": "bulldogPowerAndTechnique",
-        "discount": 1
+        "discount": 2
       }
     },
     "entrance": {
@@ -6016,14 +6034,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Wrestling God",
-      "text": "JBL uses The Wrestling God to reinforce this deck’s strength strike big daddy cool identity.",
+      "text": "The first 2 times JBL takes 9+ damage from one connected Move, gain +1 Adrenaline.",
       "trigger": {
         "type": "takeDamage",
-        "minDamage": 8,
-        "maxUses": 1,
+        "minDamage": 9,
+        "maxUses": 2,
         "adrenaline": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-jbl",
@@ -6084,10 +6102,10 @@ export const superstars = {
     },
     "ability": {
       "name": "Latino Heat",
-      "text": "Eddie Guerrero uses Latino Heat to reinforce this deck’s technical agility combo identity.",
+      "text": "Once per Control sequence after Eddie connects with a Technical Grapple that grounds the opponent, his next Agility Move costs 2 less. If that Agility Move connects, gain +1 Adrenaline.",
       "trigger": {
         "type": "jerichoY2J",
-        "discount": 1,
+        "discount": 2,
         "adrenaline": 1
       }
     },
@@ -6155,13 +6173,13 @@ export const superstars = {
     },
     "ability": {
       "name": "The Rated-R Superstar",
-      "text": "Edge uses The Rated-R Superstar to reinforce this deck’s elite technical counter identity.",
+      "text": "Once per Control sequence after Edge successfully Counters a Move, his next Technical Move costs 1 less. The first 2 times this triggers each match, draw 2 pages and gain +1 Adrenaline.",
       "trigger": {
         "type": "perfectExecution",
-        "discount": 2,
-        "draw": 1,
+        "discount": 1,
+        "draw": 2,
         "adrenaline": 1,
-        "drawMaxUses": 3
+        "drawMaxUses": 2
       }
     },
     "entrance": {
@@ -6224,14 +6242,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Charismatic Enigma",
-      "text": "Jeff Hardy uses The Charismatic Enigma to reinforce this deck’s agility strike showstopper identity.",
+      "text": "The first 2 times Jeff connects with an Agility Move after a Strike Move earlier in the same Control sequence, draw 1 page and gain +2 Adrenaline.",
       "trigger": {
         "type": "agilityAfterStrike",
-        "maxUses": 3,
+        "maxUses": 2,
         "draw": 1,
-        "adrenaline": 1
+        "adrenaline": 2
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-jeff-hardy",
@@ -6291,12 +6309,12 @@ export const superstars = {
     },
     "ability": {
       "name": "The Whole F’n Show",
-      "text": "Rob Van Dam uses The Whole F’n Show to reinforce this deck’s agility strike technical hybrid lucha identity.",
+      "text": "The first 2 times RVD connects with a Strike Move immediately after a Technical Move, that Strike deals +1 Damage and RVD gains +1 Adrenaline.",
       "trigger": {
         "type": "pentaZeroFearZeroMercy",
         "maxUses": 2,
-        "bonusDamage": 2,
-        "adrenaline": 0
+        "bonusDamage": 1,
+        "adrenaline": 1
       },
       "maxUses": 2
     },
@@ -6349,8 +6367,8 @@ export const superstars = {
       "trish-stratus-air-canada",
       "trish-stratus-stratusfaction"
     ],
-    "archetype": "reviewed-starter",
-    "hp": 63,
+    "archetype": "reward-technical-agility-striker",
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -6364,14 +6382,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Stratusfaction Guaranteed",
-      "text": "Trish Stratus uses Stratusfaction Guaranteed to reinforce this deck’s reviewed starter identity.",
+      "text": "The first time each match Trish connects with a Move using a different Method than the previous Move she connected with, draw 2 pages.",
       "trigger": {
-        "type": "agilityAfterTechnical",
-        "maxUses": 3,
-        "adrenaline": 1,
-        "draw": 1
+        "type": "differentMethod",
+        "maxUses": 1,
+        "adrenaline": 0,
+        "draw": 2
       },
-      "maxUses": 3
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-trish-stratus",
@@ -6395,3 +6413,13 @@ export const superstars = {
     "developmentOnly": false
   }
 };
+// v1.1.74: future release Superstars are active in development data for
+// Card Studio and balance simulation, while their sets remain release-gated.
+Object.assign(superstars, FUTURE_ROADMAP_SUPERSTARS);
+superstars.ajStyles = AJ_STYLES_SUPERSTAR;
+// v1.1.71: retire obsolete reward-only Superstar identities. These are not
+// aliases for Attitude Era Rock or Ruthless Aggression John Cena.
+delete superstars.theRock;
+delete superstars.chyna;
+delete superstars.goldberg;
+

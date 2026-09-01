@@ -1,0 +1,169 @@
+{
+  "matches": 83025,
+  "stalls": 0,
+  "avgTurns": 25.54,
+  "finishes": {
+    "pin": 75200,
+    "submission": 7825
+  },
+  "top10": [
+    [
+      58.96296296296296,
+      "JBL",
+      "jbl",
+      1194,
+      831
+    ],
+    [
+      58.864197530864196,
+      "Lexis King",
+      "lexis-king",
+      1192,
+      833
+    ],
+    [
+      58.71604938271605,
+      "AJ Styles",
+      "aj-styles",
+      1189,
+      836
+    ],
+    [
+      58.370370370370374,
+      "Randy Orton",
+      "randy-orton",
+      1182,
+      843
+    ],
+    [
+      58.27160493827161,
+      "Rob Van Dam",
+      "rob-van-dam",
+      1180,
+      845
+    ],
+    [
+      58.27160493827161,
+      "Diesel",
+      "diesel",
+      1180,
+      845
+    ],
+    [
+      57.82716049382716,
+      "Mason Rook",
+      "mason-rook",
+      1171,
+      854
+    ],
+    [
+      57.72839506172839,
+      "Trish Stratus",
+      "trish-stratus",
+      1169,
+      856
+    ],
+    [
+      57.03703703703704,
+      "Brock Lesnar",
+      "brock-lesnar",
+      1155,
+      870
+    ],
+    [
+      56.888888888888886,
+      "Yokozuna",
+      "yokozuna",
+      1152,
+      873
+    ]
+  ],
+  "bottom10": [
+    [
+      43.75308641975309,
+      "Roxanne Perez",
+      "roxanne-perez",
+      886,
+      1139
+    ],
+    [
+      43.407407407407405,
+      "Danhausen",
+      "danhausen",
+      879,
+      1146
+    ],
+    [
+      42.864197530864196,
+      "Hijo del Vikingo",
+      "hijo-del-vikingo",
+      868,
+      1157
+    ],
+    [
+      42.370370370370374,
+      "Lola Vice",
+      "lola-vice",
+      858,
+      1167
+    ],
+    [
+      42.123456790123456,
+      "Rowdy Roddy Piper",
+      "rowdy-roddy-piper",
+      853,
+      1172
+    ],
+    [
+      42.02469135802469,
+      "Owen Hart",
+      "owen-hart",
+      851,
+      1174
+    ],
+    [
+      41.4320987654321,
+      "Ted DiBiase",
+      "ted-dibiase",
+      839,
+      1186
+    ],
+    [
+      40.888888888888886,
+      "Tiffany Stratton",
+      "tiffany-stratton",
+      828,
+      1197
+    ],
+    [
+      40.641975308641975,
+      "Chad Gable",
+      "chad-gable",
+      823,
+      1202
+    ],
+    [
+      39.01234567901235,
+      "Kurt Angle",
+      "kurt-angle",
+      790,
+      1235
+    ]
+  ],
+  "targets": [
+    [
+      40.888888888888886,
+      "Tiffany Stratton",
+      "tiffany-stratton",
+      828,
+      1197
+    ],
+    [
+      39.01234567901235,
+      "Kurt Angle",
+      "kurt-angle",
+      790,
+      1235
+    ]
+  ]
+}

@@ -1,75 +1,66 @@
-import { superstars } from "./superstars.js?v=1.1.48";
+import { superstars } from "./superstars.js?v=1.1.86";
 
 const METHODS = ["strength", "strike", "technical", "agility"];
 const STAR_BY_ID = new Map(Object.values(superstars).map(star => [star.id, star]));
 const slug = value => String(value ?? "").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const primaryMethod = star => METHODS.filter(m => star?.methodLimits?.[m] !== 0).sort((a,b)=>(Number(star?.starterMomentum?.[b]??0)-Number(star?.starterMomentum?.[a]??0)) || METHODS.indexOf(a)-METHODS.indexOf(b))[0] ?? "strength";
-const merchCard = ({id,name,scope="generic",superstarId=null,setId=null,rarity=1,duration=3,effect,rulesText,merchLevel=null}) => Object.freeze({
-  id,name,kind:"merch",scope,superstarId,setId,rarity,duration,effect,rulesText,merchLevel,
-  subtitle:`MERCH · ${duration} MATCH${duration===1?"":"ES"}`,
-  boosterEligible:true,
-  cardCode:`MERCH-${slug(id).toUpperCase()}`
+const labelMethod = method => method[0].toUpperCase()+method.slice(1);
+const merchCard = ({id,name,scope="generic",superstarId=null,setId=null,rarity=1,duration=3,effect,rulesText,merchLevel=null,category="collectible",sourceNote=null}) => Object.freeze({
+  id,name,kind:"merch",scope,superstarId,setId,rarity,duration,effect,rulesText,merchLevel,category,sourceNote,
+  subtitle:`MERCH · ${duration} MATCH${duration===1?"":"ES"}`, boosterEligible:true, cardCode:`MERCH-${slug(id).toUpperCase()}`
 });
 
-const GENERIC_NAMES = [
-  "WWE Legacy T-Shirt","Replica Championship","Collector Figure","Foam Finger","Wristbands","Entrance Towel","Snapback Cap","Arena Poster","Logo Hoodie","Replica Gloves",
-  "Tour Program","Collector Pin","Mini Championship","Superstar Mug","Ring Apron Patch","Event Pennant","Training Tee","Fan Scarf","Replica Boots","Collector Standee",
-  "Premium Lanyard","Legacy Backpack","Souvenir Jacket","Signed-Style Print","Ring Bell Miniature","Championship Keyring","Arena Flag","Collector Coin","Superstar Socks","Legacy Beanie",
-  "Event Shirt","Photo Card Set","WWE Legacy Bottle","Replica Armband","Premium Poster","Collector Plaque","Foam Championship","Legacy Track Jacket","Mini Figure","Event Wristband"
-];
-const genericEffects = [
-  {effect:{type:"hp",amount:2},duration:5,text:"Start each match with +2 HP."},
-  {effect:{type:"hp",amount:3},duration:3,text:"Start each match with +3 HP."},
-  {effect:{type:"momentum",method:"strength",amount:1},duration:3,text:"Start each match with +1 Strength Momentum."},
-  {effect:{type:"momentum",method:"strike",amount:1},duration:3,text:"Start each match with +1 Strike Momentum."},
-  {effect:{type:"momentum",method:"technical",amount:1},duration:3,text:"Start each match with +1 Technical Momentum."},
-  {effect:{type:"momentum",method:"agility",amount:1},duration:3,text:"Start each match with +1 Agility Momentum."},
-  {effect:{type:"adrenaline",amount:1},duration:1,text:"Start the match with +1 Adrenaline."},
-  {effect:{type:"shield",multiplier:.5},duration:1,text:"Shield: take half damage from the first Move that Connects against you."}
-];
-export const GENERIC_MERCH = Object.freeze(GENERIC_NAMES.map((name,index)=>{
-  const spec=genericEffects[index%genericEffects.length];
-  return merchCard({id:`merch-generic-${String(index+1).padStart(3,"0")}-${slug(name)}`,name,rarity:index%10===9?3:index%3===2?2:1,duration:spec.duration,effect:spec.effect,rulesText:spec.text});
-}));
+const GENERIC_CATALOG = Object.freeze([
+  {name:"WWE Logo T-Shirt",category:"t-shirt",effect:{type:"hp",amount:2},duration:5,text:"Start each match with +2 HP."},
+  {name:"WWE Logo Stainless Steel Water Bottle",category:"drinkware",effect:{type:"adrenaline",amount:1},duration:1,text:"Start the match with +1 Adrenaline."},
+  {name:"WWE World Heavyweight Championship Toy Title Belt",category:"title",effect:{type:"hp",amount:3},duration:3,text:"Start each match with +3 HP."},
+  {name:"Undisputed WWE Championship Toy Title Belt",category:"title",effect:{type:"shield",multiplier:.5},duration:1,text:"Shield: take half damage from the first Move that Connects against you."},
+  {name:"WWE Logo Stainless Steel Mug",category:"drinkware",effect:{type:"adrenaline",amount:1},duration:3,text:"Start each match with +1 Adrenaline."},
+  {name:"WWE Logo Beach Towel",category:"towel",effect:{type:"hp",amount:2},duration:3,text:"Start each match with +2 HP."},
+  {name:"WWE Logo Championship Fanny Pack",category:"accessory",effect:{type:"momentum",method:"technical",amount:1},duration:3,text:"Start each match with +1 Technical Momentum."},
+  {name:"WWE Event Poster",category:"poster",effect:{type:"momentum",method:"strike",amount:1},duration:3,text:"Start each match with +1 Strike Momentum."}
+]);
+export const GENERIC_MERCH = Object.freeze(GENERIC_CATALOG.map((spec,index)=>merchCard({
+  id:`merch-generic-${String(index+1).padStart(3,"0")}-${slug(spec.name)}`, name:spec.name,category:spec.category,rarity:index>=6?3:index>=2?2:1,duration:spec.duration,effect:spec.effect,rulesText:spec.text,
+  sourceNote:"WWE Shop generic WWE-branded merchandise audit — September 2026"
+})));
 
-const DEFAULT_SPECIFIC_MERCH_NAMES = Object.freeze({
-  1: "Funko Pop",
-  2: "Collector Figure",
-  3: "Replica Gear",
-  4: "Premium Wristbands",
-  5: "Limited Poster"
+const STAR_EXTRAS = Object.freeze({
+  "john-cena":[
+    {name:"John Cena Never Give Up T-Shirt",category:"t-shirt"},{name:"John Cena Hustle Loyalty Respect T-Shirt",category:"t-shirt"},
+    {name:"John Cena WrestleMania 42 Wristband Set",category:"wristbands",effect:{type:"shield",multiplier:.5},duration:3,text:"Shield: take half damage from the first Move that Connects against you."},
+    {name:"John Cena Hustle Loyalty Respect Towel",category:"towel",effect:{type:"hp",amount:5},duration:3,text:"Start each match with +5 HP."},
+    {name:"John Cena Funko Pop",category:"funko",effect:{type:"adrenaline",amount:1},duration:5,text:"Start each match with +1 Adrenaline."}],
+  "stone-cold-steve-austin":[
+    {name:"Stone Cold Steve Austin 3:16 T-Shirt",category:"t-shirt"},{name:"Stone Cold Steve Austin Don't Trust Anybody T-Shirt",category:"t-shirt"},
+    {name:"Stone Cold Steve Austin Funko Pop",category:"funko",effect:{type:"adrenaline",amount:1},duration:5,text:"Start each match with +1 Adrenaline."},
+    {name:"Stone Cold Smoking Skull Championship",category:"title",effect:{type:"hp",amount:5},duration:3,text:"Start each match with +5 HP."},
+    {name:"Stone Cold Beer Can",category:"signature",effect:{type:"adrenaline",amount:2},duration:1,text:"Start the match with +2 Adrenaline."}],
+  "bret-hart":[{name:"Bret Hart Hit Man T-Shirt",category:"t-shirt"},{name:"Bret Hart Sunglasses",category:"signature",effect:{type:"momentum",method:"technical",amount:2},duration:1,text:"Start the match with +2 Technical Momentum."}],
+  "trish-stratus":[{name:"Trish Stratus Stratusfaction T-Shirt",category:"t-shirt"},{name:"Trish Stratus 8x10 Entrance Photo",category:"photo",effect:{type:"adrenaline",amount:1},duration:5,text:"Start each match with +1 Adrenaline."},{name:"Trish Stratus Funko Pop",category:"funko",effect:{type:"hp",amount:5},duration:3,text:"Start each match with +5 HP."}],
+  "rey-mysterio":[{name:"Rey Mysterio 619 T-Shirt",category:"t-shirt"},{name:"Rey Mysterio Replica Mask",category:"signature",effect:{type:"momentum",method:"agility",amount:2},duration:1,text:"Start the match with +2 Agility Momentum."}],
+  "the-undertaker":[{name:"The Undertaker Deadman T-Shirt",category:"t-shirt"},{name:"The Undertaker Urn",category:"signature",effect:{type:"shield",multiplier:.5},duration:5,text:"Shield: take half damage from the first Move that Connects against you."}],
+  "the-rock":[{name:"The Rock Brahma Bull T-Shirt",category:"t-shirt"},{name:"The Rock Funko Pop",category:"funko",effect:{type:"adrenaline",amount:1},duration:5,text:"Start each match with +1 Adrenaline."}],
+  "the-rock-attitude":[{name:"The Rock Brahma Bull T-Shirt",category:"t-shirt"},{name:"The Rock Funko Pop",category:"funko",effect:{type:"adrenaline",amount:1},duration:5,text:"Start each match with +1 Adrenaline."}],
+  "hulk-hogan":[{name:"Hulk Hogan Hulkamania T-Shirt",category:"t-shirt"},{name:"Hulk Hogan Bandana",category:"signature",effect:{type:"hp",amount:5},duration:3,text:"Start each match with +5 HP."}],
+  "randy-savage":[{name:"Randy Savage Macho Man T-Shirt",category:"t-shirt"},{name:"Randy Savage Sunglasses",category:"signature",effect:{type:"adrenaline",amount:2},duration:1,text:"Start the match with +2 Adrenaline."}],
+  "cm-punk":[{name:"CM Punk Best in the World T-Shirt",category:"t-shirt"},{name:"CM Punk Funko Pop",category:"funko",effect:{type:"adrenaline",amount:1},duration:5,text:"Start each match with +1 Adrenaline."}],
+  "cody-rhodes":[{name:"Cody Rhodes American Nightmare T-Shirt",category:"t-shirt"},{name:"Cody Rhodes Weight Belt",category:"signature",effect:{type:"momentum",method:"strength",amount:1},duration:5,text:"Start each match with +1 Strength Momentum."}],
+  "roman-reigns":[{name:"Roman Reigns OTC T-Shirt",category:"t-shirt"},{name:"Roman Reigns Ula Fala",category:"signature",effect:{type:"hp",amount:5},duration:3,text:"Start each match with +5 HP."}],
+  "shawn-michaels":[{name:"Shawn Michaels Heartbreak Kid T-Shirt",category:"t-shirt"},{name:"Shawn Michaels Heartbreak Kid Sunglasses",category:"signature",effect:{type:"momentum",method:"agility",amount:1},duration:5,text:"Start each match with +1 Agility Momentum."}],
+  "triple-h":[{name:"Triple H The Game T-Shirt",category:"t-shirt"},{name:"Triple H Sledgehammer",category:"signature",effect:{type:"momentum",method:"strength",amount:2},duration:1,text:"Start the match with +2 Strength Momentum."}]
 });
-const SUPERSTAR_MERCH_NAME_OVERRIDES = Object.freeze({
-  "trish-stratus": Object.freeze({
-    1: "Trish Stratus Funko Pop",
-    2: "Trish's Big Shots Pillow",
-    3: "100% Stratusfaction Guaranteed DVD",
-    4: "Trish's Action Figure",
-    5: "100% Stratusfaction Shirt"
-  })
-});
-function specificMerchName(star, level){
-  const override=SUPERSTAR_MERCH_NAME_OVERRIDES[star.id]?.[level];
-  if(override) return override;
-  return `${star.name} ${DEFAULT_SPECIFIC_MERCH_NAMES[level] ?? `Merch Level ${level}`}`;
-}
+function standardSpec(star,type){ const method=primaryMethod(star); return type==="figure"
+  ? {name:`${star.name} Action Figure`,category:"action-figure",effect:{type:"momentum",method,amount:1},duration:3,text:`Start each match with +1 ${labelMethod(method)} Momentum.`}
+  : {name:`${star.name} T-Shirt`,category:"t-shirt",effect:{type:"hp",amount:2},duration:5,text:"Start each match with +2 HP."}; }
+function normalizeExtra(star,spec){ if(spec.effect)return spec; if(spec.category==="t-shirt")return {...spec,effect:{type:"hp",amount:3},duration:3,text:"Start each match with +3 HP."}; return {...spec,effect:{type:"adrenaline",amount:1},duration:3,text:"Start each match with +1 Adrenaline."}; }
 export const SUPERSTAR_MERCH = Object.freeze(Object.values(superstars).flatMap(star=>{
-  const method=primaryMethod(star);
-  // The five-level Superstar ladder is authored by identity. Level 1 is the
-  // universal Funko Pop slot; levels 2–5 can be replaced with Superstar-specific
-  // real-world merchandise as each wrestler's art is produced.
-  const specs=[
-    {level:1,effect:{type:"hp",amount:5},duration:3,text:`Start each match with +5 HP.`},
-    {level:2,effect:{type:"momentum",method,amount:1},duration:5,text:`Start each match with +1 ${method[0].toUpperCase()+method.slice(1)} Momentum.`},
-    {level:3,effect:{type:"adrenaline",amount:1},duration:5,text:"Start each match with +1 Adrenaline."},
-    {level:4,effect:{type:"shield",multiplier:.5},duration:3,text:"Shield: take half damage from the first Move that Connects against you."},
-    {level:5,effect:{type:"momentum",method,amount:2},duration:1,text:`Premium boost: start the match with +2 ${method[0].toUpperCase()+method.slice(1)} Momentum.`}
-  ];
-  return specs.map((spec,index)=>merchCard({
-    id:`merch-${star.id}-${spec.level}-${slug(specificMerchName(star,spec.level).replace(`${star.name} `,""))}`,
-    name:specificMerchName(star,spec.level),
-    scope:"superstar",superstarId:star.id,setId:star.setId,rarity:spec.level>=4?4:3,duration:spec.duration,effect:spec.effect,merchLevel:spec.level,
-    rulesText:`${star.name} Merch. ${spec.text}`
+  const specs=[standardSpec(star,"shirt"),standardSpec(star,"figure"),...(STAR_EXTRAS[star.id]??[]).map(spec=>normalizeExtra(star,spec))];
+  const seen=new Set();
+  return specs.filter(spec=>{const key=spec.name.toLowerCase();if(seen.has(key))return false;seen.add(key);return true;}).map((spec,index)=>merchCard({
+    id:`merch-${star.id}-${String(index+1).padStart(2,"0")}-${slug(spec.name.replace(`${star.name} `,""))}`,name:spec.name,category:spec.category,scope:"superstar",superstarId:star.id,setId:star.setId,
+    rarity:spec.category==="signature"?4:spec.category==="funko"?3:2,duration:spec.duration??3,effect:spec.effect,merchLevel:index+1,rulesText:`${star.name} Merch. ${spec.text}`,
+    sourceNote:index<2?"Locked universal Superstar merch rule: one T-shirt + one action figure":"Curated Superstar-specific merch/history audit"
   }));
 }));
 
@@ -77,8 +68,21 @@ export const MERCH_ITEMS = Object.freeze([...GENERIC_MERCH,...SUPERSTAR_MERCH]);
 export const MERCH_BY_ID = Object.freeze(Object.fromEntries(MERCH_ITEMS.map(item=>[item.id,item])));
 export const merchForSuperstar = superstarId => SUPERSTAR_MERCH.filter(item=>item.superstarId===superstarId);
 export function eligibleMerchForSet(setId){ return [...GENERIC_MERCH,...SUPERSTAR_MERCH.filter(item=>item.setId===setId)]; }
-export function rollMerch(setId,rng=Math.random){
-  const starPool=SUPERSTAR_MERCH.filter(item=>item.setId===setId);
+// Every booster contains exactly one Merch card. Monthly Reward Superstar
+// merch is part of the normal booster Merch chase even though the Reward
+// Superstar/gameplay cards themselves are never booster-eligible.
+export const BOOSTER_MERCH_SUPERSTAR_IDS = Object.freeze(["trish-stratus"]);
+export const SCHEDULED_BOOSTER_MERCH = Object.freeze({"aj-styles":"2026-10-01T00:00:00Z"});
+export function boosterMerchSuperstarIds(now=new Date()){
+  const t=new Date(now).getTime();
+  return [...BOOSTER_MERCH_SUPERSTAR_IDS,...Object.entries(SCHEDULED_BOOSTER_MERCH).filter(([,at])=>t>=new Date(at).getTime()).map(([id])=>id)];
+}
+export function boosterSuperstarMerchPool(setId,now=new Date()){
+  const scheduled=new Set(boosterMerchSuperstarIds(now));
+  return SUPERSTAR_MERCH.filter(item=>item.setId===setId || scheduled.has(item.superstarId));
+}
+export function rollMerch(setId,rng=Math.random,now=new Date()){
+  const starPool=boosterSuperstarMerchPool(setId,now);
   const useStar=starPool.length>0 && rng()<.25;
   const pool=useStar?starPool:GENERIC_MERCH;
   return pool[Math.max(0,Math.min(pool.length-1,Math.floor(rng()*pool.length)))];

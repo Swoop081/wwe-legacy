@@ -172,3 +172,43 @@
 - **Leg Lariat is intentionally excluded** because it is a leg-strike family move rather than the high arm Clothesline depicted by Matrix Slide.
 - The user's uploaded screenshot is reference-only and is not copied, imported or packaged. Card Studio exposes blank canonical targets at `assets/images/matrix-slide.webp` and `assets/images/matrix-slide-base-plate.webp` for later authoring.
 - No existing deck composition is changed in this pass.
+
+### v1.1.88 — Kurt Angle Technical Identity Refinement
+- Kept Kurt Angle at 66 HP to preserve the roster durability hierarchy.
+- Olympic Gold Medalist now draws 2 pages (up from 1) on the first Technical-after-Technical connect each Control sequence.
+- Full active-82 certification: 83,025 matches, 0 stalls; Kurt 45.38%; established top-end hierarchy remains stable.
+
+## v1.1.90 — Roster Architecture Integrity + Hierarchy Pass — 1 September 2026
+- Repaired Bret Hart and AJ Styles recommended-deck Method reachability while preserving 60-page deck size.
+- Corrected HP hierarchy: Becky Lynch 65, Roman Reigns 67, Randy Orton 67, Trish Stratus 62.
+- Removed the three exact ability-template overlaps identified by the active-82 architecture audit.
+- Refined Chad Gable, Owen Hart, Roddy Piper, Lola Vice and Ted DiBiase through identity mechanics rather than generic HP increases.
+- Ted's Million Dollar Dream is now pressure 8; Million Dollar Championship discounts are 3/2.
+- Final certification: 83,025 matches, 0 stalls, 25.51 average turns; 74,850 pins / 8,175 submissions.
+- Card Studio production-integrity audit remains 0 hard issues.
+- New v1.1.90 regression suite passes 4/4; combined current targeted regression set passes 9/9.
+- The broad historical test suite still contains legacy/cache/assets/version assertions that are not release-valid for this no-assets overlay; these are recorded as pre-existing test-harness debt rather than v1.1.90 gameplay regressions.
+
+## v1.1.91 — Submission Ecosystem Certification + Diagnostic Integrity — 1 September 2026
+- Certified the active-82 finish ecosystem using a 26,568-match all-pair sample: 23,919 pins, 2,649 submissions, 0 stalls.
+- Confirmed submission specialists retain strong submission identities; no global submission buff or pin nerf is warranted.
+- Replaced the misleading `doomedStarts` submission-AI diagnostic with persistent-damage-aware setup/repeat-application classifications.
+- Gameplay remains unchanged from the v1.1.90 architecture pass.
+
+## v1.1.92 — Economy + Progression Stress Certification — 1 September 2026
+- Added a repeatable 1,000-profile / 30-day economy stress harness.
+- Certified Season XP pace, Daily Spin EV, Superstar pity, Merch supply, Store pricing and Championship Road booster cadence.
+- No economy values changed; current system remains internally coherent pending physical play/presentation testing.
+
+## v1.1.93 — Locked Core Rules Regression Certification — 1 September 2026
+- Added a permanent nine-test gate for WWE Legacy's accepted core match rules.
+- Current gameplay regression gate passes 30/30.
+- No gameplay values changed.
+- One stale historical Cena Season-splash UI assertion remains recorded as test-harness debt.
+
+## v1.1.94 — Trustworthy Current Release Test Gate — 1 September 2026
+- Split current release certification from historical version-snapshot archaeology.
+- Default `npm test` now runs an explicit 19-file current contract and passes 73/73.
+- Historical tests remain preserved and accessible via `npm run test:historical`.
+- No gameplay values changed.
+

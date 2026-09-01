@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.48';
-import { SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.48';
-import { LAUNCH_THEME_TOWERS, LIVE_EVENT_ROTATION_POOL, activeLiveEventTowers, rotatingLiveEventTemplates } from '../js/data/live-events.js?v=1.1.48';
-import { SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.48';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.86';
+import { SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.86';
+import { LAUNCH_THEME_TOWERS, LIVE_EVENT_ROTATION_POOL, activeLiveEventTowers, rotatingLiveEventTemplates } from '../js/data/live-events.js?v=1.1.86';
+import { SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.86';
 
 const studio = fs.readFileSync(new URL('../js/tools/card-art-studio.js', import.meta.url), 'utf8');
 const studioHtml = fs.readFileSync(new URL('../tools/card-art-studio.html', import.meta.url), 'utf8');
@@ -46,22 +46,17 @@ test('v1.1.20 Trish uses Air Canada as Trademark and Stratusfaction as Finisher 
   assert.ok(rewardRows.filter(r => r.cardId === strat.id).every(r => /FINISHER/.test(r.label)));
 });
 
-test('v1.1.20 Trish has the authored five-item Merch ladder and Funko Pop is level 1', () => {
+test('v1.1.68 Trish has authentic core merch plus modelling-era photo and Funko', () => {
   const merch = SUPERSTAR_MERCH.filter(item => item.superstarId === 'trish-stratus').sort((a,b) => a.merchLevel - b.merchLevel);
   assert.deepEqual(merch.map(m => m.name), [
-    'Trish Stratus Funko Pop',
-    "Trish's Big Shots Pillow",
-    '100% Stratusfaction Guaranteed DVD',
-    "Trish's Action Figure",
-    '100% Stratusfaction Shirt'
+    'Trish Stratus T-Shirt',
+    'Trish Stratus Action Figure',
+    'Trish Stratus Stratusfaction T-Shirt',
+    'Trish Stratus 8x10 Entrance Photo',
+    'Trish Stratus Funko Pop'
   ]);
   assert.deepEqual(merch.map(m => m.merchLevel), [1,2,3,4,5]);
-  assert.ok(merch.every(m => /^MERCH · \d+ MATCH/.test(m.subtitle)));
-  const allLevelOne = SUPERSTAR_MERCH.filter(item => item.merchLevel === 1);
-  assert.ok(allLevelOne.length > 90);
-  assert.ok(allLevelOne.every(item => /Funko Pop$/.test(item.name)));
 });
-
 test('v1.1.20 Merch fronts show match expiry while rules remain on the back and layered Merch plate export is transparent under the plaque', () => {
   assert.match(shared, /card\.kind==="merch"\?`MERCH • \$\{card\.duration\?\?1\} MATCH/);
   assert.match(studio, /state\.renderPlateOnly&&card\.kind==="merch"/);

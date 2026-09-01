@@ -486,42 +486,6 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "NG1-081"
   },
   {
-    "id": "goldberg-military-press-powerslam",
-    "setId": "season-2-whos-next",
-    "cardNumber": 1,
-    "cardCode": "S2WN-001"
-  },
-  {
-    "id": "goldberg-spear",
-    "setId": "season-2-whos-next",
-    "cardNumber": 2,
-    "cardCode": "S2WN-002"
-  },
-  {
-    "id": "goldberg-jackhammer",
-    "setId": "season-2-whos-next",
-    "cardNumber": 3,
-    "cardCode": "S2WN-003"
-  },
-  {
-    "id": "entrance-goldberg",
-    "setId": "season-2-whos-next",
-    "cardNumber": 4,
-    "cardCode": "S2WN-004"
-  },
-  {
-    "id": "special-goldberg",
-    "setId": "season-2-whos-next",
-    "cardNumber": 5,
-    "cardCode": "S2WN-005"
-  },
-  {
-    "id": "superstar-goldberg",
-    "setId": "season-2-whos-next",
-    "cardNumber": 6,
-    "cardCode": "S2WN-006"
-  },
-  {
     "id": "bron-breakker-gorilla-press-powerslam",
     "setId": "survivor-series-series-1",
     "cardNumber": 1,
@@ -2388,54 +2352,6 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "RAW1-089"
   },
   {
-    "id": "the-rock-lay-the-smack-down",
-    "setId": "season-1-final-boss",
-    "cardNumber": 1,
-    "cardCode": "S1FB-001"
-  },
-  {
-    "id": "the-rock-belt-whip",
-    "setId": "season-1-final-boss",
-    "cardNumber": 2,
-    "cardCode": "S1FB-002"
-  },
-  {
-    "id": "the-rock-rock-bottom",
-    "setId": "season-1-final-boss",
-    "cardNumber": 3,
-    "cardCode": "S1FB-003"
-  },
-  {
-    "id": "the-rock-people-s-elbow",
-    "setId": "season-1-final-boss",
-    "cardNumber": 4,
-    "cardCode": "S1FB-004"
-  },
-  {
-    "id": "people-championship",
-    "setId": "season-1-final-boss",
-    "cardNumber": 5,
-    "cardCode": "S1FB-005"
-  },
-  {
-    "id": "entrance-the-rock",
-    "setId": "season-1-final-boss",
-    "cardNumber": 6,
-    "cardCode": "S1FB-006"
-  },
-  {
-    "id": "special-the-rock",
-    "setId": "season-1-final-boss",
-    "cardNumber": 7,
-    "cardCode": "S1FB-007"
-  },
-  {
-    "id": "superstar-the-rock",
-    "setId": "season-1-final-boss",
-    "cardNumber": 8,
-    "cardCode": "S1FB-008"
-  },
-  {
     "id": "trish-stratus-stratusphere",
     "setId": "season-1-last-time-is-now",
     "cardNumber": 1,
@@ -2476,48 +2392,6 @@ export const CARD_NUMBER_MANIFEST = [
     "setId": "season-1-last-time-is-now",
     "cardNumber": 7,
     "cardCode": "S1TRISH-007"
-  },
-  {
-    "id": "chyna-bomb",
-    "setId": "parked-chyna",
-    "cardNumber": 1,
-    "cardCode": "PCH-001"
-  },
-  {
-    "id": "chyna-gorilla-press-slam",
-    "setId": "parked-chyna",
-    "cardNumber": 2,
-    "cardCode": "PCH-002"
-  },
-  {
-    "id": "chyna-handspring-back-elbow",
-    "setId": "parked-chyna",
-    "cardNumber": 3,
-    "cardCode": "PCH-003"
-  },
-  {
-    "id": "chyna-inverted-ddt",
-    "setId": "parked-chyna",
-    "cardNumber": 4,
-    "cardCode": "PCH-004"
-  },
-  {
-    "id": "entrance-chyna",
-    "setId": "parked-chyna",
-    "cardNumber": 5,
-    "cardCode": "PCH-005"
-  },
-  {
-    "id": "special-chyna",
-    "setId": "parked-chyna",
-    "cardNumber": 6,
-    "cardCode": "PCH-006"
-  },
-  {
-    "id": "superstar-chyna",
-    "setId": "parked-chyna",
-    "cardNumber": 7,
-    "cardCode": "PCH-007"
   },
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -5614,7 +5488,244 @@ export const CARD_NUMBER_MANIFEST = [
     "setId": "ruthless-aggression-series-1",
     "cardNumber": 61,
     "cardCode": "RA1-061"
-  }
+  },
+  {
+    "id": "giulia-hammerlock-michinoku-driver",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 39,
+    "cardCode": "MITB1-039"
+  },
+  {
+    "id": "giulia-avalanche-butterfly-suplex",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 40,
+    "cardCode": "MITB1-040"
+  },
+  {
+    "id": "giulia-arrivederci",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 41,
+    "cardCode": "MITB1-041"
+  },
+  {
+    "id": "giulia-northern-lights-bomb",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 42,
+    "cardCode": "MITB1-042"
+  },
+  {
+    "id": "entrance-giulia",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 43,
+    "cardCode": "MITB1-043"
+  },
+  {
+    "id": "special-giulia",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 44,
+    "cardCode": "MITB1-044"
+  },
+  {
+    "id": "superstar-giulia",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 45,
+    "cardCode": "MITB1-045"
+  },
+  {
+    "id": "carmelo-hayes-first-48",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 46,
+    "cardCode": "MITB1-046"
+  },
+  {
+    "id": "carmelo-hayes-springboard-clothesline",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 47,
+    "cardCode": "MITB1-047"
+  },
+  {
+    "id": "carmelo-hayes-fadeaway",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 48,
+    "cardCode": "MITB1-048"
+  },
+  {
+    "id": "carmelo-hayes-nothing-but-net",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 49,
+    "cardCode": "MITB1-049"
+  },
+  {
+    "id": "entrance-carmelo-hayes",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 50,
+    "cardCode": "MITB1-050"
+  },
+  {
+    "id": "special-carmelo-hayes",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 51,
+    "cardCode": "MITB1-051"
+  },
+  {
+    "id": "superstar-carmelo-hayes",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 52,
+    "cardCode": "MITB1-052"
+  },
+  {
+    "id": "baron-corbin-deep-six",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 53,
+    "cardCode": "MITB1-053"
+  },
+  {
+    "id": "baron-corbin-chokeslam-backbreaker",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 54,
+    "cardCode": "MITB1-054"
+  },
+  {
+    "id": "baron-corbin-big-boot",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 55,
+    "cardCode": "MITB1-055"
+  },
+  {
+    "id": "baron-corbin-end-of-days",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 56,
+    "cardCode": "MITB1-056"
+  },
+  {
+    "id": "entrance-baron-corbin",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 57,
+    "cardCode": "MITB1-057"
+  },
+  {
+    "id": "special-baron-corbin",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 58,
+    "cardCode": "MITB1-058"
+  },
+  {
+    "id": "superstar-baron-corbin",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 59,
+    "cardCode": "MITB1-059"
+  },
+  {
+    "id": "rey-fenix-fire-driver",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 60,
+    "cardCode": "MITB1-060"
+  },
+  {
+    "id": "rey-fenix-tornillo-kick",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 61,
+    "cardCode": "MITB1-061"
+  },
+  {
+    "id": "rey-fenix-mexican-destroyer",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 62,
+    "cardCode": "MITB1-062"
+  },
+  {
+    "id": "rey-fenix-mexican-muscle-buster",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 63,
+    "cardCode": "MITB1-063"
+  },
+  {
+    "id": "entrance-rey-fenix",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 64,
+    "cardCode": "MITB1-064"
+  },
+  {
+    "id": "special-rey-fenix",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 65,
+    "cardCode": "MITB1-065"
+  },
+  {
+    "id": "superstar-rey-fenix",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 66,
+    "cardCode": "MITB1-066"
+  },
+  {
+    "id": "jimmy-uso-running-hip-attack",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 55,
+    "cardCode": "SVS1-055"
+  },
+  {
+    "id": "jimmy-uso-spear",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 56,
+    "cardCode": "SVS1-056"
+  },
+  {
+    "id": "jimmy-uso-superkick",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 57,
+    "cardCode": "SVS1-057"
+  },
+  {
+    "id": "jimmy-uso-uso-splash",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 58,
+    "cardCode": "SVS1-058"
+  },
+  {
+    "id": "entrance-jimmy-uso",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 59,
+    "cardCode": "SVS1-059"
+  },
+  {
+    "id": "special-jimmy-uso",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 60,
+    "cardCode": "SVS1-060"
+  },
+  {
+    "id": "superstar-jimmy-uso",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 61,
+    "cardCode": "SVS1-061"
+  },
+  {
+    "id": "jade-cargill-reverse-alabama-slam",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 62,
+    "cardCode": "SVS1-062"
+  },
+  {
+    "id": "jade-cargill-eye-of-the-storm",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 63,
+    "cardCode": "SVS1-063"
+  },
+  {
+    "id": "logan-paul-prime-splash",
+    "setId": "raw-series-1",
+    "cardNumber": 90,
+    "cardCode": "RAW1-090"
+  },
+  {"id":"aj-styles-pele-kick","setId":"rewards-october-2026","cardNumber":1,"cardCode":"RAJ26-001"},
+  {"id":"aj-styles-ushigoroshi","setId":"rewards-october-2026","cardNumber":2,"cardCode":"RAJ26-002"},
+  {"id":"aj-styles-calf-crusher","setId":"rewards-october-2026","cardNumber":3,"cardCode":"RAJ26-003"},
+  {"id":"aj-styles-phenomenal-forearm","setId":"rewards-october-2026","cardNumber":4,"cardCode":"RAJ26-004"},
+  {"id":"aj-styles-styles-clash","setId":"rewards-october-2026","cardNumber":5,"cardCode":"RAJ26-005"},
+  {"id":"special-aj-styles","setId":"rewards-october-2026","cardNumber":6,"cardCode":"RAJ26-006"},
+  {"id":"aj-styles-house-that-aj-styles-built","setId":"rewards-october-2026","cardNumber":7,"cardCode":"RAJ26-007"},
+  {"id":"entrance-aj-styles","setId":"rewards-october-2026","cardNumber":8,"cardCode":"RAJ26-008"},
+  {"id":"superstar-aj-styles","setId":"rewards-october-2026","cardNumber":9,"cardCode":"RAJ26-009"}
 ];
 export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));
 export const CARD_IDS_BY_SET = {};

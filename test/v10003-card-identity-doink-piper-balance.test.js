@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.48';
-import { deckIds } from '../js/data/decks.js?v=1.1.48';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.86';
+import { deckIds } from '../js/data/decks.js?v=1.1.86';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 const topLevelIdentityKeys = new Set([

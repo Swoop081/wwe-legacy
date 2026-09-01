@@ -8,6 +8,7 @@ import { sets } from "../js/data/sets.js";
 import { MERCH_ITEMS } from "../js/data/merch.js";
 import { SUPERSTAR_VARIANTS } from "../js/data/superstar-variants.js";
 import { artworkFor, canonicalImageKeyForCard, canonicalCardImagePath, canonicalBasePlatePath } from "../js/data/artwork.js";
+import { fixedPrintingTierFor } from "../js/data/variants.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const starList = Object.values(superstars);
@@ -71,6 +72,7 @@ const studioShape = (card, source="collector") => ({
   submissionTarget: card.submissionTarget ?? null,
   counterSubmissionTargets: card.counterSubmissionTargets ?? null,
   rarity: card.rarity ?? 1,
+  fixedPrintingTier: fixedPrintingTierFor(card) ?? null,
   requirements: card.requirements ?? null,
   rulesText: card.rulesText ?? card.effectText ?? null,
   duration: card.duration ?? null,

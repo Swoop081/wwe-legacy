@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.48";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.48";
-import { canCounter } from "../js/engine/rules.js?v=1.1.48";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.86";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.86";
+import { canCounter } from "../js/engine/rules.js?v=1.1.86";
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const family=[

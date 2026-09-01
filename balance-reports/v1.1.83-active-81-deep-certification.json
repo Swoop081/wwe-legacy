@@ -1,0 +1,582 @@
+{
+  "version": "1.1.83",
+  "superstars": 81,
+  "uniquePairings": 3240,
+  "gamesPerPair": 25,
+  "matches": 81000,
+  "stalls": 0,
+  "averageTurns": 25.53,
+  "finishes": {
+    "pin": 73166,
+    "submission": 7834
+  },
+  "rows": [
+    {
+      "id": "aj-styles",
+      "name": "AJ Styles",
+      "wins": 1192,
+      "losses": 808,
+      "winRate": 59.6
+    },
+    {
+      "id": "lexis-king",
+      "name": "Lexis King",
+      "wins": 1177,
+      "losses": 823,
+      "winRate": 58.85
+    },
+    {
+      "id": "jbl",
+      "name": "JBL",
+      "wins": 1173,
+      "losses": 827,
+      "winRate": 58.65
+    },
+    {
+      "id": "randy-orton",
+      "name": "Randy Orton",
+      "wins": 1172,
+      "losses": 828,
+      "winRate": 58.6
+    },
+    {
+      "id": "rob-van-dam",
+      "name": "Rob Van Dam",
+      "wins": 1169,
+      "losses": 831,
+      "winRate": 58.45
+    },
+    {
+      "id": "mason-rook",
+      "name": "Mason Rook",
+      "wins": 1159,
+      "losses": 841,
+      "winRate": 57.95
+    },
+    {
+      "id": "diesel",
+      "name": "Diesel",
+      "wins": 1157,
+      "losses": 843,
+      "winRate": 57.85
+    },
+    {
+      "id": "roman-reigns",
+      "name": "Roman Reigns",
+      "wins": 1147,
+      "losses": 853,
+      "winRate": 57.35
+    },
+    {
+      "id": "brock-lesnar",
+      "name": "Brock Lesnar",
+      "wins": 1146,
+      "losses": 854,
+      "winRate": 57.3
+    },
+    {
+      "id": "yokozuna",
+      "name": "Yokozuna",
+      "wins": 1144,
+      "losses": 856,
+      "winRate": 57.2
+    },
+    {
+      "id": "the-undertaker",
+      "name": "The Undertaker",
+      "wins": 1141,
+      "losses": 859,
+      "winRate": 57.05
+    },
+    {
+      "id": "bret-hart",
+      "name": "Bret Hart",
+      "wins": 1130,
+      "losses": 870,
+      "winRate": 56.5
+    },
+    {
+      "id": "penta",
+      "name": "Penta",
+      "wins": 1121,
+      "losses": 879,
+      "winRate": 56.05
+    },
+    {
+      "id": "john-cena",
+      "name": "John Cena",
+      "wins": 1118,
+      "losses": 882,
+      "winRate": 55.9
+    },
+    {
+      "id": "andre-the-giant",
+      "name": "André the Giant",
+      "wins": 1115,
+      "losses": 885,
+      "winRate": 55.75
+    },
+    {
+      "id": "raquel-rodriguez",
+      "name": "Raquel Rodriguez",
+      "wins": 1110,
+      "losses": 890,
+      "winRate": 55.5
+    },
+    {
+      "id": "liv-morgan",
+      "name": "Liv Morgan",
+      "wins": 1106,
+      "losses": 894,
+      "winRate": 55.3
+    },
+    {
+      "id": "randy-savage",
+      "name": "Randy Savage",
+      "wins": 1102,
+      "losses": 898,
+      "winRate": 55.1
+    },
+    {
+      "id": "chelsea-green",
+      "name": "Chelsea Green",
+      "wins": 1098,
+      "losses": 902,
+      "winRate": 54.9
+    },
+    {
+      "id": "jaida-parker",
+      "name": "Jaida Parker",
+      "wins": 1092,
+      "losses": 908,
+      "winRate": 54.6
+    },
+    {
+      "id": "tony-dangelo",
+      "name": "Tony D’Angelo",
+      "wins": 1088,
+      "losses": 912,
+      "winRate": 54.4
+    },
+    {
+      "id": "oba-femi",
+      "name": "Oba Femi",
+      "wins": 1086,
+      "losses": 914,
+      "winRate": 54.3
+    },
+    {
+      "id": "the-rock-attitude",
+      "name": "The Rock",
+      "wins": 1081,
+      "losses": 919,
+      "winRate": 54.05
+    },
+    {
+      "id": "el-grande-americano",
+      "name": "El Grande Americano",
+      "wins": 1081,
+      "losses": 919,
+      "winRate": 54.05
+    },
+    {
+      "id": "kendal-grey",
+      "name": "Kendal Grey",
+      "wins": 1077,
+      "losses": 923,
+      "winRate": 53.85
+    },
+    {
+      "id": "hulk-hogan",
+      "name": "Hulk Hogan",
+      "wins": 1072,
+      "losses": 928,
+      "winRate": 53.6
+    },
+    {
+      "id": "kelani-jordan",
+      "name": "Kelani Jordan",
+      "wins": 1061,
+      "losses": 939,
+      "winRate": 53.05
+    },
+    {
+      "id": "zilla-fatu",
+      "name": "Zilla Fatu",
+      "wins": 1061,
+      "losses": 939,
+      "winRate": 53.05
+    },
+    {
+      "id": "kevin-owens",
+      "name": "Kevin Owens",
+      "wins": 1060,
+      "losses": 940,
+      "winRate": 53
+    },
+    {
+      "id": "damian-priest",
+      "name": "Damian Priest",
+      "wins": 1056,
+      "losses": 944,
+      "winRate": 52.8
+    },
+    {
+      "id": "cody-rhodes",
+      "name": "Cody Rhodes",
+      "wins": 1052,
+      "losses": 948,
+      "winRate": 52.6
+    },
+    {
+      "id": "edge",
+      "name": "Edge",
+      "wins": 1052,
+      "losses": 948,
+      "winRate": 52.6
+    },
+    {
+      "id": "montez-ford",
+      "name": "Montez Ford",
+      "wins": 1050,
+      "losses": 950,
+      "winRate": 52.5
+    },
+    {
+      "id": "tatum-paxley",
+      "name": "Tatum Paxley",
+      "wins": 1031,
+      "losses": 969,
+      "winRate": 51.55
+    },
+    {
+      "id": "bayley",
+      "name": "Bayley",
+      "wins": 1030,
+      "losses": 970,
+      "winRate": 51.5
+    },
+    {
+      "id": "ultimate-warrior",
+      "name": "Ultimate Warrior",
+      "wins": 1030,
+      "losses": 970,
+      "winRate": 51.5
+    },
+    {
+      "id": "cm-punk",
+      "name": "CM Punk",
+      "wins": 1017,
+      "losses": 983,
+      "winRate": 50.85
+    },
+    {
+      "id": "kane",
+      "name": "Kane",
+      "wins": 1004,
+      "losses": 996,
+      "winRate": 50.2
+    },
+    {
+      "id": "gunther",
+      "name": "Gunther",
+      "wins": 1002,
+      "losses": 998,
+      "winRate": 50.1
+    },
+    {
+      "id": "sol-ruca",
+      "name": "Sol Ruca",
+      "wins": 993,
+      "losses": 1007,
+      "winRate": 49.65
+    },
+    {
+      "id": "mr-perfect",
+      "name": "Mr. Perfect",
+      "wins": 989,
+      "losses": 1011,
+      "winRate": 49.45
+    },
+    {
+      "id": "mankind",
+      "name": "Mankind",
+      "wins": 987,
+      "losses": 1013,
+      "winRate": 49.35
+    },
+    {
+      "id": "seth-rollins",
+      "name": "Seth Rollins",
+      "wins": 987,
+      "losses": 1013,
+      "winRate": 49.35
+    },
+    {
+      "id": "eddie-guerrero",
+      "name": "Eddie Guerrero",
+      "wins": 986,
+      "losses": 1014,
+      "winRate": 49.3
+    },
+    {
+      "id": "razor-ramon",
+      "name": "Razor Ramon",
+      "wins": 985,
+      "losses": 1015,
+      "winRate": 49.25
+    },
+    {
+      "id": "jacy-jayne",
+      "name": "Jacy Jayne",
+      "wins": 981,
+      "losses": 1019,
+      "winRate": 49.05
+    },
+    {
+      "id": "stone-cold-steve-austin",
+      "name": "Stone Cold Steve Austin",
+      "wins": 972,
+      "losses": 1028,
+      "winRate": 48.6
+    },
+    {
+      "id": "jake-roberts",
+      "name": "Jake “The Snake” Roberts",
+      "wins": 965,
+      "losses": 1035,
+      "winRate": 48.25
+    },
+    {
+      "id": "mr-iguana",
+      "name": "Mr. Iguana",
+      "wins": 961,
+      "losses": 1039,
+      "winRate": 48.05
+    },
+    {
+      "id": "paige",
+      "name": "Paige",
+      "wins": 952,
+      "losses": 1048,
+      "winRate": 47.6
+    },
+    {
+      "id": "becky-lynch",
+      "name": "Becky Lynch",
+      "wins": 949,
+      "losses": 1051,
+      "winRate": 47.45
+    },
+    {
+      "id": "joe-hendry",
+      "name": "Joe Hendry",
+      "wins": 947,
+      "losses": 1053,
+      "winRate": 47.35
+    },
+    {
+      "id": "jeff-hardy",
+      "name": "Jeff Hardy",
+      "wins": 946,
+      "losses": 1054,
+      "winRate": 47.3
+    },
+    {
+      "id": "triple-h",
+      "name": "Triple H",
+      "wins": 944,
+      "losses": 1056,
+      "winRate": 47.2
+    },
+    {
+      "id": "chris-jericho",
+      "name": "Chris Jericho",
+      "wins": 935,
+      "losses": 1065,
+      "winRate": 46.75
+    },
+    {
+      "id": "stephanie-vaquer",
+      "name": "Stephanie Vaquer",
+      "wins": 934,
+      "losses": 1066,
+      "winRate": 46.7
+    },
+    {
+      "id": "batista",
+      "name": "Batista",
+      "wins": 929,
+      "losses": 1071,
+      "winRate": 46.45
+    },
+    {
+      "id": "british-bulldog",
+      "name": "British Bulldog",
+      "wins": 923,
+      "losses": 1077,
+      "winRate": 46.15
+    },
+    {
+      "id": "rhea-ripley",
+      "name": "Rhea Ripley",
+      "wins": 912,
+      "losses": 1088,
+      "winRate": 45.6
+    },
+    {
+      "id": "dominik-mysterio",
+      "name": "Dominik Mysterio",
+      "wins": 910,
+      "losses": 1090,
+      "winRate": 45.5
+    },
+    {
+      "id": "logan-paul",
+      "name": "Logan Paul",
+      "wins": 909,
+      "losses": 1091,
+      "winRate": 45.45
+    },
+    {
+      "id": "iyo-sky",
+      "name": "IYO SKY",
+      "wins": 907,
+      "losses": 1093,
+      "winRate": 45.35
+    },
+    {
+      "id": "shinsuke-nakamura",
+      "name": "Shinsuke Nakamura",
+      "wins": 904,
+      "losses": 1096,
+      "winRate": 45.2
+    },
+    {
+      "id": "blake-monroe",
+      "name": "Blake Monroe",
+      "wins": 901,
+      "losses": 1099,
+      "winRate": 45.05
+    },
+    {
+      "id": "shawn-michaels",
+      "name": "Shawn Michaels",
+      "wins": 897,
+      "losses": 1103,
+      "winRate": 44.85
+    },
+    {
+      "id": "roxanne-perez",
+      "name": "Roxanne Perez",
+      "wins": 886,
+      "losses": 1114,
+      "winRate": 44.3
+    },
+    {
+      "id": "austin-theory",
+      "name": "Austin Theory",
+      "wins": 884,
+      "losses": 1116,
+      "winRate": 44.2
+    },
+    {
+      "id": "rey-mysterio",
+      "name": "Rey Mysterio",
+      "wins": 883,
+      "losses": 1117,
+      "winRate": 44.15
+    },
+    {
+      "id": "doink-the-clown",
+      "name": "Doink the Clown",
+      "wins": 879,
+      "losses": 1121,
+      "winRate": 43.95
+    },
+    {
+      "id": "charlotte-flair",
+      "name": "Charlotte Flair",
+      "wins": 876,
+      "losses": 1124,
+      "winRate": 43.8
+    },
+    {
+      "id": "danhausen",
+      "name": "Danhausen",
+      "wins": 876,
+      "losses": 1124,
+      "winRate": 43.8
+    },
+    {
+      "id": "dragon-lee",
+      "name": "Dragon Lee",
+      "wins": 873,
+      "losses": 1127,
+      "winRate": 43.65
+    },
+    {
+      "id": "hijo-del-vikingo",
+      "name": "Hijo del Vikingo",
+      "wins": 861,
+      "losses": 1139,
+      "winRate": 43.05
+    },
+    {
+      "id": "trick-williams",
+      "name": "Trick Williams",
+      "wins": 854,
+      "losses": 1146,
+      "winRate": 42.7
+    },
+    {
+      "id": "lola-vice",
+      "name": "Lola Vice",
+      "wins": 849,
+      "losses": 1151,
+      "winRate": 42.45
+    },
+    {
+      "id": "owen-hart",
+      "name": "Owen Hart",
+      "wins": 849,
+      "losses": 1151,
+      "winRate": 42.45
+    },
+    {
+      "id": "rowdy-roddy-piper",
+      "name": "Rowdy Roddy Piper",
+      "wins": 843,
+      "losses": 1157,
+      "winRate": 42.15
+    },
+    {
+      "id": "ted-dibiase",
+      "name": "Ted DiBiase",
+      "wins": 826,
+      "losses": 1174,
+      "winRate": 41.3
+    },
+    {
+      "id": "chad-gable",
+      "name": "Chad Gable",
+      "wins": 813,
+      "losses": 1187,
+      "winRate": 40.65
+    },
+    {
+      "id": "tiffany-stratton",
+      "name": "Tiffany Stratton",
+      "wins": 799,
+      "losses": 1201,
+      "winRate": 39.95
+    },
+    {
+      "id": "kurt-angle",
+      "name": "Kurt Angle",
+      "wins": 784,
+      "losses": 1216,
+      "winRate": 39.2
+    }
+  ]
+}

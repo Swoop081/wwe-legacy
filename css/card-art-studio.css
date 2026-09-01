@@ -77,3 +77,19 @@
 .linked-animation-preview-wrap>span{font-size:.48rem;letter-spacing:.12em;color:var(--gold);font-weight:1000}
 .linked-animation-preview-wrap img{display:block;width:100%;max-height:210px;object-fit:contain;border-radius:8px;background:#030304}
 .animated-link-actions{grid-template-columns:1fr 1fr}
+
+/* v1.1.82 — Darby-first Normal / Animated Card Studio split */
+.studio-mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:760px;margin:0 auto 10px}
+.studio-mode-tab{display:grid;gap:3px;padding:13px 16px;border-radius:14px;background:#111117;border:1px solid #34343d;text-align:left}
+.studio-mode-tab b{font-size:.78rem;letter-spacing:.08em}
+.studio-mode-tab small{font-size:.62rem;color:#8f8f99;font-weight:700}
+.studio-mode-tab.is-active{border-color:#f0c950;background:linear-gradient(145deg,rgba(240,201,80,.15),rgba(255,255,255,.03));box-shadow:0 0 0 1px rgba(240,201,80,.08) inset}
+.studio-mode-tab.is-active b{color:#ffe58b}
+.studio-mode-note{max-width:760px;margin:0 auto 16px;padding:10px 13px;border:1px solid rgba(255,255,255,.10);border-radius:12px;background:#0d0d11;color:#a9a9b2;font-size:.68rem;line-height:1.4}
+.studio-mode-note b{color:#f0c950;margin-right:6px;letter-spacing:.08em}
+.studio-animated-only[hidden],.studio-normal-only[hidden]{display:none!important}
+.animated-workflow-intro{display:grid;gap:4px;padding:10px 12px;border:1px solid rgba(244,200,77,.24);border-radius:12px;background:rgba(244,200,77,.05)}
+.animated-workflow-intro b{font-size:.62rem;color:#f4c84d;letter-spacing:.12em}
+.animated-workflow-intro span{font-size:.7rem;color:#a6a8b2;line-height:1.4}
+body[data-studio-mode="animated"] .studio-intro .eyebrow::after{content:" · ANIMATED WORKFLOW";color:#a78bfa}
+@media(max-width:560px){.studio-mode-tabs{grid-template-columns:1fr}.studio-mode-tab{text-align:center}}

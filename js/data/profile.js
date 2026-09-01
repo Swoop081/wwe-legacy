@@ -1,12 +1,13 @@
-import { decks } from "./decks.js?v=1.1.48";
-import { collectionCards } from "./collection.js?v=1.1.48";
-import { superstars } from "./superstars.js?v=1.1.48";
-import { isUnreleasedSetId } from "./release.js?v=1.1.48";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.48";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.48";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.48";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.48";
-import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.48";
+import { decks } from "./decks.js?v=1.1.86";
+import { collectionCards } from "./collection.js?v=1.1.86";
+import { superstars } from "./superstars.js?v=1.1.86";
+import { isUnreleasedSetId } from "./release.js?v=1.1.86";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.86";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.86";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.86";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.86";
+import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.86";
+import { ownershipCapFor, isUniqueCollectionCard, totalOwnershipCapFor } from "./card-limits.js?v=1.1.86";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
@@ -14,7 +15,7 @@ export const PROFILE_RECOVERY_META_KEY = "wa-modern-profile-v3-recovery-meta-v1"
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 44;
+export const PROFILE_VERSION = 46;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -49,7 +50,8 @@ const defaultSeasonState = () => ({ xp: 0, claimedTiers: [], freePackLastClaimAt
 const cardById = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
 
-export const cardOwnershipCap = _card => 5;
+export const cardOwnershipCap = card => ownershipCapFor(card);
+export const cardTotalOwnershipCap = card => totalOwnershipCapFor(card);
 export function totalOwnedCopies(profile, id) {
   const o = profile?.ownedCards?.[id] ?? {};
   return CARD_TIERS.reduce((sum, tier) => sum + Math.max(0, Number(o[tier]) || 0), 0);
@@ -70,6 +72,7 @@ export function underTierOwnershipCap(profile, card, tier = "normal") {
   const fixedTier = fixedPrintingTierFor(card);
   const requestedTier = normalizeCardTier(tier);
   if (fixedTier && requestedTier !== fixedTier) return false;
+  if (isUniqueCollectionCard(card)) return totalOwnedCopies(profile, card.id) < 1;
   return tierOwnedCopies(profile, card.id, fixedTier ?? requestedTier) < cardOwnershipCap(card);
 }
 export function underFinishOwnershipCap(profile, card, tierOrFoil = "normal") {
@@ -89,7 +92,10 @@ export function addOwnedCard(profile, id, { tier = null, foil = null, amount = 1
   const cap = cardOwnershipCap(card);
   let added = 0, overflowed = 0;
   for (let i = 0; i < amount; i += 1) {
-    if ((o[resolvedTier] ?? 0) >= cap) { overflowed += 1; continue; }
+    const atCap = isUniqueCollectionCard(card)
+      ? totalOwnedCopies(profile, id) >= 1
+      : (o[resolvedTier] ?? 0) >= cap;
+    if (atCap) { overflowed += 1; continue; }
     o[resolvedTier] = (o[resolvedTier] ?? 0) + 1;
     added += 1;
   }
@@ -1198,6 +1204,24 @@ export function migrateProfile(old) {
           .map(({ entry }) => typeof entry === "string" ? { id: entry, tier: DEFAULT_STARTER_TIER } : { ...entry });
         p.savedDecks[sid] = [...lead, ...tail];
       }
+    }
+  }
+
+  // v1.1.78: Superstar and Entrance identities are now unique across all five
+  // printing tiers. Older saves may legitimately contain several copies from
+  // the former five-per-tier rule. Keep the highest printing owned and convert
+  // every excess copy to UP at the card's intrinsic-rarity duplicate rate.
+  if (sourceVersion < 45) {
+    const tierPriority = ["amethyst", "ruby", "sapphire", "emerald", "normal"];
+    for (const [id, owned] of Object.entries(p.ownedCards ?? {})) {
+      const card = cardById.get(id);
+      if (!isUniqueCollectionCard(card) || !owned || typeof owned !== "object") continue;
+      const total = CARD_TIERS.reduce((sum, tier) => sum + Math.max(0, Number(owned[tier]) || 0), 0);
+      if (total <= 1) continue;
+      const keepTier = tierPriority.find(tier => Math.max(0, Number(owned[tier]) || 0) > 0) ?? "normal";
+      p.ownedCards[id] = { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0, [keepTier]:1 };
+      const unitValue = ({1:1,2:2,3:3,4:4})[Number(card.rarity)] ?? 1;
+      p.universePoints += (total - 1) * unitValue;
     }
   }
 

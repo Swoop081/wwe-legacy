@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.48";
+import { allGameplayCards } from "./content.js?v=1.1.87";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -3598,7 +3598,7 @@ export const deckIds={
     "once-too-often"
   ],
   "bret-hart": [
-    "momentum-technical",
+    "momentum-agility",
     "momentum-strength",
     "european-uppercut",
     "russian-leg-sweep",
@@ -3623,7 +3623,7 @@ export const deckIds={
     "ddt",
     "back-suplex",
     "elbow-drop",
-    "momentum-strike",
+    "momentum-agility",
     "european-uppercut",
     "clothesline",
     "clothesline",
@@ -4924,9 +4924,9 @@ export const deckIds={
     "jacy-jayne-discus-boot",
     "jacy-jayne-discus-boot",
     "jacy-jayne-discus-boot",
-    "jacy-jayne-rolling-encore",
-    "jacy-jayne-rolling-encore",
-    "jacy-jayne-rolling-encore",
+    "jacy-jayne-running-knee-smash",
+    "jacy-jayne-running-knee-smash",
+    "jacy-jayne-running-knee-smash",
     "jacy-jayne-rolling-encore",
     "jacy-jayne-rolling-encore",
     "jacy-jayne-running-knee-smash",
@@ -5187,10 +5187,10 @@ export const deckIds={
     "kelani-jordan-handspring-elbow",
     "kelani-jordan-split-legged-moonsault",
     "kelani-jordan-split-legged-moonsault",
-    "kelani-jordan-split-legged-moonsault",
     "kelani-jordan-springboard-cutter",
     "kelani-jordan-springboard-cutter",
     "kelani-jordan-springboard-cutter",
+    "kelani-jordan-450-splash",
     "kelani-jordan-450-splash",
     "kelani-jordan-450-splash",
     "special-kelani-jordan",
@@ -5351,8 +5351,6 @@ export const deckIds={
     "momentum-agility",
     "lexis-king-coronation-neckbreaker",
     "lexis-king-coronation-neckbreaker",
-    "lexis-king-coronation-neckbreaker",
-    "lexis-king-coronation-neckbreaker",
     "lexis-king-the-throne",
     "lexis-king-the-throne",
     "lexis-king-the-throne",
@@ -5361,6 +5359,8 @@ export const deckIds={
     "lexis-king-superkick",
     "lexis-king-superkick",
     "lexis-king-superkick",
+    "lexis-king-king-s-landing",
+    "lexis-king-king-s-landing",
     "lexis-king-king-s-landing",
     "lexis-king-king-s-landing",
     "lexis-king-king-s-landing",
@@ -5892,7 +5892,57 @@ export const deckIds={
     "diving-crossbody"
   ]
 };
+
+const cloneRoadmapDeck=(templateId,targetId,targetSignatures,specialId,momentumMap={})=>{
+  const source=deckIds[templateId]??[];
+  let sigIndex=0;
+  const out=source.map(id=>{
+    if(id===`special-${templateId}`) return specialId;
+    const card=byId.get(id);
+    if(card?.superstarId===templateId){
+      const replacement=targetSignatures[sigIndex%targetSignatures.length];
+      sigIndex+=1;
+      return replacement;
+    }
+    return momentumMap[id]??id;
+  });
+  // Guarantee the complete authored signature package is represented in the
+  // 60-page recommended deck even when the template used shared signature IDs.
+  targetSignatures.forEach((id,index)=>{
+    if(out.includes(id)) return;
+    const slot=24+(index*2);
+    out[slot]=id;
+    if(slot+1<out.length) out[slot+1]=id;
+  });
+  return out;
+};
+deckIds["giulia"]=cloneRoadmapDeck("tatum-paxley","giulia",["giulia-hammerlock-michinoku-driver","giulia-avalanche-butterfly-suplex","giulia-arrivederci","giulia-northern-lights-bomb"],"special-giulia",{"momentum-agility":"momentum-technical"});
+deckIds["carmelo-hayes"]=cloneRoadmapDeck("finn-balor","carmelo-hayes",["carmelo-hayes-first-48","carmelo-hayes-springboard-clothesline","carmelo-hayes-fadeaway","carmelo-hayes-nothing-but-net"],"special-carmelo-hayes");
+deckIds["baron-corbin"]=cloneRoadmapDeck("jbl","baron-corbin",["baron-corbin-deep-six","baron-corbin-chokeslam-backbreaker","baron-corbin-big-boot","baron-corbin-end-of-days"],"special-baron-corbin");
+deckIds["rey-fenix"]=cloneRoadmapDeck("dragon-lee","rey-fenix",["rey-fenix-fire-driver","rey-fenix-tornillo-kick","rey-fenix-mexican-destroyer","rey-fenix-mexican-muscle-buster"],"special-rey-fenix");
+deckIds["jimmy-uso"]=cloneRoadmapDeck("jey-uso","jimmy-uso",["jimmy-uso-running-hip-attack","jimmy-uso-spear","jimmy-uso-superkick","jimmy-uso-uso-splash"],"special-jimmy-uso");
+
+
+// v1.1.75 authenticity corrections after the 97-deck realism audit.
+const replaceDeckCard=(sid,from,to,count=1)=>{
+  const ids=deckIds[sid]??[];
+  let changed=0;
+  for(let i=0;i<ids.length && changed<count;i++) if(ids[i]===from){ids[i]=to;changed++;}
+};
+replaceDeckCard("jade-cargill","running-knee","jade-cargill-reverse-alabama-slam",2);
+replaceDeckCard("jade-cargill","superkick","jade-cargill-eye-of-the-storm",2);
+replaceDeckCard("logan-paul","flipping-lariat","logan-paul-prime-splash",2);
+replaceDeckCard("tiffany-stratton","body-slam","alabama-slam",2);
+replaceDeckCard("tiffany-stratton","body-slam","falcon-arrow",1);
+replaceDeckCard("tiffany-stratton","momentum-agility","momentum-technical",1);
+
+// v1.1.80 October Rewards — AJ Styles. Authentic versatile Technical/Agility build.
+deckIds["aj-styles"] = cloneRoadmapDeck("rob-van-dam","aj-styles",["aj-styles-pele-kick","aj-styles-ushigoroshi","aj-styles-calf-crusher","aj-styles-phenomenal-forearm","aj-styles-styles-clash"],"special-aj-styles",{"momentum-strength":"momentum-technical"});
+replaceDeckCard("aj-styles","fire-up","aj-styles-house-that-aj-styles-built",1);
+replaceDeckCard("aj-styles","momentum-agility","momentum-strength",1);
+
 export const ONCE_TOO_OFTEN_ID="once-too-often";
 const onceTooOftenReplacementPriority=["crowd-support","fire-up","game-plan","got-all-of-it","punch"];
 for(const ids of Object.values(deckIds)){if(!Array.isArray(ids)||ids.includes(ONCE_TOO_OFTEN_ID))continue;let replaceAt=-1;for(const id of onceTooOftenReplacementPriority){const i=ids.lastIndexOf(id);if(i>=5){replaceAt=i;break;}}if(replaceAt<5)replaceAt=ids.findIndex((id,i)=>i>=5&&!id.startsWith("momentum-"));if(replaceAt>=5)ids[replaceAt]=ONCE_TOO_OFTEN_ID;}
+for (const retiredRewardId of ["the-rock","chyna","goldberg"]) delete deckIds[retiredRewardId];
 export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id)).filter(Boolean)]));

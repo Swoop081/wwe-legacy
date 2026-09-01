@@ -1,0 +1,744 @@
+{
+  "version": "1.1.83",
+  "superstars": 81,
+  "uniquePairings": 3240,
+  "gamesPerPair": 25,
+  "matches": 81000,
+  "stalls": 0,
+  "averageTurns": 25.51,
+  "finishes": {
+    "pin": 73170,
+    "submission": 7830
+  },
+  "rows": [
+    {
+      "id": "rob-van-dam",
+      "name": "Rob Van Dam",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 1227,
+      "losses": 773,
+      "draws": 0,
+      "winRate": 61.35
+    },
+    {
+      "id": "aj-styles",
+      "name": "AJ Styles",
+      "setId": "rewards-october-2026",
+      "wins": 1191,
+      "losses": 809,
+      "draws": 0,
+      "winRate": 59.55
+    },
+    {
+      "id": "jbl",
+      "name": "JBL",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 1173,
+      "losses": 827,
+      "draws": 0,
+      "winRate": 58.65
+    },
+    {
+      "id": "lexis-king",
+      "name": "Lexis King",
+      "setId": "nxt-series-1",
+      "wins": 1172,
+      "losses": 828,
+      "draws": 0,
+      "winRate": 58.6
+    },
+    {
+      "id": "randy-orton",
+      "name": "Randy Orton",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 1168,
+      "losses": 832,
+      "draws": 0,
+      "winRate": 58.4
+    },
+    {
+      "id": "mason-rook",
+      "name": "Mason Rook",
+      "setId": "nxt-series-1",
+      "wins": 1160,
+      "losses": 840,
+      "draws": 0,
+      "winRate": 58.0
+    },
+    {
+      "id": "diesel",
+      "name": "Diesel",
+      "setId": "new-generation-series-1",
+      "wins": 1153,
+      "losses": 847,
+      "draws": 0,
+      "winRate": 57.65
+    },
+    {
+      "id": "brock-lesnar",
+      "name": "Brock Lesnar",
+      "setId": "summerslam-series-1",
+      "wins": 1146,
+      "losses": 854,
+      "draws": 0,
+      "winRate": 57.3
+    },
+    {
+      "id": "yokozuna",
+      "name": "Yokozuna",
+      "setId": "new-generation-series-1",
+      "wins": 1145,
+      "losses": 855,
+      "draws": 0,
+      "winRate": 57.25
+    },
+    {
+      "id": "roman-reigns",
+      "name": "Roman Reigns",
+      "setId": "summerslam-series-1",
+      "wins": 1144,
+      "losses": 856,
+      "draws": 0,
+      "winRate": 57.2
+    },
+    {
+      "id": "the-undertaker",
+      "name": "The Undertaker",
+      "setId": "attitude-era-series-1",
+      "wins": 1142,
+      "losses": 858,
+      "draws": 0,
+      "winRate": 57.1
+    },
+    {
+      "id": "bret-hart",
+      "name": "Bret Hart",
+      "setId": "new-generation-series-1",
+      "wins": 1128,
+      "losses": 872,
+      "draws": 0,
+      "winRate": 56.4
+    },
+    {
+      "id": "john-cena",
+      "name": "John Cena",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 1120,
+      "losses": 880,
+      "draws": 0,
+      "winRate": 56.0
+    },
+    {
+      "id": "penta",
+      "name": "Penta",
+      "setId": "worlds-collide-series-1",
+      "wins": 1119,
+      "losses": 881,
+      "draws": 0,
+      "winRate": 55.95
+    },
+    {
+      "id": "andre-the-giant",
+      "name": "Andr\u00e9 the Giant",
+      "setId": "golden-era-series-1",
+      "wins": 1115,
+      "losses": 885,
+      "draws": 0,
+      "winRate": 55.75
+    },
+    {
+      "id": "raquel-rodriguez",
+      "name": "Raquel Rodriguez",
+      "setId": "raw-series-1",
+      "wins": 1111,
+      "losses": 889,
+      "draws": 0,
+      "winRate": 55.55
+    },
+    {
+      "id": "liv-morgan",
+      "name": "Liv Morgan",
+      "setId": "evolution-series-1",
+      "wins": 1105,
+      "losses": 895,
+      "draws": 0,
+      "winRate": 55.25
+    },
+    {
+      "id": "randy-savage",
+      "name": "Randy Savage",
+      "setId": "golden-era-series-1",
+      "wins": 1101,
+      "losses": 899,
+      "draws": 0,
+      "winRate": 55.05
+    },
+    {
+      "id": "chelsea-green",
+      "name": "Chelsea Green",
+      "setId": "smackdown-series-1",
+      "wins": 1098,
+      "losses": 902,
+      "draws": 0,
+      "winRate": 54.9
+    },
+    {
+      "id": "tony-dangelo",
+      "name": "Tony D\u2019Angelo",
+      "setId": "nxt-series-1",
+      "wins": 1089,
+      "losses": 911,
+      "draws": 0,
+      "winRate": 54.45
+    },
+    {
+      "id": "jaida-parker",
+      "name": "Jaida Parker",
+      "setId": "nxt-series-1",
+      "wins": 1089,
+      "losses": 911,
+      "draws": 0,
+      "winRate": 54.45
+    },
+    {
+      "id": "oba-femi",
+      "name": "Oba Femi",
+      "setId": "summerslam-series-1",
+      "wins": 1085,
+      "losses": 915,
+      "draws": 0,
+      "winRate": 54.25
+    },
+    {
+      "id": "el-grande-americano",
+      "name": "El Grande Americano",
+      "setId": "worlds-collide-series-1",
+      "wins": 1082,
+      "losses": 918,
+      "draws": 0,
+      "winRate": 54.1
+    },
+    {
+      "id": "kendal-grey",
+      "name": "Kendal Grey",
+      "setId": "nxt-series-1",
+      "wins": 1076,
+      "losses": 924,
+      "draws": 0,
+      "winRate": 53.8
+    },
+    {
+      "id": "the-rock-attitude",
+      "name": "The Rock",
+      "setId": "attitude-era-series-1",
+      "wins": 1075,
+      "losses": 925,
+      "draws": 0,
+      "winRate": 53.75
+    },
+    {
+      "id": "hulk-hogan",
+      "name": "Hulk Hogan",
+      "setId": "golden-era-series-1",
+      "wins": 1072,
+      "losses": 928,
+      "draws": 0,
+      "winRate": 53.6
+    },
+    {
+      "id": "zilla-fatu",
+      "name": "Zilla Fatu",
+      "setId": "nxt-series-1",
+      "wins": 1062,
+      "losses": 938,
+      "draws": 0,
+      "winRate": 53.1
+    },
+    {
+      "id": "kevin-owens",
+      "name": "Kevin Owens",
+      "setId": "summerslam-series-1",
+      "wins": 1061,
+      "losses": 939,
+      "draws": 0,
+      "winRate": 53.05
+    },
+    {
+      "id": "kelani-jordan",
+      "name": "Kelani Jordan",
+      "setId": "nxt-series-1",
+      "wins": 1058,
+      "losses": 942,
+      "draws": 0,
+      "winRate": 52.9
+    },
+    {
+      "id": "damian-priest",
+      "name": "Damian Priest",
+      "setId": "smackdown-series-1",
+      "wins": 1055,
+      "losses": 945,
+      "draws": 0,
+      "winRate": 52.75
+    },
+    {
+      "id": "cody-rhodes",
+      "name": "Cody Rhodes",
+      "setId": "summerslam-series-1",
+      "wins": 1054,
+      "losses": 946,
+      "draws": 0,
+      "winRate": 52.7
+    },
+    {
+      "id": "edge",
+      "name": "Edge",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 1049,
+      "losses": 951,
+      "draws": 0,
+      "winRate": 52.45
+    },
+    {
+      "id": "montez-ford",
+      "name": "Montez Ford",
+      "setId": "raw-series-1",
+      "wins": 1048,
+      "losses": 952,
+      "draws": 0,
+      "winRate": 52.4
+    },
+    {
+      "id": "bayley",
+      "name": "Bayley",
+      "setId": "evolution-series-1",
+      "wins": 1031,
+      "losses": 969,
+      "draws": 0,
+      "winRate": 51.55
+    },
+    {
+      "id": "tatum-paxley",
+      "name": "Tatum Paxley",
+      "setId": "nxt-series-1",
+      "wins": 1030,
+      "losses": 970,
+      "draws": 0,
+      "winRate": 51.5
+    },
+    {
+      "id": "ultimate-warrior",
+      "name": "Ultimate Warrior",
+      "setId": "golden-era-series-1",
+      "wins": 1029,
+      "losses": 971,
+      "draws": 0,
+      "winRate": 51.45
+    },
+    {
+      "id": "cm-punk",
+      "name": "CM Punk",
+      "setId": "summerslam-series-1",
+      "wins": 1015,
+      "losses": 985,
+      "draws": 0,
+      "winRate": 50.75
+    },
+    {
+      "id": "kane",
+      "name": "Kane",
+      "setId": "attitude-era-series-1",
+      "wins": 1007,
+      "losses": 993,
+      "draws": 0,
+      "winRate": 50.35
+    },
+    {
+      "id": "gunther",
+      "name": "Gunther",
+      "setId": "summerslam-series-1",
+      "wins": 1002,
+      "losses": 998,
+      "draws": 0,
+      "winRate": 50.1
+    },
+    {
+      "id": "sol-ruca",
+      "name": "Sol Ruca",
+      "setId": "raw-series-1",
+      "wins": 993,
+      "losses": 1007,
+      "draws": 0,
+      "winRate": 49.65
+    },
+    {
+      "id": "mr-perfect",
+      "name": "Mr. Perfect",
+      "setId": "golden-era-series-1",
+      "wins": 989,
+      "losses": 1011,
+      "draws": 0,
+      "winRate": 49.45
+    },
+    {
+      "id": "eddie-guerrero",
+      "name": "Eddie Guerrero",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 987,
+      "losses": 1013,
+      "draws": 0,
+      "winRate": 49.35
+    },
+    {
+      "id": "seth-rollins",
+      "name": "Seth Rollins",
+      "setId": "summerslam-series-1",
+      "wins": 986,
+      "losses": 1014,
+      "draws": 0,
+      "winRate": 49.3
+    },
+    {
+      "id": "mankind",
+      "name": "Mankind",
+      "setId": "attitude-era-series-1",
+      "wins": 985,
+      "losses": 1015,
+      "draws": 0,
+      "winRate": 49.25
+    },
+    {
+      "id": "razor-ramon",
+      "name": "Razor Ramon",
+      "setId": "new-generation-series-1",
+      "wins": 983,
+      "losses": 1017,
+      "draws": 0,
+      "winRate": 49.15
+    },
+    {
+      "id": "jacy-jayne",
+      "name": "Jacy Jayne",
+      "setId": "smackdown-series-1",
+      "wins": 981,
+      "losses": 1019,
+      "draws": 0,
+      "winRate": 49.05
+    },
+    {
+      "id": "stone-cold-steve-austin",
+      "name": "Stone Cold Steve Austin",
+      "setId": "attitude-era-series-1",
+      "wins": 971,
+      "losses": 1029,
+      "draws": 0,
+      "winRate": 48.55
+    },
+    {
+      "id": "jake-roberts",
+      "name": "Jake \u201cThe Snake\u201d Roberts",
+      "setId": "golden-era-series-1",
+      "wins": 965,
+      "losses": 1035,
+      "draws": 0,
+      "winRate": 48.25
+    },
+    {
+      "id": "mr-iguana",
+      "name": "Mr. Iguana",
+      "setId": "worlds-collide-series-1",
+      "wins": 960,
+      "losses": 1040,
+      "draws": 0,
+      "winRate": 48.0
+    },
+    {
+      "id": "paige",
+      "name": "Paige",
+      "setId": "evolution-series-1",
+      "wins": 954,
+      "losses": 1046,
+      "draws": 0,
+      "winRate": 47.7
+    },
+    {
+      "id": "becky-lynch",
+      "name": "Becky Lynch",
+      "setId": "evolution-series-1",
+      "wins": 951,
+      "losses": 1049,
+      "draws": 0,
+      "winRate": 47.55
+    },
+    {
+      "id": "joe-hendry",
+      "name": "Joe Hendry",
+      "setId": "raw-series-1",
+      "wins": 947,
+      "losses": 1053,
+      "draws": 0,
+      "winRate": 47.35
+    },
+    {
+      "id": "triple-h",
+      "name": "Triple H",
+      "setId": "attitude-era-series-1",
+      "wins": 947,
+      "losses": 1053,
+      "draws": 0,
+      "winRate": 47.35
+    },
+    {
+      "id": "jeff-hardy",
+      "name": "Jeff Hardy",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 943,
+      "losses": 1057,
+      "draws": 0,
+      "winRate": 47.15
+    },
+    {
+      "id": "chris-jericho",
+      "name": "Chris Jericho",
+      "setId": "attitude-era-series-1",
+      "wins": 935,
+      "losses": 1065,
+      "draws": 0,
+      "winRate": 46.75
+    },
+    {
+      "id": "stephanie-vaquer",
+      "name": "Stephanie Vaquer",
+      "setId": "evolution-series-1",
+      "wins": 934,
+      "losses": 1066,
+      "draws": 0,
+      "winRate": 46.7
+    },
+    {
+      "id": "batista",
+      "name": "Batista",
+      "setId": "ruthless-aggression-series-1",
+      "wins": 928,
+      "losses": 1072,
+      "draws": 0,
+      "winRate": 46.4
+    },
+    {
+      "id": "british-bulldog",
+      "name": "British Bulldog",
+      "setId": "new-generation-series-1",
+      "wins": 924,
+      "losses": 1076,
+      "draws": 0,
+      "winRate": 46.2
+    },
+    {
+      "id": "rhea-ripley",
+      "name": "Rhea Ripley",
+      "setId": "evolution-series-1",
+      "wins": 912,
+      "losses": 1088,
+      "draws": 0,
+      "winRate": 45.6
+    },
+    {
+      "id": "logan-paul",
+      "name": "Logan Paul",
+      "setId": "raw-series-1",
+      "wins": 910,
+      "losses": 1090,
+      "draws": 0,
+      "winRate": 45.5
+    },
+    {
+      "id": "dominik-mysterio",
+      "name": "Dominik Mysterio",
+      "setId": "worlds-collide-series-1",
+      "wins": 907,
+      "losses": 1093,
+      "draws": 0,
+      "winRate": 45.35
+    },
+    {
+      "id": "iyo-sky",
+      "name": "IYO SKY",
+      "setId": "evolution-series-1",
+      "wins": 906,
+      "losses": 1094,
+      "draws": 0,
+      "winRate": 45.3
+    },
+    {
+      "id": "shinsuke-nakamura",
+      "name": "Shinsuke Nakamura",
+      "setId": "smackdown-series-1",
+      "wins": 903,
+      "losses": 1097,
+      "draws": 0,
+      "winRate": 45.15
+    },
+    {
+      "id": "blake-monroe",
+      "name": "Blake Monroe",
+      "setId": "smackdown-series-1",
+      "wins": 901,
+      "losses": 1099,
+      "draws": 0,
+      "winRate": 45.05
+    },
+    {
+      "id": "shawn-michaels",
+      "name": "Shawn Michaels",
+      "setId": "new-generation-series-1",
+      "wins": 892,
+      "losses": 1108,
+      "draws": 0,
+      "winRate": 44.6
+    },
+    {
+      "id": "roxanne-perez",
+      "name": "Roxanne Perez",
+      "setId": "raw-series-1",
+      "wins": 887,
+      "losses": 1113,
+      "draws": 0,
+      "winRate": 44.35
+    },
+    {
+      "id": "austin-theory",
+      "name": "Austin Theory",
+      "setId": "raw-series-1",
+      "wins": 883,
+      "losses": 1117,
+      "draws": 0,
+      "winRate": 44.15
+    },
+    {
+      "id": "rey-mysterio",
+      "name": "Rey Mysterio",
+      "setId": "worlds-collide-series-1",
+      "wins": 881,
+      "losses": 1119,
+      "draws": 0,
+      "winRate": 44.05
+    },
+    {
+      "id": "doink-the-clown",
+      "name": "Doink the Clown",
+      "setId": "new-generation-series-1",
+      "wins": 878,
+      "losses": 1122,
+      "draws": 0,
+      "winRate": 43.9
+    },
+    {
+      "id": "danhausen",
+      "name": "Danhausen",
+      "setId": "smackdown-series-1",
+      "wins": 877,
+      "losses": 1123,
+      "draws": 0,
+      "winRate": 43.85
+    },
+    {
+      "id": "charlotte-flair",
+      "name": "Charlotte Flair",
+      "setId": "evolution-series-1",
+      "wins": 875,
+      "losses": 1125,
+      "draws": 0,
+      "winRate": 43.75
+    },
+    {
+      "id": "dragon-lee",
+      "name": "Dragon Lee",
+      "setId": "worlds-collide-series-1",
+      "wins": 872,
+      "losses": 1128,
+      "draws": 0,
+      "winRate": 43.6
+    },
+    {
+      "id": "hijo-del-vikingo",
+      "name": "Hijo del Vikingo",
+      "setId": "worlds-collide-series-1",
+      "wins": 859,
+      "losses": 1141,
+      "draws": 0,
+      "winRate": 42.95
+    },
+    {
+      "id": "trick-williams",
+      "name": "Trick Williams",
+      "setId": "smackdown-series-1",
+      "wins": 852,
+      "losses": 1148,
+      "draws": 0,
+      "winRate": 42.6
+    },
+    {
+      "id": "owen-hart",
+      "name": "Owen Hart",
+      "setId": "new-generation-series-1",
+      "wins": 849,
+      "losses": 1151,
+      "draws": 0,
+      "winRate": 42.45
+    },
+    {
+      "id": "lola-vice",
+      "name": "Lola Vice",
+      "setId": "worlds-collide-series-1",
+      "wins": 847,
+      "losses": 1153,
+      "draws": 0,
+      "winRate": 42.35
+    },
+    {
+      "id": "rowdy-roddy-piper",
+      "name": "Rowdy Roddy Piper",
+      "setId": "golden-era-series-1",
+      "wins": 843,
+      "losses": 1157,
+      "draws": 0,
+      "winRate": 42.15
+    },
+    {
+      "id": "ted-dibiase",
+      "name": "Ted DiBiase",
+      "setId": "golden-era-series-1",
+      "wins": 825,
+      "losses": 1175,
+      "draws": 0,
+      "winRate": 41.25
+    },
+    {
+      "id": "chad-gable",
+      "name": "Chad Gable",
+      "setId": "raw-series-1",
+      "wins": 809,
+      "losses": 1191,
+      "draws": 0,
+      "winRate": 40.45
+    },
+    {
+      "id": "tiffany-stratton",
+      "name": "Tiffany Stratton",
+      "setId": "smackdown-series-1",
+      "wins": 798,
+      "losses": 1202,
+      "draws": 0,
+      "winRate": 39.9
+    },
+    {
+      "id": "kurt-angle",
+      "name": "Kurt Angle",
+      "setId": "attitude-era-series-1",
+      "wins": 784,
+      "losses": 1216,
+      "draws": 0,
+      "winRate": 39.2
+    }
+  ]
+}

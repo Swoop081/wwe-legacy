@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.1.48';
-import { GENERIC_MERCH, grantMerch, equipMerch, activeMerchItem, merchEligibilityForSuperstar, merchMatchModifier } from '../js/data/merch.js?v=1.1.48';
-import { findPackUpgrades, applyUpgrade, bestMerchTarget } from '../js/data/deck-assistant.js?v=1.1.48';
-import { superstars } from '../js/data/superstars.js?v=1.1.48';
+import { createProfile } from '../js/data/profile.js?v=1.1.86';
+import { GENERIC_MERCH, grantMerch, equipMerch, activeMerchItem, merchEligibilityForSuperstar, merchMatchModifier } from '../js/data/merch.js?v=1.1.86';
+import { findPackUpgrades, applyUpgrade, bestMerchTarget } from '../js/data/deck-assistant.js?v=1.1.86';
+import { superstars } from '../js/data/superstars.js?v=1.1.86';
 
 const appSource = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const rulesSource = fs.readFileSync(new URL('../js/data/game-rules.js', import.meta.url), 'utf8');

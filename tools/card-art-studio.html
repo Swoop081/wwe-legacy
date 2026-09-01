@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08080b">
   <title>WWE Legacy — Card Art Studio</title>
-  <link rel="stylesheet" href="../css/card-art-studio.css?v=1.1.48">
+  <link rel="stylesheet" href="../css/card-art-studio.css?v=1.1.86">
 </head>
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>COLLECTIBLE CARD GAME</small></a>
-    <span class="studio-build">CARD ART STUDIO · v1.1.48</span>
+    <span class="studio-build">CARD ART STUDIO · v1.1.86</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
@@ -18,6 +18,15 @@
       <h1>Card Art Studio</h1>
       <p>Work Superstar-first or across the complete WWE Legacy library. Filter a Superstar to see their Superstar card, recommended-deck pages, exclusive booster cards, Actions, Merch and Variants together. Finished fronts and base plates export directly to the canonical GitHub filenames used by the runtime.</p>
     </section>
+    <nav class="studio-mode-tabs" aria-label="Card Studio workflow">
+      <button id="studio-tab-normal" class="studio-mode-tab is-active" type="button" data-studio-mode="normal" aria-selected="true">
+        <b>NORMAL CARDS</b><small>Darby · static card production</small>
+      </button>
+      <button id="studio-tab-animated" class="studio-mode-tab" type="button" data-studio-mode="animated" aria-selected="false">
+        <b>ANIMATED CARDS</b><small>Advanced · GIF / WebP later</small>
+      </button>
+    </nav>
+    <div id="studio-mode-note" class="studio-mode-note"><b>NORMAL CARDS</b> Static artwork, positioning and exports only. Animated tools are completely hidden in this tab.</div>
     <section class="studio-layout">
       <div class="studio-controls">
         <section class="control-group">
@@ -64,6 +73,15 @@
           <label>Card
             <select id="card-select"></select>
           </label>
+          <label>Printing tier preview
+            <select id="printing-tier-preview">
+              <option value="normal" selected>Base · White</option>
+              <option value="emerald">Emerald · Green</option>
+              <option value="sapphire">Sapphire · Blue</option>
+              <option value="ruby">Ruby · Red</option>
+              <option value="amethyst">Amethyst · Purple</option>
+            </select>
+          </label>
           <div class="move-summary card-summary">
             <span>SELECTED CARD</span>
             <b id="card-summary-name">—</b>
@@ -72,8 +90,8 @@
           </div>
         </section>
 
-        <section class="control-group">
-          <div class="group-heading"><span>2</span><div><b>Artwork</b><small>Load static art, plus an optional animated version for any card.</small></div></div>
+        <section id="normal-artwork-group" class="control-group studio-normal-only">
+          <div class="group-heading"><span>2</span><div><b>Artwork</b><small>Load the static artwork for the normal card.</small></div></div>
           <div class="button-row">
             <button id="use-current-art">Use Current Game Art</button>
             <button id="clear-art">Clear Artwork</button>
@@ -81,6 +99,19 @@
           <label class="file-picker">Choose local artwork
             <input id="art-file" type="file" accept="image/*">
           </label>
+          <div class="art-or">OR</div>
+          <div class="url-loader">
+            <label>Direct image URL
+              <input id="art-url" type="url" inputmode="url" placeholder="https://…/image.jpg">
+            </label>
+            <button id="load-art-url">Load URL Artwork</button>
+            <p id="url-status" class="url-status"></p>
+          </div>
+        </section>
+
+        <section id="animated-workflow-group" class="control-group studio-animated-only" hidden>
+          <div class="group-heading"><span>A</span><div><b>Animated Artwork</b><small>Advanced animation workflow. Normal card production stays untouched.</small></div></div>
+          <div class="animated-workflow-intro"><b>ANIMATED CARDS ONLY</b><span>Select the same card above, then link or export its optional moving artwork layer. The normal static front remains the fallback.</span></div>
           <div id="animated-artwork-panel" class="animated-artwork-panel" hidden>
             <div class="animated-artwork-title"><span>ANIMATED CARD</span><b>Available for every card</b></div>
             <p>Optional animated artwork. Use GIF or animated WebP as the moving artwork layer. WWE Legacy clips animation into the normal artwork window only, while the standard card dimensions, frame, set logo, rarity and information plaque stay untouched. The static front/base plate remains the fallback.</p>
@@ -107,17 +138,9 @@
             <p id="animated-art-status" class="url-status"></p>
           </div>
           <div id="animated-ineligible-note" class="animated-ineligible-note" hidden>Choose a card to enable animated artwork.</div>
-          <div class="art-or">OR</div>
-          <div class="url-loader">
-            <label>Direct image URL
-              <input id="art-url" type="url" inputmode="url" placeholder="https://…/image.jpg">
-            </label>
-            <button id="load-art-url">Load URL Artwork</button>
-            <p id="url-status" class="url-status"></p>
-          </div>
         </section>
 
-        <section class="control-group">
+        <section id="position-group" class="control-group studio-normal-only">
           <div class="group-heading"><span>3</span><div><b>Position</b><small>Drag or pinch directly on the preview, or use the controls.</small></div></div>
           <label>Zoom <output id="art-zoom-value">100%</output><input id="art-zoom" type="range" min="45" max="320" value="100"></label>
           <div class="position-control">
@@ -139,7 +162,7 @@
           <button id="reset-layout">Reset Position</button>
         </section>
 
-        <section class="control-group">
+        <section id="export-group" class="control-group studio-normal-only">
           <div class="group-heading"><span>4</span><div><b>Export</b><small>Layered v1 keeps mutable card data out of the saved artwork. Legacy Flat remains available for existing workflow.</small></div></div>
           <label>Export target
             <select id="export-target"><option value="card">Card Front</option><option value="headshot">HUD Headshot · Superstar cards only</option></select>
@@ -189,10 +212,10 @@
       </aside>
     </section>
   </main>
-  <script src="../js/shared/card-face-renderer.js?v=1.1.48"></script>
-  <script src="../js/shared/card-face-readability-hotfix.js?v=1.1.48-r2"></script>
-  <script src="../js/data/superstar-nameplates.js?v=1.1.48"></script>
-  <script src="../js/tools/card-art-studio-data.js?v=1.1.48"></script>
-  <script src="../js/tools/card-art-studio.js?v=1.1.48"></script>
+  <script src="../js/shared/card-face-renderer.js?v=1.1.86"></script>
+  <script src="../js/shared/card-face-readability-hotfix.js?v=1.1.86-r2"></script>
+  <script src="../js/data/superstar-nameplates.js?v=1.1.86"></script>
+  <script src="../js/tools/card-art-studio-data.js?v=1.1.86"></script>
+  <script src="../js/tools/card-art-studio.js?v=1.1.86"></script>
 </body>
 </html>

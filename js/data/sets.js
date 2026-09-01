@@ -36,6 +36,7 @@ export const sets = {
     "lifecycleDefault": "exclusive",
     "developmentOnly": true,
     "season": 2,
+    "plannedSuperstarIds": ["bron-breakker","drew-mcintyre","sami-zayn","jacob-fatu","solo-sikoa","jade-cargill","nia-jax","jimmy-uso"],
     "lifecycleLabels": {
       "exclusive": "Season Exclusive"
     }
@@ -50,6 +51,7 @@ export const sets = {
     "lifecycleDefault": "future",
     "developmentOnly": true,
     "season": 2,
+    "plannedSuperstarIds": ["bron-breakker","drew-mcintyre","sami-zayn","jacob-fatu","solo-sikoa","jade-cargill","nia-jax","jimmy-uso"],
     "lifecycleLabels": {
       "future": "Future",
       "featured": "Featured",
@@ -90,8 +92,9 @@ export const sets = {
     "type": "event-subset",
     "displayName": "Money in the Bank — Series 1",
     "shortCode": "MITB1",
-    "lifecycleDefault": "future",
+     "lifecycleDefault": "future",
     "developmentOnly": true,
+    "plannedSuperstarIds": ["jey-uso","la-knight","alexa-bliss","finn-balor","giulia","carmelo-hayes","baron-corbin","rey-fenix"],
     "lifecycleLabels": {
       "future": "Future",
       "featured": "Featured",
@@ -108,7 +111,8 @@ export const sets = {
     "shortCode": "WC1",
     "lifecycleDefault": "future",
     "developmentOnly": true,
-    "lifecycleLabels": {
+        "plannedSuperstarIds": ["rey-mysterio","dominik-mysterio","penta","el-grande-americano","lola-vice","dragon-lee","hijo-del-vikingo","mr-iguana"],
+"lifecycleLabels": {
       "future": "Future",
       "featured": "Featured",
       "vaulted": "Vaulted",
@@ -317,5 +321,13 @@ export const sets = {
       "vaulted": "Vaulted",
       "returning": "Returning"
     }
+  }  ,"rewards-october-2026": {
+    "id":"rewards-october-2026","name":"Rewards","series":1,"type":"future-reward","displayName":"October Rewards — AJ Styles","shortCode":"RAJ26","lifecycleDefault":"future","developmentOnly":true,"plannedSuperstarIds":["aj-styles"],"lifecycleLabels":{"future":"October Chase"}
   }
+
 };
+// v1.1.71 active monthly Rewards collection starts with Trish Stratus only.
+delete sets["season-1-final-boss"];
+delete sets["parked-chyna"];
+delete sets["season-2-whos-next"];
+

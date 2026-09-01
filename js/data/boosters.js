@@ -1,11 +1,11 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=1.1.48";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.1.48";
-import { duplicateUniversePointsFor } from "./store.js?v=1.1.48";
-import { sets } from "./sets.js?v=1.1.48";
-import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.1.48";
-import { CARD_TIERS, TIER_PULL_WEIGHTS, rollCardTier } from "./variants.js?v=1.1.48";
-import { grantMerch, rollMerch } from "./merch.js?v=1.1.48";
-import { grantSuperstarVariant, rollSuperstarVariant } from "./superstar-variants.js?v=1.1.48";
+import { cardsForSet, collectionCards } from "./collection.js?v=1.1.86";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.1.86";
+import { duplicateUniversePointsFor } from "./store.js?v=1.1.86";
+import { sets } from "./sets.js?v=1.1.86";
+import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.1.86";
+import { CARD_TIERS, TIER_PULL_WEIGHTS, fixedPrintingTierFor, rollCardTier } from "./variants.js?v=1.1.86";
+import { grantMerch, rollMerch } from "./merch.js?v=1.1.86";
+import { grantSuperstarVariant, rollSuperstarVariant } from "./superstar-variants.js?v=1.1.86";
 
 export const BOOSTER_SIZE = 5;
 export const BOOSTER_GAMEPLAY_SLOTS = 4;
@@ -127,7 +127,7 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
     : null;
   const variantCard = rng() < SUPERSTAR_VARIANT_CHANCE ? rollSuperstarVariant(profile, setId, rng) : null;
 
-  const normalBase = base.filter(card => card.kind !== "superstar" && (card.kind !== "entrance" || underOwnershipCap(profile, card)));
+  const normalBase = base.filter(card => card.kind !== "superstar");
   const pack = [];
   let superstarAdded = false;
   let pendingSuperstarUnlockId = null;
@@ -150,14 +150,14 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
     } else {
       // Preserve the guaranteed-progress first ordinary slot when possible,
       // but roll rarity first and only then choose uniformly inside that bucket.
-      let slotPool = normalBase.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c));
+      let slotPool = [...normalBase];
       if (i === 0) {
         const progressPool = slotPool.filter(c => underOwnershipCap(profile, c));
         if (progressPool.length) slotPool = progressPool;
       }
       if (i === 0 && guaranteedMinRarity > 1) {
         const guaranteedProgress = slotPool.filter(c => (Number(c.rarity) || 1) >= guaranteedMinRarity);
-        const guaranteedAny = normalBase.filter(c => (c.kind !== "entrance" || underOwnershipCap(profile, c)) && (Number(c.rarity) || 1) >= guaranteedMinRarity);
+        const guaranteedAny = normalBase.filter(c => (Number(c.rarity) || 1) >= guaranteedMinRarity);
         slotPool = guaranteedProgress.length ? guaranteedProgress : guaranteedAny;
       }
       if (veryRarePulls >= maxVeryRarePulls) slotPool = slotPool.filter(c => Number(c.rarity) !== 4);
@@ -172,14 +172,20 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
       pack.push({ card, tier: null, isNewCard: added, isVariant: true, replacedNormal: false, superstarUnlocked: false, overflowCopies: 0, duplicateUnitValue: 0, universePointsValue: 0, universePointsCredited: true, ownershipBefore: added ? 0 : 1, ownershipCap: 1 });
       continue;
     }
+    const fixedPullTier = fixedPrintingTierFor(card);
     const availableTiers = CARD_TIERS.filter(tier => underTierOwnershipCap(profile, card, tier));
-    if (availableTiers.length && !availableTiers.includes(pullTier)) pullTier = rollCardTier(rng, availableTiers, TIER_PULL_WEIGHTS);
-    // v0.14.05 premium-print collation: no more than two colored printings in
-    // a five-card booster, and at most one of those may be Sapphire or Ruby.
-    // Any excess premium result resolves to Normal rather than rerolling into
-    // another colored tier.
+    if (fixedPullTier) {
+      // Superstar and Entrance cards are intrinsically Amethyst-only. Entrances
+      // remain eligible after ownership so duplicate pulls can convert to UP;
+      // Superstars have already been filtered to the unowned chase pool above.
+      pullTier = fixedPullTier;
+    } else if (availableTiers.length && !availableTiers.includes(pullTier)) {
+      pullTier = rollCardTier(rng, availableTiers, TIER_PULL_WEIGHTS);
+    }
+    // Premium-print collation applies only to variable-tier cards. Intrinsic
+    // Amethyst-only Superstar/Entrance cards may never be downgraded to Base.
     const highPremium = pullTier === "sapphire" || pullTier === "ruby" || pullTier === "amethyst";
-    if (pullTier !== "normal" && (nonNormalPrintings >= MAX_NON_NORMAL_PRINTINGS || (highPremium && sapphireOrRubyPrintings >= MAX_SAPPHIRE_OR_RUBY_PRINTINGS))) {
+    if (!fixedPullTier && pullTier !== "normal" && (nonNormalPrintings >= MAX_NON_NORMAL_PRINTINGS || (highPremium && sapphireOrRubyPrintings >= MAX_SAPPHIRE_OR_RUBY_PRINTINGS))) {
       pullTier = "normal";
     }
     if (pullTier !== "normal") {

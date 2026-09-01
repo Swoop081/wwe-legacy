@@ -1,9 +1,9 @@
-import { superstars } from "./superstars.js?v=1.1.48";
-import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.66";
-import { sets } from "./sets.js?v=1.1.48";
-import { allGameplayCards } from "./content.js?v=1.1.48";
-import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=1.1.48";
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.48";
+import { superstars } from "./superstars.js?v=1.1.86";
+import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.86";
+import { sets } from "./sets.js?v=1.1.86";
+import { allGameplayCards } from "./content.js?v=1.1.86";
+import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=1.1.86";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.86";
 
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
 const orderedStars = Object.values(superstars);
@@ -14,10 +14,10 @@ const starCards = orderedStars.map(s => ({
   superstarId: s.id,
   subtitle: s.nickname,
   rarity: 4,
+  fixedPrintingTier: "amethyst",
   setId: s.setId,
   rulesText: s.ability?.text ?? "",
   ability: s.ability ?? null,
-  ...(rewardPrintingTierForSet(s.setId) ? { fixedPrintingTier: rewardPrintingTierForSet(s.setId) } : {}),
   era: s.era ?? null,
 }));
 

@@ -1,0 +1,39 @@
+{
+  "version": "1.1.85",
+  "cards": 1299,
+  "collectorCards": 962,
+  "merch": 239,
+  "variants": 98,
+  "superstars": 98,
+  "sets": 14,
+  "issues": [],
+  "warnings": [
+    {
+      "type": "shared-special-role",
+      "id": "pump-kick",
+      "name": "Pump Kick",
+      "role": "Trademark"
+    },
+    {
+      "type": "shared-special-role",
+      "id": "gorilla-press-slam",
+      "name": "Gorilla Press Slam",
+      "role": "Trademark"
+    },
+    {
+      "type": "shared-special-role",
+      "id": "spear",
+      "name": "Spear",
+      "role": "Finisher"
+    }
+  ],
+  "summary": {
+    "issueCount": 0,
+    "warningCount": 3,
+    "missingNames": 0,
+    "pathCollisions": 0,
+    "fixedTierErrors": 0,
+    "brokenAttribution": 0,
+    "logoWarnings": 0
+  }
+}

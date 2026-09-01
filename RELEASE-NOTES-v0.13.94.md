@@ -903,3 +903,251 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Card Art Studio exposes Animated Card controls for every selected card.
 - No gameplay, economy, deck, roster, Merch, Live Event, card-value, booster, progression or save-schema changes.
 - Certification: focused animation/URL assertions **17/17 passed**; dedicated v1.1.23 assertions **4/4 passed**; full isolated suite **1,071 / 905 passed / 72 inherited failures / 94 skipped** with the exact same inherited failure-name set as v1.1.21; rebuild **95 Superstars / 95 decks / 835 gameplay cards / 0 issues**; collector IDs **930/930 / 0 issues**; flow **95 / 0 issues**.
+
+
+## v1.1.67 — NXT + Ruthless Aggression Superstar Ability Source Audit — 1 September 2026
+
+- Audits all 16 Superstar identities across NXT — Series 1 and Ruthless Aggression — Series 1.
+- Confirms John Cena and Randy Orton already had fully authored bespoke Superstar abilities.
+- Replaces bulk-template ability copy in the core Superstar source for Kendal Grey, Tony D’Angelo, Jaida Parker, Kelani Jordan, Mason Rook, Tatum Paxley, Lexis King, Zilla Fatu, Batista, JBL, Eddie Guerrero, Edge, Jeff Hardy and Rob Van Dam with the already approved v1.1.66 individual ability text/effects.
+- Moves these 14 identities into the core `superstars.js` source of truth instead of relying only on the late runtime override, keeping direct Superstar-data consumers safe from generic fallback copy.
+- Adds a regression test requiring all 16 NXT/RA Superstar abilities to have authored text, supported triggers and distinct trigger payloads.
+- No gameplay rebalance: the live effects remain the same as v1.1.66. No deck-page composition, artwork, economy, progression, save-schema or booster-odds changes.
+
+## v1.1.68 — Authentic Merch Catalogue Foundation — 1 September 2026
+
+- Replaces the universal five-item Superstar Merch template (Funko / figure / replica gear / wristbands / poster) with an identity-led catalogue.
+- Every Superstar now has the locked minimum of one Superstar T-shirt and one Superstar action figure; lower-profile/NXT talent can legitimately stop at this two-card floor.
+- Adds curated deeper pools only where the Superstar identity supports them, including John Cena wristbands and Hustle Loyalty Respect towel, Stone Cold 3:16 / Don't Trust Anybody shirts, Funko, Smoking Skull Championship and beer-can collectible, Bret Hart sunglasses, Trish Stratus 8x10 entrance photo, Rey Mysterio replica mask and other signature items.
+- Replaces the 40-item generic filler pool with eight WWE-branded merchandise cards grounded in WWE Shop categories/products: WWE logo shirt, stainless steel water bottle, toy title belts, stainless steel mug, beach towel, championship fanny pack and event poster.
+- Keeps generic Merch usable by any eligible Superstar while Superstar Merch remains identity-locked.
+- Regenerates Card Art Studio data so Darby's production list now reflects the new definitive Merch catalogue and filenames.
+- Merch catalogue is now 235 cards total: 8 generic WWE items plus 227 Superstar-specific items across 95 Superstar identities.
+- Adds regression coverage requiring every Superstar to retain a T-shirt and action figure and protecting the signature-merch exceptions.
+- Includes the v1.1.67 NXT + Ruthless Aggression Superstar ability source cleanup.
+- Rebuild certification: 95 Superstars / 95 decks / 841 gameplay cards / 0 issues.
+
+
+## v1.1.69 — Full Move Identity + Five-Tier Progression — 1 September 2026
+
+- Rebuilds the 614-Move gameplay library around a broad move hierarchy instead of repeated rarity stat templates.
+- Exact mechanical Move clones are reduced to zero after the authored identity pass: cost/damage shells are differentiated while preserving each card's core effect, Method, requirements, Counter state and wrestling identity.
+- Restores the full low-to-high numerical vocabulary: authored Sapphire Move damage now intentionally includes 1, 2, 3, 4, 5 and onward rather than clustering almost entirely around 4/7/8-style templates.
+- Finishers are spread across a real cost/damage hierarchy rather than receiving audit-driven +1 Damage patches; later competitive deck balance should strengthen weak decks through better Common/Uncommon recommendations instead of inflating Finishers.
+- Replaces the universal Sapphire ± Damage tier rule with per-card growth profiles: Damage, Efficiency, Hybrid and Effect.
+- All 599 variable-printing Moves have five distinct playable Base / Emerald / Sapphire / Ruby / Amethyst versions.
+- Effect-growth cards can increase existing numerical effects at high tier (for example Draw 1 becoming Draw 2) without rewriting the underlying effect identity.
+- Submissions scale through cost and submission pressure rather than fake printed Damage.
+- Defensive Counter-only Moves scale through cost efficiency and then high-tier Counter draw rewards so all five tiers remain mechanically distinct.
+- Fixed-tier Reward cards remain fixed by design.
+- This is an identity/collection pass, not the final competitive balance pass; deck simulation and tuning follow after the new card foundation is locked.
+
+
+## v1.1.70 — Complete Five-Tier Gameplay Library (1 September 2026)
+
+- Extends the v1.1.69 Base → Emerald → Sapphire → Ruby → Amethyst identity system from Moves to the complete gameplay-card library.
+- 120 Actions now retain their authored trigger/identity while numeric payloads, costs, damage or tier utility improve across printings.
+- 96 Entrances now have five meaningful pre-match packages; higher tiers strengthen Adrenaline/Momentum without changing the Superstar entrance identity.
+- 7 Managers now have five tier states; authored Manager effects scale where numeric, while bespoke legacy Manager logic receives tier utility without being rewritten.
+- 4 Momentum cards now scale within their own Method from Base through Amethyst.
+- The v1.1.70 regression audit requires five distinct printings for every variable Action, Entrance, Manager and Momentum card and checks adjacent printings across the entire variable gameplay library.
+- Preserves v1.1.69's 614-Move identity hierarchy, zero exact Move mechanical clones and the correction away from audit-driven Finisher damage inflation.
+- Competitive deck balance remains intentionally deferred until after the card-identity foundation is complete.
+
+
+## v1.1.71 — Rewards Vault Reset (1 September 2026)
+
+- Locks WWE Legacy Rewards cards to one definitive **Amethyst-only** premium printing.
+- Resets the active monthly Rewards Superstar collection to **Trish Stratus — Stratusfaction Guaranteed** only.
+- Retires the obsolete pre-launch Reward identities for **Final Boss Rock**, **Chyna**, and **Goldberg**, including their reward-only gameplay-card packages and reward sets.
+- Confirms that **Attitude Era Rock** remains untouched as a separate Attitude Era collectible identity.
+- Confirms that **John Cena** remains the Ruthless Aggression Series 1 identity; the old Last Time Is Now reward identity is no longer part of the active reward pool.
+- Establishes an additive monthly Rewards registry: future monthly premium Reward Superstars are added alongside Trish, and remain Amethyst-only.
+- Active rebuild after cleanup: 92 Superstars, 92 decks, 823 gameplay cards, 0 orphans, 0 issues.
+
+
+## v1.1.72 — Trish Merch Booster Pool (1 September 2026)
+
+- Keeps the Season 1 50-tier Trish Stratus premium reward road strictly focused on Amethyst Reward gameplay cards; no Merch is granted from the 50 tiers.
+- Confirms every booster contains exactly one Merch card.
+- Adds all Trish Stratus Merch cards to the normal booster Merch chase pool across released booster sets, independent of Trish's Amethyst-only Reward set.
+- Reward gameplay cards remain excluded from boosters; this exception applies only to Reward Superstar Merch.
+- Establishes the forward rule that active monthly Reward Superstar Merch can join the normal booster Merch pool while the Superstar and gameplay package remain premium Rewards.
+
+
+## v1.1.73 — Clean Card Studio Reward Catalogue (1 September 2026)
+
+- Regenerates Card Studio from the cleaned v1.1.72 active catalogue so Darby's production workspace contains no retired Reward identities.
+- Removes Final Boss Rock, Chyna and Goldberg cards/variants/sets from Card Studio.
+- Keeps Trish Stratus as the sole active premium Rewards Superstar and retains her booster-eligible Merch cards.
+- Card Studio now contains 1,234 production entries: 915 collector cards, 227 Merch cards and 92 Superstar variants across 92 active Superstars and 13 active sets.
+
+
+## v1.1.74 — Future Set Roadmap + Full Balance Roster (1 September 2026)
+
+- Makes the pre-release roadmap a first-class internal balance/Card Studio catalogue while keeping future sets player-hidden until their event release gates.
+- Worlds Collide — Series 1 is locked at 8 Superstars: Rey Mysterio, Dominik Mysterio, Penta, El Grande Americano, Lola Vice, Dragon Lee, Hijo del Vikingo and Mr. Iguana.
+- Money in the Bank — Series 1 is locked at 8 Superstars: Jey Uso, LA Knight, Alexa Bliss, Finn Bálor, Giulia, Carmelo Hayes, Baron Corbin and Rey Fenix.
+- Survivor Series — Series 1 is locked at 8 Superstars: Bron Breakker, Drew McIntyre, Sami Zayn, Jacob Fatu, Solo Sikoa, Jade Cargill, Nia Jax and Jimmy Uso. Randy Orton remains in Ruthless Aggression.
+- Fully authors Giulia, Carmelo Hayes, Baron Corbin, Rey Fenix and Jimmy Uso with Superstar identities, abilities, Entrances, Actions, three Trademarks, one Finisher and 60-page recommended decks.
+- All 24 future event-set Superstars now participate in internal deck balancing before public release.
+- Release roadmap: Worlds Collide 26 Sep 2026; Money in the Bank 10 Oct 2026; Survivor Series: WarGames 28 Nov 2026.
+- Regenerates Card Studio so Darby can produce artwork for the complete future roadmap ahead of release.
+
+
+## v1.1.75 — Recommended Deck Realism Audit (1 September 2026)
+
+- Audits all 97 active/internal recommended Superstar decks before the numerical balance pass.
+- Keeps legitimate shared real-life moves shared rather than creating fake duplicate Superstar-only identities.
+- Adds Jade Cargill's Reverse Alabama Slam and Eye of the Storm to Survivor Series and moves them into her recommended deck.
+- Adds Logan Paul's Prime Splash to RAW Series 1 and moves it into his recommended deck.
+- Reweights Tiffany Stratton toward Alabama Slam and Falcon Arrow while retaining Swanton Bomb and Prettiest Moonsault Ever.
+- Corrects Chelsea Green's Trademark display name from “I’m Prettier” to current WWE naming “Un-Pretty-Her” while preserving the canonical card ID/number.
+- Adds `WWE-Legacy-v1.1.75-Recommended-Deck-Authenticity-Audit.md` as the permanent pre-balance realism audit.
+- Future move-card additions must pass wrestler-usage authenticity before entering recommended decks or boosters.
+- Cleans Charlotte Flair signature metadata so the dedicated Charlotte Spear is the single Spear identity expected by her recommendation, and retains Flipping Lariat as RAW booster-only depth rather than recommendation filler.
+
+## v1.1.76 — Five-Tier Physical Card Frame Redesign — 1 September 2026
+
+- Replaces glow-first printing-tier identification with a substantial physical outer frame while preserving every approved card-content overlay and layout.
+- Locked printing identities: Base = white, Emerald = green, Sapphire = blue, Ruby = red, Amethyst = purple.
+- The new frame scales with card width and remains visible on fronts, rules backs, full-art Superstar cards, finished fronts and fallback/rules cards.
+- Existing digital rarity glow/surface sweeps are deliberately reduced to supporting finishes so the frame is the primary rarity read at pack-opening and collection scale.
+- Card Studio gains a five-tier Printing Tier Preview control using the same physical-frame palette.
+- Layered Base Plate exports remain tier-neutral so one authored artwork file can serve all five printings; Finished Front exports can include the selected physical printing frame.
+- Rewards remain fixed Amethyst and therefore use the purple physical printing treatment.
+- No gameplay balance, card text, recommended-deck composition, set identity, plaque layout, Method dots, artwork crop or collector numbering changed in this release.
+
+## v1.1.77 — Five-Tier Collection Ownership Cap
+- Locks ordinary collectible ownership to **5 copies per printing tier**: 5 Base + 5 Emerald + 5 Sapphire + 5 Ruby + 5 Amethyst = **25 maximum stored copies per card identity**.
+- A sixth copy of an already-maxed printing tier converts to Universe Points even when other printing tiers are not yet full.
+- **Superstar and Entrance cards are unique collection exceptions**: only one printing of that identity may be stored across all tiers; every later copy converts to Universe Points.
+- Deck-construction limits remain separate from collection ownership limits.
+- Duplicate UP value continues to follow intrinsic rarity rather than printing tier.
+
+
+## v1.1.78 — Amethyst-Only Superstar + Entrance Enforcement
+- Locks every Superstar card and every Entrance card to **Amethyst only** at the catalogue/printing source of truth; Base, Emerald, Sapphire and Ruby versions do not exist for these card types.
+- Superstar booster chase now selects exclusively from **unowned Superstars**, so a duplicate Superstar can never be pulled and no Superstar-to-UP conversion event occurs.
+- Entrances remain in the normal booster candidate pool after ownership. A duplicate Entrance can therefore be pulled, but because Entrance ownership is unique the extra copy immediately overflows to its normal Universe Points conversion value.
+- Ordinary collectible cards retain the v1.1.77 limit of **5 copies per tier / 25 total**.
+- Card Studio now stamps Superstar/Entrance entries as fixed Amethyst and disables the printing-tier selector for those cards, preventing production of nonexistent lower-tier versions.
+- Existing profile normalization collapses any historical Superstar/Entrance printing into the single Amethyst ownership slot.
+
+## v1.1.79 — Full 97-Superstar Balance Laboratory
+- Adds `tools/full-roster-balance-lab.mjs`, a deterministic full-roster matchup and deck-health laboratory.
+- Audits all 97 recommended 60-page decks before any v1.2 balance changes.
+- Baseline screen covers all 4,656 unique Superstar pairings with alternating first-player position: 18,624 simulated matches, 0 stalls, 25.59 average turns.
+- Finish mix: 16,915 pins / 1,709 submissions.
+- Writes permanent machine-readable and human-readable reports under `reports/`.
+- First high-side candidates: Jade Cargill, Baron Corbin, Brock Lesnar, Roman Reigns and Penta.
+- First emergency low-side finding: Giulia at 9.38%, treated as a deck-construction/Method-access diagnosis before any card-stat buff.
+- This is deliberately an evidence-only build: no Cost, Damage, HP, ability or deck balance values were changed by the laboratory release.
+
+
+## v1.1.80 — AJ Styles + Active 81 Balance Laboratory (2026-09-01)
+- Adds AJ Styles as the locked October Rewards chase, Amethyst-only and internal-balance active.
+- Styles Clash is the Finisher. Phenomenal Forearm, Calf Crusher, Ushigoroshi and Pele Kick are Trademarks.
+- Adds The Face That Runs the Place and The House That AJ Styles Built Actions plus The Phenomenal One Entrance.
+- Adds a 60-page AJ Styles recommended deck built around mixed-Method Technical/Agility offense.
+- Narrows the active balance certification roster to 81: 72 released Superstars, 8 Worlds Collide, and AJ Styles. Later MITB/Survivor content remains authored but is deferred from current tuning.
+
+## v1.1.81 — Active 81 Deep Balance Refinement (2026-09-01)
+- Adds `CURRENT-DEVELOPMENT-STATUS.md` as the permanent in-build development handoff file and locks it into the normal release workflow.
+- Adds a resumable active-roster shard runner so deep simulations can complete reliably across execution-time limits.
+- Final certification matrix: **81 Superstars / 3,240 unique pairings / 25 games per pairing / 81,000 matches / 0 stalls / 25.68 average turns**.
+- Final finish mix: **72,772 pins / 8,228 submissions**.
+- Permanent certification reports: `balance-reports/v1.1.81-active-81-deep-balance-lab.md` and `.json`.
+- **AJ Styles:** Phenomenal conditional draw uses 2→1; The Face That Runs the Place tutor discount 2→1; HP 63→62. Final deep result **59.45%**, down from 66.75%.
+- **Roman Reigns:** HP 67→64; authentic move package and Head of the Table ability unchanged. Final deep result **58.20%**, down from 63.10%.
+- **Yokozuna:** Super Heavyweight ground-resist uses 2→1; HP 71→70. Final deep result **57.95%**, down from 60.50%.
+- **Lola Vice:** Counter Striker now draws 1 and gives +1 Adrenaline after a successful Counter, with the next Strike at -2 Cost / +2 Damage; HP 61→62. Final deep result **43.35%**, up from 32.35%.
+- **Owen Hart:** King of Harts sequencing now also grants +1 Adrenaline; Owen’s Sharpshooter pressure 7→9. Final deep result **42.90%**, up from 38.45%.
+- **Chad Gable:** first two Strength→Technical Olympic Pedigree payoffs also gain +1 Adrenaline; Gable’s Ankle Lock pressure 6→8. Final deep result **41.80%**, up from 39.75%.
+- **Penta:** retains the earlier v1.1.81 targeted trim: Zero Fear, Zero Mercy bonus +2→+1; Fearless Assault Cost discount 2→1. Final deep result **56.65%**.
+- **Rey Mysterio:** The Ultimate Underdog now triggers on the first two successful kickouts, each drawing 1 and gaining +1 Adrenaline. Final deep result **45.20%**.
+- **Jacy Jayne realism/balance correction:** Rolling Encore is the Finisher; Running Knee Smash is a Strike Trademark rather than an incorrect submission Finisher; inherited Piper wording removed; the obsolete impossible Agility draw rider is removed from the Fatal Influence Action; her Superstar ability uses two 4+ Damage Strike triggers that force a random opponent ditch. Final deep result **50.15%**.
+- Bret Hart settles at **57.45%** and is no longer an urgent high-side target.
+- No global shared-card nerf or global submission-rule rewrite was introduced. The pass remains targeted and identity-preserving.
+
+## v1.1.82 — Watchlist + AJ October + Darby Card Studio (2026-09-01)
+- **Card Studio simplified for Darby:** adds two top-level workflow tabs. `NORMAL CARDS` is the default and completely hides GIF/WebP animation tools; `ANIMATED CARDS` isolates the advanced animation workflow for later use without changing the selected card.
+- Normal Card production retains the full static artwork, positioning, printing-tier preview, base-plate/finished-front export and canonical filename workflow.
+- Animated Card production retains linked GIF / animated WebP source, preview, install-path and animated export tools, but those controls no longer appear in Darby’s normal workflow.
+- Adds `tools/v1182-watchlist-matchup-spread.mjs` plus permanent JSON/Markdown matchup-spread reports so balance decisions can distinguish broad dominance/weakness from narrow matchup effects.
+- Watchlist audit covered **25,725 watched matches with 0 stalls** at 25 games per watched pairing.
+- **El Grande Americano:** Masked Opportunist 2 uses→1. Final deep result **54.70%**.
+- **Brock Lesnar:** The Beast Incarnate one-use big-hit reduction 5→2. Final deep result **57.60%**.
+- **Montez Ford:** HP 60→62; Take Flight discount 1→2 and first two triggers draw 1. Final deep result **52.25%**.
+- **Kendal Grey identity correction:** Ankle Lock is now a grounded Submission Trademark; Olympic Slam is now a damage Grapple Finisher rather than the previous inverted move-type data. Final deep result **54.70%**.
+- **Rob Van Dam identity correction:** Five-Star Frog Splash is now his Finisher; Split-Legged Moonsault is a Trademark. Final deep result **49.35%**.
+- **AJ October readiness:** explicit `rewards-october-2026` gate at **2026-10-01T00:00:00Z**; AJ’s normal Superstar Merch enters booster Merch chase from that gate and not before.
+- **AJ printed/runtime parity:** Phenomenal Forearm now executes its printed +2 Damage when AJ connected with a different Method earlier in the Control sequence; The House That AJ Styles Built now actually draws 1 and arms its printed -1 Cost different-Method follow-up.
+- Final full active-81 certification: **81 Superstars / 3,240 pairings / 25 games per pairing / 81,000 matches / 0 stalls / 25.62 average turns**.
+- Final finish mix: **72,827 pins / 8,173 submissions**.
+- AJ Styles finishes at **59.95%** after runtime-parity activation and remains a mild high-side watch item rather than an emergency outlier.
+- Remaining clearest low-side watches are Kurt Angle **39.15%** and Tiffany Stratton **39.75%**; no automatic follow-up buff is applied in this build.
+
+## v1.1.83 — NXT + Ruthless Aggression Move Identity Audit (2026-09-01)
+- Triggered by the Kendal Grey data inversion found during v1.1.82; audits all Superstar-specific Moves for all 8 NXT — Series 1 and all 8 Ruthless Aggression — Series 1 Superstars.
+- Adds permanent `audit-reports/v1.1.83-nxt-ruthless-move-identity-audit.md` documenting every correction and every deliberately provisional item.
+- **Kendal Grey:** current WWE-finisher identity corrected to **Shades of Grey** while preserving existing canonical card ID; Ankle Lock remains a grounded Technical Submission Trademark.
+- **Tony D’Angelo:** Finisher renamed to **Dead to Rights**; Fisherman Buster corrected from submission data to Technical grapple; Crowbar search retargeted.
+- **Jaida Parker:** Finisher renamed to **Deja Vu**; Running Hip Attack corrected to Strike/Strike; Samoan Drop search retargeted; fake inherited `Jaida Parker Driver` search removed.
+- **Kelani Jordan:** **One of a Kind Split-Legged Moonsault** becomes the aerial Finisher; 450 Splash becomes an Agility aerial Trademark; Springboard Cutter posture/type corrected; recommended deck reweighted.
+- **Mason Rook:** package audited but Finisher remains provisional because current WWE results show multiple power moves and explicitly show a sit-out powerbomb failing to finish; no speculative rename introduced.
+- **Tatum Paxley:** Cemetery Drive verified and retained as Finisher.
+- **Lexis King:** **Coronation DDT** becomes the Finisher; King’s Landing becomes a Technical grapple Trademark; recommended deck reweighted.
+- **Zilla Fatu:** Island Driver corrected from diving-aerial/grounded-only to grapple/no-Method Finisher; fake inherited Running Leg Drop search removed. Finisher name remains provisional pending clearer WWE match-ending evidence.
+- **Randy Orton:** RKO and Punt Kick Finishers now correctly have no Method under the global Finisher rule.
+- **JBL:** Clothesline from Hell corrected from grapple to strike.
+- **Eddie Guerrero:** Frog Splash corrected from Submission Finisher to aerial Finisher; Lasso from El Paso corrected from grapple to grounded Technical Submission Trademark; Jericho clone wording removed; Hurricanrana posture corrected.
+- **Edge:** Edge-O-Matic and Impaler DDT corrected to grapples; Edgecution no longer incorrectly grounded-only.
+- **Jeff Hardy:** Swanton Bomb corrected to aerial Finisher; Whisper in the Wind corrected to Agility/aerial.
+- **Rob Van Dam:** Five-Star Frog Splash remains the aerial Finisher; Split-Legged Moonsault is an Agility aerial Trademark; Rolling Thunder becomes Agility/aerial; Van Daminator becomes Strike/strike; fake `Rob Van Dam Driver` search removed. The Whole F’n Show ability uses 3→2 after the authentic move hierarchy initially pushed RVD to 61.35%.
+- Cross-set integrity audit finds no remaining audited Finisher with a Method requirement, no foreign-Superstar clone-name residue, and no broken search target among the 16 audited Superstar packages.
+- Final active-81 certification after corrections: **81 Superstars / 3,240 pairings / 25 games per pairing / 81,000 matches / 0 stalls / 25.53 average turns**.
+- Final finish mix: **73,166 pins / 7,834 submissions**.
+- Audited final deep results include RVD **58.45%**, Lexis King **58.85%**, JBL **58.65%**, Randy Orton **58.60%**, Kendal Grey **53.85%**, Tony D’Angelo **54.40%**, Jaida Parker **54.60%**, Kelani Jordan **53.05%**, Tatum Paxley **51.55%**, Eddie Guerrero **49.30%**, Jeff Hardy **47.30%**, Batista **46.45%**.
+
+## v1.1.84 — Remaining Released Set Move Identity Audit (2026-09-01)
+- Audits all **56 Superstars** across RAW, SmackDown, Evolution, SummerSlam, Golden Era, New Generation and Attitude Era after the NXT/Ruthless Aggression v1.1.83 pass.
+- Checks Finisher/Trademark role, physical move type, gameplay Method, submission flags, grounded/standing requirements, named search targets, cloned Superstar wording and recommended-deck reachability.
+- Locks the key hard corrections:
+  - IYO SKY Bullet Train Attack → Strike move type.
+  - Raquel Rodriguez Big Boot → Strike move type.
+  - Hulk Hogan Big Boot → Strike; Atomic Leg Drop → Aerial.
+  - Ultimate Warrior Shoulder Block → Strike.
+  - Bret Hart Second-Rope Elbow Drop → Aerial/Agility.
+  - Razor Ramon Bulldog cloned wording corrected.
+  - Tiffany Stratton PME Finisher Method cleared.
+  - Chelsea Green: **Un-Pretty-Her is the Finisher**, Green With Envy the Trademark setup; balance compensation Cost 10 / tutor discount 1.
+  - Damian Priest Hit the Lights Finisher Method cleared.
+  - Shinsuke Nakamura Inverted Exploder and Sliding German Suplex corrected to physical Grapples while retaining their Strike/Agility gameplay Method lanes.
+  - Blake Monroe Kick → physical Strike; Top-Rope Double Stomp → Aerial.
+  - Trick Williams Cyclone Boot, Trick Knee and Trick Shot → physical Strikes; Trick Shot no longer grounded-only.
+  - Jacy Jayne Cannonball Senton → physical Aerial while retaining Strike Method.
+- Move type and Method are now explicitly treated as separate concepts so authenticity fixes do not destroy deck Momentum access.
+- All Finishers in the seven-set audit scope now have no Method requirement.
+- Shared `Spear` Finisher also has its stale Strength Method removed; it is used only by banked future decks, so active-81 certification is unaffected.
+- No real broken named search target remains in the seven-set scope.
+- Final active-81 certification: **81,000 matches / 0 stalls / 25.53 average turns / 73,244 pins / 7,756 submissions**.
+- Chelsea Green finishes at **55.00%** after the authentic finisher hierarchy + balance compensation.
+- Tiffany Stratton remains the clearest low-side watch at **38.65%**; no blind buff is applied here.
+
+## v1.1.85 — Card Studio Production Integrity + Trish Reward Positioning (2026-09-01)
+- Full Card Studio production-integrity audit across **1,299 entries**.
+- Verifies names, set IDs/logo coverage, Superstar attribution, fixed printing tiers, canonical finished/base-plate paths, export-path collisions and Finisher Method legality.
+- Final Card Studio audit: **0 hard issues**, **0 missing names**, **0 path collisions**, **0 fixed-tier errors**, **0 attribution errors**, **0 set-logo coverage warnings**.
+- Three intentional shared-role warnings remain: Pump Kick and Gorilla Press Slam as shared Trademarks, and shared Spear as a Finisher.
+- October Rewards now explicitly uses the WWE Legacy Rewards logo in Card Studio.
+- Eight banked future Finishers exposed by the Studio audit have stale Method values removed.
+- Trish Stratus is promoted into the balance certification population; active field becomes **82 Superstars**.
+- Trish initial benchmark was **48.35%**, too ordinary for the first premium Rewards chase.
+- Trish physical identities corrected: Chick Kick = physical Strike, Stratusphere/Air Canada = physical Aerial, Stratusfaction remains Finisher.
+- Gameplay Method architecture is intentionally retained separately from physical move type.
+- Trish starter-template ability copy removed. Final Reward ability: first different-Method connect each match draws 1 and gains +1 Adrenaline.
+- Trish HP **63→64**.
+- Final active-82 certification: **3,321 pairings / 25 games each / 83,025 matches / 0 stalls / 25.52 average turns**.
+- Finish mix: **75,184 pins / 7,841 submissions**.
+- Trish final certified result: **57.88%**, deliberately inside the premium ~58–60% target band without becoming an auto-win.

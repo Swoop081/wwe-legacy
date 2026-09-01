@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.48';
-import { autoCounterEligibility } from '../js/engine/rules.js?v=1.1.48';
-import { applyCardTier } from '../js/data/variants.js?v=1.1.48';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.48';
-import { superstars } from '../js/data/superstars.js?v=1.1.48';
-import { decks } from '../js/data/decks.js?v=1.1.48';
-import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=1.1.48';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.86';
+import { autoCounterEligibility } from '../js/engine/rules.js?v=1.1.86';
+import { applyCardTier } from '../js/data/variants.js?v=1.1.86';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.86';
+import { superstars } from '../js/data/superstars.js?v=1.1.86';
+import { decks } from '../js/data/decks.js?v=1.1.86';
+import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=1.1.86';
 
 const stars=Object.values(superstars);
 const filler=i=>({id:`v10002-fill-${i}`,name:`Filler ${i}`,kind:'momentum',method:'strength',amount:1,tier:'normal'});

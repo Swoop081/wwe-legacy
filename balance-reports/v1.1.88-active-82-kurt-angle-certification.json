@@ -1,0 +1,750 @@
+{
+  "version": "1.1.88",
+  "matches": 83025,
+  "stalls": 0,
+  "averageTurns": 25.53,
+  "finishes": {
+    "pin": 75131,
+    "submission": 7894
+  },
+  "stats": {
+    "iyo-sky": {
+      "wins": 919,
+      "losses": 1106,
+      "draws": 0,
+      "turns": 47545,
+      "matches": 2025,
+      "p1Wins": 464,
+      "p1Matches": 1053
+    },
+    "mankind": {
+      "wins": 969,
+      "losses": 1056,
+      "draws": 0,
+      "turns": 61345,
+      "matches": 2025,
+      "p1Wins": 501,
+      "p1Matches": 1052
+    },
+    "the-rock-attitude": {
+      "wins": 1079,
+      "losses": 946,
+      "draws": 0,
+      "turns": 50699,
+      "matches": 2025,
+      "p1Wins": 540,
+      "p1Matches": 1051
+    },
+    "john-cena": {
+      "wins": 1114,
+      "losses": 911,
+      "draws": 0,
+      "turns": 49233,
+      "matches": 2025,
+      "p1Wins": 555,
+      "p1Matches": 1050
+    },
+    "hulk-hogan": {
+      "wins": 1030,
+      "losses": 995,
+      "draws": 0,
+      "turns": 53949,
+      "matches": 2025,
+      "p1Wins": 536,
+      "p1Matches": 1049
+    },
+    "bayley": {
+      "wins": 1033,
+      "losses": 992,
+      "draws": 0,
+      "turns": 49205,
+      "matches": 2025,
+      "p1Wins": 516,
+      "p1Matches": 1048
+    },
+    "cm-punk": {
+      "wins": 1039,
+      "losses": 986,
+      "draws": 0,
+      "turns": 52841,
+      "matches": 2025,
+      "p1Wins": 552,
+      "p1Matches": 1047
+    },
+    "paige": {
+      "wins": 979,
+      "losses": 1046,
+      "draws": 0,
+      "turns": 52443,
+      "matches": 2025,
+      "p1Wins": 473,
+      "p1Matches": 1046
+    },
+    "seth-rollins": {
+      "wins": 976,
+      "losses": 1049,
+      "draws": 0,
+      "turns": 48914,
+      "matches": 2025,
+      "p1Wins": 492,
+      "p1Matches": 1045
+    },
+    "andre-the-giant": {
+      "wins": 1138,
+      "losses": 887,
+      "draws": 0,
+      "turns": 54554,
+      "matches": 2025,
+      "p1Wins": 582,
+      "p1Matches": 1044
+    },
+    "stephanie-vaquer": {
+      "wins": 934,
+      "losses": 1091,
+      "draws": 0,
+      "turns": 50024,
+      "matches": 2025,
+      "p1Wins": 468,
+      "p1Matches": 1043
+    },
+    "randy-savage": {
+      "wins": 1127,
+      "losses": 898,
+      "draws": 0,
+      "turns": 53559,
+      "matches": 2025,
+      "p1Wins": 565,
+      "p1Matches": 1042
+    },
+    "roman-reigns": {
+      "wins": 1147,
+      "losses": 878,
+      "draws": 0,
+      "turns": 48288,
+      "matches": 2025,
+      "p1Wins": 573,
+      "p1Matches": 1041
+    },
+    "charlotte-flair": {
+      "wins": 895,
+      "losses": 1130,
+      "draws": 0,
+      "turns": 52714,
+      "matches": 2025,
+      "p1Wins": 442,
+      "p1Matches": 1040
+    },
+    "kevin-owens": {
+      "wins": 1072,
+      "losses": 953,
+      "draws": 0,
+      "turns": 54212,
+      "matches": 2025,
+      "p1Wins": 521,
+      "p1Matches": 1039
+    },
+    "kane": {
+      "wins": 1010,
+      "losses": 1015,
+      "draws": 0,
+      "turns": 53711,
+      "matches": 2025,
+      "p1Wins": 494,
+      "p1Matches": 1038
+    },
+    "the-undertaker": {
+      "wins": 1137,
+      "losses": 888,
+      "draws": 0,
+      "turns": 54199,
+      "matches": 2025,
+      "p1Wins": 565,
+      "p1Matches": 1037
+    },
+    "ultimate-warrior": {
+      "wins": 1043,
+      "losses": 982,
+      "draws": 0,
+      "turns": 53380,
+      "matches": 2025,
+      "p1Wins": 533,
+      "p1Matches": 1036
+    },
+    "rhea-ripley": {
+      "wins": 908,
+      "losses": 1117,
+      "draws": 0,
+      "turns": 55444,
+      "matches": 2025,
+      "p1Wins": 455,
+      "p1Matches": 1035
+    },
+    "cody-rhodes": {
+      "wins": 1049,
+      "losses": 976,
+      "draws": 0,
+      "turns": 50240,
+      "matches": 2025,
+      "p1Wins": 552,
+      "p1Matches": 1034
+    },
+    "oba-femi": {
+      "wins": 1089,
+      "losses": 936,
+      "draws": 0,
+      "turns": 55513,
+      "matches": 2025,
+      "p1Wins": 518,
+      "p1Matches": 1033
+    },
+    "stone-cold-steve-austin": {
+      "wins": 980,
+      "losses": 1045,
+      "draws": 0,
+      "turns": 54563,
+      "matches": 2025,
+      "p1Wins": 495,
+      "p1Matches": 1032
+    },
+    "liv-morgan": {
+      "wins": 1118,
+      "losses": 907,
+      "draws": 0,
+      "turns": 49983,
+      "matches": 2025,
+      "p1Wins": 543,
+      "p1Matches": 1031
+    },
+    "brock-lesnar": {
+      "wins": 1156,
+      "losses": 869,
+      "draws": 0,
+      "turns": 53873,
+      "matches": 2025,
+      "p1Wins": 581,
+      "p1Matches": 1030
+    },
+    "gunther": {
+      "wins": 999,
+      "losses": 1026,
+      "draws": 0,
+      "turns": 55976,
+      "matches": 2025,
+      "p1Wins": 474,
+      "p1Matches": 1029
+    },
+    "becky-lynch": {
+      "wins": 961,
+      "losses": 1064,
+      "draws": 0,
+      "turns": 55056,
+      "matches": 2025,
+      "p1Wins": 491,
+      "p1Matches": 1028
+    },
+    "logan-paul": {
+      "wins": 921,
+      "losses": 1104,
+      "draws": 0,
+      "turns": 49172,
+      "matches": 2025,
+      "p1Wins": 459,
+      "p1Matches": 1027
+    },
+    "sol-ruca": {
+      "wins": 1024,
+      "losses": 1001,
+      "draws": 0,
+      "turns": 46044,
+      "matches": 2025,
+      "p1Wins": 501,
+      "p1Matches": 1026
+    },
+    "chad-gable": {
+      "wins": 819,
+      "losses": 1206,
+      "draws": 0,
+      "turns": 54188,
+      "matches": 2025,
+      "p1Wins": 414,
+      "p1Matches": 1025
+    },
+    "raquel-rodriguez": {
+      "wins": 1122,
+      "losses": 903,
+      "draws": 0,
+      "turns": 51917,
+      "matches": 2025,
+      "p1Wins": 644,
+      "p1Matches": 1024
+    },
+    "rey-mysterio": {
+      "wins": 892,
+      "losses": 1133,
+      "draws": 0,
+      "turns": 50063,
+      "matches": 2025,
+      "p1Wins": 443,
+      "p1Matches": 1023
+    },
+    "dominik-mysterio": {
+      "wins": 916,
+      "losses": 1109,
+      "draws": 0,
+      "turns": 50420,
+      "matches": 2025,
+      "p1Wins": 463,
+      "p1Matches": 1022
+    },
+    "penta": {
+      "wins": 1120,
+      "losses": 905,
+      "draws": 0,
+      "turns": 51809,
+      "matches": 2025,
+      "p1Wins": 546,
+      "p1Matches": 1021
+    },
+    "el-grande-americano": {
+      "wins": 1098,
+      "losses": 927,
+      "draws": 0,
+      "turns": 52319,
+      "matches": 2025,
+      "p1Wins": 540,
+      "p1Matches": 1020
+    },
+    "danhausen": {
+      "wins": 880,
+      "losses": 1145,
+      "draws": 0,
+      "turns": 57907,
+      "matches": 2025,
+      "p1Wins": 449,
+      "p1Matches": 1019
+    },
+    "tiffany-stratton": {
+      "wins": 831,
+      "losses": 1194,
+      "draws": 0,
+      "turns": 55145,
+      "matches": 2025,
+      "p1Wins": 427,
+      "p1Matches": 1018
+    },
+    "chelsea-green": {
+      "wins": 1106,
+      "losses": 919,
+      "draws": 0,
+      "turns": 59496,
+      "matches": 2025,
+      "p1Wins": 489,
+      "p1Matches": 1017
+    },
+    "damian-priest": {
+      "wins": 1083,
+      "losses": 942,
+      "draws": 0,
+      "turns": 49041,
+      "matches": 2025,
+      "p1Wins": 516,
+      "p1Matches": 1016
+    },
+    "randy-orton": {
+      "wins": 1184,
+      "losses": 841,
+      "draws": 0,
+      "turns": 52022,
+      "matches": 2025,
+      "p1Wins": 606,
+      "p1Matches": 1015
+    },
+    "joe-hendry": {
+      "wins": 968,
+      "losses": 1057,
+      "draws": 0,
+      "turns": 47894,
+      "matches": 2025,
+      "p1Wins": 448,
+      "p1Matches": 1014
+    },
+    "roxanne-perez": {
+      "wins": 886,
+      "losses": 1139,
+      "draws": 0,
+      "turns": 49419,
+      "matches": 2025,
+      "p1Wins": 447,
+      "p1Matches": 1013
+    },
+    "austin-theory": {
+      "wins": 889,
+      "losses": 1136,
+      "draws": 0,
+      "turns": 47255,
+      "matches": 2025,
+      "p1Wins": 414,
+      "p1Matches": 1012
+    },
+    "montez-ford": {
+      "wins": 1043,
+      "losses": 982,
+      "draws": 0,
+      "turns": 48364,
+      "matches": 2025,
+      "p1Wins": 495,
+      "p1Matches": 1011
+    },
+    "lola-vice": {
+      "wins": 856,
+      "losses": 1169,
+      "draws": 0,
+      "turns": 49020,
+      "matches": 2025,
+      "p1Wins": 387,
+      "p1Matches": 1010
+    },
+    "dragon-lee": {
+      "wins": 891,
+      "losses": 1134,
+      "draws": 0,
+      "turns": 46383,
+      "matches": 2025,
+      "p1Wins": 444,
+      "p1Matches": 1009
+    },
+    "hijo-del-vikingo": {
+      "wins": 866,
+      "losses": 1159,
+      "draws": 0,
+      "turns": 45888,
+      "matches": 2025,
+      "p1Wins": 411,
+      "p1Matches": 1008
+    },
+    "mr-iguana": {
+      "wins": 961,
+      "losses": 1064,
+      "draws": 0,
+      "turns": 47030,
+      "matches": 2025,
+      "p1Wins": 471,
+      "p1Matches": 1007
+    },
+    "bret-hart": {
+      "wins": 1108,
+      "losses": 917,
+      "draws": 0,
+      "turns": 55390,
+      "matches": 2025,
+      "p1Wins": 553,
+      "p1Matches": 1006
+    },
+    "shawn-michaels": {
+      "wins": 904,
+      "losses": 1121,
+      "draws": 0,
+      "turns": 53355,
+      "matches": 2025,
+      "p1Wins": 444,
+      "p1Matches": 1005
+    },
+    "razor-ramon": {
+      "wins": 1006,
+      "losses": 1019,
+      "draws": 0,
+      "turns": 46524,
+      "matches": 2025,
+      "p1Wins": 487,
+      "p1Matches": 1004
+    },
+    "diesel": {
+      "wins": 1179,
+      "losses": 846,
+      "draws": 0,
+      "turns": 49870,
+      "matches": 2025,
+      "p1Wins": 560,
+      "p1Matches": 1003
+    },
+    "doink-the-clown": {
+      "wins": 900,
+      "losses": 1125,
+      "draws": 0,
+      "turns": 51944,
+      "matches": 2025,
+      "p1Wins": 438,
+      "p1Matches": 1002
+    },
+    "yokozuna": {
+      "wins": 1148,
+      "losses": 877,
+      "draws": 0,
+      "turns": 52809,
+      "matches": 2025,
+      "p1Wins": 570,
+      "p1Matches": 1001
+    },
+    "owen-hart": {
+      "wins": 845,
+      "losses": 1180,
+      "draws": 0,
+      "turns": 53506,
+      "matches": 2025,
+      "p1Wins": 418,
+      "p1Matches": 1000
+    },
+    "british-bulldog": {
+      "wins": 945,
+      "losses": 1080,
+      "draws": 0,
+      "turns": 51915,
+      "matches": 2025,
+      "p1Wins": 431,
+      "p1Matches": 999
+    },
+    "rowdy-roddy-piper": {
+      "wins": 854,
+      "losses": 1171,
+      "draws": 0,
+      "turns": 55369,
+      "matches": 2025,
+      "p1Wins": 392,
+      "p1Matches": 998
+    },
+    "ted-dibiase": {
+      "wins": 840,
+      "losses": 1185,
+      "draws": 0,
+      "turns": 54519,
+      "matches": 2025,
+      "p1Wins": 421,
+      "p1Matches": 997
+    },
+    "jake-roberts": {
+      "wins": 970,
+      "losses": 1055,
+      "draws": 0,
+      "turns": 51177,
+      "matches": 2025,
+      "p1Wins": 501,
+      "p1Matches": 996
+    },
+    "mr-perfect": {
+      "wins": 987,
+      "losses": 1038,
+      "draws": 0,
+      "turns": 51976,
+      "matches": 2025,
+      "p1Wins": 468,
+      "p1Matches": 995
+    },
+    "triple-h": {
+      "wins": 939,
+      "losses": 1086,
+      "draws": 0,
+      "turns": 53428,
+      "matches": 2025,
+      "p1Wins": 458,
+      "p1Matches": 994
+    },
+    "chris-jericho": {
+      "wins": 936,
+      "losses": 1089,
+      "draws": 0,
+      "turns": 49739,
+      "matches": 2025,
+      "p1Wins": 461,
+      "p1Matches": 993
+    },
+    "kurt-angle": {
+      "wins": 919,
+      "losses": 1106,
+      "draws": 0,
+      "turns": 50803,
+      "matches": 2025,
+      "p1Wins": 445,
+      "p1Matches": 992
+    },
+    "shinsuke-nakamura": {
+      "wins": 944,
+      "losses": 1081,
+      "draws": 0,
+      "turns": 52072,
+      "matches": 2025,
+      "p1Wins": 452,
+      "p1Matches": 991
+    },
+    "blake-monroe": {
+      "wins": 889,
+      "losses": 1136,
+      "draws": 0,
+      "turns": 52224,
+      "matches": 2025,
+      "p1Wins": 423,
+      "p1Matches": 990
+    },
+    "trick-williams": {
+      "wins": 963,
+      "losses": 1062,
+      "draws": 0,
+      "turns": 47218,
+      "matches": 2025,
+      "p1Wins": 457,
+      "p1Matches": 989
+    },
+    "jacy-jayne": {
+      "wins": 986,
+      "losses": 1039,
+      "draws": 0,
+      "turns": 53794,
+      "matches": 2025,
+      "p1Wins": 470,
+      "p1Matches": 988
+    },
+    "kendal-grey": {
+      "wins": 1088,
+      "losses": 937,
+      "draws": 0,
+      "turns": 53396,
+      "matches": 2025,
+      "p1Wins": 538,
+      "p1Matches": 987
+    },
+    "tony-dangelo": {
+      "wins": 1101,
+      "losses": 924,
+      "draws": 0,
+      "turns": 47325,
+      "matches": 2025,
+      "p1Wins": 510,
+      "p1Matches": 986
+    },
+    "jaida-parker": {
+      "wins": 1094,
+      "losses": 931,
+      "draws": 0,
+      "turns": 53527,
+      "matches": 2025,
+      "p1Wins": 501,
+      "p1Matches": 985
+    },
+    "kelani-jordan": {
+      "wins": 1077,
+      "losses": 948,
+      "draws": 0,
+      "turns": 52125,
+      "matches": 2025,
+      "p1Wins": 519,
+      "p1Matches": 984
+    },
+    "mason-rook": {
+      "wins": 1167,
+      "losses": 858,
+      "draws": 0,
+      "turns": 49327,
+      "matches": 2025,
+      "p1Wins": 531,
+      "p1Matches": 983
+    },
+    "tatum-paxley": {
+      "wins": 1050,
+      "losses": 975,
+      "draws": 0,
+      "turns": 50287,
+      "matches": 2025,
+      "p1Wins": 510,
+      "p1Matches": 982
+    },
+    "lexis-king": {
+      "wins": 1191,
+      "losses": 834,
+      "draws": 0,
+      "turns": 49994,
+      "matches": 2025,
+      "p1Wins": 586,
+      "p1Matches": 981
+    },
+    "zilla-fatu": {
+      "wins": 1068,
+      "losses": 957,
+      "draws": 0,
+      "turns": 55308,
+      "matches": 2025,
+      "p1Wins": 488,
+      "p1Matches": 980
+    },
+    "batista": {
+      "wins": 945,
+      "losses": 1080,
+      "draws": 0,
+      "turns": 51159,
+      "matches": 2025,
+      "p1Wins": 426,
+      "p1Matches": 979
+    },
+    "jbl": {
+      "wins": 1193,
+      "losses": 832,
+      "draws": 0,
+      "turns": 50243,
+      "matches": 2025,
+      "p1Wins": 559,
+      "p1Matches": 978
+    },
+    "eddie-guerrero": {
+      "wins": 982,
+      "losses": 1043,
+      "draws": 0,
+      "turns": 48426,
+      "matches": 2025,
+      "p1Wins": 424,
+      "p1Matches": 977
+    },
+    "edge": {
+      "wins": 1066,
+      "losses": 959,
+      "draws": 0,
+      "turns": 51488,
+      "matches": 2025,
+      "p1Wins": 510,
+      "p1Matches": 976
+    },
+    "jeff-hardy": {
+      "wins": 950,
+      "losses": 1075,
+      "draws": 0,
+      "turns": 52493,
+      "matches": 2025,
+      "p1Wins": 445,
+      "p1Matches": 975
+    },
+    "rob-van-dam": {
+      "wins": 1179,
+      "losses": 846,
+      "draws": 0,
+      "turns": 53498,
+      "matches": 2025,
+      "p1Wins": 558,
+      "p1Matches": 974
+    },
+    "trish-stratus": {
+      "wins": 1169,
+      "losses": 856,
+      "draws": 0,
+      "turns": 50428,
+      "matches": 2025,
+      "p1Wins": 537,
+      "p1Matches": 973
+    },
+    "aj-styles": {
+      "wins": 1186,
+      "losses": 839,
+      "draws": 0,
+      "turns": 50891,
+      "matches": 2025,
+      "p1Wins": 553,
+      "p1Matches": 972
+    }
+  }
+}

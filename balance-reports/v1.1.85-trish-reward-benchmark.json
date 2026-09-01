@@ -1,0 +1,663 @@
+{
+  "version": "1.1.85",
+  "opponents": 81,
+  "gamesPerOpponent": 25,
+  "matches": 2025,
+  "wins": 1169,
+  "losses": 856,
+  "stalls": 0,
+  "winRate": 57.73,
+  "averageTurns": 0,
+  "pins": 2025,
+  "submissions": 0,
+  "matchups": [
+    {
+      "opponent": "Chelsea Green",
+      "opponentId": "chelsea-green",
+      "wins": 6,
+      "losses": 19,
+      "stalls": 0,
+      "winRate": 24
+    },
+    {
+      "opponent": "Raquel Rodriguez",
+      "opponentId": "raquel-rodriguez",
+      "wins": 7,
+      "losses": 18,
+      "stalls": 0,
+      "winRate": 28
+    },
+    {
+      "opponent": "CM Punk",
+      "opponentId": "cm-punk",
+      "wins": 9,
+      "losses": 16,
+      "stalls": 0,
+      "winRate": 36
+    },
+    {
+      "opponent": "Roman Reigns",
+      "opponentId": "roman-reigns",
+      "wins": 9,
+      "losses": 16,
+      "stalls": 0,
+      "winRate": 36
+    },
+    {
+      "opponent": "Kane",
+      "opponentId": "kane",
+      "wins": 9,
+      "losses": 16,
+      "stalls": 0,
+      "winRate": 36
+    },
+    {
+      "opponent": "Mr. Iguana",
+      "opponentId": "mr-iguana",
+      "wins": 9,
+      "losses": 16,
+      "stalls": 0,
+      "winRate": 36
+    },
+    {
+      "opponent": "Mason Rook",
+      "opponentId": "mason-rook",
+      "wins": 9,
+      "losses": 16,
+      "stalls": 0,
+      "winRate": 36
+    },
+    {
+      "opponent": "Seth Rollins",
+      "opponentId": "seth-rollins",
+      "wins": 10,
+      "losses": 15,
+      "stalls": 0,
+      "winRate": 40
+    },
+    {
+      "opponent": "Kevin Owens",
+      "opponentId": "kevin-owens",
+      "wins": 10,
+      "losses": 15,
+      "stalls": 0,
+      "winRate": 40
+    },
+    {
+      "opponent": "Bayley",
+      "opponentId": "bayley",
+      "wins": 11,
+      "losses": 14,
+      "stalls": 0,
+      "winRate": 44
+    },
+    {
+      "opponent": "Liv Morgan",
+      "opponentId": "liv-morgan",
+      "wins": 11,
+      "losses": 14,
+      "stalls": 0,
+      "winRate": 44
+    },
+    {
+      "opponent": "Gunther",
+      "opponentId": "gunther",
+      "wins": 11,
+      "losses": 14,
+      "stalls": 0,
+      "winRate": 44
+    },
+    {
+      "opponent": "Penta",
+      "opponentId": "penta",
+      "wins": 11,
+      "losses": 14,
+      "stalls": 0,
+      "winRate": 44
+    },
+    {
+      "opponent": "El Grande Americano",
+      "opponentId": "el-grande-americano",
+      "wins": 11,
+      "losses": 14,
+      "stalls": 0,
+      "winRate": 44
+    },
+    {
+      "opponent": "Diesel",
+      "opponentId": "diesel",
+      "wins": 11,
+      "losses": 14,
+      "stalls": 0,
+      "winRate": 44
+    },
+    {
+      "opponent": "Jeff Hardy",
+      "opponentId": "jeff-hardy",
+      "wins": 11,
+      "losses": 14,
+      "stalls": 0,
+      "winRate": 44
+    },
+    {
+      "opponent": "Hulk Hogan",
+      "opponentId": "hulk-hogan",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Ultimate Warrior",
+      "opponentId": "ultimate-warrior",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Brock Lesnar",
+      "opponentId": "brock-lesnar",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Joe Hendry",
+      "opponentId": "joe-hendry",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Montez Ford",
+      "opponentId": "montez-ford",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Bret Hart",
+      "opponentId": "bret-hart",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Razor Ramon",
+      "opponentId": "razor-ramon",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Tony D’Angelo",
+      "opponentId": "tony-dangelo",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "Zilla Fatu",
+      "opponentId": "zilla-fatu",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "JBL",
+      "opponentId": "jbl",
+      "wins": 12,
+      "losses": 13,
+      "stalls": 0,
+      "winRate": 48
+    },
+    {
+      "opponent": "John Cena",
+      "opponentId": "john-cena",
+      "wins": 13,
+      "losses": 12,
+      "stalls": 0,
+      "winRate": 52
+    },
+    {
+      "opponent": "André the Giant",
+      "opponentId": "andre-the-giant",
+      "wins": 13,
+      "losses": 12,
+      "stalls": 0,
+      "winRate": 52
+    },
+    {
+      "opponent": "Randy Savage",
+      "opponentId": "randy-savage",
+      "wins": 13,
+      "losses": 12,
+      "stalls": 0,
+      "winRate": 52
+    },
+    {
+      "opponent": "Hijo del Vikingo",
+      "opponentId": "hijo-del-vikingo",
+      "wins": 13,
+      "losses": 12,
+      "stalls": 0,
+      "winRate": 52
+    },
+    {
+      "opponent": "Batista",
+      "opponentId": "batista",
+      "wins": 13,
+      "losses": 12,
+      "stalls": 0,
+      "winRate": 52
+    },
+    {
+      "opponent": "Cody Rhodes",
+      "opponentId": "cody-rhodes",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Logan Paul",
+      "opponentId": "logan-paul",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Dominik Mysterio",
+      "opponentId": "dominik-mysterio",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Roxanne Perez",
+      "opponentId": "roxanne-perez",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Austin Theory",
+      "opponentId": "austin-theory",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Yokozuna",
+      "opponentId": "yokozuna",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Triple H",
+      "opponentId": "triple-h",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Kendal Grey",
+      "opponentId": "kendal-grey",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Tatum Paxley",
+      "opponentId": "tatum-paxley",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Lexis King",
+      "opponentId": "lexis-king",
+      "wins": 14,
+      "losses": 11,
+      "stalls": 0,
+      "winRate": 56
+    },
+    {
+      "opponent": "Paige",
+      "opponentId": "paige",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "Charlotte Flair",
+      "opponentId": "charlotte-flair",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "The Undertaker",
+      "opponentId": "the-undertaker",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "Stone Cold Steve Austin",
+      "opponentId": "stone-cold-steve-austin",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "Dragon Lee",
+      "opponentId": "dragon-lee",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "Jaida Parker",
+      "opponentId": "jaida-parker",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "Edge",
+      "opponentId": "edge",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "AJ Styles",
+      "opponentId": "aj-styles",
+      "wins": 15,
+      "losses": 10,
+      "stalls": 0,
+      "winRate": 60
+    },
+    {
+      "opponent": "Stephanie Vaquer",
+      "opponentId": "stephanie-vaquer",
+      "wins": 16,
+      "losses": 9,
+      "stalls": 0,
+      "winRate": 64
+    },
+    {
+      "opponent": "Rhea Ripley",
+      "opponentId": "rhea-ripley",
+      "wins": 16,
+      "losses": 9,
+      "stalls": 0,
+      "winRate": 64
+    },
+    {
+      "opponent": "Oba Femi",
+      "opponentId": "oba-femi",
+      "wins": 16,
+      "losses": 9,
+      "stalls": 0,
+      "winRate": 64
+    },
+    {
+      "opponent": "Becky Lynch",
+      "opponentId": "becky-lynch",
+      "wins": 16,
+      "losses": 9,
+      "stalls": 0,
+      "winRate": 64
+    },
+    {
+      "opponent": "Lola Vice",
+      "opponentId": "lola-vice",
+      "wins": 16,
+      "losses": 9,
+      "stalls": 0,
+      "winRate": 64
+    },
+    {
+      "opponent": "Kelani Jordan",
+      "opponentId": "kelani-jordan",
+      "wins": 16,
+      "losses": 9,
+      "stalls": 0,
+      "winRate": 64
+    },
+    {
+      "opponent": "Eddie Guerrero",
+      "opponentId": "eddie-guerrero",
+      "wins": 16,
+      "losses": 9,
+      "stalls": 0,
+      "winRate": 64
+    },
+    {
+      "opponent": "Tiffany Stratton",
+      "opponentId": "tiffany-stratton",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Damian Priest",
+      "opponentId": "damian-priest",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Randy Orton",
+      "opponentId": "randy-orton",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Shawn Michaels",
+      "opponentId": "shawn-michaels",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Doink the Clown",
+      "opponentId": "doink-the-clown",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "British Bulldog",
+      "opponentId": "british-bulldog",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Ted DiBiase",
+      "opponentId": "ted-dibiase",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Jake “The Snake” Roberts",
+      "opponentId": "jake-roberts",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Mr. Perfect",
+      "opponentId": "mr-perfect",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Chris Jericho",
+      "opponentId": "chris-jericho",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "Jacy Jayne",
+      "opponentId": "jacy-jayne",
+      "wins": 17,
+      "losses": 8,
+      "stalls": 0,
+      "winRate": 68
+    },
+    {
+      "opponent": "IYO SKY",
+      "opponentId": "iyo-sky",
+      "wins": 18,
+      "losses": 7,
+      "stalls": 0,
+      "winRate": 72
+    },
+    {
+      "opponent": "Sol Ruca",
+      "opponentId": "sol-ruca",
+      "wins": 18,
+      "losses": 7,
+      "stalls": 0,
+      "winRate": 72
+    },
+    {
+      "opponent": "Rey Mysterio",
+      "opponentId": "rey-mysterio",
+      "wins": 18,
+      "losses": 7,
+      "stalls": 0,
+      "winRate": 72
+    },
+    {
+      "opponent": "Danhausen",
+      "opponentId": "danhausen",
+      "wins": 18,
+      "losses": 7,
+      "stalls": 0,
+      "winRate": 72
+    },
+    {
+      "opponent": "Shinsuke Nakamura",
+      "opponentId": "shinsuke-nakamura",
+      "wins": 18,
+      "losses": 7,
+      "stalls": 0,
+      "winRate": 72
+    },
+    {
+      "opponent": "Blake Monroe",
+      "opponentId": "blake-monroe",
+      "wins": 18,
+      "losses": 7,
+      "stalls": 0,
+      "winRate": 72
+    },
+    {
+      "opponent": "The Rock",
+      "opponentId": "the-rock-attitude",
+      "wins": 19,
+      "losses": 6,
+      "stalls": 0,
+      "winRate": 76
+    },
+    {
+      "opponent": "Chad Gable",
+      "opponentId": "chad-gable",
+      "wins": 19,
+      "losses": 6,
+      "stalls": 0,
+      "winRate": 76
+    },
+    {
+      "opponent": "Rob Van Dam",
+      "opponentId": "rob-van-dam",
+      "wins": 19,
+      "losses": 6,
+      "stalls": 0,
+      "winRate": 76
+    },
+    {
+      "opponent": "Mankind",
+      "opponentId": "mankind",
+      "wins": 20,
+      "losses": 5,
+      "stalls": 0,
+      "winRate": 80
+    },
+    {
+      "opponent": "Trick Williams",
+      "opponentId": "trick-williams",
+      "wins": 20,
+      "losses": 5,
+      "stalls": 0,
+      "winRate": 80
+    },
+    {
+      "opponent": "Owen Hart",
+      "opponentId": "owen-hart",
+      "wins": 21,
+      "losses": 4,
+      "stalls": 0,
+      "winRate": 84
+    },
+    {
+      "opponent": "Kurt Angle",
+      "opponentId": "kurt-angle",
+      "wins": 21,
+      "losses": 4,
+      "stalls": 0,
+      "winRate": 84
+    },
+    {
+      "opponent": "Rowdy Roddy Piper",
+      "opponentId": "rowdy-roddy-piper",
+      "wins": 23,
+      "losses": 2,
+      "stalls": 0,
+      "winRate": 92
+    }
+  ]
+}

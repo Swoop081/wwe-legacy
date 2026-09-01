@@ -1,0 +1,36 @@
+{
+  "version": "1.1.94",
+  "policy": "Default release gate contains evergreen gameplay/data contracts and current-baseline tests only. Historical version snapshots are preserved but do not gate current releases.",
+  "currentTests": [
+    "test/v1182-watchlist-aj-october-card-studio.test.js",
+    "test/v1183-nxt-ruthless-identity-audit.test.js",
+    "test/v1183-nxt-ruthless-move-identity-audit.test.js",
+    "test/v1184-remaining-released-set-identity-audit.test.js",
+    "test/v1185-card-studio-production-integrity-trish-reward.test.js",
+    "test/v1187-hierarchy-preserving-balance.test.js",
+    "test/v1188-kurt-angle-technical-identity.test.js",
+    "test/v1189-tiffany-athletic-sequencing.test.js",
+    "test/v1190-roster-architecture-integrity.test.js",
+    "test/v1193-locked-core-rules-regression.test.js",
+    "test/v01221-auto-counter.test.js",
+    "test/v01233-retained-control-draw.test.js",
+    "test/v01241-persistent-body-part-submissions.test.js",
+    "test/v01288-pin-health-gate.test.js",
+    "test/v01295-submission-response-window.test.js",
+    "test/v10002-launch-regression-hotfix.test.js",
+    "test/v1172-trish-merch-booster-pool.test.js",
+    "test/v1177-collection-ownership-cap.test.js",
+    "test/v1178-amethyst-superstar-entrance-collation.test.js"
+  ],
+  "historicalSuiteCommand": "npm run test:historical",
+  "knownHistoricalDebt": [
+    "Cena Season 1 presentation/reward snapshots superseded by Trish Season 1",
+    "four-tier/Diamond-era printing assertions superseded by five-tier Amethyst system",
+    "fixed roster/set/card counts superseded by current 98-Superstar / 14-set Card Studio catalogue",
+    "pre-v1.1.87 Tiffany/Kurt HP tuning assertions superseded by hierarchy-preserving philosophy",
+    "pre-v1.1.90 HP values superseded by physical hierarchy corrections",
+    "old Trish-only Rewards registry assertions superseded by scheduled AJ Styles October Rewards content",
+    "legacy generic Momentum-Merch recommendation assumptions superseded by current curated Merch catalogue",
+    "old packaged-asset assertions invalid for verified no-assets overlays"
+  ]
+}
