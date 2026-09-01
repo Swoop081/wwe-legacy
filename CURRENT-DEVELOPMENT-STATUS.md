@@ -172,3 +172,12 @@ Permanent report:
 - `physicalIphoneSmoke` marker standardized to `pending-v1.1.94-user-smoke`.
 - Permanent report: `reports/v1.1.94-current-release-test-gate.md`.
 
+## v1.1.95 — iPhone Infinite Update Reload Hotfix (2026-09-02)
+- Physical iPhone screen recording confirmed a full-page update/reload loop: Season splash repeatedly dropped to black and repainted, preventing interaction.
+- Root cause: release manifest had advanced beyond the runtime cache identity; `build.json` was newer while `js/config/build.js` and module imports still reported/stamped **v1.1.86**.
+- Canonical cache stamper run for v1.1.95: runtime `BUILD_VERSION`, release manifest and module cache tokens now align.
+- Added same-build navigation guard to `applyAppUpdate()` so a stale bundle cannot repeatedly auto-navigate to the same target build.
+- Added `test/v1195-iphone-update-reload-loop-hotfix.test.js` to the current release gate.
+- No gameplay/economy/balance changes.
+- Physical iPhone smoke must be rerun against v1.1.95 after deployment.
+

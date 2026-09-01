@@ -212,3 +212,9 @@
 - Historical tests remain preserved and accessible via `npm run test:historical`.
 - No gameplay values changed.
 
+## v1.1.95 — iPhone Infinite Update Reload Hotfix — 2 September 2026
+- Fixed the physical-iPhone black/splash flicker caused by mismatched release/runtime cache versions.
+- Stamped runtime and module imports to v1.1.95.
+- Added a hard guard against repeated auto-navigation to the same build.
+- No gameplay values changed.
+
