@@ -1,0 +1,74 @@
+diff --git a/js/ui/app.js b/js/ui/app.js
+--- a/js/ui/app.js
++++ b/js/ui/app.js
+@@ -110,6 +110,7 @@
+ let liveEventNow = null;
+ let selectedLiveEventKey = null;
+ let activeLiveEventTowerKey = null;
+ let liveEventSuperstarSwapTowerKey = null;
++let liveEventMatchupOpen = false;
+ let flippedHandCards = new Set();
+ let autoCounterSelecting = false;
+ let autoCounterSelection = new Set();
+@@ -600,8 +601,8 @@
+-function showLiveEvents() { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = null; liveEventSuperstarSwapTowerKey = null; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }
+-function showLiveEventTower(towerKey) { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = towerKey; liveEventSuperstarSwapTowerKey = null; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }
++function showLiveEvents() { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = null; liveEventSuperstarSwapTowerKey = null; liveEventMatchupOpen = false; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }
++function showLiveEventTower(towerKey) { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = towerKey; liveEventSuperstarSwapTowerKey = null; liveEventMatchupOpen = false; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }
+@@ -1664,8 +1665,7 @@
+   const focusOpponent = superstarById[focusOpponentId];
+   const focusStage = active ? stage : liveEventStage(event, 0);
+   const previewThemed = [...new Set(event.opponentPool.filter(id => id !== chosenId && superstarById[id]))];
+-  const previewFallback = roster.map(star => star.id).filter(id => id !== chosenId && !previewThemed.includes(id));
+-  const previewPool = [...previewThemed, ...previewFallback];
++  const previewPool = previewThemed;
+   const previewBossId = event.bossId && event.bossId !== chosenId && superstarById[event.bossId] ? event.bossId : null;
+@@ -1710,6 +1710,55 @@
+     ${message ? `<div class="live-event-message-banner"><span>${message}</span></div>` : ''}
+     <section class="live-tower-detail-body">${command}<section class="live-tower-route"><div class="live-tower-section-head"><span>EVENT ROUTE</span><strong>${active ? `Current Opponent · ${focusOpponent?.name ?? 'Opponent'}` : `${LIVE_EVENT_LENGTH} opponents · 1 random pack on clear`}</strong></div><div class="live-tower-route-strip">${route}</div></section></section>
+   </section>${swapOverlay}`;
++  if (liveEventMatchupOpen && !cleared) {
++    const matchupStageIndex = active ? Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(run?.stage ?? 0))) : 0;
++    const matchupOpponentId = opponentIds[matchupStageIndex];
++    const matchupOpponent = superstarById[matchupOpponentId];
++    const matchupStage = liveEventStage(event, matchupStageIndex);
++    const canChooseForThisMatch = !active || matchupStageIndex === 0;
++    const playerCards = canChooseForThisMatch
++      ? selectionCarouselMarkup(unlocked, chosenId, 'live-event-select')
++      : `<div class="live-event-locked-player-card"><span class="live-tower-route-card-frame">${superstarPreviewCardMarkup(chosenId,"live-tower-opponent-card")}</span></div>`;
++    root.innerHTML = `<section class="live-event-matchup-screen premium-screen" style="--tower-accent:${detailAccent}">
++      <header class="live-event-matchup-head"><button type="button" id="back-live-event-route" class="live-event-matchup-back">‹</button><div><span>MATCH ${matchupStageIndex + 1} OF ${LIVE_EVENT_LENGTH}</span><h2>${event.name}</h2></div></header>
++      <section class="live-event-matchup-player"><span>YOUR SUPERSTAR${canChooseForThisMatch ? ' · SWIPE TO CHANGE' : ' · LOCKED'}</span>${playerCards}</section>
++      <div class="live-event-matchup-vs">VS</div>
++      <section class="live-event-matchup-opponent"><span>OPPONENT</span><div class="live-event-matchup-opponent-card"><span class="live-tower-route-card-frame">${superstarPreviewCardMarkup(matchupOpponentId,"live-tower-opponent-card")}</span></div><strong>${matchupOpponent?.name ?? 'Opponent'}</strong><small>${matchupStage.label}</small></section>
++      <button type="button" id="live-event-matchup-fight" class="start-match live-event-matchup-fight">FIGHT MATCH ${matchupStageIndex + 1}</button>
++    </section>`;
++    if (canChooseForThisMatch) {
++      wireSelectionCarousel('live-event-select', id => {
++        selection.p1 = id;
++        if (active && Number(run?.stage ?? 0) === 0 && id !== run?.superstarId) {
++          try { changeLiveEventTowerSuperstar(profile, towerKey, id, new Date()); saveProfile(profile); }
++          catch (error) { message = error.message; }
++        }
++        renderLiveEvents();
++      });
++    }
++    $("#back-live-event-route")?.addEventListener("click", () => { liveEventMatchupOpen = false; renderLiveEvents(); });
++    $("#live-event-matchup-fight")?.addEventListener("click", () => { if (active) startCurrentLiveEventMatch(towerKey); else beginLiveEventTower(); });
++    return;
++  }
++
++  const routeCards = [...root.querySelectorAll('.live-tower-route-card')];
++  const currentRouteIndex = active ? Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(run?.stage ?? 0))) : 0;
++  routeCards.forEach((card,index) => {
++    const isCurrent = !cleared && index === currentRouteIndex;
++    card.classList.toggle('is-current-selectable', isCurrent);
++    if (!isCurrent) return;
++    card.setAttribute('role','button');
++    card.setAttribute('tabindex','0');
++    const openMatchup = () => { liveEventMatchupOpen = true; renderLiveEvents(); };
++    card.addEventListener('click', openMatchup);
++    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openMatchup(); } });
++  });
++  requestAnimationFrame(() => routeCards[currentRouteIndex]?.scrollIntoView?.({ block:'center', inline:'nearest' }));
+   wireSelectionCarousel('live-event-select', id => { selection.p1 = id; renderLiveEvents(); });
