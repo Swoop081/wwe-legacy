@@ -1,11 +1,11 @@
 {
-  "version": "1.1.128",
+  "version": "1.1.129",
   "releasedAt": "2026-09-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.128",
+  "physicalIphoneSmoke": "pending-v1.1.129",
   "launchStatus": "released",
-  "name": "v1.1.128 \u2014 Direct Pack Reveal Recovery"
+  "name": "v1.1.129 \u2014 Safe Pack Flow Recovery"
 }

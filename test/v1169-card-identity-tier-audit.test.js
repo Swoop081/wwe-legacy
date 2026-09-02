@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.128';
-import { applyCardTier, CARD_TIERS, fixedPrintingTierFor } from '../js/data/variants.js?v=1.1.128';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.129';
+import { applyCardTier, CARD_TIERS, fixedPrintingTierFor } from '../js/data/variants.js?v=1.1.129';
 
 const moveSig=c=>JSON.stringify({cost:c.cost,damage:c.damage,rarity:c.rarity,method:c.method,moveType:c.moveType,requirements:c.requirements,groundOpponent:!!c.groundOpponent,groundedOnly:!!c.groundedOnly,standingOnly:!!c.standingOnly,stun:c.stun||0,selfDamage:c.selfDamage||0,effects:c.effects||[],submission:c.submission||null,bodyDamage:c.bodyDamage||null,counterState:c.counterState||null,counterStates:[...(c.counterStates||[])].sort(),defensiveOnly:!!c.defensiveOnly,finisher:!!c.finisher,trademark:!!c.trademark});
 const tierSig=c=>JSON.stringify({cost:c.cost,damage:c.damage,effects:c.effects,submission:c.submission,drawOnCounter:c.drawOnCounter,drawOnCounterTypes:c.drawOnCounterTypes});
