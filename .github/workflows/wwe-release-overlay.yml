@@ -47,13 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          node --test \
-            test/v1139-bret-hart-ringpost-figure-four.test.js \
-            test/v1138-card-studio-runtime-animation-layering.test.js \
-            test/v1135-presentation-source-of-truth.test.js \
-            test/v01356-bret-hart-new-generation.test.js \
-            test/v01381-british-bulldog-new-generation.test.js \
-            test/v01274-exclusive-rarity-policy.test.js
+          npm run test:current
           npm run flow
           npm run validate
           npm run card-ids
