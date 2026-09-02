@@ -1,0 +1,124 @@
+name: WWE Legacy v1.1.131 Restore Original Pack Experience
+
+on:
+  push:
+    paths:
+      - '.release-v1.1.131.trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Restore pre-regression pack implementation
+        run: |
+          git config user.name "WWE Legacy Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          # Reverse only the emergency pack rewrites. v1.1.123 onboarding work remains intact.
+          for sha in \
+            ac8c945be15869005a86389aa40eda66b383c4b2 \
+            15a535c58bcadefbc199097b9a4c8ee793ab6108 \
+            16e36ae655f48deaaaa81226d374ad085e57619a \
+            7705a9623b8a43a27c0669994c7feedf2a5e4d73 \
+            ea2e5bb722089e28a5897d37f2675a98e824e5f8 \
+            016b5d2beb4cd625ce31e72b5537384a428ab4e6 \
+            4da9ed3f7408c213f34a7b4f537bdd46a2f52bcd
+          do
+            git revert --no-commit "$sha"
+          done
+          # Reverted one-shot release commits can resurrect their temporary files; never publish those.
+          rm -rf .pack-rip-fix .pack-* .release-v1.1.124* .release-v1.1.125* .release-v1.1.126* .release-v1.1.127* .release-v1.1.128* .release-v1.1.129* .release-v1.1.130*
+          rm -f .github/workflows/wwe-pack-rip-state-v1.1.122.yml
+          rm -f .github/workflows/wwe-pack-*v1.1.124*.yml .github/workflows/wwe-pack-*v1.1.125*.yml .github/workflows/wwe-pack-*v1.1.126*.yml .github/workflows/wwe-pack-*v1.1.127*.yml .github/workflows/wwe-pack-*v1.1.128*.yml .github/workflows/wwe-pack-*v1.1.129*.yml .github/workflows/wwe-pack-*v1.1.130*.yml
+
+      - name: Stamp v1.1.131
+        run: |
+          npm version 1.1.131 --no-git-tag-version
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='build.json';
+          const d=JSON.parse(fs.readFileSync(p,'utf8'));
+          d.version='1.1.131';
+          d.releasedAt='2026-09-02';
+          d.name='v1.1.131 — Original Pack Experience Restored + Verified';
+          d.physicalIphoneSmoke='pending-v1.1.131';
+          fs.writeFileSync(p,JSON.stringify(d,null,2)+'\n');
+          NODE
+          npm run stamp-cache
+          npm run generate-studio
+
+      - name: Verify original pack implementation restored exactly
+        run: |
+          node --check js/ui/app.js
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess, json
+          current=Path('js/ui/app.js').read_text()
+          old=subprocess.check_output(['git','show','6ed8765a2ccab9002c382539897b63becc3d4626:js/ui/app.js'],text=True)
+          start='function processPack(kind = "standard")'
+          end='function premiumHubHeading('
+          cur_seg=current[current.index(start):current.index(end)]
+          old_seg=old[old.index(start):old.index(end)]
+          if cur_seg != old_seg:
+              import difflib
+              diff=''.join(difflib.unified_diff(old_seg.splitlines(True),cur_seg.splitlines(True),fromfile='v1.1.122-pack',tofile='v1.1.131-pack'))
+              raise SystemExit('Pack subsystem is not an exact restoration of the last original implementation:\n'+diff[:12000])
+          required=[
+            'TAP TO RIP',
+            'Open the pack and reveal all five cards',
+            'RIPPING PACK…',
+            'RIP!',
+            'Pack open — all five cards are face up.',
+            'TAP CARD · NEXT CARD',
+            'TAP CARD · PACK SUMMARY',
+            'PACK COMPLETE',
+            'collectibleCardMarkup(p.card'
+          ]
+          for marker in required:
+              if marker not in cur_seg: raise SystemExit(f'Missing restored pack marker: {marker}')
+          forbidden=['renderSafePackFlow','booster-safe-reveal-card','full surface pack tap','iPhone Safari stability: do not allocate']
+          for marker in forbidden:
+              if marker in current: raise SystemExit(f'Emergency replacement still present: {marker}')
+          b=json.loads(Path('build.json').read_text())
+          assert b['version']=='1.1.131'
+          assert json.loads(Path('package.json').read_text())['version']=='1.1.131'
+          assert '?v=1.1.131' in Path('index.html').read_text()
+          print('Exact original pack subsystem and copy/animation contract verified.')
+          PY
+
+      - name: Install browser certification runtime
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+
+      - name: Run iPhone-size Chromium and WebKit pack certification
+        run: |
+          cd "$(dirname "$GITHUB_WORKSPACE")"
+          python3 -m http.server 4173 >/tmp/wwe-pack-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          cd "$GITHUB_WORKSPACE"
+          sleep 2
+          node .release-v1.1.131-pack-browser-smoke.mjs
+
+      - name: Publish verified release
+        run: |
+          rm -f .release-v1.1.131-pack-browser-smoke.mjs .release-v1.1.131.trigger .github/workflows/wwe-pack-restore-v1.1.131.yml
+          git add -A
+          git commit -m "WWE Legacy v1.1.131 — restore and verify original pack opening"
+          git push origin main
