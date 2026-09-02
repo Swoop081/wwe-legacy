@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { sets } from "../js/data/sets.js?v=1.1.97";
-import { PLAY_PILE_MAT_THEMES, playPileMatStyle } from "../js/ui/play-pile-mats.js?v=1.1.97";
+import { sets } from "../js/data/sets.js?v=1.1.98";
+import { PLAY_PILE_MAT_THEMES, playPileMatStyle } from "../js/ui/play-pile-mats.js?v=1.1.98";
 
 const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
 const css = fs.readFileSync(new URL("../css/game.css", import.meta.url), "utf8");

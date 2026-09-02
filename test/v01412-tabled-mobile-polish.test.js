@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { championshipRoadSectionForStage } from '../js/data/championship-road.js?v=1.1.97';
-import { collectionCards } from '../js/data/collection.js?v=1.1.97';
+import { championshipRoadSectionForStage } from '../js/data/championship-road.js?v=1.1.98';
+import { collectionCards } from '../js/data/collection.js?v=1.1.98';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');

@@ -1,13 +1,13 @@
-import { decks } from "./decks.js?v=1.1.97";
-import { collectionCards } from "./collection.js?v=1.1.97";
-import { superstars } from "./superstars.js?v=1.1.97";
-import { isUnreleasedSetId } from "./release.js?v=1.1.97";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.97";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.97";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.97";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.97";
-import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.97";
-import { ownershipCapFor, isUniqueCollectionCard, totalOwnershipCapFor } from "./card-limits.js?v=1.1.97";
+import { decks } from "./decks.js?v=1.1.98";
+import { collectionCards } from "./collection.js?v=1.1.98";
+import { superstars } from "./superstars.js?v=1.1.98";
+import { isUnreleasedSetId } from "./release.js?v=1.1.98";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.98";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.98";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.98";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.98";
+import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.98";
+import { ownershipCapFor, isUniqueCollectionCard, totalOwnershipCapFor } from "./card-limits.js?v=1.1.98";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";

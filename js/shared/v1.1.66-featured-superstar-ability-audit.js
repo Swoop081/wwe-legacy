@@ -1,4 +1,4 @@
-import { superstars } from "../data/superstars.js?v=1.1.97";
+import { superstars } from "../data/superstars.js?v=1.1.98";
 
 // WWE Legacy v1.1.66 — featured-set Superstar ability individuality audit.
 // The first nine featured launch sets should not ship template placeholder copy
