@@ -1,0 +1,48 @@
+name: WWE Legacy v1.1.123 Starter Roster Fit
+on:
+  push:
+    paths:
+      - '.starter-roster-fit/READY'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Apply starter roster one-screen fix
+        run: python3 scripts/patch-starter-roster-v1.1.123.py
+      - name: Bump release
+        run: |
+          npm version 1.1.123 --no-git-tag-version
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('build.json'); d=json.loads(p.read_text()); d['version']='1.1.123'; d['name']='v1.1.123 — Starting Roster One-Screen Fit'; p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          npm run stamp-cache
+          npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          grep -q "HERE’S YOUR STARTING ROSTER" js/ui/app.js
+          grep -q 'height:100dvh!important' css/game.css
+          grep -q 'starter-summary-superstar-card' css/game.css
+      - name: Publish
+        run: |
+          rm -rf .starter-roster-fit
+          rm -f .github/workflows/wwe-starter-roster-v1.1.123.yml
+          rm -f scripts/patch-starter-roster-v1.1.123.py
+          git config user.name 'WWE Legacy Release Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'WWE Legacy v1.1.123 — starting roster fits one iPhone screen'
+          git push origin main
