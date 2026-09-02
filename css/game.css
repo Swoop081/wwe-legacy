@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.116") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.117") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -11151,3 +11151,14 @@ body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.
     font-size:.82rem;
   }
 }
+
+/* v1.1.117 — onboarding roster summary + resilient pack rip */
+.starter-roster-summary{width:min(100%,430px);min-height:100svh;margin:0 auto;padding:max(22px,env(safe-area-inset-top)) 12px max(18px,env(safe-area-inset-bottom));display:grid;grid-template-rows:auto 1fr auto;gap:14px;align-items:center;overflow:hidden}
+.starter-roster-summary h1{margin:0;text-align:center;font-size:clamp(24px,7.3vw,34px);line-height:.95;letter-spacing:.04em}
+.starter-roster-summary-cards{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:center;justify-items:center}
+.starter-roster-summary-cards .starter-summary-superstar-card{width:100%;max-width:128px;height:auto;aspect-ratio:680/1000}
+.starter-roster-summary .start-match{width:100%;min-width:0;margin:0;padding:13px 18px}
+.sealed-pack-stage.is-ripping .sealed-pack-button{animation:starterPackRip .42s ease-in forwards}
+@keyframes starterPackRip{0%{transform:scale(1) rotate(0)}55%{transform:scale(1.035) rotate(-1.5deg)}100%{transform:scale(.96) rotate(1deg);opacity:.15}}
+.pack-render-recovery{min-height:70svh;display:grid;place-items:center;align-content:center;gap:18px;text-align:center}.pack-render-recovery strong{font-size:28px;letter-spacing:.08em}
+@media(max-width:430px){.starter-roster-summary{padding-left:8px;padding-right:8px;gap:10px}.starter-roster-summary-cards{gap:5px}.starter-roster-summary h1{font-size:27px}}

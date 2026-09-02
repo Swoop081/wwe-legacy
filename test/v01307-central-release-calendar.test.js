@@ -1,19 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=1.1.116';
-import { superstars } from '../js/data/superstars.js?v=1.1.116';
+import { collectionCards } from '../js/data/collection.js?v=1.1.117';
+import { superstars } from '../js/data/superstars.js?v=1.1.117';
 import {
   playerReleasedCollectibleSetIds,
   isPlayerReleasedSetId,
   isPlayerVisibleSuperstar,
   setReleaseAt
-} from '../js/data/release.js?v=1.1.116';
-import { boosterEligible } from '../js/data/boosters.js?v=1.1.116';
-import { releasedStoreSetIds, storeRotation, storeSuperstars } from '../js/data/store.js?v=1.1.116';
-import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=1.1.116';
-import { exhibitionOpponentIds } from '../js/data/matchmaking.js?v=1.1.116';
-import { tierReward } from '../js/data/seasons.js?v=1.1.116';
-import { liveEventRotation } from '../js/data/live-events.js?v=1.1.116';
+} from '../js/data/release.js?v=1.1.117';
+import { boosterEligible } from '../js/data/boosters.js?v=1.1.117';
+import { releasedStoreSetIds, storeRotation, storeSuperstars } from '../js/data/store.js?v=1.1.117';
+import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=1.1.117';
+import { exhibitionOpponentIds } from '../js/data/matchmaking.js?v=1.1.117';
+import { tierReward } from '../js/data/seasons.js?v=1.1.117';
+import { liveEventRotation } from '../js/data/live-events.js?v=1.1.117';
 
 const at = (y,m,d,h=12) => new Date(y,m-1,d,h,0,0,0);
 const star = id => Object.values(superstars).find(s => s.id === id);

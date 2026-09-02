@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=1.1.116";
+import { superstars } from "../js/data/superstars.js?v=1.1.117";
 const SETS = new Set(["nxt-series-1", "ruthless-aggression-series-1"]);
 const expected = new Set(["kendal-grey","tony-dangelo","jaida-parker","kelani-jordan","mason-rook","tatum-paxley","lexis-king","zilla-fatu","john-cena","randy-orton","batista","jbl","eddie-guerrero","edge","jeff-hardy","rob-van-dam"]);
 const stable = value => Array.isArray(value) ? `[${value.map(stable).join(",")}]` : value && typeof value === "object" ? `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${stable(value[key])}`).join(",")}}` : JSON.stringify(value);
