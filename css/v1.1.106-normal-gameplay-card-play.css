@@ -1,0 +1,32 @@
+/* WWE Legacy v1.1.106 — normal gameplay card play.
+   Played moves/actions stay in the normal match surface. No enlarged foreground
+   showcase or special played-card animation presentation. Card artwork itself
+   may remain animated inside the ordinary card wherever it is rendered. */
+body[data-screen="match"] .played-card-animation,
+body[data-screen="match"] .played-move-animation,
+body[data-screen="match"] .played-card-showcase,
+body[data-screen="match"] .move-card-showcase,
+body[data-screen="match"] .card-play-animation,
+body[data-screen="match"] .card-play-showcase,
+body[data-screen="match"] .move-play-showcase,
+body[data-screen="match"] .gameplay-card-showcase,
+body[data-screen="match"] .move-animation-overlay,
+body[data-screen="match"] .played-card-overlay,
+body[data-screen="match"] [data-played-card-animation],
+body[data-screen="match"] [data-played-move-animation],
+body[data-screen="match"] [data-card-play-showcase] {
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  animation:none!important;
+  transition:none!important;
+}
+
+/* Never let a normal played card get promoted into a viewport-sized card. */
+body[data-screen="match"] .play-pile .ccg-card,
+body[data-screen="match"] .play-pile-card .ccg-card,
+body[data-screen="match"] .played-card .ccg-card,
+body[data-screen="match"] .played-move .ccg-card {
+  transform:none!important;
+  max-height:none;
+}
