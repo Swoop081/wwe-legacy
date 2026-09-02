@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, ownedCount } from '../js/data/profile.js?v=1.1.96';
-import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=1.1.96';
-import { awardMatchSeasonXp, claimAllSeasonTiers, seasonTier, tierReward, SEASON_TIER_COUNT, MAX_SEASON_XP } from '../js/data/seasons.js?v=1.1.96';
-import { challengeState, recordChallengeMetric, claimChallenge } from '../js/data/challenges.js?v=1.1.96';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=1.1.96';
-import { superstars } from '../js/data/superstars.js?v=1.1.96';
+import { createProfile, ownedCount } from '../js/data/profile.js?v=1.1.97';
+import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=1.1.97';
+import { awardMatchSeasonXp, claimAllSeasonTiers, seasonTier, tierReward, SEASON_TIER_COUNT, MAX_SEASON_XP } from '../js/data/seasons.js?v=1.1.97';
+import { challengeState, recordChallengeMetric, claimChallenge } from '../js/data/challenges.js?v=1.1.97';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=1.1.97';
+import { superstars } from '../js/data/superstars.js?v=1.1.97';
 
 const eligible = Object.values(superstars).filter(star => !star.developmentOnly && LAUNCH_LIVE_SET_IDS.includes(star.setId)).map(star => star.id);
 const DAY = 86400000;

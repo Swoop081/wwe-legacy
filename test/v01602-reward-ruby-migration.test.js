@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=1.1.96';
-import { sets } from '../js/data/sets.js?v=1.1.96';
-import { addOwnedCard, createProfile, migrateProfile, ownedCount, PROFILE_VERSION } from '../js/data/profile.js?v=1.1.96';
-import { applyCardTier, cardPrintingTiers, fixedPrintingTierFor } from '../js/data/variants.js?v=1.1.96';
+import { collectionCards } from '../js/data/collection.js?v=1.1.97';
+import { sets } from '../js/data/sets.js?v=1.1.97';
+import { addOwnedCard, createProfile, migrateProfile, ownedCount, PROFILE_VERSION } from '../js/data/profile.js?v=1.1.97';
+import { applyCardTier, cardPrintingTiers, fixedPrintingTierFor } from '../js/data/variants.js?v=1.1.97';
 
 const rewardSetIds = Object.values(sets)
   .filter(set => set.type === 'season-exclusive' || set.type === 'future-reward')

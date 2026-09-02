@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.96';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.97';
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 
