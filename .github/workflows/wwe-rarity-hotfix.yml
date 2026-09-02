@@ -1,0 +1,75 @@
+name: WWE Legacy Rarity Star Hotfix
+
+on:
+  push:
+    paths:
+      - '.hotfix/READY'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wwe-legacy-rarity-hotfix
+  cancel-in-progress: false
+
+jobs:
+  apply-hotfix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply deterministic rarity-star safe-zone fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          app = Path('js/ui/app.js')
+          text = app.read_text()
+          old = 'x="51" y="${62 + i * 31}"'
+          new = 'x="68" y="${78 + i * 31}"'
+          count = text.count(old)
+          if count != 1:
+              raise SystemExit(f'Expected exactly one rarity-star coordinate anchor, found {count}')
+          app.write_text(text.replace(old, new, 1))
+
+          pkg_path = Path('package.json')
+          pkg = json.loads(pkg_path.read_text())
+          if pkg.get('version') != '1.1.98':
+              raise SystemExit(f"Expected package version 1.1.98, found {pkg.get('version')}")
+          pkg['version'] = '1.1.99'
+          pkg_path.write_text(json.dumps(pkg, indent=2) + '\n')
+          PY
+
+      - name: Stamp release version and regenerate Card Studio data
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run stamp-cache
+          npm run generate-studio
+
+      - name: Verify release
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+
+      - name: Publish verified hotfix to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .release .hotfix
+          rm -f .github/workflows/wwe-rarity-hotfix.yml
+          git config user.name "WWE Legacy Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "WWE Legacy v1.1.99 — rarity star safe zone"
+          git push origin HEAD:main
