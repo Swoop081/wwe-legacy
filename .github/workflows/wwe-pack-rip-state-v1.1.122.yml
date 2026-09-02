@@ -16,44 +16,11 @@ jobs:
         with:
           node-version: 20
       - name: Fix pack rip transition state
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          p=Path('js/ui/app.js')
-          s=p.read_text()
-          old='''function processPack(kind = "standard") {
-  try {
-    currentPackType = "standard";'''
-          new='''function processPack(kind = "standard") {
-  try {
-    screen = "boosters";
-    currentPackType = "standard";'''
-          if old not in s:
-              raise SystemExit('processPack marker not found')
-          s=s.replace(old,new,1)
-          old='''  setTimeout(() => {
-    if (screen !== "boosters" || packStage !== "opening") return;
-    revealedPackCards = new Set(lastPack.map((_, index) => index));'''
-          new='''  setTimeout(() => {
-    if (packStage !== "opening" || !lastPack?.length) return;
-    revealedPackCards = new Set(lastPack.map((_, index) => index));'''
-          if old not in s:
-              raise SystemExit('rip timeout guard marker not found')
-          s=s.replace(old,new,1)
-          old='''    if (screen !== "boosters" || packStage !== "reveal" || lastPack?.[boosterFocusIndex] !== pull) return;'''
-          new='''    if (packStage !== "reveal" || lastPack?.[boosterFocusIndex] !== pull) return;'''
-          if old in s:
-              s=s.replace(old,new,1)
-          p.write_text(s)
-          PY
+        run: python3 .pack-rip-fix/fix.py
       - name: Bump release
         run: |
           npm version 1.1.122 --no-git-tag-version
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          p=Path('build.json'); d=json.loads(p.read_text()); d['version']='1.1.122'; d['name']='v1.1.122 — Pack Rip State Transition Fix'; p.write_text(json.dumps(d,indent=2)+'\n')
-          PY
+          node -e "const fs=require('fs');const p='build.json';const d=JSON.parse(fs.readFileSync(p,'utf8'));d.version='1.1.122';d.name='v1.1.122 — Pack Rip State Transition Fix';fs.writeFileSync(p,JSON.stringify(d,null,2)+'\n')"
           npm run stamp-cache
           npm run generate-studio
       - name: Verify release
@@ -62,14 +29,7 @@ jobs:
           npm run flow
           npm run validate
           npm run card-ids
-          python3 - <<'PY'
-          from pathlib import Path
-          s=Path('js/ui/app.js').read_text()
-          assert 'screen = "boosters";\n    currentPackType = "standard";' in s
-          assert 'if (packStage !== "opening" || !lastPack?.length) return;' in s
-          assert 'if (screen !== "boosters" || packStage !== "opening") return;' not in s
-          print('Pack rip transition state verified')
-          PY
+          node -e "const s=require('fs').readFileSync('js/ui/app.js','utf8');if(!s.includes('screen = \"boosters\";\n    currentPackType = \"standard\";'))process.exit(1);if(!s.includes('if (packStage !== \"opening\" || !lastPack?.length) return;'))process.exit(1);if(s.includes('if (screen !== \"boosters\" || packStage !== \"opening\") return;'))process.exit(1);console.log('Pack rip transition state verified')"
       - name: Publish
         run: |
           rm -rf .pack-rip-fix
