@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { collectionCards } from "../js/data/collection.js?v=1.1.123";
-import { addOwnedCard, totalOwnedCopies, underTierOwnershipCap } from "../js/data/profile.js?v=1.1.123";
-import { CARD_TIERS, fixedPrintingTierFor } from "../js/data/variants.js?v=1.1.123";
+import { collectionCards } from "../js/data/collection.js?v=1.1.125";
+import { addOwnedCard, totalOwnedCopies, underTierOwnershipCap } from "../js/data/profile.js?v=1.1.125";
+import { CARD_TIERS, fixedPrintingTierFor } from "../js/data/variants.js?v=1.1.125";
 
 const blank = () => ({ ownedCards: {} });
 const superstars = collectionCards.filter(card => card.kind === "superstar");

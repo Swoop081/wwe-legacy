@@ -1,9 +1,9 @@
-import { decks } from "./decks.js?v=1.1.123";
-import { collectionCards } from "./collection.js?v=1.1.123";
-import { superstars } from "./superstars.js?v=1.1.123";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=1.1.123";
-import { isPlayerReleasedSetId } from "./release.js?v=1.1.123";
-import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=1.1.123";
+import { decks } from "./decks.js?v=1.1.125";
+import { collectionCards } from "./collection.js?v=1.1.125";
+import { superstars } from "./superstars.js?v=1.1.125";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=1.1.125";
+import { isPlayerReleasedSetId } from "./release.js?v=1.1.125";
+import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=1.1.125";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));

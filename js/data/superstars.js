@@ -1,5 +1,5 @@
-import { FUTURE_ROADMAP_SUPERSTARS } from "./future-roadmap-v1.1.74.js?v=1.1.123";
-import { AJ_STYLES_SUPERSTAR } from "./aj-styles-v1.1.80.js?v=1.1.123";
+import { FUTURE_ROADMAP_SUPERSTARS } from "./future-roadmap-v1.1.74.js?v=1.1.125";
+import { AJ_STYLES_SUPERSTAR } from "./aj-styles-v1.1.80.js?v=1.1.125";
 export const superstars = {
   "iyoSky": {
     "id": "iyo-sky",

@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.123") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.125") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -11254,4 +11254,22 @@ body.booster-modal-open .ccg-card-inner {
     filter: none !important;
     backdrop-filter: none !important;
   }
+}
+
+
+/* v1.1.125 — iPhone Chrome sealed-pack interaction hardening */
+body.booster-modal-open .sealed-pack-button{
+  position:relative!important;
+  z-index:30!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+}
+body.booster-modal-open .sealed-pack-button .physical-booster-pack,
+body.booster-modal-open .sealed-pack-button .physical-booster-pack *,
+body.booster-modal-open .sealed-pack-button>strong,
+body.booster-modal-open .sealed-pack-button>small{
+  pointer-events:none!important;
 }

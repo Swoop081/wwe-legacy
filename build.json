@@ -1,5 +1,5 @@
 {
-  "version": "1.1.123",
+  "version": "1.1.125",
   "releasedAt": "2026-09-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
@@ -7,5 +7,5 @@
   "criticalFixOnly": false,
   "physicalIphoneSmoke": "pending-v1.1.124",
   "launchStatus": "released",
-  "name": "v1.1.124 — iPhone Pack Reveal Stability"
+  "name": "v1.1.125 \u2014 iPhone Chrome Pack Tap + Cache Fix"
 }
