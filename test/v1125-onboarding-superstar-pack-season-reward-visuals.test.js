@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, STARTER_CHOICES, claimWelcomeSuperstarPack, welcomeSuperstarState, ownedCount } from "../js/data/profile.js?v=1.1.127";
-import { superstarPackCandidates, SUPERSTAR_PACK_SIZE } from "../js/data/superstar-packs.js?v=1.1.127";
-import { collectionCards } from "../js/data/collection.js?v=1.1.127";
+import { createProfile, STARTER_CHOICES, claimWelcomeSuperstarPack, welcomeSuperstarState, ownedCount } from "../js/data/profile.js?v=1.1.128";
+import { superstarPackCandidates, SUPERSTAR_PACK_SIZE } from "../js/data/superstar-packs.js?v=1.1.128";
+import { collectionCards } from "../js/data/collection.js?v=1.1.128";
 
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");

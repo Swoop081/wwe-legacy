@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=1.1.127';
-import { cardsForSet } from '../js/data/collection.js?v=1.1.127';
-import { boosterCreditsFor } from '../js/data/boosters.js?v=1.1.127';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=1.1.128';
+import { cardsForSet } from '../js/data/collection.js?v=1.1.128';
+import { boosterCreditsFor } from '../js/data/boosters.js?v=1.1.128';
 import {
   COLLECTION_MILESTONES,
   EMERALD_MILESTONES,
@@ -13,7 +13,7 @@ import {
   availableMilestoneRewards,
   claimMilestone,
   setProgressState
-} from '../js/data/set-progression.js?v=1.1.127';
+} from '../js/data/set-progression.js?v=1.1.128';
 
 const fixedRng = () => 0.314159;
 const now = new Date(2026,7,24,12,0,0);

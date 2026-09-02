@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.127';
-import { superstars } from '../js/data/superstars.js?v=1.1.127';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.128';
+import { superstars } from '../js/data/superstars.js?v=1.1.128';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);

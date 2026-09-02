@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=1.1.127";
-import { superstars } from "../js/data/superstars.js?v=1.1.127";
-import { decks } from "../js/data/decks.js?v=1.1.127";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.127";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.127";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=1.1.127";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.127";
-import { canPlaySpecial } from "../js/engine/rules.js?v=1.1.127";
+import { sets } from "../js/data/sets.js?v=1.1.128";
+import { superstars } from "../js/data/superstars.js?v=1.1.128";
+import { decks } from "../js/data/decks.js?v=1.1.128";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.128";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.128";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=1.1.128";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.128";
+import { canPlaySpecial } from "../js/engine/rules.js?v=1.1.128";
 
 const razor=Object.values(superstars).find(s=>s.id==="razor-ramon");
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
