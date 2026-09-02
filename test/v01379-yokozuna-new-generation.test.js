@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { superstars } from '../js/data/superstars.js?v=1.1.112';
-import { decks } from '../js/data/decks.js?v=1.1.112';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.112';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.112';
-import { boosterEligible } from '../js/data/boosters.js?v=1.1.112';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.112';
-import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.112';
-await import('../js/data/superstar-nameplates.js?v=1.1.112');
+import { superstars } from '../js/data/superstars.js?v=1.1.113';
+import { decks } from '../js/data/decks.js?v=1.1.113';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.113';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.113';
+import { boosterEligible } from '../js/data/boosters.js?v=1.1.113';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.113';
+import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.113';
+await import('../js/data/superstar-nameplates.js?v=1.1.113');
 
 const yoko=Object.values(superstars).find(s=>s.id==='yokozuna');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));

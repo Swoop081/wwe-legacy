@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.112";
-import { superstars } from "./superstars.js?v=1.1.112";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.112";
-import { awardSeasonXp } from "./seasons.js?v=1.1.112";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.113";
+import { superstars } from "./superstars.js?v=1.1.113";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.113";
+import { awardSeasonXp } from "./seasons.js?v=1.1.113";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -296,9 +296,7 @@ export const LAUNCH_THEME_TOWERS = Object.freeze([
 ]);
 
 export const LIVE_EVENT_ROTATION_POOL = Object.freeze([
-  ...LAUNCH_THEME_TOWERS,
-  ...THREE_DAY_TOWERS,
-  ...WEEKLY_TOWERS
+  ...LAUNCH_THEME_TOWERS
 ]);
 export const LIVE_EVENT_COOLDOWN_DAYS = 1;
 
