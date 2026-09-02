@@ -1,0 +1,92 @@
+name: WWE Legacy Live Event Owned Card Fit
+on:
+  push:
+    paths:
+      - '.live-event-card-fit/READY'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Remove undersized Live Event detail overlays
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('js/ui/app.js')
+          s=p.read_text()
+          old='''    const wasSelected = btn.classList.contains('selected');\n    if (!wasSelected) {\n      for (const existing of [...selectDetailKeys]) if (existing.startsWith(`${context}:`)) selectDetailKeys.delete(existing);\n      onPick(starId);\n      restoreScroll();\n      return;\n    }\n    if (selectDetailKeys.has(key)) selectDetailKeys.delete(key); else selectDetailKeys.add(key);\n    onPick(starId);\n    restoreScroll();\n'''
+          new='''    const wasSelected = btn.classList.contains('selected');\n    const frontOnly = context === "live-event-select" || context === "live-event-swap";\n    if (!wasSelected || frontOnly) {\n      for (const existing of [...selectDetailKeys]) if (existing.startsWith(`${context}:`)) selectDetailKeys.delete(existing);\n      onPick(starId);\n      restoreScroll();\n      return;\n    }\n    if (selectDetailKeys.has(key)) selectDetailKeys.delete(key); else selectDetailKeys.add(key);\n    onPick(starId);\n    restoreScroll();\n'''
+          if old not in s: raise SystemExit('selection carousel click block not found')
+          p.write_text(s.replace(old,new))
+          PY
+          cat >> css/game.css <<'CSS'
+
+/* v1.1.109 — Live Event owned Superstar cards stay clean and fully contained.
+   The compact selector is front-only: no generic detail-back text or stray selector
+   overlays are allowed to escape the physical card bounds. */
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-superstar-card,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-superstar-card{
+  overflow:hidden!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-inner,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-card-inner{
+  transform:none!important;
+  overflow:hidden!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-front,
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .selection-owned-card,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-card-front,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .selection-owned-card{
+  width:100%!important;
+  height:100%!important;
+  overflow:hidden!important;
+  padding:0!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-back,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-card-back,
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-favourite,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-favourite{
+  display:none!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .selection-owned-superstar-card,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .selection-owned-superstar-card{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  aspect-ratio:680/1000!important;
+  object-fit:contain!important;
+  overflow:hidden!important;
+}
+CSS
+      - name: Bump release version
+        run: |
+          npm version 1.1.109 --no-git-tag-version --allow-same-version
+          node -e "const fs=require('fs'); const p='build.json'; const j=JSON.parse(fs.readFileSync(p)); j.version='1.1.109'; j.name='v1.1.109 — Live Event Owned Card Fit'; fs.writeFileSync(p, JSON.stringify(j,null,2)+'\n');"
+          npm run stamp-cache
+          npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          grep -q 'frontOnly = context === "live-event-select"' js/ui/app.js
+          grep -q 'v1.1.109 — Live Event owned Superstar cards stay clean' css/game.css
+      - name: Publish
+        run: |
+          rm -rf .live-event-card-fit
+          rm -f .github/workflows/wwe-live-event-card-fit.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m 'WWE Legacy v1.1.109 — Live Event owned card fit'
+          git push
