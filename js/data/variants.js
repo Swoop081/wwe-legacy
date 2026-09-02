@@ -1,4 +1,4 @@
-import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.121";
+import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.122";
 
 // WWE Legacy five-tier collectible printing system.
 // v1.1.70: the five-tier identity system now covers the complete gameplay

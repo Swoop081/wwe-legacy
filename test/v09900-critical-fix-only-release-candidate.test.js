@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.121';
-import { collectionCards } from '../js/data/collection.js?v=1.1.121';
-import { superstars } from '../js/data/superstars.js?v=1.1.121';
-import { decks } from '../js/data/decks.js?v=1.1.121';
-import { LAUNCH_LIVE_SET_IDS, isPlayerVisibleSuperstar } from '../js/data/release.js?v=1.1.121';
-import { sets } from '../js/data/sets.js?v=1.1.121';
-import { rewardPrintingTierForSet } from '../js/data/reward-printings.js?v=1.1.121';
-import { PROFILE_VERSION } from '../js/data/profile.js?v=1.1.121';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.122';
+import { collectionCards } from '../js/data/collection.js?v=1.1.122';
+import { superstars } from '../js/data/superstars.js?v=1.1.122';
+import { decks } from '../js/data/decks.js?v=1.1.122';
+import { LAUNCH_LIVE_SET_IDS, isPlayerVisibleSuperstar } from '../js/data/release.js?v=1.1.122';
+import { sets } from '../js/data/sets.js?v=1.1.122';
+import { rewardPrintingTierForSet } from '../js/data/reward-printings.js?v=1.1.122';
+import { PROFILE_VERSION } from '../js/data/profile.js?v=1.1.122';
 
 test('v0.99 certified launch-content freeze carries forward into v1.0',()=>{
   assert.equal(Object.keys(superstars).length,76); assert.equal(Object.keys(decks).length,76);

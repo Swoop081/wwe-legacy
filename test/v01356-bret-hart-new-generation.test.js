@@ -1,12 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=1.1.121";
-import { superstars } from "../js/data/superstars.js?v=1.1.121";
-import { decks } from "../js/data/decks.js?v=1.1.121";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.121";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.121";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId, setReleaseAt } from "../js/data/release.js?v=1.1.121";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.121";
+import { sets } from "../js/data/sets.js?v=1.1.122";
+import { superstars } from "../js/data/superstars.js?v=1.1.122";
+import { decks } from "../js/data/decks.js?v=1.1.122";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.122";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.122";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId, setReleaseAt } from "../js/data/release.js?v=1.1.122";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.122";
 
 const bret = Object.values(superstars).find(s => s.id === "bret-hart");
 const byId = Object.fromEntries(allGameplayCards.map(c => [c.id,c]));

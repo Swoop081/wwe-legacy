@@ -1,5 +1,5 @@
 {
-  "version": "1.1.121",
+  "version": "1.1.122",
   "releasedAt": "2026-09-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
@@ -7,5 +7,5 @@
   "criticalFixOnly": false,
   "physicalIphoneSmoke": "pending-v1.1.109",
   "launchStatus": "released",
-  "name": "v1.1.120 — Play Page Proportions + Larger Portraits"
+  "name": "v1.1.122 — Pack Rip State Transition Fix"
 }

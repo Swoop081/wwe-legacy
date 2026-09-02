@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.1.121';
-import { decks } from '../js/data/decks.js?v=1.1.121';
-import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.121';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.121';
-import { decisionOwner,cpuDecision,executeCpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.121';
-import { createProfile, saveProfile, loadProfile, PROFILE_KEY } from '../js/data/profile.js?v=1.1.121';
-import { recordCareerMatch } from '../js/data/career.js?v=1.1.121';
+import { superstars } from '../js/data/superstars.js?v=1.1.122';
+import { decks } from '../js/data/decks.js?v=1.1.122';
+import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.122';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.122';
+import { decisionOwner,cpuDecision,executeCpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.122';
+import { createProfile, saveProfile, loadProfile, PROFILE_KEY } from '../js/data/profile.js?v=1.1.122';
+import { recordCareerMatch } from '../js/data/career.js?v=1.1.122';
 
 class MemoryStorage { constructor(){this.map=new Map();} getItem(k){return this.map.has(k)?this.map.get(k):null;} setItem(k,v){this.map.set(k,String(v));} removeItem(k){this.map.delete(k);} }
 const released=Object.values(superstars).filter(s=>isPlayerReleasedSetId(s.setId));

@@ -1,5 +1,5 @@
-import { assetUrl } from "../config/build.js?v=1.1.121";
-import { canonicalImageKeyForCard } from "./artwork.js?v=1.1.121";
+import { assetUrl } from "../config/build.js?v=1.1.122";
+import { canonicalImageKeyForCard } from "./artwork.js?v=1.1.122";
 
 // v1.1.22 — Every collectible card may optionally use animated artwork.
 // Animation is opt-in per card; the existing static front/base plate is always the fallback.
