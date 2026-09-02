@@ -51,7 +51,7 @@ const LINKED_ANIMATION_STORAGE_KEY="wweLegacyAnimatedCardLinks.v1";
 function linkedAnimationMap(){try{const raw=localStorage.getItem(LINKED_ANIMATION_STORAGE_KEY);if(!raw)return {};const parsed=JSON.parse(raw);return parsed&&typeof parsed==="object"&&!Array.isArray(parsed)?parsed:{};}catch{return {};}}
 function savedLinkedAnimation(card=currentCard()){if(!card?.id)return "";return String(linkedAnimationMap()[card.id]||"").trim();}
 function saveLinkedAnimation(card,url){if(!card?.id)return false;try{const map=linkedAnimationMap(),value=String(url||"").trim();if(value)map[card.id]=value;else delete map[card.id];localStorage.setItem(LINKED_ANIMATION_STORAGE_KEY,JSON.stringify(map));return true;}catch{return false;}}
-const BUILD_VERSION="1.1.101";
+const BUILD_VERSION="1.1.102";
 function assetUrl(path){
   if(/^https?:\/\//i.test(String(path||""))) return String(path);
   const url=new URL(`../${path}`,document.location.href);
@@ -269,7 +269,7 @@ function drawBottomIdentity(){
   renderer.drawFace(ctx,card,{width:w,height:h,theme:set,nameplateProfile:superstarNameplateProfile(card),drawPlaque:true,drawInk:!state.renderPlateOnly,drawStars:false});
 }
 function drawPhysicalPrintingFrame(){
-  const meta=PRINTING_TIER_FRAMES[selectedPrintingTier()]||PRINTING_TIER_FRAMES.normal,w=canvas.width,h=canvas.height,s=scale();
+  const selectedFrame=PRINTING_TIER_FRAMES[selectedPrintingTier()]||PRINTING_TIER_FRAMES.normal,frameCard=currentCard(),meta=(frameCard?.kind==="superstar"||frameCard?.kind==="entrance")?{label:"Gold",color:"#d6ad37",dark:"#8f6716",highlight:"rgba(255,244,190,.92)"}:selectedFrame,w=canvas.width,h=canvas.height,s=scale();
   ctx.save();
   const inset=7*s,width=34*s,radius=29*s;
   roundedRect(ctx,inset,inset,w-inset*2,h-inset*2,radius);

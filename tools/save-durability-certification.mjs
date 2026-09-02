@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import {
   PROFILE_KEY, PROFILE_RECOVERY_KEY,
   createProfile, loadProfile, saveProfile, resetProfile, profilePersistenceStatus
-} from '../js/data/profile.js?v=1.1.101';
-import { serializeSave, parseSaveText } from '../js/data/save-backup.js?v=1.1.101';
+} from '../js/data/profile.js?v=1.1.102';
+import { serializeSave, parseSaveText } from '../js/data/save-backup.js?v=1.1.102';
 
 class MemoryStorage {
   constructor(){ this.map=new Map(); }

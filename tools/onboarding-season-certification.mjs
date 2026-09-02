@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, ownedCount, DEFAULT_PLAYER_ENTRANCE_ID, STARTING_MOMENTUM_COPIES } from '../js/data/profile.js?v=1.1.101';
-import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=1.1.101';
-import { claimAllSeasonTiers, seasonState } from '../js/data/seasons.js?v=1.1.101';
+import { STARTER_CHOICES, WELCOME_SUPERSTAR_SET_IDS, createProfile, claimWelcomeSuperstar, ownedCount, DEFAULT_PLAYER_ENTRANCE_ID, STARTING_MOMENTUM_COPIES } from '../js/data/profile.js?v=1.1.102';
+import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=1.1.102';
+import { claimAllSeasonTiers, seasonState } from '../js/data/seasons.js?v=1.1.102';
 
 const report = { starterPaths: [], welcomePaths: [], seasonCompletion: null };
 for (const sid of STARTER_CHOICES) {

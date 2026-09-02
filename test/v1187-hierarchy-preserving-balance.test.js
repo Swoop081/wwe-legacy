@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=1.1.101";
-import { decks } from "../js/data/decks.js?v=1.1.101";
+import { superstars } from "../js/data/superstars.js?v=1.1.102";
+import { decks } from "../js/data/decks.js?v=1.1.102";
 const star=id=>Object.values(superstars).find(s=>s.id===id);
 test("v1.1.87 preserves authored HP hierarchy while retaining Tiffany structural access",()=>{
  const t=star("tiffany-stratton"),k=star("kurt-angle");
