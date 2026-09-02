@@ -1,0 +1,93 @@
+name: WWE Legacy Play Page Live Events Hero
+on:
+  push:
+    paths:
+      - '.play-page-hero/READY'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Rebuild Play page one hierarchy
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('js/ui/app.js')
+          s=p.read_text()
+          old='''  const firstPageCards = `
+      <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("rhea-ripley","Rhea Ripley")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · 1 RANDOM PACK EVERY 5 WINS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
+      <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · 1 RANDOM PACK ON CLEAR</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
+      <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr ${reigningKingId?'has-reigning-king':''}"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${reigningKingId ? portraitMarkup(reigningKingId,reigningKingName) : kotrDefaultPortrait}</span><span class="legacy-mode-copy"><em>${reigningKingName ? `♛ REIGNING KING · ${reigningKingName.toUpperCase()}` : '8 SUPERSTARS · SINGLE ELIMINATION'}</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>${reigningKingName?'RETURN TO THE THRONE':'ENTER THE TOURNAMENT'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>`;'''
+          new='''  const firstPageCards = `
+      <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event play-page-feature-hero"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · 1 RANDOM PACK ON CLEAR</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
+      <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition play-page-compact-mode"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("rhea-ripley","Rhea Ripley")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · 1 RANDOM PACK EVERY 5 WINS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
+      <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr play-page-compact-mode ${reigningKingId?'has-reigning-king':''}"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${reigningKingId ? portraitMarkup(reigningKingId,reigningKingName) : kotrDefaultPortrait}</span><span class="legacy-mode-copy"><em>${reigningKingName ? `♛ REIGNING KING · ${reigningKingName.toUpperCase()}` : '8 SUPERSTARS · SINGLE ELIMINATION'}</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>${reigningKingName?'RETURN TO THE THRONE':'ENTER THE TOURNAMENT'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>`;'''
+          if old not in s:
+              raise SystemExit('firstPageCards block not found')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+
+          css=Path('css/game.css')
+          c=css.read_text()
+          c += '''\n/* v1.1.118 — Play page one uses the full iPhone viewport with Live Events as the hero. */
+@media (max-width:600px){
+  .legacy-play-v3.play-menu-page-1{min-height:calc(100svh - 188px);height:calc(100svh - 188px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding-bottom:4px;overflow:hidden}
+  .play-menu-page-1 .legacy-play-heading{padding-block:4px 2px;margin:0}
+  .play-menu-page-1 .legacy-play-heading h2{font-size:clamp(29px,8.2vw,38px);line-height:.92;margin:0}
+  .play-menu-page-1 .legacy-play-heading p{margin:3px 0 0;font-size:12px}
+  .play-menu-page-1 .legacy-mode-stack{display:grid;grid-template-rows:minmax(0,1.34fr) minmax(0,.86fr) minmax(0,.86fr);gap:7px;min-height:0}
+  .play-menu-page-1 .legacy-mode-banner{min-height:0;height:100%;margin:0;border-radius:10px;overflow:hidden}
+  .play-menu-page-1 .play-page-feature-hero{min-height:0}
+  .play-menu-page-1 .play-page-feature-hero .legacy-mode-superstar{width:47%;right:-1%;transform:scale(1.08);transform-origin:bottom right}
+  .play-menu-page-1 .play-page-feature-hero .legacy-mode-copy{width:61%;padding:14px 8px 12px 14px}
+  .play-menu-page-1 .play-page-feature-hero .mode-logo span,.play-menu-page-1 .play-page-feature-hero .mode-logo strong{font-size:clamp(34px,10vw,50px);line-height:.82}
+  .play-menu-page-1 .play-page-feature-hero .legacy-mode-copy>b{font-size:13px;padding:10px 12px;margin-top:8px}
+  .play-menu-page-1 .play-page-compact-mode .legacy-mode-superstar{width:34%;right:0}
+  .play-menu-page-1 .play-page-compact-mode .legacy-mode-copy{width:70%;padding:9px 7px 8px 12px}
+  .play-menu-page-1 .play-page-compact-mode .mode-logo span,.play-menu-page-1 .play-page-compact-mode .mode-logo strong{font-size:clamp(25px,7.2vw,34px);line-height:.84}
+  .play-menu-page-1 .play-page-compact-mode .legacy-mode-copy em{font-size:9px}
+  .play-menu-page-1 .play-page-compact-mode .legacy-mode-copy small{font-size:9px;line-height:1.08;margin-top:2px}
+  .play-menu-page-1 .play-page-compact-mode .legacy-mode-copy>b{font-size:11px;padding:7px 9px;margin-top:5px}
+  .play-menu-page-1 .play-mode-page-arrow{min-height:54px;height:54px;margin:0;padding:0 18px;border-radius:9px}
+  .play-menu-page-1 .play-mode-page-arrow span{font-size:12px}
+  .play-menu-page-1 .play-mode-page-arrow b{font-size:34px}
+}
+'''
+          css.write_text(c)
+          PY
+      - name: Bump release
+        run: |
+          npm version 1.1.118 --no-git-tag-version
+          npm run stamp-cache
+          npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('js/ui/app.js').read_text()
+          c=Path('css/game.css').read_text()
+          assert s.index('id="play-live-event"') < s.index('id="play-exhibition"')
+          assert 'play-page-feature-hero' in s
+          assert 'grid-template-rows:minmax(0,1.34fr)' in c
+          print('Play page one hierarchy verified')
+          PY
+      - name: Publish
+        run: |
+          rm -rf .play-page-hero
+          rm -f .github/workflows/wwe-play-page-live-events-hero.yml
+          git config user.name 'Swoop081'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'WWE Legacy v1.1.118 — Live Events Play page hero'
+          git push origin main
