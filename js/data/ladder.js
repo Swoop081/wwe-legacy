@@ -1,5 +1,5 @@
-import { unlockSuperstar } from "./profile.js?v=1.1.125";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.125";
+import { unlockSuperstar } from "./profile.js?v=1.1.126";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.126";
 
 export const LADDER_LIVES = 3;
 export const LADDER_LENGTH = 8;

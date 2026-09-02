@@ -1,1 +1,1 @@
-import { allGameplayCards } from "./content.js?v=1.1.125"; export const cards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="summerslam-series-1").map(c=>[c.id,c]));
+import { allGameplayCards } from "./content.js?v=1.1.126"; export const cards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="summerslam-series-1").map(c=>[c.id,c]));

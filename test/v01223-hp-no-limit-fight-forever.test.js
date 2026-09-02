@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=1.1.125";
-import { decks } from "../js/data/decks.js?v=1.1.125";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.125";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.125";
-import { canPlayAction } from "../js/engine/rules.js?v=1.1.125";
+import { superstars } from "../js/data/superstars.js?v=1.1.126";
+import { decks } from "../js/data/decks.js?v=1.1.126";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.126";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.126";
+import { canPlayAction } from "../js/engine/rules.js?v=1.1.126";
 
 const stars=Object.values(superstars);
 const fight=allGameplayCards.find(c=>c.id==='fight-forever');

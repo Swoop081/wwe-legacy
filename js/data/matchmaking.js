@@ -1,6 +1,6 @@
-import { superstars } from "./superstars.js?v=1.1.125";
-import { decks } from "./decks.js?v=1.1.125";
-import { isPlayerReleasedSetId, PLAYER_COLLECTIBLE_SET_IDS } from "./release.js?v=1.1.125";
+import { superstars } from "./superstars.js?v=1.1.126";
+import { decks } from "./decks.js?v=1.1.126";
+import { isPlayerReleasedSetId, PLAYER_COLLECTIBLE_SET_IDS } from "./release.js?v=1.1.126";
 
 export function exhibitionOpponentIds(playerSuperstarId, now = new Date()) {
   return Object.values(superstars)
