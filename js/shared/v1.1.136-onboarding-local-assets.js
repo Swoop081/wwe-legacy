@@ -1,18 +1,12 @@
-/* v1.1.136 — repo-hosted onboarding brands, eager same-origin rendering, premium starter summary. */
+/* v1.1.137 — safe repo-hosted onboarding assets; no DOM prototype patching or render gating. */
 (() => {
   const LOCAL = {
-    raw: './assets/images/onboarding-raw-logo.svg?v=1.1.136',
-    smackdown: './assets/images/onboarding-smackdown-logo.svg?v=1.1.136',
-    nxt: './assets/images/onboarding-nxt-logo.svg?v=1.1.136'
+    raw: './assets/images/onboarding-raw-logo.svg?v=1.1.137',
+    smackdown: './assets/images/onboarding-smackdown-logo.svg?v=1.1.137',
+    nxt: './assets/images/onboarding-nxt-logo.svg?v=1.1.137'
   };
 
-  const REMOTE_TO_LOCAL = new Map([
-    ['https://commons.wikimedia.org/wiki/Special:Redirect/file/WWE_RAW_Logo_2025.svg', LOCAL.raw],
-    ['https://commons.wikimedia.org/wiki/Special:Redirect/file/WWE_SmackDown_%282024%29_Logo.svg', LOCAL.smackdown],
-    ['https://corporate.wwe.com/f/inline-images/NXT-logo.png', LOCAL.nxt]
-  ]);
-
-  // Warm all three same-origin assets before app.js can render the first starter screen.
+  // Warm local assets without blocking startup. A failed logo can never stop onboarding.
   window.__WWE_LEGACY_STARTER_BRAND_PRELOADERS__ = Object.values(LOCAL).map(src => {
     const image = new Image();
     image.loading = 'eager';
@@ -21,30 +15,6 @@
     image.src = src;
     return image;
   });
-
-  // app.js builds onboarding with root.innerHTML. Rewrite its three known remote brand
-  // URLs to same-origin assets before the browser parses the markup, so no third-party
-  // image request is needed for the starter screens and lazy loading cannot cause pop-in.
-  const innerHTMLDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
-  if (innerHTMLDescriptor?.get && innerHTMLDescriptor?.set && !window.__WWE_LEGACY_LOCAL_BRAND_INNERHTML_PATCH__) {
-    window.__WWE_LEGACY_LOCAL_BRAND_INNERHTML_PATCH__ = true;
-    Object.defineProperty(Element.prototype, 'innerHTML', {
-      configurable: innerHTMLDescriptor.configurable,
-      enumerable: innerHTMLDescriptor.enumerable,
-      get: innerHTMLDescriptor.get,
-      set(value) {
-        let html = String(value ?? '');
-        for (const [remote, local] of REMOTE_TO_LOCAL) html = html.split(remote).join(local);
-        if (html.includes('starter-onboarding-set-logo')) {
-          html = html.replace(
-            /<img loading="lazy" decoding="async" referrerpolicy="no-referrer" class="set-brand-logo starter-onboarding-set-logo"/g,
-            '<img loading="eager" decoding="async" fetchpriority="high" class="set-brand-logo starter-onboarding-set-logo"'
-          );
-        }
-        innerHTMLDescriptor.set.call(this, html);
-      }
-    });
-  }
 
   const localForStarterImage = img => {
     const screen = img.closest?.('.three-brand-starter-onboarding');
@@ -65,17 +35,19 @@
   };
 
   const decorateSummary = root => {
-    if (!root || root.dataset.v11136Decorated === '1') return;
-    root.dataset.v11136Decorated = '1';
+    if (!root || root.dataset.v11137Decorated === '1') return;
+    root.dataset.v11137Decorated = '1';
     const title = root.querySelector('h1');
     if (!root.querySelector('.starter-roster-summary-brand')) {
       const brand = document.createElement('div');
       brand.className = 'starter-roster-summary-brand';
-      brand.innerHTML = '<img class="starter-roster-summary-logo" src="./assets/images/app-icon-192.png?v=1.1.136" alt="WWE Legacy"><span class="starter-roster-summary-wordmark">WWE LEGACY</span>';
+      brand.innerHTML = '<img class="starter-roster-summary-logo" src="./assets/images/app-icon-192.png?v=1.1.137" alt="WWE Legacy"><span class="starter-roster-summary-wordmark">WWE LEGACY</span>';
       root.insertBefore(brand, title || root.firstChild);
     }
-    const button = root.querySelector('#starter-summary-continue');
+    const button = root.querySelector('#open-starter-support, #starter-summary-continue');
     if (button) {
+      button.id = 'starter-summary-continue';
+      button.classList.add('starter-roster-continue');
       button.innerHTML = 'CONTINUE <span aria-hidden="true">›</span>';
       button.setAttribute('aria-label', 'Continue');
     }
@@ -92,8 +64,16 @@
   const observer = new MutationObserver(mutations => {
     for (const mutation of mutations) mutation.addedNodes.forEach(inspect);
   });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
 
-  document.querySelectorAll('.starter-onboarding-set-logo').forEach(promoteStarterBrand);
-  document.querySelectorAll('.starter-roster-summary').forEach(decorateSummary);
+  const start = () => {
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    document.querySelectorAll('.starter-onboarding-set-logo').forEach(promoteStarterBrand);
+    document.querySelectorAll('.starter-roster-summary').forEach(decorateSummary);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
 })();
