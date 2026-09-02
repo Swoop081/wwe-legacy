@@ -1,5 +1,5 @@
 {
-  "version": "1.1.118",
+  "version": "1.1.119",
   "releasedAt": "2026-09-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
@@ -7,5 +7,5 @@
   "criticalFixOnly": false,
   "physicalIphoneSmoke": "pending-v1.1.109",
   "launchStatus": "released",
-  "name": "v1.1.118 \u2014 Live Events Play Page Hero"
+  "name": "v1.1.119 \u2014 Play Page Full Viewport Fill"
 }

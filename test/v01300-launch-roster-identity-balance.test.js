@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.118';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.118';
-import { superstars } from '../js/data/superstars.js?v=1.1.118';
-import { decks } from '../js/data/decks.js?v=1.1.118';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.118';
-import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=1.1.118';
-import { evaluateDeckHealth } from '../js/data/deck-health.js?v=1.1.118';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.119';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.119';
+import { superstars } from '../js/data/superstars.js?v=1.1.119';
+import { decks } from '../js/data/decks.js?v=1.1.119';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.119';
+import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=1.1.119';
+import { evaluateDeckHealth } from '../js/data/deck-health.js?v=1.1.119';
 
 const cards = new Map(allGameplayCards.map(c => [c.id, c]));
 const stars = new Map(Object.values(superstars).map(s => [s.id, s]));
