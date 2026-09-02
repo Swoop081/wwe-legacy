@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.114";
-import { superstars } from "./superstars.js?v=1.1.114";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.114";
-import { awardSeasonXp } from "./seasons.js?v=1.1.114";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.115";
+import { superstars } from "./superstars.js?v=1.1.115";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.115";
+import { awardSeasonXp } from "./seasons.js?v=1.1.115";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -553,18 +553,24 @@ function dailyVarietyEvents(templates, profile = null, now = new Date()) {
   return templates.map((template,index) => {
     const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, (daySerial(now)+index) % LIVE_REWARD_FALLBACKS.length, now), now);
     const themed = releasedLiveEventOpponentIds(event, profile, now);
-    // Theme eligibility is absolute. Variety/recency may reorder an event's authored
-    // opponent pool, but must never widen it (for example Evolution is women-only).
-    const candidates = [...new Set(themed)].filter(id => !usedToday.has(id));
+    // Theme eligibility and five-match tower length are absolute. Daily variety is
+    // only a preference: unused Superstars lead the pool, but already-used themed
+    // opponents backfill when necessary so a tower can never collapse below five.
+    const candidates = [...new Set(themed)];
     candidates.sort((a,b) => {
       const aLast = recentUse.get(a) ?? -Infinity, bLast = recentUse.get(b) ?? -Infinity;
       if (aLast !== bLast) return aLast - bLast;
       const seed = `${dateKey(localDayStart(now))}:${event.id}:`;
       return `${seed}${a}`.localeCompare(`${seed}${b}`);
     });
-    const selected = candidates.slice(0, LIVE_EVENT_LENGTH);
-    selected.forEach(id => usedToday.add(id));
-    return { ...event, opponentPool: selected };
+    const unused = candidates.filter(id => !usedToday.has(id));
+    const reused = candidates.filter(id => usedToday.has(id));
+    const ordered = [...unused, ...reused];
+    if (ordered.length < LIVE_EVENT_LENGTH) {
+      throw new Error(`Live Event ${event.id} has only ${ordered.length} released themed opponents; five are required.`);
+    }
+    ordered.slice(0, LIVE_EVENT_LENGTH).forEach(id => usedToday.add(id));
+    return { ...event, opponentPool: ordered };
   });
 }
 
