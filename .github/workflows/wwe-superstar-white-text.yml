@@ -1,0 +1,109 @@
+name: WWE Legacy Superstar White Text
+
+on:
+  push:
+    paths:
+      - '.superstar-white-text/READY'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wwe-legacy-superstar-white-text
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply Superstar white identity text
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          pkg_path = Path('package.json')
+          pkg = json.loads(pkg_path.read_text())
+          if pkg.get('version') != '1.1.102':
+              raise SystemExit(f"Expected v1.1.102, found {pkg.get('version')}")
+          pkg['version'] = '1.1.103'
+          pkg_path.write_text(json.dumps(pkg, indent=2) + '\n')
+
+          css_path = Path('css/v1.1.103-superstar-white-text.css')
+          css_path.write_text('''/* WWE Legacy v1.1.103 — Superstar White Identity Text\n   Superstar names and the SUPERSTAR type label are always white.\n   Existing stroke, glow, typography, set identity, rarity effects and gold frame remain intact. */\n.ccg-card.type-superstar {\n  --np-top:#fff!important;\n  --np-bottom:#fff!important;\n}\n.ccg-card.type-superstar .ccg-superstar-nameplate small {\n  color:#fff!important;\n}\n''')
+
+          index_path = Path('index.html')
+          index = index_path.read_text()
+          marker = '  <link rel="stylesheet" href="./css/v1.1.101-superstar-entrance-gold-frame.css?v=1.1.102">\n'
+          insert = marker + '  <link rel="stylesheet" href="./css/v1.1.103-superstar-white-text.css?v=1.1.103">\n'
+          if 'v1.1.103-superstar-white-text.css' not in index:
+              if marker not in index:
+                  raise SystemExit('Could not locate v1.1.101 gold-frame stylesheet marker in index.html')
+              index = index.replace(marker, insert, 1)
+          index_path.write_text(index)
+
+          shared_path = Path('js/shared/card-face-renderer.js')
+          shared = shared_path.read_text()
+          old_name = 'const fill=gradient(ctx,0,size,theme.nameTop||"#fff",theme.nameBottom||"#fff");drawVectorText(ctx,text,0,0,{size,tracking,xScale:scaleX,fillStyle:fill,'
+          new_name = 'const fill="#ffffff";drawVectorText(ctx,text,0,0,{size,tracking,xScale:scaleX,fillStyle:fill,'
+          if shared.count(old_name) != 1:
+              raise SystemExit(f'Expected one shared Superstar name gradient, found {shared.count(old_name)}')
+          shared = shared.replace(old_name, new_name, 1)
+          old_label = 'drawVectorText(ctx,type,cx,height*.909,{size:29*s,tracking:1*s,fillStyle:isReward?"#f1d079":(theme.nameBottom||"#fff")});'
+          new_label = 'drawVectorText(ctx,type,cx,height*.909,{size:29*s,tracking:1*s,fillStyle:isSuperstar?"#ffffff":(isReward?"#f1d079":(theme.nameBottom||"#fff"))});'
+          if shared.count(old_label) != 1:
+              raise SystemExit(f'Expected one shared non-move type label renderer, found {shared.count(old_label)}')
+          shared = shared.replace(old_label, new_label, 1)
+          shared_path.write_text(shared)
+
+          studio_path = Path('js/tools/card-art-studio.js')
+          studio = studio_path.read_text()
+          old_fallback = 'const ng=ctx.createLinearGradient(0,-26*s,0,18*s);ng.addColorStop(0,set.nameTop);ng.addColorStop(.62,set.nameTop);ng.addColorStop(1,set.nameBottom);ctx.fillStyle=ng;'
+          new_fallback = 'ctx.fillStyle="#ffffff";'
+          if studio.count(old_fallback) != 1:
+              raise SystemExit(f'Expected one Card Studio fallback Superstar name gradient, found {studio.count(old_fallback)}')
+          studio = studio.replace(old_fallback, new_fallback, 1)
+          studio_path.write_text(studio)
+          PY
+
+      - name: Stamp release version and regenerate Card Studio data
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run stamp-cache
+          npm run generate-studio
+
+      - name: Verify release
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          grep -Fq '.ccg-card.type-superstar' css/v1.1.103-superstar-white-text.css
+          grep -Fq '.ccg-superstar-nameplate small' css/v1.1.103-superstar-white-text.css
+          grep -Fq 'const fill="#ffffff";drawVectorText(ctx,text' js/shared/card-face-renderer.js
+          grep -Fq 'fillStyle:isSuperstar?"#ffffff"' js/shared/card-face-renderer.js
+          grep -Fq 'ctx.fillStyle="#ffffff";' js/tools/card-art-studio.js
+          grep -Fq '"version": "1.1.103"' package.json
+
+      - name: Publish verified v1.1.103
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .superstar-white-text
+          rm -f .github/workflows/wwe-superstar-white-text.yml
+          git config user.name "WWE Legacy Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "No release changes to commit."; exit 1; }
+          git commit -m "WWE Legacy v1.1.103 — Superstar white identity text"
+          git push origin HEAD:main
