@@ -18,6 +18,8 @@ jobs:
           node-version: 20
       - name: Apply direct reveal recovery
         run: python3 .release-v1.1.128.py
+      - name: Stamp release cache/version
+        run: npm run stamp-cache
       - name: Regenerate studio data
         run: npm run generate-studio
       - name: Verify release
@@ -36,6 +38,7 @@ jobs:
           b=json.loads(Path('build.json').read_text())
           assert b['version']=='1.1.128'
           assert json.loads(Path('package.json').read_text())['version']=='1.1.128'
+          assert 'BUILD_VERSION = "1.1.128"' in Path('js/config/build.js').read_text()
           assert '?v=1.1.128' in Path('index.html').read_text()
           print('v1.1.128 direct pack reveal verified')
           PY
