@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.1.122';
-import { GENERIC_MERCH, SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.122';
+import { superstars } from '../js/data/superstars.js?v=1.1.123';
+import { GENERIC_MERCH, SUPERSTAR_MERCH } from '../js/data/merch.js?v=1.1.123';
 
 test('v1.1.68 every Superstar has a T-shirt and action figure', () => {
   for (const star of Object.values(superstars)) {

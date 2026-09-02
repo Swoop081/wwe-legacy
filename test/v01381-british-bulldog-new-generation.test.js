@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=1.1.122';
-import { superstars } from '../js/data/superstars.js?v=1.1.122';
-import { decks } from '../js/data/decks.js?v=1.1.122';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.122';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.122';
-import { boosterEligible } from '../js/data/boosters.js?v=1.1.122';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.122';
-import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.122';
-await import('../js/data/superstar-nameplates.js?v=1.1.122');
+import { sets } from '../js/data/sets.js?v=1.1.123';
+import { superstars } from '../js/data/superstars.js?v=1.1.123';
+import { decks } from '../js/data/decks.js?v=1.1.123';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.123';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=1.1.123';
+import { boosterEligible } from '../js/data/boosters.js?v=1.1.123';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.123';
+import { canPlaySpecial } from '../js/engine/rules.js?v=1.1.123';
+await import('../js/data/superstar-nameplates.js?v=1.1.123');
 
 const bulldog=Object.values(superstars).find(s=>s.id==='british-bulldog');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));

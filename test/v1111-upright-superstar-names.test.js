@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-await import('../js/data/superstar-nameplates.js?v=1.1.122');
+await import('../js/data/superstar-nameplates.js?v=1.1.123');
 const profiles=globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES;
 const read=relative=>fs.readFileSync(new URL(`../${relative}`,import.meta.url),'utf8');
 

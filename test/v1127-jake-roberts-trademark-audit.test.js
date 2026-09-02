@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.122";
-import { deckIds } from "../js/data/decks.js?v=1.1.122";
-import { superstars } from "../js/data/superstars.js?v=1.1.122";
-import { CARD_NUMBER_MANIFEST } from "../js/data/card-number-manifest.js?v=1.1.122";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.123";
+import { deckIds } from "../js/data/decks.js?v=1.1.123";
+import { superstars } from "../js/data/superstars.js?v=1.1.123";
+import { CARD_NUMBER_MANIFEST } from "../js/data/card-number-manifest.js?v=1.1.123";
 
 const removed = ["jake-roberts-gutwrench-gutbuster", "jake-roberts-running-knee-lift"];
 

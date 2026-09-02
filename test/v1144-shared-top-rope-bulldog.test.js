@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.122";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.122";
-import { decks } from "../js/data/decks.js?v=1.1.122";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.123";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.123";
+import { decks } from "../js/data/decks.js?v=1.1.123";
 
 const card=allGameplayCards.find(card=>card.id==="top-rope-bulldog");
 

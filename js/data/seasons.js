@@ -1,6 +1,6 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.122";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.122";
-import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.122";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.123";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.123";
+import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.123";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-22T00:00:00";
 export const SEASON_END = "2026-09-21T00:00:00";

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { compareBuildVersions, isNewerBuild, updateNavigationUrl, fetchLatestBuild } from '../js/config/update.js?v=1.1.122';
+import { compareBuildVersions, isNewerBuild, updateNavigationUrl, fetchLatestBuild } from '../js/config/update.js?v=1.1.123';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = rel => fs.readFileSync(path.join(root, rel), 'utf8');
