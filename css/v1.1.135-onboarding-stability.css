@@ -123,10 +123,6 @@
   text-transform:uppercase!important;
 }
 
-.starter-onboarding-brand img{
-  loading:eager;
-}
-
 @media (max-width:600px){
   .starter-roster-summary{
     min-height:calc(100dvh - 145px)!important;
