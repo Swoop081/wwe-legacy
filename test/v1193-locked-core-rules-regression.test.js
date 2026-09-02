@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.110";
-import { autoCounterEligibility, submissionThreshold } from "../js/engine/rules.js?v=1.1.110";
-import { healthOnlyPinChance } from "../js/engine/health.js?v=1.1.110";
-import { superstars } from "../js/data/superstars.js?v=1.1.110";
-import { decks } from "../js/data/decks.js?v=1.1.110";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.110";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.111";
+import { autoCounterEligibility, submissionThreshold } from "../js/engine/rules.js?v=1.1.111";
+import { healthOnlyPinChance } from "../js/engine/health.js?v=1.1.111";
+import { superstars } from "../js/data/superstars.js?v=1.1.111";
+import { decks } from "../js/data/decks.js?v=1.1.111";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.111";
 
 const star=id=>Object.values(superstars).find(s=>s.id===id);
 const filler=i=>({id:`lock-fill-${i}`,name:`Filler ${i}`,kind:"momentum",method:"strength",amount:1});

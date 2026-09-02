@@ -1,17 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.110';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.110';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.110';
-import { collectionCards } from '../js/data/collection.js?v=1.1.110';
-import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=1.1.110';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.110';
-import { superstars } from '../js/data/superstars.js?v=1.1.110';
-import { decks } from '../js/data/decks.js?v=1.1.110';
-import { activeLiveEventTowers, LIVE_EVENT_WIN_UP } from '../js/data/live-events.js?v=1.1.110';
-import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=1.1.110';
-import { layeredCardArtFor, finishedCardArtFor } from '../js/data/artwork.js?v=1.1.110';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.111';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.111';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.111';
+import { collectionCards } from '../js/data/collection.js?v=1.1.111';
+import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=1.1.111';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=1.1.111';
+import { superstars } from '../js/data/superstars.js?v=1.1.111';
+import { decks } from '../js/data/decks.js?v=1.1.111';
+import { activeLiveEventTowers, LIVE_EVENT_WIN_UP } from '../js/data/live-events.js?v=1.1.111';
+import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=1.1.111';
+import { layeredCardArtFor, finishedCardArtFor } from '../js/data/artwork.js?v=1.1.111';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);

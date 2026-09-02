@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.1.110';
-import { superstars } from '../js/data/superstars.js?v=1.1.110';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.110';
-import { decks } from '../js/data/decks.js?v=1.1.110';
-import { activeLiveEventTowers, startLiveEventTower, RAW_LIVE_EVENT } from '../js/data/live-events.js?v=1.1.110';
-import { counterEligibility } from '../js/engine/rules.js?v=1.1.110';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.110';
+import { createProfile } from '../js/data/profile.js?v=1.1.111';
+import { superstars } from '../js/data/superstars.js?v=1.1.111';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.111';
+import { decks } from '../js/data/decks.js?v=1.1.111';
+import { activeLiveEventTowers, startLiveEventTower, RAW_LIVE_EVENT } from '../js/data/live-events.js?v=1.1.111';
+import { counterEligibility } from '../js/engine/rules.js?v=1.1.111';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.111';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');

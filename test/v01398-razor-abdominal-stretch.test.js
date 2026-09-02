@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.110";
-import { decks } from "../js/data/decks.js?v=1.1.110";
-import { superstars } from "../js/data/superstars.js?v=1.1.110";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.110";
-import { createProfile, migrateProfile, PROFILE_VERSION } from "../js/data/profile.js?v=1.1.110";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.111";
+import { decks } from "../js/data/decks.js?v=1.1.111";
+import { superstars } from "../js/data/superstars.js?v=1.1.111";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.111";
+import { createProfile, migrateProfile, PROFILE_VERSION } from "../js/data/profile.js?v=1.1.111";
 
 const byId = Object.fromEntries(allGameplayCards.map(card => [card.id, card]));
 const razor = Object.values(superstars).find(star => star.id === "razor-ramon");
