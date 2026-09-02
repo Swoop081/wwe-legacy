@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.108") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.110") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -11008,3 +11008,10 @@ body[data-screen="seasons"] .season-road-reward button{min-height:48px!important
 }
 .ccg-card.is-layered-front:not(.has-layered-asset) .ccg-card-studio-ink{visibility:hidden!important}
 .ccg-card.has-active-animation .ccg-card-studio-ink{z-index:4!important}
+
+
+/* v1.1.110 — Live Event owned choices are literally scaled route cards. */
+body[data-screen="live-events"][data-live-view="detail"] .live-event-route-choice-carousel{align-items:center!important;gap:10px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:4px 2px 8px!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-event-route-choice{appearance:none!important;-webkit-appearance:none!important;flex:0 0 min(31vw,122px)!important;width:min(31vw,122px)!important;height:auto!important;aspect-ratio:680/1000!important;padding:0!important;border:0!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important;perspective:none!important;overflow:visible!important;scroll-snap-align:center!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-event-route-choice .live-event-player-choice-frame,body[data-screen="live-events"][data-live-view="detail"] .live-event-route-choice .live-tower-opponent-card{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;margin:0!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-event-route-choice.selected .live-event-player-choice-frame{border-radius:10px!important;outline:2px solid var(--tower-accent,#45d8ff)!important;outline-offset:2px!important;filter:drop-shadow(0 0 7px color-mix(in srgb,var(--tower-accent,#45d8ff) 70%,transparent))!important}
