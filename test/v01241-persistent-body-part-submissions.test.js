@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.103';
-import { submissionThreshold } from '../js/engine/rules.js?v=1.1.103';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.103';
-import { superstars } from '../js/data/superstars.js?v=1.1.103';
-import { decks } from '../js/data/decks.js?v=1.1.103';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.107';
+import { submissionThreshold } from '../js/engine/rules.js?v=1.1.107';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.107';
+import { superstars } from '../js/data/superstars.js?v=1.1.107';
+import { decks } from '../js/data/decks.js?v=1.1.107';
 
 const rng=()=>0.42;
 const stars=Object.values(superstars);

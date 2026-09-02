@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { superstars } from '../js/data/superstars.js?v=1.1.103';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.103';
-import { isScheduledSetReleased, setReleaseAt } from '../js/data/release.js?v=1.1.103';
-import { boosterMerchSuperstarIds } from '../js/data/merch.js?v=1.1.103';
+import { superstars } from '../js/data/superstars.js?v=1.1.107';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.107';
+import { isScheduledSetReleased, setReleaseAt } from '../js/data/release.js?v=1.1.107';
+import { boosterMerchSuperstarIds } from '../js/data/merch.js?v=1.1.107';
 
 const byId=id=>Object.values(superstars).find(s=>s.id===id);
 const card=id=>allGameplayCards.find(c=>c.id===id);

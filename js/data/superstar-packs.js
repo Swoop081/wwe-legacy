@@ -1,7 +1,7 @@
-import { collectionCards } from "./collection.js?v=1.1.103";
-import { superstars } from "./superstars.js?v=1.1.103";
-import { decks } from "./decks.js?v=1.1.103";
-import { isPlayerVisibleSuperstar } from "./release.js?v=1.1.103";
+import { collectionCards } from "./collection.js?v=1.1.107";
+import { superstars } from "./superstars.js?v=1.1.107";
+import { decks } from "./decks.js?v=1.1.107";
+import { isPlayerVisibleSuperstar } from "./release.js?v=1.1.107";
 
 export const SUPERSTAR_PACK_SIZE = 5;
 export const SUPERSTAR_PACK_TYPE = "superstar-pack";

@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.103";
-import { superstars } from "./superstars.js?v=1.1.103";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.103";
-import { awardSeasonXp } from "./seasons.js?v=1.1.103";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.107";
+import { superstars } from "./superstars.js?v=1.1.107";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.107";
+import { awardSeasonXp } from "./seasons.js?v=1.1.107";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -533,19 +533,53 @@ export function rotatingLiveEventTemplates(now = new Date()) {
   return [0,1,2].map(offset => pool[(startIndex + offset) % pool.length]);
 }
 
+function recentLiveEventOpponentUse(profile, now = new Date()) {
+  const today = localDayStart(now).getTime();
+  const lastUsed = new Map();
+  for (const [key,state] of Object.entries(profile?.liveEventTowers?.states ?? {})) {
+    const match = /^daily:(\d{4}-\d{2}-\d{2}):/.exec(key);
+    const ids = state?.activeRun?.opponents;
+    if (!match || !Array.isArray(ids)) continue;
+    const usedDay = new Date(`${match[1]}T00:00:00`).getTime();
+    if (!Number.isFinite(usedDay) || usedDay >= today) continue;
+    for (const id of ids) lastUsed.set(id, Math.max(lastUsed.get(id) ?? -Infinity, usedDay));
+  }
+  return lastUsed;
+}
+
+function dailyVarietyEvents(templates, profile = null, now = new Date()) {
+  const usedToday = new Set();
+  const recentUse = recentLiveEventOpponentUse(profile, now);
+  const visibleAll = Object.values(superstars).filter(star => isPlayerVisibleSuperstar(star, profile, now)).map(star => star.id);
+  return templates.map((template,index) => {
+    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, (daySerial(now)+index) % LIVE_REWARD_FALLBACKS.length, now), now);
+    const themed = releasedLiveEventOpponentIds(event, profile, now);
+    const candidates = [...new Set([...themed, ...visibleAll])].filter(id => !usedToday.has(id));
+    candidates.sort((a,b) => {
+      const aThemed = themed.includes(a) ? 1 : 0, bThemed = themed.includes(b) ? 1 : 0;
+      const aLast = recentUse.get(a) ?? -Infinity, bLast = recentUse.get(b) ?? -Infinity;
+      if (aLast !== bLast) return aLast - bLast;
+      if (aThemed !== bThemed) return bThemed - aThemed;
+      const seed = `${dateKey(localDayStart(now))}:${event.id}:`;
+      return `${seed}${a}`.localeCompare(`${seed}${b}`);
+    });
+    const selected = candidates.slice(0, LIVE_EVENT_LENGTH);
+    selected.forEach(id => usedToday.add(id));
+    return { ...event, opponentPool: selected };
+  });
+}
+
 export function activeLiveEventTowers(now = new Date(), profile = null) {
   const start = localDayStart(now);
   const nextAt = new Date(start.getTime());
   nextAt.setDate(nextAt.getDate() + 1);
-  return rotatingLiveEventTemplates(now).map((template,index) => {
-    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, (daySerial(now)+index) % LIVE_REWARD_FALLBACKS.length, now), now);
-    return descriptorRemaining(towerDescriptor({
-      key: `daily:${dateKey(start)}:slot-${index+1}:${event.id}`,
-      event, startsAt: start, nextAt,
-      cadence: "daily", cadenceLabel: "24 HOURS ONLY",
-      winUp: LIVE_EVENT_WIN_UP, clearBoosters: LIVE_EVENT_CLEAR_BOOSTERS
-    }), now);
-  });
+  const events = dailyVarietyEvents(rotatingLiveEventTemplates(now), profile, now);
+  return events.map((event,index) => descriptorRemaining(towerDescriptor({
+    key: `daily:${dateKey(start)}:slot-${index+1}:${event.id}`,
+    event, startsAt: start, nextAt,
+    cadence: "daily", cadenceLabel: "24 HOURS ONLY",
+    winUp: LIVE_EVENT_WIN_UP, clearBoosters: LIVE_EVENT_CLEAR_BOOSTERS
+  }), now));
 }
 export function liveEventTowerByKey(towerKey, now = new Date(), profile = null) {
   return activeLiveEventTowers(now, profile).find(tower => tower.key === towerKey) ?? null;

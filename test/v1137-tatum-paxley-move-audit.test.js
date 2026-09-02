@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.103';
-import { deckIds } from '../js/data/decks.js?v=1.1.103';
-import { superstars } from '../js/data/superstars.js?v=1.1.103';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.107';
+import { deckIds } from '../js/data/decks.js?v=1.1.107';
+import { superstars } from '../js/data/superstars.js?v=1.1.107';
 
 const byId = Object.fromEntries(allGameplayCards.map(card => [card.id, card]));
 const count = id => deckIds['tatum-paxley'].filter(cardId => cardId === id).length;

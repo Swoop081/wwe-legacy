@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {
   PROFILE_KEY, PROFILE_RECOVERY_KEY, PROFILE_RECOVERY_META_KEY,
   createProfile, loadProfile, saveProfile, resetProfile, profilePersistenceStatus
-} from '../js/data/profile.js?v=1.1.103';
+} from '../js/data/profile.js?v=1.1.107';
 
 class MemoryStorage {
   constructor(){ this.map=new Map(); }
