@@ -1,4 +1,4 @@
-import { superstars } from "./superstars.js?v=1.1.102";
+import { superstars } from "./superstars.js?v=1.1.103";
 const METHODS=["strength","strike","technical","agility"];
 const primaryMethod=star=>METHODS.filter(m=>star?.methodLimits?.[m]!==0).sort((a,b)=>(Number(star?.starterMomentum?.[b]??0)-Number(star?.starterMomentum?.[a]??0))||METHODS.indexOf(a)-METHODS.indexOf(b))[0]??"strength";
 const labels=["Champion Edition","Legacy Era","Main Event Edition","Career Spotlight","Premium Edition"];

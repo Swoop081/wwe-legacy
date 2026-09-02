@@ -1,5 +1,5 @@
-import { superstars } from "./superstars.js?v=1.1.102";
-import { isPlayerVisibleSuperstar } from "./release.js?v=1.1.102";
+import { superstars } from "./superstars.js?v=1.1.103";
+import { isPlayerVisibleSuperstar } from "./release.js?v=1.1.103";
 const unique=arr=>[...new Set(arr)];
 export const SURVIVOR_SERIES_TEAM_SIZE=4;
 export function survivorSeriesState(profile){profile.survivorSeries??={activeRun:null,clears:0};return profile.survivorSeries;}

@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.102";
-import { shuffle } from "../js/engine/utils.js?v=1.1.102";
-import { decks } from "../js/data/decks.js?v=1.1.102";
-import { superstars } from "../js/data/superstars.js?v=1.1.102";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=1.1.103";
+import { shuffle } from "../js/engine/utils.js?v=1.1.103";
+import { decks } from "../js/data/decks.js?v=1.1.103";
+import { superstars } from "../js/data/superstars.js?v=1.1.103";
 
 function mulberry32(seed) {
   let a = seed >>> 0;

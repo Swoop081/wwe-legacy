@@ -1,0 +1,10 @@
+/* WWE Legacy v1.1.103 — Superstar White Identity Text
+   Superstar names and the SUPERSTAR type label are always white.
+   Existing stroke, glow, typography, set identity, rarity effects and gold frame remain intact. */
+.ccg-card.type-superstar {
+  --np-top:#fff!important;
+  --np-bottom:#fff!important;
+}
+.ccg-card.type-superstar .ccg-superstar-nameplate small {
+  color:#fff!important;
+}
