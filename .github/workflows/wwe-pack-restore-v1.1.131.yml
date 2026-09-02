@@ -40,20 +40,16 @@ jobs:
           rm -f .github/workflows/wwe-pack-rip-state-v1.1.122.yml
           rm -f .github/workflows/wwe-pack-*v1.1.124*.yml .github/workflows/wwe-pack-*v1.1.125*.yml .github/workflows/wwe-pack-*v1.1.126*.yml .github/workflows/wwe-pack-*v1.1.127*.yml .github/workflows/wwe-pack-*v1.1.128*.yml .github/workflows/wwe-pack-*v1.1.129*.yml .github/workflows/wwe-pack-*v1.1.130*.yml
 
-      - name: Fix root cause without changing original presentation
+      - name: Remove the MutationObserver feedback loop that caused the freeze
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          p=Path('js/ui/app.js')
-          s=p.read_text()
-          old='if (screen !== "boosters" || packStage !== "opening") return;'
-          new='if (packStage !== "opening" || !lastPack?.length) return;'
-          if s.count(old) != 1:
-              raise SystemExit(f'Expected exactly one original rip route guard, found {s.count(old)}')
-          s=s.replace(old,new,1)
-          p.write_text(s)
-          print('Removed unrelated screen-route dependency from the original 420ms rip transition.')
-          PY
+          # v1.1.105 rewrote every .reveal-progress text node from inside a
+          # childList MutationObserver. Assigning textContent creates another
+          # childList mutation even after the text is already unchanged, so the
+          # observer continuously re-queued itself as soon as Card 1 mounted.
+          # Restore the last version before that regression. It keeps Daily Spin
+          # retired and the zero-UP merch correction, but does not rewrite the
+          # original pack presentation/copy on every mutation.
+          git show 16c44cb0ce82207c1f2be8a272b475582e3f3391:js/shared/v1.1.104-pack-reward-hotfix.js > js/shared/v1.1.104-pack-reward-hotfix.js
 
       - name: Stamp v1.1.131
         run: |
@@ -64,16 +60,17 @@ jobs:
           const d=JSON.parse(fs.readFileSync(p,'utf8'));
           d.version='1.1.131';
           d.releasedAt='2026-09-02';
-          d.name='v1.1.131 — Original Pack Experience Restored + Verified';
+          d.name='v1.1.131 — Original Pack Experience Restored + Freeze Root Cause Fixed';
           d.physicalIphoneSmoke='browser-certified-v1.1.131';
           fs.writeFileSync(p,JSON.stringify(d,null,2)+'\n');
           NODE
           npm run stamp-cache
           npm run generate-studio
 
-      - name: Verify original pack presentation and root-cause fix
+      - name: Verify exact original pack experience and regression removal
         run: |
           node --check js/ui/app.js
+          node --check js/shared/v1.1.104-pack-reward-hotfix.js
           npm run test:current
           npm run flow
           npm run validate
@@ -82,29 +79,35 @@ jobs:
           from pathlib import Path
           import subprocess, json
           current=Path('js/ui/app.js').read_text()
-          old=subprocess.check_output(['git','show','6ed8765a2ccab9002c382539897b63becc3d4626:js/ui/app.js'],text=True)
+          historical=subprocess.check_output(['git','show','d807d9905d51e03bb517a19b8392354086581df4:js/ui/app.js'],text=True)
           start='function processPack(kind = "standard")'
           end='function premiumHubHeading('
           cur_seg=current[current.index(start):current.index(end)]
-          old_seg=old[old.index(start):old.index(end)]
-          normalized=cur_seg.replace('if (packStage !== "opening" || !lastPack?.length) return;','if (screen !== "boosters" || packStage !== "opening") return;')
-          if normalized != old_seg:
+          old_seg=historical[historical.index(start):historical.index(end)]
+          if cur_seg != old_seg:
               import difflib
-              diff=''.join(difflib.unified_diff(old_seg.splitlines(True),normalized.splitlines(True),fromfile='v1.1.122-pack',tofile='v1.1.131-pack-normalized'))
-              raise SystemExit('Pack subsystem changed beyond the single root-cause guard fix:\n'+diff[:12000])
+              diff=''.join(difflib.unified_diff(old_seg.splitlines(True),cur_seg.splitlines(True),fromfile='v1.1.123-original-pack',tofile='v1.1.131-restored-pack'))
+              raise SystemExit('Original pack subsystem is not restored exactly:\n'+diff[:12000])
           required=['TAP TO RIP','Open the pack and reveal all five cards','RIPPING PACK…','RIP!','Pack open — all five cards are face up.','TAP CARD · NEXT CARD','TAP CARD · PACK SUMMARY','PACK COMPLETE','collectibleCardMarkup(p.card']
           for marker in required:
               if marker not in cur_seg: raise SystemExit(f'Missing original pack marker: {marker}')
-          if 'if (screen !== "boosters" || packStage !== "opening") return;' in cur_seg:
-              raise SystemExit('Fragile screen-route guard still present')
           forbidden=['renderSafePackFlow','booster-safe-reveal-card','full surface pack tap','iPhone Safari stability: do not allocate']
           for marker in forbidden:
               if marker in current: raise SystemExit(f'Emergency replacement still present: {marker}')
+
+          hotfix=Path('js/shared/v1.1.104-pack-reward-hotfix.js').read_text()
+          old_hotfix=subprocess.check_output(['git','show','16c44cb0ce82207c1f2be8a272b475582e3f3391:js/shared/v1.1.104-pack-reward-hotfix.js'],text=True)
+          if hotfix != old_hotfix: raise SystemExit('Pack observer was not restored to the pre-regression implementation')
+          if "root.querySelectorAll?.('.single-card-reveal-hint,.reveal-progress')" in hotfix:
+              raise SystemExit('Regression loop still present')
+          if "simplifyPack" in hotfix:
+              raise SystemExit('v1.1.105 presentation rewrite still present')
+
           b=json.loads(Path('build.json').read_text())
           assert b['version']=='1.1.131'
           assert json.loads(Path('package.json').read_text())['version']=='1.1.131'
           assert '?v=1.1.131' in Path('index.html').read_text()
-          print('Original pack presentation restored exactly; only the unrelated route guard is removed.')
+          print('Original pack subsystem restored exactly and MutationObserver regression removed.')
           PY
 
       - name: Install browser certification runtime
@@ -126,5 +129,5 @@ jobs:
         run: |
           rm -f .release-v1.1.131-pack-browser-smoke.mjs .release-v1.1.131.trigger .github/workflows/wwe-pack-restore-v1.1.131.yml
           git add -A
-          git commit -m "WWE Legacy v1.1.131 — restore original pack opening and fix rip transition"
+          git commit -m "WWE Legacy v1.1.131 — restore original pack opening and fix observer freeze"
           git push origin main
