@@ -1,0 +1,52 @@
+name: WWE Legacy Pack Cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.release/TRIGGER-v1.1.105.md'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply pack cleanup
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('js/ui/app.js')
+          s=p.read_text()
+          reps=[
+          ('"summerslam-series-1": { label:"SUMMERSLAM", tone:"summer", logo: assetUrl("assets/images/art-summerslam-series-1-summerslam-2026-logo.png") }','"summerslam-series-1": { label:"SUMMERSLAM", tone:"summer", logo: "https://raw.githubusercontent.com/Swoop081/wwe-legacy/6f0c7b74a51112624f3172670bd8ca76c810971f/assets/images/art-summerslam-series-1-summerslam-2026-logo.png" }'),
+          ('      <span class="physical-booster-set-line">${set.name.toUpperCase()}</span>\n      <small>SERIES 1 · 4 CARDS + 1 MERCH · AMETHYST CHASE</small>\n',''),
+          ('const converted = !!p?.universePointsCredited;','const converted = !!p?.universePointsCredited && universePointsValue > 0;'),
+          ('collectibleCardMarkup(p.card, { large: true, tier: p.tier, flipped: true, classes: "booster-reveal-card" })','collectibleCardMarkup(p.card, { large: true, tier: p.tier, flipped: p.card?.kind === "merch" && !finishedCardArtFor(p.card), classes: "booster-reveal-card" })'),
+          ('<p class="single-card-reveal-hint">TAP CARD · ${boosterRevealIndex >= boosterRevealResults.length - 1 ? \'PACK SUMMARY\' : \'NEXT CARD\'}</p>','<p class="single-card-reveal-hint">${boosterRevealIndex >= boosterRevealResults.length - 1 ? \'PACK SUMMARY\' : \'NEXT CARD\'}</p>'),
+          ('      <p class="booster-rip-note">Open the pack and reveal all five cards</p>\n','')]
+          for old,new in reps:
+              if old not in s:
+                  raise SystemExit('Expected source not found: '+old[:90])
+              s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+      - name: Validate
+        run: |
+          npm test
+          npm run test:release-current
+          npm run validate
+          npm run audit:flow
+          npm run audit:card-ids
+      - name: Publish
+        run: |
+          rm -f .release/part1.patch .release/TRIGGER-v1.1.105.md
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "v1.1.105: simplify pack presentation and merch reveals"
+          git push origin main
