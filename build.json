@@ -1,5 +1,5 @@
 {
-  "version": "1.1.117",
+  "version": "1.1.118",
   "releasedAt": "2026-09-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
@@ -7,5 +7,5 @@
   "criticalFixOnly": false,
   "physicalIphoneSmoke": "pending-v1.1.109",
   "launchStatus": "released",
-  "name": "v1.1.113 — Nine-Set Live Event Rotation"
+  "name": "v1.1.118 \u2014 Live Events Play Page Hero"
 }

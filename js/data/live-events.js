@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.117";
-import { superstars } from "./superstars.js?v=1.1.117";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.117";
-import { awardSeasonXp } from "./seasons.js?v=1.1.117";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.118";
+import { superstars } from "./superstars.js?v=1.1.118";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.118";
+import { awardSeasonXp } from "./seasons.js?v=1.1.118";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;

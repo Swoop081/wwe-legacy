@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=1.1.117";
+import { sets } from "./sets.js?v=1.1.118";
 
 // v1.1.0 — player-facing set slate: five current-brand/event sets plus four Legends sets.
 export const LAUNCH_LIVE_SET_IDS = Object.freeze([

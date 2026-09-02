@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.117';
-import { collectionCards } from '../js/data/collection.js?v=1.1.117';
-import { decks } from '../js/data/decks.js?v=1.1.117';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.118';
+import { collectionCards } from '../js/data/collection.js?v=1.1.118';
+import { decks } from '../js/data/decks.js?v=1.1.118';
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 const collectorById = id => collectionCards.find(card => card.id === id);

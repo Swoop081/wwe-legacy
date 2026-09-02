@@ -1,32 +1,4 @@
-from pathlib import Path
-import json, re
-
-APP = Path('js/ui/app.js')
-INDEX = Path('index.html')
-BUILD = Path('build.json')
-CSS = Path('css/v1.1.118-play-page-live-events-hero.css')
-
-s = APP.read_text()
-match = re.search(r'(  const firstPageCards = `\n)(.*?)(`;\n  const secondPageCards = `)', s, re.S)
-if not match:
-    raise SystemExit('firstPageCards block not found')
-body = match.group(2)
-lines = [line for line in body.splitlines() if line.strip()]
-articles = {}
-for line in lines:
-    if 'id="play-live-event"' in line:
-        articles['live'] = line
-    elif 'id="play-exhibition"' in line:
-        articles['exhibition'] = line
-    elif 'id="play-kotr"' in line:
-        articles['kotr'] = line
-if set(articles) != {'live','exhibition','kotr'}:
-    raise SystemExit(f'play page cards missing: {set(articles)}')
-new_body = '\n'.join([articles['live'], articles['exhibition'], articles['kotr']])
-s = s[:match.start(2)] + new_body + s[match.end(2):]
-APP.write_text(s)
-
-css = '''/* v1.1.118 — Live Events leads Play page one and the full iPhone viewport is used. */
+/* v1.1.118 — Live Events leads Play page one and the full iPhone viewport is used. */
 @media (max-width:600px){
   .legacy-play-v3.play-menu-page-1{min-height:calc(100svh - 188px);height:calc(100svh - 188px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding-bottom:4px;overflow:hidden}
   .play-menu-page-1 .legacy-play-heading{padding-block:4px 2px;margin:0}
@@ -48,28 +20,3 @@ css = '''/* v1.1.118 — Live Events leads Play page one and the full iPhone vie
   .play-menu-page-1 .play-mode-page-arrow span{font-size:12px}
   .play-menu-page-1 .play-mode-page-arrow b{font-size:34px}
 }
-'''
-CSS.write_text(css)
-
-idx = INDEX.read_text()
-link = '  <link rel="stylesheet" href="./css/v1.1.118-play-page-live-events-hero.css?v=1.1.118">\n'
-if 'v1.1.118-play-page-live-events-hero.css' not in idx:
-    anchor = '  <script>\n    (() => {'
-    if anchor not in idx:
-        raise SystemExit('index insertion anchor not found')
-    idx = idx.replace(anchor, link + anchor, 1)
-INDEX.write_text(idx)
-
-build = json.loads(BUILD.read_text())
-build['version'] = '1.1.118'
-build['releasedAt'] = '2026-09-02'
-build['name'] = 'v1.1.118 — Live Events Play Page Hero'
-BUILD.write_text(json.dumps(build, indent=2) + '\n')
-
-check = APP.read_text()
-pos_live = check.index('id="play-live-event"', check.index('const firstPageCards'))
-pos_ex = check.index('id="play-exhibition"', check.index('const firstPageCards'))
-pos_kotr = check.index('id="play-kotr"', check.index('const firstPageCards'))
-if not (pos_live < pos_ex < pos_kotr):
-    raise SystemExit('Play page order verification failed')
-print('v1.1.118 Play page direct fix prepared')
