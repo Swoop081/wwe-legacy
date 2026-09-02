@@ -1,0 +1,145 @@
+/* v1.1.134 — atomic onboarding reveal + centered starting roster summary */
+.three-brand-starter-onboarding,
+.starter-roster-summary{
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+.three-brand-starter-onboarding.starter-assets-ready,
+.starter-roster-summary.starter-assets-ready{
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  transition:opacity .12s ease!important;
+}
+.starter-roster-summary{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-height:calc(100dvh - 154px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  padding:10px 14px 14px!important;
+  margin:0 auto!important;
+}
+.starter-roster-summary-logo{
+  display:block!important;
+  width:min(176px,46vw)!important;
+  height:auto!important;
+  max-height:88px!important;
+  object-fit:contain!important;
+  margin:0 auto 4px!important;
+}
+.starter-roster-summary>.eyebrow{
+  display:none!important;
+}
+.starter-roster-summary h1,
+.starter-roster-summary-title{
+  width:100%!important;
+  text-align:center!important;
+  margin:2px auto 4px!important;
+}
+.starter-roster-summary>.muted{
+  width:min(340px,92vw)!important;
+  margin:0 auto 6px!important;
+  text-align:center!important;
+}
+.starter-roster-summary-cards{
+  width:min(100%,360px)!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-areas:"top top" "left right"!important;
+  justify-items:center!important;
+  align-items:center!important;
+  gap:8px 12px!important;
+  margin:6px auto 0!important;
+  padding:0!important;
+}
+.starter-roster-summary-cards>.superstar-preview-card{
+  max-width:none!important;
+  min-width:0!important;
+  margin:0!important;
+}
+.starter-roster-summary-cards>.superstar-preview-card:nth-child(1){
+  grid-area:top!important;
+  width:clamp(96px,29vw,138px)!important;
+  justify-self:center!important;
+}
+.starter-roster-summary-cards>.superstar-preview-card:nth-child(2){
+  grid-area:left!important;
+  width:clamp(92px,27vw,128px)!important;
+  justify-self:end!important;
+}
+.starter-roster-summary-cards>.superstar-preview-card:nth-child(3){
+  grid-area:right!important;
+  width:clamp(92px,27vw,128px)!important;
+  justify-self:start!important;
+}
+#open-starter-support.starter-roster-continue{
+  box-sizing:border-box!important;
+  width:min(320px,88vw)!important;
+  min-height:50px!important;
+  margin:10px auto 0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  flex:0 0 auto!important;
+  font-size:15px!important;
+  font-weight:900!important;
+  letter-spacing:.12em!important;
+  text-align:center!important;
+}
+#open-starter-support.starter-roster-continue span{
+  font-size:25px!important;
+  line-height:1!important;
+}
+@media (max-width:600px){
+  .starter-roster-summary{
+    min-height:calc(100dvh - 145px)!important;
+    padding-inline:10px!important;
+  }
+}
+@media (max-height:760px){
+  .starter-roster-summary{
+    min-height:calc(100dvh - 138px)!important;
+    padding-block:5px 8px!important;
+    gap:1px!important;
+  }
+  .starter-roster-summary-logo{
+    width:min(142px,39vw)!important;
+    max-height:64px!important;
+    margin-bottom:1px!important;
+  }
+  .starter-roster-summary h1,
+  .starter-roster-summary-title{
+    font-size:clamp(23px,6.8vw,31px)!important;
+    line-height:.94!important;
+    margin:1px auto 3px!important;
+  }
+  .starter-roster-summary>.muted{
+    font-size:10.5px!important;
+    line-height:1.12!important;
+    margin:0 auto 3px!important;
+  }
+  .starter-roster-summary-cards{
+    width:min(100%,300px)!important;
+    gap:4px 8px!important;
+    margin-top:3px!important;
+  }
+  .starter-roster-summary-cards>.superstar-preview-card:nth-child(1){width:clamp(86px,24vw,112px)!important}
+  .starter-roster-summary-cards>.superstar-preview-card:nth-child(2),
+  .starter-roster-summary-cards>.superstar-preview-card:nth-child(3){width:clamp(82px,23vw,106px)!important}
+  #open-starter-support.starter-roster-continue{
+    min-height:44px!important;
+    margin-top:5px!important;
+  }
+}
+@media (max-height:680px){
+  .starter-roster-summary>.muted{display:none!important}
+  .starter-roster-summary-logo{width:min(126px,35vw)!important;max-height:54px!important}
+  .starter-roster-summary-cards{gap:3px 7px!important;margin-top:2px!important}
+  #open-starter-support.starter-roster-continue{min-height:40px!important;margin-top:4px!important}
+}
