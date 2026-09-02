@@ -1,11 +1,11 @@
 {
-  "version": "1.1.108",
-  "releasedAt": "2026-09-01",
+  "version": "1.1.109",
+  "releasedAt": "2026-09-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "in-progress-v1.1.96-user-smoke",
+  "physicalIphoneSmoke": "pending-v1.1.109",
   "launchStatus": "released",
-  "name": "v1.1.108 — Live Event Theme Eligibility Gate"
+  "name": "v1.1.109 — Live Event Owned Card Fit"
 }
