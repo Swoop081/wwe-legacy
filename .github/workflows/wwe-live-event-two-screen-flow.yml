@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Apply Live Event patch
-        run: git apply .live-event-two-screen/change.patch
+      - name: Apply Live Event code
+        run: python3 .live-event-two-screen/apply.py
       - name: Apply Live Event layout
         run: cat .live-event-two-screen/layout.css >> css/game.css
       - name: Bump release version
