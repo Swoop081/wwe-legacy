@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=1.1.126";
-import { deckIds } from "../js/data/decks.js?v=1.1.126";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.126";
-import { isPlayerReleasedSetId, setReleaseAt } from "../js/data/release.js?v=1.1.126";
+import { superstars } from "../js/data/superstars.js?v=1.1.127";
+import { deckIds } from "../js/data/decks.js?v=1.1.127";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.127";
+import { isPlayerReleasedSetId, setReleaseAt } from "../js/data/release.js?v=1.1.127";
 
 const SETS={
   "worlds-collide-series-1":["rey-mysterio","dominik-mysterio","penta","el-grande-americano","lola-vice","dragon-lee","hijo-del-vikingo","mr-iguana"],

@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { collectionCards } from '../js/data/collection.js?v=1.1.126';
-import { MERCH_ITEMS } from '../js/data/merch.js?v=1.1.126';
-import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.126';
-import { canonicalCardImagePath, canonicalBasePlatePath } from '../js/data/artwork.js?v=1.1.126';
+import { collectionCards } from '../js/data/collection.js?v=1.1.127';
+import { MERCH_ITEMS } from '../js/data/merch.js?v=1.1.127';
+import { SUPERSTAR_VARIANTS } from '../js/data/superstar-variants.js?v=1.1.127';
+import { canonicalCardImagePath, canonicalBasePlatePath } from '../js/data/artwork.js?v=1.1.127';
 
 const root = new URL('../', import.meta.url);
 const read = relative => fs.readFileSync(new URL(relative, root), 'utf8');
