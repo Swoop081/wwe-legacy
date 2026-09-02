@@ -1,9 +1,9 @@
-/* v1.1.140 — safe repo-hosted onboarding assets + reusable transparent Legacy branding. */
+/* v1.1.141 — safe repo-hosted onboarding assets + visible Legacy lockup + centered Continue. */
 (() => {
   const LOCAL = {
-    raw: './assets/images/onboarding-raw-logo.svg?v=1.1.140',
-    smackdown: './assets/images/onboarding-smackdown-logo.svg?v=1.1.140',
-    nxt: './assets/images/onboarding-nxt-logo.svg?v=1.1.140'
+    raw: './assets/images/onboarding-raw-logo.svg?v=1.1.141',
+    smackdown: './assets/images/onboarding-smackdown-logo.svg?v=1.1.141',
+    nxt: './assets/images/onboarding-nxt-logo.svg?v=1.1.141'
   };
 
   window.__WWE_LEGACY_STARTER_BRAND_PRELOADERS__ = Object.values(LOCAL).map(src => {
@@ -34,20 +34,20 @@
   };
 
   const decorateSummary = root => {
-    if (!root || root.dataset.v11140Decorated === '1') return;
-    root.dataset.v11140Decorated = '1';
+    if (!root || root.dataset.v11141Decorated === '1') return;
+    root.dataset.v11141Decorated = '1';
     const title = root.querySelector('h1');
     const existingBrand = root.querySelector('.starter-roster-summary-brand');
     if (existingBrand) existingBrand.remove();
     const brand = document.createElement('div');
     brand.className = 'starter-roster-summary-brand';
-    brand.innerHTML = '<img class="starter-roster-summary-logo" src="./assets/images/branding-wwe-legacy-transparent.svg?v=1.1.140" alt="WWE Legacy">';
+    brand.innerHTML = '<img class="starter-roster-summary-logo" src="./assets/images/branding-wwe-legacy-lockup.png?v=1.1.141" alt="WWE Legacy">';
     root.insertBefore(brand, title || root.firstChild);
     const button = root.querySelector('#open-starter-support, #starter-summary-continue');
     if (button) {
       button.id = 'starter-summary-continue';
       button.classList.add('starter-roster-continue');
-      button.innerHTML = 'CONTINUE <span aria-hidden="true">›</span>';
+      button.textContent = 'CONTINUE';
       button.setAttribute('aria-label', 'Continue');
     }
   };
