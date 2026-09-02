@@ -1,11 +1,11 @@
 {
-  "version": "1.1.135",
+  "version": "1.1.136",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.135",
+  "physicalIphoneSmoke": "pending-v1.1.136",
   "launchStatus": "released",
-  "name": "v1.1.135 — Onboarding Crash Hotfix + Reliable Brand Preload"
+  "name": "v1.1.136 — Repo-Hosted Onboarding Brands + Roster Reveal Validation"
 }
