@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=1.1.111";
-import { deckIds } from "../js/data/decks.js?v=1.1.111";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.111";
+import { superstars } from "../js/data/superstars.js?v=1.1.112";
+import { deckIds } from "../js/data/decks.js?v=1.1.112";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.112";
 
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 

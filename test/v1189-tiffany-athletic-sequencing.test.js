@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=1.1.111";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.111";
+import { superstars } from "../js/data/superstars.js?v=1.1.112";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.112";
 test("v1.1.89 preserves Tiffany physical hierarchy and upgrades Tiffany Epiphany sequencing",()=>{
  const t=Object.values(superstars).find(s=>s.id==="tiffany-stratton");
  const a=allGameplayCards.find(c=>c.id==="special-tiffany-stratton");
