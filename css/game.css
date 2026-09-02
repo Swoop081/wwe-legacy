@@ -10229,7 +10229,7 @@ body[data-screen="splash"] #game>section{animation:none!important}
   position:absolute;
   inset:-28px;
   z-index:-2;
-  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.115") center/cover no-repeat;
+  background:url("../assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.116") center/cover no-repeat;
   filter:blur(20px) brightness(.42) saturate(.9);
   transform:scale(1.08);
 }
@@ -11043,3 +11043,111 @@ body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.
 .live-event-matchup-vs{align-self:center!important;justify-self:center!important;font-size:1rem!important;font-weight:1000!important;font-style:italic!important;color:#fff!important}
 .live-event-matchup-fight{width:100%!important;min-height:54px!important;margin:0!important}
 @media(max-width:390px){.live-event-matchup-screen{gap:4px!important;padding-inline:9px!important}.live-event-matchup-player .live-event-route-choice{flex-basis:31vw!important;width:31vw!important}.live-event-locked-player-card,.live-event-matchup-opponent-card{width:29vw!important}}
+
+/* v1.1.116 — Live Event route uses full mobile width */
+.live-tower-route-strip{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+  gap:14px;
+}
+.live-tower-route-card{
+  width:100%;
+  max-width:none;
+  min-height:250px;
+  display:grid;
+  grid-template-columns:minmax(118px, .72fr) minmax(0, 1.28fr);
+  grid-template-areas:"info card";
+  align-items:center;
+  gap:12px;
+  padding:16px 14px 16px 18px;
+  margin:0;
+}
+.live-tower-route-card .live-tower-route-head,
+.live-tower-route-card .live-tower-route-copy{
+  grid-area:info;
+  align-self:center;
+  justify-self:stretch;
+  text-align:left;
+}
+.live-tower-route-card .live-tower-route-head{
+  position:static;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-start;
+  gap:7px;
+  margin:0 0 72px;
+}
+.live-tower-route-card .live-tower-route-head strong{
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  font-size:1.35rem;
+  line-height:1;
+}
+.live-tower-route-card .live-tower-route-head span{
+  font-size:.72rem;
+  letter-spacing:.14em;
+  line-height:1.25;
+}
+.live-tower-route-card .live-tower-route-copy{
+  margin-top:66px;
+  padding:0;
+}
+.live-tower-route-card .live-tower-route-copy strong{
+  display:block;
+  font-size:clamp(1.3rem,5vw,1.65rem);
+  line-height:.98;
+  letter-spacing:-.015em;
+  margin:0 0 5px;
+}
+.live-tower-route-card .live-tower-route-copy span{
+  display:block;
+  font-size:.9rem;
+  line-height:1.1;
+}
+.live-tower-route-card-frame{
+  grid-area:card;
+  justify-self:end;
+  width:min(100%,230px);
+  max-width:230px;
+  margin:0;
+}
+.live-tower-route-card-frame .live-tower-opponent-card{
+  width:100%;
+  max-width:none;
+}
+@media (max-width:430px){
+  .live-tower-detail-body,
+  .live-tower-route,
+  .live-tower-route-strip{
+    width:100%;
+    max-width:none;
+  }
+  .live-tower-route-card{
+    grid-template-columns:minmax(108px,.67fr) minmax(190px,1.33fr);
+    min-height:238px;
+    padding:14px 10px 14px 16px;
+    gap:8px;
+    border-radius:20px;
+  }
+  .live-tower-route-card-frame{
+    width:min(100%,218px);
+    max-width:218px;
+  }
+  .live-tower-route-card .live-tower-route-head strong{
+    width:46px;
+    height:46px;
+    font-size:1.25rem;
+  }
+  .live-tower-route-card .live-tower-route-copy strong{
+    font-size:1.35rem;
+  }
+  .live-tower-route-card .live-tower-route-copy span{
+    font-size:.82rem;
+  }
+}

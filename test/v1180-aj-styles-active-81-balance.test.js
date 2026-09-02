@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.1.115';
-import { decks } from '../js/data/decks.js?v=1.1.115';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.115';
+import { superstars } from '../js/data/superstars.js?v=1.1.116';
+import { decks } from '../js/data/decks.js?v=1.1.116';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.116';
 
 const activeSetIds=new Set(['evolution-series-1','attitude-era-series-1','ruthless-aggression-series-1','golden-era-series-1','summerslam-series-1','raw-series-1','smackdown-series-1','new-generation-series-1','nxt-series-1','worlds-collide-series-1']);
 
