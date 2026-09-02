@@ -1,0 +1,28 @@
+/* v1.1.111 — Live Events: route first, matchup second. */
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body{display:block!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body>.live-tower-player,
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body>.live-tower-command{display:none!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route{height:auto!important;min-height:0!important;padding:12px!important;overflow:visible!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-strip{display:grid!important;grid-auto-flow:row!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-columns:auto!important;gap:14px!important;overflow:visible!important;padding:0!important;scroll-snap-type:none!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card{width:100%!important;min-height:0!important;display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"head card" "copy card"!important;align-items:center!important;gap:6px 12px!important;padding:12px!important;border-radius:16px!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-head{grid-area:head!important;display:grid!important;gap:5px!important;justify-items:center!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-superstar{grid-area:card!important;justify-self:center!important;width:min(48vw,190px)!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-copy{grid-area:copy!important;align-self:start!important;text-align:center!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.is-current-selectable{border-color:var(--tower-accent,#45d8ff)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--tower-accent,#45d8ff) 40%,transparent),0 0 22px color-mix(in srgb,var(--tower-accent,#45d8ff) 18%,transparent)!important;cursor:pointer!important}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.is-current-selectable .live-tower-route-head>em::after{content:" · SELECT"}
+.live-event-matchup-screen{min-height:calc(100svh - var(--app-topbar-height,0px) - 10px)!important;display:grid!important;grid-template-rows:auto minmax(0,1fr) auto minmax(0,1fr) auto!important;gap:6px!important;padding:10px 12px max(12px,env(safe-area-inset-bottom))!important;overflow:hidden!important;background:radial-gradient(circle at 50% 36%,color-mix(in srgb,var(--tower-accent,#45d8ff) 14%,transparent),transparent 34%),#07090d!important}
+.live-event-matchup-head{display:flex!important;align-items:center!important;gap:10px!important;min-height:48px!important}
+.live-event-matchup-back{width:38px!important;height:38px!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:50%!important;background:#10131a!important;color:#fff!important;font-size:1.6rem!important}
+.live-event-matchup-head span,.live-event-matchup-player>span,.live-event-matchup-opponent>span{display:block!important;font-size:.46rem!important;letter-spacing:.16em!important;font-weight:1000!important;color:var(--tower-accent,#45d8ff)!important}
+.live-event-matchup-head h2{margin:2px 0 0!important;font-size:1.25rem!important;line-height:1!important}
+.live-event-matchup-player,.live-event-matchup-opponent{min-height:0!important;display:grid!important;align-content:center!important;justify-items:center!important;gap:5px!important;overflow:hidden!important}
+.live-event-matchup-player .superstar-select-carousel{width:100%!important;height:100%!important;min-height:0!important;display:flex!important;align-items:center!important;gap:9px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:3px 4px 7px!important;scroll-snap-type:x mandatory!important}
+.live-event-matchup-player .live-event-route-choice{flex:0 0 min(34vw,132px)!important;width:min(34vw,132px)!important;height:auto!important;aspect-ratio:680/1000!important}
+.live-event-locked-player-card,.live-event-matchup-opponent-card{width:min(32vw,126px)!important;aspect-ratio:680/1000!important;display:grid!important;place-items:center!important}
+.live-event-locked-player-card>.live-tower-route-card-frame,.live-event-matchup-opponent-card>.live-tower-route-card-frame{width:100%!important;height:100%!important}
+.live-event-locked-player-card .live-tower-opponent-card,.live-event-matchup-opponent-card .live-tower-opponent-card{width:100%!important;height:100%!important}
+.live-event-matchup-opponent>strong{font-size:.9rem!important;line-height:1!important}
+.live-event-matchup-opponent>small{font-size:.5rem!important;color:#aeb6c2!important}
+.live-event-matchup-vs{align-self:center!important;justify-self:center!important;font-size:1rem!important;font-weight:1000!important;font-style:italic!important;color:#fff!important}
+.live-event-matchup-fight{width:100%!important;min-height:54px!important;margin:0!important}
+@media(max-width:390px){.live-event-matchup-screen{gap:4px!important;padding-inline:9px!important}.live-event-matchup-player .live-event-route-choice{flex-basis:31vw!important;width:31vw!important}.live-event-locked-player-card,.live-event-matchup-opponent-card{width:29vw!important}}
