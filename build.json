@@ -1,11 +1,11 @@
 {
-  "version": "1.1.140",
+  "version": "1.1.141",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.140",
+  "physicalIphoneSmoke": "pending-v1.1.141",
   "launchStatus": "released",
-  "name": "v1.1.140 — Reusable Transparent WWE Legacy Branding"
+  "name": "v1.1.141 — Visible Roster Logo + Centered Continue"
 }
