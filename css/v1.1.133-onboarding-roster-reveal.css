@@ -1,0 +1,151 @@
+/* WWE Legacy v1.1.133 — onboarding logo load + starting roster reveal */
+
+/* Never show a half-rendered brand screen. The companion script releases the
+   screen only after the RAW / SmackDown / NXT mark has decoded. */
+body[data-starter-onboarding]:not([data-starter-onboarding="summary"]) .starter-onboarding-shell {
+  opacity: 0;
+}
+body[data-starter-onboarding]:not([data-starter-onboarding="summary"]).starter-brand-ready .starter-onboarding-shell {
+  opacity: 1;
+  transition: opacity 140ms ease-out;
+}
+
+body[data-starter-onboarding="summary"] .starter-onboarding-shell {
+  min-height: 100svh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(208, 166, 55, .16), transparent 27%),
+    radial-gradient(circle at 15% 68%, rgba(255, 255, 255, .045), transparent 28%),
+    linear-gradient(180deg, #090a0d 0%, #040507 62%, #020304 100%);
+}
+
+.starter-roster-summary {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100svh;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(7px, 1.25vh, 12px);
+  overflow: hidden;
+  padding:
+    max(12px, env(safe-area-inset-top))
+    16px
+    max(14px, env(safe-area-inset-bottom));
+}
+
+.starter-roster-summary-brand {
+  flex: 0 0 auto;
+  width: min(43vw, 174px);
+  margin: clamp(2px, .8vh, 8px) auto 0;
+}
+.starter-roster-summary-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: clamp(58px, 10vh, 88px);
+  object-fit: contain;
+}
+
+.starter-roster-summary-title {
+  flex: 0 0 auto;
+  margin: 0;
+  text-align: center;
+  color: #f7f7f5;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 7.7vw, 3.35rem);
+  font-weight: 900;
+  line-height: .91;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.starter-roster-summary-kicker {
+  display: block;
+  margin-bottom: 7px;
+  color: #aaa9ad;
+  font-family: var(--font-display);
+  font-size: clamp(.68rem, 2.6vw, .88rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .18em;
+}
+.starter-roster-summary-heading {
+  display: block;
+}
+
+/* 1-over-2: one featured pick above the other two. */
+.starter-roster-summary-cards {
+  flex: 0 1 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  align-items: end;
+  justify-content: center;
+  width: min(72vw, 292px);
+  gap: clamp(5px, 1.25vw, 8px);
+  margin: 1px auto 0;
+}
+.starter-roster-summary-card {
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 636 / 957;
+  border: 2px solid #d4af37;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #111319;
+  box-shadow: 0 10px 24px rgba(0,0,0,.54);
+}
+.starter-roster-summary-card:first-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - clamp(5px, 1.25vw, 8px)) / 2);
+}
+.starter-roster-summary-card img,
+.starter-roster-summary-card .superstar-card,
+.starter-roster-summary-card .card-face {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.starter-roster-summary-continue {
+  flex: 0 0 auto;
+  width: min(100%, 430px);
+  min-height: 50px;
+  margin: auto 0 0;
+  padding: 13px 22px;
+  border: 1px solid rgba(255,255,255,.92);
+  border-radius: 13px;
+  background: #f4f4f4;
+  color: #0b0b0d;
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
+  font-family: var(--font-display);
+  font-size: clamp(.75rem, 3vw, .9rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .15em;
+}
+.starter-roster-summary-continue:active {
+  transform: scale(.985);
+}
+
+/* Shorter iPhones get the same composition, just tightened rather than scroll. */
+@media (max-height: 760px) {
+  .starter-roster-summary {
+    gap: 5px;
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-bottom: max(9px, env(safe-area-inset-bottom));
+  }
+  .starter-roster-summary-brand { width: min(36vw, 145px); margin-top: 0; }
+  .starter-roster-summary-brand img { max-height: 62px; }
+  .starter-roster-summary-title { font-size: clamp(1.62rem, 6.8vw, 2.45rem); }
+  .starter-roster-summary-kicker { margin-bottom: 4px; font-size: .62rem; }
+  .starter-roster-summary-cards { width: min(61vw, 244px); gap: 5px; }
+  .starter-roster-summary-continue { min-height: 46px; padding-block: 11px; }
+}
