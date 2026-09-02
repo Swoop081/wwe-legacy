@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.1.119';
-import { decks } from '../js/data/decks.js?v=1.1.119';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.119';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.119';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.119';
-import { PROFILE_VERSION } from '../js/data/profile.js?v=1.1.119';
+import { superstars } from '../js/data/superstars.js?v=1.1.120';
+import { decks } from '../js/data/decks.js?v=1.1.120';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.120';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.120';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.120';
+import { PROFILE_VERSION } from '../js/data/profile.js?v=1.1.120';
 
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 const star=id=>Object.values(superstars).find(s=>s.id===id);
