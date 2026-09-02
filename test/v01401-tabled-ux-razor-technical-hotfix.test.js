@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.129";
-import { decks } from "../js/data/decks.js?v=1.1.129";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.129";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.130";
+import { decks } from "../js/data/decks.js?v=1.1.130";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=1.1.130";
 
 const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
 const css = fs.readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
