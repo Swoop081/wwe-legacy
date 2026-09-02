@@ -1,11 +1,11 @@
 {
-  "version": "1.1.138",
+  "version": "1.1.139",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.138",
+  "physicalIphoneSmoke": "pending-v1.1.139",
   "launchStatus": "released",
-  "name": "v1.1.138 — Onboarding Roster Presentation Integrity"
+  "name": "v1.1.139 — Roster Logo Scale + Third Card Centering"
 }
