@@ -1,0 +1,81 @@
+name: WWE Legacy v1.1.122 Pack Rip State Fix
+on:
+  push:
+    paths:
+      - '.pack-rip-fix/READY'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fix pack rip transition state
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('js/ui/app.js')
+          s=p.read_text()
+          old='''function processPack(kind = "standard") {
+  try {
+    currentPackType = "standard";'''
+          new='''function processPack(kind = "standard") {
+  try {
+    screen = "boosters";
+    currentPackType = "standard";'''
+          if old not in s:
+              raise SystemExit('processPack marker not found')
+          s=s.replace(old,new,1)
+          old='''  setTimeout(() => {
+    if (screen !== "boosters" || packStage !== "opening") return;
+    revealedPackCards = new Set(lastPack.map((_, index) => index));'''
+          new='''  setTimeout(() => {
+    if (packStage !== "opening" || !lastPack?.length) return;
+    revealedPackCards = new Set(lastPack.map((_, index) => index));'''
+          if old not in s:
+              raise SystemExit('rip timeout guard marker not found')
+          s=s.replace(old,new,1)
+          old='''    if (screen !== "boosters" || packStage !== "reveal" || lastPack?.[boosterFocusIndex] !== pull) return;'''
+          new='''    if (packStage !== "reveal" || lastPack?.[boosterFocusIndex] !== pull) return;'''
+          if old in s:
+              s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+      - name: Bump release
+        run: |
+          npm version 1.1.122 --no-git-tag-version
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('build.json'); d=json.loads(p.read_text()); d['version']='1.1.122'; d['name']='v1.1.122 — Pack Rip State Transition Fix'; p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+          npm run stamp-cache
+          npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('js/ui/app.js').read_text()
+          assert 'screen = "boosters";\n    currentPackType = "standard";' in s
+          assert 'if (packStage !== "opening" || !lastPack?.length) return;' in s
+          assert 'if (screen !== "boosters" || packStage !== "opening") return;' not in s
+          print('Pack rip transition state verified')
+          PY
+      - name: Publish
+        run: |
+          rm -rf .pack-rip-fix
+          rm -f .github/workflows/wwe-pack-rip-state-v1.1.122.yml
+          git config user.name 'WWE Legacy Release Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'WWE Legacy v1.1.122 — fix pack rip transition crash'
+          git push origin main
