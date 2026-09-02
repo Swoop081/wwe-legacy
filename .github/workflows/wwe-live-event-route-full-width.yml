@@ -1,0 +1,150 @@
+name: WWE Legacy Live Event Route Full Width
+on:
+  push:
+    paths:
+      - '.live-event-route-width/READY'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Expand Live Event route cards
+        run: |
+          cat >> css/game.css <<'CSS'
+
+          /* v1.1.116 — Live Event route uses full mobile width */
+          .live-tower-route-strip{
+            width:100%;
+            max-width:none;
+            margin:0;
+            padding:0;
+            gap:14px;
+          }
+          .live-tower-route-card{
+            width:100%;
+            max-width:none;
+            min-height:250px;
+            display:grid;
+            grid-template-columns:minmax(118px, .72fr) minmax(0, 1.28fr);
+            grid-template-areas:"info card";
+            align-items:center;
+            gap:12px;
+            padding:16px 14px 16px 18px;
+            margin:0;
+          }
+          .live-tower-route-card .live-tower-route-head,
+          .live-tower-route-card .live-tower-route-copy{
+            grid-area:info;
+            align-self:center;
+            justify-self:stretch;
+            text-align:left;
+          }
+          .live-tower-route-card .live-tower-route-head{
+            position:static;
+            display:flex;
+            flex-direction:column;
+            align-items:flex-start;
+            justify-content:flex-start;
+            gap:7px;
+            margin:0 0 72px;
+          }
+          .live-tower-route-card .live-tower-route-head strong{
+            display:grid;
+            place-items:center;
+            width:48px;
+            height:48px;
+            border-radius:50%;
+            font-size:1.35rem;
+            line-height:1;
+          }
+          .live-tower-route-card .live-tower-route-head span{
+            font-size:.72rem;
+            letter-spacing:.14em;
+            line-height:1.25;
+          }
+          .live-tower-route-card .live-tower-route-copy{
+            margin-top:66px;
+            padding:0;
+          }
+          .live-tower-route-card .live-tower-route-copy strong{
+            display:block;
+            font-size:clamp(1.3rem,5vw,1.65rem);
+            line-height:.98;
+            letter-spacing:-.015em;
+            margin:0 0 5px;
+          }
+          .live-tower-route-card .live-tower-route-copy span{
+            display:block;
+            font-size:.9rem;
+            line-height:1.1;
+          }
+          .live-tower-route-card-frame{
+            grid-area:card;
+            justify-self:end;
+            width:min(100%,230px);
+            max-width:230px;
+            margin:0;
+          }
+          .live-tower-route-card-frame .live-tower-opponent-card{
+            width:100%;
+            max-width:none;
+          }
+          @media (max-width:430px){
+            .live-tower-detail-body,
+            .live-tower-route,
+            .live-tower-route-strip{
+              width:100%;
+              max-width:none;
+            }
+            .live-tower-route-card{
+              grid-template-columns:minmax(108px,.67fr) minmax(190px,1.33fr);
+              min-height:238px;
+              padding:14px 10px 14px 16px;
+              gap:8px;
+              border-radius:20px;
+            }
+            .live-tower-route-card-frame{
+              width:min(100%,218px);
+              max-width:218px;
+            }
+            .live-tower-route-card .live-tower-route-head strong{
+              width:46px;
+              height:46px;
+              font-size:1.25rem;
+            }
+            .live-tower-route-card .live-tower-route-copy strong{
+              font-size:1.35rem;
+            }
+            .live-tower-route-card .live-tower-route-copy span{
+              font-size:.82rem;
+            }
+          }
+          CSS
+      - name: Bump release
+        run: |
+          npm version 1.1.116 --no-git-tag-version
+          npm run stamp-cache
+          npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          grep -q 'v1.1.116 — Live Event route uses full mobile width' css/game.css
+      - name: Publish
+        run: |
+          rm -rf .live-event-route-width
+          rm -f .github/workflows/wwe-live-event-route-full-width.yml
+          git config user.name 'Swoop081'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'WWE Legacy v1.1.116 — full-width Live Event route cards'
+          git push origin main
