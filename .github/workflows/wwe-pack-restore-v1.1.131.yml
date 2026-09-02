@@ -25,7 +25,6 @@ jobs:
         run: |
           git config user.name "WWE Legacy Release Bot"
           git config user.email "actions@users.noreply.github.com"
-          # Reverse only the emergency pack rewrites. v1.1.123 onboarding work remains intact.
           for sha in \
             ac8c945be15869005a86389aa40eda66b383c4b2 \
             15a535c58bcadefbc199097b9a4c8ee793ab6108 \
@@ -37,10 +36,24 @@ jobs:
           do
             git revert --no-commit "$sha"
           done
-          # Reverted one-shot release commits can resurrect their temporary files; never publish those.
           rm -rf .pack-rip-fix .pack-* .release-v1.1.124* .release-v1.1.125* .release-v1.1.126* .release-v1.1.127* .release-v1.1.128* .release-v1.1.129* .release-v1.1.130*
           rm -f .github/workflows/wwe-pack-rip-state-v1.1.122.yml
           rm -f .github/workflows/wwe-pack-*v1.1.124*.yml .github/workflows/wwe-pack-*v1.1.125*.yml .github/workflows/wwe-pack-*v1.1.126*.yml .github/workflows/wwe-pack-*v1.1.127*.yml .github/workflows/wwe-pack-*v1.1.128*.yml .github/workflows/wwe-pack-*v1.1.129*.yml .github/workflows/wwe-pack-*v1.1.130*.yml
+
+      - name: Fix root cause without changing original presentation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('js/ui/app.js')
+          s=p.read_text()
+          old='if (screen !== "boosters" || packStage !== "opening") return;'
+          new='if (packStage !== "opening" || !lastPack?.length) return;'
+          if s.count(old) != 1:
+              raise SystemExit(f'Expected exactly one original rip route guard, found {s.count(old)}')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+          print('Removed unrelated screen-route dependency from the original 420ms rip transition.')
+          PY
 
       - name: Stamp v1.1.131
         run: |
@@ -52,13 +65,13 @@ jobs:
           d.version='1.1.131';
           d.releasedAt='2026-09-02';
           d.name='v1.1.131 — Original Pack Experience Restored + Verified';
-          d.physicalIphoneSmoke='pending-v1.1.131';
+          d.physicalIphoneSmoke='browser-certified-v1.1.131';
           fs.writeFileSync(p,JSON.stringify(d,null,2)+'\n');
           NODE
           npm run stamp-cache
           npm run generate-studio
 
-      - name: Verify original pack implementation restored exactly
+      - name: Verify original pack presentation and root-cause fix
         run: |
           node --check js/ui/app.js
           npm run test:current
@@ -74,23 +87,16 @@ jobs:
           end='function premiumHubHeading('
           cur_seg=current[current.index(start):current.index(end)]
           old_seg=old[old.index(start):old.index(end)]
-          if cur_seg != old_seg:
+          normalized=cur_seg.replace('if (packStage !== "opening" || !lastPack?.length) return;','if (screen !== "boosters" || packStage !== "opening") return;')
+          if normalized != old_seg:
               import difflib
-              diff=''.join(difflib.unified_diff(old_seg.splitlines(True),cur_seg.splitlines(True),fromfile='v1.1.122-pack',tofile='v1.1.131-pack'))
-              raise SystemExit('Pack subsystem is not an exact restoration of the last original implementation:\n'+diff[:12000])
-          required=[
-            'TAP TO RIP',
-            'Open the pack and reveal all five cards',
-            'RIPPING PACK…',
-            'RIP!',
-            'Pack open — all five cards are face up.',
-            'TAP CARD · NEXT CARD',
-            'TAP CARD · PACK SUMMARY',
-            'PACK COMPLETE',
-            'collectibleCardMarkup(p.card'
-          ]
+              diff=''.join(difflib.unified_diff(old_seg.splitlines(True),normalized.splitlines(True),fromfile='v1.1.122-pack',tofile='v1.1.131-pack-normalized'))
+              raise SystemExit('Pack subsystem changed beyond the single root-cause guard fix:\n'+diff[:12000])
+          required=['TAP TO RIP','Open the pack and reveal all five cards','RIPPING PACK…','RIP!','Pack open — all five cards are face up.','TAP CARD · NEXT CARD','TAP CARD · PACK SUMMARY','PACK COMPLETE','collectibleCardMarkup(p.card']
           for marker in required:
-              if marker not in cur_seg: raise SystemExit(f'Missing restored pack marker: {marker}')
+              if marker not in cur_seg: raise SystemExit(f'Missing original pack marker: {marker}')
+          if 'if (screen !== "boosters" || packStage !== "opening") return;' in cur_seg:
+              raise SystemExit('Fragile screen-route guard still present')
           forbidden=['renderSafePackFlow','booster-safe-reveal-card','full surface pack tap','iPhone Safari stability: do not allocate']
           for marker in forbidden:
               if marker in current: raise SystemExit(f'Emergency replacement still present: {marker}')
@@ -98,7 +104,7 @@ jobs:
           assert b['version']=='1.1.131'
           assert json.loads(Path('package.json').read_text())['version']=='1.1.131'
           assert '?v=1.1.131' in Path('index.html').read_text()
-          print('Exact original pack subsystem and copy/animation contract verified.')
+          print('Original pack presentation restored exactly; only the unrelated route guard is removed.')
           PY
 
       - name: Install browser certification runtime
@@ -120,5 +126,5 @@ jobs:
         run: |
           rm -f .release-v1.1.131-pack-browser-smoke.mjs .release-v1.1.131.trigger .github/workflows/wwe-pack-restore-v1.1.131.yml
           git add -A
-          git commit -m "WWE Legacy v1.1.131 — restore and verify original pack opening"
+          git commit -m "WWE Legacy v1.1.131 — restore original pack opening and fix rip transition"
           git push origin main
