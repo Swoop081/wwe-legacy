@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.107";
-import { superstars } from "./superstars.js?v=1.1.107";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.107";
-import { awardSeasonXp } from "./seasons.js?v=1.1.107";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.108";
+import { superstars } from "./superstars.js?v=1.1.108";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.108";
+import { awardSeasonXp } from "./seasons.js?v=1.1.108";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -550,16 +550,15 @@ function recentLiveEventOpponentUse(profile, now = new Date()) {
 function dailyVarietyEvents(templates, profile = null, now = new Date()) {
   const usedToday = new Set();
   const recentUse = recentLiveEventOpponentUse(profile, now);
-  const visibleAll = Object.values(superstars).filter(star => isPlayerVisibleSuperstar(star, profile, now)).map(star => star.id);
   return templates.map((template,index) => {
     const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, (daySerial(now)+index) % LIVE_REWARD_FALLBACKS.length, now), now);
     const themed = releasedLiveEventOpponentIds(event, profile, now);
-    const candidates = [...new Set([...themed, ...visibleAll])].filter(id => !usedToday.has(id));
+    // Theme eligibility is absolute. Variety/recency may reorder an event's authored
+    // opponent pool, but must never widen it (for example Evolution is women-only).
+    const candidates = [...new Set(themed)].filter(id => !usedToday.has(id));
     candidates.sort((a,b) => {
-      const aThemed = themed.includes(a) ? 1 : 0, bThemed = themed.includes(b) ? 1 : 0;
       const aLast = recentUse.get(a) ?? -Infinity, bLast = recentUse.get(b) ?? -Infinity;
       if (aLast !== bLast) return aLast - bLast;
-      if (aThemed !== bThemed) return bThemed - aThemed;
       const seed = `${dateKey(localDayStart(now))}:${event.id}:`;
       return `${seed}${a}`.localeCompare(`${seed}${b}`);
     });

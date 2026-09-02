@@ -1,9 +1,9 @@
-import { superstars } from '../js/data/superstars.js?v=1.1.107';
-import { decks } from '../js/data/decks.js?v=1.1.107';
-import { applyCardTier } from '../js/data/variants.js?v=1.1.107';
-import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.107';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.107';
-import { decisionOwner, cpuDecision, executeCpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.107';
+import { superstars } from '../js/data/superstars.js?v=1.1.108';
+import { decks } from '../js/data/decks.js?v=1.1.108';
+import { applyCardTier } from '../js/data/variants.js?v=1.1.108';
+import { isPlayerReleasedSetId } from '../js/data/release.js?v=1.1.108';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.108';
+import { decisionOwner, cpuDecision, executeCpuDecision } from '../js/ai/WrestlingAI.js?v=1.1.108';
 
 const N = Math.max(20, Number(process.env.MATCHES_PER_OPP ?? 80));
 const stars = Object.values(superstars).filter(star => isPlayerReleasedSetId(star.setId));

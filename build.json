@@ -1,5 +1,5 @@
 {
-  "version": "1.1.107",
+  "version": "1.1.108",
   "releasedAt": "2026-09-01",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
@@ -7,5 +7,5 @@
   "criticalFixOnly": false,
   "physicalIphoneSmoke": "in-progress-v1.1.96-user-smoke",
   "launchStatus": "released",
-  "name": "v1.1.96 — iPhone Card Frame Safe-Zone Hotfix"
+  "name": "v1.1.108 — Live Event Theme Eligibility Gate"
 }

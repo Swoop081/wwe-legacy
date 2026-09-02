@@ -1,11 +1,11 @@
 
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=1.1.107";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.107";
-import { sets } from "../js/data/sets.js?v=1.1.107";
-import { seasonExclusiveSuperstars, ACTIVE_REWARD_SUPERSTAR_IDS, REWARD_PRINTING_TIER } from "../js/data/season-exclusive.js?v=1.1.107";
-import { cardPrintingTiers } from "../js/data/variants.js?v=1.1.107";
+import { superstars } from "../js/data/superstars.js?v=1.1.108";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.108";
+import { sets } from "../js/data/sets.js?v=1.1.108";
+import { seasonExclusiveSuperstars, ACTIVE_REWARD_SUPERSTAR_IDS, REWARD_PRINTING_TIER } from "../js/data/season-exclusive.js?v=1.1.108";
+import { cardPrintingTiers } from "../js/data/variants.js?v=1.1.108";
 
 test("v1.1.71 active Rewards registry contains only Trish Stratus",()=>{
   assert.deepEqual(ACTIVE_REWARD_SUPERSTAR_IDS,["trish-stratus"]);

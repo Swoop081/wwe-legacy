@@ -1,6 +1,6 @@
-import { addUniversePoints } from "./profile.js?v=1.1.107";
-import { grantBooster, randomReleasedBoosterSetId } from "./boosters.js?v=1.1.107";
-import { grantMerch, rollMerch } from "./merch.js?v=1.1.107";
+import { addUniversePoints } from "./profile.js?v=1.1.108";
+import { grantBooster, randomReleasedBoosterSetId } from "./boosters.js?v=1.1.108";
+import { grantMerch, rollMerch } from "./merch.js?v=1.1.108";
 export const DAILY_SPIN_COOLDOWN_MS=24*60*60*1000;
 export const DAILY_SPIN_WEDGES=Object.freeze([
  {id:"up-50",label:"50 UP",type:"up",amount:50},

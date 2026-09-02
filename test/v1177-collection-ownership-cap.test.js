@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=1.1.107';
-import { addOwnedCard, totalOwnedCopies, underTierOwnershipCap, cardTotalOwnershipCap } from '../js/data/profile.js?v=1.1.107';
-import { CARD_TIERS } from '../js/data/variants.js?v=1.1.107';
+import { collectionCards } from '../js/data/collection.js?v=1.1.108';
+import { addOwnedCard, totalOwnedCopies, underTierOwnershipCap, cardTotalOwnershipCap } from '../js/data/profile.js?v=1.1.108';
+import { CARD_TIERS } from '../js/data/variants.js?v=1.1.108';
 
 const ordinary = collectionCards.find(card => !['superstar','entrance'].includes(card.kind) && !card.fixedPrintingTier);
 const superstar = collectionCards.find(card => card.kind === 'superstar');
