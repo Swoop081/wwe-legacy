@@ -1,46 +1,46 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.130";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.130";
-import { superstars } from "../data/superstars.js?v=1.1.130";
-import { decks } from "../data/decks.js?v=1.1.130";
-import { sets } from "../data/sets.js?v=1.1.130";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.130";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.130";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.130";
-import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.130";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.130";
-import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.130";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.130";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.130";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.130";
-import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.130";
-import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.130";
-import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.130";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.130";
-import { totalMomentum } from "../engine/utils.js?v=1.1.130";
-import { healthZone } from "../engine/health.js?v=1.1.130";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.130";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.130";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.130";
-import { playPileMatStyle } from "./play-pile-mats.js?v=1.1.130";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.130";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.130";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.130";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.130";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.130";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.130";
-import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.130";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.130";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.130";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.130";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.130";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.130";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.130";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.130";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.130";
-import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.130";
-import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.130";
-import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.130";
-import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.130";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.131";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.131";
+import { superstars } from "../data/superstars.js?v=1.1.131";
+import { decks } from "../data/decks.js?v=1.1.131";
+import { sets } from "../data/sets.js?v=1.1.131";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=1.1.131";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.131";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.131";
+import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.131";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.131";
+import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.131";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.131";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.131";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=1.1.131";
+import { applyCardTier, CARD_TIERS, highestOwnedTier, normalizeCardTier, tierLabel, tierRank } from "../data/variants.js?v=1.1.131";
+import { scaleCpuDeckToPlayer } from "../data/cpu-tier-scaling.js?v=1.1.131";
+import { MatchEngine } from "../engine/MatchEngine.js?v=1.1.131";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=1.1.131";
+import { totalMomentum } from "../engine/utils.js?v=1.1.131";
+import { healthZone } from "../engine/health.js?v=1.1.131";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=1.1.131";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=1.1.131";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=1.1.131";
+import { playPileMatStyle } from "./play-pile-mats.js?v=1.1.131";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=1.1.131";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, markKingOfTheRingCoronationSeen, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=1.1.131";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, championshipRoadOpponentsForSuperstar, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=1.1.131";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, DAILY_LIVE_EVENT_SET_XP, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, changeLiveEventTowerSuperstar, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState, dailyLiveEventSetStatus } from "../data/live-events.js?v=1.1.131";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=1.1.131";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=1.1.131";
+import { COLLECTION_MILESTONES, EMERALD_MILESTONES, SAPPHIRE_MILESTONES, RUBY_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=1.1.131";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=1.1.131";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=1.1.131";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=1.1.131";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=1.1.131";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=1.1.131";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=1.1.131";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=1.1.131";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=1.1.131";
+import { DAILY_SPIN_WEDGES, dailySpinState, spinDaily } from "../data/daily-spin.js?v=1.1.131";
+import { MERCH_ITEMS, MERCH_BY_ID, activeMerchItem, activeMerchSuperstarId, merchEligibilityForSuperstar, equipMerch, discardActiveMerch, merchMatchModifier, consumeActiveMerchMatch } from "../data/merch.js?v=1.1.131";
+import { SUPERSTAR_VARIANTS, SUPERSTAR_VARIANT_BY_ID, equippedSuperstarVariant, equipSuperstarVariant, superstarVariantMatchModifier } from "../data/superstar-variants.js?v=1.1.131";
+import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, startSurvivorSeries, setSurvivorChallenge, autoSurvivorChallenge, resolveSurvivorSeriesMatch, resetSurvivorSeries } from "../data/survivor-series-mode.js?v=1.1.131";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -897,76 +897,17 @@ function finishUnlockCelebration(openDeckLab = false) {
 }
 
 
-function renderSafePackFlow() {
-  const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
-  const root = $("#game");
-  const pulls = lastPack ?? [];
-  if (!root || !pulls.length) { packStage = "idle"; renderBoosters(); return; }
-  document.body.classList.add("booster-modal-open");
-  const mobileNav = document.querySelector("#mobile-game-nav");
-  if (mobileNav) mobileNav.hidden = true;
-  const setInfo = setCollections[activeBoosterSetId] ?? setCollection;
-  const setName = setInfo?.displayName ?? setInfo?.name ?? activeBoosterSetId;
-  const rarityName = pull => pull?.card?.ultraRare ? "ULTRA RARE" : ((setCollections[pull?.card?.setId]?.rarityLabels ?? setInfo?.rarityLabels)?.[pull?.card?.rarity ?? 1] ?? "CARD").toUpperCase();
-
-  if (packStage === "safe-summary") {
-    const converted = finalizePackUniversePoints(profile, pulls);
-    if (converted) saveProfile(profile);
-    const rows = pulls.map((pull, index) => `<article style="display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.12)"><b style="font-size:18px;color:#f0bf54">${index + 1}</b><div><strong style="display:block;font-size:16px">${escapeHtml(pull.card?.name ?? 'Card')}</strong><small style="opacity:.7">${escapeHtml(rarityName(pull))}${pull.tier ? ` · ${escapeHtml(tierLabel(pull.tier).toUpperCase())}` : ''}</small></div><span style="font-weight:900;color:${pull.isNewCard ? '#60e79a' : '#fff'}">${pull.universePointsValue ? `+${pull.universePointsValue} UP` : pull.isNewCard ? 'NEW' : ''}</span></article>`).join("");
-    root.innerHTML = `<section style="position:fixed;inset:0;z-index:9000;background:#05070b;color:#fff;padding:max(24px,env(safe-area-inset-top)) 22px max(24px,env(safe-area-inset-bottom));box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden"><header style="display:flex;justify-content:space-between;align-items:end;padding:8px 0 18px;border-bottom:1px solid rgba(255,255,255,.15)"><span style="font-size:13px;font-weight:900;letter-spacing:.22em;color:#f0bf54">PACK COMPLETE</span><b style="font-size:15px;letter-spacing:.08em">${escapeHtml(setName)}</b></header><div style="flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0"><div style="width:100%;max-width:560px;margin:0 auto">${rows}</div></div><button id="safe-pack-finish" type="button" class="start-match" style="width:100%;min-height:58px;font-size:18px">CONTINUE</button></section>`;
-    $("#safe-pack-finish")?.addEventListener("click", finishSafePackFlow, { once: true });
-    return;
-  }
-
-  const index = Math.max(0, Math.min(boosterFocusIndex, pulls.length - 1));
-  const pull = pulls[index];
-  const art = finishedCardArtFor(pull.card) || layeredCardArtFor(pull.card) || artworkFor(pull.card) || "";
-  const artMarkup = art ? `<img src="${assetUrl(art)}" alt="${escapeHtml(pull.card?.name ?? 'Card')}" style="display:block;width:auto;height:auto;max-width:min(74vw,360px);max-height:58dvh;object-fit:contain" decoding="async">` : `<div style="width:min(74vw,360px);aspect-ratio:680/1000;border:2px solid #d8b34b;border-radius:12px;display:grid;place-items:center;background:#111722"><strong style="padding:20px;text-align:center;font-size:24px">${escapeHtml(pull.card?.name ?? 'Card')}</strong></div>`;
-  const action = index === pulls.length - 1 ? "PACK SUMMARY" : "NEXT CARD";
-  root.innerHTML = `<section style="position:fixed;inset:0;z-index:9000;background:radial-gradient(circle at 50% 34%,rgba(95,63,24,.28),transparent 46%),#05070b;color:#fff;padding:max(24px,env(safe-area-inset-top)) 20px max(22px,env(safe-area-inset-bottom));box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden"><header style="display:flex;justify-content:space-between;align-items:end;padding:8px 0 16px;border-bottom:1px solid rgba(255,255,255,.15)"><span style="font-size:13px;font-weight:900;letter-spacing:.22em;color:#f0bf54">PACK OPENING</span><b style="font-size:15px;letter-spacing:.08em">${escapeHtml(setName)}</b></header><div style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><small style="font-weight:900;letter-spacing:.18em;opacity:.72">CARD ${index + 1} OF ${pulls.length}</small>${artMarkup}<strong style="font-size:22px;text-align:center;line-height:1.05">${escapeHtml(pull.card?.name ?? 'Card')}</strong><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><span style="font-size:12px;font-weight:900;letter-spacing:.12em;color:#f0bf54">${escapeHtml(rarityName(pull))}</span>${pull.tier ? `<span style="font-size:12px;font-weight:900;letter-spacing:.12em">${escapeHtml(tierLabel(pull.tier).toUpperCase())}</span>` : ''}${pull.isNewCard ? '<span style="font-size:12px;font-weight:900;letter-spacing:.12em;color:#60e79a">NEW</span>' : ''}${pull.superstarUnlocked ? '<span style="font-size:12px;font-weight:900;letter-spacing:.12em;color:#68d9ff">SUPERSTAR</span>' : ''}</div></div><button id="safe-pack-next" type="button" class="start-match" style="width:100%;min-height:58px;font-size:18px">${action}</button></section>`;
-  $("#safe-pack-next")?.addEventListener("click", () => {
-    if (boosterFocusIndex < pulls.length - 1) { boosterFocusIndex += 1; renderSafePackFlow(); }
-    else { packStage = "safe-summary"; renderSafePackFlow(); }
-  }, { once: true });
-}
-
-function finishSafePackFlow() {
-  const returnScreen = boosterReturnScreen;
-  boosterReturnScreen = null;
-  pendingUpgrades = findPackUpgrades(profile, lastPack ?? []);
-  appliedPackUpgrades = [];
-  if (profile.deckAssistance === "auto") {
-    for (const upgrade of pendingUpgrades) if (applyUpgrade(profile, upgrade)) appliedPackUpgrades.push(upgrade);
-  }
-  saveProfile(profile);
-  lastPack = null; revealedPackCards = new Set(); boosterRulesFlipped = new Set(); boosterInspectIndex = null; boosterInspectFlipped = false; convertedPackCards = new Set(); boosterFocusIndex = 0; pendingUpgrades = []; appliedPackUpgrades = []; packStage = "idle"; currentPackType = "standard"; message = "";
-  document.body.classList.remove("booster-modal-open");
-  const mobileNav = document.querySelector("#mobile-game-nav");
-  if (mobileNav) mobileNav.hidden = false;
-  if (returnScreen === "launch-daily-rewards") { continueLaunchDailyRewards(); return; }
-  if (returnScreen === "seasons") { screen = "seasons"; renderSeasons(); return; }
-  screen = "boosters"; renderBoosters();
-}
-
 function processPack(kind = "standard") {
   try {
     screen = "boosters";
     currentPackType = "standard";
     lastPack = openBooster(profile, Math.random, activeBoosterSetId);
     if (lastPack?.[0]?.card?.setId) activeBoosterSetId = lastPack[0].card.setId;
-    pendingUpgrades = []; appliedPackUpgrades = []; revealedPackCards = new Set(lastPack.map((_, index) => index)); boosterRulesFlipped = new Set(); boosterInspectIndex = null; boosterInspectFlipped = false; convertedPackCards = new Set(); boosterFocusIndex = 0; packFinalized = false; packStage = "safe-reveal";
+    pendingUpgrades = []; appliedPackUpgrades = []; revealedPackCards = new Set(); boosterRulesFlipped = new Set(); boosterInspectIndex = null; boosterInspectFlipped = false; convertedPackCards = new Set(); boosterFocusIndex = 0; packFinalized = false; packStage = "sealed";
     const setName = setCollections[activeBoosterSetId]?.displayName ?? activeBoosterSetId;
-    message = `${setName} pack open — Card 1 of ${lastPack.length}.`;
-    saveProfile(profile);
-    renderSafePackFlow();
-  } catch (error) {
-    message = error?.message ?? "Unable to open pack.";
-    packStage = "idle";
-    document.body.classList.remove("booster-modal-open");
-    const mobileNav = document.querySelector("#mobile-game-nav");
-    if (mobileNav) mobileNav.hidden = false;
-    renderBoosters();
-  }
+    message = `${setName} pack ready. Tap the pack to rip it open.`;
+    saveProfile(profile); renderBoosters();
+  } catch (error) { message = error.message; renderBoosters(); }
 }
 
 function scheduleFocusedDuplicateConversion() {
@@ -1004,16 +945,19 @@ function maybeCelebrateFocusedSuperstarPull(delay = 260) {
 
 function ripOpenPack() {
   if (packStage !== "sealed" || !lastPack?.length) return;
-  // v1.1.124 — iPhone Safari stability: do not allocate a second animated pack
-  // scene before mounting the first reveal card. The pack contents were already
-  // generated and saved by processPack(), so this is presentation-only.
-  revealedPackCards = new Set(lastPack.map((_, index) => index));
-  boosterFocusIndex = Math.max(0, Math.min(boosterFocusIndex, lastPack.length - 1));
-  packStage = "reveal";
-  message = "Pack open — reveal all five cards.";
-  renderBoosters();
-  scheduleFocusedDuplicateConversion();
-  maybeCelebrateFocusedSuperstarPull(220);
+  packStage = "opening";
+  message = "RIPPING PACK…";
+  document.querySelector(".sealed-pack-stage")?.classList.add("is-ripping");
+  setTimeout(() => {
+    if (packStage !== "opening" || !lastPack?.length) return;
+    revealedPackCards = new Set(lastPack.map((_, index) => index));
+    boosterFocusIndex = Math.max(0, Math.min(boosterFocusIndex, lastPack.length - 1));
+    packStage = "reveal";
+    message = "Pack open — all five cards are face up.";
+    renderBoosters();
+    scheduleFocusedDuplicateConversion();
+    maybeCelebrateFocusedSuperstarPull(300);
+  }, 420);
 }
 
 function preparePackSummary() {
@@ -1123,7 +1067,7 @@ function boosterInspectOverlayMarkup(pulls = lastPack ?? []) {
   const pull = Number.isInteger(boosterInspectIndex) ? pulls[boosterInspectIndex] : null;
   if (!pull?.card || packStage === "idle" || packStage === "reveal") return "";
   const instruction = `Tap card to ${boosterInspectFlipped ? "show front" : "view effects"} · Tap outside to close`;
-  return `<div class="superstar-card-modal deck-lab-card-modal booster-card-inspect-modal" data-booster-inspect-modal-backdrop="1"><div class="superstar-card-modal-inner deck-lab-card-modal-inner"><button type="button" class="deck-lab-card-modal-close" data-close-booster-inspect="1" aria-label="Close card inspector">×</button>${collectibleCardMarkup(pull.card,{flipped:boosterInspectFlipped,tier:pull.tier,extraClass:"hud-superstar-modal-card deck-lab-inspect-card booster-inspect-card",flipAttr:'data-flip-booster-inspect="1"',allowAnimation:false})}<small>${instruction}</small></div></div>`;
+  return `<div class="superstar-card-modal deck-lab-card-modal booster-card-inspect-modal" data-booster-inspect-modal-backdrop="1"><div class="superstar-card-modal-inner deck-lab-card-modal-inner"><button type="button" class="deck-lab-card-modal-close" data-close-booster-inspect="1" aria-label="Close card inspector">×</button>${collectibleCardMarkup(pull.card,{flipped:boosterInspectFlipped,tier:pull.tier,extraClass:"hud-superstar-modal-card deck-lab-inspect-card booster-inspect-card",flipAttr:'data-flip-booster-inspect="1"'})}<small>${instruction}</small></div></div>`;
 }
 
 function renderBoostersUnsafe() {
@@ -1145,7 +1089,7 @@ function renderBoostersUnsafe() {
   const upRewardTile = (p, extraClass="", actionAttr="") => `<button type="button" class="up-card-replacement ${extraClass}" ${actionAttr} aria-label="${`${tierLabel(p.tier)} duplicate`} converted to ${p.universePointsValue} Universe Points"><span>${p.tier && p.tier!=="normal" ? `${tierLabel(p.tier).toUpperCase()} DUPLICATE` : "DUPLICATE CONVERTED"}</span><strong>+${p.universePointsValue}</strong><b>UP</b><small>UNIVERSE POINTS</small></button>`;
   const summaryCard = (p,index,slotClass="") => `
     <article class="pack-summary-card actual-card-summary ${slotClass} rarity-${p.card.rarity} ${tierCssClass(p.tier)} ${p.universePointsValue?'is-up-converted':''}" data-pack-summary-inspect="${index}" role="button" tabindex="0" aria-label="Inspect ${p.card.name}">
-      <div class="pack-summary-actual-card">${p.universePointsValue ? upRewardTile(p,"summary-up-reward") : collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,interactive:false,extraClass:"pack-summary-ccg",allowAnimation:false})}</div>
+      <div class="pack-summary-actual-card">${p.universePointsValue ? upRewardTile(p,"summary-up-reward") : collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,interactive:false,extraClass:"pack-summary-ccg"})}</div>
       <div class="pack-summary-badges">${p.universePointsValue ? `<span class="up-conversion-badge">+${p.universePointsValue} UP</span>` : `<span class="summary-rarity-badge">${rarityName(p)}</span>${p.tier?`<span class="tier-summary-symbol ${tierCssClass(p.tier)}">${tierLabel(p.tier).toUpperCase()}</span>`:''}${p.isNewCard?'<span class="new-card-symbol">NEW</span>':''}${p.superstarUnlocked?'<span class="unlock-symbol">SUPERSTAR</span>':''}`}</div>
     </article>`;
   const summarySlots = ["summary-top-left","summary-top-right","summary-center","summary-bottom-left","summary-bottom-right"];
@@ -1169,7 +1113,7 @@ function renderBoostersUnsafe() {
     outerSummaryEntries[2] ? {...outerSummaryEntries[2],slot:summarySlots[3]} : null,
     outerSummaryEntries[3] ? {...outerSummaryEntries[3],slot:summarySlots[4]} : null,
   ].filter(Boolean);
-  const compactSummaryThumbs = packStage === "summary" ? summaryLayout.map(({p,index,slot})=>summaryCard(p,index,slot)).join("") : "";
+  const compactSummaryThumbs = summaryLayout.map(({p,index,slot})=>summaryCard(p,index,slot)).join("");
 
   let packArea = "";
   if (packStage === "sealed") {
@@ -1180,17 +1124,12 @@ function renderBoostersUnsafe() {
     const p=pulls[boosterFocusIndex];
     const converted=convertedPackCards.has(boosterFocusIndex) || p.universePointsCredited;
     const converting=Boolean(p.universePointsValue && !converted);
-    const revealArt = finishedCardArtFor(p.card) || layeredCardArtFor(p.card) || artworkFor(p.card) || "";
-    const revealArtMarkup = revealArt
-      ? `<img class="booster-safe-reveal-art" src="${assetUrl(revealArt)}" alt="${p.card.name}" loading="eager" decoding="async">`
-      : `<div class="booster-safe-reveal-fallback"><strong>${p.card.name}</strong><span>${String(p.card.kind || "CARD").toUpperCase()}</span></div>`;
     const cardMarkup = converted
       ? upRewardTile(p,"reveal-up-reward",`data-booster-next="${boosterFocusIndex}"`)
-      : `<button type="button" class="booster-safe-reveal-card single-pack-card is-revealed is-current rarity-${p.card.rarity} ${tierCssClass(p.tier)} ${converting?'duplicate-disintegrating':''}" data-booster-next="${boosterFocusIndex}" aria-label="${p.card.name}. Tap for next card.">
-          ${revealArtMarkup}
-          <span class="booster-safe-reveal-name">${p.card.name}</span>
+      : `<div class="booster-flip-card single-pack-card is-revealed is-current rarity-${p.card.rarity} ${tierCssClass(p.tier)} ${converting?'duplicate-disintegrating':''}">
+          ${collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,extraClass:"booster-ccg",flipAttr:`data-booster-next="${boosterFocusIndex}"`})}
           ${converting?`<div class="duplicate-conversion-overlay" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><strong>DUPLICATE</strong><span>CONVERTING TO UP</span></div>`:''}
-        </button>`;
+        </div>`;
     const dots=pulls.map((_,i)=>`<i class="${i===boosterFocusIndex?'current':''} revealed ${pulls[i]?.universePointsValue?'converted':''}"></i>`).join("");
     packArea=`<section class="single-card-reveal-stage rarity-stage-${p.card.rarity} card-is-revealed ${p.tier && p.tier!=='normal' ? `tier-stage ${tierCssClass(p.tier)}` : ''} ${converting?'duplicate-conversion-stage':''} ${converted?'up-reward-stage':''}">
       <div class="booster-reveal-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -1277,26 +1216,7 @@ function renderBoostersUnsafe() {
     activeBoosterSetId=setId; currentPackType=type; message=''; processPack(type);
   }));
   $("#deck-assistance")?.addEventListener("change",e=>{setDeckAssistance(profile,e.target.value);saveProfile(profile);message=`Deck Assistance set to ${e.target.options[e.target.selectedIndex].text}.`;renderBoosters();});
-  const ripPackButton = $("#rip-pack");
-  const ripCaptureSurface = root.querySelector(".booster-pack-modal-body");
-  if (ripPackButton && ripCaptureSurface && packStage === "sealed") {
-    let ripGestureHandled = false;
-    const handleRipGesture = event => {
-      if (ripGestureHandled || packStage !== "sealed") return;
-      if (event?.type === "keydown" && event.key !== "Enter" && event.key !== " ") return;
-      if (event?.cancelable) event.preventDefault();
-      ripGestureHandled = true;
-      ripPackButton.classList.add("is-rip-pressed");
-      requestAnimationFrame(() => ripOpenPack());
-    };
-    // v1.1.126 — the whole sealed-pack modal body owns the gesture at capture
-    // phase. This avoids child artwork/layer hit-testing swallowing the tap on
-    // iPhone Chrome/WebKit. Pointerdown gives immediate first-contact feedback.
-    ripCaptureSurface.addEventListener("pointerdown", handleRipGesture, { capture: true, once: true });
-    ripCaptureSurface.addEventListener("touchstart", handleRipGesture, { capture: true, passive: false, once: true });
-    ripCaptureSurface.addEventListener("click", handleRipGesture, { capture: true, once: true });
-    ripPackButton.addEventListener("keydown", handleRipGesture, { once: true });
-  }
+  $("#rip-pack")?.addEventListener("click", ripOpenPack);
   root.querySelectorAll('[data-booster-inspect]').forEach(btn=>btn.addEventListener('click',()=>{if(packStage==="reveal"){nextBoosterCard();return;}boosterInspectIndex=Number(btn.dataset.boosterInspect);boosterInspectFlipped=false;renderBoosters();}));
   const openPackSummaryInspector = trigger => { boosterInspectIndex=Number(trigger.dataset.packSummaryInspect); boosterInspectFlipped=false; renderBoosters(); };
   root.querySelectorAll('[data-pack-summary-inspect]').forEach(tile=>{ tile.addEventListener('click',()=>openPackSummaryInspector(tile)); tile.addEventListener('keydown',event=>{if(event.key!=="Enter"&&event.key!==" ")return;event.preventDefault();openPackSummaryInspector(tile);}); });
@@ -3065,7 +2985,7 @@ function cardPlayRestrictionText(card) {
   return "";
 }
 
-function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null, extraClass = "", footer = "", flipAttr = "", interactive = true, eagerArt = false, preferFinished = false, finishedAnimationShell = false, allowAnimation = true } = {}) {
+function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null, extraClass = "", footer = "", flipAttr = "", interactive = true, eagerArt = false, preferFinished = false, finishedAnimationShell = false } = {}) {
   // Five print tiers share one underlying card identity. Sapphire is the authored
   // balance value; Normal/Emerald step down while Ruby/Amethyst step up at runtime.
   const resolvedTier = normalizeCardTier(card?.fixedPrintingTier ?? tier ?? card?.tier ?? (foil === true ? "ruby" : "normal"), "normal");
@@ -3093,7 +3013,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
     ? [card.method ? card.method.toUpperCase() : "", card.moveType ? (MOVE_TYPE_LABELS[card.moveType] ?? card.moveType).toUpperCase() : ""].filter(Boolean).join(" · ")
     : (card.subtitle ?? typeLabel);
   const tierTag = resolvedTier === "normal" ? "NORMAL" : tierLabel(resolvedTier).toUpperCase();
-  const animatedSurface = allowAnimation ? animatedCardSurfaceMarkup(card) : "";
+  const animatedSurface = animatedCardSurfaceMarkup(card);
   const layeredFallbackData = "";
   const frontMarkup = forcedFinishedFront
     ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${layeredFallbackData}`

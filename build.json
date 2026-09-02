@@ -1,11 +1,11 @@
 {
-  "version": "1.1.130",
+  "version": "1.1.131",
   "releasedAt": "2026-09-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.130",
+  "physicalIphoneSmoke": "browser-certified-v1.1.131",
   "launchStatus": "released",
-  "name": "v1.1.130 \u2014 Pack Renderer ReferenceError Fix"
+  "name": "v1.1.131 — Original Pack Experience Restored + Freeze Root Cause Fixed"
 }

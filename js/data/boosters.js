@@ -1,11 +1,11 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=1.1.130";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.1.130";
-import { duplicateUniversePointsFor } from "./store.js?v=1.1.130";
-import { sets } from "./sets.js?v=1.1.130";
-import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.1.130";
-import { CARD_TIERS, TIER_PULL_WEIGHTS, fixedPrintingTierFor, rollCardTier } from "./variants.js?v=1.1.130";
-import { grantMerch, rollMerch } from "./merch.js?v=1.1.130";
-import { grantSuperstarVariant, rollSuperstarVariant } from "./superstar-variants.js?v=1.1.130";
+import { cardsForSet, collectionCards } from "./collection.js?v=1.1.131";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.1.131";
+import { duplicateUniversePointsFor } from "./store.js?v=1.1.131";
+import { sets } from "./sets.js?v=1.1.131";
+import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.1.131";
+import { CARD_TIERS, TIER_PULL_WEIGHTS, fixedPrintingTierFor, rollCardTier } from "./variants.js?v=1.1.131";
+import { grantMerch, rollMerch } from "./merch.js?v=1.1.131";
+import { grantSuperstarVariant, rollSuperstarVariant } from "./superstar-variants.js?v=1.1.131";
 
 export const BOOSTER_SIZE = 5;
 export const BOOSTER_GAMEPLAY_SLOTS = 4;

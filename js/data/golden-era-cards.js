@@ -1,1 +1,1 @@
-import { allGameplayCards } from "./content.js?v=1.1.130"; export const goldenEraCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="golden-era-series-1").map(c=>[c.id,c]));
+import { allGameplayCards } from "./content.js?v=1.1.131"; export const goldenEraCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="golden-era-series-1").map(c=>[c.id,c]));
