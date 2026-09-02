@@ -1,0 +1,49 @@
+name: WWE Legacy v1.1.128 Direct Pack Reveal Recovery
+
+on:
+  push:
+    paths:
+      - '.release-v1.1.128.trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Apply direct reveal recovery
+        run: python3 .release-v1.1.128.py
+      - name: Regenerate studio data
+        run: npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          s=Path('js/ui/app.js').read_text()
+          assert 'packStage = "reveal";' in s
+          assert 'pack ready. Tap the pack to rip it open.' not in s
+          assert 'new Set(lastPack.map((_, index) => index))' in s
+          b=json.loads(Path('build.json').read_text())
+          assert b['version']=='1.1.128'
+          assert json.loads(Path('package.json').read_text())['version']=='1.1.128'
+          assert '?v=1.1.128' in Path('index.html').read_text()
+          print('v1.1.128 direct pack reveal verified')
+          PY
+      - name: Publish
+        run: |
+          rm -f .release-v1.1.128.py .release-v1.1.128.trigger .github/workflows/wwe-pack-direct-reveal-v1.1.128.yml
+          git config user.name "Swoop081"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "WWE Legacy v1.1.128 — direct pack reveal recovery"
+          git push
