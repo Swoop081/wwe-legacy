@@ -54,6 +54,17 @@ async function assertPackFlow(page, label, pageErrors) {
   console.log(`PASS ${label}: Tap to Rip -> five animated card reveals -> Pack Complete`);
 }
 
+async function finishPackFlow(page, label, pageErrors) {
+  const summaryNext = page.locator('#pack-summary-next');
+  await summaryNext.waitFor({ state: 'visible', timeout: 10000 });
+  await summaryNext.click({ timeout: 5000 });
+  const finish = page.locator('#finish-pack-review');
+  await finish.waitFor({ state: 'visible', timeout: 10000 });
+  await finish.click({ timeout: 5000 });
+  await page.waitForFunction(() => !document.body.classList.contains('booster-modal-open'), null, { timeout: 10000 });
+  if (pageErrors.length) throw new Error(`${label}: JavaScript runtime errors while exiting pack flow: ${pageErrors.join(' | ')}`);
+}
+
 async function newIphonePage(browser, profile) {
   const context = await browser.newContext({ ...devices['iPhone 13'], viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
@@ -61,6 +72,14 @@ async function newIphonePage(browser, profile) {
   page.on('pageerror', error => pageErrors.push(error.message));
   await installDeterministicProfile(page, profile);
   return { context, page, pageErrors };
+}
+
+async function openLaunchRewardIfPresented(page, label, pageErrors) {
+  const rip = page.locator('#rip-pack');
+  if (await rip.isVisible().catch(() => false)) {
+    await assertPackFlow(page, `${label} launch reward`, pageErrors);
+    await finishPackFlow(page, `${label} launch reward`, pageErrors);
+  }
 }
 
 async function runBrowser(browserType, browserName) {
@@ -73,6 +92,7 @@ async function runBrowser(browserType, browserName) {
       await page.locator('#launch-poster-play').waitFor({ state: 'visible', timeout: 15000 });
       await page.locator('#launch-poster-play').click();
       await assertPackFlow(page, `${browserName} launch reward`, pageErrors);
+      await finishPackFlow(page, `${browserName} launch reward`, pageErrors);
       await context.close();
     }
 
@@ -85,13 +105,15 @@ async function runBrowser(browserType, browserName) {
       await page.goto(BASE, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await page.locator('#launch-poster-play').waitFor({ state: 'visible', timeout: 15000 });
       await page.locator('#launch-poster-play').click();
+      await openLaunchRewardIfPresented(page, browserName, pageErrors);
       const packsNav = page.locator('[data-mobile-nav="boosters"]').first();
       await packsNav.waitFor({ state: 'attached', timeout: 15000 });
       await packsNav.evaluate(el => el.click());
       const byData = page.locator('[data-open-vault-pack^="nxt-series-1:"]').first();
       await byData.waitFor({ state: 'visible', timeout: 10000 });
-      await byData.click();
+      await byData.click({ timeout: 5000 });
       await assertPackFlow(page, `${browserName} NXT vault`, pageErrors);
+      await finishPackFlow(page, `${browserName} NXT vault`, pageErrors);
       await context.close();
     }
   } finally {
@@ -101,4 +123,4 @@ async function runBrowser(browserType, browserName) {
 
 await runBrowser(chromium, 'Chromium iPhone viewport');
 await runBrowser(webkit, 'WebKit iPhone viewport');
-console.log('CERTIFIED: original Tap to Rip + animated five-card reveal passes launch reward and NXT vault in Chromium and WebKit iPhone viewports with zero JavaScript runtime errors.');
+console.log('CERTIFIED: original Tap to Rip + animated five-card reveal + Pack Complete + exit passes launch reward and NXT vault in Chromium and WebKit iPhone viewports with zero JavaScript runtime errors.');
