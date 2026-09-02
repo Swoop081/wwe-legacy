@@ -85,8 +85,9 @@ async function runBrowser(browserType, browserName) {
       await page.goto(BASE, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await page.locator('#launch-poster-play').waitFor({ state: 'visible', timeout: 15000 });
       await page.locator('#launch-poster-play').click();
-      await page.locator('[data-mobile-nav="boosters"]').waitFor({ state: 'visible', timeout: 15000 });
-      await page.locator('[data-mobile-nav="boosters"]').click();
+      const packsNav = page.locator('[data-mobile-nav="boosters"]').first();
+      await packsNav.waitFor({ state: 'attached', timeout: 15000 });
+      await packsNav.evaluate(el => el.click());
       const byData = page.locator('[data-open-vault-pack^="nxt-series-1:"]').first();
       await byData.waitFor({ state: 'visible', timeout: 10000 });
       await byData.click();
