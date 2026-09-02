@@ -1,18 +1,23 @@
-import { decks } from "./decks.js?v=1.1.96";
-import { collectionCards } from "./collection.js?v=1.1.96";
-import { superstars } from "./superstars.js?v=1.1.96";
-import { isUnreleasedSetId } from "./release.js?v=1.1.96";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.96";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.96";
-import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.96";
-import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.96";
-import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.96";
-import { ownershipCapFor, isUniqueCollectionCard, totalOwnershipCapFor } from "./card-limits.js?v=1.1.96";
+import { decks } from "./decks.js?v=1.1.97";
+import { collectionCards } from "./collection.js?v=1.1.97";
+import { superstars } from "./superstars.js?v=1.1.97";
+import { isUnreleasedSetId } from "./release.js?v=1.1.97";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.97";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.97";
+import { buildBestOwnedRecommendedDraft, cardEligibilityForSuperstar, categoryForCard } from "./deck-builder.js?v=1.1.97";
+import { isRubyOnlyRewardSetId } from "./reward-printings.js?v=1.1.97";
+import { drawRandomSuperstarPack } from "./superstar-packs.js?v=1.1.97";
+import { ownershipCapFor, isUniqueCollectionCard, totalOwnershipCapFor } from "./card-limits.js?v=1.1.97";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
 export const PROFILE_RECOVERY_META_KEY = "wa-modern-profile-v3-recovery-meta-v1";
-export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
+export const STARTER_BRAND_CHOICES = Object.freeze({
+  raw: Object.freeze(["roman-reigns", "liv-morgan"]),
+  smackdown: Object.freeze(["cm-punk", "rhea-ripley"]),
+  nxt: Object.freeze(["tony-dangelo", "kendal-grey"])
+});
+export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
 export const PROFILE_VERSION = 46;
@@ -298,11 +303,18 @@ export function grantStoreSuperstarUnlockPackage(profile, sid, options = {}) {
   return grantSuperstarUnlockPackage(profile, sid, options);
 }
 
-export function createProfile(starterId) {
-  if (!STARTER_CHOICES.includes(starterId) || !decks[starterId]) throw new Error("Starter must be CM Punk or Roman Reigns");
+export function createProfile(starterInput) {
+  const starterIds = Array.isArray(starterInput) ? [...starterInput] : [starterInput];
+  const brandOrder = ["raw", "smackdown", "nxt"];
+  const validThreeBrandSelection = starterIds.length === brandOrder.length && starterIds.every((id, index) =>
+    STARTER_BRAND_CHOICES[brandOrder[index]].includes(id) && decks[id]?.length === 60
+  );
+  if (!validThreeBrandSelection) throw new Error("Choose one RAW, one SmackDown and one NXT starter Superstar");
+  const starterId = starterIds[0];
   const p = {
     version: PROFILE_VERSION,
     starterId,
+    starterIds: [...starterIds],
     universePoints: 0,
     unlockedSuperstars: [],
     favouriteSuperstars: [],
@@ -344,7 +356,7 @@ export function createProfile(starterId) {
   for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
     addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES, tier: DEFAULT_STARTER_TIER });
   }
-  grantInitialStarterPackage(p, starterId, { celebrate: false });
+  for (const sid of starterIds) grantInitialStarterPackage(p, sid, { celebrate: false });
   ensureCareerState(p);
   return p;
 }

@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.96";
-import { decks } from "../js/data/decks.js?v=1.1.96";
-import { migrateProfile } from "../js/data/profile.js?v=1.1.96";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.97";
+import { decks } from "../js/data/decks.js?v=1.1.97";
+import { migrateProfile } from "../js/data/profile.js?v=1.1.97";
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 
