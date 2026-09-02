@@ -1,0 +1,70 @@
+name: WWE Legacy Live Event Full Roster Variety
+on:
+  push:
+    paths:
+      - '.live-event-variety/READY'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Restore broad Live Event rotation and diversify cross-set towers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('js/data/live-events.js')
+          s=p.read_text()
+          old='export const LIVE_EVENT_ROTATION_POOL = Object.freeze([\n  ...LAUNCH_THEME_TOWERS\n]);'
+          broad='export const LIVE_EVENT_ROTATION_POOL = Object.freeze([\n  ...LAUNCH_THEME_TOWERS,\n  ...THREE_DAY_TOWERS,\n  ...WEEKLY_TOWERS\n]);'
+          if old in s:
+              s=s.replace(old,broad)
+          elif broad not in s:
+              raise SystemExit('rotation pool shape not found')
+
+          replacements={
+          '["rhea-ripley", "becky-lynch", "charlotte-flair", "bayley", "paige", "cm-punk", "gunther", "chad-gable"]':'["rhea-ripley", "becky-lynch", "bret-hart", "kurt-angle", "chad-gable", "tony-dangelo", "rowdy-roddy-piper", "eddie-guerrero", "cm-punk", "gunther"]',
+          '["iyo-sky", "seth-rollins", "rey-mysterio", "sol-ruca", "logan-paul", "randy-savage", "liv-morgan", "penta"]':'["iyo-sky", "seth-rollins", "rey-mysterio", "sol-ruca", "logan-paul", "randy-savage", "jeff-hardy", "rob-van-dam", "kelani-jordan", "liv-morgan"]',
+          '["stone-cold-steve-austin", "mankind", "cm-punk", "seth-rollins", "becky-lynch", "gunther", "kevin-owens", "roman-reigns"]':'["stone-cold-steve-austin", "mankind", "cm-punk", "jbl", "gunther", "kevin-owens", "roman-reigns", "tony-dangelo", "ted-dibiase", "randy-orton"]',
+          '["kane", "andre-the-giant", "brock-lesnar", "ultimate-warrior", "rhea-ripley", "roman-reigns", "gunther", "oba-femi"]':'["kane", "andre-the-giant", "brock-lesnar", "ultimate-warrior", "batista", "roman-reigns", "gunther", "oba-femi", "diesel", "zilla-fatu"]',
+          '["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "andre-the-giant", "randy-savage", "mankind", "ultimate-warrior", "the-rock-attitude"]':'["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "bret-hart", "john-cena", "randy-orton", "eddie-guerrero", "shawn-michaels", "andre-the-giant", "the-rock-attitude"]',
+          '["roman-reigns", "cody-rhodes", "gunther", "cm-punk", "rhea-ripley", "seth-rollins", "brock-lesnar", "charlotte-flair"]':'["roman-reigns", "cody-rhodes", "gunther", "cm-punk", "rhea-ripley", "john-cena", "bret-hart", "tony-dangelo", "the-undertaker", "randy-orton", "charlotte-flair"]',
+          '["cm-punk", "bayley", "seth-rollins", "gunther", "rhea-ripley", "cody-rhodes", "becky-lynch", "roman-reigns"]':'["cm-punk", "bret-hart", "kurt-angle", "eddie-guerrero", "tony-dangelo", "gunther", "becky-lynch", "mr-perfect", "cody-rhodes", "roman-reigns"]',
+          '["becky-lynch", "rhea-ripley", "charlotte-flair", "iyo-sky", "bayley", "paige", "liv-morgan", "stephanie-vaquer"]':'["becky-lynch", "rhea-ripley", "charlotte-flair", "iyo-sky", "bayley", "paige", "liv-morgan", "stephanie-vaquer", "kendal-grey", "jaida-parker", "tatum-paxley"]'
+          }
+          for a,b in replacements.items():
+              if a in s: s=s.replace(a,b)
+          p.write_text(s)
+          PY
+      - name: Bump release
+        run: |
+          npm version 1.1.114 --no-git-tag-version
+          npm run stamp-cache
+          npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          node --input-type=module <<'NODE'
+          import { LIVE_EVENT_ROTATION_POOL, LAUNCH_THEME_TOWERS, THREE_DAY_TOWERS, WEEKLY_TOWERS } from './js/data/live-events.js';
+          if (LIVE_EVENT_ROTATION_POOL.length !== LAUNCH_THEME_TOWERS.length + THREE_DAY_TOWERS.length + WEEKLY_TOWERS.length) throw new Error('broad rotation not restored');
+          if (LIVE_EVENT_ROTATION_POOL.some(e => (e.opponentPool?.length ?? 0) < 8)) throw new Error('Live Event pool too narrow');
+          console.log('Verified broad rotation:', LIVE_EVENT_ROTATION_POOL.length, 'events');
+          NODE
+      - name: Publish
+        run: |
+          rm -rf .live-event-variety
+          rm -f .github/workflows/wwe-live-event-full-roster-variety.yml
+          git config user.name 'Swoop081'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'WWE Legacy v1.1.114 — Full-roster Live Event variety'
+          git push origin main
