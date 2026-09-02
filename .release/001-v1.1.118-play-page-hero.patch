@@ -40,7 +40,7 @@ diff --git a/css/v1.1.118-play-page-live-events-hero.css b/css/v1.1.118-play-pag
 new file mode 100644
 --- /dev/null
 +++ b/css/v1.1.118-play-page-live-events-hero.css
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,24 @@
 +/* v1.1.118 — fill Play page one and feature Live Events first. */
 +@media (max-width:600px){
 +  .legacy-play-v3.play-menu-page-1{min-height:calc(100svh - 188px);height:calc(100svh - 188px);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding-bottom:4px;overflow:hidden}
