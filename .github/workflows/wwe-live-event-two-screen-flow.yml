@@ -21,148 +21,100 @@ jobs:
           from pathlib import Path
           p=Path('js/ui/app.js')
           s=p.read_text()
-
           anchor='let liveEventSuperstarSwapTowerKey = null;'
           if 'let liveEventMatchupOpen = false;' not in s:
-            if anchor not in s: raise SystemExit('live event state anchor not found')
-            s=s.replace(anchor, anchor+'\nlet liveEventMatchupOpen = false;', 1)
-
+              if anchor not in s: raise SystemExit('live event state anchor not found')
+              s=s.replace(anchor, anchor+'\nlet liveEventMatchupOpen = false;', 1)
           old='function showLiveEvents() { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = null; liveEventSuperstarSwapTowerKey = null; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }'
           new='function showLiveEvents() { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = null; liveEventSuperstarSwapTowerKey = null; liveEventMatchupOpen = false; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }'
           if old in s: s=s.replace(old,new,1)
           old='function showLiveEventTower(towerKey) { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = towerKey; liveEventSuperstarSwapTowerKey = null; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }'
           new='function showLiveEventTower(towerKey) { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = towerKey; liveEventSuperstarSwapTowerKey = null; liveEventMatchupOpen = false; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }'
           if old in s: s=s.replace(old,new,1)
-
-          # Insert the dedicated matchup screen immediately before the old selector wiring.
           marker="  wireSelectionCarousel('live-event-select', id => { selection.p1 = id; renderLiveEvents(); });"
           if marker not in s: raise SystemExit('live event selector wiring marker not found')
           block=r'''  if (liveEventMatchupOpen && !cleared) {
-    const matchupStageIndex = active ? Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(run?.stage ?? 0))) : 0;
-    const matchupOpponentId = opponentIds[matchupStageIndex];
-    const matchupOpponent = superstarById[matchupOpponentId];
-    const matchupStage = liveEventStage(event, matchupStageIndex);
-    const canChooseForThisMatch = !active || matchupStageIndex === 0;
-    const playerCards = canChooseForThisMatch
-      ? selectionCarouselMarkup(unlocked, chosenId, 'live-event-match-select')
-      : `<div class="live-event-locked-player-card"><span class="live-tower-route-card-frame">${superstarPreviewCardMarkup(chosenId,"live-tower-opponent-card")}</span><strong>${chosenStar?.name ?? 'Your Superstar'}</strong></div>`;
-    root.innerHTML = `<section class="live-event-matchup-screen premium-screen" style="--tower-accent:${detailAccent}">
-      <header class="live-event-matchup-head"><button type="button" id="back-live-event-route" class="live-event-matchup-back">‹</button><div><span>LIVE EVENT · MATCH ${matchupStageIndex + 1} OF ${LIVE_EVENT_LENGTH}</span><h2>${event.name}</h2></div></header>
-      <section class="live-event-matchup-player"><span>YOUR SUPERSTAR${canChooseForThisMatch ? ' · SWIPE TO CHANGE' : ' · LOCKED'}</span>${playerCards}</section>
-      <div class="live-event-matchup-vs">VS</div>
-      <section class="live-event-matchup-opponent"><span>OPPONENT</span><div class="live-event-matchup-opponent-card"><span class="live-tower-route-card-frame">${superstarPreviewCardMarkup(matchupOpponentId,"live-tower-opponent-card")}</span></div><strong>${matchupOpponent?.name ?? 'Opponent'}</strong><small>${matchupStage.label}</small></section>
-      <button type="button" id="live-event-matchup-fight" class="start-match live-event-matchup-fight">FIGHT MATCH ${matchupStageIndex + 1}</button>
-    </section>`;
-    if (canChooseForThisMatch) {
-      wireSelectionCarousel('live-event-match-select', id => {
-        selection.p1 = id;
-        if (active && Number(run?.stage ?? 0) === 0 && id !== run?.superstarId) {
-          try { changeLiveEventTowerSuperstar(profile, towerKey, id, new Date()); saveProfile(profile); }
-          catch (error) { message = error.message; }
-        }
-        renderLiveEvents();
-      });
-    }
-    $("#back-live-event-route")?.addEventListener("click", () => { liveEventMatchupOpen = false; renderLiveEvents(); });
-    $("#live-event-matchup-fight")?.addEventListener("click", () => { if (active) startCurrentLiveEventMatch(towerKey); else beginLiveEventTower(); });
-    return;
-  }
+            const matchupStageIndex = active ? Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(run?.stage ?? 0))) : 0;
+            const matchupOpponentId = opponentIds[matchupStageIndex];
+            const matchupOpponent = superstarById[matchupOpponentId];
+            const matchupStage = liveEventStage(event, matchupStageIndex);
+            const canChooseForThisMatch = !active || matchupStageIndex === 0;
+            const playerCards = canChooseForThisMatch
+              ? selectionCarouselMarkup(unlocked, chosenId, 'live-event-match-select')
+              : `<div class="live-event-locked-player-card"><span class="live-tower-route-card-frame">${superstarPreviewCardMarkup(chosenId,"live-tower-opponent-card")}</span><strong>${chosenStar?.name ?? 'Your Superstar'}</strong></div>`;
+            root.innerHTML = `<section class="live-event-matchup-screen premium-screen" style="--tower-accent:${detailAccent}">
+              <header class="live-event-matchup-head"><button type="button" id="back-live-event-route" class="live-event-matchup-back">‹</button><div><span>LIVE EVENT · MATCH ${matchupStageIndex + 1} OF ${LIVE_EVENT_LENGTH}</span><h2>${event.name}</h2></div></header>
+              <section class="live-event-matchup-player"><span>YOUR SUPERSTAR${canChooseForThisMatch ? ' · SWIPE TO CHANGE' : ' · LOCKED'}</span>${playerCards}</section>
+              <div class="live-event-matchup-vs">VS</div>
+              <section class="live-event-matchup-opponent"><span>OPPONENT</span><div class="live-event-matchup-opponent-card"><span class="live-tower-route-card-frame">${superstarPreviewCardMarkup(matchupOpponentId,"live-tower-opponent-card")}</span></div><strong>${matchupOpponent?.name ?? 'Opponent'}</strong><small>${matchupStage.label}</small></section>
+              <button type="button" id="live-event-matchup-fight" class="start-match live-event-matchup-fight">FIGHT MATCH ${matchupStageIndex + 1}</button>
+            </section>`;
+            if (canChooseForThisMatch) {
+              wireSelectionCarousel('live-event-match-select', id => {
+                selection.p1 = id;
+                if (active && Number(run?.stage ?? 0) === 0 && id !== run?.superstarId) {
+                  try { changeLiveEventTowerSuperstar(profile, towerKey, id, new Date()); saveProfile(profile); }
+                  catch (error) { message = error.message; }
+                }
+                renderLiveEvents();
+              });
+            }
+            $("#back-live-event-route")?.addEventListener("click", () => { liveEventMatchupOpen = false; renderLiveEvents(); });
+            $("#live-event-matchup-fight")?.addEventListener("click", () => { if (active) startCurrentLiveEventMatch(towerKey); else beginLiveEventTower(); });
+            return;
+          }
 
-  const routeCards = [...root.querySelectorAll('.live-tower-route-card')];
-  const currentRouteIndex = active ? Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(run?.stage ?? 0))) : 0;
-  routeCards.forEach((card,index) => {
-    const isCurrent = !cleared && index === currentRouteIndex;
-    card.classList.toggle('is-current-selectable', isCurrent);
-    if (!isCurrent) return;
-    card.setAttribute('role','button');
-    card.setAttribute('tabindex','0');
-    const openMatchup = () => { liveEventMatchupOpen = true; renderLiveEvents(); };
-    card.addEventListener('click', openMatchup);
-    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openMatchup(); } });
-  });
-  requestAnimationFrame(() => routeCards[currentRouteIndex]?.scrollIntoView?.({ block:'center', inline:'nearest' }));
+          const routeCards = [...root.querySelectorAll('.live-tower-route-card')];
+          const currentRouteIndex = active ? Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(run?.stage ?? 0))) : 0;
+          routeCards.forEach((card,index) => {
+            const isCurrent = !cleared && index === currentRouteIndex;
+            card.classList.toggle('is-current-selectable', isCurrent);
+            if (!isCurrent) return;
+            card.setAttribute('role','button');
+            card.setAttribute('tabindex','0');
+            const openMatchup = () => { liveEventMatchupOpen = true; renderLiveEvents(); };
+            card.addEventListener('click', openMatchup);
+            card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openMatchup(); } });
+          });
+          requestAnimationFrame(() => routeCards[currentRouteIndex]?.scrollIntoView?.({ block:'center', inline:'nearest' }));
 '''
           s=s.replace(marker,block+marker,1)
           p.write_text(s)
           PY
-
+      - name: Apply Live Event route and matchup layout
+        run: |
           cat >> css/game.css <<'CSS'
-
-/* v1.1.111 — Live Events: route first, matchup second. */
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body{
-  display:block!important;
-}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body>.live-tower-player,
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body>.live-tower-command{
-  display:none!important;
-}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route{
-  height:auto!important;
-  min-height:0!important;
-  padding:12px!important;
-  overflow:visible!important;
-}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-strip{
-  display:grid!important;
-  grid-auto-flow:row!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  grid-auto-columns:auto!important;
-  gap:14px!important;
-  overflow:visible!important;
-  padding:0!important;
-  scroll-snap-type:none!important;
-}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card{
-  width:100%!important;
-  min-height:0!important;
-  display:grid!important;
-  grid-template-columns:42px minmax(0,1fr)!important;
-  grid-template-areas:"head card" "copy card"!important;
-  align-items:center!important;
-  gap:6px 12px!important;
-  padding:12px!important;
-  border-radius:16px!important;
-}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-head{grid-area:head!important;display:grid!important;gap:5px!important;justify-items:center!important}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-superstar{grid-area:card!important;justify-self:center!important;width:min(48vw,190px)!important}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-copy{grid-area:copy!important;align-self:start!important;text-align:center!important}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.is-current-selectable{
-  border-color:var(--tower-accent,#45d8ff)!important;
-  box-shadow:0 0 0 1px color-mix(in srgb,var(--tower-accent,#45d8ff) 40%,transparent),0 0 22px color-mix(in srgb,var(--tower-accent,#45d8ff) 18%,transparent)!important;
-  cursor:pointer!important;
-}
-body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.is-current-selectable .live-tower-route-head>em::after{content:" · SELECT"}
-
-.live-event-matchup-screen{
-  min-height:calc(100svh - var(--app-topbar-height,0px) - 10px)!important;
-  display:grid!important;
-  grid-template-rows:auto minmax(0,1fr) auto minmax(0,1fr) auto!important;
-  gap:6px!important;
-  padding:10px 12px max(12px,env(safe-area-inset-bottom))!important;
-  overflow:hidden!important;
-  background:radial-gradient(circle at 50% 36%,color-mix(in srgb,var(--tower-accent,#45d8ff) 14%,transparent),transparent 34%),#07090d!important;
-}
-.live-event-matchup-head{display:flex!important;align-items:center!important;gap:10px!important;min-height:48px!important}
-.live-event-matchup-back{width:38px!important;height:38px!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:50%!important;background:#10131a!important;color:#fff!important;font-size:1.6rem!important}
-.live-event-matchup-head span,.live-event-matchup-player>span,.live-event-matchup-opponent>span{display:block!important;font-size:.46rem!important;letter-spacing:.16em!important;font-weight:1000!important;color:var(--tower-accent,#45d8ff)!important}
-.live-event-matchup-head h2{margin:2px 0 0!important;font-size:1.25rem!important;line-height:1!important}
-.live-event-matchup-player,.live-event-matchup-opponent{min-height:0!important;display:grid!important;align-content:center!important;justify-items:center!important;gap:5px!important;overflow:hidden!important}
-.live-event-matchup-player .superstar-select-carousel{width:100%!important;height:100%!important;min-height:0!important;display:flex!important;align-items:center!important;gap:9px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:3px 4px 7px!important;scroll-snap-type:x mandatory!important}
-.live-event-matchup-player .live-event-route-choice{flex:0 0 min(34vw,132px)!important;width:min(34vw,132px)!important;height:auto!important;aspect-ratio:680/1000!important}
-.live-event-locked-player-card,.live-event-matchup-opponent-card{width:min(32vw,126px)!important;aspect-ratio:680/1000!important;display:grid!important;place-items:center!important}
-.live-event-locked-player-card>.live-tower-route-card-frame,.live-event-matchup-opponent-card>.live-tower-route-card-frame{width:100%!important;height:100%!important}
-.live-event-locked-player-card .live-tower-opponent-card,.live-event-matchup-opponent-card .live-tower-opponent-card{width:100%!important;height:100%!important}
-.live-event-locked-player-card>strong{font-size:.72rem!important;margin-top:2px!important}
-.live-event-matchup-opponent>strong{font-size:.9rem!important;line-height:1!important}
-.live-event-matchup-opponent>small{font-size:.5rem!important;color:#aeb6c2!important}
-.live-event-matchup-vs{align-self:center!important;justify-self:center!important;font-size:1rem!important;font-weight:1000!important;font-style:italic!important;color:#fff!important}
-.live-event-matchup-fight{width:100%!important;min-height:54px!important;margin:0!important}
-@media(max-width:390px){
-  .live-event-matchup-screen{gap:4px!important;padding-inline:9px!important}
-  .live-event-matchup-player .live-event-route-choice{flex-basis:31vw!important;width:31vw!important}
-  .live-event-locked-player-card,.live-event-matchup-opponent-card{width:29vw!important}
-}
-CSS
+          
+          /* v1.1.111 — Live Events: route first, matchup second. */
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body{display:block!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body>.live-tower-player,
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body>.live-tower-command{display:none!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route{height:auto!important;min-height:0!important;padding:12px!important;overflow:visible!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-strip{display:grid!important;grid-auto-flow:row!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-columns:auto!important;gap:14px!important;overflow:visible!important;padding:0!important;scroll-snap-type:none!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card{width:100%!important;min-height:0!important;display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"head card" "copy card"!important;align-items:center!important;gap:6px 12px!important;padding:12px!important;border-radius:16px!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-head{grid-area:head!important;display:grid!important;gap:5px!important;justify-items:center!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-superstar{grid-area:card!important;justify-self:center!important;width:min(48vw,190px)!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card .live-tower-route-copy{grid-area:copy!important;align-self:start!important;text-align:center!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.is-current-selectable{border-color:var(--tower-accent,#45d8ff)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--tower-accent,#45d8ff) 40%,transparent),0 0 22px color-mix(in srgb,var(--tower-accent,#45d8ff) 18%,transparent)!important;cursor:pointer!important}
+          body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card.is-current-selectable .live-tower-route-head>em::after{content:" · SELECT"}
+          .live-event-matchup-screen{min-height:calc(100svh - var(--app-topbar-height,0px) - 10px)!important;display:grid!important;grid-template-rows:auto minmax(0,1fr) auto minmax(0,1fr) auto!important;gap:6px!important;padding:10px 12px max(12px,env(safe-area-inset-bottom))!important;overflow:hidden!important;background:radial-gradient(circle at 50% 36%,color-mix(in srgb,var(--tower-accent,#45d8ff) 14%,transparent),transparent 34%),#07090d!important}
+          .live-event-matchup-head{display:flex!important;align-items:center!important;gap:10px!important;min-height:48px!important}
+          .live-event-matchup-back{width:38px!important;height:38px!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:50%!important;background:#10131a!important;color:#fff!important;font-size:1.6rem!important}
+          .live-event-matchup-head span,.live-event-matchup-player>span,.live-event-matchup-opponent>span{display:block!important;font-size:.46rem!important;letter-spacing:.16em!important;font-weight:1000!important;color:var(--tower-accent,#45d8ff)!important}
+          .live-event-matchup-head h2{margin:2px 0 0!important;font-size:1.25rem!important;line-height:1!important}
+          .live-event-matchup-player,.live-event-matchup-opponent{min-height:0!important;display:grid!important;align-content:center!important;justify-items:center!important;gap:5px!important;overflow:hidden!important}
+          .live-event-matchup-player .superstar-select-carousel{width:100%!important;height:100%!important;min-height:0!important;display:flex!important;align-items:center!important;gap:9px!important;overflow-x:auto!important;overflow-y:hidden!important;padding:3px 4px 7px!important;scroll-snap-type:x mandatory!important}
+          .live-event-matchup-player .live-event-route-choice{flex:0 0 min(34vw,132px)!important;width:min(34vw,132px)!important;height:auto!important;aspect-ratio:680/1000!important}
+          .live-event-locked-player-card,.live-event-matchup-opponent-card{width:min(32vw,126px)!important;aspect-ratio:680/1000!important;display:grid!important;place-items:center!important}
+          .live-event-locked-player-card>.live-tower-route-card-frame,.live-event-matchup-opponent-card>.live-tower-route-card-frame{width:100%!important;height:100%!important}
+          .live-event-locked-player-card .live-tower-opponent-card,.live-event-matchup-opponent-card .live-tower-opponent-card{width:100%!important;height:100%!important}
+          .live-event-locked-player-card>strong{font-size:.72rem!important;margin-top:2px!important}
+          .live-event-matchup-opponent>strong{font-size:.9rem!important;line-height:1!important}
+          .live-event-matchup-opponent>small{font-size:.5rem!important;color:#aeb6c2!important}
+          .live-event-matchup-vs{align-self:center!important;justify-self:center!important;font-size:1rem!important;font-weight:1000!important;font-style:italic!important;color:#fff!important}
+          .live-event-matchup-fight{width:100%!important;min-height:54px!important;margin:0!important}
+          @media(max-width:390px){.live-event-matchup-screen{gap:4px!important;padding-inline:9px!important}.live-event-matchup-player .live-event-route-choice{flex-basis:31vw!important;width:31vw!important}.live-event-locked-player-card,.live-event-matchup-opponent-card{width:29vw!important}}
+          CSS
       - name: Bump release version
         run: |
           npm version 1.1.111 --no-git-tag-version --allow-same-version
