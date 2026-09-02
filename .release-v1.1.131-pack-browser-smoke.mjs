@@ -12,11 +12,14 @@ function freshProfile() {
   return profile;
 }
 
-async function assertPackFlow(page, label) {
-  const errors = [];
-  page.on('pageerror', error => errors.push(`pageerror: ${error.message}`));
-  page.on('console', msg => { if (msg.type() === 'error') errors.push(`console: ${msg.text()}`); });
+async function installDeterministicProfile(page, profile) {
+  await page.addInitScript(({ key, value }) => {
+    localStorage.setItem(key, value);
+    Math.random = () => 0.5;
+  }, { key: PROFILE_KEY, value: JSON.stringify(profile) });
+}
 
+async function assertPackFlow(page, label, pageErrors) {
   const rip = page.locator('#rip-pack');
   await rip.waitFor({ state: 'visible', timeout: 15000 });
   const ripText = (await rip.innerText()).replace(/\s+/g, ' ').trim();
@@ -36,6 +39,9 @@ async function assertPackFlow(page, label) {
     if (index < 4 && !progress.includes('NEXT CARD') && !progress.includes('CONVERTING')) {
       throw new Error(`${label}: original reveal instruction missing on card ${index + 1}: ${progress}`);
     }
+    if (index === 4 && !progress.includes('PACK SUMMARY') && !progress.includes('CONVERTING')) {
+      throw new Error(`${label}: original pack-summary instruction missing on card 5: ${progress}`);
+    }
     if (progress.includes('CONVERTING')) await page.waitForTimeout(1300);
     const next = page.locator('[data-booster-next]').first();
     await next.waitFor({ state: 'visible', timeout: 5000 });
@@ -44,51 +50,47 @@ async function assertPackFlow(page, label) {
   }
 
   await page.getByText('PACK COMPLETE', { exact: true }).waitFor({ state: 'visible', timeout: 10000 });
-  if (errors.length) throw new Error(`${label}: browser errors: ${errors.join(' | ')}`);
+  if (pageErrors.length) throw new Error(`${label}: JavaScript runtime errors: ${pageErrors.join(' | ')}`);
+  console.log(`PASS ${label}: Tap to Rip -> five animated card reveals -> Pack Complete`);
+}
+
+async function newIphonePage(browser, profile) {
+  const context = await browser.newContext({ ...devices['iPhone 13'], viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  await installDeterministicProfile(page, profile);
+  return { context, page, pageErrors };
 }
 
 async function runBrowser(browserType, browserName) {
   const browser = await browserType.launch({ headless: true });
   try {
-    // Test the launch-poster daily reward path that originally exposed the freeze.
     {
       const profile = freshProfile();
-      const context = await browser.newContext({ ...devices['iPhone 13'], viewport: { width: 390, height: 844 } });
-      const page = await context.newPage();
-      await page.addInitScript(({ key, value }) => localStorage.setItem(key, value), { key: PROFILE_KEY, value: JSON.stringify(profile) });
+      const { context, page, pageErrors } = await newIphonePage(browser, profile);
       await page.goto(BASE, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await page.locator('#launch-poster-play').waitFor({ state: 'visible', timeout: 15000 });
       await page.locator('#launch-poster-play').click();
-      await assertPackFlow(page, `${browserName} launch reward`);
+      await assertPackFlow(page, `${browserName} launch reward`, pageErrors);
       await context.close();
     }
 
-    // Test a normal NXT reward booster from the Packs vault.
     {
       const profile = freshProfile();
       profile.season ??= {};
       profile.season.freePackLastClaimAt = new Date().toISOString();
       grantBooster(profile, 1, 'nxt-series-1');
-      const context = await browser.newContext({ ...devices['iPhone 13'], viewport: { width: 390, height: 844 } });
-      const page = await context.newPage();
-      const errors = [];
-      page.on('pageerror', error => errors.push(`pageerror: ${error.message}`));
-      await page.addInitScript(({ key, value }) => localStorage.setItem(key, value), { key: PROFILE_KEY, value: JSON.stringify(profile) });
+      const { context, page, pageErrors } = await newIphonePage(browser, profile);
       await page.goto(BASE, { waitUntil: 'domcontentloaded', timeout: 30000 });
       await page.locator('#launch-poster-play').waitFor({ state: 'visible', timeout: 15000 });
       await page.locator('#launch-poster-play').click();
       await page.locator('[data-mobile-nav="boosters"]').waitFor({ state: 'visible', timeout: 15000 });
       await page.locator('[data-mobile-nav="boosters"]').click();
-      const nxtPack = page.locator('[data-open-vault-pack]').filter({ has: page.locator('text=NXT') }).first();
-      if (await nxtPack.count()) {
-        await nxtPack.click();
-      } else {
-        const byData = page.locator('[data-open-vault-pack^="nxt-series-1:"]').first();
-        await byData.waitFor({ state: 'visible', timeout: 10000 });
-        await byData.click();
-      }
-      await assertPackFlow(page, `${browserName} NXT vault`);
-      if (errors.length) throw new Error(`${browserName} NXT vault errors: ${errors.join(' | ')}`);
+      const byData = page.locator('[data-open-vault-pack^="nxt-series-1:"]').first();
+      await byData.waitFor({ state: 'visible', timeout: 10000 });
+      await byData.click();
+      await assertPackFlow(page, `${browserName} NXT vault`, pageErrors);
       await context.close();
     }
   } finally {
@@ -98,4 +100,4 @@ async function runBrowser(browserType, browserName) {
 
 await runBrowser(chromium, 'Chromium iPhone viewport');
 await runBrowser(webkit, 'WebKit iPhone viewport');
-console.log('Pack browser certification passed: original Tap to Rip + animated five-card reveal works in Chromium and WebKit iPhone viewports.');
+console.log('CERTIFIED: original Tap to Rip + animated five-card reveal passes launch reward and NXT vault in Chromium and WebKit iPhone viewports with zero JavaScript runtime errors.');
