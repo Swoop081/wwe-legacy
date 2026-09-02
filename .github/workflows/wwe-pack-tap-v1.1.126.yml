@@ -1,0 +1,48 @@
+name: WWE Legacy v1.1.126 Full Surface Pack Tap
+on:
+  push:
+    paths:
+      - '.pack-tap-v1.1.126/trigger.txt'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Apply full-surface pack tap fix
+        run: python3 .pack-tap-v1.1.126/apply.py
+      - name: Bump v1.1.126 and stamp cache
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p=JSON.parse(fs.readFileSync('package.json','utf8'));
+          p.version='1.1.126';
+          fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');
+          const b=JSON.parse(fs.readFileSync('build.json','utf8'));
+          b.version='1.1.126'; b.name='v1.1.126 — Full Surface Pack Tap'; b.releasedAt='2026-09-02';
+          fs.writeFileSync('build.json',JSON.stringify(b,null,2)+'\n');
+          NODE
+          npm run stamp-cache
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          grep -q 'v1.1.126 — the whole sealed-pack modal body owns the gesture' js/ui/app.js
+          grep -q 'v=1.1.126' index.html
+      - name: Publish
+        run: |
+          rm -rf .pack-tap-v1.1.126
+          rm -f .github/workflows/wwe-pack-tap-v1.1.126.yml
+          git config user.name 'Swoop081'
+          git config user.email 'justinbelot8@gmail.com'
+          git add -A
+          git commit -m 'WWE Legacy v1.1.126 — full surface pack tap'
+          git push origin main
