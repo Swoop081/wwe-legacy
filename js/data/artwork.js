@@ -1,5 +1,5 @@
-import { assetUrl } from "../config/build.js?v=1.1.99";
-import { superstars } from "./superstars.js?v=1.1.99";
+import { assetUrl } from "../config/build.js?v=1.1.100";
+import { superstars } from "./superstars.js?v=1.1.100";
 
 const ROOT="assets/images";
 const slug=value=>String(value??"").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");

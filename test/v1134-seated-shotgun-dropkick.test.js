@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.99";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.99";
-import { deckIds } from "../js/data/decks.js?v=1.1.99";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.100";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=1.1.100";
+import { deckIds } from "../js/data/decks.js?v=1.1.100";
 
 const card=allGameplayCards.find(c=>c.id==="seated-shotgun-dropkick");
 

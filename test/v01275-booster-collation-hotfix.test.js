@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createProfile } from '../js/data/profile.js?v=1.1.99';
-import { grantBooster, openBooster, MAX_VERY_RARE_PULLS } from '../js/data/boosters.js?v=1.1.99';
+import { createProfile } from '../js/data/profile.js?v=1.1.100';
+import { grantBooster, openBooster, MAX_VERY_RARE_PULLS } from '../js/data/boosters.js?v=1.1.100';
 
 function seqRng(values, fallback = 0.999) {
   let i = 0;
