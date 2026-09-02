@@ -24,9 +24,11 @@ jobs:
           old='''<section class="live-tower-detail-body">${command}<section class="live-tower-route">'''
           new='''<section class="live-tower-detail-body">${cleared ? command : ''}<section class="live-tower-route">'''
           if old not in s:
-            raise SystemExit('live tower detail body command markup not found')
-          s=s.replace(old,new,1)
-          p.write_text(s)
+            if new not in s:
+              raise SystemExit('live tower detail body command markup not found')
+          else:
+            s=s.replace(old,new,1)
+            p.write_text(s)
           PY
       - name: Bump release version
         run: |
@@ -40,7 +42,14 @@ jobs:
           npm run flow
           npm run validate
           npm run card-ids
-          grep -Fq '${cleared ? command : '\''\''}<section class="live-tower-route">' js/ui/app.js
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('js/ui/app.js').read_text()
+          target='''<section class="live-tower-detail-body">${cleared ? command : ''}<section class="live-tower-route">'''
+          if target not in s:
+            raise SystemExit('route screen still renders player command')
+          print('Live Event route player removal verified')
+          PY
       - name: Publish
         run: |
           rm -rf .live-event-route-cleanup
