@@ -1,18 +1,15 @@
-diff --git a/package.json b/package.json
 --- a/package.json
 +++ b/package.json
-@@ -1,6 +1,6 @@
+@@ -1,5 +1,5 @@
  {
    "name": "wwe-legacy-ccg",
 -  "version": "1.1.96",
 +  "version": "1.1.97",
    "private": true,
    "type": "module",
-   "scripts": {
-diff --git a/js/data/profile.js b/js/data/profile.js
 --- a/js/data/profile.js
 +++ b/js/data/profile.js
-@@ -11,7 +11,13 @@
+@@ -1,7 +1,12 @@
  export const PROFILE_KEY = "wa-modern-profile-v3";
  export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
  export const PROFILE_RECOVERY_META_KEY = "wa-modern-profile-v3-recovery-meta-v1";
@@ -26,7 +23,9 @@ diff --git a/js/data/profile.js b/js/data/profile.js
  export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
  export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
  export const PROFILE_VERSION = 46;
-@@ -300,11 +306,21 @@
+--- a/js/data/profile.js
++++ b/js/data/profile.js
+@@ -1,6 +1,13 @@
 -export function createProfile(starterId) {
 -  if (!STARTER_CHOICES.includes(starterId) || !decks[starterId]) throw new Error("Starter must be CM Punk or Roman Reigns");
 +export function createProfile(starterInput) {
@@ -42,9 +41,9 @@ diff --git a/js/data/profile.js b/js/data/profile.js
      starterId,
 +    starterIds: [...starterIds],
      universePoints: 0,
-     unlockedSuperstars: [],
-     favouriteSuperstars: [],
-@@ -337,7 +353,7 @@
+--- a/js/data/profile.js
++++ b/js/data/profile.js
+@@ -1,7 +1,7 @@
    for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
      addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES, tier: DEFAULT_STARTER_TIER });
    }
@@ -53,10 +52,9 @@ diff --git a/js/data/profile.js b/js/data/profile.js
    ensureCareerState(p);
    return p;
  }
-diff --git a/js/ui/app.js b/js/ui/app.js
 --- a/js/ui/app.js
 +++ b/js/ui/app.js
-@@ -66,6 +66,8 @@
+@@ -1,5 +1,7 @@
  let screen = "splash";
  let playMenuPage = 1;
  let selection = { p1: profile?.starterId ?? "cm-punk", p2: profile?.starterId === "roman-reigns" ? "cm-punk" : "roman-reigns" };
@@ -64,8 +62,9 @@ diff --git a/js/ui/app.js b/js/ui/app.js
 +let starterOnboardingSelections = { raw: null, smackdown: null, nxt: null };
  let lastMatchup = { ...selection };
  let collectionFilter = { kind: "all", rarity: "all", search: "" };
- let collectionSort = "newest";
-@@ -2447,15 +2449,20 @@
+--- a/js/ui/app.js
++++ b/js/ui/app.js
+@@ -1,12 +1,15 @@
 -function chooseStarter(starId) {
 -  profile = createProfile(starId);
 +function chooseStarter(starterIds) {
@@ -88,7 +87,9 @@ diff --git a/js/ui/app.js b/js/ui/app.js
  }
  
  function renderWelcomeSuperstar() {
-@@ -2495,20 +2502,42 @@
+--- a/js/ui/app.js
++++ b/js/ui/app.js
+@@ -1,20 +1,36 @@
  function renderStarter() {
    setChrome({ hideTopbar: true });
    const root = $("#game");
@@ -130,3 +131,5 @@ diff --git a/js/ui/app.js b/js/ui/app.js
 +    ]);
 +  }));
  }
+ 
+ 
