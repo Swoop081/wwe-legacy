@@ -1,11 +1,11 @@
 {
-  "version": "1.1.134",
+  "version": "1.1.135",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.134",
+  "physicalIphoneSmoke": "pending-v1.1.135",
   "launchStatus": "released",
-  "name": "v1.1.134 — Atomic Onboarding Reveal + Centered Roster Summary"
+  "name": "v1.1.135 — Onboarding Crash Hotfix + Reliable Brand Preload"
 }
