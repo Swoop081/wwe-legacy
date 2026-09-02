@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.113";
-import { superstars } from "./superstars.js?v=1.1.113";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.113";
-import { awardSeasonXp } from "./seasons.js?v=1.1.113";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.114";
+import { superstars } from "./superstars.js?v=1.1.114";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.114";
+import { awardSeasonXp } from "./seasons.js?v=1.1.114";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -119,7 +119,7 @@ export const THREE_DAY_TOWERS = Object.freeze([
     heroId: "rhea-ripley",
     rewardSetId: "evolution-series-1",
     logoMode: "legacy",
-    opponentPool: ["rhea-ripley", "becky-lynch", "charlotte-flair", "bayley", "paige", "cm-punk", "gunther", "chad-gable"]
+    opponentPool: ["rhea-ripley", "becky-lynch", "bret-hart", "kurt-angle", "chad-gable", "tony-dangelo", "rowdy-roddy-piper", "eddie-guerrero", "cm-punk", "gunther"]
   },
   {
     id: "high-risk-showcase",
@@ -130,7 +130,7 @@ export const THREE_DAY_TOWERS = Object.freeze([
     heroId: "iyo-sky",
     rewardSetId: "summerslam-series-1",
     logoMode: "legacy",
-    opponentPool: ["iyo-sky", "seth-rollins", "rey-mysterio", "sol-ruca", "logan-paul", "randy-savage", "liv-morgan", "penta"]
+    opponentPool: ["iyo-sky", "seth-rollins", "rey-mysterio", "sol-ruca", "logan-paul", "randy-savage", "jeff-hardy", "rob-van-dam", "kelani-jordan", "liv-morgan"]
   },
   {
     id: "fight-night",
@@ -141,7 +141,7 @@ export const THREE_DAY_TOWERS = Object.freeze([
     heroId: "stone-cold-steve-austin",
     rewardSetId: "attitude-era-series-1",
     logoMode: "legacy",
-    opponentPool: ["stone-cold-steve-austin", "mankind", "cm-punk", "seth-rollins", "becky-lynch", "gunther", "kevin-owens", "roman-reigns"]
+    opponentPool: ["stone-cold-steve-austin", "mankind", "cm-punk", "jbl", "gunther", "kevin-owens", "roman-reigns", "tony-dangelo", "ted-dibiase", "randy-orton"]
   },
   {
     id: "giants-and-monsters",
@@ -152,7 +152,7 @@ export const THREE_DAY_TOWERS = Object.freeze([
     heroId: "kane",
     rewardSetId: "golden-era-series-1",
     logoMode: "legacy",
-    opponentPool: ["kane", "andre-the-giant", "brock-lesnar", "ultimate-warrior", "rhea-ripley", "roman-reigns", "gunther", "oba-femi"]
+    opponentPool: ["kane", "andre-the-giant", "brock-lesnar", "ultimate-warrior", "batista", "roman-reigns", "gunther", "oba-femi", "diesel", "zilla-fatu"]
   }
 ]);
 
@@ -178,7 +178,7 @@ export const WEEKLY_TOWERS = Object.freeze([
     heroId: "the-undertaker",
     rewardSetId: "attitude-era-series-1",
     logoMode: "legacy",
-    opponentPool: ["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "andre-the-giant", "randy-savage", "mankind", "ultimate-warrior", "the-rock-attitude"]
+    opponentPool: ["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "bret-hart", "john-cena", "randy-orton", "eddie-guerrero", "shawn-michaels", "andre-the-giant", "the-rock-attitude"]
   },
   {
     id: "champions-clash",
@@ -189,7 +189,7 @@ export const WEEKLY_TOWERS = Object.freeze([
     heroId: "roman-reigns",
     rewardSetId: "summerslam-series-1",
     logoMode: "legacy",
-    opponentPool: ["roman-reigns", "cody-rhodes", "gunther", "cm-punk", "rhea-ripley", "seth-rollins", "brock-lesnar", "charlotte-flair"]
+    opponentPool: ["roman-reigns", "cody-rhodes", "gunther", "cm-punk", "rhea-ripley", "john-cena", "bret-hart", "tony-dangelo", "the-undertaker", "randy-orton", "charlotte-flair"]
   },
   {
     id: "method-masterclass",
@@ -200,7 +200,7 @@ export const WEEKLY_TOWERS = Object.freeze([
     heroId: "cm-punk",
     rewardSetId: "summerslam-series-1",
     logoMode: "legacy",
-    opponentPool: ["cm-punk", "bayley", "seth-rollins", "gunther", "rhea-ripley", "cody-rhodes", "becky-lynch", "roman-reigns"]
+    opponentPool: ["cm-punk", "bret-hart", "kurt-angle", "eddie-guerrero", "tony-dangelo", "gunther", "becky-lynch", "mr-perfect", "cody-rhodes", "roman-reigns"]
   },
   {
     id: "evolution-showcase",
@@ -211,7 +211,7 @@ export const WEEKLY_TOWERS = Object.freeze([
     heroId: "becky-lynch",
     rewardSetId: "evolution-series-1",
     logoMode: "legacy",
-    opponentPool: ["becky-lynch", "rhea-ripley", "charlotte-flair", "iyo-sky", "bayley", "paige", "liv-morgan", "stephanie-vaquer"]
+    opponentPool: ["becky-lynch", "rhea-ripley", "charlotte-flair", "iyo-sky", "bayley", "paige", "liv-morgan", "stephanie-vaquer", "kendal-grey", "jaida-parker", "tatum-paxley"]
   }
 ]);
 
@@ -296,7 +296,9 @@ export const LAUNCH_THEME_TOWERS = Object.freeze([
 ]);
 
 export const LIVE_EVENT_ROTATION_POOL = Object.freeze([
-  ...LAUNCH_THEME_TOWERS
+  ...LAUNCH_THEME_TOWERS,
+  ...THREE_DAY_TOWERS,
+  ...WEEKLY_TOWERS
 ]);
 export const LIVE_EVENT_COOLDOWN_DAYS = 1;
 

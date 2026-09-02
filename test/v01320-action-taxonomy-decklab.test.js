@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=1.1.113';
-import { DECK_LAB_CATEGORIES, categoryForCard } from '../js/data/deck-builder.js?v=1.1.113';
-import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=1.1.113';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.113';
-import { canPlayAction, canPlayPinEscape } from '../js/engine/rules.js?v=1.1.113';
-import { superstars } from '../js/data/superstars.js?v=1.1.113';
-import { decks } from '../js/data/decks.js?v=1.1.113';
+import { allGameplayCards } from '../js/data/content.js?v=1.1.114';
+import { DECK_LAB_CATEGORIES, categoryForCard } from '../js/data/deck-builder.js?v=1.1.114';
+import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=1.1.114';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=1.1.114';
+import { canPlayAction, canPlayPinEscape } from '../js/engine/rules.js?v=1.1.114';
+import { superstars } from '../js/data/superstars.js?v=1.1.114';
+import { decks } from '../js/data/decks.js?v=1.1.114';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 
