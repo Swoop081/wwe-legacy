@@ -11227,3 +11227,31 @@ body[data-screen="starter-summary"] #game{
   .starter-roster-summary-cards{gap:3px!important}
   .starter-roster-summary-cards .starter-summary-superstar-card{width:min(31.4vw,126px)!important}
 }
+
+
+/* v1.1.124 — iPhone pack reveal stability */
+body.booster-modal-open .booster-reveal-atmosphere,
+body.booster-modal-open .pack-rip-flash,
+body.booster-modal-open .pack-rip-callout,
+body.booster-modal-open .ccg-animated-card-surface,
+body.booster-modal-open .ccg-animated-card-plate {
+  display: none !important;
+  animation: none !important;
+}
+body.booster-modal-open .single-card-reveal-stage,
+body.booster-modal-open .booster-card-halo,
+body.booster-modal-open .booster-flip-card,
+body.booster-modal-open .ccg-card,
+body.booster-modal-open .ccg-card-inner {
+  animation: none !important;
+  transition: none !important;
+}
+@media (max-width: 430px) {
+  body.booster-modal-open .booster-pack-modal,
+  body.booster-modal-open .booster-pack-modal-shell,
+  body.booster-modal-open .booster-pack-modal-body {
+    transform: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+}

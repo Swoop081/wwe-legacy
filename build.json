@@ -5,7 +5,7 @@
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.109",
+  "physicalIphoneSmoke": "pending-v1.1.124",
   "launchStatus": "released",
-  "name": "v1.1.123 \u2014 Starting Roster One-Screen Fit"
+  "name": "v1.1.124 — iPhone Pack Reveal Stability"
 }

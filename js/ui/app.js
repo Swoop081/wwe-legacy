@@ -945,19 +945,16 @@ function maybeCelebrateFocusedSuperstarPull(delay = 260) {
 
 function ripOpenPack() {
   if (packStage !== "sealed" || !lastPack?.length) return;
-  packStage = "opening";
-  message = "RIPPING PACK…";
-  document.querySelector(".sealed-pack-stage")?.classList.add("is-ripping");
-  setTimeout(() => {
-    if (packStage !== "opening" || !lastPack?.length) return;
-    revealedPackCards = new Set(lastPack.map((_, index) => index));
-    boosterFocusIndex = Math.max(0, Math.min(boosterFocusIndex, lastPack.length - 1));
-    packStage = "reveal";
-    message = "Pack open — all five cards are face up.";
-    renderBoosters();
-    scheduleFocusedDuplicateConversion();
-    maybeCelebrateFocusedSuperstarPull(300);
-  }, 420);
+  // v1.1.124 — iPhone Safari stability: do not allocate a second animated pack
+  // scene before mounting the first reveal card. The pack contents were already
+  // generated and saved by processPack(), so this is presentation-only.
+  revealedPackCards = new Set(lastPack.map((_, index) => index));
+  boosterFocusIndex = Math.max(0, Math.min(boosterFocusIndex, lastPack.length - 1));
+  packStage = "reveal";
+  message = "Pack open — reveal all five cards.";
+  renderBoosters();
+  scheduleFocusedDuplicateConversion();
+  maybeCelebrateFocusedSuperstarPull(220);
 }
 
 function preparePackSummary() {
@@ -1067,7 +1064,7 @@ function boosterInspectOverlayMarkup(pulls = lastPack ?? []) {
   const pull = Number.isInteger(boosterInspectIndex) ? pulls[boosterInspectIndex] : null;
   if (!pull?.card || packStage === "idle" || packStage === "reveal") return "";
   const instruction = `Tap card to ${boosterInspectFlipped ? "show front" : "view effects"} · Tap outside to close`;
-  return `<div class="superstar-card-modal deck-lab-card-modal booster-card-inspect-modal" data-booster-inspect-modal-backdrop="1"><div class="superstar-card-modal-inner deck-lab-card-modal-inner"><button type="button" class="deck-lab-card-modal-close" data-close-booster-inspect="1" aria-label="Close card inspector">×</button>${collectibleCardMarkup(pull.card,{flipped:boosterInspectFlipped,tier:pull.tier,extraClass:"hud-superstar-modal-card deck-lab-inspect-card booster-inspect-card",flipAttr:'data-flip-booster-inspect="1"'})}<small>${instruction}</small></div></div>`;
+  return `<div class="superstar-card-modal deck-lab-card-modal booster-card-inspect-modal" data-booster-inspect-modal-backdrop="1"><div class="superstar-card-modal-inner deck-lab-card-modal-inner"><button type="button" class="deck-lab-card-modal-close" data-close-booster-inspect="1" aria-label="Close card inspector">×</button>${collectibleCardMarkup(pull.card,{flipped:boosterInspectFlipped,tier:pull.tier,extraClass:"hud-superstar-modal-card deck-lab-inspect-card booster-inspect-card",flipAttr:'data-flip-booster-inspect="1"',allowAnimation:false})}<small>${instruction}</small></div></div>`;
 }
 
 function renderBoostersUnsafe() {
@@ -1089,7 +1086,7 @@ function renderBoostersUnsafe() {
   const upRewardTile = (p, extraClass="", actionAttr="") => `<button type="button" class="up-card-replacement ${extraClass}" ${actionAttr} aria-label="${`${tierLabel(p.tier)} duplicate`} converted to ${p.universePointsValue} Universe Points"><span>${p.tier && p.tier!=="normal" ? `${tierLabel(p.tier).toUpperCase()} DUPLICATE` : "DUPLICATE CONVERTED"}</span><strong>+${p.universePointsValue}</strong><b>UP</b><small>UNIVERSE POINTS</small></button>`;
   const summaryCard = (p,index,slotClass="") => `
     <article class="pack-summary-card actual-card-summary ${slotClass} rarity-${p.card.rarity} ${tierCssClass(p.tier)} ${p.universePointsValue?'is-up-converted':''}" data-pack-summary-inspect="${index}" role="button" tabindex="0" aria-label="Inspect ${p.card.name}">
-      <div class="pack-summary-actual-card">${p.universePointsValue ? upRewardTile(p,"summary-up-reward") : collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,interactive:false,extraClass:"pack-summary-ccg"})}</div>
+      <div class="pack-summary-actual-card">${p.universePointsValue ? upRewardTile(p,"summary-up-reward") : collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,interactive:false,extraClass:"pack-summary-ccg",allowAnimation:false})}</div>
       <div class="pack-summary-badges">${p.universePointsValue ? `<span class="up-conversion-badge">+${p.universePointsValue} UP</span>` : `<span class="summary-rarity-badge">${rarityName(p)}</span>${p.tier?`<span class="tier-summary-symbol ${tierCssClass(p.tier)}">${tierLabel(p.tier).toUpperCase()}</span>`:''}${p.isNewCard?'<span class="new-card-symbol">NEW</span>':''}${p.superstarUnlocked?'<span class="unlock-symbol">SUPERSTAR</span>':''}`}</div>
     </article>`;
   const summarySlots = ["summary-top-left","summary-top-right","summary-center","summary-bottom-left","summary-bottom-right"];
@@ -1127,7 +1124,7 @@ function renderBoostersUnsafe() {
     const cardMarkup = converted
       ? upRewardTile(p,"reveal-up-reward",`data-booster-next="${boosterFocusIndex}"`)
       : `<div class="booster-flip-card single-pack-card is-revealed is-current rarity-${p.card.rarity} ${tierCssClass(p.tier)} ${converting?'duplicate-disintegrating':''}">
-          ${collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,extraClass:"booster-ccg",flipAttr:`data-booster-next="${boosterFocusIndex}"`})}
+          ${collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,extraClass:"booster-ccg",flipAttr:`data-booster-next="${boosterFocusIndex}"`,allowAnimation:false})}
           ${converting?`<div class="duplicate-conversion-overlay" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><strong>DUPLICATE</strong><span>CONVERTING TO UP</span></div>`:''}
         </div>`;
     const dots=pulls.map((_,i)=>`<i class="${i===boosterFocusIndex?'current':''} revealed ${pulls[i]?.universePointsValue?'converted':''}"></i>`).join("");
@@ -2985,7 +2982,7 @@ function cardPlayRestrictionText(card) {
   return "";
 }
 
-function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null, extraClass = "", footer = "", flipAttr = "", interactive = true, eagerArt = false, preferFinished = false, finishedAnimationShell = false } = {}) {
+function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null, extraClass = "", footer = "", flipAttr = "", interactive = true, eagerArt = false, preferFinished = false, finishedAnimationShell = false, allowAnimation = true } = {}) {
   // Five print tiers share one underlying card identity. Sapphire is the authored
   // balance value; Normal/Emerald step down while Ruby/Amethyst step up at runtime.
   const resolvedTier = normalizeCardTier(card?.fixedPrintingTier ?? tier ?? card?.tier ?? (foil === true ? "ruby" : "normal"), "normal");
@@ -3013,7 +3010,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
     ? [card.method ? card.method.toUpperCase() : "", card.moveType ? (MOVE_TYPE_LABELS[card.moveType] ?? card.moveType).toUpperCase() : ""].filter(Boolean).join(" · ")
     : (card.subtitle ?? typeLabel);
   const tierTag = resolvedTier === "normal" ? "NORMAL" : tierLabel(resolvedTier).toUpperCase();
-  const animatedSurface = animatedCardSurfaceMarkup(card);
+  const animatedSurface = allowAnimation ? animatedCardSurfaceMarkup(card) : "";
   const layeredFallbackData = "";
   const frontMarkup = forcedFinishedFront
     ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${layeredFallbackData}`
