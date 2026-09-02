@@ -1,0 +1,36 @@
+/* WWE Legacy v1.1.109 — Live Event owned Superstar card fit.
+   Compact Live Event selectors are front-only and fully contained. */
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-superstar-card,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-superstar-card{
+  overflow:hidden!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-inner,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-card-inner{
+  transform:none!important;
+  overflow:hidden!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-front,
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .selection-owned-card,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-card-front,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .selection-owned-card{
+  width:100%!important;
+  height:100%!important;
+  overflow:hidden!important;
+  padding:0!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-back,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-card-back,
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-favourite,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .select-favourite{
+  display:none!important;
+}
+body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .selection-owned-superstar-card,
+body[data-screen="live-events"][data-live-view="detail"] .live-event-superstar-swap-sheet .selection-owned-superstar-card{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  aspect-ratio:680/1000!important;
+  overflow:hidden!important;
+}
