@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { BUILD_VERSION } from "../js/config/build.js?v=1.1.131";
+import { BUILD_VERSION } from "../js/config/build.js?v=1.1.132";
 import build from "../build.json" with { type: "json" };
 
 test("v1.1.95 runtime build identity matches build.json",()=>{

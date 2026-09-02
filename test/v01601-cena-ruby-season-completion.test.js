@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=1.1.131';
-import { addOwnedCard, createProfile, migrateProfile, ownedCount, PROFILE_VERSION } from '../js/data/profile.js?v=1.1.131';
-import { claimAllSeasonTiers, SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.131';
-import { applyCardTier } from '../js/data/variants.js?v=1.1.131';
+import { collectionCards } from '../js/data/collection.js?v=1.1.132';
+import { addOwnedCard, createProfile, migrateProfile, ownedCount, PROFILE_VERSION } from '../js/data/profile.js?v=1.1.132';
+import { claimAllSeasonTiers, SEASON_1_CHASE_TIER_REWARDS } from '../js/data/seasons.js?v=1.1.132';
+import { applyCardTier } from '../js/data/variants.js?v=1.1.132';
 
 const CENA_SET = 'season-1-last-time-is-now';
 const MOVE_IDS = ['john-cena-protobomb','john-cena-five-knuckle-shuffle','john-cena-stf','john-cena-attitude-adjustment'];

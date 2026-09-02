@@ -1,8 +1,8 @@
 
 import test from "node:test";
 import assert from "node:assert/strict";
-import { SUPERSTAR_MERCH, BOOSTER_MERCH_SUPERSTAR_IDS, boosterSuperstarMerchPool } from "../js/data/merch.js?v=1.1.131";
-import { SEASON_1_CHASE_TIER_REWARDS } from "../js/data/seasons.js?v=1.1.131";
+import { SUPERSTAR_MERCH, BOOSTER_MERCH_SUPERSTAR_IDS, boosterSuperstarMerchPool } from "../js/data/merch.js?v=1.1.132";
+import { SEASON_1_CHASE_TIER_REWARDS } from "../js/data/seasons.js?v=1.1.132";
 
 test("v1.1.72 boosters retain exactly one Merch slot", async ()=>{
   const source=await (await import("node:fs/promises")).readFile(new URL("../js/data/boosters.js",import.meta.url),"utf8");

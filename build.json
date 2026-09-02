@@ -1,11 +1,11 @@
 {
-  "version": "1.1.131",
-  "releasedAt": "2026-09-02",
+  "version": "1.1.132",
+  "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "browser-certified-v1.1.131",
+  "physicalIphoneSmoke": "browser-certified-v1.1.132",
   "launchStatus": "released",
-  "name": "v1.1.131 — Original Pack Experience Restored + Freeze Root Cause Fixed"
+  "name": "v1.1.132 — Actual Merch Card Pack Reveal"
 }
