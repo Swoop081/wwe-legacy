@@ -1,8 +1,8 @@
 
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=1.1.120";
-import { CARD_TIERS, applyCardTier } from "../js/data/variants.js?v=1.1.120";
+import { allGameplayCards } from "../js/data/content.js?v=1.1.121";
+import { CARD_TIERS, applyCardTier } from "../js/data/variants.js?v=1.1.121";
 
 const sig=c=>JSON.stringify({
   cost:c.cost??null,damage:c.damage??null,effects:c.effects??null,effect:c.effect??null,special:c.special??null,

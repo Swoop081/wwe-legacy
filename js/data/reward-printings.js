@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=1.1.120";
+import { sets } from "./sets.js?v=1.1.121";
 
 // Major character/reward-track collectibles use one definitive printing: Amethyst.
 // This applies to current Season-exclusive sets and banked/future reward sets so

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=1.1.120';
+import { superstars } from '../js/data/superstars.js?v=1.1.121';
 
 test('v1.1.88 strengthens Kurt Angle through technical identity without HP inflation',()=>{
  const k=superstars.kurtAngle;
