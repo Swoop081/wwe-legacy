@@ -42,13 +42,6 @@ jobs:
 
       - name: Remove the MutationObserver feedback loop that caused the freeze
         run: |
-          # v1.1.105 rewrote every .reveal-progress text node from inside a
-          # childList MutationObserver. Assigning textContent creates another
-          # childList mutation even after the text is already unchanged, so the
-          # observer continuously re-queued itself as soon as Card 1 mounted.
-          # Restore the last version before that regression. It keeps Daily Spin
-          # retired and the zero-UP merch correction, but does not rewrite the
-          # original pack presentation/copy on every mutation.
           git show 16c44cb0ce82207c1f2be8a272b475582e3f3391:js/shared/v1.1.104-pack-reward-hotfix.js > js/shared/v1.1.104-pack-reward-hotfix.js
 
       - name: Stamp v1.1.131
@@ -94,7 +87,6 @@ jobs:
           forbidden=['renderSafePackFlow','booster-safe-reveal-card','full surface pack tap','iPhone Safari stability: do not allocate']
           for marker in forbidden:
               if marker in current: raise SystemExit(f'Emergency replacement still present: {marker}')
-
           hotfix=Path('js/shared/v1.1.104-pack-reward-hotfix.js').read_text()
           old_hotfix=subprocess.check_output(['git','show','16c44cb0ce82207c1f2be8a272b475582e3f3391:js/shared/v1.1.104-pack-reward-hotfix.js'],text=True)
           if hotfix != old_hotfix: raise SystemExit('Pack observer was not restored to the pre-regression implementation')
@@ -102,7 +94,6 @@ jobs:
               raise SystemExit('Regression loop still present')
           if "simplifyPack" in hotfix:
               raise SystemExit('v1.1.105 presentation rewrite still present')
-
           b=json.loads(Path('build.json').read_text())
           assert b['version']=='1.1.131'
           assert json.loads(Path('package.json').read_text())['version']=='1.1.131'
@@ -127,7 +118,22 @@ jobs:
 
       - name: Publish verified release
         run: |
-          rm -f .release-v1.1.131-pack-browser-smoke.mjs .release-v1.1.131.trigger .github/workflows/wwe-pack-restore-v1.1.131.yml
-          git add -A
+          rm -rf node_modules
+          git reset
+          git add -u
+          git restore --staged .github/workflows 2>/dev/null || true
+          git restore .github/workflows 2>/dev/null || true
+          git restore --staged .release-v1.1.131.trigger .release-v1.1.131-pack-browser-smoke.mjs 2>/dev/null || true
+          git restore .release-v1.1.131.trigger .release-v1.1.131-pack-browser-smoke.mjs 2>/dev/null || true
+          echo 'Production files staged for v1.1.131:'
+          git diff --cached --name-status
+          if git diff --cached --name-only | grep -q '^\.github/workflows/'; then
+            echo 'Workflow mutation accidentally staged' >&2
+            exit 1
+          fi
+          if git diff --cached --name-only | grep -q '^node_modules/'; then
+            echo 'node_modules accidentally staged' >&2
+            exit 1
+          fi
           git commit -m "WWE Legacy v1.1.131 — restore original pack opening and fix observer freeze"
           git push origin main
