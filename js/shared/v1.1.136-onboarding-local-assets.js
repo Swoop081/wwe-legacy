@@ -1,12 +1,11 @@
-/* v1.1.137 — safe repo-hosted onboarding assets; no DOM prototype patching or render gating. */
+/* v1.1.138 — safe repo-hosted onboarding assets + corrected roster branding. */
 (() => {
   const LOCAL = {
-    raw: './assets/images/onboarding-raw-logo.svg?v=1.1.137',
-    smackdown: './assets/images/onboarding-smackdown-logo.svg?v=1.1.137',
-    nxt: './assets/images/onboarding-nxt-logo.svg?v=1.1.137'
+    raw: './assets/images/onboarding-raw-logo.svg?v=1.1.138',
+    smackdown: './assets/images/onboarding-smackdown-logo.svg?v=1.1.138',
+    nxt: './assets/images/onboarding-nxt-logo.svg?v=1.1.138'
   };
 
-  // Warm local assets without blocking startup. A failed logo can never stop onboarding.
   window.__WWE_LEGACY_STARTER_BRAND_PRELOADERS__ = Object.values(LOCAL).map(src => {
     const image = new Image();
     image.loading = 'eager';
@@ -35,15 +34,15 @@
   };
 
   const decorateSummary = root => {
-    if (!root || root.dataset.v11137Decorated === '1') return;
-    root.dataset.v11137Decorated = '1';
+    if (!root || root.dataset.v11138Decorated === '1') return;
+    root.dataset.v11138Decorated = '1';
     const title = root.querySelector('h1');
-    if (!root.querySelector('.starter-roster-summary-brand')) {
-      const brand = document.createElement('div');
-      brand.className = 'starter-roster-summary-brand';
-      brand.innerHTML = '<img class="starter-roster-summary-logo" src="./assets/images/app-icon-192.png?v=1.1.137" alt="WWE Legacy"><span class="starter-roster-summary-wordmark">WWE LEGACY</span>';
-      root.insertBefore(brand, title || root.firstChild);
-    }
+    const existingBrand = root.querySelector('.starter-roster-summary-brand');
+    if (existingBrand) existingBrand.remove();
+    const brand = document.createElement('div');
+    brand.className = 'starter-roster-summary-brand';
+    brand.innerHTML = '<img class="starter-roster-summary-logo" src="./assets/images/branding-wwe-legacy-logo.png?v=1.1.138" alt="WWE Legacy">';
+    root.insertBefore(brand, title || root.firstChild);
     const button = root.querySelector('#open-starter-support, #starter-summary-continue');
     if (button) {
       button.id = 'starter-summary-continue';
@@ -64,16 +63,11 @@
   const observer = new MutationObserver(mutations => {
     for (const mutation of mutations) mutation.addedNodes.forEach(inspect);
   });
-
   const start = () => {
     observer.observe(document.documentElement, { childList: true, subtree: true });
     document.querySelectorAll('.starter-onboarding-set-logo').forEach(promoteStarterBrand);
     document.querySelectorAll('.starter-roster-summary').forEach(decorateSummary);
   };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start, { once: true });
-  } else {
-    start();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
 })();
