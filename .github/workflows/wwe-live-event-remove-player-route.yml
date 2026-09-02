@@ -1,0 +1,52 @@
+name: WWE Legacy Live Event Route Cleanup
+on:
+  push:
+    paths:
+      - '.live-event-route-cleanup/READY'
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Remove player selector from route screen markup
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('js/ui/app.js')
+          s=p.read_text()
+          old='''<section class="live-tower-detail-body">${command}<section class="live-tower-route">'''
+          new='''<section class="live-tower-detail-body">${cleared ? command : ''}<section class="live-tower-route">'''
+          if old not in s:
+            raise SystemExit('live tower detail body command markup not found')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+      - name: Bump release version
+        run: |
+          npm version 1.1.112 --no-git-tag-version --allow-same-version
+          node -e "const fs=require('fs');const p='build.json';const j=JSON.parse(fs.readFileSync(p));j.version='1.1.112';j.name='v1.1.112 — Live Event Route Player Removal';fs.writeFileSync(p,JSON.stringify(j,null,2)+'\n')"
+          npm run stamp-cache
+          npm run generate-studio
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          grep -Fq '${cleared ? command : '\''\''}<section class="live-tower-route">' js/ui/app.js
+      - name: Publish
+        run: |
+          rm -rf .live-event-route-cleanup
+          rm -f .github/workflows/wwe-live-event-remove-player-route.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m 'WWE Legacy v1.1.112 — remove player selector from Live Event route'
+          git push
