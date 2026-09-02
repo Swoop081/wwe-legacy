@@ -1,0 +1,11 @@
+/* WWE Legacy v1.1.101 — Superstar + Entrance Gold Identity Frames
+   Only the physical border changes. Artwork, tier overlays, glow, rarity, typography,
+   layout and gameplay remain untouched. */
+.ccg-card.type-superstar .ccg-print-frame,
+.ccg-card.type-entrance .ccg-print-frame {
+  border-color:#d6ad37!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,244,190,.92),
+    0 0 0 1px #8f6716,
+    inset 0 0 12px rgba(255,255,255,.10)!important;
+}

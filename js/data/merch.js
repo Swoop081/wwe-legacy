@@ -1,4 +1,4 @@
-import { superstars } from "./superstars.js?v=1.1.100";
+import { superstars } from "./superstars.js?v=1.1.101";
 
 const METHODS = ["strength", "strike", "technical", "agility"];
 const STAR_BY_ID = new Map(Object.values(superstars).map(star => [star.id, star]));

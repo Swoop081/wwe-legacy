@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=1.1.100';
-import { decks } from '../js/data/decks.js?v=1.1.100';
-import { collectionCards } from '../js/data/collection.js?v=1.1.100';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=1.1.100';
-import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=1.1.100';
-import { cardOwnershipCap } from '../js/data/profile.js?v=1.1.100';
-import { DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=1.1.100';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=1.1.101';
+import { decks } from '../js/data/decks.js?v=1.1.101';
+import { collectionCards } from '../js/data/collection.js?v=1.1.101';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=1.1.101';
+import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=1.1.101';
+import { cardOwnershipCap } from '../js/data/profile.js?v=1.1.101';
+import { DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=1.1.101';
 
 const byId = new Map(collectionCards.map(card=>[card.id,card]));
 

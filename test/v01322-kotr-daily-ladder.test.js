@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=1.1.100';
-import { superstars } from '../js/data/superstars.js?v=1.1.100';
-import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=1.1.100';
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=1.1.100';
-import { CAREER_MODES } from '../js/data/career.js?v=1.1.100';
+import { createProfile } from '../js/data/profile.js?v=1.1.101';
+import { superstars } from '../js/data/superstars.js?v=1.1.101';
+import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=1.1.101';
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=1.1.101';
+import { CAREER_MODES } from '../js/data/career.js?v=1.1.101';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const fixedRng = () => 0.314159;
