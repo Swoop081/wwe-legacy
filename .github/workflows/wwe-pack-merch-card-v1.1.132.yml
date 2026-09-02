@@ -21,6 +21,11 @@ jobs:
         with:
           node-version: 20
 
+      - name: Configure release identity
+        run: |
+          git config user.name "WWE Legacy Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+
       - name: Make fifth-slot Merch reveal the actual card
         run: |
           python3 - <<'PY'
