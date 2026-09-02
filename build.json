@@ -1,11 +1,11 @@
 {
-  "version": "1.1.139",
+  "version": "1.1.140",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.139",
+  "physicalIphoneSmoke": "pending-v1.1.140",
   "launchStatus": "released",
-  "name": "v1.1.139 — Roster Logo Scale + Third Card Centering"
+  "name": "v1.1.140 — Reusable Transparent WWE Legacy Branding"
 }
