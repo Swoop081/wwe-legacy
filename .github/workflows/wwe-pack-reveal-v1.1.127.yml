@@ -1,0 +1,53 @@
+name: WWE Legacy v1.1.127 Lightweight Pack Reveal
+on:
+  push:
+    paths:
+      - '.release-triggers/v1.1.127-pack-reveal'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Apply lightweight pack reveal fix
+        run: python3 tools/apply-v1.1.127-pack-reveal-safe.py
+      - name: Bump v1.1.127 and stamp cache
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          for name in ['package.json','build.json']:
+              p=Path(name)
+              data=json.loads(p.read_text())
+              data['version']='1.1.127'
+              p.write_text(json.dumps(data, indent=2)+"\n")
+          PY
+          npm run stamp-cache
+      - name: Verify release
+        run: |
+          npm run test:current
+          npm run flow
+          npm run validate
+          npm run card-ids
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('js/ui/app.js').read_text()
+          assert 'booster-safe-reveal-card' in s
+          assert 'const compactSummaryThumbs = packStage === "summary"' in s
+          assert 'collectibleCardMarkup(p.card,{flipped:false,tier:p.tier,extraClass:"booster-ccg"' not in s
+          print('Lightweight pack reveal verified')
+          PY
+      - name: Publish
+        run: |
+          rm -f .release-triggers/v1.1.127-pack-reveal
+          rm -f .github/workflows/wwe-pack-reveal-v1.1.127.yml
+          rm -f tools/apply-v1.1.127-pack-reveal-safe.py
+          git config user.name "Swoop081"
+          git config user.email "justinbelot8@gmail.com"
+          git add -A
+          git commit -m "WWE Legacy v1.1.127 — lightweight pack reveal stability"
+          git push
