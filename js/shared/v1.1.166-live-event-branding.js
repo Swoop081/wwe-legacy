@@ -1,4 +1,4 @@
-// v1.1.166 — branded rotating Live Events with official WWE.com Superstar profile photography.
+// v1.1.176 — branded rotating Live Events with official WWE.com Superstar profile photography.
 const EVENTS = Object.freeze({
   "daily-raw": { title:["DAILY","RAW"], hero:"Logan Paul", src:"https://www.wwe.com/f/styles/talent_champion_lg/public/all/2022/07/Logan_Paul_PROFILE--479a7c8503950ea02f1b6f2819b79f81.png" },
   "daily-smackdown": { title:["DAILY","SMACKDOWN"], hero:"Chelsea Green", src:"https://www.wwe.com/f/styles/talent_champion_lg/public/2026/08/Chelsea_08022026MM_28291_PROFILE.png" },
@@ -17,6 +17,26 @@ const EVENTS = Object.freeze({
 function eventIdFor(card){
   const key=String(card?.dataset?.openLiveTower||"");
   return key.split(":").pop()||"";
+}
+function forceBrandColours(card,id){
+  const cta=card.querySelector(".live-tower-enter");
+  if(id==="daily-smackdown"&&cta){
+    cta.style.setProperty("background","#82ddff","important");
+    cta.style.setProperty("border-color","#a8e8ff","important");
+    cta.style.setProperty("color","#fff","important");
+    cta.querySelector("i")?.style.setProperty("color","#fff","important");
+  }
+  if(id==="daily-nxt"){
+    const accent=card.querySelector(".live-event-split-title b");
+    accent?.style.setProperty("color","#555b63","important");
+    accent?.style.setProperty("text-shadow","none","important");
+    if(cta){
+      cta.style.setProperty("background","#555b63","important");
+      cta.style.setProperty("border-color","#747b84","important");
+      cta.style.setProperty("color","#fff","important");
+      cta.querySelector("i")?.style.setProperty("color","#fff","important");
+    }
+  }
 }
 function brandCard(card){
   if(!(card instanceof HTMLElement))return;
@@ -39,6 +59,7 @@ function brandCard(card){
   }
   hero.src=cfg.src;
   hero.alt=cfg.hero;
+  forceBrandColours(card,id);
 }
 function apply(root=document){
   if(root.matches?.("[data-open-live-tower]"))brandCard(root);
