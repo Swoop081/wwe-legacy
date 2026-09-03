@@ -1,11 +1,11 @@
 {
-  "version": "1.1.159",
+  "version": "1.1.160",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.159",
+  "physicalIphoneSmoke": "pending-v1.1.160",
   "launchStatus": "released",
-  "name": "v1.1.159 — Launch Nav Guard + Natural Swipe"
+  "name": "v1.1.160 — Splash Nav Hidden Contract"
 }
