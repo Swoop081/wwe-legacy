@@ -1,0 +1,30 @@
+/* v1.1.158 — force the premium bottom rail back to a real horizontally scrollable flex strip on iPhone. */
+#mobile-game-nav.mobile-game-nav.compact-eight-nav{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  grid-template-columns:none!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  overflow-x:scroll!important;
+  overflow-y:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-x!important;
+  overscroll-behavior-x:contain!important;
+  scroll-snap-type:x proximity!important;
+  scrollbar-width:none!important;
+}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav::-webkit-scrollbar{display:none!important}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav::before{position:fixed!important;pointer-events:none!important}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav > button{
+  flex:0 0 calc(20vw - 2px)!important;
+  width:calc(20vw - 2px)!important;
+  min-width:calc(20vw - 2px)!important;
+  max-width:calc(20vw - 2px)!important;
+  scroll-snap-align:start!important;
+  touch-action:pan-x!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+}
