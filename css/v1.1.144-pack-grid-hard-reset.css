@@ -1,0 +1,119 @@
+/* v1.1.144 — hard reset legacy pyramid sizing/positioning so all five pack pulls are equal. */
+.streamlined-pack-summary{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0 auto!important;
+  padding:3px 10px max(8px,env(safe-area-inset-bottom))!important;
+  overflow:visible!important;
+}
+
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{
+  box-sizing:border-box!important;
+  display:grid!important;
+  width:100%!important;
+  max-width:none!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  grid-template-rows:auto auto!important;
+  grid-template-areas:none!important;
+  grid-auto-flow:row!important;
+  column-gap:7px!important;
+  row-gap:8px!important;
+  align-items:start!important;
+  align-content:start!important;
+  justify-items:stretch!important;
+  justify-content:stretch!important;
+  margin:5px 0 0!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+
+/* Override every historical pyramid/featured-card rule, including inline-ish placement classes. */
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card,
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card.actual-card-summary,
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card.actual-card-summary.summary-center{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  translate:none!important;
+  scale:none!important;
+  position:relative!important;
+  inset:auto!important;
+  top:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  left:auto!important;
+  grid-area:auto!important;
+  justify-self:stretch!important;
+  align-self:start!important;
+  grid-template-rows:auto 20px!important;
+}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card:nth-child(1){grid-column:1 / 3!important;grid-row:1!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card:nth-child(2){grid-column:3 / 5!important;grid-row:1!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card:nth-child(3){grid-column:5 / 7!important;grid-row:1!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card:nth-child(4){grid-column:2 / 4!important;grid-row:2!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid > .pack-summary-card:nth-child(5){grid-column:4 / 6!important;grid-row:2!important}
+
+.streamlined-pack-summary .pack-summary-grid > .pack-summary-card .pack-summary-actual-card,
+.streamlined-pack-summary .pack-summary-grid > .pack-summary-card .pack-summary-actual-card > *,
+.streamlined-pack-summary .pack-summary-grid > .pack-summary-card .pack-summary-actual-card .card-face,
+.streamlined-pack-summary .pack-summary-grid > .pack-summary-card .pack-summary-actual-card .card-shell,
+.streamlined-pack-summary .pack-summary-grid > .pack-summary-card .pack-summary-actual-card .card-wrap{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  transform:none!important;
+}
+.streamlined-pack-summary .pack-summary-grid > .pack-summary-card .pack-summary-actual-card{
+  aspect-ratio:0.68!important;
+  overflow:hidden!important;
+  border-radius:7px!important;
+}
+
+.streamlined-pack-summary .pack-summary-badges{
+  width:100%!important;
+  height:20px!important;
+  min-height:20px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-wrap:nowrap!important;
+  gap:2px!important;
+  margin:3px 0 0!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+.streamlined-pack-summary .pack-summary-badges>*{
+  flex:0 1 auto!important;
+  min-width:0!important;
+  height:17px!important;
+  min-height:17px!important;
+  padding:1px 4px!important;
+  font-size:clamp(5.5px,1.55vw,7.5px)!important;
+  line-height:1!important;
+  letter-spacing:.02em!important;
+  white-space:nowrap!important;
+}
+
+.streamlined-pack-summary .pack-summary-key{margin:7px auto 0!important}
+.streamlined-pack-summary .pack-summary-actions.pack-summary-next-row{margin:7px auto 0!important}
+
+/* Preserve the working inspection interaction from v1.1.142+. */
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect]{pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;z-index:4!important}
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect] .pack-summary-actual-card,
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect] .pack-summary-actual-card *{pointer-events:none!important}
+
+@media(max-width:390px){
+  .streamlined-pack-summary{padding-inline:7px!important}
+  .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{column-gap:5px!important;row-gap:6px!important}
+  .streamlined-pack-summary .pack-summary-badges>*{font-size:5.5px!important;padding-inline:3px!important}
+}
