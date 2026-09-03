@@ -1,11 +1,11 @@
 {
-  "version": "1.1.146",
+  "version": "1.1.147",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.146",
+  "physicalIphoneSmoke": "pending-v1.1.147",
   "launchStatus": "released",
-  "name": "v1.1.146 — Restored 2-1-2 Rarest-Centre Pack Summary"
+  "name": "v1.1.147 — Clean 2-1-2 Pack Summary"
 }
