@@ -1,0 +1,65 @@
+/* v1.1.170 — tighten Live Event matchup screen spacing on phones. */
+@media (max-width:600px){
+  .live-event-matchup-screen{
+    min-height:calc(100dvh - 170px)!important;
+    padding:18px 16px 18px!important;
+    gap:0!important;
+  }
+
+  .live-event-matchup-head{
+    margin-bottom:10px!important;
+  }
+
+  .live-event-matchup-player{
+    margin-top:0!important;
+    margin-bottom:8px!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
+  }
+
+  .live-event-matchup-player > span{
+    margin:0 0 8px!important;
+  }
+
+  .live-event-route-choice-carousel{
+    margin:0!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
+  }
+
+  .live-event-route-choice{
+    margin-bottom:0!important;
+  }
+
+  .live-event-matchup-vs{
+    margin:6px 0 8px!important;
+    padding:0!important;
+    line-height:1!important;
+  }
+
+  .live-event-matchup-opponent{
+    margin-top:0!important;
+    padding-top:0!important;
+    gap:5px!important;
+  }
+
+  .live-event-matchup-opponent > span{
+    margin:0 0 4px!important;
+  }
+
+  .live-event-matchup-opponent-card{
+    margin:0!important;
+  }
+
+  .live-event-matchup-opponent > strong{
+    margin-top:4px!important;
+  }
+
+  .live-event-matchup-opponent > small{
+    margin-top:0!important;
+  }
+
+  .live-event-matchup-fight{
+    margin-top:12px!important;
+  }
+}
