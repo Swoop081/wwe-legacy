@@ -1,11 +1,11 @@
 {
-  "version": "1.1.163",
+  "version": "1.1.164",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.163",
+  "physicalIphoneSmoke": "pending-v1.1.164",
   "launchStatus": "released",
-  "name": "v1.1.163 — Paige Collection + Tiffany MITB Portraits"
+  "name": "v1.1.164 — Black Premium Navigation"
 }
