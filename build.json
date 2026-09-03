@@ -1,11 +1,11 @@
 {
-  "version": "1.1.185",
+  "version": "1.1.186",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.185",
+  "physicalIphoneSmoke": "pending-v1.1.186",
   "launchStatus": "released",
-  "name": "v1.1.185 — Header Legacy Logo 75 Percent Size"
+  "name": "v1.1.186 — Evolution Shared Short-Arm Clothesline"
 }
