@@ -50,10 +50,10 @@
   <link rel="stylesheet" href="./css/v1.1.170-live-event-matchup-tighten.css?v=1.1.170">
   <link rel="stylesheet" href="./css/v1.1.171-mode-cta-colors.css?v=1.1.176">
   <link rel="stylesheet" href="./css/v1.1.172-survivor-series-unlock.css?v=1.1.172">
-  <link rel="stylesheet" href="./css/v1.1.177-championship-road-select.css?v=1.1.184">
+  <link rel="stylesheet" href="./css/v1.1.177-championship-road-select.css?v=1.1.185">
   <script>
     (() => {
-      const currentBuild = "1.1.184";
+      const currentBuild = "1.1.185";
       window.__WWE_LEGACY_BOOT_VERSION__ = currentBuild;
       const parts = value => String(value ?? "").replace(/^v/i, "").split(".").slice(0,3).map(Number);
       const newer=(latest,current)=>{const a=parts(latest),b=parts(current);if(a.length!==3||b.length!==3||a.some(Number.isNaN)||b.some(Number.isNaN))return false;for(let i=0;i<3;i+=1){if(a[i]!==b[i])return a[i]>b[i]}return false};
