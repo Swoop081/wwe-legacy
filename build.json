@@ -1,11 +1,11 @@
 {
-  "version": "1.1.190",
+  "version": "1.1.191",
   "releasedAt": "2026-09-04",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.190",
+  "physicalIphoneSmoke": "pending-v1.1.191",
   "launchStatus": "released",
-  "name": "v1.1.190 — Rhea Move Identity + Update State Repair"
+  "name": "v1.1.191 — Season 1 Tier-One Stratusphere"
 }
