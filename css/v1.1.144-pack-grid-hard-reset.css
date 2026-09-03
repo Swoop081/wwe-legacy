@@ -1,15 +1,15 @@
-/* v1.1.147 — authoritative pack branding + clean 2 / 1 / 2 rarest-centre summary. */
+/* v1.1.148 — authoritative pack branding + deterministic 2 / 1 / 2 rarest-centre summary. */
 
 /* Pack logos: approved project assets only. */
 .physical-booster-pack{--pack-logo:none}
-.physical-booster-pack.pack-set-raw-series-1{--pack-logo:url('../assets/images/onboarding-raw-logo.svg?v=1.1.147')}
-.physical-booster-pack.pack-set-smackdown-series-1{--pack-logo:url('../assets/images/onboarding-smackdown-logo.svg?v=1.1.147')}
-.physical-booster-pack.pack-set-nxt-series-1{--pack-logo:url('../assets/images/onboarding-nxt-logo.svg?v=1.1.147')}
-.physical-booster-pack.pack-set-evolution-series-1{--pack-logo:url('../assets/images/art-evolution-series-1-evolution-logo.png?v=1.1.147')}
-.physical-booster-pack.pack-set-summerslam-series-1{--pack-logo:url('../assets/images/art-summerslam-series-1-summerslam-2026-logo.png?v=1.1.147')}
-.physical-booster-pack.pack-set-golden-era-series-1{--pack-logo:url('../assets/images/set-logos/golden-era-set-logo.png?v=1.1.147')}
-.physical-booster-pack.pack-set-new-generation-series-1{--pack-logo:url('../assets/images/branding-new-generation-series-1-new-generation-logo.png?v=1.1.147')}
-.physical-booster-pack.pack-set-attitude-era-series-1{--pack-logo:url('../assets/images/branding-attitude-era-series-1-wwf-scratch-logo-card.png?v=1.1.147')}
+.physical-booster-pack.pack-set-raw-series-1{--pack-logo:url('../assets/images/onboarding-raw-logo.svg?v=1.1.148')}
+.physical-booster-pack.pack-set-smackdown-series-1{--pack-logo:url('../assets/images/onboarding-smackdown-logo.svg?v=1.1.148')}
+.physical-booster-pack.pack-set-nxt-series-1{--pack-logo:url('../assets/images/onboarding-nxt-logo.svg?v=1.1.148')}
+.physical-booster-pack.pack-set-evolution-series-1{--pack-logo:url('../assets/images/art-evolution-series-1-evolution-logo.png?v=1.1.148')}
+.physical-booster-pack.pack-set-summerslam-series-1{--pack-logo:url('../assets/images/art-summerslam-series-1-summerslam-2026-logo.png?v=1.1.148')}
+.physical-booster-pack.pack-set-golden-era-series-1{--pack-logo:url('../assets/images/set-logos/golden-era-set-logo.png?v=1.1.148')}
+.physical-booster-pack.pack-set-new-generation-series-1{--pack-logo:url('../assets/images/branding-new-generation-series-1-new-generation-logo.png?v=1.1.148')}
+.physical-booster-pack.pack-set-attitude-era-series-1{--pack-logo:url('../assets/images/branding-attitude-era-series-1-wwf-scratch-logo-card.png?v=1.1.148')}
 .physical-booster-pack.pack-set-ruthless-aggression-series-1{--pack-logo:url('https://images.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/39850/1526513686-11744-2621/WWE_20Ruthless_20Aggression_20logo_large.png')}
 .physical-booster-pack .pack-brand-lockup{
   display:block!important;
@@ -22,6 +22,8 @@
   background-position:center!important;
   background-size:contain!important;
 }
+/* The repo-hosted SmackDown source has a black image field. Screen blend removes that field against the blue foil without touching layout. */
+.physical-booster-pack.pack-set-smackdown-series-1 .pack-brand-lockup{mix-blend-mode:screen!important}
 .physical-booster-pack .pack-brand-lockup>.pack-set-logo,
 .physical-booster-pack .pack-brand-lockup>.pack-text-logo{display:none!important}
 
@@ -39,6 +41,8 @@
   display:grid!important;
   width:100%!important;
   max-width:390px!important;
+  height:auto!important;
+  min-height:0!important;
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
   grid-template-rows:auto auto auto!important;
   grid-template-areas:none!important;
@@ -52,13 +56,13 @@
   overflow:visible!important;
 }
 
-/* Every pull gets the same exact card box. Historical featured/slot rules cannot resize anything. */
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card.actual-card-summary,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card.actual-card-summary.summary-top-left,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card.actual-card-summary.summary-top-right,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card.actual-card-summary.summary-center,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card.actual-card-summary.summary-bottom-left,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card.actual-card-summary.summary-bottom-right{
+/* Every pull gets the same exact card box. Do not depend on the HTML tag name. */
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary.summary-top-left,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary.summary-top-right,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary.summary-center,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary.summary-bottom-left,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary.summary-bottom-right{
   box-sizing:border-box!important;
   display:block!important;
   width:min(31vw,126px)!important;
@@ -70,19 +74,23 @@
   padding:0!important;
   position:relative!important;
   inset:auto!important;
+  top:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  left:auto!important;
   transform:none!important;
   translate:none!important;
   scale:1!important;
   justify-self:center!important;
   align-self:start!important;
 }
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card:nth-child(1){grid-column:1!important;grid-row:1!important}
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card:nth-child(2){grid-column:2!important;grid-row:1!important}
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card:nth-child(3){grid-column:1 / span 2!important;grid-row:2!important;justify-self:center!important}
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card:nth-child(4){grid-column:1!important;grid-row:3!important}
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card:nth-child(5){grid-column:2!important;grid-row:3!important}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card:nth-child(1){grid-column:1!important;grid-row:1!important;grid-area:auto!important}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card:nth-child(2){grid-column:2!important;grid-row:1!important;grid-area:auto!important}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card:nth-child(3){grid-column:1 / span 2!important;grid-row:2!important;grid-area:auto!important;justify-self:center!important}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card:nth-child(4){grid-column:1!important;grid-row:3!important;grid-area:auto!important}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card:nth-child(5){grid-column:2!important;grid-row:3!important;grid-area:auto!important}
 
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card .pack-summary-actual-card{
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-actual-card{
   box-sizing:border-box!important;
   display:block!important;
   width:100%!important;
@@ -96,8 +104,8 @@
   border-radius:7px!important;
   transform:none!important;
 }
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card .pack-summary-actual-card>.ccg-card.pack-summary-ccg,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card .pack-summary-actual-card>.up-card-replacement{
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-actual-card>.ccg-card.pack-summary-ccg,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-actual-card>.up-card-replacement{
   box-sizing:border-box!important;
   display:block!important;
   width:100%!important;
@@ -113,10 +121,10 @@
   inset:auto!important;
   overflow:hidden!important;
 }
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card .pack-summary-ccg>.ccg-card-inner,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card .pack-summary-ccg .ccg-card-face,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card .pack-summary-ccg .ccg-card-art,
-.streamlined-pack-summary .pack-summary-grid>article.pack-summary-card .pack-summary-ccg .ccg-card-art img{
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-ccg>.ccg-card-inner,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-ccg .ccg-card-face,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-ccg .ccg-card-art,
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-ccg .ccg-card-art img{
   box-sizing:border-box!important;
   width:100%!important;
   min-width:0!important;
@@ -150,5 +158,5 @@
   .physical-booster-pack .pack-brand-lockup{width:min(70%,250px)!important;height:118px!important;min-height:118px!important}
   .streamlined-pack-summary{padding-inline:6px!important}
   .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{column-gap:10px!important;row-gap:6px!important}
-  .streamlined-pack-summary .pack-summary-grid>article.pack-summary-card.actual-card-summary{width:min(30vw,118px)!important;max-width:118px!important}
+  .streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary{width:min(30vw,118px)!important;max-width:118px!important}
 }
