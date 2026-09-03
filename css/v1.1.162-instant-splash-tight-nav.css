@@ -11,6 +11,8 @@
   grid-auto-rows:auto!important;
   align-items:flex-start!important;
   box-sizing:border-box!important;
+  background:linear-gradient(180deg,#111722 0%,#090d14 58%,#05070b 100%)!important;
+  border-top-color:rgba(255,255,255,.16)!important;
 }
 
 #mobile-game-nav.mobile-game-nav.compact-eight-nav > button{
@@ -20,6 +22,7 @@
   margin:0!important;
   padding:4px 3px 3px!important;
   box-sizing:border-box!important;
+  color:#fff!important;
 }
 
 /* Keep the premium icon treatment while trimming vertical bulk. */
@@ -35,6 +38,7 @@
 #mobile-game-nav.mobile-game-nav.compact-eight-nav button b{
   margin-top:1px!important;
   line-height:1!important;
+  color:#fff!important;
 }
 
 /* The application hidden contract always wins, including the boot poster. */
