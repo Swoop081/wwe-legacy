@@ -1,0 +1,68 @@
+/* v1.1.155 — sealed pack logo hardening + premium five-button navigation. */
+.physical-booster-pack{position:relative!important}
+.physical-booster-pack .v1155-pack-logo{
+  position:absolute!important;
+  z-index:8!important;
+  left:50%!important;
+  top:30%!important;
+  width:min(62%,250px)!important;
+  height:112px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:translate(-50%,-50%)!important;
+  display:block!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:none!important;
+  filter:none!important;
+}
+.physical-booster-pack.v1155-has-pack-logo .pack-brand-lockup{visibility:hidden!important;opacity:0!important}
+
+.mobile-game-nav.compact-eight-nav{
+  background:linear-gradient(180deg,#7134b5 0%,#55218f 52%,#3c126f 100%)!important;
+  border-top:1px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 -8px 28px rgba(27,5,55,.58),inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+.mobile-game-nav.compact-eight-nav button{
+  position:relative!important;
+  border:0!important;
+  border-radius:0!important;
+  color:#fff!important;
+  background:transparent!important;
+}
+.mobile-game-nav.compact-eight-nav button+button::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:18%;
+  bottom:18%;
+  width:1px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 0 7px rgba(255,255,255,.18);
+}
+.mobile-game-nav.compact-eight-nav .nav-icon{
+  width:34px!important;
+  height:34px!important;
+  display:grid!important;
+  place-items:center!important;
+  margin-inline:auto!important;
+}
+.mobile-game-nav.compact-eight-nav .nav-icon svg{
+  width:31px!important;
+  height:31px!important;
+  fill:none!important;
+  stroke:#fff!important;
+  stroke-width:2.25!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.32));
+}
+.mobile-game-nav.compact-eight-nav button b{
+  color:#fff!important;
+  text-shadow:0 1px 4px rgba(0,0,0,.35)!important;
+}
+.mobile-game-nav.compact-eight-nav button.active,
+.mobile-game-nav.compact-eight-nav button[aria-current="page"]{
+  background:linear-gradient(180deg,rgba(204,162,255,.26),rgba(139,80,217,.18))!important;
+  box-shadow:inset 0 -4px 0 #ffd65c,inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
