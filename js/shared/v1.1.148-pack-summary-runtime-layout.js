@@ -1,4 +1,4 @@
-/* v1.1.148 — deterministic five-card Pack Complete layout for mobile Safari. */
+/* v1.1.149 — deterministic five-card Pack Complete 2 / 1 / 2 layout for mobile Safari. */
 (() => {
   const important = (el, property, value) => {
     if (el instanceof HTMLElement) el.style.setProperty(property, value, "important");
@@ -28,6 +28,8 @@
     important(grid, "padding", "0");
     important(grid, "overflow", "visible");
 
+    // IMPORTANT: do not set grid-area after grid-column/grid-row. grid-area is a
+    // shorthand and was resetting the explicit placement back to auto on Safari.
     const positions = [
       ["1", "1"],
       ["2", "1"],
@@ -39,9 +41,9 @@
     cards.forEach((card, index) => {
       const [column, row] = positions[index];
       important(card, "display", "block");
+      card.style.removeProperty("grid-area");
       important(card, "grid-column", column);
       important(card, "grid-row", row);
-      important(card, "grid-area", "auto");
       important(card, "width", "min(31vw,126px)");
       important(card, "min-width", "0");
       important(card, "max-width", "126px");
