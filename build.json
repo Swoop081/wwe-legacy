@@ -1,11 +1,11 @@
 {
-  "version": "1.1.154",
+  "version": "1.1.155",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.154",
+  "physicalIphoneSmoke": "pending-v1.1.155",
   "launchStatus": "released",
-  "name": "v1.1.154 — Superstar Reorder + Purple Navigation Rail"
+  "name": "v1.1.155 — Pack Logo + Card Copy + Premium Navigation"
 }
