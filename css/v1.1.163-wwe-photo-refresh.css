@@ -1,0 +1,30 @@
+/* v1.1.163 — official WWE.com portrait positioning. */
+#menu-owned-collection .v1163-paige-menu-photo{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:right bottom!important;
+  transform:translate(7%,8%) scale(1.15)!important;
+  transform-origin:bottom right!important;
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,.42));
+}
+.play-menu-page-2 #play-ladder .legacy-mode-superstar{
+  width:48%!important;
+  right:-1%!important;
+  overflow:visible!important;
+}
+.play-menu-page-2 #play-ladder .v1163-tiffany-mitb-photo{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:translate(9%,10%) scale(1.58)!important;
+  transform-origin:bottom center!important;
+  filter:drop-shadow(0 12px 20px rgba(0,0,0,.48));
+}
+.play-menu-page-2 #play-ladder .legacy-mode-copy{
+  width:68%!important;
+  position:relative!important;
+  z-index:3!important;
+}
