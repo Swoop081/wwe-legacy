@@ -1,11 +1,11 @@
 {
-  "version": "1.1.179",
+  "version": "1.1.180",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.179",
+  "physicalIphoneSmoke": "pending-v1.1.180",
   "launchStatus": "released",
-  "name": "v1.1.179 — Championship Road Selector Self-Heal"
+  "name": "v1.1.180 — Championship Road Card Selector"
 }
