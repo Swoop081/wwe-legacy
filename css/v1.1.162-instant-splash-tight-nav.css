@@ -58,3 +58,64 @@ body:has(.splash-screen) #mobile-game-nav{
     max-height:68px!important;
   }
 }
+
+/* v1.1.163 — Play page 2 now mirrors page 1's visual hierarchy and density. */
+@media (max-width:600px){
+  .legacy-play-v3.play-menu-page-2{
+    box-sizing:border-box!important;
+    min-height:calc(100dvh - 246px)!important;
+    height:calc(100dvh - 246px)!important;
+    display:grid!important;
+    grid-template-rows:auto minmax(0,1fr) auto!important;
+    gap:6px!important;
+    padding-bottom:4px!important;
+    overflow:hidden!important;
+  }
+  .play-menu-page-2 .legacy-play-heading{padding-block:3px 1px!important;margin:0!important}
+  .play-menu-page-2 .legacy-play-heading h2{font-size:clamp(29px,8.2vw,38px)!important;line-height:.92!important;margin:0!important}
+  .play-menu-page-2 .legacy-play-heading p{margin:3px 0 0!important;font-size:12px!important}
+  .play-menu-page-2 .legacy-mode-stack{
+    display:grid!important;
+    grid-template-rows:minmax(0,1.24fr) minmax(0,.96fr) minmax(0,.96fr)!important;
+    gap:6px!important;
+    min-height:0!important;
+    height:100%!important;
+  }
+  .play-menu-page-2 .legacy-mode-banner{min-height:0!important;height:100%!important;margin:0!important;border-radius:10px!important;overflow:hidden!important}
+
+  /* Required order: Championship Road hero, Money in the Bank, Survivor Series. */
+  .play-menu-page-2 #play-championship{order:1}
+  .play-menu-page-2 #play-ladder{order:2}
+  .play-menu-page-2 #play-survivor-series{order:3}
+
+  /* Championship Road gets the same hero scale as Live Events on page 1. */
+  .play-menu-page-2 #play-championship .legacy-mode-superstar{width:54%!important;right:-2%!important;transform:none!important}
+  .play-menu-page-2 #play-championship .legacy-mode-superstar img.official-menu-superstar-photo{transform:translate(7%,10%) scale(1.62)!important;transform-origin:bottom center!important}
+  .play-menu-page-2 #play-championship .legacy-mode-copy{width:62%!important;padding:13px 8px 11px 14px!important}
+  .play-menu-page-2 #play-championship .mode-logo span,
+  .play-menu-page-2 #play-championship .mode-logo strong{font-size:clamp(34px,9.8vw,49px)!important;line-height:.82!important}
+  .play-menu-page-2 #play-championship .legacy-mode-copy>b{font-size:13px!important;padding:9px 11px!important;margin-top:7px!important}
+
+  /* MITB + Survivor Series match Exhibition + King of the Ring card sizing. */
+  .play-menu-page-2 :is(#play-ladder,#play-survivor-series) .legacy-mode-superstar{width:49%!important;right:-2%!important;transform:none!important}
+  .play-menu-page-2 #play-survivor-series .legacy-mode-superstar img.official-menu-superstar-photo{transform:translate(9%,11%) scale(1.70)!important;transform-origin:bottom center!important}
+  .play-menu-page-2 :is(#play-ladder,#play-survivor-series) .legacy-mode-copy{width:68%!important;padding:9px 7px 8px 12px!important}
+  .play-menu-page-2 :is(#play-ladder,#play-survivor-series) .mode-logo span,
+  .play-menu-page-2 :is(#play-ladder,#play-survivor-series) .mode-logo strong{font-size:clamp(26px,7.5vw,35px)!important;line-height:.84!important}
+  .play-menu-page-2 :is(#play-ladder,#play-survivor-series) .legacy-mode-copy em{font-size:9px!important}
+  .play-menu-page-2 :is(#play-ladder,#play-survivor-series) .legacy-mode-copy small{font-size:9px!important;line-height:1.05!important;margin-top:1px!important}
+  .play-menu-page-2 :is(#play-ladder,#play-survivor-series) .legacy-mode-copy>b{font-size:11px!important;padding:7px 9px!important;margin-top:5px!important}
+
+  /* Back uses the exact compact geometry of Next Page and the same cyan treatment. */
+  .play-menu-page-2 .play-mode-page-arrow{min-height:52px!important;height:52px!important;margin:0!important;padding:0 18px!important;border-radius:9px!important}
+  .play-menu-page-2 .play-mode-page-arrow span{font-size:12px!important}
+  .play-menu-page-2 .play-mode-page-arrow b{font-size:35px!important}
+  .play-menu-page-2 .play-mode-page-arrow.is-back{
+    color:#55dcff!important;
+    border-color:rgba(67,211,250,.72)!important;
+    background:linear-gradient(110deg,rgba(8,93,118,.72),rgba(8,48,66,.78))!important;
+    box-shadow:inset 0 0 0 1px rgba(100,226,255,.18),0 8px 22px rgba(0,0,0,.24)!important;
+  }
+  .play-menu-page-2 .play-mode-page-arrow.is-back span{color:#f6fbff!important}
+  .play-menu-page-2 .play-mode-page-arrow.is-back b{color:#55dcff!important}
+}
