@@ -1,11 +1,11 @@
 {
-  "version": "1.1.161",
+  "version": "1.1.162",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.161",
+  "physicalIphoneSmoke": "pending-v1.1.162",
   "launchStatus": "released",
-  "name": "v1.1.161 — Compact Premium Navigation"
+  "name": "v1.1.162 — Instant Splash + Tight Navigation Rail"
 }
