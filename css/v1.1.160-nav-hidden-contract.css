@@ -1,0 +1,7 @@
+/* v1.1.160 — preserve the platform hidden contract for the premium nav. */
+#mobile-game-nav[hidden],
+#mobile-game-nav[aria-hidden="true"]{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
