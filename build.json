@@ -1,11 +1,11 @@
 {
-  "version": "1.1.144",
+  "version": "1.1.145",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.144",
+  "physicalIphoneSmoke": "pending-v1.1.145",
   "launchStatus": "released",
-  "name": "v1.1.144 — Restored Evolution Branding + Equal Pack Grid"
+  "name": "v1.1.145 — Authoritative Pack Branding + Equal Summary Layout"
 }
