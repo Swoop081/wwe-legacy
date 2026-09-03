@@ -1,0 +1,36 @@
+/* v1.1.171 — mode CTA readability and Daily SmackDown/NXT button colour correction. */
+
+/* Mode play/enter CTAs use white type across Home, Play and Live Events. */
+.legacy-mode-banner .legacy-mode-copy > b,
+.legacy-mode-banner .legacy-mode-copy > button,
+.legacy-mode-banner button,
+.live-tower-hub-card[data-live-brand] .start-match,
+.live-tower-hub-card[data-live-brand] button,
+.legacy-command-card button,
+.legacy-command-card .legacy-command-cta,
+.legacy-command-hero button,
+.legacy-command-hero .legacy-command-cta,
+.legacy-home-hero button,
+.legacy-home-hero .start-match,
+.home-hero button,
+.home-hero .start-match {
+  color:#fff!important;
+}
+
+/* Daily SmackDown: replace the inherited pink CTA fill with baby blue. */
+.live-tower-hub-card[data-live-brand="daily-smackdown"] .start-match,
+.live-tower-hub-card[data-live-brand="daily-smackdown"] button {
+  background:#72d8ff!important;
+  border-color:#9be5ff!important;
+  color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.32)!important;
+}
+
+/* Daily NXT: replace the inherited orange CTA fill with dark graphite/silver branding. */
+.live-tower-hub-card[data-live-brand="daily-nxt"] .start-match,
+.live-tower-hub-card[data-live-brand="daily-nxt"] button {
+  background:linear-gradient(180deg,#5f6670 0%,#3f454d 100%)!important;
+  border-color:#aeb4bc!important;
+  color:#fff!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.42)!important;
+}
