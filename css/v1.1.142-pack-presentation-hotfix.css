@@ -1,5 +1,5 @@
 /* v1.1.142 — compact one-screen pack summary + dependable 60% inspection. */
-.physical-booster-pack .pack-set-logo{loading:eager;object-fit:contain!important}
+.physical-booster-pack .pack-set-logo{object-fit:contain!important}
 .physical-booster-pack .pack-local-set-logo{display:block!important;opacity:1!important;visibility:visible!important}
 
 /* Summary tiles own the tap target; the rendered card face cannot swallow the tap. */
