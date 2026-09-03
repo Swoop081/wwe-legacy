@@ -1,12 +1,4 @@
-/* v1.1.159 — restore natural iPhone momentum scrolling and keep the nav off launch/splash screens. */
-
-/* Launch/onboarding posters are full-screen experiences: the command rail must never overlay them. */
-body:has(.launch-poster-splash) #mobile-game-nav,
-body:has(.launch-poster-screen) #mobile-game-nav,
-body:has(.season-launch-poster) #mobile-game-nav,
-body:has(.splash-screen) #mobile-game-nav {
-  display:none!important;
-}
+/* v1.1.159/v1.1.160 — natural iPhone momentum scrolling plus authoritative launch/splash hiding. */
 
 /* Use Safari's own inertial scroller. No scripted touchmove interception. */
 #mobile-game-nav.mobile-game-nav.compact-eight-nav {
@@ -36,6 +28,16 @@ body:has(.splash-screen) #mobile-game-nav {
   -webkit-user-select:none!important;
   user-select:none!important;
 }
-#mobile-game-nav.mobile-game-nav.compact-eight-nav::before{
+#mobile-game-nav.mobile-game-nav.compact-eight-nav::before{pointer-events:none!important}
+
+/* IMPORTANT: these rules come LAST so the premium rail's forced display:flex can never override app visibility. */
+#mobile-game-nav[hidden],
+#mobile-game-nav[aria-hidden="true"],
+body:has(.launch-poster-splash) #mobile-game-nav,
+body:has(.launch-poster-screen) #mobile-game-nav,
+body:has(.season-launch-poster) #mobile-game-nav,
+body:has(.splash-screen) #mobile-game-nav {
+  display:none!important;
+  visibility:hidden!important;
   pointer-events:none!important;
 }
