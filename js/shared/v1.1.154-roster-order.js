@@ -18,21 +18,21 @@ function saveOrder(order) {
   profile[ORDER_KEY] = [...new Set(order)].filter(id => unlocked.has(id));
   saveProfile(profile);
 }
-function orderIndex(id) {
-  const order = normalizedOrder();
-  const i = order.indexOf(id);
-  return i < 0 ? Number.MAX_SAFE_INTEGER : i;
-}
+function desiredIndexMap() { return new Map(normalizedOrder().map((id,index)=>[id,index])); }
 function reorderCarousel(carousel) {
-  if (!carousel || carousel.dataset.rosterOrdering === "1") return;
+  if (!carousel) return;
   const cards = [...carousel.querySelectorAll(":scope > [data-select-star]")];
   if (cards.length < 2) return;
+  const rank = desiredIndexMap();
+  const desired = [...cards].sort((a,b) => (rank.get(a.dataset.selectStar) ?? 9999) - (rank.get(b.dataset.selectStar) ?? 9999));
+  const alreadyOrdered = cards.every((card,index) => card === desired[index]);
+  if (alreadyOrdered) return;
   const selected = cards.find(card => card.classList.contains("selected"));
-  cards.sort((a,b) => orderIndex(a.dataset.selectStar) - orderIndex(b.dataset.selectStar));
-  cards.forEach(card => carousel.appendChild(card));
-  if (selected) selected.scrollIntoView({inline:"center",block:"nearest"});
+  desired.forEach(card => carousel.appendChild(card));
+  if (selected) requestAnimationFrame(()=>selected.scrollIntoView({inline:"center",block:"nearest"}));
 }
 function reorderAllSelectors(root = document) {
+  if (root.matches?.(".superstar-select-carousel")) reorderCarousel(root);
   root.querySelectorAll?.(".superstar-select-carousel").forEach(reorderCarousel);
 }
 function starRow(id) {
@@ -83,11 +83,11 @@ function openRosterOrder() {
   modal.addEventListener("click",event=>{if(event.target===modal)modal.remove();});
   modal.querySelector(".roster-order-done").addEventListener("click",()=>{
     const ids=[...list.querySelectorAll(".roster-order-row")].map(row=>row.dataset.rosterStar);
-    saveOrder(ids); modal.remove(); reorderAllSelectors();
+    saveOrder(ids); modal.remove(); reorderAllSelectors(document);
   });
 }
 function ensureDeckLabButton(root=document) {
-  const title = root.querySelector?.(".deck-lab-roster-selector .selector-title");
+  const title = root.matches?.(".deck-lab-roster-selector .selector-title") ? root : root.querySelector?.(".deck-lab-roster-selector .selector-title");
   if (!title || title.querySelector(".roster-order-launch")) return;
   title.classList.add("has-roster-order");
   const button=document.createElement("button");
@@ -97,6 +97,8 @@ function ensureDeckLabButton(root=document) {
 }
 function apply(root=document) { ensureDeckLabButton(root); reorderAllSelectors(root); }
 
-const observer = new MutationObserver(records => { for (const record of records) { for (const node of record.addedNodes) { if (node.nodeType===1) apply(node); } } apply(document); });
+const observer = new MutationObserver(records => {
+  for (const record of records) for (const node of record.addedNodes) if (node.nodeType===1) apply(node);
+});
 observer.observe(document.documentElement,{childList:true,subtree:true});
 apply(document);
