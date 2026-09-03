@@ -1,5 +1,6 @@
 // v1.1.155 — production copy cleanup, sealed-pack logo hardening, premium nav icons.
 // v1.1.165 — stale-build update recovery for iPhone Safari.
+// v1.1.186 — Evolution shared Short-Arm Clothesline balance pass.
 import { allGameplayCards } from "../data/content.js?v=1.1.132";
 import "./v1.1.163-wwe-photo-refresh.js?v=1.1.163";
 
@@ -15,6 +16,34 @@ for (const card of allGameplayCards) {
 for (const card of allGameplayCards) {
   if (card?.name !== "Front Kick" || card?.superstarId != null) continue;
   if (/smackdown/i.test(String(card.setId || ""))) card.rulesText = "";
+}
+
+// Keep Jake Roberts' trademark identity separate. The existing shared card is
+// promoted into Evolution Series 1 and tuned between the basic Clothesline
+// (3/5) and the stronger running/leaping family (4/7).
+const sharedShortArm = allGameplayCards.find(card => card?.id === "short-arm-clothesline" && card?.superstarId == null);
+if (sharedShortArm) {
+  Object.assign(sharedShortArm, {
+    name: "Short-Arm Clothesline",
+    kind: "move",
+    setId: "evolution-series-1",
+    cost: 4,
+    damage: 6,
+    requirements: { strike: 1 },
+    moveType: "strike",
+    method: "strike",
+    superstarId: null,
+    rarity: 1,
+    rulesText: "Grounds opponent.",
+    groundOpponent: true,
+    groundedOnly: false,
+    stun: 0,
+    selfDamage: 0,
+    effects: [],
+    counterState: "arm-extended",
+    trademark: false,
+    finisher: false
+  });
 }
 
 const LOGOS = {
