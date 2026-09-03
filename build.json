@@ -1,11 +1,11 @@
 {
-  "version": "1.1.157",
+  "version": "1.1.158",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.157",
+  "physicalIphoneSmoke": "pending-v1.1.158",
   "launchStatus": "released",
-  "name": "v1.1.157 — Premium Nav Swipe Restoration"
+  "name": "v1.1.158 — Premium Nav iPhone Swipe Hardfix"
 }
