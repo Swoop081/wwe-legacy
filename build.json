@@ -1,11 +1,11 @@
 {
-  "version": "1.1.147",
+  "version": "1.1.148",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.147",
+  "physicalIphoneSmoke": "pending-v1.1.148",
   "launchStatus": "released",
-  "name": "v1.1.147 — Clean 2-1-2 Pack Summary"
+  "name": "v1.1.148 — Build Sync + Pack Layout + SmackDown Branding"
 }
