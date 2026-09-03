@@ -1,7 +1,45 @@
-/* v1.1.149 — deterministic five-card Pack Complete 2 / 1 / 2 layout for mobile Safari. */
+/* v1.1.150 — deterministic five-card Pack Complete 2 / 1 / 2 layout + prestige-centre ranking. */
 (() => {
   const important = (el, property, value) => {
     if (el instanceof HTMLElement) el.style.setProperty(property, value, "important");
+  };
+
+  const rarityScore = card => {
+    for (let rarity = 5; rarity >= 1; rarity -= 1) {
+      if (card.classList.contains(`rarity-${rarity}`)) return rarity;
+    }
+    return 0;
+  };
+
+  const tierScore = card => {
+    if (card.classList.contains("tier-amethyst")) return 4;
+    if (card.classList.contains("tier-ruby")) return 3;
+    if (card.classList.contains("tier-sapphire")) return 2;
+    if (card.classList.contains("tier-emerald")) return 1;
+    return 0;
+  };
+
+  // Within the same star rarity, card identity decides the showcase pull.
+  // Merch is intentionally always the weakest tie-breaker.
+  const identityScore = card => {
+    const face = card.querySelector(".ccg-card");
+    if (!face) return card.querySelector(".up-card-replacement") ? 50 : 0;
+    if (face.classList.contains("is-finisher")) return 900;
+    if (face.classList.contains("type-superstar")) return 850;
+    if (face.classList.contains("is-trademark")) return 800;
+    if (face.classList.contains("is-signature")) return 750;
+    if (face.classList.contains("type-entrance")) return 700;
+    if (face.classList.contains("type-action")) return 600;
+    if (face.classList.contains("type-manager")) return 500;
+    if (face.classList.contains("type-move")) return 400;
+    if (face.classList.contains("type-momentum")) return 300;
+    if (face.classList.contains("type-merch")) return 100;
+    return 200;
+  };
+
+  const centreScore = card => {
+    const isNew = card.querySelector(".new-card-symbol") ? 1 : 0;
+    return rarityScore(card) * 100000 + identityScore(card) * 100 + tierScore(card) * 10 + isNew;
   };
 
   const normalizeGrid = grid => {
@@ -28,8 +66,9 @@
     important(grid, "padding", "0");
     important(grid, "overflow", "visible");
 
-    // IMPORTANT: do not set grid-area after grid-column/grid-row. grid-area is a
-    // shorthand and was resetting the explicit placement back to auto on Safari.
+    const centreCard = cards.reduce((best, card) => !best || centreScore(card) > centreScore(best) ? card : best, null);
+    const outerCards = cards.filter(card => card !== centreCard);
+    const ordered = [outerCards[0], outerCards[1], centreCard, outerCards[2], outerCards[3]];
     const positions = [
       ["1", "1"],
       ["2", "1"],
@@ -38,7 +77,8 @@
       ["2", "3"]
     ];
 
-    cards.forEach((card, index) => {
+    ordered.forEach((card, index) => {
+      if (!(card instanceof HTMLElement)) return;
       const [column, row] = positions[index];
       important(card, "display", "block");
       card.style.removeProperty("grid-area");
