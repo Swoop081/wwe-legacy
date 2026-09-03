@@ -1,11 +1,11 @@
 {
-  "version": "1.1.155",
+  "version": "1.1.156",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.155",
+  "physicalIphoneSmoke": "pending-v1.1.156",
   "launchStatus": "released",
-  "name": "v1.1.155 — Pack Logo + Card Copy + Premium Navigation"
+  "name": "v1.1.156 — Premium Command Navigation Overhaul"
 }
