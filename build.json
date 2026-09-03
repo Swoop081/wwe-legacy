@@ -1,11 +1,11 @@
 {
-  "version": "1.1.177",
+  "version": "1.1.178",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.177",
+  "physicalIphoneSmoke": "pending-v1.1.178",
   "launchStatus": "released",
-  "name": "v1.1.177 — Championship Road 72 + Superstar Select"
+  "name": "v1.1.178 — Championship Road Selector Routing Hotfix"
 }
