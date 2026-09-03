@@ -13,6 +13,8 @@
     Object.assign(normal, {
       cost: 3,
       damage: 5,
+      stun: 0,
+      groundOpponent: true,
       rulesText: normalRules,
       moveType: "strike",
       method: "strike"
@@ -52,6 +54,8 @@
       rarity: 3,
       fixedPrintingTier: null,
       requirements: { agility: 2 },
+      stun: 1,
+      groundOpponent: true,
       rulesText: divingRules,
       duration: null,
       scope: null,
