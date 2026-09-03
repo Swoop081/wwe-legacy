@@ -1,11 +1,11 @@
 {
-  "version": "1.1.192",
+  "version": "1.1.193",
   "releasedAt": "2026-09-04",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.192",
+  "physicalIphoneSmoke": "pending-v1.1.193",
   "launchStatus": "released",
-  "name": "v1.1.192 — Electric Chair Drop Shared Identity Fix"
+  "name": "v1.1.193 — Splash Card Identity Cleanup"
 }
