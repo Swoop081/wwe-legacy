@@ -1,0 +1,143 @@
+/* v1.1.143 — approved pack branding + equal-width 3/2 iPhone summary. */
+.physical-booster-pack .pack-set-logo{
+  display:block!important;
+  width:min(62%,250px)!important;
+  max-height:132px!important;
+  margin-inline:auto!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+/* The summary wrapper is the tap target. Keep the working v1.1.142 inspector behaviour. */
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect]{
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  cursor:pointer!important;
+  position:relative!important;
+  z-index:4!important;
+}
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect] .pack-summary-actual-card,
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect] .pack-summary-actual-card *{
+  pointer-events:none!important;
+}
+
+/* Five equal cards: 3 across, then 2 centred. No featured/centre card is a different size. */
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:430px!important;
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  grid-template-areas:none!important;
+  column-gap:6px!important;
+  row-gap:8px!important;
+  align-items:start!important;
+  justify-items:stretch!important;
+  margin:5px auto 0!important;
+  padding:0 2px!important;
+  overflow:visible!important;
+}
+.streamlined-pack-summary .pack-summary-grid .pack-summary-card.actual-card-summary,
+.streamlined-pack-summary .pack-summary-grid .pack-summary-card.actual-card-summary.summary-center{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin:0!important;
+  grid-column:span 2!important;
+  grid-area:auto!important;
+  justify-self:stretch!important;
+  align-self:start!important;
+  grid-template-rows:auto 20px!important;
+}
+.streamlined-pack-summary .pack-summary-grid .pack-summary-card.actual-card-summary:nth-child(4){grid-column:2 / span 2!important}
+.streamlined-pack-summary .pack-summary-grid .pack-summary-card.actual-card-summary:nth-child(5){grid-column:4 / span 2!important}
+.streamlined-pack-summary .pack-summary-grid .pack-summary-actual-card,
+.streamlined-pack-summary .pack-summary-grid .pack-summary-actual-card>*,
+.streamlined-pack-summary .pack-summary-grid .pack-summary-actual-card .card-face,
+.streamlined-pack-summary .pack-summary-grid .pack-summary-actual-card .card-shell,
+.streamlined-pack-summary .pack-summary-grid .pack-summary-actual-card .card-wrap{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin-inline:auto!important;
+}
+.streamlined-pack-summary .pack-summary-grid .pack-summary-actual-card{
+  border-radius:8px!important;
+  overflow:hidden!important;
+}
+
+/* Three compact badges stay on one line and align identically beneath every card. */
+.streamlined-pack-summary .pack-summary-badges{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:20px!important;
+  height:20px!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3px!important;
+  margin:3px auto 0!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+.streamlined-pack-summary .pack-summary-badges>*{
+  box-sizing:border-box!important;
+  flex:0 1 auto!important;
+  min-width:0!important;
+  max-width:100%!important;
+  min-height:17px!important;
+  height:17px!important;
+  padding:1px 5px!important;
+  font-size:clamp(6px,1.65vw,8px)!important;
+  line-height:1!important;
+  letter-spacing:.035em!important;
+  white-space:nowrap!important;
+}
+
+/* Use the screen width without pushing the lower row or NEXT below the viewport. */
+.streamlined-pack-summary{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:440px!important;
+  margin:0 auto!important;
+  padding:3px 7px max(8px,env(safe-area-inset-bottom))!important;
+  overflow:visible!important;
+}
+.streamlined-pack-summary .pack-complete-hero{margin:0 auto 2px!important;padding:0!important}
+.streamlined-pack-summary .pack-complete-hero span{font-size:.55rem!important;line-height:1!important}
+.streamlined-pack-summary .pack-complete-hero h3{font-size:1.08rem!important;line-height:1!important;margin:4px 0!important}
+.streamlined-pack-summary .pack-complete-hero p{font-size:.62rem!important;line-height:1.1!important;margin:3px 0!important}
+.streamlined-pack-summary .pack-summary-key{
+  min-height:20px!important;
+  margin:6px auto 0!important;
+  padding:0 2px!important;
+  gap:8px!important;
+  flex-wrap:nowrap!important;
+  justify-content:center!important;
+  font-size:.5rem!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.streamlined-pack-summary .pack-summary-actions.pack-summary-next-row{
+  box-sizing:border-box!important;
+  width:min(100%,360px)!important;
+  margin:7px auto 0!important;
+  padding:0!important;
+}
+.streamlined-pack-summary .pack-theme-next{width:100%!important;min-height:46px!important;height:46px!important;padding:8px 10px!important;font-size:.9rem!important}
+
+/* Inspector remains roughly 60% viewport width and centred. */
+.booster-card-inspect-modal{position:fixed!important;inset:0!important;z-index:10000!important;display:grid!important;place-items:center!important;padding:max(18px,env(safe-area-inset-top)) 12px max(18px,env(safe-area-inset-bottom))!important;overflow:auto!important}
+.booster-card-inspect-modal .deck-lab-card-modal-inner{width:min(68vw,370px)!important;max-width:370px!important;max-height:92dvh!important;margin:auto!important;overflow:visible!important}
+.booster-card-inspect-modal .booster-inspect-card{width:min(60vw,330px)!important;max-width:330px!important;height:auto!important;margin:0 auto!important}
+
+@media(max-width:390px){
+  .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{column-gap:4px!important;row-gap:6px!important;padding-inline:0!important}
+  .streamlined-pack-summary .pack-summary-badges{gap:2px!important}
+  .streamlined-pack-summary .pack-summary-badges>*{font-size:6px!important;padding-inline:3px!important}
+}
