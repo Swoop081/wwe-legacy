@@ -1,4 +1,4 @@
-// v1.1.179 — self-healing Championship Road Superstar selector routing.
+// v1.1.180 — Championship Road selector card + compact progress treatment.
 let allowDetail = false;
 let selectorOpen = false;
 let lastPlayChampionshipAt = 0;
@@ -20,7 +20,8 @@ function buildSelector(screen){
     const name=btn.querySelector('strong')?.textContent?.trim()||id;
     const progress=btn.querySelector('span')?.textContent?.trim()||'0/72';
     const status=btn.querySelector('small')?.textContent?.trim()||'NEW ROAD';
-    return `<button type="button" class="champ-select-card" data-champ-select-pick="${id}"><span class="champ-select-name">${name}</span><b>${progress}</b><small>${status}</small><i>SELECT ›</i></button>`;
+    const image=`./assets/images/${id}-superstar.webp?v=1.1.180`;
+    return `<button type="button" class="champ-select-card" data-champ-select-pick="${id}"><span class="champ-select-art"><img src="${image}" alt="${name} Superstar card" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="champ-select-art-fallback" style="display:none">${name}</span></span><span class="champ-select-meta"><strong>${name}</strong><small>${progress} · ${status}</small><i>SELECT ›</i></span></button>`;
   }).join('');
 
   const selector=document.createElement('section');
@@ -53,10 +54,7 @@ function buildSelector(screen){
 
 function reconcile(){
   const screen=detailScreen();
-  if(!screen){
-    selectorOpen=false;
-    return;
-  }
+  if(!screen){ selectorOpen=false; return; }
   if(allowDetail){
     screen.classList.remove('champ-detail-hidden-for-select');
     screen.querySelector('.champ-superstar-roads')?.classList.add('champ-superstar-roads-detail-hidden');
@@ -66,7 +64,6 @@ function reconcile(){
   buildSelector(screen);
 }
 
-// Capture the actual Play-card activation before app.js replaces the Play screen.
 document.addEventListener('click',event=>{
   if(event.target.closest?.('#play-championship')){
     lastPlayChampionshipAt=Date.now();
@@ -84,12 +81,8 @@ document.addEventListener('click',event=>{
 
 const observer=new MutationObserver(()=>reconcile());
 observer.observe(document.documentElement,{childList:true,subtree:true});
-
-// iOS Safari safety net: DOM replacement order from the large app module can vary.
-// While Championship Road is visible, keep the entry gate reconciled.
 setInterval(()=>{
   if(detailScreen()) reconcile();
   else if(Date.now()-lastPlayChampionshipAt>1500) selectorOpen=false;
 },150);
-
 reconcile();
