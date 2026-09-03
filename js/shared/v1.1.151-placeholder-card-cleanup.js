@@ -3,6 +3,7 @@ import { allGameplayCards } from "../data/content.js?v=1.1.132";
 import { collectionCards, collectionCardsBySet, setCollections } from "../data/collection.js?v=1.1.132";
 import { decks } from "../data/decks.js?v=1.1.132";
 import { superstars } from "../data/superstars.js?v=1.1.132";
+import "./v1.1.188-diving-shotgun-dropkick.js?v=1.1.188";
 
 const PROFILE_KEY = "wa-modern-profile-v3";
 const placeholderRule = /^Shared\s+[^.]+\s+move\b/i;
