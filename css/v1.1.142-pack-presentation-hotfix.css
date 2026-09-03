@@ -1,0 +1,39 @@
+/* v1.1.142 — compact one-screen pack summary + dependable 60% inspection. */
+.physical-booster-pack .pack-set-logo{loading:eager;object-fit:contain!important}
+.physical-booster-pack .pack-local-set-logo{display:block!important;opacity:1!important;visibility:visible!important}
+
+/* Summary tiles own the tap target; the rendered card face cannot swallow the tap. */
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect]{pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;position:relative!important;z-index:4!important}
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect] .pack-summary-actual-card,
+.streamlined-pack-summary .pack-summary-card[data-pack-summary-inspect] .pack-summary-actual-card *{pointer-events:none!important}
+
+/* Inspector target: roughly 60% of the iPhone viewport, centered and never clipped. */
+.booster-card-inspect-modal{position:fixed!important;inset:0!important;z-index:10000!important;display:grid!important;place-items:center!important;padding:max(18px,env(safe-area-inset-top)) 12px max(18px,env(safe-area-inset-bottom))!important;overflow:auto!important}
+.booster-card-inspect-modal .deck-lab-card-modal-inner{width:min(68vw,370px)!important;max-width:370px!important;max-height:92dvh!important;margin:auto!important;overflow:visible!important}
+.booster-card-inspect-modal .booster-inspect-card{width:min(60vw,330px)!important;max-width:330px!important;height:auto!important;margin:0 auto!important}
+
+/* Keep rarity / tier / new on a single line. */
+.streamlined-pack-summary .pack-summary-badges{flex-wrap:nowrap!important;min-height:18px!important;height:18px!important;margin-top:3px!important;gap:3px!important;overflow:visible!important;white-space:nowrap!important}
+.streamlined-pack-summary .pack-summary-badges>*{white-space:nowrap!important;min-height:17px!important;height:17px!important;padding:1px 5px!important;font-size:.39rem!important;line-height:1!important;letter-spacing:.045em!important;flex:0 0 auto!important}
+
+/* iPhone pack-complete view: five cards, legend and NEXT all fit without cropped bottom rows. */
+@media(max-width:600px){
+  .streamlined-pack-summary{display:grid!important;grid-template-rows:auto auto auto auto!important;align-content:start!important;gap:3px!important;max-height:none!important;min-height:0!important;overflow:visible!important;padding:2px 5px max(6px,env(safe-area-inset-bottom))!important}
+  .streamlined-pack-summary .pack-complete-hero{margin:0 auto 1px!important;padding:0!important}
+  .streamlined-pack-summary .pack-complete-hero span{font-size:.47rem!important;line-height:1!important}
+  .streamlined-pack-summary .pack-complete-hero h3{font-size:1.02rem!important;line-height:1!important;margin:3px 0!important}
+  .streamlined-pack-summary .pack-complete-hero p{font-size:.57rem!important;line-height:1!important;margin:2px 0!important}
+  .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{--summary-card-w:min(24.5vw,103px)!important;grid-template-columns:repeat(2,var(--summary-card-w))!important;grid-template-areas:"tl tr" "cc cc" "bl br"!important;column-gap:clamp(14px,6vw,28px)!important;row-gap:3px!important;align-items:start!important;align-content:start!important;margin:1px auto 0!important;overflow:visible!important}
+  .streamlined-pack-summary .pack-summary-card.actual-card-summary,
+  .streamlined-pack-summary .pack-summary-card.actual-card-summary.summary-center{width:var(--summary-card-w)!important;max-width:103px!important;grid-template-rows:auto 18px!important;min-height:0!important}
+  .streamlined-pack-summary .pack-summary-actual-card{border-radius:8px!important;overflow:hidden!important}
+  .streamlined-pack-summary .pack-summary-key{min-height:18px!important;margin:2px auto 0!important;padding:1px 4px 0!important;gap:7px!important;flex-wrap:nowrap!important;font-size:.47rem!important;line-height:1!important;white-space:nowrap!important}
+  .streamlined-pack-summary .pack-summary-key .new-card-symbol{font-size:.38rem!important;min-height:16px!important;height:16px!important;padding:1px 5px!important}
+  .streamlined-pack-summary .pack-summary-actions.pack-summary-next-row{margin:4px auto 0!important;padding:0!important;width:min(340px,94vw)!important}
+  .streamlined-pack-summary .pack-theme-next{width:100%!important;min-height:42px!important;height:42px!important;padding:8px 10px!important;font-size:.84rem!important}
+}
+@media(max-width:390px){
+  .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{--summary-card-w:min(23.8vw,95px)!important;column-gap:18px!important;row-gap:2px!important}
+  .streamlined-pack-summary .pack-summary-card.actual-card-summary,.streamlined-pack-summary .pack-summary-card.actual-card-summary.summary-center{max-width:95px!important}
+  .streamlined-pack-summary .pack-summary-badges>*{font-size:.35rem!important;padding-inline:4px!important}
+}
