@@ -1,11 +1,11 @@
 {
-  "version": "1.1.151",
+  "version": "1.1.152",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.151",
+  "physicalIphoneSmoke": "pending-v1.1.152",
   "launchStatus": "released",
-  "name": "v1.1.151 — Local Transparent Pack Logos + Shared Placeholder Purge"
+  "name": "v1.1.152 — Placeholder Move Deletion + Ringside Knee Lift Removal"
 }
