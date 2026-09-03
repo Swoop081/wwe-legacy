@@ -1,0 +1,41 @@
+/* v1.1.159 — restore natural iPhone momentum scrolling and keep the nav off launch/splash screens. */
+
+/* Launch/onboarding posters are full-screen experiences: the command rail must never overlay them. */
+body:has(.launch-poster-splash) #mobile-game-nav,
+body:has(.launch-poster-screen) #mobile-game-nav,
+body:has(.season-launch-poster) #mobile-game-nav,
+body:has(.splash-screen) #mobile-game-nav {
+  display:none!important;
+}
+
+/* Use Safari's own inertial scroller. No scripted touchmove interception. */
+#mobile-game-nav.mobile-game-nav.compact-eight-nav {
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  justify-content:flex-start!important;
+  align-items:stretch!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:auto!important;
+  overscroll-behavior-x:auto!important;
+  scroll-behavior:auto!important;
+  scroll-snap-type:none!important;
+  scrollbar-width:none!important;
+}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav::-webkit-scrollbar{display:none!important}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav > button{
+  flex:0 0 20vw!important;
+  width:20vw!important;
+  min-width:20vw!important;
+  max-width:20vw!important;
+  scroll-snap-align:none!important;
+  touch-action:auto!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav::before{
+  pointer-events:none!important;
+}
