@@ -1,5 +1,6 @@
 // v1.1.155 — production copy cleanup, sealed-pack logo hardening, premium nav icons.
 import { allGameplayCards } from "../data/content.js?v=1.1.132";
+import "./v1.1.163-wwe-photo-refresh.js?v=1.1.163";
 
 // Shared availability is the default. Only exclusivity needs to be stated.
 for (const card of allGameplayCards) {
