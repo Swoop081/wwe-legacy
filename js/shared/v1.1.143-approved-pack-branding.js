@@ -1,6 +1,6 @@
-/* v1.1.143 — pack/store branding must use the approved set identities, never generic substitutes. */
+/* v1.1.144 — pack/store branding uses approved set identities; restored Evolution asset is cache-busted. */
 (() => {
-  const V = '1.1.143';
+  const V = '1.1.144';
   const LOGOS = {
     'raw-series-1': `./assets/images/onboarding-raw-logo.svg?v=${V}`,
     'smackdown-series-1': `./assets/images/onboarding-smackdown-logo.svg?v=${V}`,
@@ -10,7 +10,6 @@
     'golden-era-series-1': `./assets/images/set-logos/golden-era-set-logo.png?v=${V}`,
     'new-generation-series-1': `./assets/images/branding-new-generation-series-1-new-generation-logo.png?v=${V}`,
     'attitude-era-series-1': `./assets/images/branding-attitude-era-series-1-wwf-scratch-logo-card.png?v=${V}`,
-    // This is the exact approved Card Studio source until its binary is mirrored into the repo.
     'ruthless-aggression-series-1': 'https://images.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/39850/1526513686-11744-2621/WWE_20Ruthless_20Aggression_20logo_large.png'
   };
 
