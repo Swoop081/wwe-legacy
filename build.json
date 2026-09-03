@@ -1,11 +1,11 @@
 {
-  "version": "1.1.175",
+  "version": "1.1.176",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.175",
+  "physicalIphoneSmoke": "pending-v1.1.176",
   "launchStatus": "released",
-  "name": "v1.1.175 — Live Event CTA Selector Fix"
+  "name": "v1.1.176 — Forced Live Event CTA Brand Colours"
 }
