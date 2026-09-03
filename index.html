@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/app-apple-touch-icon.png?v=1.1.132">
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/images/app-icon-192.png?v=1.1.138">
   <link rel="manifest" href="./manifest.webmanifest?v=1.1.132">
-  <link rel="preload" as="image" href="./assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.174" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.175" fetchpriority="high">
   <title>WWE Legacy: Collectible Card Game</title>
   <link rel="stylesheet" href="./css/game.css?v=1.1.132">
   <link rel="stylesheet" href="./css/v1.1.52-ui-polish.css?v=1.1.132-r1">
@@ -48,18 +48,18 @@
   <link rel="stylesheet" href="./css/v1.1.166-live-event-branding.css?v=1.1.169">
   <link rel="stylesheet" href="./css/v1.1.167-live-event-route-mobile.css?v=1.1.169">
   <link rel="stylesheet" href="./css/v1.1.170-live-event-matchup-tighten.css?v=1.1.170">
-  <link rel="stylesheet" href="./css/v1.1.171-mode-cta-colors.css?v=1.1.174">
+  <link rel="stylesheet" href="./css/v1.1.171-mode-cta-colors.css?v=1.1.175">
   <link rel="stylesheet" href="./css/v1.1.172-survivor-series-unlock.css?v=1.1.172">
   <script>
     (() => {
-      const currentBuild = "1.1.174";
+      const currentBuild = "1.1.175";
       window.__WWE_LEGACY_BOOT_VERSION__ = currentBuild;
       const parts = value => String(value ?? "").replace(/^v/i, "").split(".").slice(0,3).map(Number);
       const newer=(latest,current)=>{const a=parts(latest),b=parts(current);if(a.length!==3||b.length!==3||a.some(Number.isNaN)||b.some(Number.isNaN))return false;for(let i=0;i<3;i+=1){if(a[i]!==b[i])return a[i]>b[i]}return false};
       const check=async()=>{try{const manifest=new URL("./build.json",location.href);manifest.searchParams.set("_",String(Date.now()));const response=await fetch(manifest.toString(),{cache:"no-store"});if(!response.ok)return;const latest=String((await response.json())?.version??"");if(!newer(latest,currentBuild)){try{sessionStorage.removeItem(`wwe-legacy-update-attempts:${latest}`)}catch{}return}const key=`wwe-legacy-update-attempts:${latest}`;let attempts=0;try{attempts=Number(sessionStorage.getItem(key)??0)}catch{}if(attempts>=3)return;try{sessionStorage.setItem(key,String(attempts+1))}catch{}const target=new URL(location.href);target.searchParams.set("build",latest);target.searchParams.set("_update",String(Date.now()));location.replace(target.toString())}catch{}};check();
     })();
   </script>
-  <script type="importmap">{"imports":{"/wwe-legacy/js/config/build.js?v=1.1.132":"/wwe-legacy/js/config/build.js?v=1.1.174","/wwe-legacy/js/data/seasons.js?v=1.1.132":"/wwe-legacy/js/data/seasons-v1.1.56.js?v=1.1.132","/wwe-legacy/js/data/collection.js?v=1.1.132":"/wwe-legacy/js/data/collection.js?v=1.1.132","/wwe-legacy/js/data/live-events.js?v=1.1.132":"/wwe-legacy/js/data/live-events-v1.1.166.js?v=1.1.169"}}</script>
+  <script type="importmap">{"imports":{"/wwe-legacy/js/config/build.js?v=1.1.132":"/wwe-legacy/js/config/build.js?v=1.1.175","/wwe-legacy/js/data/seasons.js?v=1.1.132":"/wwe-legacy/js/data/seasons-v1.1.56.js?v=1.1.132","/wwe-legacy/js/data/collection.js?v=1.1.132":"/wwe-legacy/js/data/collection.js?v=1.1.132","/wwe-legacy/js/data/live-events.js?v=1.1.132":"/wwe-legacy/js/data/live-events-v1.1.166.js?v=1.1.169"}}</script>
 </head>
 <body>
   <main>
@@ -68,7 +68,7 @@
       <button type="button" id="chrome-season" class="gamebar-season" aria-label="Open Season"><span><small class="gamebar-season-title"><span>SEASON</span><em>1</em></small><b data-chrome-tier>TIER 0</b></span><i class="gamebar-tier-track"><em data-chrome-tier-bar></em></i></button>
       <div class="gamebar-resources"><button type="button" id="chrome-packs" aria-label="Open Booster Packs"><small>PACKS</small><b data-chrome-packs>0</b></button><span class="gamebar-up"><small>UP</small><b data-chrome-up>0</b></span></div>
     </header>
-    <div id="game" aria-live="polite"><section class="splash-screen launch-poster-splash boot-launch-poster" aria-label="WWE Legacy Season 1 launch screen"><div class="launch-poster-frame"><img class="launch-poster-image" src="./assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.174" alt="WWE Legacy Season 1. Get Some Stratusfaction. Reach Tier 50 before September 30." fetchpriority="high" loading="eager" decoding="async"></div></section></div>
+    <div id="game" aria-live="polite"><section class="splash-screen launch-poster-splash boot-launch-poster" aria-label="WWE Legacy Season 1 launch screen"><div class="launch-poster-frame"><img class="launch-poster-image" src="./assets/images/season1-stratusfaction-launch-poster.jpg?v=1.1.175" alt="WWE Legacy Season 1. Get Some Stratusfaction. Reach Tier 50 before September 30." fetchpriority="high" loading="eager" decoding="async"></div></section></div>
     <nav class="mobile-game-nav compact-eight-nav" id="mobile-game-nav" aria-label="Primary navigation" hidden>
       <button type="button" data-mobile-nav="menu" aria-label="Home"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"/></svg></span><b>HOME</b></button>
       <button type="button" data-mobile-nav="play-menu" aria-label="Play"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5 19 12 6 19.5z"/></svg></span><b>PLAY</b></button>
