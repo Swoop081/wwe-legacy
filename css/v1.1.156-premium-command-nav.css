@@ -1,4 +1,4 @@
-/* v1.1.156 — premium command-deck bottom navigation overhaul. Keeps all routes/labels unchanged. */
+/* v1.1.156 — premium command-deck bottom navigation overhaul. v1.1.157 restores native horizontal swipe. Keeps all routes/labels unchanged. */
 .mobile-game-nav.compact-eight-nav{
   --nav-purple-1:#7a3bc2;
   --nav-purple-2:#5a2498;
@@ -17,8 +17,15 @@
     0 -14px 34px rgba(25,6,49,.6),
     inset 0 1px 0 rgba(255,255,255,.35),
     inset 0 8px 22px rgba(255,255,255,.04)!important;
-  overflow:visible!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-x!important;
+  overscroll-behavior-x:contain!important;
+  scroll-behavior:smooth!important;
+  scrollbar-width:none!important;
 }
+.mobile-game-nav.compact-eight-nav::-webkit-scrollbar{display:none!important}
 .mobile-game-nav.compact-eight-nav::before{
   content:"";
   position:absolute;
@@ -30,7 +37,9 @@
   mix-blend-mode:screen;
 }
 .mobile-game-nav.compact-eight-nav button{
-  min-width:0!important;
+  flex:0 0 calc((100vw - 40px)/5)!important;
+  width:calc((100vw - 40px)/5)!important;
+  min-width:68px!important;
   min-height:92px!important;
   padding:8px 5px 7px!important;
   border:1px solid rgba(255,255,255,.16)!important;
@@ -49,6 +58,7 @@
   gap:5px!important;
   isolation:isolate!important;
   transition:transform .14s ease,filter .14s ease,background .14s ease,box-shadow .14s ease!important;
+  touch-action:pan-x manipulation!important;
 }
 .mobile-game-nav.compact-eight-nav button+button::before{
   content:""!important;
@@ -89,6 +99,7 @@
     inset 0 -8px 14px rgba(12,3,29,.2),
     0 5px 14px rgba(16,2,34,.3)!important;
   transform:translateZ(0);
+  pointer-events:none!important;
 }
 .mobile-game-nav.compact-eight-nav .nav-icon::before{
   content:"";
@@ -117,6 +128,7 @@
   letter-spacing:.09em!important;
   text-shadow:0 2px 4px rgba(0,0,0,.55)!important;
   white-space:nowrap!important;
+  pointer-events:none!important;
 }
 .mobile-game-nav.compact-eight-nav button.active,
 .mobile-game-nav.compact-eight-nav button[aria-current="page"]{
@@ -143,16 +155,11 @@
     0 0 12px rgba(244,204,85,.18)!important;
 }
 .mobile-game-nav.compact-eight-nav button.active b,
-.mobile-game-nav.compact-eight-nav button[aria-current="page"] b{
-  color:#fff!important;
-}
-.mobile-game-nav.compact-eight-nav button:active{
-  transform:translateY(-1px) scale(.985)!important;
-  filter:brightness(.97)!important;
-}
+.mobile-game-nav.compact-eight-nav button[aria-current="page"] b{color:#fff!important}
+.mobile-game-nav.compact-eight-nav button:active{filter:brightness(.97)!important}
 @media (max-width:390px){
   .mobile-game-nav.compact-eight-nav{gap:4px!important;padding-left:5px!important;padding-right:5px!important}
-  .mobile-game-nav.compact-eight-nav button{padding-left:3px!important;padding-right:3px!important}
+  .mobile-game-nav.compact-eight-nav button{flex-basis:calc((100vw - 28px)/5)!important;width:calc((100vw - 28px)/5)!important;padding-left:3px!important;padding-right:3px!important}
   .mobile-game-nav.compact-eight-nav .nav-icon{width:44px!important;height:44px!important;flex-basis:44px!important}
   .mobile-game-nav.compact-eight-nav .nav-icon svg{width:27px!important;height:27px!important}
   .mobile-game-nav.compact-eight-nav button b{font-size:8px!important;letter-spacing:.075em!important}
