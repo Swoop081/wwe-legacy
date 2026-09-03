@@ -1,6 +1,4 @@
-// v1.1.188 — Card Studio sync for the Shotgun Dropkick split.
-// Card Studio data is generated separately from the live runtime, so mirror the
-// published gameplay correction here before the normal Studio controller boots.
+// v1.1.189 — Card Studio sync for Shotgun Dropkick split + Sol Ruca X-Factor rebalance.
 (() => {
   const NORMAL_ID = "shotgun-dropkick";
   const DIVING_ID = "diving-shot-gun-dropkick";
@@ -68,13 +66,47 @@
     });
   }
 
+  const solXFactor = STUDIO_CARDS.find(card => card?.id === "sol-ruca-avalanche-x-factor");
+  if (solXFactor) {
+    Object.assign(solXFactor, {
+      name: "X-Factor",
+      cost: 4,
+      damage: 7,
+      requirements: { agility: 1 },
+      moveType: "grapple",
+      method: "agility",
+      rulesText: "Sol Ruca-exclusive. Grounds opponent.",
+      groundOpponent: true,
+      groundedOnly: false,
+      standingOnly: false,
+      stun: 0,
+      selfDamage: 0,
+      effects: [],
+      counterState: "front-control"
+    });
+    delete solXFactor.tacticalType;
+    delete solXFactor.counterStates;
+  }
+
   globalThis.WWE_LEGACY_CARD_STUDIO_SHOTGUN_188 = Object.freeze({
     normal: Object.freeze({ id: NORMAL_ID, cost: 3, damage: 5, stun: 0, coupDiscount: 1 }),
     diving: Object.freeze({ id: DIVING_ID, cardCode: "MITB1-019A", cost: 5, damage: 8, stun: 1, coupDiscount: 3, method: "agility", requirement: 2 })
   });
 
+  globalThis.WWE_LEGACY_CARD_STUDIO_SOL_X_FACTOR_119 = Object.freeze({
+    id: "sol-ruca-avalanche-x-factor",
+    name: "X-Factor",
+    cost: 4,
+    damage: 7,
+    method: "agility",
+    requirement: 1,
+    groundOpponent: true,
+    stun: 0,
+    counterState: "front-control"
+  });
+
   const core = document.createElement("script");
-  core.src = "../js/tools/card-art-studio-core.js?v=1.1.188-card-studio-sync";
+  core.src = "../js/tools/card-art-studio-core.js?v=1.1.189-card-studio-sync";
   core.async = false;
   document.body.appendChild(core);
 })();
