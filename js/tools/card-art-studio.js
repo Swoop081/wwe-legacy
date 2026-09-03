@@ -1,4 +1,4 @@
-// v1.1.189 — Card Studio sync for Shotgun Dropkick split + Sol Ruca X-Factor rebalance.
+// v1.1.190 — Card Studio sync for Shotgun Dropkick, Sol Ruca X-Factor, and Rhea move rarity correction.
 (() => {
   const NORMAL_ID = "shotgun-dropkick";
   const DIVING_ID = "diving-shot-gun-dropkick";
@@ -88,6 +88,37 @@
     delete solXFactor.counterStates;
   }
 
+  const electricChairDrop = STUDIO_CARDS.find(card => card?.id === "rhea-ripley-electric-chair-facebuster");
+  if (electricChairDrop) {
+    Object.assign(electricChairDrop, {
+      name: "Electric Chair Drop",
+      superstarId: null,
+      specificSuperstarIds: [],
+      universalSuperstarCard: true,
+      rarity: 2,
+      boosterOnly: true,
+      trademark: false,
+      signature: false,
+      rulesText: "Shared. Grounds opponent."
+    });
+  }
+
+  const crucifixPowerbomb = STUDIO_CARDS.find(card => card?.id === "razor-s-edge");
+  if (crucifixPowerbomb) {
+    Object.assign(crucifixPowerbomb, {
+      name: "Rhea’s Crucifix Powerbomb",
+      superstarId: "rhea-ripley",
+      specificSuperstarIds: ["rhea-ripley"],
+      librarySuperstarIds: ["rhea-ripley"],
+      universalSuperstarCard: false,
+      rarity: 3,
+      boosterOnly: true,
+      trademark: true,
+      signature: false,
+      rulesText: "Rhea Ripley-exclusive Trademark. Grounds opponent."
+    });
+  }
+
   globalThis.WWE_LEGACY_CARD_STUDIO_SHOTGUN_188 = Object.freeze({
     normal: Object.freeze({ id: NORMAL_ID, cost: 3, damage: 5, stun: 0, coupDiscount: 1 }),
     diving: Object.freeze({ id: DIVING_ID, cardCode: "MITB1-019A", cost: 5, damage: 8, stun: 1, coupDiscount: 3, method: "agility", requirement: 2 })
@@ -105,8 +136,13 @@
     counterState: "front-control"
   });
 
+  globalThis.WWE_LEGACY_CARD_STUDIO_RHEA_SWAP_1190 = Object.freeze({
+    electricChairDrop: Object.freeze({ id: "rhea-ripley-electric-chair-facebuster", rarity: 2, shared: true, trademark: false }),
+    crucifixPowerbomb: Object.freeze({ id: "razor-s-edge", rarity: 3, superstarId: "rhea-ripley", trademark: true })
+  });
+
   const core = document.createElement("script");
-  core.src = "../js/tools/card-art-studio-core.js?v=1.1.189-card-studio-sync";
+  core.src = "../js/tools/card-art-studio-core.js?v=1.1.190-card-studio-sync";
   core.async = false;
   document.body.appendChild(core);
 })();
