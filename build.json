@@ -1,11 +1,11 @@
 {
-  "version": "1.1.187",
+  "version": "1.1.188",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.187",
+  "physicalIphoneSmoke": "pending-v1.1.188",
   "launchStatus": "released",
-  "name": "v1.1.187 — Restore Attitude Era Short-Arm Clothesline"
+  "name": "v1.1.188 — Diving Shot-Gun Dropkick Split"
 }
