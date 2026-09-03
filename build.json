@@ -1,11 +1,11 @@
 {
-  "version": "1.1.167",
+  "version": "1.1.168",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.167",
+  "physicalIphoneSmoke": "pending-v1.1.168",
   "launchStatus": "released",
-  "name": "v1.1.167 — Full-Width Live Event Match Route"
+  "name": "v1.1.168 — Live Event Route Alignment Hotfix"
 }
