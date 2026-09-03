@@ -45,3 +45,9 @@
 @media(max-width:390px){
   .legacy-gamebar .gamebar-brand .gamebar-app-icon{width:100%!important;height:100%!important}
 }
+
+/* v1.1.183 — visibly double the actual logo artwork without changing the header box. */
+.legacy-gamebar .gamebar-brand .gamebar-app-icon{
+  transform:scale(2)!important;
+  transform-origin:center center!important;
+}
