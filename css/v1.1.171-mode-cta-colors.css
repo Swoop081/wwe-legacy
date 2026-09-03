@@ -1,4 +1,4 @@
-/* v1.1.173 — mode CTA readability and Daily SmackDown/NXT button colour correction. */
+/* v1.1.174 — mode CTA readability and exact Daily SmackDown/NXT colour matching. */
 
 /* Mode play/enter CTAs use white type across Home, Play and Live Events. */
 .legacy-mode-banner .legacy-mode-copy > b,
@@ -15,25 +15,30 @@
 .home-hero button,
 .home-hero .start-match,
 .legacy-stage-cta,
-.legacy-stage-cta > b,
-.legacy-stage-cta > i {
+.legacy-stage-cta b,
+.legacy-stage-cta i {
   color:#fff!important;
 }
 
-/* Daily SmackDown: replace the inherited pink CTA fill with baby blue. */
+/* Daily SmackDown: CTA fill exactly matches the baby-blue title accent. */
 .live-tower-hub-card[data-live-brand="daily-smackdown"] .start-match,
 .live-tower-hub-card[data-live-brand="daily-smackdown"] button {
-  background:#72d8ff!important;
-  border-color:#9be5ff!important;
+  background:#82ddff!important;
+  border-color:#a8e8ff!important;
   color:#fff!important;
   text-shadow:0 1px 3px rgba(0,0,0,.32)!important;
 }
 
-/* Daily NXT: replace the inherited orange CTA fill with dark graphite/silver branding. */
+/* Daily NXT: title accent and CTA share the same dark graphite identity. */
+.live-tower-hub-card[data-live-brand="daily-nxt"] .live-event-split-title b,
+.live-tower-hub-card[data-live-brand="daily-nxt"] .live-tower-cadence {
+  color:#555b63!important;
+  text-shadow:none!important;
+}
 .live-tower-hub-card[data-live-brand="daily-nxt"] .start-match,
 .live-tower-hub-card[data-live-brand="daily-nxt"] button {
-  background:linear-gradient(180deg,#5f6670 0%,#3f454d 100%)!important;
-  border-color:#aeb4bc!important;
+  background:#555b63!important;
+  border-color:#747b84!important;
   color:#fff!important;
   text-shadow:0 1px 3px rgba(0,0,0,.42)!important;
 }
