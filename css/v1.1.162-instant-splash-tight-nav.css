@@ -1,0 +1,60 @@
+/* v1.1.162 — remove dead purple rail space and preserve native iPhone momentum scrolling. */
+
+/* The visible rail is only the command row plus the device safe area. */
+#mobile-game-nav.mobile-game-nav.compact-eight-nav:not([hidden]){
+  --premium-nav-height:auto!important;
+  min-height:0!important;
+  height:calc(76px + env(safe-area-inset-bottom))!important;
+  max-height:calc(76px + env(safe-area-inset-bottom))!important;
+  padding:3px 0 env(safe-area-inset-bottom)!important;
+  gap:0!important;
+  grid-auto-rows:auto!important;
+  align-items:flex-start!important;
+  box-sizing:border-box!important;
+}
+
+#mobile-game-nav.mobile-game-nav.compact-eight-nav > button{
+  height:70px!important;
+  min-height:70px!important;
+  max-height:70px!important;
+  margin:0!important;
+  padding:4px 3px 3px!important;
+  box-sizing:border-box!important;
+}
+
+/* Keep the premium icon treatment while trimming vertical bulk. */
+#mobile-game-nav.mobile-game-nav.compact-eight-nav .nav-icon{
+  width:36px!important;
+  height:36px!important;
+  flex:0 0 36px!important;
+}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav .nav-icon svg{
+  width:22px!important;
+  height:22px!important;
+}
+#mobile-game-nav.mobile-game-nav.compact-eight-nav button b{
+  margin-top:1px!important;
+  line-height:1!important;
+}
+
+/* The application hidden contract always wins, including the boot poster. */
+#mobile-game-nav[hidden],
+#mobile-game-nav[aria-hidden="true"],
+body:has(.launch-poster-splash) #mobile-game-nav,
+body:has(.splash-screen) #mobile-game-nav{
+  display:none!important;
+}
+
+@media (max-width:390px){
+  #mobile-game-nav.mobile-game-nav.compact-eight-nav:not([hidden]){
+    height:calc(73px + env(safe-area-inset-bottom))!important;
+    max-height:calc(73px + env(safe-area-inset-bottom))!important;
+    padding-top:2px!important;
+    padding-bottom:env(safe-area-inset-bottom)!important;
+  }
+  #mobile-game-nav.mobile-game-nav.compact-eight-nav > button{
+    height:68px!important;
+    min-height:68px!important;
+    max-height:68px!important;
+  }
+}
