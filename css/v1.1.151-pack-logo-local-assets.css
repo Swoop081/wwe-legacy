@@ -1,0 +1,69 @@
+/* v1.1.151 — force sealed booster wrappers to use the approved local transparent set logos. */
+
+.physical-booster-pack.pack-set-raw-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/raw-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-smackdown-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/smackdown-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-nxt-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/nxt-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-evolution-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/evolution-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-summerslam-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/summerslam-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-golden-era-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/golden-era-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-new-generation-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/new-generation-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-attitude-era-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/attitude-era-series-1-transparent.svg?v=1.1.151")}
+.physical-booster-pack.pack-set-ruthless-aggression-series-1{--pack-local-transparent-logo:url("../assets/images/pack-logos/ruthless-aggression-series-1-transparent.svg?v=1.1.151")}
+
+.physical-booster-pack:is(
+  .pack-set-raw-series-1,
+  .pack-set-smackdown-series-1,
+  .pack-set-nxt-series-1,
+  .pack-set-evolution-series-1,
+  .pack-set-summerslam-series-1,
+  .pack-set-golden-era-series-1,
+  .pack-set-new-generation-series-1,
+  .pack-set-attitude-era-series-1,
+  .pack-set-ruthless-aggression-series-1
+) .pack-brand-lockup{
+  position:relative!important;
+  display:block!important;
+  width:min(68%,270px)!important;
+  height:112px!important;
+  margin:0 auto 14px!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+.physical-booster-pack:is(
+  .pack-set-raw-series-1,
+  .pack-set-smackdown-series-1,
+  .pack-set-nxt-series-1,
+  .pack-set-evolution-series-1,
+  .pack-set-summerslam-series-1,
+  .pack-set-golden-era-series-1,
+  .pack-set-new-generation-series-1,
+  .pack-set-attitude-era-series-1,
+  .pack-set-ruthless-aggression-series-1
+) .pack-brand-lockup > *{
+  display:none!important;
+}
+
+.physical-booster-pack:is(
+  .pack-set-raw-series-1,
+  .pack-set-smackdown-series-1,
+  .pack-set-nxt-series-1,
+  .pack-set-evolution-series-1,
+  .pack-set-summerslam-series-1,
+  .pack-set-golden-era-series-1,
+  .pack-set-new-generation-series-1,
+  .pack-set-attitude-era-series-1,
+  .pack-set-ruthless-aggression-series-1
+) .pack-brand-lockup::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  display:block;
+  background-image:var(--pack-local-transparent-logo)!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:none;
+}
