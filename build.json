@@ -1,11 +1,11 @@
 {
-  "version": "1.1.174",
+  "version": "1.1.175",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.174",
+  "physicalIphoneSmoke": "pending-v1.1.175",
   "launchStatus": "released",
-  "name": "v1.1.174 — SmackDown + NXT Live Event Colour Match"
+  "name": "v1.1.175 — Live Event CTA Selector Fix"
 }
