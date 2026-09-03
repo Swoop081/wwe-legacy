@@ -1,207 +1,55 @@
-/* v1.1.168 — corrected phone-width Live Event match route presentation across all rotating events. */
+/* v1.1.169 — simplified phone-width Live Event route: MATCH + number + Superstar card only. */
 @media (max-width:600px){
-  .live-tower-detail{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding-left:0!important;
-    padding-right:0!important;
-    overflow-x:hidden!important;
-  }
-
-  .live-tower-detail > .live-tower-back,
-  .live-tower-detail > .live-tower-detail-hero,
-  .live-tower-detail > .live-event-message-banner{
-    margin-left:12px!important;
-    margin-right:12px!important;
-  }
-
-  .live-tower-detail-body{
-    width:100vw!important;
-    max-width:100vw!important;
-    margin-left:calc(50% - 50vw)!important;
-    margin-right:calc(50% - 50vw)!important;
-    padding-left:0!important;
-    padding-right:0!important;
-  }
-
-  .live-tower-route{
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:14px 8px 18px!important;
-    border-left:0!important;
-    border-right:0!important;
-    border-radius:0!important;
-    box-sizing:border-box!important;
-  }
-
+  .live-tower-detail{width:100%!important;max-width:none!important;margin:0!important;padding-left:0!important;padding-right:0!important;overflow-x:hidden!important}
+  .live-tower-detail > .live-tower-back,.live-tower-detail > .live-tower-detail-hero,.live-tower-detail > .live-event-message-banner{margin-left:12px!important;margin-right:12px!important}
+  .live-tower-detail-body{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;padding:0!important}
+  .live-tower-route{width:100%!important;max-width:none!important;margin:0!important;padding:14px 8px 18px!important;border-left:0!important;border-right:0!important;border-radius:0!important;box-sizing:border-box!important}
   .live-tower-section-head{margin:0 4px 10px!important}
-
-  .live-tower-route-strip{
-    display:flex!important;
-    flex-direction:column!important;
-    gap:10px!important;
-    width:100%!important;
-    max-width:none!important;
-    overflow:visible!important;
-    padding:0!important;
-  }
+  .live-tower-route-strip{display:flex!important;flex-direction:column!important;gap:10px!important;width:100%!important;max-width:none!important;overflow:visible!important;padding:0!important}
 
   .live-tower-route-card{
-    position:relative!important;
-    display:grid!important;
-    grid-template-columns:minmax(0,44%) minmax(0,56%)!important;
-    grid-template-rows:1fr!important;
-    column-gap:0!important;
-    align-items:center!important;
-    width:100%!important;
-    min-width:0!important;
-    max-width:none!important;
-    min-height:286px!important;
-    margin:0!important;
-    padding:10px 0 10px 18px!important;
-    box-sizing:border-box!important;
-    border-radius:18px!important;
-    overflow:hidden!important;
+    position:relative!important;display:grid!important;
+    grid-template-columns:minmax(0,42%) minmax(0,58%)!important;grid-template-rows:1fr!important;
+    align-items:center!important;width:100%!important;min-width:0!important;max-width:none!important;
+    min-height:286px!important;margin:0!important;padding:10px 18px!important;box-sizing:border-box!important;
+    border-radius:18px!important;overflow:hidden!important;
   }
 
   .live-tower-route-card .live-tower-route-head{
-    grid-column:1!important;
-    grid-row:1!important;
-    align-self:center!important;
-    display:flex!important;
-    flex-direction:column!important;
-    align-items:flex-start!important;
-    justify-content:center!important;
-    width:100%!important;
-    min-width:0!important;
-    gap:7px!important;
-    padding:0!important;
-    margin:0!important;
-    transform:translateX(18px)!important;
-    position:relative!important;
-    z-index:2!important;
+    grid-column:1!important;grid-row:1!important;align-self:center!important;justify-self:start!important;
+    display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+    width:150px!important;max-width:100%!important;min-width:0!important;gap:0!important;padding:0!important;margin:0!important;
+    transform:none!important;position:relative!important;z-index:2!important;text-align:center!important;
   }
-
+  .live-tower-route-card .live-tower-route-head > em{display:none!important;visibility:hidden!important;width:0!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
   .live-tower-route-card .live-tower-route-head > span{
-    display:block!important;
-    width:auto!important;
-    height:auto!important;
-    min-width:0!important;
-    border:0!important;
-    border-radius:0!important;
-    background:none!important;
-    box-shadow:none!important;
-    font-size:clamp(76px,23vw,108px)!important;
-    line-height:.72!important;
-    font-weight:950!important;
-    letter-spacing:-.075em!important;
-    color:#fff!important;
-    text-align:left!important;
+    display:block!important;width:100%!important;height:auto!important;min-width:0!important;border:0!important;border-radius:0!important;
+    background:none!important;box-shadow:none!important;font-size:clamp(76px,23vw,108px)!important;line-height:.72!important;
+    font-weight:950!important;letter-spacing:-.06em!important;color:#fff!important;text-align:center!important;
   }
-
   .live-tower-route-card .live-tower-route-head > span::before{
-    content:"MATCH";
-    display:block!important;
-    margin:0 0 7px 3px!important;
-    font-size:clamp(19px,5.8vw,27px)!important;
-    line-height:.8!important;
-    letter-spacing:.045em!important;
-    font-weight:950!important;
-    color:var(--tower-accent,#ff4b62)!important;
-  }
-
-  .live-tower-route-card .live-tower-route-head > em{
-    order:-1!important;
-    display:block!important;
-    margin:0 0 6px 3px!important;
-    font-size:11px!important;
-    line-height:1!important;
-    letter-spacing:.18em!important;
-    font-weight:900!important;
-    color:var(--tower-accent,#ff4b62)!important;
+    content:"MATCH";display:block!important;width:100%!important;margin:0 0 10px!important;
+    font-size:clamp(19px,5.8vw,27px)!important;line-height:.8!important;letter-spacing:.045em!important;
+    font-weight:950!important;color:var(--tower-accent,#ff4b62)!important;text-align:center!important;
   }
 
   .live-tower-route-card .live-tower-route-superstar{
-    grid-column:2!important;
-    grid-row:1!important;
-    align-self:center!important;
-    justify-self:stretch!important;
-    display:flex!important;
-    align-items:center!important;
-    justify-content:flex-end!important;
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:0!important;
-    transform:translateX(12px)!important;
-    position:relative!important;
-    z-index:1!important;
+    grid-column:2!important;grid-row:1!important;align-self:center!important;justify-self:stretch!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;width:100%!important;max-width:none!important;
+    margin:0!important;padding:0!important;transform:none!important;position:relative!important;z-index:1!important;
   }
+  .live-tower-route-card .live-tower-route-card-frame{display:block!important;width:min(190px,100%)!important;max-width:190px!important;margin:0!important}
+  .live-tower-route-card .live-tower-opponent-card{width:100%!important;max-width:none!important;height:auto!important}
 
-  .live-tower-route-card .live-tower-route-card-frame{
-    display:block!important;
-    width:min(190px,100%)!important;
-    max-width:190px!important;
-    margin:0!important;
-  }
-
-  .live-tower-route-card .live-tower-opponent-card{
-    width:100%!important;
-    max-width:none!important;
-    height:auto!important;
-  }
-
-  /* The Superstar name is already printed on the Superstar card. Keep only the stage label. */
+  /* No duplicate status, selection prompt, wrestler name or bout label on the route card. */
   .live-tower-route .live-tower-route-card .live-tower-route-copy,
-  .live-tower-route-card > .live-tower-route-copy{
-    position:absolute!important;
-    left:36px!important;
-    bottom:26px!important;
-    width:34%!important;
-    margin:0!important;
-    padding:0!important;
-    text-align:left!important;
-    z-index:3!important;
-  }
+  .live-tower-route-card > .live-tower-route-copy{display:none!important;visibility:hidden!important;width:0!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
 
-  .live-tower-route .live-tower-route-card .live-tower-route-copy > strong,
-  .live-tower-route-card > .live-tower-route-copy > strong,
-  .live-tower-route-card .live-tower-route-copy strong{
-    display:none!important;
-    visibility:hidden!important;
-    width:0!important;
-    height:0!important;
-    margin:0!important;
-    padding:0!important;
-    overflow:hidden!important;
-  }
-
-  .live-tower-route-card .live-tower-route-copy > small{
-    display:block!important;
-    margin:0!important;
-    font-size:12px!important;
-    line-height:1.05!important;
-    letter-spacing:.04em!important;
-    text-transform:uppercase!important;
-    opacity:.7!important;
-  }
-
-  .live-tower-route-card.current,
-  .live-tower-route-card.is-current-selectable{
-    box-shadow:inset 0 0 0 2px var(--tower-accent,#ff4b62),0 0 18px color-mix(in srgb,var(--tower-accent,#ff4b62) 32%,transparent)!important;
-  }
+  .live-tower-route-card.current,.live-tower-route-card.is-current-selectable{box-shadow:inset 0 0 0 2px var(--tower-accent,#ff4b62),0 0 18px color-mix(in srgb,var(--tower-accent,#ff4b62) 32%,transparent)!important}
 }
 
 @media (max-width:380px){
-  .live-tower-route-card{
-    grid-template-columns:minmax(0,43%) minmax(0,57%)!important;
-    min-height:264px!important;
-    padding-left:14px!important;
-  }
-  .live-tower-route-card .live-tower-route-head{transform:translateX(15px)!important}
+  .live-tower-route-card{grid-template-columns:minmax(0,42%) minmax(0,58%)!important;min-height:264px!important;padding:10px 14px!important}
+  .live-tower-route-card .live-tower-route-head{width:136px!important}
   .live-tower-route-card .live-tower-route-head > span{font-size:clamp(70px,22vw,92px)!important}
-  .live-tower-route-card .live-tower-route-superstar{transform:translateX(10px)!important}
-  .live-tower-route .live-tower-route-card .live-tower-route-copy{left:31px!important;bottom:22px!important}
 }
