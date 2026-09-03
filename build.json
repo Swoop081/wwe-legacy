@@ -1,11 +1,11 @@
 {
-  "version": "1.1.166",
+  "version": "1.1.167",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.166",
+  "physicalIphoneSmoke": "pending-v1.1.167",
   "launchStatus": "released",
-  "name": "v1.1.166 — Live Events Rotation"
+  "name": "v1.1.167 — Full-Width Live Event Match Route"
 }
