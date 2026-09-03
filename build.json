@@ -1,11 +1,11 @@
 {
-  "version": "1.1.180",
+  "version": "1.1.181",
   "releasedAt": "2026-09-03",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.180",
+  "physicalIphoneSmoke": "pending-v1.1.181",
   "launchStatus": "released",
-  "name": "v1.1.180 — Championship Road Card Selector"
+  "name": "v1.1.181 — Championship Road Native Card Rail"
 }
