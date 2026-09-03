@@ -36,20 +36,21 @@
   <link rel="stylesheet" href="./css/v1.1.135-onboarding-stability.css?v=1.1.141">
   <link rel="stylesheet" href="./css/v1.1.143-approved-pack-branding-uniform-summary.css?v=1.1.148">
   <link rel="stylesheet" href="./css/v1.1.144-pack-grid-hard-reset.css?v=1.1.150">
-  <link rel="stylesheet" href="./css/v1.1.151-pack-logo-local-assets.css?v=1.1.155">
-  <link rel="stylesheet" href="./css/v1.1.154-roster-order-purple-nav.css?v=1.1.155">
-  <link rel="stylesheet" href="./css/v1.1.155-pack-logo-card-copy-premium-nav.css?v=1.1.155">
-  <link rel="stylesheet" href="./css/v1.1.156-premium-command-nav.css?v=1.1.156">
+  <link rel="stylesheet" href="./css/v1.1.151-pack-logo-local-assets.css?v=1.1.158">
+  <link rel="stylesheet" href="./css/v1.1.154-roster-order-purple-nav.css?v=1.1.158">
+  <link rel="stylesheet" href="./css/v1.1.155-pack-logo-card-copy-premium-nav.css?v=1.1.158">
+  <link rel="stylesheet" href="./css/v1.1.156-premium-command-nav.css?v=1.1.158">
+  <link rel="stylesheet" href="./css/v1.1.158-nav-swipe-hardfix.css?v=1.1.158">
   <script>
     (() => {
-      const currentBuild = "1.1.156";
+      const currentBuild = "1.1.158";
       window.__WWE_LEGACY_BOOT_VERSION__ = currentBuild;
       const parts = value => String(value ?? "").replace(/^v/i, "").split(".").slice(0,3).map(Number);
       const newer=(latest,current)=>{const a=parts(latest),b=parts(current);if(a.length!==3||b.length!==3||a.some(Number.isNaN)||b.some(Number.isNaN))return false;for(let i=0;i<3;i+=1){if(a[i]!==b[i])return a[i]>b[i]}return false};
       const check=async()=>{try{const manifest=new URL("./build.json",location.href);manifest.searchParams.set("_",String(Date.now()));const response=await fetch(manifest.toString(),{cache:"no-store"});if(!response.ok)return;const latest=String((await response.json())?.version??"");if(!newer(latest,currentBuild)){try{sessionStorage.removeItem(`wwe-legacy-update-attempts:${latest}`)}catch{}return}const key=`wwe-legacy-update-attempts:${latest}`;let attempts=0;try{attempts=Number(sessionStorage.getItem(key)??0)}catch{}if(attempts>=3)return;try{sessionStorage.setItem(key,String(attempts+1))}catch{}const target=new URL(location.href);target.searchParams.set("build",latest);target.searchParams.set("_update",String(Date.now()));location.replace(target.toString())}catch{}};check();
     })();
   </script>
-  <script type="importmap">{"imports":{"/wwe-legacy/js/config/build.js?v=1.1.132":"/wwe-legacy/js/config/build.js?v=1.1.156","/wwe-legacy/js/data/seasons.js?v=1.1.132":"/wwe-legacy/js/data/seasons-v1.1.56.js?v=1.1.132","/wwe-legacy/js/data/collection.js?v=1.1.132":"/wwe-legacy/js/data/collection.js?v=1.1.132"}}</script>
+  <script type="importmap">{"imports":{"/wwe-legacy/js/config/build.js?v=1.1.132":"/wwe-legacy/js/config/build.js?v=1.1.158","/wwe-legacy/js/data/seasons.js?v=1.1.132":"/wwe-legacy/js/data/seasons-v1.1.56.js?v=1.1.132","/wwe-legacy/js/data/collection.js?v=1.1.132":"/wwe-legacy/js/data/collection.js?v=1.1.132"}}</script>
 </head>
 <body>
   <main>
@@ -80,15 +81,16 @@
   <script type="module" src="./js/shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.132"></script>
   <script src="./js/shared/v1.1.136-onboarding-local-assets.js?v=1.1.141"></script>
   <script src="./js/shared/v1.1.143-approved-pack-branding.js?v=1.1.148"></script>
-  <script type="module" src="./js/shared/v1.1.151-placeholder-card-cleanup.js?v=1.1.155"></script>
-  <script type="module" src="./js/shared/v1.1.155-card-copy-pack-logo-nav.js?v=1.1.155"></script>
-  <script type="module" src="./js/ui/app.js?v=1.1.155"></script>
-  <script type="module" src="./js/shared/v1.1.154-roster-order.js?v=1.1.155"></script>
+  <script type="module" src="./js/shared/v1.1.151-placeholder-card-cleanup.js?v=1.1.158"></script>
+  <script type="module" src="./js/shared/v1.1.155-card-copy-pack-logo-nav.js?v=1.1.158"></script>
+  <script type="module" src="./js/ui/app.js?v=1.1.158"></script>
+  <script type="module" src="./js/shared/v1.1.154-roster-order.js?v=1.1.158"></script>
+  <script src="./js/shared/v1.1.158-nav-drag-scroll.js?v=1.1.158"></script>
   <script src="./js/shared/v1.1.56-consolidated-fixes.js?v=1.1.132-r1"></script>
   <script src="./js/shared/v1.1.61-home-stat-links.js?v=1.1.132-r1"></script>
   <script src="./js/shared/v1.1.62-home-cena-legacy.js?v=1.1.132-r1"></script>
   <script src="./js/shared/v1.1.63-play-path-portraits.js?v=1.1.132-r2"></script>
   <script src="./js/shared/v1.1.104-pack-reward-hotfix.js?v=1.1.133"></script>
-  <script src="./js/shared/v1.1.148-pack-summary-runtime-layout.js?v=1.1.155"></script>
+  <script src="./js/shared/v1.1.148-pack-summary-runtime-layout.js?v=1.1.158"></script>
 </body>
 </html>
