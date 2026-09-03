@@ -1,4 +1,4 @@
-// v1.1.193 — Card Studio sync for Shotgun Dropkick, Sol Ruca X-Factor, Rhea identity and Splash-card disambiguation.
+// v1.1.194 — Card Studio sync for Shotgun Dropkick, Sol Ruca X-Factor, Rhea identity, Splash identities and exclusive move naming.
 (() => {
   const NORMAL_ID = "shotgun-dropkick";
   const DIVING_ID = "diving-shot-gun-dropkick";
@@ -203,6 +203,46 @@
     });
   }
 
+  const renames = new Map([
+    ["lexis-king-superkick", "Lexis King’s Superkick"],
+    ["jacob-fatu-moonsault", "Jacob Fatu’s Moonsault"],
+    ["jaida-parker-samoan-drop", "Jaida Parker’s Samoan Drop"],
+    ["jaida-parker-running-hip-attack", "Jaida Parker’s Running Hip Attack"],
+    ["jimmy-uso-running-hip-attack", "Jimmy Uso’s Running Hip Attack"],
+    ["jimmy-uso-spear", "Jimmy Uso’s Spear"],
+    ["jimmy-uso-superkick", "Jimmy Uso’s Superkick"],
+    ["jacob-fatu-pop-up-samoan-drop", "Jacob Fatu’s Pop-Up Samoan Drop"],
+    ["zilla-fatu-pop-up-samoan-drop", "Zilla Fatu’s Pop-Up Samoan Drop"]
+  ]);
+  const refsByStar = {
+    "jacob-fatu": new Map([["Moonsault", "Jacob Fatu’s Moonsault"], ["Pop-Up Samoan Drop", "Jacob Fatu’s Pop-Up Samoan Drop"]]),
+    "jaida-parker": new Map([["Samoan Drop", "Jaida Parker’s Samoan Drop"], ["Running Hip Attack", "Jaida Parker’s Running Hip Attack"]]),
+    "jimmy-uso": new Map([["Running Hip Attack", "Jimmy Uso’s Running Hip Attack"], ["Spear", "Jimmy Uso’s Spear"], ["Superkick", "Jimmy Uso’s Superkick"]]),
+    "zilla-fatu": new Map([["Pop-Up Samoan Drop", "Zilla Fatu’s Pop-Up Samoan Drop"]]),
+    "lexis-king": new Map([["Superkick", "Lexis King’s Superkick"]])
+  };
+  const replaceRefs = (value, replacements) => {
+    if (!value || !replacements) return;
+    if (Array.isArray(value)) { for (const item of value) replaceRefs(item, replacements); return; }
+    if (typeof value !== "object") return;
+    for (const [key, current] of Object.entries(value)) {
+      if (typeof current === "string") {
+        if (["name", "searchName", "searchOnConnectName", "standingChainAfter", "afterName"].includes(key) && replacements.has(current)) value[key] = replacements.get(current);
+      } else replaceRefs(current, replacements);
+    }
+  };
+  for (const card of STUDIO_CARDS) {
+    if (renames.has(card?.id)) card.name = renames.get(card.id);
+    const replacements = refsByStar[card?.superstarId];
+    if (replacements) {
+      replaceRefs(card, replacements);
+      if (typeof card.rulesText === "string") for (const [oldName, newName] of replacements) card.rulesText = card.rulesText.replaceAll(oldName, newName);
+    }
+  }
+
+  const duplicateRunningPowerslam = STUDIO_CARDS.findIndex(card => card?.id === "ra1-running-powerslam");
+  if (duplicateRunningPowerslam >= 0) STUDIO_CARDS.splice(duplicateRunningPowerslam, 1);
+
   globalThis.WWE_LEGACY_CARD_STUDIO_SHOTGUN_188 = Object.freeze({
     normal: Object.freeze({ id: NORMAL_ID, cost: 3, damage: 5, stun: 0, coupDiscount: 1 }),
     diving: Object.freeze({ id: DIVING_ID, cardCode: "MITB1-019A", cost: 5, damage: 8, stun: 1, coupDiscount: 3, method: "agility", requirement: 2 })
@@ -233,8 +273,14 @@
     jimmy: "Jimmy Uso Splash"
   });
 
+  globalThis.WWE_LEGACY_CARD_STUDIO_EXCLUSIVE_NAMES_1194 = Object.freeze({
+    renamed: Object.freeze(Object.fromEntries(renames)),
+    canonicalRunningPowerslam: "running-powerslam",
+    removedRunningPowerslamAlias: "ra1-running-powerslam"
+  });
+
   const core = document.createElement("script");
-  core.src = "../js/tools/card-art-studio-core.js?v=1.1.193-card-studio-sync";
+  core.src = "../js/tools/card-art-studio-core.js?v=1.1.194-card-studio-sync";
   core.async = false;
   document.body.appendChild(core);
 })();
