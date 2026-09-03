@@ -1,4 +1,4 @@
-/* v1.1.167 — phone-width Live Event match route presentation across all rotating events. */
+/* v1.1.168 — corrected phone-width Live Event match route presentation across all rotating events. */
 @media (max-width:600px){
   .live-tower-detail{
     width:100%!important;
@@ -36,9 +36,7 @@
     box-sizing:border-box!important;
   }
 
-  .live-tower-section-head{
-    margin:0 4px 10px!important;
-  }
+  .live-tower-section-head{margin:0 4px 10px!important}
 
   .live-tower-route-strip{
     display:flex!important;
@@ -53,16 +51,16 @@
   .live-tower-route-card{
     position:relative!important;
     display:grid!important;
-    grid-template-columns:minmax(0,1fr) minmax(164px,48%)!important;
-    grid-template-rows:1fr auto!important;
-    column-gap:8px!important;
+    grid-template-columns:minmax(0,44%) minmax(0,56%)!important;
+    grid-template-rows:1fr!important;
+    column-gap:0!important;
     align-items:center!important;
     width:100%!important;
     min-width:0!important;
     max-width:none!important;
     min-height:286px!important;
     margin:0!important;
-    padding:10px 8px 10px 16px!important;
+    padding:10px 0 10px 18px!important;
     box-sizing:border-box!important;
     border-radius:18px!important;
     overflow:hidden!important;
@@ -81,6 +79,9 @@
     gap:7px!important;
     padding:0!important;
     margin:0!important;
+    transform:translateX(18px)!important;
+    position:relative!important;
+    z-index:2!important;
   }
 
   .live-tower-route-card .live-tower-route-head > span{
@@ -124,19 +125,25 @@
 
   .live-tower-route-card .live-tower-route-superstar{
     grid-column:2!important;
-    grid-row:1 / span 2!important;
+    grid-row:1!important;
     align-self:center!important;
-    justify-self:end!important;
+    justify-self:stretch!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
     width:100%!important;
-    max-width:190px!important;
+    max-width:none!important;
     margin:0!important;
     padding:0!important;
+    transform:translateX(12px)!important;
+    position:relative!important;
+    z-index:1!important;
   }
 
   .live-tower-route-card .live-tower-route-card-frame{
     display:block!important;
-    width:100%!important;
-    max-width:none!important;
+    width:min(190px,100%)!important;
+    max-width:190px!important;
     margin:0!important;
   }
 
@@ -146,18 +153,29 @@
     height:auto!important;
   }
 
-  .live-tower-route-card .live-tower-route-copy{
-    grid-column:1!important;
-    grid-row:2!important;
-    align-self:end!important;
-    min-width:0!important;
-    margin:0 0 2px 3px!important;
+  /* The Superstar name is already printed on the Superstar card. Keep only the stage label. */
+  .live-tower-route .live-tower-route-card .live-tower-route-copy,
+  .live-tower-route-card > .live-tower-route-copy{
+    position:absolute!important;
+    left:36px!important;
+    bottom:26px!important;
+    width:34%!important;
+    margin:0!important;
     padding:0!important;
     text-align:left!important;
+    z-index:3!important;
   }
 
-  .live-tower-route-card .live-tower-route-copy > strong{
+  .live-tower-route .live-tower-route-card .live-tower-route-copy > strong,
+  .live-tower-route-card > .live-tower-route-copy > strong,
+  .live-tower-route-card .live-tower-route-copy strong{
     display:none!important;
+    visibility:hidden!important;
+    width:0!important;
+    height:0!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
   }
 
   .live-tower-route-card .live-tower-route-copy > small{
@@ -178,11 +196,12 @@
 
 @media (max-width:380px){
   .live-tower-route-card{
-    grid-template-columns:minmax(0,1fr) minmax(150px,47%)!important;
+    grid-template-columns:minmax(0,43%) minmax(0,57%)!important;
     min-height:264px!important;
-    padding-left:13px!important;
+    padding-left:14px!important;
   }
-  .live-tower-route-card .live-tower-route-head > span{
-    font-size:clamp(70px,22vw,92px)!important;
-  }
+  .live-tower-route-card .live-tower-route-head{transform:translateX(15px)!important}
+  .live-tower-route-card .live-tower-route-head > span{font-size:clamp(70px,22vw,92px)!important}
+  .live-tower-route-card .live-tower-route-superstar{transform:translateX(10px)!important}
+  .live-tower-route .live-tower-route-card .live-tower-route-copy{left:31px!important;bottom:22px!important}
 }
