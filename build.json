@@ -1,11 +1,11 @@
 {
-  "version": "1.1.188",
-  "releasedAt": "2026-09-03",
+  "version": "1.1.190",
+  "releasedAt": "2026-09-04",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.188",
+  "physicalIphoneSmoke": "pending-v1.1.190",
   "launchStatus": "released",
-  "name": "v1.1.188 — Diving Shot-Gun Dropkick Split"
+  "name": "v1.1.190 — Rhea Move Identity + Update State Repair"
 }
