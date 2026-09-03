@@ -1,4 +1,4 @@
-// v1.1.190 — Rhea Ripley Electric Chair Drop / Crucifix Powerbomb identity correction.
+// v1.1.192 — Rhea Ripley Electric Chair Drop / Crucifix Powerbomb identity correction.
 import { allGameplayCards } from "../data/content.js?v=1.1.132";
 import { collectionCards, collectionCardsBySet, setCollections } from "../data/collection.js?v=1.1.132";
 
@@ -14,10 +14,15 @@ function patchCard(card) {
       superstarId: null,
       rarity: 2,
       boosterOnly: true,
-      trademark: false,
-      signature: false,
       rulesText: "Shared. Grounds opponent."
     });
+    // Shared Moves must not carry Superstar-signature metadata at all. Some
+    // presentation/classification paths key off field presence rather than the
+    // boolean value, which made Electric Chair Drop appear as a Trademark for
+    // every Superstar when trademark/signature were explicitly set to false.
+    delete card.superstarId;
+    delete card.trademark;
+    delete card.signature;
   }
   if (card.id === CRUCIFIX_ID) {
     Object.assign(card, {
