@@ -21,13 +21,17 @@
 .champ-select-back{width:100%;margin-top:0;min-height:52px;border-radius:12px;border:1px solid rgba(85,220,255,.5);background:linear-gradient(110deg,rgba(8,93,118,.72),rgba(8,48,66,.78));color:#fff;font-weight:900;letter-spacing:.12em}
 @media(min-width:700px){.champ-select-card{flex-basis:210px;width:210px}.champ-select-grid{justify-content:flex-start}}
 
-/* v1.1.182 — Top-left Legacy header logo: transparent, zero padding, maximum fit. */
+/* v1.1.184 — hard crop/zoom the visible Legacy artwork; header geometry stays unchanged. */
 .legacy-gamebar .gamebar-brand{
+  position:relative!important;
   padding:0!important;
   background:transparent!important;
   overflow:hidden!important;
 }
 .legacy-gamebar .gamebar-brand .gamebar-app-icon{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
   width:100%!important;
   height:100%!important;
   max-width:none!important;
@@ -37,17 +41,6 @@
   margin:0!important;
   padding:0!important;
   background:transparent!important;
-}
-@media(max-width:600px){
-  .legacy-gamebar .gamebar-brand{padding:0!important}
-  .legacy-gamebar .gamebar-brand .gamebar-app-icon{width:100%!important;height:100%!important}
-}
-@media(max-width:390px){
-  .legacy-gamebar .gamebar-brand .gamebar-app-icon{width:100%!important;height:100%!important}
-}
-
-/* v1.1.183 — visibly double the actual logo artwork without changing the header box. */
-.legacy-gamebar .gamebar-brand .gamebar-app-icon{
-  transform:scale(2)!important;
+  transform:translate(-50%,-50%) scale(2.5)!important;
   transform-origin:center center!important;
 }
