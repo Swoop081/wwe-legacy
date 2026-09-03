@@ -1,4 +1,4 @@
-// v1.1.190 — Card Studio sync for Shotgun Dropkick, Sol Ruca X-Factor, and Rhea move rarity correction.
+// v1.1.193 — Card Studio sync for Shotgun Dropkick, Sol Ruca X-Factor, Rhea identity and Splash-card disambiguation.
 (() => {
   const NORMAL_ID = "shotgun-dropkick";
   const DIVING_ID = "diving-shot-gun-dropkick";
@@ -97,10 +97,10 @@
       universalSuperstarCard: true,
       rarity: 2,
       boosterOnly: true,
-      trademark: false,
-      signature: false,
       rulesText: "Shared. Grounds opponent."
     });
+    delete electricChairDrop.trademark;
+    delete electricChairDrop.signature;
   }
 
   const crucifixPowerbomb = STUDIO_CARDS.find(card => card?.id === "razor-s-edge");
@@ -116,6 +116,90 @@
       trademark: true,
       signature: false,
       rulesText: "Rhea Ripley-exclusive Trademark. Grounds opponent."
+    });
+  }
+
+  const kelani450 = STUDIO_CARDS.find(card => card?.id === "kelani-jordan-450-splash");
+  if (kelani450) {
+    Object.assign(kelani450, {
+      name: "Kelani’s 450 Splash",
+      superstarId: "kelani-jordan",
+      specificSuperstarIds: ["kelani-jordan"],
+      librarySuperstarIds: ["kelani-jordan"],
+      universalSuperstarCard: false,
+      trademark: true,
+      rulesText: "Kelani Jordan-exclusive Trademark. 450 Splash. Grounded opponent only. On Connect: +1 persistent Leg damage."
+    });
+  }
+
+  const sharedFrog = STUDIO_CARDS.find(card => card?.id === "frog-splash");
+  if (sharedFrog) {
+    Object.assign(sharedFrog, {
+      name: "Frog Splash",
+      superstarId: null,
+      specificSuperstarIds: [],
+      librarySuperstarIds: [],
+      universalSuperstarCard: true,
+      rulesText: "Shared. Grounded opponent only. Stun 1.",
+      effects: []
+    });
+    delete sharedFrog.allowedSuperstarIds;
+    delete sharedFrog.trademark;
+    delete sharedFrog.signature;
+    delete sharedFrog.finisher;
+  }
+
+  const eddieFrog = STUDIO_CARDS.find(card => card?.id === "eddie-guerrero-frog-splash");
+  if (eddieFrog) {
+    Object.assign(eddieFrog, {
+      name: "Eddie’s Frog Splash",
+      superstarId: "eddie-guerrero",
+      specificSuperstarIds: ["eddie-guerrero"],
+      librarySuperstarIds: ["eddie-guerrero"],
+      universalSuperstarCard: false,
+      finisher: true,
+      rulesText: "Eddie Guerrero-exclusive Finisher. Frog Splash. No Method requirement. Grounded opponent only. On Connect: opponent loses 1 additional Adrenaline."
+    });
+  }
+
+  const eddieLasso = STUDIO_CARDS.find(card => card?.id === "eddie-guerrero-lasso-from-el-paso");
+  if (eddieLasso) {
+    Object.assign(eddieLasso, {
+      rulesText: "Eddie Guerrero-exclusive Trademark Submission. Lasso from El Paso. Grounded opponent only. +5 persistent Leg damage per successful turn. On Connect: search/draw Eddie’s Frog Splash; it costs 1 less this Control sequence.",
+      searchOnConnectName: "Eddie’s Frog Splash"
+    });
+  }
+
+  const jeySplash = STUDIO_CARDS.find(card => card?.id === "uso-splash");
+  if (jeySplash) {
+    Object.assign(jeySplash, {
+      name: "Jey Uso Splash",
+      superstarId: "jey-uso",
+      specificSuperstarIds: ["jey-uso"],
+      librarySuperstarIds: ["jey-uso"],
+      universalSuperstarCard: false,
+      finisher: true,
+      rulesText: "Jey Uso-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after Spear in the same Control sequence, +1 Damage."
+    });
+    delete jeySplash.allowedSuperstarIds;
+  }
+
+  const jeyAction = STUDIO_CARDS.find(card => card?.id === "special-jey-uso");
+  if (jeyAction) {
+    jeyAction.rulesText = "Once per match, after Jey connects with Spear, search/draw Jey Uso Splash. That searched Jey Uso Splash costs 3 less during the current Control sequence.";
+    if (jeyAction.special && typeof jeyAction.special === "object") jeyAction.special.searchName = "Jey Uso Splash";
+  }
+
+  const jimmySplash = STUDIO_CARDS.find(card => card?.id === "jimmy-uso-uso-splash");
+  if (jimmySplash) {
+    Object.assign(jimmySplash, {
+      name: "Jimmy Uso Splash",
+      superstarId: "jimmy-uso",
+      specificSuperstarIds: ["jimmy-uso"],
+      librarySuperstarIds: ["jimmy-uso"],
+      universalSuperstarCard: false,
+      finisher: true,
+      rulesText: "Jimmy Uso-exclusive Finisher. No Method requirement. Grounded opponent only."
     });
   }
 
@@ -141,8 +225,16 @@
     crucifixPowerbomb: Object.freeze({ id: "razor-s-edge", rarity: 3, superstarId: "rhea-ripley", trademark: true })
   });
 
+  globalThis.WWE_LEGACY_CARD_STUDIO_SPLASH_IDENTITY_1193 = Object.freeze({
+    kelani: "Kelani’s 450 Splash",
+    sharedFrogSplash: true,
+    eddie: "Eddie’s Frog Splash",
+    jey: "Jey Uso Splash",
+    jimmy: "Jimmy Uso Splash"
+  });
+
   const core = document.createElement("script");
-  core.src = "../js/tools/card-art-studio-core.js?v=1.1.190-card-studio-sync";
+  core.src = "../js/tools/card-art-studio-core.js?v=1.1.193-card-studio-sync";
   core.async = false;
   document.body.appendChild(core);
 })();
