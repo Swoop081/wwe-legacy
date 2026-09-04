@@ -1,4 +1,4 @@
-// v1.1.194 — Card Studio sync for Shotgun Dropkick, Sol Ruca X-Factor, Rhea identity, Splash identities and exclusive move naming.
+// v1.1.197 — Card Studio sync for exclusive identities and generic booster-only library isolation.
 (() => {
   const NORMAL_ID = "shotgun-dropkick";
   const DIVING_ID = "diving-shot-gun-dropkick";
@@ -94,13 +94,17 @@
       name: "Electric Chair Drop",
       superstarId: null,
       specificSuperstarIds: [],
-      universalSuperstarCard: true,
+      deckSuperstarIds: [],
+      librarySuperstarIds: [],
+      universalSuperstarCard: false,
       rarity: 2,
       boosterOnly: true,
       rulesText: "Shared. Grounds opponent."
     });
+    delete electricChairDrop.allowedSuperstarIds;
     delete electricChairDrop.trademark;
     delete electricChairDrop.signature;
+    delete electricChairDrop.finisher;
   }
 
   const crucifixPowerbomb = STUDIO_CARDS.find(card => card?.id === "razor-s-edge");
@@ -138,8 +142,10 @@
       name: "Frog Splash",
       superstarId: null,
       specificSuperstarIds: [],
+      deckSuperstarIds: [],
       librarySuperstarIds: [],
-      universalSuperstarCard: true,
+      universalSuperstarCard: false,
+      boosterOnly: true,
       rulesText: "Shared. Grounded opponent only. Stun 1.",
       effects: []
     });
@@ -261,13 +267,14 @@
   });
 
   globalThis.WWE_LEGACY_CARD_STUDIO_RHEA_SWAP_1190 = Object.freeze({
-    electricChairDrop: Object.freeze({ id: "rhea-ripley-electric-chair-facebuster", rarity: 2, shared: true, trademark: false }),
+    electricChairDrop: Object.freeze({ id: "rhea-ripley-electric-chair-facebuster", rarity: 2, shared: true, trademark: false, superstarAssigned: false }),
     crucifixPowerbomb: Object.freeze({ id: "razor-s-edge", rarity: 3, superstarId: "rhea-ripley", trademark: true })
   });
 
   globalThis.WWE_LEGACY_CARD_STUDIO_SPLASH_IDENTITY_1193 = Object.freeze({
     kelani: "Kelani’s 450 Splash",
     sharedFrogSplash: true,
+    sharedFrogSplashSuperstarAssigned: false,
     eddie: "Eddie’s Frog Splash",
     jey: "Jey Uso Splash",
     jimmy: "Jimmy Uso Splash"
@@ -279,8 +286,13 @@
     removedRunningPowerslamAlias: "ra1-running-powerslam"
   });
 
+  globalThis.WWE_LEGACY_CARD_STUDIO_GENERIC_BOOSTER_ONLY_1197 = Object.freeze({
+    ids: Object.freeze(["frog-splash", "rhea-ripley-electric-chair-facebuster", "slap", "shove"]),
+    universalSuperstarCard: false
+  });
+
   const core = document.createElement("script");
-  core.src = "../js/tools/card-art-studio-core.js?v=1.1.194-card-studio-sync";
+  core.src = "../js/tools/card-art-studio-core.js?v=1.1.197-card-studio-sync";
   core.async = false;
   document.body.appendChild(core);
 })();
