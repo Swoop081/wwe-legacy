@@ -1,11 +1,11 @@
 {
-  "version": "1.1.195",
+  "version": "1.1.196",
   "releasedAt": "2026-09-04",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.195",
+  "physicalIphoneSmoke": "pending-v1.1.196",
   "launchStatus": "released",
-  "name": "v1.1.195 — Slap + Shove Shared Commons"
+  "name": "v1.1.196 — Card Studio Slap + Shove Visibility Hotfix"
 }
