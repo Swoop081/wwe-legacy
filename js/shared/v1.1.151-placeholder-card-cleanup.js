@@ -8,6 +8,7 @@ import "./v1.1.189-sol-ruca-x-factor-rebalance.js?v=1.1.189";
 import "./v1.1.190-rhea-electric-chair-crucifix-swap.js?v=1.1.192";
 import "./v1.1.193-splash-card-identity-cleanup.js?v=1.1.193";
 import "./v1.1.194-exclusive-move-naming-pass.js?v=1.1.194";
+import "./v1.1.195-slap-shove-shared-commons.js?v=1.1.195";
 
 const PROFILE_KEY = "wa-modern-profile-v3";
 const placeholderRule = /^Shared\s+[^.]+\s+move\b/i;
