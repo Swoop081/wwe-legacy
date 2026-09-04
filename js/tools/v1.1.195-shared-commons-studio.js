@@ -1,6 +1,9 @@
-// v1.1.195 — Card Studio entries for shared Common Slap and Shove.
+// v1.1.196 — Card Studio entries for shared Common Slap and Shove.
 (() => {
-  if (!Array.isArray(globalThis.STUDIO_CARDS)) return;
+  // Card Studio's generated data is exposed as the page-level STUDIO_CARDS binding.
+  // Do not gate this on globalThis.STUDIO_CARDS: a top-level lexical binding is not
+  // required to be mirrored as a Window/globalThis property.
+  if (typeof STUDIO_CARDS === "undefined" || !Array.isArray(STUDIO_CARDS)) return;
 
   const makeStudioCard = card => ({
     ...card,
@@ -81,8 +84,9 @@
     if (!STUDIO_CARDS.some(existing => existing?.id === card.id)) STUDIO_CARDS.push(card);
   }
 
-  globalThis.WWE_LEGACY_CARD_STUDIO_SHARED_COMMONS_1195 = Object.freeze({
+  globalThis.WWE_LEGACY_CARD_STUDIO_SHARED_COMMONS_1196 = Object.freeze({
     slap: "slap",
-    shove: "shove"
+    shove: "shove",
+    visibleCount: additions.filter(card => STUDIO_CARDS.some(existing => existing?.id === card.id)).length
   });
 })();
