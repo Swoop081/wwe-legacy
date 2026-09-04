@@ -1,4 +1,4 @@
-// v1.1.196 — Card Studio entries for shared Common Slap and Shove.
+// v1.1.197 — Card Studio entries for generic booster-only Common Slap and Shove.
 (() => {
   // Card Studio's generated data is exposed as the page-level STUDIO_CARDS binding.
   // Do not gate this on globalThis.STUDIO_CARDS: a top-level lexical binding is not
@@ -12,7 +12,7 @@
     specificSuperstarIds: [],
     deckSuperstarIds: [],
     librarySuperstarIds: [],
-    universalSuperstarCard: true,
+    universalSuperstarCard: false,
     imageKey: card.id,
     artKey: card.id,
     currentArt: "assets/cards/art/temp/generic-wrestling-action.webp",
@@ -81,12 +81,16 @@
   ];
 
   for (const card of additions) {
-    if (!STUDIO_CARDS.some(existing => existing?.id === card.id)) STUDIO_CARDS.push(card);
+    const existing = STUDIO_CARDS.find(candidate => candidate?.id === card.id);
+    if (existing) Object.assign(existing, card);
+    else STUDIO_CARDS.push(card);
   }
 
-  globalThis.WWE_LEGACY_CARD_STUDIO_SHARED_COMMONS_1196 = Object.freeze({
+  globalThis.WWE_LEGACY_CARD_STUDIO_SHARED_COMMONS_1197 = Object.freeze({
     slap: "slap",
     shove: "shove",
+    boosterOnly: true,
+    superstarAssigned: false,
     visibleCount: additions.filter(card => STUDIO_CARDS.some(existing => existing?.id === card.id)).length
   });
 })();
