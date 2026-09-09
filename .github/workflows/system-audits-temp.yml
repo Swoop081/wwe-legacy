@@ -1,0 +1,43 @@
+name: System Audits Temp
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/system-audits-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run audit scripts
+        shell: bash
+        run: |
+          set +e
+          scripts=(
+            tools/full-card-tier-audit.mjs
+            tools/ai-action-usage-audit.mjs
+            tools/ai-auto-selection-audit.mjs
+            tools/ai-behind-recovery-audit.mjs
+            tools/ai-choice-audit.mjs
+            tools/ai-counter-passivity-audit.mjs
+            tools/ai-defense-passivity-audit.mjs
+            tools/ai-pin-timing-audit.mjs
+            tools/ai-special-usage-audit.mjs
+            tools/ai-submission-strategy-audit.mjs
+            tools/ai-support-usage-audit.mjs
+            tools/architecture-audit-temp.mjs
+            tools/art-audit.mjs
+          )
+          for s in "${scripts[@]}"; do
+            echo "===== $s ====="
+            node "$s"
+            echo "EXIT_CODE=$?"
+          done
