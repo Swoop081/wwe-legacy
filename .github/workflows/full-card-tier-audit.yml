@@ -23,4 +23,21 @@ jobs:
         with:
           node-version: '22'
       - name: Audit every gameplay Move and printing tier
-        run: node tools/full-card-tier-audit.mjs
+        id: tier_audit
+        shell: bash
+        run: |
+          set +e
+          node tools/full-card-tier-audit.mjs > full-card-tier-audit.txt 2>&1
+          code=$?
+          cat full-card-tier-audit.txt
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload full audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-card-tier-audit
+          path: full-card-tier-audit.txt
+      - name: Enforce audit result
+        if: steps.tier_audit.outputs.exit_code != '0'
+        run: exit 1
