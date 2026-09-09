@@ -8,6 +8,7 @@ const BENEFICIAL_EFFECT_TYPES = new Set([
 ]);
 
 const finite = value => Number.isFinite(Number(value)) ? Number(value) : 0;
+const isSubmission = card => card?.moveType==='submission' || !!card?.submission;
 
 function effectPower(card){
   let score=0;
@@ -65,7 +66,7 @@ for(const card of moves){
     failures.push(`${card.id}: Finisher has a Momentum/Method requirement`);
   }
 
-  if((card.moveType==='submission' || card.submission) && finite(card.damage)!==0){
+  if(isSubmission(card) && finite(card.damage)!==0){
     failures.push(`${card.id}: Submission has ${card.damage} immediate damage`);
   }
 
@@ -74,7 +75,7 @@ for(const card of moves){
     fixedTierMoves += 1;
     const printed=applyCardTier(card,supported[0]);
     if(card.finisher && positiveMomentumRequirement(printed)) failures.push(`${card.id}/${supported[0]}: printed Finisher has a Momentum/Method requirement`);
-    if((card.moveType==='submission' || card.submission) && finite(printed.damage)!==0) failures.push(`${card.id}/${supported[0]}: printed Submission has immediate damage`);
+    if(isSubmission(card) && finite(printed.damage)!==0) failures.push(`${card.id}/${supported[0]}: printed Submission has immediate damage`);
     continue;
   }
 
@@ -84,7 +85,7 @@ for(const card of moves){
     const printed=printings[index];
     const tier=CARD_TIERS[index];
     if(card.finisher && positiveMomentumRequirement(printed)) failures.push(`${card.id}/${tier}: printed Finisher has a Momentum/Method requirement`);
-    if((card.moveType==='submission' || card.submission) && finite(printed.damage)!==0) failures.push(`${card.id}/${tier}: printed Submission has immediate damage`);
+    if(isSubmission(card) && finite(printed.damage)!==0) failures.push(`${card.id}/${tier}: printed Submission has immediate damage`);
   }
 
   for(let index=0; index<printings.length-1; index+=1){
@@ -96,9 +97,10 @@ for(const card of moves){
     if(!result.improved) failures.push(`${card.id} ${pair}: higher gem is not mechanically better (${JSON.stringify(result.a)})`);
   }
 
-  // Finishers must leave visible raw-power room above Base. Effects are allowed;
-  // Momentum requirements are not. This catches the old Base-16 Oblivion case.
-  if(card.finisher){
+  // Damage-dealing Finishers must leave visible raw-power room above Base.
+  // Submission Finishers remain at 0 immediate damage and improve through
+  // pressure/cost/effects instead. Effects are allowed on either class.
+  if(card.finisher && !isSubmission(card)){
     const base=printings[0], amethyst=printings.at(-1);
     if(finite(base.damage)>=finite(amethyst.damage)) failures.push(`${card.id}: Base Finisher damage ${base.damage} does not trail Amethyst ${amethyst.damage}`);
   }
