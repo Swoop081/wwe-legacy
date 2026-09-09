@@ -5916,7 +5916,20 @@ const cloneRoadmapDeck=(templateId,targetId,targetSignatures,specialId,momentumM
   });
   return out;
 };
-deckIds["giulia"]=cloneRoadmapDeck("tatum-paxley","giulia",["giulia-hammerlock-michinoku-driver","giulia-avalanche-butterfly-suplex","giulia-arrivederci","giulia-northern-lights-bomb"],"special-giulia",{"momentum-agility":"momentum-technical"});
+deckIds["giulia"]=cloneRoadmapDeck("tatum-paxley","giulia",["giulia-hammerlock-michinoku-driver","giulia-avalanche-butterfly-suplex","giulia-arrivederci","giulia-northern-lights-bomb"],"special-giulia");
+// Giulia's authored 12-Momentum identity is 6 Technical / 4 Strike / 1 Agility / 1 Strength.
+// The roadmap clone previously converted all four Agility pages to Technical, leaving
+// her Agility and Strength requirements unreachable in actual matches.
+{
+  const ids=deckIds["giulia"]??[];
+  let agilitySeen=0;
+  for(let i=0;i<ids.length;i++){
+    if(ids[i]!=="momentum-agility")continue;
+    agilitySeen++;
+    if(agilitySeen<=2)ids[i]="momentum-strike";
+    else if(agilitySeen===3)ids[i]="momentum-strength";
+  }
+}
 deckIds["carmelo-hayes"]=cloneRoadmapDeck("finn-balor","carmelo-hayes",["carmelo-hayes-first-48","carmelo-hayes-springboard-clothesline","carmelo-hayes-fadeaway","carmelo-hayes-nothing-but-net"],"special-carmelo-hayes");
 deckIds["baron-corbin"]=cloneRoadmapDeck("jbl","baron-corbin",["baron-corbin-deep-six","baron-corbin-chokeslam-backbreaker","baron-corbin-big-boot","baron-corbin-end-of-days"],"special-baron-corbin");
 deckIds["rey-fenix"]=cloneRoadmapDeck("dragon-lee","rey-fenix",["rey-fenix-fire-driver","rey-fenix-tornillo-kick","rey-fenix-mexican-destroyer","rey-fenix-mexican-muscle-buster"],"special-rey-fenix");
