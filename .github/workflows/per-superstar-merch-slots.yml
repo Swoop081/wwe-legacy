@@ -1,0 +1,69 @@
+name: Per-Superstar Merch Slots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/per-superstar-merch-slots.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run per-Superstar Merch slot migration'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply independent Merch slots
+        run: python tools/apply-per-superstar-merch-slots.py
+      - name: Verify independent Merch behavior
+        run: |
+          node --input-type=module <<'NODE'
+          import { GENERIC_MERCH, merchForSuperstar, grantMerch, equipMerch, activeMerchItem, merchMatchModifier, consumeActiveMerchMatch, discardActiveMerch } from './js/data/merch.js';
+          const profile={starterId:'roman-reigns',unlockedSuperstars:['roman-reigns','cm-punk','liv-morgan'],ownedMerch:{},activeMerchBySuperstar:{},activeMerch:null};
+          const romanGeneric=GENERIC_MERCH[0];
+          const punkGeneric=GENERIC_MERCH[1];
+          grantMerch(profile,romanGeneric.id,1);
+          grantMerch(profile,punkGeneric.id,1);
+          equipMerch(profile,romanGeneric.id,'roman-reigns');
+          equipMerch(profile,punkGeneric.id,'cm-punk');
+          if(activeMerchItem(profile,'roman-reigns')?.id!==romanGeneric.id) throw new Error('Roman slot not independent');
+          if(activeMerchItem(profile,'cm-punk')?.id!==punkGeneric.id) throw new Error('Punk slot not independent');
+          if(!merchMatchModifier(profile,'roman-reigns')||!merchMatchModifier(profile,'cm-punk')) throw new Error('Independent modifiers missing');
+          if(merchMatchModifier(profile,'liv-morgan')) throw new Error('Merch leaked to an unequipped Superstar');
+          const punkBefore=activeMerchItem(profile,'cm-punk').remainingMatches;
+          consumeActiveMerchMatch(profile,'roman-reigns');
+          if(activeMerchItem(profile,'cm-punk').remainingMatches!==punkBefore) throw new Error('Using Roman Merch consumed Punk Merch');
+          discardActiveMerch(profile,'roman-reigns');
+          if(activeMerchItem(profile,'roman-reigns')) throw new Error('Roman Merch did not discard');
+          if(!activeMerchItem(profile,'cm-punk')) throw new Error('Discarding Roman removed Punk Merch');
+          const romanSpecific=merchForSuperstar('roman-reigns')[0];
+          grantMerch(profile,romanSpecific.id,1);
+          equipMerch(profile,romanSpecific.id,'cm-punk');
+          if(activeMerchItem(profile,'roman-reigns')?.id!==romanSpecific.id) throw new Error('Superstar-specific Merch did not stay linked to Roman');
+          if(activeMerchItem(profile,'cm-punk')?.id!==punkGeneric.id) throw new Error('Roman-specific Merch disturbed Punk slot');
+          console.log('PASS: every owned Superstar has an independent one-card Merch slot.');
+          NODE
+      - name: Verify UI no longer has global-slot wording
+        run: |
+          grep -q 'One Merch slot for every owned Superstar' js/ui/app.js
+          grep -q 'other Superstars have their own slots' js/ui/app.js
+          ! grep -q 'The single Merch slot is already occupied' js/ui/app.js
+          ! grep -q 'one temporary boost at a time' js/ui/app.js
+      - name: Commit correction
+        run: |
+          git config user.name "Swoop081"
+          git config user.email "justinbelot8@gmail.com"
+          git add js/data/merch.js js/data/profile.js js/ui/app.js
+          git commit -m "Give every owned Superstar an independent Merch slot"
+          git push origin HEAD:main
