@@ -1,0 +1,54 @@
+name: Full Game Simulation Audit Temp
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/full-game-simulation-audit-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run simulation and audit suite
+        shell: bash
+        run: |
+          set +e
+          mkdir -p audit-output
+          scripts=(
+            tools/balance-sim.mjs
+            tools/full-card-tier-audit.mjs
+            tools/ai-action-usage-audit.mjs
+            tools/ai-auto-selection-audit.mjs
+            tools/ai-behind-recovery-audit.mjs
+            tools/ai-choice-audit.mjs
+            tools/ai-counter-passivity-audit.mjs
+            tools/ai-defense-passivity-audit.mjs
+            tools/ai-pin-timing-audit.mjs
+            tools/ai-special-usage-audit.mjs
+            tools/ai-submission-strategy-audit.mjs
+            tools/ai-support-usage-audit.mjs
+            tools/architecture-audit-temp.mjs
+            tools/art-audit.mjs
+          )
+          : > audit-output/summary.txt
+          for s in "${scripts[@]}"; do
+            echo "===== $s =====" | tee -a audit-output/summary.txt
+            node "$s" 2>&1 | tee -a audit-output/summary.txt
+            code=${PIPESTATUS[0]}
+            echo "EXIT_CODE=$code" | tee -a audit-output/summary.txt
+            echo | tee -a audit-output/summary.txt
+          done
+      - name: Upload simulation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-game-simulation-audit
+          path: audit-output/summary.txt
