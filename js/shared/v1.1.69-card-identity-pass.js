@@ -107,9 +107,10 @@ function auditedTierGrowthProfile(card){
   const damage=Number(card?.damage)||0;
   const scalable=hasScalableMoveEffect(card);
 
-  // Trademarks with real numeric effects improve through both identity and stats;
-  // straightforward Trademarks use Hybrid so no printing is only cosmetic.
-  if(card?.trademark) return scalable ? 'effect' : 'hybrid';
+  // Trademarks always use a mixed cost/damage progression so every adjacent gem
+  // is mechanically stronger even when a bespoke effect is stored outside the
+  // generic numeric effects array. Their authored effects remain intact.
+  if(card?.trademark) return 'hybrid';
 
   // High-impact moves should visibly gain impact as the gem rises.
   if(damage>=8) return 'damage';
