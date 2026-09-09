@@ -1,4 +1,5 @@
 from pathlib import Path
+# Trigger v2
 p=Path('js/ai/WrestlingAI.js')
 s=p.read_text()
 old='''      const nonFinisher=legalNormal.filter(x=>!x.finisher),pool=nonFinisher.length?nonFinisher:legalNormal;
