@@ -196,7 +196,7 @@ function cpuActionPriority(state,pid,card){
  // Future/authored Superstar Actions should never become dead cards merely because
  // their effect type has not yet received bespoke AI scoring. canPlayAction() has
  // already verified the authored play condition, so give a conservative fallback.
- if(card.superstarId)return 32+(!legal.length?10:0)+(p.hand.length<=4?5:0);
+ if(card.superstarId&&legal.length)return 32+(p.hand.length<=4?5:0);
  return -Infinity;
 }
 function cpuBestAction(state,pid,minScore=1){
@@ -487,8 +487,12 @@ function cpuSubmissionDecision(state,pid){
  const canFinishWithinCap=holdsToTap<=remainingTicks&&holdsToTap<=p.hand.length;
  const canBankPressure=p.hand.length>2;
  if(!canFinishWithinCap&&!canBankPressure)return{type:'release'};
- let index=0,best=Infinity;for(let i=0;i<p.hand.length;i++){const v=cpuDiscardPreservationScore(p.hand[i]);if(v<best){best=v;index=i;}}
- return{type:'maintain',index};
+ // Maintain a Submission by ditching expendable pages first. Protected match-winning/reactive cards are last resort only.
+ const protectedCard=c=>!!(c?.finisher||c?.trademark||c?.special||c?.pinEscape||c?.special?.type==='pinEscape'||c?.effect?.type==='onceTooOften');
+ const indexed=p.hand.map((card,index)=>({card,index}));
+ const safe=indexed.filter(x=>!protectedCard(x.card)),candidates=safe.length?safe:indexed;
+ candidates.sort((a,b)=>cpuDiscardPreservationScore(a.card)-cpuDiscardPreservationScore(b.card)||a.index-b.index);
+ return{type:'maintain',index:candidates[0].index};
 }
 function cpuTriggeredSpecialChoice(state,pid){
  const pending=state.pendingTriggeredSpecial,p=state.players?.[pid];if(!pending||!p)return false;
@@ -521,13 +525,9 @@ export function cpuDecision(game,pid="p2"){
    const legalNormal=p.hand.filter(x=>x.kind==="move"&&counterEligibility(s,pid,incoming,x).legal);
    if(legalNormal.length){
      const nonFinisher=legalNormal.filter(x=>!x.finisher),pool=nonFinisher.length?nonFinisher:legalNormal;
-     const chosen=[...pool].sort((a,b)=>{
-        // Counter with purpose-built defensive pages first and preserve offensive
-        // damage, Trademarks, Finishers and Specials for the player's own turn.
-        const av=cpuDiscardPreservationScore(a)+(a.defensiveOnly?-60:Math.min(45,(a.damage??0)*3));
-        const bv=cpuDiscardPreservationScore(b)+(b.defensiveOnly?-60:Math.min(45,(b.damage??0)*3));
-        return av-bv;
-      })[0];
+     // Purpose-built defensive counters are expendable answers. Preserve offensive Moves whenever one is legal.
+     const defensivePool=pool.filter(x=>x.defensiveOnly),choicePool=defensivePool.length?defensivePool:pool;
+     const chosen=[...choicePool].sort((a,b)=>cpuDiscardPreservationScore(a)-cpuDiscardPreservationScore(b))[0];
      return{type:"counter",card:chosen};
    }
    const repeats=p.hand.filter(x=>x.kind==="action"&&x.effect?.type==="onceTooOften"&&counterEligibility(s,pid,incoming,x).legal),repeat=repeats[0],repeatThreat=repeat?cpuRepeatThreat(s,pid,incoming):0;
