@@ -35,4 +35,6 @@ jobs:
         with:
           node-version: '22'
       - name: Run ${{ matrix.script }}
-        run: node tools/${{ matrix.script }}
+        run: |
+          echo "Auditing ${{ matrix.script }}"
+          node tools/${{ matrix.script }}
