@@ -1,0 +1,27 @@
+name: Run AI Preservation Patch Temp
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'tools/apply-ai-preservation-fix-temp.py'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python tools/apply-ai-preservation-fix-temp.py
+      - run: node --check js/ai/WrestlingAI.js
+      - run: |
+          git config user.name Swoop081
+          git config user.email justinbelot8@gmail.com
+          git add js/ai/WrestlingAI.js
+          git commit -m 'v1.1.199 AI card-preservation hardening'
+          git push origin main
