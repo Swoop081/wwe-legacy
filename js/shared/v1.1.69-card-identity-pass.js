@@ -49,7 +49,7 @@ function broadenCloneGroup(group){
     let cost=clamp(baseCost+p.cost,lim.cost[0],lim.cost[1]);
     let damage=clamp(baseDamage+p.damage,lim.damage[0],lim.damage[1]);
     if(card.finisher && card.moveType!=='submission'){
-      // Finishers should occupy a real hierarchy rather than audit-driven +1 clones.
+      // Finishers occupy a real authored hierarchy before printing-tier growth.
       const finisherBands=[
         [8,14],[9,15],[9,16],[10,17],[10,18],[11,19],[12,20],[8,17],[11,16]
       ];
@@ -82,6 +82,63 @@ function seedMissingLowDamage(moves){
   }
 }
 
+const scalableEffectTypes=new Set([
+  'drawSelf','discardOpponent','gainAdrenaline','loseOpponentAdrenaline','bodyPressure',
+  'discountNextByName','discountNextMethod','discountNextMoveType','search','buffNextByName'
+]);
+
+function hasScalableMoveEffect(card){
+  return !!card?.submission || (card?.effects??[]).some(effect=>scalableEffectTypes.has(effect?.type));
+}
+
+// v1.1.198 full-library tier audit.
+// Printing growth is now chosen from the move's wrestling/gameplay identity,
+// never from a hash of its ID. This keeps every card distinct without allowing
+// a high-end move (especially a Finisher) to accidentally retain premium damage
+// on its Base printing simply because it drew an efficiency profile.
+function auditedTierGrowthProfile(card){
+  if(card?.moveType==='submission' || card?.submission) return 'submission';
+  if(card?.finisher) return 'damage';
+  if(card?.defensiveOnly) return 'defensive';
+
+  const cost=Number(card?.cost)||0;
+  const damage=Number(card?.damage)||0;
+  const scalable=hasScalableMoveEffect(card);
+
+  // Trademarks with real numeric effects improve through both identity and stats;
+  // straightforward Trademarks use Hybrid so no printing is only cosmetic.
+  if(card?.trademark) return scalable ? 'effect' : 'hybrid';
+
+  // High-impact moves should visibly gain impact as the gem rises.
+  if(damage>=8) return 'damage';
+
+  // Setup/control cards whose authored cost has enough headroom can become more
+  // efficient at each gem without collapsing adjacent tiers at the cost floor.
+  if(!scalable && damage<=4 && cost>=3) return 'efficiency';
+
+  // Effect-bearing and middle-band moves use mixed cost/damage growth.
+  return 'hybrid';
+}
+
+function enforceAuditedMoveStructure(card){
+  // Finishers may retain their authored effects, but never require Momentum.
+  if(card?.finisher){
+    card.method=null;
+    card.requirements={};
+  }
+
+  // Submissions never deal immediate printed damage; their pressure/cost/effects
+  // are the progression vocabulary.
+  if(card?.moveType==='submission' || card?.submission){
+    card.damage=0;
+  }
+
+  card.tierGrowthProfile=auditedTierGrowthProfile(card);
+  card.balanceAuditVersion='v1.1.198';
+  card.authoredCost=Number(card.cost)||0;
+  card.authoredDamage=Number(card.damage)||0;
+}
+
 export function applyCardIdentityPass(cards=[]){
   const moves=cards.filter(c=>c?.kind==='move');
   const groups=new Map();
@@ -95,16 +152,9 @@ export function applyCardIdentityPass(cards=[]){
   for(const group of groups.values()) broadenCloneGroup(group);
   seedMissingLowDamage(moves);
 
-  // Give every move an explicit stable tier-growth profile. This guarantees
-  // future balancing can tune one card without reverting to rarity templates.
-  const scalableEffectTypes=new Set(['drawSelf','discardOpponent','gainAdrenaline','loseOpponentAdrenaline','bodyPressure','discountNextByName','discountNextMethod','discountNextMoveType','search','buffNextByName']);
-  for(const card of moves){
-    const hasScalableEffect=!!card.submission || (card.effects??[]).some(e=>scalableEffectTypes.has(e.type));
-    const profiles=hasScalableEffect?['damage','efficiency','hybrid','effect']:['damage','efficiency','hybrid'];
-    card.tierGrowthProfile=profiles[stableHash(card.id)%profiles.length];
-    card.authoredCost=Number(card.cost)||0;
-    card.authoredDamage=Number(card.damage)||0;
-  }
+  // Every gameplay Move receives an explicit audited growth profile. The old
+  // stableHash(card.id) profile lottery is deliberately retired here.
+  for(const card of moves) enforceAuditedMoveStructure(card);
   return cards;
 }
 
@@ -137,8 +187,9 @@ export function finalizeCardIdentityPass(cards=[]){
       // while guaranteeing a separate authored shell.
       card.cost=clamp(baseCost+1,lim.cost[0],lim.cost[1]);
     }
-    card.authoredCost=Number(card.cost)||0;
-    card.authoredDamage=Number(card.damage)||0;
+    // A final de-duplication adjustment must not discard the audited profile or
+    // Finisher/Submission structure established above.
+    enforceAuditedMoveStructure(card);
     card.identityPass='v1.1.69';
     seen.add(sig(card));
   }
