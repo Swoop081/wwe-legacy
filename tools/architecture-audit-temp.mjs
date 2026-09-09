@@ -3,8 +3,9 @@ import { superstars } from '../js/data/superstars.js';
 import { deckIds } from '../js/data/decks.js';
 import { allGameplayCards } from '../js/data/content.js';
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
-const ssById=new Map(Object.values(superstars).map(s=>[s.id,s]));
-const activeIds=Object.keys(superstars);
+const roster=Object.values(superstars);
+const ssById=new Map(roster.map(s=>[s.id,s]));
+const activeIds=roster.map(s=>s.id);
 const methods=['strength','strike','technical','agility'];
 function abilityType(s){return s?.ability?.trigger?.type||s?.ability?.type||s?.special?.type||'none'}
 const rows=[];
@@ -16,8 +17,6 @@ for(const id of activeIds){
  const inaccessible=[];
  for(const c of moves){for(const m of methods){const req=Number(c.requirements?.[m]||0); const limit=s?.methodLimits?.[m]; if(req>0 && limit===0) inaccessible.push(`${c.id}:${m}${req}>limit0`); else if(req>0 && Number.isFinite(limit)&&req>limit) inaccessible.push(`${c.id}:${m}${req}>limit${limit}`); else if(req>0 && mom[m]===0 && !(s?.entrance?.preMatchMomentum?.[m]>0)) inaccessible.push(`${c.id}:${m}${req}:no momentum`);}}
  const exclusive=cards.filter(c=>c.superstarId===id);
- // Finishers may be shared (for example Tombstone Piledriver for Kane/Undertaker),
- // so audit what is actually in the Superstar's deck rather than only exclusive cards.
  const finishers=cards.filter(c=>c.finisher||/finisher/i.test(c.rulesText||''));
  const trademarks=cards.filter(c=>c.trademark||/trademark/i.test(c.rulesText||''));
  const actions=exclusive.filter(c=>c.kind==='action'||c.kind==='support');
