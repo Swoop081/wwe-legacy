@@ -26,4 +26,4 @@ jobs:
           git add js/ai/WrestlingAI.js
           git commit -m 'v1.1.199 AI card-preservation hardening'
           git push origin main
-# retrigger after removing invalid temporary workflows
+# robust patch trigger
