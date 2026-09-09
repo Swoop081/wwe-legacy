@@ -1,41 +1,30 @@
-name: Validate v1.1.199 Temp
+name: Apply and Validate v1.1.199 AI Hardening
 on:
   push:
     branches: [main]
     paths: ['.github/workflows/validate-v1.1.199-temp.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
-  validate:
+  harden:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
-        with: { node-version: '22' }
-      - name: Regression audits
-        shell: bash
+        with:
+          node-version: '22'
+      - name: Apply patch
+        run: python tools/apply-ai-preservation-fix-temp.py
+      - name: Validate syntax and card tiers
         run: |
           node --check js/ai/WrestlingAI.js
           node tools/full-card-tier-audit.mjs
-          node tools/ai-action-usage-audit.mjs
-          node tools/ai-choice-audit.mjs
-          node tools/art-audit.mjs || true
-          node tools/architecture-audit-temp.mjs || true
-      - name: Larger multi-seed balance matrix
-        shell: bash
+      - name: Commit implementation
         run: |
-          node --input-type=module <<'NODE'
-          import { superstars } from './js/data/superstars.js';
-          import { decks } from './js/data/decks.js';
-          import { MatchEngine } from './js/engine/MatchEngine.js';
-          import { decisionOwner,cpuDecision,executeCpuDecision } from './js/ai/WrestlingAI.js';
-          const stars=Object.values(superstars), N=stars.length;
-          const rng=seed=>{let x=seed>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296;};};
-          const r=Object.fromEntries(stars.map(s=>[s.id,{name:s.name,w:0,l:0,m:0,turns:0,stalls:0}]));
-          let matches=0,stalls=0,turns=0;const finishes={};
-          function play(a,b,seed){const g=new MatchEngine({p1:a,p2:b,decks,rng:rng(seed)});let steps=0;while(g.state().phase!=='MATCH_OVER'&&steps++<1600){const pid=decisionOwner(g.state());if(!pid)break;const d=cpuDecision(g,pid);if(!d||!executeCpuDecision(g,d,pid))break;}const s=g.state();matches++;turns+=s.turnNumber;for(const x of [a,b]){r[x.id].m++;r[x.id].turns+=s.turnNumber;}if(s.phase!=='MATCH_OVER'){stalls++;r[a.id].stalls++;r[b.id].stalls++;return;}finishes[s.finish?.type]=(finishes[s.finish?.type]||0)+1;if(s.winner==='p1'){r[a.id].w++;r[b.id].l++;}else{r[b.id].w++;r[a.id].l++;}}
-          const offsets=[1,7,17,31,47];
-          for(let seedPass=0;seedPass<4;seedPass++)for(let i=0;i<N;i++)for(let k=0;k<offsets.length;k++){const j=(i+offsets[k])%N;if(i===j)continue;play(stars[i],stars[j],1000003+seedPass*100003+i*997+k*31);play(stars[j],stars[i],2000003+seedPass*120011+i*991+k*37);}
-          const table=Object.entries(r).map(([id,x])=>({id,name:x.name,matches:x.w+x.l,wins:x.w,losses:x.l,winPct:+(100*x.w/Math.max(1,x.w+x.l)).toFixed(1),avgTurns:+(x.turns/Math.max(1,x.m)).toFixed(1),stalls:x.stalls})).sort((a,b)=>b.winPct-a.winPct);
-          console.log(JSON.stringify({stars:N,matches,stalls,avgTurns:+(turns/matches).toFixed(2),finishes,top15:table.slice(0,15),bottom15:table.slice(-15).reverse(),outliers:table.filter(x=>x.winPct>=65||x.winPct<=35)},null,2));
-          NODE
+          git config user.name Swoop081
+          git config user.email justinbelot8@gmail.com
+          git add js/ai/WrestlingAI.js
+          git commit -m 'v1.1.199 AI card-preservation hardening'
+          git push origin main
