@@ -13,17 +13,20 @@ jobs:
         with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
-      - name: Apply AI preservation hardening
-        run: python tools/apply-ai-preservation-fix-temp.py
-      - name: Validate
+      - name: Correct Giulia Momentum distribution
+        run: python tools/apply-giulia-balance-fix-temp.py
+      - name: Validate full systems
+        shell: bash
         run: |
           node --check js/ai/WrestlingAI.js
           node tools/full-card-tier-audit.mjs
+          node tools/architecture-audit-temp.mjs
+          node tools/ai-action-usage-audit.mjs
+          node tools/ai-choice-audit.mjs
       - name: Commit fixes
         run: |
           git config user.name 'Swoop081'
           git config user.email 'justinbelot8@gmail.com'
-          git add js/ai/WrestlingAI.js
-          git commit -m 'v1.1.199 AI card-preservation hardening'
+          git add js/data/decks.js
+          git commit -m 'v1.1.199 correct Giulia playable Momentum balance'
           git push origin main
-# robust patch trigger
