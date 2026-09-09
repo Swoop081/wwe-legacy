@@ -1,0 +1,45 @@
+name: Fast Whole Game Health Temp
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fast-game-health-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Whole-game sampled simulation
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { superstars } from './js/data/superstars.js';
+          import { decks } from './js/data/decks.js';
+          import { MatchEngine } from './js/engine/MatchEngine.js';
+          import { decisionOwner,cpuDecision,executeCpuDecision } from './js/ai/WrestlingAI.js';
+          const stars=Object.values(superstars);
+          const rng=seed=>{let x=seed>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296;};};
+          const results=Object.fromEntries(stars.map(s=>[s.id,{name:s.name,w:0,l:0,stalls:0,turns:0,matches:0}]));
+          let matches=0,stalls=0,turns=0;const finishes={};const brokenDecks=[];
+          for(const s of stars){const d=decks[s.id]??[];if(d.length!==60)brokenDecks.push({id:s.id,name:s.name,size:d.length});}
+          const play=(a,b,seed)=>{const g=new MatchEngine({p1:a,p2:b,decks,rng:rng(seed)});let steps=0;while(g.state().phase!=='MATCH_OVER'&&steps++<1400){const pid=decisionOwner(g.state());if(!pid)break;const d=cpuDecision(g,pid);if(!d||!executeCpuDecision(g,d,pid))break;}const st=g.state();matches++;turns+=st.turnNumber;results[a.id].matches++;results[a.id].turns+=st.turnNumber;results[b.id].matches++;results[b.id].turns+=st.turnNumber;if(st.phase!=='MATCH_OVER'){stalls++;results[a.id].stalls++;results[b.id].stalls++;return;}finishes[st.finish?.type]=(finishes[st.finish?.type]||0)+1;if(st.winner==='p1'){results[a.id].w++;results[b.id].l++;}else{results[b.id].w++;results[a.id].l++;}};
+          for(let i=0;i<stars.length;i++){
+            const offsets=[1,Math.max(2,Math.floor(stars.length/3)),Math.max(3,Math.floor(stars.length*2/3))];
+            for(let k=0;k<offsets.length;k++){
+              const j=(i+offsets[k])%stars.length;if(i===j)continue;
+              play(stars[i],stars[j],700001+i*97+k*13);
+              play(stars[j],stars[i],900001+i*89+k*17);
+            }
+          }
+          const table=Object.entries(results).map(([id,r])=>({id,name:r.name,matches:r.w+r.l,wins:r.w,losses:r.l,winPct:+(100*r.w/Math.max(1,r.w+r.l)).toFixed(1),avgTurns:+(r.turns/Math.max(1,r.matches)).toFixed(1),stalls:r.stalls})).sort((a,b)=>b.winPct-a.winPct);
+          const valid=table.filter(x=>x.matches>=4);
+          console.log(JSON.stringify({stars:stars.length,matches,stalls,avgTurns:+(turns/Math.max(1,matches)).toFixed(2),finishes,brokenDecks,top10:valid.slice(0,10),bottom10:valid.slice(-10).reverse(),wideOutliers:valid.filter(x=>x.winPct>=70||x.winPct<=30)},null,2));
+          NODE
