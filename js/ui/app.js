@@ -3464,11 +3464,11 @@ function renderDeckBuilder() {
 
     <section class="deck-merch-loadout ${activeMerchRecord ? 'has-active-merch' : 'is-empty'}">
       <div class="section-title"><div><h3>Merch Slot</h3><small>1 active item · non-stackable · expires after completed eligible matches</small></div><span>${activeMerchRecord ? `${activeMerchMatches} MATCH${activeMerchMatches===1?'':'ES'} LEFT` : 'EMPTY'}</span></div>
-      ${activeMerchRecord ? `<div class="deck-merch-active">
-        <div class="deck-merch-card">${collectibleCardMarkup(activeMerchRecord,{tier:'normal',extraClass:'deck-merch-ccg',flipAttr:`data-deck-lab-inspect="${activeMerchRecord.id}"`})}</div>
-        <div class="deck-merch-copy"><span>${activeMerchForStar ? 'ACTIVE FOR THIS SUPERSTAR' : `SLOT OCCUPIED · ${superstarById[activeMerchTargetId]?.name ?? activeMerchTargetId ?? 'ASSIGNED SUPERSTAR'}`}</span><strong>${activeMerchRecord.name}</strong><p>${activeMerchRecord.rulesText}</p><small>${activeMerchRecord.duration} match card · ${activeMerchMatches} remaining · assigned only to ${superstarById[activeMerchTargetId]?.name ?? 'one Superstar'} · one use consumed after each completed eligible match.</small></div>
+      ${activeMerchForStar ? `<div class="deck-merch-active">
+        <div class="deck-merch-card">${collectibleCardMarkup(activeMerchForStar,{tier:'normal',extraClass:'deck-merch-ccg',flipAttr:`data-deck-lab-inspect="${activeMerchForStar.id}"`})}</div>
+        <div class="deck-merch-copy"><span>ACTIVE FOR THIS SUPERSTAR</span><strong>${activeMerchForStar.name}</strong><p>${activeMerchForStar.rulesText}</p><small>${activeMerchForStar.duration} match card · ${activeMerchMatches} remaining · assigned only to ${star.name} · one use consumed after each completed eligible match.</small></div>
         <button id="discard-deck-merch" type="button" class="secondary">DISCARD ACTIVE MERCH</button>
-      </div>` : `<div class="deck-merch-empty"><div><span>FREE MERCH SLOT</span><strong>Add a temporary match boost</strong><p>Equip eligible Generic Merch or ${star.name}-specific Merch. Generic Merch is assigned to this Superstar only. Method boosts are blocked when this Superstar cannot legally use that Method.</p></div><button id="change-merch" type="button" class="primary">ADD MERCH</button></div>`}
+      </div>` : activeMerchRecord ? `<div class="deck-merch-empty deck-merch-occupied"><div><span>SLOT OCCUPIED</span><strong>Merch assigned to ${superstarById[activeMerchTargetId]?.name ?? 'another Superstar'}</strong><p>The active Merch card and its match bonus apply only to ${superstarById[activeMerchTargetId]?.name ?? 'the assigned Superstar'}. It is not equipped to ${star.name}.</p></div></div>` : `<div class="deck-merch-empty"><div><span>FREE MERCH SLOT</span><strong>Add a temporary match boost</strong><p>Equip eligible Generic Merch or ${star.name}-specific Merch. Generic Merch is assigned to this Superstar only. Method boosts are blocked when this Superstar cannot legally use that Method.</p></div><button id="change-merch" type="button" class="primary">ADD MERCH</button></div>`}
     </section>
 
     <section class="deck-recommended-plan">
