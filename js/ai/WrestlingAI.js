@@ -490,9 +490,12 @@ function cpuSubmissionDecision(state,pid){
  // Maintain a Submission by ditching expendable pages first. Protected match-winning/reactive cards are last resort only.
  const protectedCard=c=>!!(c?.finisher||c?.trademark||c?.special||c?.pinEscape||c?.special?.type==='pinEscape'||c?.effect?.type==='onceTooOften');
  const indexed=p.hand.map((card,index)=>({card,index}));
- const safe=indexed.filter(x=>!protectedCard(x.card)),candidates=safe.length?safe:indexed;
- candidates.sort((a,b)=>cpuDiscardPreservationScore(a.card)-cpuDiscardPreservationScore(b.card)||a.index-b.index);
- return{type:'maintain',index:candidates[0].index};
+ const safe=indexed.filter(x=>!protectedCard(x.card));
+ // If every remaining page is a protected match-winning/reactive card, release
+ // the hold rather than sacrifice a Finisher, Trademark, Special or pin escape.
+ if(!safe.length)return{type:'release'};
+ safe.sort((a,b)=>cpuDiscardPreservationScore(a.card)-cpuDiscardPreservationScore(b.card)||a.index-b.index);
+ return{type:'maintain',index:safe[0].index};
 }
 function cpuTriggeredSpecialChoice(state,pid){
  const pending=state.pendingTriggeredSpecial,p=state.players?.[pid];if(!pending||!p)return false;
@@ -524,9 +527,11 @@ export function cpuDecision(game,pid="p2"){
    const incoming=s.proposedMove.card;
    const legalNormal=p.hand.filter(x=>x.kind==="move"&&counterEligibility(s,pid,incoming,x).legal);
    if(legalNormal.length){
-     const nonFinisher=legalNormal.filter(x=>!x.finisher),pool=nonFinisher.length?nonFinisher:legalNormal;
-     // Purpose-built defensive counters are expendable answers. Preserve offensive Moves whenever one is legal.
-     const defensivePool=pool.filter(x=>x.defensiveOnly),choicePool=defensivePool.length?defensivePool:pool;
+     // Prefer any purpose-built defensive counter before considering offensive Moves.
+     // Only after that preserve Finishers where another legal answer exists.
+     const defensivePool=legalNormal.filter(x=>x.defensiveOnly);
+     const basePool=defensivePool.length?defensivePool:legalNormal;
+     const nonFinisher=basePool.filter(x=>!x.finisher),choicePool=nonFinisher.length?nonFinisher:basePool;
      const chosen=[...choicePool].sort((a,b)=>cpuDiscardPreservationScore(a)-cpuDiscardPreservationScore(b))[0];
      return{type:"counter",card:chosen};
    }
