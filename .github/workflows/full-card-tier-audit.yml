@@ -1,0 +1,26 @@
+name: Full Card Tier Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'js/data/content.js'
+      - 'js/data/variants.js'
+      - 'js/shared/v1.1.69-card-identity-pass.js'
+      - 'tools/full-card-tier-audit.mjs'
+      - '.github/workflows/full-card-tier-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit every gameplay Move and printing tier
+        run: node tools/full-card-tier-audit.mjs
