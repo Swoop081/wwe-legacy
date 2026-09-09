@@ -13,60 +13,16 @@ jobs:
         with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
-      - name: Apply approved health fixes
-        shell: bash
+      - name: Apply AI preservation hardening
+        run: python tools/apply-ai-preservation-fix-temp.py
+      - name: Validate
         run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          p=Path('js/ai/WrestlingAI.js')
-          s=p.read_text()
-          old=""" if(ef.type==='drawThenDiscardSelf'){\n   const net=(ef.draw??1)-(ef.discard??1);\n   if(net<=0)return -Infinity;\n   return 34+net*18+(p.hand.length<=4?12:0)+(!legal.length?16:0);\n }"""
-          new=""" if(ef.type==='drawThenDiscardSelf'){\n   const draw=Math.max(0,ef.draw??1),discard=Math.max(0,ef.discard??1),net=draw-discard;\n   // A draw-then-ditch cycle still has real value at net zero: it filters a weak\n   // page out of hand and can find a needed Momentum/Move. Do not make these\n   // authored signature Actions invisible to the CPU just because net cards = 0.\n   if(draw<=0)return -Infinity;\n   return 30+Math.max(0,net)*18+(p.hand.length<=4?10:0)+(!legal.length?14:0);\n }"""
-          if old not in s: raise SystemExit('drawThenDiscardSelf target not found')
-          s=s.replace(old,new,1)
-
-          old=""" return -Infinity;\n}\nfunction cpuBestAction"""
-          new=""" // Future/authored Superstar Actions should never become dead cards merely because\n // their effect type has not yet received bespoke AI scoring. canPlayAction() has\n // already verified the authored play condition, so give a conservative fallback.\n if(card.superstarId)return 32+(!legal.length?10:0)+(p.hand.length<=4?5:0);\n return -Infinity;\n}\nfunction cpuBestAction"""
-          if old not in s: raise SystemExit('action fallback target not found')
-          s=s.replace(old,new,1)
-
-          old="""const chosen=[...pool].sort((a,b)=>{const av=cpuDiscardPreservationScore(a)-(a.defensiveOnly?18:Math.min(22,(a.damage??0)*2)),bv=cpuDiscardPreservationScore(b)-(b.defensiveOnly?18:Math.min(22,(b.damage??0)*2));return av-bv;})[0];"""
-          new="""const chosen=[...pool].sort((a,b)=>{\n        // Counter with purpose-built defensive pages first and preserve offensive\n        // damage, Trademarks, Finishers and Specials for the player's own turn.\n        const av=cpuDiscardPreservationScore(a)+(a.defensiveOnly?-60:Math.min(45,(a.damage??0)*3));\n        const bv=cpuDiscardPreservationScore(b)+(b.defensiveOnly?-60:Math.min(45,(b.damage??0)*3));\n        return av-bv;\n      })[0];"""
-          if old not in s: raise SystemExit('counter selection target not found')
-          s=s.replace(old,new,1)
-          p.write_text(s)
-
-          # Repair architecture audit portability.
-          p=Path('tools/architecture-audit-temp.mjs')
-          s=p.read_text().replace("'/mnt/data/architecture_rows.json'","'./architecture_rows.json'").replace('"/mnt/data/architecture_rows.json"','"./architecture_rows.json"')
-          p.write_text(s)
-
-          # Repair artwork audit: accept either finished-card artwork or the current
-          # layered base-plate artwork that the renderer actually uses.
-          p=Path('tools/art-audit.mjs')
-          p.write_text('''import fs from "node:fs";\nimport path from "node:path";\nimport {fileURLToPath} from "node:url";\nimport { collectionCards } from "../js/data/collection.js";\nimport { canonicalCardImagePath, canonicalBasePlatePath, legacyFinishedCardArtFor } from "../js/data/artwork.js";\nconst root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");\nconst exists=rel=>{if(!rel)return false;const clean=String(rel).split("?")[0].replace(/^\\.\\//,"");return fs.existsSync(path.join(root,clean));};\nlet missing=[];\nfor(const c of collectionCards){\n  if(c.kind==="momentum") continue; // Momentum uses generated graphic treatment, not photo plates.\n  const candidates=[canonicalCardImagePath(c),canonicalBasePlatePath(c)];\n  const legacy=legacyFinishedCardArtFor(c);if(legacy)candidates.push(String(legacy).split("?")[0]);\n  if(!candidates.some(exists))missing.push(c.id);\n}\nconsole.log(JSON.stringify({cards:collectionCards.length,photoCardsAudited:collectionCards.filter(c=>c.kind!=="momentum").length,missing:missing.length,missingIds:missing.slice(0,100)},null,2));\nif(missing.length)process.exit(1);\n''')
-
-          # Advance runtime cache identity so clients cannot stay pinned to 1.1.196.
-          p=Path('js/config/build.js')
-          s=p.read_text().replace('export const BUILD_VERSION = "1.1.196";','export const BUILD_VERSION = "1.1.199";')
-          p.write_text(s)
-          for fname in ['package.json','build.json']:
-            q=Path(fname)
-            if q.exists():
-              t=q.read_text()
-              t=t.replace('"version": "1.1.196"','"version": "1.1.199"')
-              q.write_text(t)
-          PY
           node --check js/ai/WrestlingAI.js
           node tools/full-card-tier-audit.mjs
-          node tools/art-audit.mjs || true
-          node tools/architecture-audit-temp.mjs || true
       - name: Commit fixes
-        shell: bash
         run: |
           git config user.name 'Swoop081'
           git config user.email 'justinbelot8@gmail.com'
-          git add js/ai/WrestlingAI.js tools/art-audit.mjs tools/architecture-audit-temp.mjs js/config/build.js package.json build.json 2>/dev/null || true
-          git commit -m 'v1.1.199 game health and AI simulation fixes'
+          git add js/ai/WrestlingAI.js
+          git commit -m 'v1.1.199 AI card-preservation hardening'
           git push origin main
