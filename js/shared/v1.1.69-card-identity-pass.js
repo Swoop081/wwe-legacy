@@ -99,7 +99,9 @@ function hasScalableMoveEffect(card){
 function auditedTierGrowthProfile(card){
   if(card?.moveType==='submission' || card?.submission) return 'submission';
   if(card?.finisher) return 'damage';
-  if(card?.defensiveOnly) return 'defensive';
+  // Defensive cards use the existing efficiency curve: Base/Emerald/Sapphire
+  // improve through cost, while Ruby/Amethyst gain the existing counter draws.
+  if(card?.defensiveOnly) return 'efficiency';
 
   const cost=Number(card?.cost)||0;
   const damage=Number(card?.damage)||0;
