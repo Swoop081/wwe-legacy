@@ -113,36 +113,57 @@ export function merchEligibilityForSuperstar(starOrId,itemOrId){
   if(Number.isFinite(limit)&&amount>limit) return {legal:false,reason:`Grants +${amount} ${label} Momentum · ${star.name} limit ${limit}`};
   return {legal:true,reason:`Compatible with ${star.name}'s ${label} limit`};
 }
-export function activeMerchSuperstarId(profile){
-  const active=profile?.activeMerch;
-  const item=active?.id?MERCH_BY_ID[active.id]:null;
-  if(!item) return null;
-  return active.superstarId??item.superstarId??profile?.starterId??null;
+function activeMerchMap(profile){
+  if(!profile) return {};
+  profile.activeMerchBySuperstar??={};
+  const legacy=profile.activeMerch;
+  if(legacy?.id){
+    const item=MERCH_BY_ID[legacy.id]??null;
+    const legacyTarget=legacy.superstarId??item?.superstarId??profile?.starterId??null;
+    if(legacyTarget&&!profile.activeMerchBySuperstar[legacyTarget]) profile.activeMerchBySuperstar[legacyTarget]={...legacy,superstarId:legacyTarget};
+    profile.activeMerch=null;
+  }
+  return profile.activeMerchBySuperstar;
+}
+export function activeMerchSuperstarId(profile,superstarId=null){
+  const map=activeMerchMap(profile);
+  const requested=String(superstarId??"").trim();
+  if(requested) return map[requested]?.id?requested:null;
+  const activeIds=Object.keys(map).filter(id=>map[id]?.id);
+  return activeIds.length===1?activeIds[0]:null;
 }
 export function equipMerch(profile,id,superstarId=null){
   const item=MERCH_BY_ID[id]; if(!profile||!item) throw new Error("Merch item not found.");
-  if(profile.activeMerch?.id) throw new Error("Finish or discard your active Merch before equipping another item.");
-  const targetId=item.superstarId??superstarId;
+  const targetId=String(item.superstarId??superstarId??"").trim();
   if(!targetId) throw new Error("Choose an eligible Superstar in Deck Lab before equipping Generic Merch.");
   const star=STAR_BY_ID.get(targetId);
   if(!star||(profile.unlockedSuperstars??[]).includes(targetId)===false) throw new Error(`Unlock ${star?.name??targetId} before using this Merch.`);
   const eligibility=merchEligibilityForSuperstar(star,item);
   if(!eligibility.legal) throw new Error(eligibility.reason);
+  const active=activeMerchMap(profile);
+  if(active[targetId]?.id) throw new Error(`${star.name} already has active Merch. Finish or discard it before equipping another card.`);
   const owned=Math.max(0,Number(profile.ownedMerch?.[id])||0); if(owned<1) throw new Error("You do not own this Merch.");
   profile.ownedMerch[id]=owned-1;
-  profile.activeMerch={id,superstarId:targetId,remainingMatches:item.duration,equippedAt:new Date().toISOString()};
-  return profile.activeMerch;
+  active[targetId]={id,superstarId:targetId,remainingMatches:item.duration,equippedAt:new Date().toISOString()};
+  return active[targetId];
 }
-export function discardActiveMerch(profile){ if(!profile) return null; const old=profile.activeMerch??null; profile.activeMerch=null; return old; }
+export function discardActiveMerch(profile,superstarId=null){
+  if(!profile) return null;
+  const active=activeMerchMap(profile);
+  const targetId=String(superstarId??activeMerchSuperstarId(profile)??"").trim();
+  if(!targetId||!active[targetId]?.id) return null;
+  const old=active[targetId];
+  delete active[targetId];
+  return old;
+}
 export function activeMerchItem(profile,superstarId=null){
-  const active=profile?.activeMerch; const item=active?.id?MERCH_BY_ID[active.id]:null;
-  if(!item) return null;
-  const targetId=activeMerchSuperstarId(profile);
-  if(superstarId){
-    if(targetId!==superstarId) return null;
-    if(!merchEligibilityForSuperstar(superstarId,item).legal) return null;
-  }
-  return {...item,remainingMatches:Math.max(0,Number(active.remainingMatches)||0),equippedSuperstarId:targetId};
+  const active=activeMerchMap(profile);
+  const targetId=String(superstarId??activeMerchSuperstarId(profile)??"").trim();
+  if(!targetId) return null;
+  const slot=active[targetId];
+  const item=slot?.id?MERCH_BY_ID[slot.id]:null;
+  if(!item||!merchEligibilityForSuperstar(targetId,item).legal) return null;
+  return {...item,remainingMatches:Math.max(0,Number(slot.remainingMatches)||0),equippedSuperstarId:targetId};
 }
 export function merchMatchModifier(profile,superstarId=""){ const targetId=String(superstarId??"").trim(); if(!targetId)return null; const item=activeMerchItem(profile,targetId); if(!item)return null; const e=item.effect??{}; const out={name:item.name,ruleText:item.rulesText,startingMomentum:{p1:{}},startingAdrenaline:{},startingHpBonus:{},firstMoveDamageMultiplier:{}}; if(e.type==="hp")out.startingHpBonus.p1=e.amount??0; if(e.type==="momentum")out.startingMomentum.p1[e.method]=e.amount??1; if(e.type==="adrenaline")out.startingAdrenaline.p1=e.amount??1; if(e.type==="shield")out.firstMoveDamageMultiplier.p1=e.multiplier??.5; return out; }
-export function consumeActiveMerchMatch(profile){ const a=profile?.activeMerch;if(!a?.id)return null; a.remainingMatches=Math.max(0,(Number(a.remainingMatches)||0)-1); const item=MERCH_BY_ID[a.id]??null; if(a.remainingMatches<=0)profile.activeMerch=null; return {item,remainingMatches:a.remainingMatches}; }
+export function consumeActiveMerchMatch(profile,superstarId=null){ const active=activeMerchMap(profile); const targetId=String(superstarId??activeMerchSuperstarId(profile)??"").trim(); const a=targetId?active[targetId]:null; if(!a?.id)return null; a.remainingMatches=Math.max(0,(Number(a.remainingMatches)||0)-1); const item=MERCH_BY_ID[a.id]??null; if(a.remainingMatches<=0)delete active[targetId]; return {item,superstarId:targetId,remainingMatches:Math.max(0,Number(a.remainingMatches)||0)}; }
