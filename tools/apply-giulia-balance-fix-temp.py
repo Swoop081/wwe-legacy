@@ -2,7 +2,8 @@ from pathlib import Path
 import re
 p=Path('js/data/decks.js')
 s=p.read_text()
-m=re.search(r'(\"giulia\"\s*:\s*\[)(.*?)(\n\s*\])',s,re.S)
+# decks.js uses object keys in either quoted or bare form depending on the section.
+m=re.search(r'((?:\"giulia\"|giulia)\s*:\s*\[)(.*?)(\n\s*\])',s,re.S)
 if not m: raise SystemExit('Giulia deck block not found')
 body=m.group(2)
 pattern=re.compile(r'\"momentum-(strength|strike|technical|agility)\"')
@@ -13,6 +14,5 @@ out=[]; last=0
 for hit,method in zip(matches,target):
     out.append(body[last:hit.start()]); out.append(f'\"momentum-{method}\"'); last=hit.end()
 out.append(body[last:])
-newbody=''.join(out)
-s=s[:m.start(2)]+newbody+s[m.end(2):]
+s=s[:m.start(2)]+''.join(out)+s[m.end(2):]
 p.write_text(s)
