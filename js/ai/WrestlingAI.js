@@ -157,9 +157,12 @@ function cpuActionPriority(state,pid,card){
    return need+Math.round(hitChance*40)+(p.hand.length<=4?10:0);
  }
  if(ef.type==='drawThenDiscardSelf'){
-   const net=(ef.draw??1)-(ef.discard??1);
-   if(net<=0)return -Infinity;
-   return 34+net*18+(p.hand.length<=4?12:0)+(!legal.length?16:0);
+   const draw=Math.max(0,ef.draw??1),discard=Math.max(0,ef.discard??1),net=draw-discard;
+   // A draw-then-ditch cycle still has real value at net zero: it filters a weak
+   // page out of hand and can find a needed Momentum/Move. Do not make these
+   // authored signature Actions invisible to the CPU just because net cards = 0.
+   if(draw<=0)return -Infinity;
+   return 30+Math.max(0,net)*18+(p.hand.length<=4?10:0)+(!legal.length?14:0);
  }
  if(ef.type==='paulHeymanPromo')return 48+(!legal.length?20:0)+(p.hand.length<=4?12:0);
  if(ef.type==='angleIntensity'){
@@ -190,6 +193,10 @@ function cpuActionPriority(state,pid,card){
  if(ef.type==='what')return (p.persistentActions?.['what']||p.support?.effect?.type==='what')?-Infinity:42;
  if(ef.type==='peopleChampionship')return (p.persistentActions?.['peopleChampionship']||p.support?.effect?.type==='peopleChampionship')?-Infinity:(p.hp<=p.maxHp*.5?58:34);
  if(ef.type==='hustleLoyaltyRespect')return (p.persistentActions?.['hustleLoyaltyRespect']||p.support?.effect?.type==='hustleLoyaltyRespect')?-Infinity:(p.hp<=p.maxHp*.5?60:36);
+ // Future/authored Superstar Actions should never become dead cards merely because
+ // their effect type has not yet received bespoke AI scoring. canPlayAction() has
+ // already verified the authored play condition, so give a conservative fallback.
+ if(card.superstarId)return 32+(!legal.length?10:0)+(p.hand.length<=4?5:0);
  return -Infinity;
 }
 function cpuBestAction(state,pid,minScore=1){
@@ -514,7 +521,13 @@ export function cpuDecision(game,pid="p2"){
    const legalNormal=p.hand.filter(x=>x.kind==="move"&&counterEligibility(s,pid,incoming,x).legal);
    if(legalNormal.length){
      const nonFinisher=legalNormal.filter(x=>!x.finisher),pool=nonFinisher.length?nonFinisher:legalNormal;
-     const chosen=[...pool].sort((a,b)=>{const av=cpuDiscardPreservationScore(a)-(a.defensiveOnly?18:Math.min(22,(a.damage??0)*2)),bv=cpuDiscardPreservationScore(b)-(b.defensiveOnly?18:Math.min(22,(b.damage??0)*2));return av-bv;})[0];
+     const chosen=[...pool].sort((a,b)=>{
+        // Counter with purpose-built defensive pages first and preserve offensive
+        // damage, Trademarks, Finishers and Specials for the player's own turn.
+        const av=cpuDiscardPreservationScore(a)+(a.defensiveOnly?-60:Math.min(45,(a.damage??0)*3));
+        const bv=cpuDiscardPreservationScore(b)+(b.defensiveOnly?-60:Math.min(45,(b.damage??0)*3));
+        return av-bv;
+      })[0];
      return{type:"counter",card:chosen};
    }
    const repeats=p.hand.filter(x=>x.kind==="action"&&x.effect?.type==="onceTooOften"&&counterEligibility(s,pid,incoming,x).legal),repeat=repeats[0],repeatThreat=repeat?cpuRepeatThreat(s,pid,incoming):0;

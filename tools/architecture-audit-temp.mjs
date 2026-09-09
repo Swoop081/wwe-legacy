@@ -25,7 +25,7 @@ for(const id of activeIds){
  const signatureMissing=(s?.signatures||[]).filter(x=>!ids.includes(x));
  rows.push({id,name:s?.name||bal.stats[id].name,setId:s?.setId,hp:s?.hp,winRate:+(bal.stats[id].wins/bal.stats[id].matches*100).toFixed(2),ability:s?.ability?.name||'',abilityType:abilityType(s),specialType:s?.special?.type||'',methodLimits:s?.methodLimits,starterMomentum:s?.starterMomentum,deckMomentum:mom,reqMax,methodCount:uniqueMethods.length,methods:uniqueMethods,deckSize:ids.length,missingCards:ids.filter(x=>!byId.has(x)),inaccessible:[...new Set(inaccessible)],exclusiveCount:exclusive.length,exclusiveActions:actions.map(c=>c.id),finishers:finishers.map(c=>c.id),trademarks:trademarks.map(c=>c.id),reversalLike:reversals,signatureMissing});
 }
-fs.writeFileSync('/mnt/data/architecture_rows.json',JSON.stringify(rows,null,2));
+fs.writeFileSync('./architecture_rows.json',JSON.stringify(rows,null,2));
 console.log('active',rows.length,'hp',Math.min(...rows.map(r=>r.hp)),Math.max(...rows.map(r=>r.hp)));
 console.log('deck size !=60',rows.filter(r=>r.deckSize!==60).map(r=>[r.name,r.deckSize]));
 console.log('missing card ids',rows.filter(r=>r.missingCards.length).map(r=>[r.name,r.missingCards]));
