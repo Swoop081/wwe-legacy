@@ -21,6 +21,7 @@ jobs:
         shell: bash
         run: |
           set +e
+          echo "Full WWE Legacy audit suite"
           scripts=(
             tools/full-card-tier-audit.mjs
             tools/ai-action-usage-audit.mjs
