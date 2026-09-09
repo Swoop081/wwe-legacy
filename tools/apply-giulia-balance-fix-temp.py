@@ -1,18 +1,21 @@
 from pathlib import Path
-import re
 p=Path('js/data/decks.js')
 s=p.read_text()
-# decks.js uses object keys in either quoted or bare form depending on the section.
-m=re.search(r'((?:\"giulia\"|giulia)\s*:\s*\[)(.*?)(\n\s*\])',s,re.S)
-if not m: raise SystemExit('Giulia deck block not found')
-body=m.group(2)
-pattern=re.compile(r'\"momentum-(strength|strike|technical|agility)\"')
-matches=list(pattern.finditer(body))
-if len(matches)!=12: raise SystemExit(f'Expected 12 Giulia Momentum cards, found {len(matches)}')
-target=['technical']*6+['strike']*4+['agility','strength']
-out=[]; last=0
-for hit,method in zip(matches,target):
-    out.append(body[last:hit.start()]); out.append(f'\"momentum-{method}\"'); last=hit.end()
-out.append(body[last:])
-s=s[:m.start(2)]+''.join(out)+s[m.end(2):]
+old='deckIds["giulia"]=cloneRoadmapDeck("tatum-paxley","giulia",["giulia-hammerlock-michinoku-driver","giulia-avalanche-butterfly-suplex","giulia-arrivederci","giulia-northern-lights-bomb"],"special-giulia",{"momentum-agility":"momentum-technical"});'
+new='''deckIds["giulia"]=cloneRoadmapDeck("tatum-paxley","giulia",["giulia-hammerlock-michinoku-driver","giulia-avalanche-butterfly-suplex","giulia-arrivederci","giulia-northern-lights-bomb"],"special-giulia");
+// Giulia's authored 12-Momentum identity is 6 Technical / 4 Strike / 1 Agility / 1 Strength.
+// The roadmap clone previously converted all four Agility pages to Technical, leaving
+// her Agility and Strength requirements unreachable in actual matches.
+{
+  const ids=deckIds["giulia"]??[];
+  let agilitySeen=0;
+  for(let i=0;i<ids.length;i++){
+    if(ids[i]!=="momentum-agility")continue;
+    agilitySeen++;
+    if(agilitySeen<=2)ids[i]="momentum-strike";
+    else if(agilitySeen===3)ids[i]="momentum-strength";
+  }
+}'''
+if old not in s: raise SystemExit('Exact Giulia roadmap assignment not found')
+s=s.replace(old,new,1)
 p.write_text(s)
