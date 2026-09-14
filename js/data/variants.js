@@ -20,6 +20,7 @@ export function normalizeCardTier(value, fallback = "normal") {
   return CARD_TIERS.includes(key) ? key : fallback;
 }
 export function fixedPrintingTierFor(card) {
+  if (card?.kind === "momentum") return "normal";
   if (card?.kind === "superstar" || card?.kind === "entrance") return "amethyst";
   const raw = String(card?.fixedPrintingTier ?? "").toLowerCase();
   if (CARD_TIERS.includes(raw)) return raw;
@@ -146,9 +147,8 @@ function tierIdentityNote(card,tier){
   return `${label} printing.`;
 }
 function applyMomentumAmount(card,tier){
-  // Five distinct permanent-Momentum printings without rewriting the Method:
-  // Base 1, Emerald 2, Sapphire 3, Ruby 4, Amethyst 5.
-  return Math.max(1,1+tierRank(tier));
+  // Momentum is a single Base-only resource card. It always grants exactly +1.
+  return 1;
 }
 function entranceTierPackage(card,tier){
   const rank=tierRank(tier);

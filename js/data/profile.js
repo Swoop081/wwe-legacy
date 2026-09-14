@@ -20,7 +20,7 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 47;
+export const PROFILE_VERSION = 48;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -774,6 +774,27 @@ export function migrateProfile(old) {
     owned.sapphire = Math.max(0, Number(owned.sapphire) || 0);
     owned.ruby = Math.max(0, Number(owned.ruby) || 0);
     owned.amethyst = Math.max(0, Number(owned.amethyst) || 0);
+  }
+
+  // v48: Momentum has one Base printing only. Collapse historical gem Momentum into Base.
+  for (const method of MOMENTUM_METHODS) {
+    const id = `momentum-${method}`;
+    const card = cardById.get(id);
+    const owned = p.ownedCards?.[id];
+    if (owned && typeof owned === "object") {
+      const total = CARD_TIERS.reduce((sum, tier) => sum + Math.max(0, Number(owned[tier]) || 0), 0);
+      p.ownedCards[id] = { normal: Math.min(cardOwnershipCap(card), total), emerald: 0, sapphire: 0, ruby: 0, amethyst: 0 };
+    }
+  }
+  for (const saved of Object.values(p.savedDecks ?? {})) {
+    if (!Array.isArray(saved)) continue;
+    for (let i = 0; i < saved.length; i += 1) {
+      const entry = saved[i];
+      const id = typeof entry === "string" ? entry : entry?.id;
+      if (!String(id ?? "").startsWith("momentum-")) continue;
+      saved[i] = { ...(typeof entry === "string" ? { id } : entry), tier: "normal" };
+      delete saved[i].foil;
+    }
   }
 
   // v1.1.30: Diamond was the legacy name for the fifth printing. Preserve all
