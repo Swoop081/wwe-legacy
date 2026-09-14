@@ -1,0 +1,54 @@
+name: Momentum Base Only Migration Temp
+on:
+  push:
+    paths:
+      - '.github/workflows/momentum-base-only-migration-temp.yml'
+permissions:
+  contents: write
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make Momentum base-only and migrate saves
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          v=Path('js/data/variants.js')
+          s=v.read_text()
+          s=s.replace('if (card?.kind === "superstar" || card?.kind === "entrance") return "amethyst";', 'if (card?.kind === "momentum") return "normal";\n  if (card?.kind === "superstar" || card?.kind === "entrance") return "amethyst";', 1)
+          s=s.replace('''function applyMomentumAmount(card,tier){
+  // Five distinct permanent-Momentum printings without rewriting the Method:
+  // Base 1, Emerald 2, Sapphire 3, Ruby 4, Amethyst 5.
+  return Math.max(1,1+tierRank(tier));
+}''','''function applyMomentumAmount(card,tier){
+  // Momentum is a single Base-only resource card. It always grants exactly +1.
+  return 1;
+}''',1)
+          if 'if (card?.kind === "momentum") return "normal";' not in s or 'return 1;\n}' not in s:
+              raise SystemExit('variants patch failed')
+          v.write_text(s)
+
+          p=Path('js/data/profile.js')
+          s=p.read_text()
+          s=s.replace('export const PROFILE_VERSION = 47;', 'export const PROFILE_VERSION = 48;', 1)
+          needle='''  for (const saved of Object.values(p.savedDecks ?? {})) if (Array.isArray(saved)) for (const entry of saved) {
+    const id = typeof entry === "string" ? entry : entry?.id;
+    if (entry && typeof entry === "object" && fixedPrintingTierFor(cardById.get(id)) === "amethyst") entry.tier = "amethyst";
+  }
+'''
+          replacement=needle+'''\n  // v48: Momentum has one Base printing only. Collapse all historical gem-tier\n  // Momentum ownership into Base and rewrite every saved deck to Base Momentum.\n  for (const method of MOMENTUM_METHODS) {\n    const id = `momentum-${method}`;\n    const card = cardById.get(id);\n    const owned = p.ownedCards?.[id];\n    if (owned && typeof owned === "object") {\n      const total = CARD_TIERS.reduce((sum, tier) => sum + Math.max(0, Number(owned[tier]) || 0), 0);\n      p.ownedCards[id] = { normal: Math.min(cardOwnershipCap(card), total), emerald: 0, sapphire: 0, ruby: 0, amethyst: 0 };\n    }\n  }\n  for (const saved of Object.values(p.savedDecks ?? {})) {\n    if (!Array.isArray(saved)) continue;\n    for (let i = 0; i < saved.length; i += 1) {\n      const entry = saved[i];\n      const id = typeof entry === "string" ? entry : entry?.id;\n      if (!String(id ?? "").startsWith("momentum-")) continue;\n      saved[i] = { ...(typeof entry === "string" ? { id } : entry), tier: "normal" };\n      delete saved[i].foil;\n    }\n  }\n'''
+          if needle not in s: raise SystemExit('profile migration insertion point missing')
+          s=s.replace(needle,replacement,1)
+          if 'export const PROFILE_VERSION = 48;' not in s or 'Momentum has one Base printing only' not in s:
+              raise SystemExit('profile patch failed')
+          p.write_text(s)
+          PY
+      - name: Commit migration
+        run: |
+          git config user.name 'Swoop081'
+          git config user.email 'justinbelot8@gmail.com'
+          git add js/data/variants.js js/data/profile.js
+          git commit -m 'Make Momentum cards Base-only and migrate existing decks'
+          git push
