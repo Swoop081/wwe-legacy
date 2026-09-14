@@ -1,54 +1,21 @@
 name: Momentum Base Only Migration Temp
-on:
-  push:
-    paths:
-      - '.github/workflows/momentum-base-only-migration-temp.yml'
+on: [push]
 permissions:
   contents: write
 jobs:
   migrate:
+    if: github.event.head_commit.message == 'Fix Momentum migration workflow'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Make Momentum base-only and migrate saves
+      - name: Patch
         run: |
-          python <<'PY'
-          from pathlib import Path
-
-          v=Path('js/data/variants.js')
-          s=v.read_text()
-          s=s.replace('if (card?.kind === "superstar" || card?.kind === "entrance") return "amethyst";', 'if (card?.kind === "momentum") return "normal";\n  if (card?.kind === "superstar" || card?.kind === "entrance") return "amethyst";', 1)
-          s=s.replace('''function applyMomentumAmount(card,tier){
-  // Five distinct permanent-Momentum printings without rewriting the Method:
-  // Base 1, Emerald 2, Sapphire 3, Ruby 4, Amethyst 5.
-  return Math.max(1,1+tierRank(tier));
-}''','''function applyMomentumAmount(card,tier){
-  // Momentum is a single Base-only resource card. It always grants exactly +1.
-  return 1;
-}''',1)
-          if 'if (card?.kind === "momentum") return "normal";' not in s or 'return 1;\n}' not in s:
-              raise SystemExit('variants patch failed')
-          v.write_text(s)
-
-          p=Path('js/data/profile.js')
-          s=p.read_text()
-          s=s.replace('export const PROFILE_VERSION = 47;', 'export const PROFILE_VERSION = 48;', 1)
-          needle='''  for (const saved of Object.values(p.savedDecks ?? {})) if (Array.isArray(saved)) for (const entry of saved) {
-    const id = typeof entry === "string" ? entry : entry?.id;
-    if (entry && typeof entry === "object" && fixedPrintingTierFor(cardById.get(id)) === "amethyst") entry.tier = "amethyst";
-  }
-'''
-          replacement=needle+'''\n  // v48: Momentum has one Base printing only. Collapse all historical gem-tier\n  // Momentum ownership into Base and rewrite every saved deck to Base Momentum.\n  for (const method of MOMENTUM_METHODS) {\n    const id = `momentum-${method}`;\n    const card = cardById.get(id);\n    const owned = p.ownedCards?.[id];\n    if (owned && typeof owned === "object") {\n      const total = CARD_TIERS.reduce((sum, tier) => sum + Math.max(0, Number(owned[tier]) || 0), 0);\n      p.ownedCards[id] = { normal: Math.min(cardOwnershipCap(card), total), emerald: 0, sapphire: 0, ruby: 0, amethyst: 0 };\n    }\n  }\n  for (const saved of Object.values(p.savedDecks ?? {})) {\n    if (!Array.isArray(saved)) continue;\n    for (let i = 0; i < saved.length; i += 1) {\n      const entry = saved[i];\n      const id = typeof entry === "string" ? entry : entry?.id;\n      if (!String(id ?? "").startsWith("momentum-")) continue;\n      saved[i] = { ...(typeof entry === "string" ? { id } : entry), tier: "normal" };\n      delete saved[i].foil;\n    }\n  }\n'''
-          if needle not in s: raise SystemExit('profile migration insertion point missing')
-          s=s.replace(needle,replacement,1)
-          if 'export const PROFILE_VERSION = 48;' not in s or 'Momentum has one Base printing only' not in s:
-              raise SystemExit('profile patch failed')
-          p.write_text(s)
-          PY
-      - name: Commit migration
+          echo 'ZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCnY9UGF0aCgnanMvZGF0YS92YXJpYW50cy5qcycpCnM9di5yZWFkX3RleHQoKQpvbGQ9J2lmIChjYXJkPy5raW5kID09PSAic3VwZXJzdGFyIiB8fCBjYXJkPy5raW5kID09PSAiZW50cmFuY2UiKSByZXR1cm4gImFtZXRoeXN0IjsnCmFzc2VydCBvbGQgaW4gcwpzPXMucmVwbGFjZShvbGQsJ2lmIChjYXJkPy5raW5kID09PSAibW9tZW50dW0iKSByZXR1cm4gIm5vcm1hbCI7XG4gICcrb2xkLDEpCm9sZDI9J2Z1bmN0aW9uIGFwcGx5TW9tZW50dW1BbW91bnQoY2FyZCx0aWVyKXtcbiAgLy8gRml2ZSBkaXN0aW5jdCBwZXJtYW5lbnQtTW9tZW50dW0gcHJpbnRpbmdzIHdpdGhvdXQgcmV3cml0aW5nIHRoZSBNZXRob2Q6XG4gIC8vIEJhc2UgMSwgRW1lcmFsZCAyLCBTYXBwaGlyZSAzLCBSdWJ5IDQsIEFtZXRoeXN0IDUuXG4gIHJldHVybiBNYXRoLm1heCgxLDErdGllclJhbmsodGllcikpO1xufScKbmV3Mj0nZnVuY3Rpb24gYXBwbHlNb21lbnR1bUFtb3VudChjYXJkLHRpZXIpe1xuICAvLyBNb21lbnR1bSBpcyBhIHNpbmdsZSBCYXNlLW9ubHkgcmVzb3VyY2UgY2FyZC4gSXQgYWx3YXlzIGdyYW50cyBleGFjdGx5ICsxLlxuICByZXR1cm4gMTtcbn0nCmFzc2VydCBvbGQyIGluIHMKdi53cml0ZV90ZXh0KHMucmVwbGFjZShvbGQyLG5ldzIsMSkpCnA9UGF0aCgnanMvZGF0YS9wcm9maWxlLmpzJykKcz1wLnJlYWRfdGV4dCgpCmFzc2VydCAnZXhwb3J0IGNvbnN0IFBST0ZJTEVfVkVSU0lPTiA9IDQ3OycgaW4gcwpzPXMucmVwbGFjZSgnZXhwb3J0IGNvbnN0IFBST0ZJTEVfVkVSU0lPTiA9IDQ3OycsJ2V4cG9ydCBjb25zdCBQUk9GSUxFX1ZFUlNJT04gPSA0ODsnLDEpCm5lZWRsZT0nICAvLyB2MS4xLjMwOiBEaWFtb25kIHdhcyB0aGUgbGVnYWN5IG5hbWUgZm9yIHRoZSBmaWZ0aCBwcmludGluZy4gUHJlc2VydmUgYWxsJwptaWdyYXRpb249JycnICAvLyB2NDg6IE1vbWVudHVtIGhhcyBvbmUgQmFzZSBwcmludGluZyBvbmx5LiBDb2xsYXBzZSBoaXN0b3JpY2FsIGdlbSBNb21lbnR1bSBpbnRvIEJhc2UuCiAgZm9yIChjb25zdCBtZXRob2Qgb2YgTU9NRU5UVU1fTUVUSE9EUykgewogICAgY29uc3QgaWQgPSBgbW9tZW50dW0tJHttZXRob2R9YDsKICAgIGNvbnN0IGNhcmQgPSBjYXJkQnlJZC5nZXQoaWQpOwogICAgY29uc3Qgb3duZWQgPSBwLm93bmVkQ2FyZHM/LltpZF07CiAgICBpZiAob3duZWQgJiYgdHlwZW9mIG93bmVkID09PSAib2JqZWN0IikgewogICAgICBjb25zdCB0b3RhbCA9IENBUkRfVElFUlMucmVkdWNlKChzdW0sIHRpZXIpID0+IHN1bSArIE1hdGgubWF4KDAsIE51bWJlcihvd25lZFt0aWVyXSkgfHwgMCksIDApOwogICAgICBwLm93bmVkQ2FyZHNbaWRdID0geyBub3JtYWw6IE1hdGgubWluKGNhcmRPd25lcnNoaXBDYXAoY2FyZCksIHRvdGFsKSwgZW1lcmFsZDogMCwgc2FwcGhpcmU6IDAsIHJ1Ynk6IDAsIGFtZXRoeXN0OiAwIH07CiAgICB9CiAgfQogIGZvciAoY29uc3Qgc2F2ZWQgb2YgT2JqZWN0LnZhbHVlcyhwLnNhdmVkRGVja3MgPz8ge30pKSB7CiAgICBpZiAoIUFycmF5LmlzQXJyYXkoc2F2ZWQpKSBjb250aW51ZTsKICAgIGZvciAobGV0IGkgPSAwOyBpIDwgc2F2ZWQubGVuZ3RoOyBpICs9IDEpIHsKICAgICAgY29uc3QgZW50cnkgPSBzYXZlZFtpXTsKICAgICAgY29uc3QgaWQgPSB0eXBlb2YgZW50cnkgPT09ICJzdHJpbmciID8gZW50cnkgOiBlbnRyeT8uaWQ7CiAgICAgIGlmICghU3RyaW5nKGlkID8/ICIiKS5zdGFydHNXaXRoKCJtb21lbnR1bS0iKSkgY29udGludWU7CiAgICAgIHNhdmVkW2ldID0geyAuLi4odHlwZW9mIGVudHJ5ID09PSAic3RyaW5nIiA/IHsgaWQgfSA6IGVudHJ5KSwgdGllcjogIm5vcm1hbCIgfTsKICAgICAgZGVsZXRlIHNhdmVkW2ldLmZvaWw7CiAgICB9CiAgfQoKJycnCmFzc2VydCBuZWVkbGUgaW4gcwpwLndyaXRlX3RleHQocy5yZXBsYWNlKG5lZWRsZSxtaWdyYXRpb24rbmVlZGxlLDEpKQo=' | base64 -d > /tmp/patch.py
+          python /tmp/patch.py
+      - name: Commit
         run: |
-          git config user.name 'Swoop081'
-          git config user.email 'justinbelot8@gmail.com'
+          git config user.name Swoop081
+          git config user.email justinbelot8@gmail.com
           git add js/data/variants.js js/data/profile.js
-          git commit -m 'Make Momentum cards Base-only and migrate existing decks'
+          git commit -m 'Make Momentum Base-only and migrate existing decks'
           git push
