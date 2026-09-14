@@ -20,7 +20,7 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 46;
+export const PROFILE_VERSION = 47;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -334,6 +334,7 @@ export function createProfile(starterInput) {
     survivorSeries: { activeRun: null, clears: 0 },
     dailySpin: { lastSpinAt: null, nextSpinAt: null, totalSpins: 0, lastReward: null },
     ownedMerch: {},
+    activeMerchBySuperstar: {},
     activeMerch: null,
     ownedSuperstarVariants: {},
     equippedSuperstarVariants: {},
@@ -757,6 +758,12 @@ export function migrateProfile(old) {
   p.survivorSeries ??= { activeRun: null, clears: 0 };
   p.dailySpin ??= { lastSpinAt: null, nextSpinAt: null, totalSpins: 0, lastReward: null };
   p.ownedMerch ??= {};
+  p.activeMerchBySuperstar ??= {};
+  if(p.activeMerch?.id){
+    const legacyTarget=p.activeMerch.superstarId??p.starterId??null;
+    if(legacyTarget&&!p.activeMerchBySuperstar[legacyTarget]) p.activeMerchBySuperstar[legacyTarget]={...p.activeMerch,superstarId:legacyTarget};
+    p.activeMerch=null;
+  }
   p.activeMerch ??= null;
   p.ownedSuperstarVariants ??= {};
   p.equippedSuperstarVariants ??= {};
