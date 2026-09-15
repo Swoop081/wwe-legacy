@@ -355,7 +355,44 @@ async function encodedCardFile(){const quality=Number($("#quality").value)/100,c
 function renderForExport(){state.exportingPlate=isLayeredFormat();state.renderPlateOnly=state.exportingPlate;draw();}
 function restorePreviewAfterExport(){state.exportingPlate=false;state.renderPlateOnly=previewPlateOnly();draw();}
 function download(blob,name){const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name;a.style.display="none";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);}
-async function prepareExport(){const card=currentCard();if(!card)throw new Error("Choose a card before exporting.");if(isHeadshotMode()&&card.kind!=="superstar")throw new Error("HUD Headshot export is available on Superstar cards only.");if(!state.art&&card.kind!=="momentum")throw new Error("Choose or load artwork before exporting.");renderForExport();if(!canvasIsOriginClean()){resetCanvasSurface();renderForExport();}if(!canvasIsOriginClean()){const src=String(state.art?.currentSrc||state.art?.src||"");if(src.startsWith("blob:")||src.startsWith("data:")){resetCanvasSurface();renderForExport();}if(!canvasIsOriginClean())throw new Error("This artwork source cannot be exported safely. Re-select only the artwork image with the file picker; all WWE Legacy templates and set logos are now export-safe automatically.");}return card;}
+async function prepareExport(){
+  const originalCanvas=canvas;
+  const originalCtx=ctx;
+  const originalImages=[];
+  const revoke=[];
+  try{
+    // Localise all loaded image elements used anywhere by the Studio renderer.
+    const imgs=[...document.images];
+    for(const img of imgs){
+      const src=String(img.currentSrc||img.src||'');
+      if(!src||src.startsWith('blob:')||src.startsWith('data:'))continue;
+      let u;
+      try{u=new URL(src,location.href)}catch(_){continue}
+      if(u.origin===location.origin)continue;
+      const r=await fetch(src,{mode:'cors',credentials:'omit',cache:'no-store'});
+      if(!r.ok)throw new Error('Export layer could not be localised: '+r.status);
+      const b=await r.blob();
+      const local=URL.createObjectURL(b); revoke.push(local);
+      originalImages.push([img,img.src]);
+      await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=local;});
+    }
+    // Render from state onto a completely new surface. Never export the live preview canvas.
+    const clean=document.createElement('canvas');
+    clean.width=canvas.width; clean.height=canvas.height;
+    canvas=clean; ctx=clean.getContext('2d',{alpha:true});
+    resetCanvasSurface();
+    renderForExport();
+    await new Promise(requestAnimationFrame);
+    if(!canvasIsOriginClean())throw new Error('A rendered card layer is still cross-origin after clean export reconstruction.');
+    return clean;
+  }catch(error){
+    throw error;
+  }finally{
+    canvas=originalCanvas; ctx=originalCtx;
+    for(const [img,src] of originalImages){img.src=src;}
+    for(const u of revoke)URL.revokeObjectURL(u);
+  }
+}
 async function exportWebp(){try{const card=await prepareExport();status(isLayeredFormat()?"Encoding canonical base plate…":"Encoding finished front…");const file=await encodedCardFile();download(file.blob,file.name);const layeredNote=isLayeredFormat()?" This is the canonical base-plate path from ASSET-MIGRATION.csv.":"";const note=file.format==="WebP"?`Put it at ${destinationFor(card)}.${layeredNote}`:`PNG fallback saved. Use the Bulk PNG/JPG → WebP Converter before installing it at ${destinationFor(card)}.${layeredNote}`;status(`Saved ${file.name} (${file.format}). ${note}`,true);}catch(error){status(`Export failed: ${error?.message||error}`,false);}finally{restorePreviewAfterExport();}}
 async function shareCard(){try{const card=await prepareExport();status(isLayeredFormat()?"Preparing canonical base plate for the iPhone share sheet…":"Preparing finished front for the iPhone share sheet…");const out=await encodedCardFile(),file=new File([out.blob],out.name,{type:out.blob.type});if(navigator.share&&navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:`WWE Legacy — ${card.name}`});status(`Shared ${out.name}. Choose Google Drive or Files in the iOS share sheet.`,true);return;}download(out.blob,out.name);status(`Native file sharing is unavailable here, so ${out.name} was downloaded instead.`,true);}catch(error){if(error?.name==="AbortError")return status("Share cancelled.");status(`Share failed: ${error?.message||error}`,false);}finally{restorePreviewAfterExport();}}
 function pointerDistance(){const pts=[...state.pointerMap.values()];return pts.length<2?null:Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y);}
