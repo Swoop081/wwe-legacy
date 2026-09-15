@@ -19747,6 +19747,34 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "running-aerial"
+  },
+  {
+    "id": "charlotte-flair-moonsault",
+    "name": "Charlotte's Moonsault",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "superstarId": "charlotte-flair",
+    "trademark": true,
+    "method": "agility",
+    "moveType": "aerial",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 1
+    },
+    "rarity": 3,
+    "rulesText": "Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "diving-aerial"
   }
 ];
 allGameplayCards.push(...FUTURE_ROADMAP_GAMEPLAY_CARDS, ...V1175_AUTHENTICITY_CARDS);
