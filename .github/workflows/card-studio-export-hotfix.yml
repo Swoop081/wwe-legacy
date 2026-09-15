@@ -1,9 +1,9 @@
-name: Card Studio Export Layer Isolation Repair
+name: Card Studio Export Canvas Verification Fix
 on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/card-studio-repair-trigger-v5'
+      - '.github/card-studio-repair-trigger-v6'
 permissions:
   contents: write
 jobs:
@@ -13,73 +13,38 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Patch renderer with per-draw export safety isolation
+      - name: Fix false taint verification against preview canvas
         shell: python
         run: |
           from pathlib import Path
-          import re
           p=Path('js/tools/card-art-studio-core.js')
           s=p.read_text(encoding='utf-8')
-          # Replace v1.1.207 prepareExport. During the clean render, intercept drawImage.
-          # Before each image reaches the real clean canvas, probe it on a tiny fresh canvas.
-          # Unsafe image layers are skipped instead of poisoning the entire finished front.
-          marker='async function prepareExport()'
-          i=s.find(marker)
-          if i<0: raise SystemExit('prepareExport not found')
-          j=s.find('async function',i+len(marker))
-          if j<0: raise SystemExit('next async function not found')
-          new=r'''async function prepareExport(){
-            const originalCanvas=canvas,originalCtx=ctx;
-            const clean=document.createElement('canvas');
-            clean.width=canvas.width;clean.height=canvas.height;
-            const cleanCtx=clean.getContext('2d',{alpha:true});
-            const nativeDraw=cleanCtx.drawImage.bind(cleanCtx);
-            const skipped=[];
-            cleanCtx.drawImage=function(source,...args){
-              try{
-                const probe=document.createElement('canvas');probe.width=1;probe.height=1;
-                const pc=probe.getContext('2d');
-                pc.drawImage(source,0,0,1,1);
-                pc.getImageData(0,0,1,1);
-              }catch(e){
-                skipped.push(String(source?.currentSrc||source?.src||source?.tagName||'unknown layer'));
-                return;
-              }
-              return nativeDraw(source,...args);
-            };
-            try{
-              canvas=clean;ctx=cleanCtx;
-              resetCanvasSurface();renderForExport();
-              await new Promise(requestAnimationFrame);
-              if(!canvasIsOriginClean())throw new Error('Clean export canvas was tainted outside drawImage.');
-              if(skipped.length)console.warn('[WWE Legacy Card Studio] skipped unsafe export layers',skipped);
-              return clean;
-            }finally{canvas=originalCanvas;ctx=originalCtx;}
-          }
-          '''
-          s=s[:i]+new+s[j:]
+          old="if(!canvasIsOriginClean())throw new Error('Clean export canvas was tainted outside drawImage.');"
+          new="try{cleanCtx.getImageData(0,0,1,1);}catch(e){throw new Error('Clean export canvas is still cross-origin after isolated rendering.');}"
+          if old not in s: raise SystemExit('v1.1.208 false verification line not found')
+          s=s.replace(old,new,1)
           p.write_text(s,encoding='utf-8')
-      - name: Bump Studio to v1.1.208
+      - name: Bump Studio to v1.1.209
         shell: python
         run: |
           from pathlib import Path
           import re
           h=Path('tools/card-art-studio.html');s=h.read_text(encoding='utf-8')
-          s=re.sub(r'CARD ART STUDIO · v1\.1\.\d+','CARD ART STUDIO · v1.1.208',s)
-          s=re.sub(r'card-art-studio\.js\?v=[^"\']+','card-art-studio.js?v=1.1.208-export-layer-isolation',s)
-          s=re.sub(r'card-art-studio-url-export-guard\.js\?v=[^"\']+','card-art-studio-url-export-guard.js?v=1.1.208',s)
+          s=re.sub(r'CARD ART STUDIO · v1\.1\.\d+','CARD ART STUDIO · v1.1.209',s)
+          s=re.sub(r'card-art-studio\.js\?v=[^"\']+','card-art-studio.js?v=1.1.209-export-canvas-verification',s)
+          s=re.sub(r'card-art-studio-url-export-guard\.js\?v=[^"\']+','card-art-studio-url-export-guard.js?v=1.1.209',s)
           h.write_text(s,encoding='utf-8')
           w=Path('js/tools/card-art-studio.js');x=w.read_text(encoding='utf-8')
-          x=re.sub(r'card-art-studio-core\.js\?v=[^"\']+','card-art-studio-core.js?v=1.1.208-export-layer-isolation',x)
+          x=re.sub(r'card-art-studio-core\.js\?v=[^"\']+','card-art-studio-core.js?v=1.1.209-export-canvas-verification',x)
           w.write_text(x,encoding='utf-8')
       - name: Verify and commit
         run: |
           node --check js/tools/card-art-studio-core.js
-          grep -q 'v1.1.208' tools/card-art-studio.html
-          grep -q '1.1.208-export-layer-isolation' js/tools/card-art-studio.js
+          grep -q 'v1.1.209' tools/card-art-studio.html
+          grep -q '1.1.209-export-canvas-verification' js/tools/card-art-studio.js
           git config user.name "WWE Legacy Build Bot"
           git config user.email "actions@users.noreply.github.com"
           git add js/tools/card-art-studio-core.js js/tools/card-art-studio.js tools/card-art-studio.html
           git diff --cached --check
-          git commit -m "v1.1.208 isolate unsafe Card Studio export layers"
+          git commit -m "v1.1.209 verify actual clean Card Studio export canvas"
           git push origin main
