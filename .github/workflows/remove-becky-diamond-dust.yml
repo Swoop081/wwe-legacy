@@ -1,0 +1,64 @@
+name: Remove Becky Diamond Dust
+on:
+  push:
+    paths: ['.github/remove-becky-diamond-dust-trigger']
+permissions:
+  contents: write
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Remove EVO1-008 by canonical ID
+        shell: python
+        run: |
+          from pathlib import Path
+          import re,json
+          mp=Path('js/data/card-number-manifest.js'); ms=mp.read_text()
+          m=re.search(r'\{\s*"id":\s*"([^"]+)"[^{}]*"cardCode":\s*"EVO1-008"\s*\}',ms,re.S)
+          if not m: raise SystemExit('EVO1-008 not found in manifest')
+          cid=m.group(1); print('EVO1-008 canonical id:',cid)
+          cp=Path('js/data/content.js'); s=cp.read_text(); needle='"id": "'+cid+'"'; pos=s.find(needle)
+          if pos<0: raise SystemExit('EVO1-008 gameplay object not found')
+          start=s.rfind('{',0,pos); obj,end=json.JSONDecoder().raw_decode(s[start:])
+          print('EVO1-008 name:',obj.get('name'),'superstar:',obj.get('superstarId'))
+          if obj.get('name')!='Diamond Dust': raise SystemExit('EVO1-008 is not Diamond Dust; refusing removal')
+          if obj.get('superstarId')!='becky-lynch': raise SystemExit('EVO1-008 is not Becky Lynch; refusing removal')
+          # Remove canonical gameplay object.
+          a=start; b=start+end
+          while b<len(s) and s[b] in ' \t\r\n': b+=1
+          if b<len(s) and s[b]==',': b+=1
+          cp.write_text(s[:a]+s[b:])
+          # Remove all deck/library references to the exact canonical ID.
+          for p in Path('js/data').glob('*.js'):
+            if p==cp or p==mp: continue
+            t=p.read_text(); old=t
+            t=re.sub(r'(["\'])'+re.escape(cid)+r'\1\s*,?\s*','',t)
+            if t!=old: p.write_text(t)
+          # Remove EVO1-008 manifest entry without renumbering any other card.
+          pos=ms.find('"cardCode": "EVO1-008"'); start=ms.rfind('{',0,pos); obj2,end=json.JSONDecoder().raw_decode(ms[start:]); b=start+end
+          while b<len(ms) and ms[b] in ' \t\r\n': b+=1
+          if b<len(ms) and ms[b]==',': b+=1
+          mp.write_text(ms[:start]+ms[b:])
+      - name: Regenerate Card Studio
+        run: node tools/generate-card-studio-data.mjs
+      - name: Verify removal
+        shell: python
+        run: |
+          from pathlib import Path
+          targets=['js/data/content.js','js/data/card-number-manifest.js','js/tools/card-art-studio-data.js']
+          for f in targets:
+            s=Path(f).read_text()
+            if 'EVO1-008' in s: raise SystemExit('EVO1-008 remains in '+f)
+          if re.search(r'"name"\s*:\s*"Diamond Dust"',Path('js/data/content.js').read_text()): raise SystemExit('Diamond Dust remains active')
+          print('EVO1-008 / Becky Lynch Diamond Dust removed from game and Card Studio')
+        env: {PYTHONUNBUFFERED: '1'}
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/data js/tools/card-art-studio-data.js
+          git diff --cached --check
+          git commit -m "Remove Becky Lynch Diamond Dust EVO1-008"
+          git push origin main
