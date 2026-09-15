@@ -44,12 +44,10 @@ function broadenCloneGroup(group){
   const baseCost=Number(group[0].cost)||0, baseDamage=Number(group[0].damage)||0;
   group.forEach((card,index)=>{
     const lim=limits(card);
-    // Use a shifted pattern per group so repeated templates don't all fan out identically.
     const p=variationPattern[(index + stableHash(group[0].id)) % variationPattern.length];
     let cost=clamp(baseCost+p.cost,lim.cost[0],lim.cost[1]);
     let damage=clamp(baseDamage+p.damage,lim.damage[0],lim.damage[1]);
     if(card.finisher && card.moveType!=='submission'){
-      // Finishers occupy a real authored hierarchy before printing-tier growth.
       const finisherBands=[
         [8,14],[9,15],[9,16],[10,17],[10,18],[11,19],[12,20],[8,17],[11,16]
       ];
@@ -65,9 +63,6 @@ function broadenCloneGroup(group){
 }
 
 function seedMissingLowDamage(moves){
-  // Ensure the full numerical vocabulary exists. Choose simple, non-exclusive
-  // Common/Uncommon moves so tiny damage values represent setup moves rather
-  // than weakening signatures/finishers.
   const candidates=moves.filter(c=>!c.finisher&&!c.trademark&&!c.superstarId&&!c.defensiveOnly&&c.moveType!=='submission')
     .sort((a,b)=>(stableHash(a.id)-stableHash(b.id))||a.id.localeCompare(b.id));
   const desired=[1,2,3,4,5,6,7,8,9,10,11,12];
@@ -91,53 +86,86 @@ function hasScalableMoveEffect(card){
   return !!card?.submission || (card?.effects??[]).some(effect=>scalableEffectTypes.has(effect?.type));
 }
 
-// v1.1.198 full-library tier audit.
-// Printing growth is now chosen from the move's wrestling/gameplay identity,
-// never from a hash of its ID. This keeps every card distinct without allowing
-// a high-end move (especially a Finisher) to accidentally retain premium damage
-// on its Base printing simply because it drew an efficiency profile.
 function auditedTierGrowthProfile(card){
   if(card?.moveType==='submission' || card?.submission) return 'submission';
   if(card?.finisher) return 'damage';
-  // Defensive cards use the existing efficiency curve: Base/Emerald/Sapphire
-  // improve through cost, while Ruby/Amethyst gain the existing counter draws.
   if(card?.defensiveOnly) return 'efficiency';
-
   const cost=Number(card?.cost)||0;
   const damage=Number(card?.damage)||0;
   const scalable=hasScalableMoveEffect(card);
-
-  // Trademarks always use a mixed cost/damage progression so every adjacent gem
-  // is mechanically stronger even when a bespoke effect is stored outside the
-  // generic numeric effects array. Their authored effects remain intact.
   if(card?.trademark) return 'hybrid';
-
-  // High-impact moves should visibly gain impact as the gem rises.
   if(damage>=8) return 'damage';
-
-  // Setup/control cards whose authored cost has enough headroom can become more
-  // efficient at each gem without collapsing adjacent tiers at the cost floor.
   if(!scalable && damage<=4 && cost>=3) return 'efficiency';
-
-  // Effect-bearing and middle-band moves use mixed cost/damage growth.
   return 'hybrid';
 }
 
+const APPROVED_AUDIT_OVERRIDES = Object.freeze({
+  'becky-lynch-diving-leg-drop': {
+    name:"Becky’s Diving Leg Drop", trademark:true, cost:6, damage:10,
+    requirements:{agility:2}, method:'agility', moveType:'aerial', groundedOnly:true, groundOpponent:true,
+    rulesText:"Becky Lynch-exclusive Trademark. Grounded opponent only. Grounds opponent.",
+    printingStats:{
+      base:{cost:7,damage:7}, emerald:{cost:7,damage:8}, sapphire:{cost:6,damage:8},
+      ruby:{cost:6,damage:9}, amethyst:{cost:6,damage:10}
+    }
+  },
+  'becky-lynch-manhandle-slam': {
+    cost:9, damage:16, requirements:{}, method:null, finisher:true, groundOpponent:true,
+    rulesText:"Becky Lynch-exclusive Finisher. No Method requirement. Grounds opponent.",
+    printingStats:{
+      base:{cost:10,damage:12}, emerald:{cost:10,damage:13}, sapphire:{cost:9,damage:14},
+      ruby:{cost:9,damage:15}, amethyst:{cost:9,damage:16}
+    }
+  },
+  'becky-lynch-dis-arm-her': {
+    cost:7, damage:0, requirements:{technical:2}, method:'technical', trademark:true,
+    printingStats:{
+      base:{cost:8,damage:0}, emerald:{cost:8,damage:0}, sapphire:{cost:7,damage:0},
+      ruby:{cost:7,damage:0}, amethyst:{cost:7,damage:0}
+    }
+  },
+  'chelsea-green-im-prettier': {
+    name:'Un-Pretty-Her', cost:10, damage:16, requirements:{}, method:null, finisher:true, groundOpponent:true,
+    rulesText:"Chelsea Green-exclusive Finisher. Un-Pretty-Her. No Method requirement. Grounds opponent.",
+    printingStats:{
+      base:{cost:11,damage:12}, emerald:{cost:11,damage:13}, sapphire:{cost:10,damage:14},
+      ruby:{cost:10,damage:15}, amethyst:{cost:10,damage:16}
+    }
+  },
+  'damian-priest-south-of-heaven': {
+    name:'South of Heaven', cost:10, damage:16, requirements:{}, method:null, moveType:'grapple',
+    finisher:true, trademark:false, groundOpponent:true, groundedOnly:false,
+    rulesText:"Damian Priest-exclusive Finisher. South of Heaven. No Method requirement. Grounds opponent.",
+    effects:[], searchOnConnectName:null, searchOnConnectDiscount:null, nextFinisherDiscountOnConnect:null,
+    printingStats:{
+      base:{cost:11,damage:12}, emerald:{cost:11,damage:13}, sapphire:{cost:10,damage:14},
+      ruby:{cost:10,damage:15}, amethyst:{cost:10,damage:16}
+    }
+  },
+  'damian-priest-razors-edge': {
+    name:"Priest’s Crucifix Powerbomb", cost:8, damage:11, requirements:{strength:3}, method:'strength',
+    moveType:'grapple', trademark:true, finisher:false, groundOpponent:true,
+    rulesText:"Damian Priest-exclusive Trademark. Priest’s Crucifix Powerbomb. Grounds opponent. On Connect: opponent loses 1 Adrenaline.",
+    printingStats:{
+      base:{cost:9,damage:8}, emerald:{cost:9,damage:9}, sapphire:{cost:8,damage:9},
+      ruby:{cost:8,damage:10}, amethyst:{cost:8,damage:11}
+    }
+  }
+});
+
+function applyApprovedAuditOverride(card){
+  const override=APPROVED_AUDIT_OVERRIDES[card?.id];
+  if(!override) return;
+  Object.assign(card, override);
+  card.balanceAuditVersion='v1.1.199';
+  card.authenticityAudit='approved-2026-09';
+}
+
 function enforceAuditedMoveStructure(card){
-  // Finishers may retain their authored effects, but never require Momentum.
-  if(card?.finisher){
-    card.method=null;
-    card.requirements={};
-  }
-
-  // Submissions never deal immediate printed damage; their pressure/cost/effects
-  // are the progression vocabulary.
-  if(card?.moveType==='submission' || card?.submission){
-    card.damage=0;
-  }
-
+  if(card?.finisher){ card.method=null; card.requirements={}; }
+  if(card?.moveType==='submission' || card?.submission) card.damage=0;
   card.tierGrowthProfile=auditedTierGrowthProfile(card);
-  card.balanceAuditVersion='v1.1.198';
+  card.balanceAuditVersion=card.balanceAuditVersion ?? 'v1.1.198';
   card.authoredCost=Number(card.cost)||0;
   card.authoredDamage=Number(card.damage)||0;
 }
@@ -146,18 +174,13 @@ export function applyCardIdentityPass(cards=[]){
   const moves=cards.filter(c=>c?.kind==='move');
   const groups=new Map();
   for(const card of moves){
-    // Cost and damage intentionally included: we're identifying mechanically
-    // identical stat/effect shells, not merely cards that share an effect.
     const key=JSON.stringify({cost:card.cost,damage:card.damage,sig:effectSignature(card)});
     if(!groups.has(key)) groups.set(key,[]);
     groups.get(key).push(card);
   }
   for(const group of groups.values()) broadenCloneGroup(group);
   seedMissingLowDamage(moves);
-
-  // Every gameplay Move receives an explicit audited growth profile. The old
-  // stableHash(card.id) profile lottery is deliberately retired here.
-  for(const card of moves) enforceAuditedMoveStructure(card);
+  for(const card of moves){ applyApprovedAuditOverride(card); enforceAuditedMoveStructure(card); }
   return cards;
 }
 
@@ -185,16 +208,13 @@ export function finalizeCardIdentityPass(cards=[]){
       if(!seen.has(sig(card))){resolved=true;break;}
       card.cost=oldCost; card.damage=oldDamage;
     }
-    if(!resolved){
-      // Extremely unlikely fallback: a one-point cost shift keeps the move legal
-      // while guaranteeing a separate authored shell.
-      card.cost=clamp(baseCost+1,lim.cost[0],lim.cost[1]);
-    }
-    // A final de-duplication adjustment must not discard the audited profile or
-    // Finisher/Submission structure established above.
+    if(!resolved) card.cost=clamp(baseCost+1,lim.cost[0],lim.cost[1]);
     enforceAuditedMoveStructure(card);
     card.identityPass='v1.1.69';
     seen.add(sig(card));
   }
+  // Approved authenticity/balance decisions are authoritative and must survive
+  // the generic clone de-duplication pass above.
+  for(const card of moves){ applyApprovedAuditOverride(card); enforceAuditedMoveStructure(card); }
   return cards;
 }
