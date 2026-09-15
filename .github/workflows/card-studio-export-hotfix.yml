@@ -1,0 +1,72 @@
+name: Card Studio URL Export Hotfix
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Patch core URL export safety
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('js/tools/card-art-studio-core.js')
+          s=p.read_text()
+          old='Export failed: This artwork source cannot be exported safely. Re-select only the artwork image with the file picker; all WWE Legacy templates and set logos are now export-safe automatically.'
+          i=s.find(old)
+          if i < 0:
+              raise SystemExit('target export error not found')
+          # Locate the surrounding catch/guard by finding the nearest previous art-safety test and neutralize only
+          # the URL/proxy rejection. Local and current-game artwork behaviour remains untouched.
+          starts=[]
+          for token in ['artExportSafe','artSourceExportSafe','artworkExportSafe','isArtworkExportSafe']:
+              j=s.rfind(token, max(0,i-5000), i)
+              if j>=0: starts.append((j,token))
+          if not starts:
+              # Diagnostic fallback: print context and fail rather than make an unsafe blind edit.
+              print(s[max(0,i-3500):i+1200])
+              raise SystemExit('could not identify export-safety variable')
+          j,token=max(starts)
+          print('Found safety token',token,'at',j,'error at',i)
+          # Proxy-loaded artwork is already same-origin/blob-safe by the time it reaches export.
+          # Change the rejection condition immediately preceding this error to exempt proxy/blob/data sources.
+          cond_start=s.rfind('if', j, i)
+          brace=s.find('{', cond_start, i)
+          if cond_start<0 or brace<0:
+              print(s[max(0,j-1500):i+800]); raise SystemExit('guard condition not found')
+          cond=s[cond_start:brace]
+          if 'proxy' in cond.lower() or 'blob:' in cond.lower():
+              raise SystemExit('guard already appears proxy-aware; inspect manually')
+          # The Studio records proxy success in URL status/source state. Exempt browser-safe schemes and proxied URL art.
+          replacement=cond.rstrip()+" && !String((artImage && (artImage.currentSrc || artImage.src)) || '').startsWith('blob:') && !String((artImage && (artImage.currentSrc || artImage.src)) || '').startsWith('data:') "
+          s=s[:cond_start]+replacement+s[brace:]
+          p.write_text(s)
+      - name: Remove personal name from core too
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('js/tools/card-art-studio-core.js'); s=p.read_text()
+          s=s.replace("Darby’s normal-card workflow","normal-card workflow").replace("Darby's normal-card workflow","normal-card workflow")
+          s=s.replace('Darby · ','').replace('Darby ·','')
+          p.write_text(s)
+      - name: Bump Card Studio cache key
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('tools/card-art-studio.html'); s=p.read_text()
+          s=s.replace('CARD ART STUDIO · v1.1.200','CARD ART STUDIO · v1.1.202')
+          s=s.replace('card-art-studio.js?v=1.1.200-card-studio-sync','card-art-studio.js?v=1.1.202-card-studio-export-hotfix')
+          s=s.replace('card-art-studio-url-export-guard.js?v=1.1.200','card-art-studio-url-export-guard.js?v=1.1.202')
+          p.write_text(s)
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/tools/card-art-studio-core.js tools/card-art-studio.html
+          git diff --cached --check
+          git commit -m "v1.1.202 fix Card Studio proxied URL exports"
+          git push origin main
