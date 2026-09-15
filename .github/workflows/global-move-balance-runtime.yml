@@ -20,9 +20,9 @@ jobs:
             ids11=['andre-the-giant-double-underhook-suplex','kevin-owens-avalanche-fishermans-buster','aj-styles-phenomenal-forearm','kevin-owens-package-piledriver','rey-fenix-mexican-destroyer','baron-corbin-deep-six','cody-rhodes-cody-cutter','finn-balor-1916','jacob-fatu-pop-up-samoan-drop','jaida-parker-samoan-drop','kane-chokeslam-from-hell','last-symphony','montez-ford-450-splash','nia-jax-avalanche-samoan-drop','penta-driver','pop-up-powerbomb','rob-van-dam-van-daminator','superplex','the-rock-attitude-people-s-elbow','trick-williams-trick-knee','vikingo-twisting-450-splash']
             ids10=['bayley-diving-elbow','seth-rollins-phoenix-splash']
             rows=[]
-            for x in ids11: rows.append("  '%s':[8,9,9,10,11]"%x)
-            for x in ids10: rows.append("  '%s':[7,8,8,9,10]"%x)
-            block="const AUTHORED_HIGH_DAMAGE_CURVES=Object.freeze({\n"+',\n'.join(rows)+"\n});\nfunction applyAuthoredHighDamageCurve(card){\n  const curve=AUTHORED_HIGH_DAMAGE_CURVES[card?.id];\n  if(!curve || card?.finisher || card?.submission || card?.moveType==='submission') return;\n  card.damage=curve[4];\n  card.printingStats={base:{damage:curve[0]},emerald:{damage:curve[1]},sapphire:{damage:curve[2]},ruby:{damage:curve[3]},amethyst:{damage:curve[4]}};\n  card.balanceAuditVersion='v1.1.200';\n}\n\n"
+            for x in ids11: rows.append("  '%s':[7,8,9,10,11]"%x)
+            for x in ids10: rows.append("  '%s':[6,7,8,9,10]"%x)
+            block="const AUTHORED_HIGH_DAMAGE_CURVES=Object.freeze({\n"+',\n'.join(rows)+"\n});\nfunction applyAuthoredHighDamageCurve(card){\n  const curve=AUTHORED_HIGH_DAMAGE_CURVES[card?.id];\n  if(!curve || card?.finisher || card?.submission || card?.moveType==='submission') return;\n  card.damage=curve[4];\n  card.printingStats={base:{damage:curve[0]},emerald:{damage:curve[1]},sapphire:{damage:curve[2]},ruby:{damage:curve[3]},amethyst:{damage:curve[4]}};\n  card.balanceAuditVersion='v1.1.198';\n}\n\n"
             s=s.replace(marker,block+marker)
             s=s.replace('function enforceAuditedMoveStructure(card){\n  if(card?.finisher)','function enforceAuditedMoveStructure(card){\n  applyAuthoredHighDamageCurve(card);\n  if(card?.finisher)')
             p.write_text(s)
