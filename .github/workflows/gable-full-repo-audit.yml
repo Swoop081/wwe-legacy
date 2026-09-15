@@ -1,0 +1,30 @@
+name: Chad Gable full repository audit
+on:
+  push:
+    paths: ['.github/gable-full-repo-audit-trigger']
+permissions: {contents: write}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Locate live RAW1 Gable source
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo '# Chad Gable full repository source audit'
+            echo
+            echo 'Exact whole-repository search, excluding .git and this generated report.'
+            echo
+            grep -RniE 'RAW1-018|RAW1-019|RAW1-020|RAW1-021|RAW1-022|RAW1-037|chad-gable|Chad Gable|Chaos Theory|SHOOSH!|Shoosh!|GABLE.S ANKLE LOCK|Gable.s Ankle Lock|READY, WILLING AND GABLE|Ready, Willing and Gable|GABLE.S MOONSAULT|Gable.s Moonsault' . --exclude-dir=.git --exclude='gable-full-repo-audit.txt' || true
+          } > .github/gable-full-repo-audit.txt
+          test -s .github/gable-full-repo-audit.txt
+      - name: Commit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/gable-full-repo-audit.txt
+          git commit -m 'Locate live RAW1 Chad Gable source'
+          git push origin main
