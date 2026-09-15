@@ -1,7 +1,7 @@
 name: Add Charlotte Moonsault Trademark
 on:
   push:
-    paths: ['.github/add-charlotte-moonsault-trigger-v4']
+    paths: ['.github/add-charlotte-moonsault-trigger-v5']
 permissions:
   contents: write
 jobs:
@@ -36,7 +36,7 @@ jobs:
       - name: Regenerate Card Studio and validate Charlotte
         run: |
           node tools/generate-card-studio-data.mjs || true
-          grep -q "Charlotte's Moonsault" js/tools/card-art-studio-data.js
+          grep -q 'charlotte-flair-moonsault' js/tools/card-art-studio-data.js
           grep -q 'charlotte-flair-moonsault' js/data/content.js
           grep -q 'charlotte-flair-moonsault' js/data/card-number-manifest.js
       - name: Commit
