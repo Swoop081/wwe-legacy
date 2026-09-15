@@ -875,13 +875,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardNumber": 18,
     "cardCode": "SD1-018"
   },
-  {
-    "id": "chelsea-green-green-with-envy",
-    "setId": "smackdown-series-1",
-    "cardNumber": 19,
-    "cardCode": "SD1-019"
-  },
-  {
+{
     "id": "entrance-chelsea-green",
     "setId": "smackdown-series-1",
     "cardNumber": 20,

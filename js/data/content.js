@@ -7699,36 +7699,7 @@ export const allGameplayCards = [
     ],
     "counterState": "front-control"
   },
-  {
-    "id": "chelsea-green-green-with-envy",
-    "name": "Green With Envy",
-    "kind": "move",
-    "setId": "smackdown-series-1",
-    "cost": 7,
-    "damage": 11,
-    "requirements": {
-      "technical": 2
-    },
-    "moveType": "grapple",
-    "method": "technical",
-    "superstarId": "chelsea-green",
-    "rarity": 3,
-    "rulesText": "Chelsea Green-exclusive Trademark. Green With Envy. Grounds opponent. On Connect: search/draw Un-Pretty-Her; it costs 1 less this Control sequence.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "trademark": true,
-    "effects": [
-      {
-        "type": "search",
-        "name": "Un-Pretty-Her",
-        "discount": 1
-      }
-    ],
-    "counterState": "front-control"
-  },
-  {
+{
     "id": "entrance-chelsea-green",
     "name": "Hot Mess",
     "kind": "entrance",

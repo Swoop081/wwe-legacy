@@ -2766,8 +2766,7 @@ export const superstars = {
     ],
     "signatures": [
       "chelsea-green-im-prettier",
-      "chelsea-green-green-with-envy"
-    ],
+      ],
     "archetype": "counter-control-opportunist",
     "hp": 61,
     "methodLimits": {
