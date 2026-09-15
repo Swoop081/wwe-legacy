@@ -1,0 +1,98 @@
+name: Batista Card Corrections
+on:
+  push:
+    paths:
+      - '.github/batista-card-corrections-trigger'
+permissions:
+  contents: write
+jobs:
+  correct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Locate and correct canonical card data
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          roots=[Path('js'),Path('data'),Path('tools')]
+          files=[]
+          for root in roots:
+            if root.exists():
+              files += [p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.js','.json','.mjs','.html','.csv'}]
+          demon=[]; ra=[]
+          for p in files:
+            try:s=p.read_text(encoding='utf-8')
+            except:continue
+            if re.search(r'Demon\s+Bomb',s,re.I): demon.append(p)
+            if 'RA1-014' in s: ra.append(p)
+          print('Demon Bomb files:',*[str(p) for p in demon],sep='\n')
+          print('RA1-014 files:',*[str(p) for p in ra],sep='\n')
+          if not demon: raise SystemExit('Demon Bomb not found in source files')
+          if not ra: raise SystemExit('RA1-014 not found in source files')
+          changed=set()
+          # Rename RA1-014 everywhere it is represented as a card name/title while preserving its ID.
+          for p in ra:
+            s=p.read_text(encoding='utf-8'); old=s
+            # Object/CSV/compact data: constrain replacements to a local window around the ID.
+            positions=[m.start() for m in re.finditer('RA1-014',s)]
+            offset=0
+            for pos0 in positions:
+              pos=pos0+offset
+              a=max(0,pos-500); b=min(len(s),pos+1000)
+              chunk=s[a:b]
+              newchunk=re.sub(r'(?i)(["\'](?:name|title)["\']\s*:\s*["\'])[^"\']+(["\'])',r"\1Batista's Spear\2",chunk,count=1)
+              if newchunk==chunk:
+                # CSV-ish row: only replace the existing display name in the row containing RA1-014.
+                lines=chunk.splitlines(True)
+                for n,line in enumerate(lines):
+                  if 'RA1-014' in line:
+                    line2=re.sub(r'(?i)\b(?:Spear|Batista Spear|Demon Bomb)\b',"Batista's Spear",line,count=1)
+                    lines[n]=line2; break
+                newchunk=''.join(lines)
+              if newchunk!=chunk:
+                s=s[:a]+newchunk+s[b:]; offset+=len(newchunk)-len(chunk)
+            if s!=old: p.write_text(s,encoding='utf-8');changed.add(p)
+          # Remove Demon Bomb card definitions/references. Do not rename it into Batista Bomb.
+          for p in demon:
+            s=p.read_text(encoding='utf-8'); old=s
+            # JSON/JS object entries containing Demon Bomb.
+            s=re.sub(r'(?ms)^\s*\{[^{}]{0,2500}["\'](?:name|title)["\']\s*:\s*["\']Demon Bomb["\'][^{}]{0,2500}\}\s*,?\s*','',s)
+            # Compact one-line object entries.
+            s=re.sub(r'(?i)\{[^{}]{0,1800}["\'](?:name|title)["\']\s*:\s*["\']Demon Bomb["\'][^{}]{0,1800}\}\s*,?','',s)
+            # Quoted deck/library references.
+            s=re.sub(r'(?i)["\']Demon Bomb["\']\s*,?\s*','',s)
+            # CSV rows whose card name is Demon Bomb.
+            s=''.join(line for line in s.splitlines(True) if not re.search(r'(?i)(^|,)\s*["\']?Demon Bomb["\']?\s*(,|$)',line))
+            if s!=old: p.write_text(s,encoding='utf-8');changed.add(p)
+          if not changed: raise SystemExit('No source changes made')
+          print('Changed:',*[str(p) for p in sorted(changed)],sep='\n')
+      - name: Verify removal and rename
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          scan=[]
+          for root in ('js','data','tools'):
+            r=Path(root)
+            if r.exists(): scan += [p for p in r.rglob('*') if p.is_file() and p.suffix.lower() in {'.js','.json','.mjs','.html','.csv'}]
+          bad=[]; renamed=[]
+          for p in scan:
+            try:s=p.read_text(encoding='utf-8')
+            except:continue
+            if re.search(r'Demon\s+Bomb',s,re.I): bad.append(str(p))
+            if 'RA1-014' in s and "Batista's Spear" in s: renamed.append(str(p))
+          if bad: raise SystemExit('Demon Bomb remains in: '+', '.join(bad))
+          if not renamed: raise SystemExit("RA1-014 was not verified as Batista's Spear")
+          print('RA1-014 rename verified:',*renamed,sep='\n')
+      - name: Commit live game and Card Studio corrections
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js data tools 2>/dev/null || true
+          git diff --cached --check
+          git diff --cached --quiet && { echo 'No changes staged'; exit 1; } || true
+          git commit -m "Remove Demon Bomb and rename RA1-014 to Batista's Spear"
+          git push origin main
