@@ -1,0 +1,59 @@
+name: Remove NG1-075 Bulldogs Crucifix
+on:
+  push:
+    paths: ['.github/remove-ng1-075-trigger']
+permissions:
+  contents: write
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Remove exact NG1-075 card
+        shell: python
+        run: |
+          from pathlib import Path
+          import re,json
+          mp=Path('js/data/card-number-manifest.js'); ms=mp.read_text()
+          m=re.search(r'\{\s*"id":\s*"([^"]+)"[^{}]*"cardCode":\s*"NG1-075"\s*\}',ms,re.S)
+          if not m: raise SystemExit('NG1-075 not found in manifest')
+          cid=m.group(1); print('NG1-075 canonical id:',cid)
+          cp=Path('js/data/content.js'); s=cp.read_text(); needle='"id": "'+cid+'"'; pos=s.find(needle)
+          if pos<0: raise SystemExit('NG1-075 gameplay object not found')
+          a=s.rfind('{',0,pos); obj,end=json.JSONDecoder().raw_decode(s[a:])
+          print('Card:',obj.get('name'),'superstar:',obj.get('superstarId'))
+          if 'crucifix' not in str(obj.get('name','')).lower(): raise SystemExit('NG1-075 is not Crucifix; refusing removal')
+          if obj.get('superstarId') not in ('british-bulldog','the-british-bulldog','davey-boy-smith'): raise SystemExit('NG1-075 is not Bulldog-owned; refusing removal')
+          b=a+end
+          while b<len(s) and s[b] in ' \t\r\n': b+=1
+          if b<len(s) and s[b]==',': b+=1
+          cp.write_text(s[:a]+s[b:])
+          # Remove exact internal-ID references only.
+          for p in Path('js/data').glob('*.js'):
+            if p in (cp,mp): continue
+            t=p.read_text(); old=t
+            t=re.sub(r'(["\'])'+re.escape(cid)+r'\1\s*,?\s*','',t)
+            if t!=old: p.write_text(t)
+          # Remove manifest entry without renumbering anything else.
+          pos=ms.find('"cardCode": "NG1-075"'); a=ms.rfind('{',0,pos); _,end=json.JSONDecoder().raw_decode(ms[a:]); b=a+end
+          while b<len(ms) and ms[b] in ' \t\r\n': b+=1
+          if b<len(ms) and ms[b]==',': b+=1
+          mp.write_text(ms[:a]+ms[b:])
+      - name: Regenerate Card Studio
+        run: node tools/generate-card-studio-data.mjs
+      - name: Verify
+        shell: python
+        run: |
+          from pathlib import Path
+          for f in ('js/data/content.js','js/data/card-number-manifest.js','js/tools/card-art-studio-data.js'):
+            if 'NG1-075' in Path(f).read_text(): raise SystemExit('NG1-075 remains in '+f)
+          print('NG1-075 removed; no other NG1 cards renumbered')
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/data js/tools/card-art-studio-data.js
+          git diff --cached --check
+          git commit -m "Remove British Bulldog Crucifix NG1-075"
+          git push origin main
