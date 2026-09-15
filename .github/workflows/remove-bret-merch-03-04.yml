@@ -1,0 +1,76 @@
+name: Remove Bret Merch 03 04
+on:
+  push:
+    paths: ['.github/remove-bret-merch-03-04-trigger']
+permissions:
+  contents: write
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Discover exact Bret merch entries and remove only 03/04
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          roots=[Path('js'),Path('data'),Path('tools')]
+          files=[]
+          for r in roots:
+            if r.exists(): files += [p for p in r.rglob('*') if p.is_file() and p.suffix.lower() in {'.js','.json','.mjs','.html'}]
+          # Locate exact authored merch labels/IDs first; never use broad Bret deletion.
+          pats03=[r'(?i)bret[\s_-]*hart[^\n]{0,120}(?:merch[\s_-]*)?03',r'(?i)(?:merch[\s_-]*)?bret[\s_-]*hart[\s_-]*03']
+          pats04=[r'(?i)bret[\s_-]*hart[^\n]{0,120}(?:merch[\s_-]*)?04',r'(?i)(?:merch[\s_-]*)?bret[\s_-]*hart[\s_-]*04']
+          hits={3:[],4:[]}
+          for p in files:
+            s=p.read_text(errors='ignore')
+            for n,pats in ((3,pats03),(4,pats04)):
+              if any(re.search(x,s) for x in pats): hits[n].append(p)
+          print('03 files:',*[str(x) for x in hits[3]],sep='\n')
+          print('04 files:',*[str(x) for x in hits[4]],sep='\n')
+          if not hits[3] or not hits[4]: raise SystemExit('Could not positively identify both Bret Hart 03 and 04; refusing broad removal')
+          touched=set()
+          # Remove containing JSON/JS object only when it positively contains Bret Hart + exact 03/04 marker.
+          for p in set(hits[3]+hits[4]):
+            s=p.read_text(); old=s
+            for n in (3,4):
+              # Iteratively inspect brace objects around exact label markers.
+              markers=list(re.finditer(r'(?i)(?:bret[\s_-]*hart[^\n]{0,160}(?:merch[\s_-]*)?0'+str(n)+r'|(?:merch[\s_-]*)?bret[\s_-]*hart[\s_-]*0'+str(n)+r')',s))
+              for m in reversed(markers):
+                a=s.rfind('{',0,m.start()); b=s.find('}',m.end())
+                if a<0 or b<0: continue
+                chunk=s[a:b+1]
+                if not re.search(r'(?i)bret[\s_-]*hart',chunk): continue
+                if not re.search(r'(?i)(?:merch[^\n]{0,50})?0'+str(n)+r'\b',chunk): continue
+                # Guard names requested by user when present.
+                if n==3 and re.search(r'(?i)(hitman|t.?shirt)',chunk) is None: continue
+                if n==4 and re.search(r'(?i)sunglasses',chunk) is None: continue
+                end=b+1
+                while end<len(s) and s[end] in ' \t\r\n': end+=1
+                if end<len(s) and s[end]==',': end+=1
+                s=s[:a]+s[end:]
+            if s!=old: p.write_text(s); touched.add(str(p))
+          if not touched: raise SystemExit('No exact Bret merch objects removed')
+          print('Touched:',*sorted(touched),sep='\n')
+      - name: Verify 01/02 preserved and 03/04 absent
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          text='\n'.join(p.read_text(errors='ignore') for p in Path('js').rglob('*.js'))
+          # 03/04 requested items must no longer be authored.
+          for phrase in ('Hitman T-Shirt','Sunglasses'):
+            # Only fail when still near Bret Hart context.
+            if re.search(r'(?is)bret[\s_-]*hart.{0,500}'+re.escape(phrase),text): raise SystemExit('Removed Bret merch remains: '+phrase)
+          # Explicitly report remaining Bret merch markers; do not mutate 01/02.
+          for n in ('01','02'):
+            if re.search(r'(?i)bret[\s_-]*hart[^\n]{0,160}(?:merch[\s_-]*)?'+n,text): print('Preserved Bret merch '+n)
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js data tools 2>/dev/null || git add js tools
+          git diff --cached --check
+          git commit -m "Remove Bret Hart merch 03 and 04 only"
+          git push origin main
