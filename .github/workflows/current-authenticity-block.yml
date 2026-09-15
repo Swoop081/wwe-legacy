@@ -1,0 +1,119 @@
+name: Current Wrestler Authenticity Block
+on:
+  push:
+    paths: ['.github/current-authenticity-block-trigger']
+permissions: {contents: write}
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Apply removals and Chelsea replacements
+        shell: python
+        run: |
+          from pathlib import Path
+          import json,re
+          cp=Path('js/data/content.js'); mp=Path('js/data/card-number-manifest.js')
+          s=cp.read_text(); ms=mp.read_text(); dec=json.JSONDecoder()
+          def objects(text):
+            out=[]; i=0
+            while True:
+              a=text.find('{',i)
+              if a<0: break
+              try:o,n=dec.raw_decode(text[a:])
+              except: i=a+1; continue
+              if isinstance(o,dict) and 'id' in o: out.append((a,n,o))
+              i=a+n
+            return out
+          def remove_card(cid,replacement=None):
+            global s,ms
+            hits=[x for x in objects(s) if x[2].get('id')==cid]
+            if hits:
+              a,n,o=hits[0]; b=a+n
+              while b<len(s) and s[b] in ' \t\r\n': b+=1
+              if b<len(s) and s[b]==',': b+=1
+              s=s[:a].rstrip()+'\n'+s[b:].lstrip()
+            mh=[x for x in objects(ms) if x[2].get('id')==cid]
+            if mh:
+              a,n,o=mh[0]; b=a+n
+              while b<len(ms) and ms[b] in ' \t\r\n': b+=1
+              if b<len(ms) and ms[b]==',': b+=1
+              ms=ms[:a].rstrip()+'\n'+ms[b:].lstrip()
+            for p in Path('js/data').glob('*.js'):
+              if p in (cp,mp): continue
+              t=p.read_text()
+              if replacement: nt=t.replace('"'+cid+'"','"'+replacement+'"').replace("'"+cid+"'","'"+replacement+"'")
+              else: nt=re.sub(r'(["\'])'+re.escape(cid)+r'\1\s*,?\s*','',t)
+              if nt!=t: p.write_text(nt)
+          remove_card('becky-lynch-diamond-dust')
+          remove_card('becky-lynch-bexploder','becky-lynch-diving-leg-drop')
+          remove_card('damian-priest-hit-the-lights','damian-priest-south-of-heaven')
+          # Green With Envy was already removed in the guarded earlier pass.
+          newcards=[
+            {'id':'chelsea-green-missile-dropkick','name':"Chelsea’s Missile Dropkick",'kind':'move','setId':'smackdown-series-1','cost':9,'damage':9,'requirements':{'agility':2},'moveType':'aerial','method':'agility','superstarId':'chelsea-green','rarity':3,'trademark':True,'rulesText':"Chelsea Green-exclusive Trademark. Grounds opponent.",'groundOpponent':True,'groundedOnly':False,'stun':0,'selfDamage':0,'effects':[],'counterState':'diving-aerial'},
+            {'id':'chelsea-green-rough-ryder','name':"Chelsea’s Rough Ryder",'kind':'move','setId':'smackdown-series-1','cost':10,'damage':10,'requirements':{'agility':2},'moveType':'strike','method':'agility','superstarId':'chelsea-green','rarity':3,'trademark':True,'rulesText':"Chelsea Green-exclusive Trademark. Grounds opponent. On Connect: Un-Pretty-Her costs 1 less this Control sequence.",'groundOpponent':True,'groundedOnly':False,'stun':0,'selfDamage':0,'effects':[{'type':'discountNextByName','name':'Un-Pretty-Her','amount':1}],'counterState':'running-aerial'}]
+          marker='export const allGameplayCards = ['; start=s.find(marker); i=start+len(marker); depth=1; q=None; esc=False
+          while depth:
+            c=s[i]
+            if q:
+              if esc: esc=False
+              elif c=='\\': esc=True
+              elif c==q: q=None
+            else:
+              if c in ('"',"'",'`'): q=c
+              elif c=='[': depth+=1
+              elif c==']': depth-=1
+            i+=1
+          close=i-1
+          existing={o[2].get('id') for o in objects(s)}
+          additions=[c for c in newcards if c['id'] not in existing]
+          if additions:
+            block=',\n'.join('  '+json.dumps(c,indent=2).replace('\n','\n  ') for c in additions)
+            s=s[:close].rstrip()+',\n'+block+'\n'+s[close:]
+          entries=[x[2] for x in objects(ms) if x[2].get('setId')=='smackdown-series-1' and x[2].get('cardNumber') is not None]
+          nxt=max(int(x['cardNumber']) for x in entries)+1
+          mend=ms.rfind('];')
+          for card in additions:
+            entry={'id':card['id'],'setId':'smackdown-series-1','cardNumber':nxt,'cardCode':f'SD1-{nxt:03d}'}; nxt+=1
+            ms=ms[:mend].rstrip()+',\n  '+json.dumps(entry)+'\n'+ms[mend:]; mend=ms.rfind('];')
+          cp.write_text(s); mp.write_text(ms)
+          # Put the two new current Chelsea trademarks into her recommended deck.
+          dp=Path('js/data/decks.js'); d=dp.read_text()
+          key='"chelsea-green": ['; a=d.find(key)
+          if a>=0:
+            b=d.find(']',a)
+            block=d[a:b]
+            for cid in ['chelsea-green-missile-dropkick','chelsea-green-rough-ryder']:
+              if cid not in block: block += '\n    "'+cid+'",\n    "'+cid+'",'
+            d=d[:a]+block+d[b:]; dp.write_text(d)
+          # Keep Chelsea signature identity synchronized.
+          sp=Path('js/data/superstars.js'); t=sp.read_text(); pos=t.find('"id": "chelsea-green"')
+          if pos>=0:
+            sig=t.find('"signatures": [',pos); end=t.find(']',sig)
+            if sig>=0 and end>=0:
+              chunk=t[sig:end]
+              for cid in ['chelsea-green-missile-dropkick','chelsea-green-rough-ryder']:
+                if cid not in chunk: chunk += '\n      "'+cid+'",'
+              t=t[:sig]+chunk+t[end:]; sp.write_text(t)
+      - name: Fix audit stamp compatibility and regenerate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tools/full-card-tier-audit.mjs'); s=p.read_text(); s=s.replace("if(card.balanceAuditVersion!=='v1.1.198'){","if(!['v1.1.198','v1.1.199'].includes(card.balanceAuditVersion)){"); p.write_text(s)
+          PY
+          node tools/generate-card-studio-data.mjs
+          node tools/full-card-tier-audit.mjs
+          ! grep -qi 'Diamond Dust' js/data/content.js
+          ! grep -qi 'Bexploder' js/data/content.js
+          ! grep -qi 'Hit the Lights' js/data/content.js
+          grep -q 'chelsea-green-missile-dropkick' js/data/content.js
+          grep -q 'chelsea-green-rough-ryder' js/data/content.js
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/data js/tools/card-art-studio-data.js tools/full-card-tier-audit.mjs
+          git diff --cached --check
+          git commit -m "Apply Becky Chelsea Priest authenticity block"
+          git push origin main
