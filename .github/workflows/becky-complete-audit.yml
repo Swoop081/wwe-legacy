@@ -15,4 +15,8 @@ jobs:
           set -euo pipefail
           grep -RniE 'becky-lynch|Becky Lynch|Tap or Snap|Straight Fire|Manhandle|Dis-arm-her' . --exclude-dir=.git --exclude-dir=.github > /tmp/becky.txt || true
           cat /tmp/becky.txt
+          echo '=== CONTENT CONTEXT ==='
+          grep -n -B8 -A18 'special-becky-lynch' js/data/content.js || true
+          echo '=== DECK/REFERENCE CONTEXT ==='
+          grep -Rni -B3 -A5 'special-becky-lynch' js --include='*.js' || true
           test -s /tmp/becky.txt
