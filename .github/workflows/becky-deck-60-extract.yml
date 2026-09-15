@@ -1,0 +1,33 @@
+name: Becky canonical 60-card deck extractor
+on:
+  push:
+    paths: ['.github/becky-deck-60-extract-trigger']
+permissions:
+  contents: write
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Extract Becky deck structure and definitions
+        run: |
+          set -euo pipefail
+          OUT=.github/becky-current-60-audit.txt
+          : > "$OUT"
+          {
+            echo '=== BECKY REFERENCES ==='
+            grep -RniE 'becky[- ]lynch|Becky Lynch|Manhandle Slam|Dis-arm-her|Straight Fire|Tap or Snap' js --include='*.js' || true
+            echo
+            echo '=== DECK BUILDERS / 60 CARD STRUCTURE ==='
+            grep -RniE -B8 -A30 '60|recommendedDeck|starterDeck|deckList|deckIds|momentum|reversal' js/data js/shared js/engine --include='*.js' || true
+            echo
+            echo '=== BECKY CONTEXT ==='
+            grep -RniE -B20 -A60 'becky[- ]lynch|Becky Lynch' js/data js/shared --include='*.js' || true
+          } >> "$OUT"
+          test -s "$OUT"
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add "$OUT"
+          git commit -m 'Capture Becky current 60-card deck audit' || exit 0
+          git push origin main
