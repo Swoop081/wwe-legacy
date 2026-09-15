@@ -10,16 +10,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Audit global move population and runtime tier plumbing
+      - name: Locate combat runtime and balance outliers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          pats=[r'\.damage\b',r'playCard',r'resolveMove',r'printingStats',r'gameplayStatsForPrinting',r'printingTier']
+          for p in Path('js').rglob('*.js'):
+            s=p.read_text(errors='ignore')
+            hits=[]
+            for n,line in enumerate(s.splitlines(),1):
+              if any(re.search(x,line,re.I) for x in pats): hits.append((n,line.strip()))
+            if hits:
+              print('FILE',p)
+              for n,line in hits[:35]: print(f'{n}: {line[:240]}')
+          PY
+      - name: Run tier audit
         run: |
           set -euo pipefail
-          echo '=== High damage move definitions ==='
-          grep -RniE 'damage[^:]*:[[:space:]]*(1[2-9]|2[0-9])' js --include='*.js' | head -400 || true
-          echo '=== Printing tier/runtime references ==='
-          grep -RniE 'printingStats|gameplayStatsForPrinting|printingTier|fixedPrintingTier|cardTier|rarityTier|tier' js --include='*.js' | head -1000 || true
-          echo '=== Combat/play resolution candidates ==='
-          grep -RniE 'playCard|resolve.*card|card\.damage|damage.*card|selectedCard|playedCard|resolveMove|connect.*damage' js --include='*.js' | head -1000 || true
-      - name: Run existing tier audit
-        run: |
-          set -euo pipefail
+          node --check js/data/content.js
           if [ -f tools/full-card-tier-audit.mjs ]; then node tools/full-card-tier-audit.mjs; fi
