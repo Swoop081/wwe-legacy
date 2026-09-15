@@ -14,7 +14,7 @@ jobs:
         run: |
           set -euo pipefail
           echo '=== High damage move definitions ==='
-          grep -RniE 'damage["'"']?[[:space:]]*:[[:space:]]*(1[2-9]|2[0-9])' js --include='*.js' | head -400 || true
+          grep -RniE 'damage[^:]*:[[:space:]]*(1[2-9]|2[0-9])' js --include='*.js' | head -400 || true
           echo '=== Printing tier/runtime references ==='
           grep -RniE 'printingStats|gameplayStatsForPrinting|printingTier|fixedPrintingTier|cardTier|rarityTier|tier' js --include='*.js' | head -1000 || true
           echo '=== Combat/play resolution candidates ==='
