@@ -1,0 +1,22 @@
+name: Roster five-tier audit
+on:
+  push:
+    paths: ['.github/roster-five-tier-audit-trigger']
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Audit active roster five-tier coverage
+        run: node tools/roster-five-tier-audit.mjs > roster-five-tier-audit.json
+      - name: Summary
+        if: always()
+        run: |
+          node -e "const r=require('./roster-five-tier-audit.json'); console.log('ROSTER',r.rosterCount); console.log('UNIQUE MOVES',r.uniqueMoveIds); console.log('MISSING FIVE TIER',r.missingFiveTierCount); console.log('SUBMISSIONS',r.submissionCount); console.log('FINISHERS',r.finisherCount); console.log('ILLEGAL FINISHER METHODS',r.illegalFinisherMethods.length); console.log('BAD DECK SIZES',Object.entries(r.deckSizes).filter(([,n])=>n!==60));"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: roster-five-tier-audit
+          path: roster-five-tier-audit.json
