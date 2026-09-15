@@ -1,41 +1,63 @@
-name: Chad Gable full repository audit
+name: Chad Gable current authenticity apply
 on:
   push:
     paths: ['.github/gable-full-repo-audit-trigger']
 permissions: {contents: write}
 jobs:
-  audit:
+  apply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Locate exact live RAW1 Gable source files
+      - name: Apply Gable current-authenticity correction to discovered sources
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          excluded={'.git','.github'}
+          needles=('RAW1-018','RAW1-019','RAW1-020','RAW1-021','RAW1-022','RAW1-037','Chaos Theory','Shoosh!','Ready, Willing and Gable',"Gable's Ankle Lock","Gable’s Ankle Lock","Gable's Moonsault","Gable’s Moonsault")
+          files=[]
+          for p in Path('.').rglob('*'):
+            if not p.is_file() or any(part in excluded for part in p.parts): continue
+            try: s=p.read_text()
+            except UnicodeDecodeError: continue
+            if any(n in s for n in needles): files.append(p)
+          if not files: raise SystemExit('No live RAW1 Chad Gable source files discovered')
+          changed=[]
+          for p in files:
+            s=p.read_text(); original=s
+            # Remove the obsolete Shoosh card/object where it is represented as a standalone JSON/JS object.
+            s=re.sub(r'\{(?=[^{}]*(?:"id"\s*:\s*"[^"]*chad-gable[^"]*"|"cardCode"\s*:\s*"RAW1-021"))(?=[^{}]*(?:"name"\s*:\s*"Shoosh!"|"cardCode"\s*:\s*"RAW1-021"))[^{}]*\}\s*,?', '', s, flags=re.I|re.S)
+            # Remove simple references to the obsolete action by known catalogue code/name/id without touching surrounding objects.
+            s=re.sub(r'(["\'])[^"\']*chad-gable[^"\']*shoosh[^"\']*\1\s*,?\s*','',s,flags=re.I)
+            s=re.sub(r'(["\'])Shoosh!\1\s*,?\s*','',s,flags=re.I)
+            # Preserve the current core move package; stamp recognizable current names consistently.
+            s=s.replace('GABLE’S ANKLE LOCK', "Gable’s Ankle Lock").replace("GABLE'S ANKLE LOCK", "Gable’s Ankle Lock")
+            s=s.replace('GABLE’S MOONSAULT', "Gable’s Moonsault").replace("GABLE'S MOONSAULT", "Gable’s Moonsault")
+            if s!=original:
+              p.write_text(s); changed.append(str(p))
+          if not changed: raise SystemExit('Gable source located but no safe Shoosh/current-name correction was applicable')
+          Path('/tmp/gable-changed.txt').write_text('\n'.join(changed)+'\n')
+      - name: Validate Gable correction and JavaScript syntax
         shell: bash
         run: |
           set -euo pipefail
-          rm -f .github/gable-source-files.txt
-          pattern='RAW1-018|RAW1-019|RAW1-020|RAW1-021|RAW1-022|RAW1-037|Chaos Theory|Shoosh!|Ready, Willing and Gable|Gable.s Ankle Lock|Gable.s Moonsault'
-          grep -RIlE "$pattern" . \
-            --exclude-dir=.git \
-            --exclude='gable-full-repo-audit.txt' \
-            --exclude='gable-source-files.txt' \
-            --exclude='gable-full-repo-audit.yml' \
-            --exclude='gable-full-repo-audit-trigger' \
-            | sort -u > /tmp/gable-files.txt || true
-          {
-            echo '# Exact RAW1 Chad Gable source files'
-            while IFS= read -r file; do
-              [ -n "$file" ] || continue
-              echo "FILE: $file"
-              grep -nE "$pattern" "$file" | head -40 || true
-              echo
-            done < /tmp/gable-files.txt
-          } > .github/gable-source-files.txt
-          grep -q '^FILE:' .github/gable-source-files.txt
-      - name: Commit compact report
+          echo 'Changed files:'; cat /tmp/gable-changed.txt
+          if grep -RniE 'Shoosh!' . --exclude-dir=.git --exclude-dir=.github; then
+            echo 'Obsolete Shoosh remains in active repository source' >&2; exit 1
+          fi
+          while IFS= read -r f; do
+            case "$f" in
+              *.js|*.mjs) node --check "$f" ;;
+            esac
+          done < /tmp/gable-changed.txt
+          if [ -f tools/generate-card-studio-data.mjs ]; then node tools/generate-card-studio-data.mjs; fi
+          if [ -f tools/full-card-tier-audit.mjs ]; then node tools/full-card-tier-audit.mjs; fi
+      - name: Commit verified Gable correction
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .github/gable-source-files.txt
-          git commit -m 'Identify canonical RAW1 Chad Gable files'
+          git config user.name 'WWE Legacy Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'Remove obsolete Chad Gable Shoosh action'
           git push origin main
