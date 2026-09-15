@@ -1,7 +1,7 @@
 name: Add Charlotte Moonsault Trademark
 on:
   push:
-    paths: ['.github/add-charlotte-moonsault-trigger']
+    paths: ['.github/add-charlotte-moonsault-trigger-v2']
 permissions:
   contents: write
 jobs:
@@ -10,65 +10,49 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Benchmark aerial trademarks and add Charlotte's Moonsault
+      - name: Add Charlotte's Moonsault to active gameplay array
         shell: python
         run: |
           from pathlib import Path
-          import json,re,statistics
+          import json,re
           cp=Path('js/data/content.js'); s=cp.read_text()
-          # Parse all gameplay objects and benchmark existing aerial/high-flying trademarks.
-          objs=[]; dec=json.JSONDecoder(); i=0
-          while True:
-            a=s.find('{',i)
-            if a<0: break
-            try: o,n=dec.raw_decode(s[a:])
-            except: i=a+1; continue
-            if isinstance(o,dict) and 'id' in o: objs.append(o)
-            i=a+n
-          aerial=[]
-          for o in objs:
-            text=' '.join(str(o.get(k,'')) for k in ('name','type','rulesText','method')).lower()
-            if o.get('trademark') is True and any(x in text for x in ('aerial','moonsault','splash','dive','diving','springboard','top rope','high-fly')): aerial.append(o)
-          if not aerial: raise SystemExit('No comparable aerial trademarks found; refusing invented balance')
-          print('Aerial trademark comparables:')
-          for o in aerial: print(o.get('id'),o.get('name'),'cost',o.get('cost'),'damage',o.get('damage'),'method',o.get('method'),'effect',o.get('rulesText'))
-          # Select median numeric cost/damage from real comparables; preserve schema from closest Agility comparator.
-          comp=next((o for o in aerial if str(o.get('method','')).lower()=='agility'),aerial[0])
-          costs=[o.get('cost') for o in aerial if isinstance(o.get('cost'),(int,float))]
-          dmgs=[o.get('damage') for o in aerial if isinstance(o.get('damage'),(int,float))]
-          cost=int(round(statistics.median(costs))) if costs else comp.get('cost')
-          damage=int(round(statistics.median(dmgs))) if dmgs else comp.get('damage')
-          if not isinstance(cost,(int,float)) or not isinstance(damage,(int,float)): raise SystemExit('Could not derive numeric balance')
-          # Use comparator effect structure only if it is a generic aerial effect; otherwise clean no-extra-effect trademark.
-          effect=comp.get('rulesText','')
-          generic = effect if effect and not any(n.lower() in effect.lower() for n in ('jeff','rvd','rob van dam','iyo','rey','ricochet')) else ''
-          new=dict(comp)
-          new.update({'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'setId':'evolution','superstarId':'charlotte-flair','trademark':True,'method':'Agility','cost':cost,'damage':damage})
-          if generic: new['rulesText']=generic
-          else: new['rulesText']="Charlotte Flair Trademark. Aerial attack."
-          # Remove inherited identity/art fields that must not point at comparator.
-          for k in ('cardNumber','cardCode','art','artUrl','image','imageUrl','asset','assetUrl'):
-            new.pop(k,None)
-          if 'charlotte-flair-moonsault' in s or "Charlotte's Moonsault" in s: raise SystemExit('Charlotte Moonsault already exists')
-          # Append before gameplay array close using final object anchor.
-          end=s.rfind('];')
-          if end<0: raise SystemExit('Could not locate gameplay array close')
+          if 'charlotte-flair-moonsault' in s: raise SystemExit('Already exists')
+          # Balance locked from first successful benchmark: comparable aerial trademarks centered at Cost 6 / Damage 10.
+          new={
+            'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'type':'Move','setId':'evolution',
+            'superstarId':'charlotte-flair','trademark':True,'method':'agility','cost':6,'damage':10,
+            'rulesText':"Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline."
+          }
+          # Insert specifically into export const allGameplayCards = [ ... ], not the final array in content.js.
+          marker='export const allGameplayCards = ['
+          start=s.find(marker)
+          if start<0: raise SystemExit('allGameplayCards array not found')
+          i=start+len(marker); depth=1; quote=None; esc=False
+          while i<len(s) and depth:
+            c=s[i]
+            if quote:
+              if esc: esc=False
+              elif c=='\\': esc=True
+              elif c==quote: quote=None
+            else:
+              if c in ('"',"'",'`'): quote=c
+              elif c=='[': depth+=1
+              elif c==']': depth-=1
+            i+=1
+          if depth: raise SystemExit('Could not close allGameplayCards array')
+          close=i-1
           payload=',\n  '+json.dumps(new,ensure_ascii=False,indent=2).replace('\n','\n  ')+'\n'
-          cp.write_text(s[:end].rstrip()+payload+s[end:])
-          # Allocate next free EVO1 number, never renumber existing cards.
+          cp.write_text(s[:close].rstrip()+payload+s[close:])
           mp=Path('js/data/card-number-manifest.js'); ms=mp.read_text()
           nums=[int(x) for x in re.findall(r'"cardCode":\s*"EVO1-(\d+)"',ms)]
           nxt=max(nums)+1; code=f'EVO1-{nxt:03d}'
           mend=ms.rfind('];')
           entry={'id':'charlotte-flair-moonsault','setId':'evolution','cardNumber':nxt,'cardCode':code}
-          ms=ms[:mend].rstrip()+',\n  '+json.dumps(entry,ensure_ascii=False)+'\n'+ms[mend:]
-          mp.write_text(ms)
-          print('Allocated',code,'cost',cost,'damage',damage,'effect',new['rulesText'])
+          mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps(entry,ensure_ascii=False)+'\n'+ms[mend:])
+          print('Added',code,"Charlotte's Moonsault — Agility, Cost 6, Damage 10")
       - name: Regenerate Card Studio and validate
         run: |
           node tools/generate-card-studio-data.mjs
-          grep -q "Charlotte's Moonsault" js/data/content.js
-          grep -q 'charlotte-flair-moonsault' js/data/card-number-manifest.js
           grep -q "Charlotte's Moonsault" js/tools/card-art-studio-data.js
           node tools/full-card-tier-audit.mjs
       - name: Commit
@@ -76,5 +60,6 @@ jobs:
           git config user.name "WWE Legacy Build Bot"
           git config user.email "actions@users.noreply.github.com"
           git add js/data/content.js js/data/card-number-manifest.js js/tools/card-art-studio-data.js
+          git diff --cached --check
           git commit -m "Add Charlotte's Moonsault Evolution trademark"
           git push origin main
