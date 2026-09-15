@@ -19724,6 +19724,29 @@ export const allGameplayCards = [
     "effects": [],
     "boosterOnly": true,
     "counterState": "torso-trapped"
+  },
+  {
+    "id": "chris-jericho-springboard-dropkick",
+    "name": "Jericho's Springboard Dropkick",
+    "kind": "move",
+    "setId": "attitude-era-series-1",
+    "superstarId": "chris-jericho",
+    "trademark": true,
+    "method": "agility",
+    "moveType": "agility",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 1
+    },
+    "rarity": 3,
+    "rulesText": "Jericho-exclusive Trademark. Running Aerial. Grounds opponent. On Connect: gain +1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "running-aerial"
   }
 ];
 allGameplayCards.push(...FUTURE_ROADMAP_GAMEPLAY_CARDS, ...V1175_AUTHENTICITY_CARDS);

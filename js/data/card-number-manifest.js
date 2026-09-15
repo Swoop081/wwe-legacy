@@ -5713,7 +5713,8 @@ export const CARD_NUMBER_MANIFEST = [
   {"id":"special-aj-styles","setId":"rewards-october-2026","cardNumber":6,"cardCode":"RAJ26-006"},
   {"id":"aj-styles-house-that-aj-styles-built","setId":"rewards-october-2026","cardNumber":7,"cardCode":"RAJ26-007"},
   {"id":"entrance-aj-styles","setId":"rewards-october-2026","cardNumber":8,"cardCode":"RAJ26-008"},
-  {"id":"superstar-aj-styles","setId":"rewards-october-2026","cardNumber":9,"cardCode":"RAJ26-009"}
+  {"id":"superstar-aj-styles","setId":"rewards-october-2026","cardNumber":9,"cardCode":"RAJ26-009"},
+  {"id": "chris-jericho-springboard-dropkick", "setId": "attitude-era-series-1", "cardNumber": 84, "cardCode": "AE1-084"}
 ];
 export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));
 export const CARD_IDS_BY_SET = {};
