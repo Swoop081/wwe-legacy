@@ -10,16 +10,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Report live non-finisher damage outliers
+      - name: Apply authored high damage curves
         run: |
-          node --input-type=module <<'NODE'
-          const {allGameplayCards}=await import('./js/data/content.js');
-          const moves=allGameplayCards.filter(c=>c.kind==='move' && !c.finisher && !c.submission && c.moveType!=='submission');
-          const out=moves.filter(c=>Number(c.damage)>=12).sort((a,b)=>Number(b.damage)-Number(a.damage)||String(a.id).localeCompare(String(b.id)));
-          console.log('NON_FINISHER_DAMAGE_12_PLUS',out.length);
-          for(const c of out) console.log(JSON.stringify({id:c.id,name:c.name,damage:c.damage,cost:c.cost,trademark:!!c.trademark,superstarId:c.superstarId??null,requirements:c.requirements??{},effects:c.effects??[],groundOpponent:!!c.groundOpponent,selfDamage:c.selfDamage??0,setId:c.setId,printingStats:c.printingStats??null}));
-          NODE
-      - name: Run tier audit
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('js/shared/v1.1.69-card-identity-pass.js'); s=p.read_text()
+          marker="const EXCEPTIONAL_FINISHER_IDS=new Set(['brock-lesnar-f-5']);"
+          if 'AUTHORED_HIGH_DAMAGE_CURVES' not in s:
+            ids11=['andre-the-giant-double-underhook-suplex','kevin-owens-avalanche-fishermans-buster','aj-styles-phenomenal-forearm','kevin-owens-package-piledriver','rey-fenix-mexican-destroyer','baron-corbin-deep-six','cody-rhodes-cody-cutter','finn-balor-1916','jacob-fatu-pop-up-samoan-drop','jaida-parker-samoan-drop','kane-chokeslam-from-hell','last-symphony','montez-ford-450-splash','nia-jax-avalanche-samoan-drop','penta-driver','pop-up-powerbomb','rob-van-dam-van-daminator','superplex','the-rock-attitude-people-s-elbow','trick-williams-trick-knee','vikingo-twisting-450-splash']
+            ids10=['bayley-diving-elbow','seth-rollins-phoenix-splash']
+            rows=[]
+            for x in ids11: rows.append("  '%s':[8,9,9,10,11]"%x)
+            for x in ids10: rows.append("  '%s':[7,8,8,9,10]"%x)
+            block="const AUTHORED_HIGH_DAMAGE_CURVES=Object.freeze({\n"+',\n'.join(rows)+"\n});\nfunction applyAuthoredHighDamageCurve(card){\n  const curve=AUTHORED_HIGH_DAMAGE_CURVES[card?.id];\n  if(!curve || card?.finisher || card?.submission || card?.moveType==='submission') return;\n  card.damage=curve[4];\n  card.printingStats={base:{damage:curve[0]},emerald:{damage:curve[1]},sapphire:{damage:curve[2]},ruby:{damage:curve[3]},amethyst:{damage:curve[4]}};\n  card.balanceAuditVersion='v1.1.200';\n}\n\n"
+            s=s.replace(marker,block+marker)
+            s=s.replace('function enforceAuditedMoveStructure(card){\n  if(card?.finisher)','function enforceAuditedMoveStructure(card){\n  applyAuthoredHighDamageCurve(card);\n  if(card?.finisher)')
+            p.write_text(s)
+          PY
+      - name: Validate and commit
         run: |
           set -euo pipefail
+          node --check js/shared/v1.1.69-card-identity-pass.js
+          node --input-type=module -e "const m=await import('./js/data/content.js'); const bad=m.allGameplayCards.filter(c=>c.kind==='move'&&!c.finisher&&!c.submission&&c.moveType!=='submission'&&Number(c.damage)>=12); if(bad.length){console.error(bad.map(c=>[c.id,c.damage]));process.exit(1)}; console.log('PASS no non-finisher Move remains at 12+ damage')"
           if [ -f tools/full-card-tier-audit.mjs ]; then node tools/full-card-tier-audit.mjs; fi
+          git config user.name 'WWE Legacy Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add js/shared/v1.1.69-card-identity-pass.js
+          git diff --cached --check
+          git commit -m 'Rebalance high damage non-finisher moves'
+          git push origin main
