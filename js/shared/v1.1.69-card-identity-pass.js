@@ -100,6 +100,19 @@ function auditedTierGrowthProfile(card){
 }
 
 const APPROVED_AUDIT_OVERRIDES = Object.freeze({
+  // BECKY_FULL_FIVE_TIER_V11201 — shared IDs intentionally global.
+  'punch': {cost:1,damage:3,printingStats:{base:{cost:2,damage:2},emerald:{cost:2,damage:2},sapphire:{cost:1,damage:2},ruby:{cost:1,damage:3},amethyst:{cost:1,damage:3}}},
+  'arm-drag': {cost:3,damage:4,printingStats:{base:{cost:4,damage:2},emerald:{cost:4,damage:3},sapphire:{cost:3,damage:3},ruby:{cost:3,damage:4},amethyst:{cost:3,damage:4}}},
+  'missile-dropkick': {cost:6,damage:9,printingStats:{base:{cost:7,damage:6},emerald:{cost:7,damage:7},sapphire:{cost:6,damage:7},ruby:{cost:6,damage:8},amethyst:{cost:6,damage:9}}},
+  'inverted-ddt': {cost:5,damage:7,printingStats:{base:{cost:6,damage:4},emerald:{cost:6,damage:5},sapphire:{cost:5,damage:5},ruby:{cost:5,damage:6},amethyst:{cost:5,damage:7}}},
+  'leg-lariat': {cost:4,damage:7,printingStats:{base:{cost:5,damage:4},emerald:{cost:5,damage:5},sapphire:{cost:4,damage:5},ruby:{cost:4,damage:6},amethyst:{cost:4,damage:7}}},
+  'calf-kick': {cost:3,damage:5,printingStats:{base:{cost:4,damage:3},emerald:{cost:4,damage:4},sapphire:{cost:3,damage:4},ruby:{cost:3,damage:5},amethyst:{cost:3,damage:5}}},
+  'hammerlock': {cost:3,damage:4,printingStats:{base:{cost:4,damage:2},emerald:{cost:4,damage:3},sapphire:{cost:3,damage:3},ruby:{cost:3,damage:3},amethyst:{cost:3,damage:4}}},
+  'european-uppercut': {cost:2,damage:3,printingStats:{base:{cost:3,damage:2},emerald:{cost:3,damage:2},sapphire:{cost:2,damage:2},ruby:{cost:2,damage:3},amethyst:{cost:2,damage:3}}},
+  'snap-suplex': {cost:3,damage:5,printingStats:{base:{cost:4,damage:3},emerald:{cost:4,damage:4},sapphire:{cost:3,damage:4},ruby:{cost:3,damage:5},amethyst:{cost:3,damage:5}}},
+  'german-suplex': {cost:5,damage:7,printingStats:{base:{cost:6,damage:4},emerald:{cost:6,damage:5},sapphire:{cost:5,damage:5},ruby:{cost:5,damage:6},amethyst:{cost:5,damage:7}}},
+  'superplex': {cost:7,damage:11,printingStats:{base:{cost:8,damage:7},emerald:{cost:8,damage:8},sapphire:{cost:7,damage:9},ruby:{cost:7,damage:10},amethyst:{cost:7,damage:11}}},
+  'dropkick': {cost:2,damage:3,printingStats:{base:{cost:3,damage:2},emerald:{cost:3,damage:2},sapphire:{cost:2,damage:2},ruby:{cost:2,damage:3},amethyst:{cost:2,damage:3}}},
   'becky-lynch-diving-leg-drop': {
     name:"Becky’s Diving Leg Drop", trademark:true, cost:6, damage:10,
     requirements:{agility:2}, method:'agility', moveType:'aerial', groundedOnly:true, groundOpponent:true,
@@ -121,13 +134,7 @@ const APPROVED_AUDIT_OVERRIDES = Object.freeze({
     name:'Dis-arm-her', cost:9, damage:0, requirements:{}, method:null, moveType:'submission',
     submission:{bodyPart:'arms',pressure:6}, finisher:true, trademark:false,
     rulesText:'Becky Lynch-exclusive Finisher Submission. No Method requirement.',
-    printingStats:{
-      base:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:3}},
-      emerald:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:4}},
-      sapphire:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:4}},
-      ruby:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:5}},
-      amethyst:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:6}}
-    }
+    printingStats:{base:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:3}},emerald:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:4}},sapphire:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:4}},ruby:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:5}},amethyst:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:6}}}
   },
   'chelsea-green-im-prettier': {
     name:'Un-Pretty-Her', cost:10, damage:16, requirements:{}, method:null, finisher:true, groundOpponent:true,

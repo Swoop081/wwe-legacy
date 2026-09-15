@@ -64,5 +64,6 @@ export function gameplayStatsForPrinting(card, tier) {
     printingTier,
     ...(Number.isFinite(curve.damage) ? { damage: curve.damage } : {}),
     ...(Number.isFinite(curve.cost) ? { cost: curve.cost } : {}),
+    ...(curve.submission ? { submission: { ...(card.submission ?? {}), ...curve.submission } } : {}),
   };
 }
