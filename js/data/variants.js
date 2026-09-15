@@ -197,8 +197,12 @@ export function applyCardTier(card, tier = DEFAULT_AUTHORED_TIER) {
     out.authoredCost=authoredCost;
     out.tierDamageOffset=damageOffset;
     out.tierCostOffset=costOffset;
-    out.damage=Math.max(0,authoredDamage+damageOffset);
-    out.cost=Math.max(card.defensiveOnly?0:1,authoredCost+costOffset);
+    const printingKey = resolvedTier === 'normal' ? 'base' : resolvedTier;
+    const printingSpec = card.printingStats?.[printingKey] ?? null;
+    out.damage=Number.isFinite(Number(printingSpec?.damage)) ? Math.max(0,Number(printingSpec.damage)) : Math.max(0,authoredDamage+damageOffset);
+    out.cost=Number.isFinite(Number(printingSpec?.cost)) ? Math.max(card.defensiveOnly?0:1,Number(printingSpec.cost)) : Math.max(card.defensiveOnly?0:1,authoredCost+costOffset);
+    out.tierDamageOffset=out.damage-authoredDamage;
+    out.tierCostOffset=out.cost-authoredCost;
     out.effects=scaleEffectArray(card.effects,moveEffectDelta);
     if(card.defensiveOnly && tierRank(resolvedTier)>tierRank('sapphire')){
       const counterTypes=[card.counterState,...(card.counterStates??[]),...(card.counters??[])].filter(Boolean);

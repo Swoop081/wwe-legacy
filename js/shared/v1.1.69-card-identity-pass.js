@@ -161,8 +161,15 @@ function applyApprovedAuditOverride(card){
   card.authenticityAudit='approved-2026-09';
 }
 
+const EXCEPTIONAL_FINISHER_IDS=new Set(['brock-lesnar-f-5']);
+const LOWER_FINISHER_IDS=new Set([]);
+function ensureFinisherPrintingCurve(card){
+  if(!card?.finisher || card?.moveType==='submission' || card?.submission || card?.printingStats) return;
+  const damage=EXCEPTIONAL_FINISHER_IDS.has(card.id) ? [13,14,15,16,17] : LOWER_FINISHER_IDS.has(card.id) ? [11,12,13,14,15] : [12,13,14,15,16];
+  card.printingStats={base:{damage:damage[0]},emerald:{damage:damage[1]},sapphire:{damage:damage[2]},ruby:{damage:damage[3]},amethyst:{damage:damage[4]}};
+}
 function enforceAuditedMoveStructure(card){
-  if(card?.finisher){ card.method=null; card.requirements={}; }
+  if(card?.finisher){ card.method=null; card.requirements={}; ensureFinisherPrintingCurve(card); }
   if(card?.moveType==='submission' || card?.submission) card.damage=0;
   card.tierGrowthProfile=auditedTierGrowthProfile(card);
   card.balanceAuditVersion=card.balanceAuditVersion ?? 'v1.1.198';
