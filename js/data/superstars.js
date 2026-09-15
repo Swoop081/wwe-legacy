@@ -1745,7 +1745,7 @@ export const superstars = {
     "signatures": [
       "becky-lynch-dis-arm-her",
       "becky-lynch-manhandle-slam",
-      "becky-lynch-bexploder"
+      "becky-lynch-diving-leg-drop"
     ],
     "archetype": "reviewed-starter",
     "hp": 65,
@@ -2766,7 +2766,9 @@ export const superstars = {
     ],
     "signatures": [
       "chelsea-green-im-prettier",
-      ],
+      ,
+      "chelsea-green-missile-dropkick",
+      "chelsea-green-rough-ryder"],
     "archetype": "counter-control-opportunist",
     "hp": 61,
     "methodLimits": {
@@ -2827,7 +2829,7 @@ export const superstars = {
     "signatures": [
       "damian-priest-south-of-heaven",
       "damian-priest-razors-edge",
-      "damian-priest-hit-the-lights"
+      "damian-priest-south-of-heaven"
     ],
     "archetype": "counter-punishment-heavy-hitter",
     "hp": 66,

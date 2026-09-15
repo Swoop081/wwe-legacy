@@ -3898,30 +3898,7 @@ export const allGameplayCards = [
       "arms"
     ]
   },
-  {
-    "id": "becky-lynch-diamond-dust",
-    "name": "Diamond Dust",
-    "kind": "move",
-    "setId": "evolution-series-1",
-    "cost": 5,
-    "damage": 8,
-    "requirements": {
-      "technical": 1,
-      "agility": 1
-    },
-    "moveType": "grapple",
-    "method": "technical",
-    "superstarId": "becky-lynch",
-    "rarity": 3,
-    "rulesText": "New shared",
-    "groundOpponent": false,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [],
-    "counterState": "diving-aerial"
-  },
-  {
+{
     "id": "becky-lynch-diving-leg-drop",
     "name": "Diving Leg Drop",
     "kind": "move",
@@ -7774,28 +7751,7 @@ export const allGameplayCards = [
     "effects": [],
     "counterState": "body-elevated"
   },
-  {
-    "id": "damian-priest-hit-the-lights",
-    "name": "Hit the Lights",
-    "kind": "move",
-    "setId": "smackdown-series-1",
-    "cost": 10,
-    "damage": 16,
-    "requirements": {},
-    "moveType": "grapple",
-    "method": null,
-    "superstarId": "damian-priest",
-    "rarity": 4,
-    "rulesText": "Damian Priest-exclusive Finisher. No Method requirement. Grounded opponent only.",
-    "groundOpponent": false,
-    "groundedOnly": true,
-    "stun": 0,
-    "selfDamage": 0,
-    "finisher": true,
-    "effects": [],
-    "counterState": "body-elevated"
-  },
-  {
+{
     "id": "entrance-damian-priest",
     "name": "Rise of the Punisher",
     "kind": "entrance",
@@ -10269,36 +10225,7 @@ export const allGameplayCards = [
       "discount": 0
     }
   },
-  {
-    "id": "becky-lynch-bexploder",
-    "name": "Bexploder",
-    "kind": "move",
-    "setId": "evolution-series-1",
-    "cost": 5,
-    "damage": 9,
-    "requirements": {
-      "strength": 2
-    },
-    "moveType": "grapple",
-    "method": "strength",
-    "superstarId": "becky-lynch",
-    "rarity": 3,
-    "rulesText": "Becky-exclusive Trademark. Ground opponent. On Connect: search/draw Dis-arm-her; it costs 2 less this Control sequence.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "trademark": true,
-    "effects": [
-      {
-        "type": "search",
-        "name": "Dis-arm-her",
-        "discount": 2
-      }
-    ],
-    "counterState": "torso-trapped"
-  },
-  {
+{
     "id": "cody-rhodes-what-do-you-want-to-talk-about",
     "name": "What Do You Want to Talk About?",
     "kind": "action",
@@ -19775,6 +19702,58 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "diving-aerial"
+  },
+  {
+    "id": "chelsea-green-missile-dropkick",
+    "name": "Chelsea\u2019s Missile Dropkick",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 9,
+    "damage": 9,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "chelsea-green",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Chelsea Green-exclusive Trademark. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "chelsea-green-rough-ryder",
+    "name": "Chelsea\u2019s Rough Ryder",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 10,
+    "damage": 10,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": "chelsea-green",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Chelsea Green-exclusive Trademark. Grounds opponent. On Connect: Un-Pretty-Her costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Un-Pretty-Her",
+        "amount": 1
+      }
+    ],
+    "counterState": "running-aerial"
   }
 ];
 allGameplayCards.push(...FUTURE_ROADMAP_GAMEPLAY_CARDS, ...V1175_AUTHENTICITY_CARDS);
