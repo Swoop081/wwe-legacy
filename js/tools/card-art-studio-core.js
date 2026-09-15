@@ -378,7 +378,7 @@ async function prepareExport(){
     canvas=clean;ctx=cleanCtx;
     resetCanvasSurface();renderForExport();
     await new Promise(requestAnimationFrame);
-    if(!canvasIsOriginClean())throw new Error('Clean export canvas was tainted outside drawImage.');
+    try{cleanCtx.getImageData(0,0,1,1);}catch(e){throw new Error('Clean export canvas is still cross-origin after isolated rendering.');}
     if(skipped.length)console.warn('[WWE Legacy Card Studio] skipped unsafe export layers',skipped);
     return clean;
   }finally{canvas=originalCanvas;ctx=originalCtx;}

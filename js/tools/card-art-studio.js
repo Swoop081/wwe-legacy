@@ -292,7 +292,7 @@
   });
 
   const core = document.createElement("script");
-  core.src = "../js/tools/card-art-studio-core.js?v=1.1.208-export-layer-isolation";
+  core.src = "../js/tools/card-art-studio-core.js?v=1.1.209-export-canvas-verification";
   core.async = false;
   document.body.appendChild(core);
 })();
