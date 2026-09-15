@@ -1,0 +1,91 @@
+name: Becky direct lock
+on:
+  push:
+    paths:
+      - '.github/workflows/becky-direct-lock.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Patch Becky
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('js/data/content.js'); s=p.read_text()
+          imp='import { BECKY_LYNCH_V11200_CARDS } from "./becky-lynch-v1.1.200.js?v=1.1.200";\n'
+          anchor='import { AJ_STYLES_GAMEPLAY_CARDS } from "./aj-styles-v1.1.80.js?v=1.1.132";\n'
+          if imp not in s:
+              assert anchor in s
+              s=s.replace(anchor,anchor+imp)
+          marker='allGameplayCards.push(...AJ_STYLES_GAMEPLAY_CARDS);'
+          assert marker in s
+          add='allGameplayCards.push(...BECKY_LYNCH_V11200_CARDS);'
+          if add not in s: s=s.replace(marker,marker+'\n'+add)
+          p.write_text(s)
+
+          p=Path('js/data/decks.js'); s=p.read_text()
+          m=re.search(r'  "becky-lynch": \[\n(.*?)\n  \],\n  "logan-paul":',s,re.S); assert m
+          deck=['momentum-strike','momentum-technical','momentum-strength','punch','arm-drag','momentum-strike','momentum-strike','momentum-strike','momentum-strike','momentum-technical','momentum-technical','momentum-technical','momentum-technical','becky-lynch-manhandle-slam','becky-lynch-manhandle-slam','becky-lynch-dis-arm-her','becky-lynch-dis-arm-her','becky-lynch-bex-plex','becky-lynch-bex-plex','becky-lynch-diving-leg-drop','becky-lynch-diving-leg-drop','becky-lynch-flying-fire-arm','becky-lynch-flying-fire-arm','punch','armbar','armbar','missile-dropkick','missile-dropkick','inverted-ddt','inverted-ddt','leg-lariat','leg-lariat','calf-kick','calf-kick','hammerlock','hammerlock','european-uppercut','european-uppercut','snap-suplex','snap-suplex','german-suplex','german-suplex','superplex','special-becky-lynch','duck','sidestep','shoulder-up','once-too-often','standing-switch','up-and-over','dodge','knees-up','catch-the-foot','grab-the-ropes','dropkick']
+          assert len(deck)==55, len(deck)
+          # 55 authored IDs + Superstar + Entrance; add three authentic repeats to preserve the established 58-card body.
+          deck += ['arm-drag','snap-suplex','european-uppercut']
+          assert len(deck)==58
+          assert deck[:5]==['momentum-strike','momentum-technical','momentum-strength','punch','arm-drag']
+          assert deck.count('momentum-strike')==5 and deck.count('momentum-technical')==5 and deck.count('momentum-strength')==1
+          assert deck.count('once-too-often')==1 and deck.count('punch')==2
+          assert not set(['chain-wrestling','game-plan','fire-up','jawbreaker','rollover-counter']) & set(deck)
+          body='\n'.join('    "'+x+'"'+(',' if i<len(deck)-1 else '') for i,x in enumerate(deck))
+          s=s[:m.start(1)]+body+s[m.end(1):]; p.write_text(s)
+
+          p=Path('js/shared/v1.1.69-card-identity-pass.js'); s=p.read_text()
+          old="""  'becky-lynch-dis-arm-her': {
+    cost:7, damage:0, requirements:{technical:2}, method:'technical', trademark:true,
+    printingStats:{
+      base:{cost:8,damage:0}, emerald:{cost:8,damage:0}, sapphire:{cost:7,damage:0},
+      ruby:{cost:7,damage:0}, amethyst:{cost:7,damage:0}
+    }
+  },"""
+          new="""  'becky-lynch-dis-arm-her': {
+    name:'Dis-arm-her', cost:9, damage:0, requirements:{}, method:null, moveType:'submission',
+    submission:{bodyPart:'arms',pressure:6}, finisher:true, trademark:false,
+    rulesText:'Becky Lynch-exclusive Finisher Submission. No Method requirement.',
+    printingStats:{
+      base:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:3}},
+      emerald:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:4}},
+      sapphire:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:4}},
+      ruby:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:5}},
+      amethyst:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:6}}
+    }
+  },"""
+          if old in s: s=s.replace(old,new)
+          else: assert "name:'Dis-arm-her'" in s
+          p.write_text(s)
+          PY
+      - name: Certify Becky
+        run: |
+          node --input-type=module <<'NODE'
+          import { allGameplayCards } from './js/data/content.js';
+          import { deckIds } from './js/data/decks.js';
+          const d=deckIds['becky-lynch']; const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
+          const missing=[...new Set(d.filter(id=>!byId.has(id)))];
+          if(d.length!==58 || missing.length) throw new Error(`deck=${d.length} missing=${missing}`);
+          const bex=byId.get('becky-lynch-bex-plex'); if(bex.requirements.strength!==1||bex.requirements.technical!==1) throw new Error('Bex-Plex');
+          const dis=byId.get('becky-lynch-dis-arm-her'); if(!dis.finisher||dis.trademark||dis.method!==null||Object.keys(dis.requirements||{}).length) throw new Error('Dis-arm-her identity');
+          const t=['base','emerald','sapphire','ruby','amethyst']; if(!t.every(x=>dis.printingStats[x].damage===0)) throw new Error('submission damage');
+          for(const id of ['dodge','knees-up','catch-the-foot','grab-the-ropes']) if(!byId.get(id)?.defensiveOnly) throw new Error(id);
+          console.log('BECKY LOCK PASS', d.length, 'missing', missing.length);
+          NODE
+      - name: Commit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add js/data/content.js js/data/decks.js js/shared/v1.1.69-card-identity-pass.js
+          git commit -m 'Lock Becky Lynch final authentic deck'
+          git pull --rebase origin main
+          git push origin main
