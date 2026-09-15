@@ -1,0 +1,66 @@
+name: Becky authentic 60-card deck apply
+on:
+  push:
+    paths: ['.github/becky-authentic-60-apply-trigger']
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Apply Becky authenticated 60-card package
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('js/data/decks.js')
+          s=p.read_text()
+          m=re.search(r'  "becky-lynch": \[\n(.*?)\n  \],\n  "logan-paul":',s,re.S)
+          assert m, 'Becky deck block missing'
+          old=m.group(1)
+          ids=re.findall(r'"([^"]+)"',old)
+          assert len(ids)==58, f'expected 58 authored deck IDs + Superstar/Entrance = 60, got {len(ids)}'
+          momentum=[x for x in ids if x.startswith('momentum-')]
+          assert len(momentum)==12, len(momentum)
+          support=ids[43:]
+          assert len(support)==15, len(support)
+          moves=[
+            'becky-lynch-manhandle-slam','becky-lynch-manhandle-slam',
+            'becky-lynch-dis-arm-her','becky-lynch-dis-arm-her',
+            'becky-lynch-bex-plex','becky-lynch-bex-plex',
+            'becky-lynch-diving-leg-drop','becky-lynch-diving-leg-drop',
+            'becky-lynch-flying-fire-arm','becky-lynch-flying-fire-arm',
+            'armbar','armbar','missile-dropkick','missile-dropkick','inverted-ddt','inverted-ddt',
+            'leg-lariat','leg-lariat','calf-kick','calf-kick','hammerlock','hammerlock',
+            'european-uppercut','european-uppercut','snap-suplex','snap-suplex',
+            'german-suplex','german-suplex','superplex','arm-drag','arm-drag'
+          ]
+          assert len(moves)==31
+          new_ids=moves+momentum+support
+          assert len(new_ids)==58
+          body='\n'.join('    '+repr(x).replace("'",'"')+(',' if i<57 else '') for i,x in enumerate(new_ids))
+          s=s[:m.start(1)]+body+s[m.end(1):]
+          p.write_text(s)
+          print('Becky deck: 31 moves + 12 Momentum + 15 support + Superstar + Entrance = 60')
+          print('Momentum preserved:', momentum)
+          print('Support preserved:', support)
+          PY
+          # Verify every requested ID resolves in canonical gameplay content before committing.
+          node --input-type=module <<'NODE'
+          import { deckIds } from './js/data/decks.js';
+          import { allGameplayCards } from './js/data/content.js';
+          const d=deckIds['becky-lynch'];
+          const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
+          const missing=[...new Set(d.filter(id=>!byId.has(id)))];
+          console.log('authored IDs',d.length,'missing',missing);
+          if(missing.length) process.exit(42);
+          NODE
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add js/data/decks.js
+          git commit -m 'Rebuild Becky Lynch authentic 60-card deck'
+          git pull --rebase origin main
+          git push origin main
