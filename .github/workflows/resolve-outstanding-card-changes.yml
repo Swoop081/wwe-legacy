@@ -1,0 +1,81 @@
+name: Resolve Outstanding Card Changes
+on:
+  push:
+    paths: ['.github/resolve-outstanding-card-changes-trigger-v2']
+permissions:
+  contents: write
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Resolve requested state
+        shell: python
+        run: |
+          from pathlib import Path
+          import json,re
+          cp=Path('js/data/content.js'); mp=Path('js/data/card-number-manifest.js'); s=cp.read_text(); ms=mp.read_text(); dec=json.JSONDecoder()
+          def objs(t):
+            out=[];i=0
+            while True:
+              a=t.find('{',i)
+              if a<0:break
+              try:o,n=dec.raw_decode(t[a:])
+              except:i=a+1;continue
+              if isinstance(o,dict) and 'id' in o:out.append((a,n,o))
+              i=a+n
+            return out
+          def remove(code,owner):
+            global s,ms
+            p=ms.find('"cardCode": "'+code+'"')
+            if p<0: print(code,'already absent'); return
+            ma=ms.rfind('{',0,p); mo,mn=dec.raw_decode(ms[ma:]); cid=mo['id']; hits=[x for x in objs(s) if x[2].get('id')==cid]
+            if len(hits)!=1 or hits[0][2].get('superstarId')!=owner:raise SystemExit('identity guard '+code)
+            a,n,o=hits[0];b=a+n
+            while b<len(s) and s[b] in ' \t\r\n':b+=1
+            if b<len(s) and s[b]==',':b+=1
+            s=s[:a].rstrip()+'\n'+s[b:].lstrip(); mb=ma+mn
+            while mb<len(ms) and ms[mb] in ' \t\r\n':mb+=1
+            if mb<len(ms) and ms[mb]==',':mb+=1
+            ms=ms[:ma].rstrip()+'\n'+ms[mb:].lstrip()
+            for f in Path('js/data').glob('*.js'):
+              if f in (cp,mp):continue
+              t=f.read_text();nt=re.sub(r'(["\'])'+re.escape(cid)+r'\1\s*,?\s*','',t)
+              if nt!=t:f.write_text(nt)
+          remove('EVO1-008','becky-lynch'); remove('NG1-075','british-bulldog')
+          if 'charlotte-flair-moonsault' not in s:
+            new={'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'type':'Move','setId':'evolution','superstarId':'charlotte-flair','trademark':True,'method':'agility','cost':6,'damage':10,'rulesText':'Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline.'}
+            marker='export const allGameplayCards = [';start=s.find(marker);i=start+len(marker);depth=1;q=None;esc=False
+            while depth:
+              c=s[i]
+              if q:
+                if esc:esc=False
+                elif c=='\\':esc=True
+                elif c==q:q=None
+              else:
+                if c in ('"',"'",'`'):q=c
+                elif c=='[':depth+=1
+                elif c==']':depth-=1
+              i+=1
+            close=i-1;s=s[:close].rstrip()+',\n  '+json.dumps(new,indent=2).replace('\n','\n  ')+'\n'+s[close:]
+            nums=[int(x) for x in re.findall(r'"cardCode":\s*"EVO1-(\d+)"',ms)];n=max(nums)+1;mend=ms.rfind('];')
+            ms=ms[:mend].rstrip()+',\n  '+json.dumps({'id':'charlotte-flair-moonsault','setId':'evolution','cardNumber':n,'cardCode':f'EVO1-{n:03d}'})+'\n'+ms[mend:]
+          cp.write_text(s);mp.write_text(ms)
+      - name: Regenerate and verify
+        run: |
+          node tools/generate-card-studio-data.mjs
+          ! grep -q 'EVO1-008' js/data/card-number-manifest.js
+          ! grep -q 'NG1-075' js/data/card-number-manifest.js
+          ! grep -qi 'Diamond Dust' js/tools/card-art-studio-data.js
+          ! grep -qi 'Green with Envy' js/tools/card-art-studio-data.js
+          ! grep -qi 'Hitman T-Shirt' js/tools/card-art-studio-data.js
+          grep -q "Charlotte's Moonsault" js/tools/card-art-studio-data.js
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/data js/tools/card-art-studio-data.js
+          git diff --cached --check
+          git commit -m "Resolve outstanding WWE Legacy card changes"
+          git push origin main
