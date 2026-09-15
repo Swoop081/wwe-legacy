@@ -18278,66 +18278,66 @@ export const allGameplayCards = [
     }
   },
   {
-    "id": "batista-spear",
-    "name": "Spear",
-    "kind": "move",
-    "setId": "ruthless-aggression-series-1",
-    "cost": 5,
-    "damage": 7,
-    "requirements": {
-      "technical": 2
-    },
-    "moveType": "grapple",
-    "method": "technical",
-    "superstarId": "batista",
-    "rarity": 3,
-    "trademark": true,
-    "rulesText": "Batista-exclusive Trademark. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them −5 percentage points to their kickout chance. On Connect: +1 persistent Arm damage.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [],
-    "counterState": "front-control",
-    "pinKickoutPenalty": 5,
-    "bodyDamage": {
-      "bodyPart": "arms",
-      "pressure": 1
-    }
+  "id": "batista-spear",
+  "name": "Batista's Spear",
+  "kind": "move",
+  "setId": "ruthless-aggression-series-1",
+  "cost": 5,
+  "damage": 7,
+  "requirements": {
+    "technical": 2
   },
+  "moveType": "grapple",
+  "method": "technical",
+  "superstarId": "batista",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Batista-exclusive Trademark. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them \u22125 percentage points to their kickout chance. On Connect: +1 persistent Arm damage.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "front-control",
+  "pinKickoutPenalty": 5,
+  "bodyDamage": {
+    "bodyPart": "arms",
+    "pressure": 1
+  }
+},
   {
-    "id": "batista-demon-bomb",
-    "name": "Demon Bomb",
-    "kind": "move",
-    "setId": "ruthless-aggression-series-1",
-    "cost": 6,
-    "damage": 10,
-    "requirements": {
-      "strength": 2
-    },
-    "moveType": "grapple",
-    "method": "strength",
-    "superstarId": "batista",
-    "rarity": 3,
-    "trademark": true,
-    "rulesText": "Batista-exclusive Trademark. Grounds opponent. On Connect: search/draw Batista Bomb; it costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [
-      {
-        "type": "search",
-        "name": "Batista Bomb",
-        "discount": 1
-      }
-    ],
-    "counterState": "body-elevated",
-    "bodyDamage": {
-      "bodyPart": "legs",
-      "pressure": 1
-    }
+  "id": "batista-demon-bomb",
+  "name": "Batista's Powerslam",
+  "kind": "move",
+  "setId": "ruthless-aggression-series-1",
+  "cost": 6,
+  "damage": 10,
+  "requirements": {
+    "strength": 2
   },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": "batista",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Batista-exclusive Trademark. Grounds opponent. On Connect: search/draw Batista Bomb; it costs 1 less this Control sequence. On Connect: +1 persistent Leg damage.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [
+    {
+      "type": "search",
+      "name": "Batista Bomb",
+      "discount": 1
+    }
+  ],
+  "counterState": "body-elevated",
+  "bodyDamage": {
+    "bodyPart": "legs",
+    "pressure": 1
+  }
+},
   {
     "id": "batista-batista-bomb",
     "name": "Batista Bomb",
