@@ -10,32 +10,50 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Apply authored high damage curves
+      - name: Wire owned printing stats into live combat
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('js/shared/v1.1.69-card-identity-pass.js'); s=p.read_text()
-          marker="const EXCEPTIONAL_FINISHER_IDS=new Set(['brock-lesnar-f-5']);"
-          if 'AUTHORED_HIGH_DAMAGE_CURVES' not in s:
-            ids11=['andre-the-giant-double-underhook-suplex','kevin-owens-avalanche-fishermans-buster','aj-styles-phenomenal-forearm','kevin-owens-package-piledriver','rey-fenix-mexican-destroyer','baron-corbin-deep-six','cody-rhodes-cody-cutter','finn-balor-1916','jacob-fatu-pop-up-samoan-drop','jaida-parker-samoan-drop','kane-chokeslam-from-hell','last-symphony','montez-ford-450-splash','nia-jax-avalanche-samoan-drop','penta-driver','pop-up-powerbomb','rob-van-dam-van-daminator','superplex','the-rock-attitude-people-s-elbow','trick-williams-trick-knee','vikingo-twisting-450-splash']
-            ids10=['bayley-diving-elbow','seth-rollins-phoenix-splash']
-            rows=[]
-            for x in ids11: rows.append("  '%s':[7,8,9,10,11]"%x)
-            for x in ids10: rows.append("  '%s':[6,7,8,9,10]"%x)
-            block="const AUTHORED_HIGH_DAMAGE_CURVES=Object.freeze({\n"+',\n'.join(rows)+"\n});\nfunction applyAuthoredHighDamageCurve(card){\n  const curve=AUTHORED_HIGH_DAMAGE_CURVES[card?.id];\n  if(!curve || card?.finisher || card?.submission || card?.moveType==='submission') return;\n  card.damage=curve[4];\n  card.printingStats={base:{damage:curve[0]},emerald:{damage:curve[1]},sapphire:{damage:curve[2]},ruby:{damage:curve[3]},amethyst:{damage:curve[4]}};\n  card.balanceAuditVersion='v1.1.198';\n}\n\n"
-            s=s.replace(marker,block+marker)
-            s=s.replace('function enforceAuditedMoveStructure(card){\n  if(card?.finisher)','function enforceAuditedMoveStructure(card){\n  applyAuthoredHighDamageCurve(card);\n  if(card?.finisher)')
-            p.write_text(s)
+          p=Path('js/engine/MatchEngine.js'); s=p.read_text()
+          imp='import { gameplayStatsForPrinting } from "../data/reward-printings.js?v=1.1.132";'
+          if imp not in s:
+            anchor='import { linkedGameplayCards } from "../data/content.js?v=1.1.132";'
+            if anchor not in s: raise SystemExit('MatchEngine content import anchor not found')
+            s=s.replace(anchor,anchor+'\n'+imp,1)
+          helper='const combatPrintingTier=card=>card?.printingTier??card?.gameplayPrintingTier??card?.ownedTier??card?.gemTier??card?.rarityTier??card?.fixedPrintingTier??"base";'
+          if helper not in s:
+            anchor='const other=id=>id==="p1"?"p2":"p1";'
+            if anchor not in s: raise SystemExit('MatchEngine helper anchor not found')
+            s=s.replace(anchor,anchor+'\n'+helper,1)
+          old='_setup(pid,star,deckCards=[]){const cards=deckCards.map(cloneCard),lead=cards.splice(0,Math.min(5,cards.length));'
+          new='_setup(pid,star,deckCards=[]){const cards=deckCards.map(card=>gameplayStatsForPrinting(cloneCard(card),combatPrintingTier(card))),lead=cards.splice(0,Math.min(5,cards.length));'
+          if old in s: s=s.replace(old,new,1)
+          elif new not in s: raise SystemExit('MatchEngine setup anchor not found')
+          p.write_text(s)
           PY
-      - name: Validate and commit
+      - name: Validate printing-aware combat
         run: |
           set -euo pipefail
-          node --check js/shared/v1.1.69-card-identity-pass.js
-          node --input-type=module -e "const m=await import('./js/data/content.js'); const bad=m.allGameplayCards.filter(c=>c.kind==='move'&&!c.finisher&&!c.submission&&c.moveType!=='submission'&&Number(c.damage)>=12); if(bad.length){console.error(bad.map(c=>[c.id,c.damage]));process.exit(1)}; console.log('PASS no non-finisher Move remains at 12+ damage')"
+          node --check js/engine/MatchEngine.js
+          node --input-type=module <<'NODE'
+          import { allGameplayCards } from './js/data/content.js';
+          import { gameplayStatsForPrinting } from './js/data/reward-printings.js';
+          const liv=allGameplayCards.find(c=>c.id==='liv-morgan-oblivion');
+          if(!liv) throw new Error('Liv Morgan Oblivion not found');
+          const expected={base:12,emerald:13,sapphire:14,ruby:15,amethyst:16};
+          for(const [tier,damage] of Object.entries(expected)){
+            const resolved=gameplayStatsForPrinting(liv,tier);
+            if(resolved.damage!==damage) throw new Error(`Oblivion ${tier}: expected ${damage}, got ${resolved.damage}`);
+          }
+          console.log('PASS Oblivion live printing curve 12/13/14/15/16');
+          NODE
           if [ -f tools/full-card-tier-audit.mjs ]; then node tools/full-card-tier-audit.mjs; fi
+      - name: Commit verified runtime
+        run: |
+          set -euo pipefail
           git config user.name 'WWE Legacy Build Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add js/shared/v1.1.69-card-identity-pass.js
+          git add js/engine/MatchEngine.js
           git diff --cached --check
-          git commit -m 'Rebalance high damage non-finisher moves'
+          git commit -m 'Use owned card printing stats in live combat'
           git push origin main
