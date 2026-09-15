@@ -1,0 +1,18 @@
+name: Becky complete deck audit
+on:
+  push:
+    paths: ['.github/becky-complete-audit-trigger']
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Locate Becky canonical package
+        run: |
+          set -euo pipefail
+          grep -RniE 'becky-lynch|Becky Lynch|Tap or Snap|Straight Fire|Manhandle|Dis-arm-her' . --exclude-dir=.git --exclude-dir=.github > /tmp/becky.txt || true
+          cat /tmp/becky.txt
+          test -s /tmp/becky.txt
