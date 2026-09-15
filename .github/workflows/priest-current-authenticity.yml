@@ -1,0 +1,105 @@
+name: Damian Priest current authenticity
+on:
+  push:
+    paths: ['.github/priest-current-authenticity-trigger']
+permissions: {contents: write}
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Apply current SmackDown Series 1 Priest package
+        shell: python
+        run: |
+          from pathlib import Path
+          import json,re
+          cp=Path('js/data/content.js'); mp=Path('js/data/card-number-manifest.js')
+          s=cp.read_text(); ms=mp.read_text(); dec=json.JSONDecoder()
+          def objects(text):
+            out=[]; i=0
+            while True:
+              a=text.find('{',i)
+              if a<0: break
+              try:o,n=dec.raw_decode(text[a:])
+              except: i=a+1; continue
+              if isinstance(o,dict) and 'id' in o: out.append((a,n,o))
+              i=a+n
+            return out
+          ids={o[2].get('id') for o in objects(s)}
+          # Current persona cleanup: these IDs stay stable so existing collections/decks do not break.
+          replacements={
+            'entrance-damian-priest': ('Archer of Infamy','Damian Priest enters as The Archer of Infamy. Gain +1 Strength Momentum and +1 Adrenaline.'),
+            'special-damian-priest': ('Wepa!','Damian Priest fires up the WWE Universe with Wepa! Gain +1 Adrenaline; your next Priest Trademark this Control costs 1 less.')
+          }
+          for cid,(name,rules) in replacements.items():
+            hits=[x for x in objects(s) if x[2].get('id')==cid]
+            if not hits: raise SystemExit(f'Missing canonical Priest card: {cid}')
+            a,n,o=hits[0]; o['name']=name; o['rulesText']=rules
+            if cid=='entrance-damian-priest':
+              o['effects']=[{'type':'gainMomentum','method':'strength','amount':1},{'type':'gainAdrenaline','amount':1}]
+            else:
+              o['effects']=[{'type':'gainAdrenaline','amount':1},{'type':'discountNextTrademark','superstarId':'damian-priest','amount':1}]
+            rep=json.dumps(o,ensure_ascii=False,indent=2)
+            s=s[:a]+rep+s[a+n:]
+          # Add Broken Arrow exactly once to the live SD1 population.
+          broken='damian-priest-broken-arrow'
+          if broken not in {o[2].get('id') for o in objects(s)}:
+            card={'id':broken,'name':'Broken Arrow','kind':'move','setId':'smackdown-series-1','cost':7,'damage':10,'requirements':{'strength':2},'moveType':'grapple','method':'strength','superstarId':'damian-priest','rarity':3,'trademark':True,'finisher':False,'rulesText':'Damian Priest-exclusive Trademark. Grounds opponent.','groundOpponent':True,'groundedOnly':False,'stun':0,'selfDamage':0,'effects':[],'counterState':'body-elevated','printingStats':{'base':{'cost':8,'damage':7},'emerald':{'cost':8,'damage':8},'sapphire':{'cost':7,'damage':8},'ruby':{'cost':7,'damage':9},'amethyst':{'cost':7,'damage':10}}}
+            marker='export const allGameplayCards = ['; start=s.find(marker); i=start+len(marker); depth=1; q=None; esc=False
+            if start<0: raise SystemExit('Canonical gameplay array not found')
+            while depth:
+              c=s[i]
+              if q:
+                if esc: esc=False
+                elif c=='\\': esc=True
+                elif c==q: q=None
+              else:
+                if c in ('"',"'",'`'): q=c
+                elif c=='[': depth+=1
+                elif c==']': depth-=1
+              i+=1
+            close=i-1
+            s=s[:close].rstrip()+',\n  '+json.dumps(card,ensure_ascii=False,indent=2).replace('\n','\n  ')+'\n'+s[close:]
+          cp.write_text(s)
+          # Assign next available SD1 catalogue number.
+          if broken not in {o[2].get('id') for o in objects(ms)}:
+            entries=[x[2] for x in objects(ms) if x[2].get('setId')=='smackdown-series-1' and x[2].get('cardNumber') is not None]
+            nxt=max(int(x['cardNumber']) for x in entries)+1
+            entry={'id':broken,'setId':'smackdown-series-1','cardNumber':nxt,'cardCode':f'SD1-{nxt:03d}'}
+            mend=ms.rfind('];'); ms=ms[:mend].rstrip()+',\n  '+json.dumps(entry)+'\n'+ms[mend:]; mp.write_text(ms)
+          # Put two copies into Priest's authored deck and add to signatures when those canonical structures exist.
+          dp=Path('js/data/decks.js'); d=dp.read_text(); key='"damian-priest": ['; a=d.find(key)
+          if a<0: key="'damian-priest': ["; a=d.find(key)
+          if a<0: raise SystemExit('Damian Priest deck not found')
+          b=d.find(']',a); block=d[a:b]
+          if broken not in block:
+            d=d[:b]+',\n    "'+broken+'",\n    "'+broken+'"'+d[b:]; dp.write_text(d)
+          sp=Path('js/data/superstars.js'); t=sp.read_text(); pos=max(t.find('"id": "damian-priest"'),t.find("id: 'damian-priest'"))
+          if pos>=0:
+            sig=t.find('"signatures": [',pos)
+            if sig>=0:
+              end=t.find(']',sig); chunk=t[sig:end]
+              if broken not in chunk: t=t[:end]+',\n      "'+broken+'"'+t[end:]; sp.write_text(t)
+      - name: Validate Priest package
+        run: |
+          set -euo pipefail
+          node --check js/data/content.js
+          node --check js/data/decks.js
+          node --check js/data/card-number-manifest.js
+          grep -q 'damian-priest-broken-arrow' js/data/content.js
+          grep -q '"name": "Broken Arrow"' js/data/content.js
+          grep -q 'Archer of Infamy' js/data/content.js
+          grep -q 'Wepa!' js/data/content.js
+          ! grep -qi 'Rise of the Punisher' js/data/content.js
+          ! grep -qi 'Last Rites' js/data/content.js
+          if [ -f tools/generate-card-studio-data.mjs ]; then node tools/generate-card-studio-data.mjs; fi
+          if [ -f tools/full-card-tier-audit.mjs ]; then node tools/full-card-tier-audit.mjs; fi
+      - name: Commit verified Priest package
+        run: |
+          git config user.name 'WWE Legacy Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add js/data js/tools/card-art-studio-data.js
+          git diff --cached --check
+          git commit -m 'Complete Damian Priest current SmackDown authenticity pass'
+          git push origin main
