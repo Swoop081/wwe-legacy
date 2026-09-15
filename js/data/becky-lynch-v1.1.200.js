@@ -1,0 +1,49 @@
+// v1.1.200 — Becky Lynch locked authenticity additions.
+// Shared cards are created only where the canonical library had no existing ID.
+export const BECKY_LYNCH_V11200_CARDS = [
+  {
+    id:"becky-lynch-bex-plex", name:"Bex-Plex", kind:"move", setId:"raw-series-1",
+    superstarId:"becky-lynch", rarity:3, cost:7, damage:10,
+    requirements:{strength:1,technical:1}, moveType:"grapple", method:null,
+    trademark:true, finisher:false, groundOpponent:true, groundedOnly:false, stun:0, selfDamage:0,
+    rulesText:"Becky Lynch-exclusive Trademark. Requires 1 Strength and 1 Technical Momentum. Grounds opponent.",
+    effects:[], counterState:"body-elevated",
+    printingStats:{base:{cost:8,damage:7},emerald:{cost:8,damage:8},sapphire:{cost:7,damage:8},ruby:{cost:7,damage:9},amethyst:{cost:7,damage:10}}
+  },
+  {
+    id:"becky-lynch-flying-fire-arm", name:"Flying Fire-arm", kind:"move", setId:"raw-series-1",
+    superstarId:"becky-lynch", rarity:3, cost:6, damage:9,
+    requirements:{strike:2}, moveType:"strike", method:"strike",
+    trademark:true, finisher:false, groundOpponent:true, groundedOnly:false, stun:0, selfDamage:0,
+    rulesText:"Becky Lynch-exclusive Trademark. Flying forearm attack. Grounds opponent.",
+    effects:[], counterState:"arm-extended",
+    printingStats:{base:{cost:7,damage:6},emerald:{cost:7,damage:7},sapphire:{cost:6,damage:7},ruby:{cost:6,damage:8},amethyst:{cost:6,damage:9}}
+  },
+  {
+    id:"armbar", name:"Armbar", kind:"move", setId:"raw-series-1", superstarId:null, rarity:1,
+    cost:5, damage:0, requirements:{technical:1}, moveType:"submission", method:"technical",
+    submission:{part:"arm",perTurn:3}, rulesText:"Submission. Applies persistent Arm pressure while the hold remains active.",
+    groundOpponent:false, groundedOnly:false, stun:0, selfDamage:0, effects:[], counterState:"limb-control",
+    printingStats:{
+      base:{cost:6,damage:0,submission:{part:"arm",perTurn:2}},
+      emerald:{cost:6,damage:0,submission:{part:"arm",perTurn:3}},
+      sapphire:{cost:5,damage:0,submission:{part:"arm",perTurn:3}},
+      ruby:{cost:5,damage:0,submission:{part:"arm",perTurn:4}},
+      amethyst:{cost:5,damage:0,submission:{part:"arm",perTurn:5}}
+    }
+  },
+  {
+    id:"calf-kick", name:"Calf Kick", kind:"move", setId:"raw-series-1", superstarId:null, rarity:1,
+    cost:3, damage:5, requirements:{strike:1}, moveType:"strike", method:"strike",
+    rulesText:"Fast kick to the upper body.", groundOpponent:false, groundedOnly:false, stun:0, selfDamage:0,
+    effects:[], counterState:"leg-extended",
+    printingStats:{base:{cost:4,damage:3},emerald:{cost:4,damage:4},sapphire:{cost:3,damage:4},ruby:{cost:3,damage:5},amethyst:{cost:3,damage:5}}
+  },
+  {
+    id:"hammerlock", name:"Hammerlock", kind:"move", setId:"raw-series-1", superstarId:null, rarity:1,
+    cost:3, damage:3, requirements:{technical:1}, moveType:"grapple", method:"technical",
+    rulesText:"Technical arm control.", groundOpponent:false, groundedOnly:false, stun:0, selfDamage:0,
+    effects:[], counterState:"limb-control",
+    printingStats:{base:{cost:4,damage:2},emerald:{cost:4,damage:3},sapphire:{cost:3,damage:3},ruby:{cost:3,damage:3},amethyst:{cost:3,damage:4}}
+  }
+];
