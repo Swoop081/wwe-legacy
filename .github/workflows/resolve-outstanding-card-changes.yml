@@ -1,0 +1,102 @@
+name: Resolve Outstanding Card Changes
+on:
+  push:
+    paths: ['.github/resolve-outstanding-card-changes-trigger']
+permissions:
+  contents: write
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Resolve outstanding removals and Charlotte Moonsault
+        shell: python
+        run: |
+          from pathlib import Path
+          import json,re
+          cp=Path('js/data/content.js'); mp=Path('js/data/card-number-manifest.js')
+          s=cp.read_text(); ms=mp.read_text(); dec=json.JSONDecoder()
+          def objects(text):
+            out=[]; i=0
+            while True:
+              a=text.find('{',i)
+              if a<0: break
+              try:o,n=dec.raw_decode(text[a:])
+              except:i=a+1; continue
+              if isinstance(o,dict) and 'id' in o: out.append((a,n,o))
+              i=a+n
+            return out
+          def remove_card(cardcode=None,name=None,owner=None):
+            global s,ms
+            cid=None
+            if cardcode:
+              p=ms.find('"cardCode": "'+cardcode+'"')
+              if p<0: print(cardcode,'already absent'); return
+              ma=ms.rfind('{',0,p); mo,mn=dec.raw_decode(ms[ma:]); cid=mo['id']
+            matches=[x for x in objects(s) if (cid and x[2].get('id')==cid) or (not cid and str(x[2].get('name','')).lower()==name.lower())]
+            if not matches:
+              print(cardcode or name,'already absent from content'); return
+            if len(matches)!=1: raise SystemExit('Ambiguous removal '+str(cardcode or name))
+            a,n,o=matches[0]
+            if owner and o.get('superstarId')!=owner: raise SystemExit('Owner guard failed '+str(cardcode or name)+' got '+str(o.get('superstarId')))
+            cid=o['id']; b=a+n
+            while b<len(s) and s[b] in ' \t\r\n': b+=1
+            if b<len(s) and s[b]==',': b+=1
+            s=s[:a].rstrip()+"\n"+s[b:].lstrip()
+            # manifest exact id
+            p=ms.find('"id": "'+cid+'"')
+            if p>=0:
+              ma=ms.rfind('{',0,p); _,mn=dec.raw_decode(ms[ma:]); mb=ma+mn
+              while mb<len(ms) and ms[mb] in ' \t\r\n': mb+=1
+              if mb<len(ms) and ms[mb]==',': mb+=1
+              ms=ms[:ma].rstrip()+"\n"+ms[mb:].lstrip()
+            for f in Path('js/data').glob('*.js'):
+              if f in (cp,mp): continue
+              t=f.read_text(); nt=re.sub(r'(["\'])'+re.escape(cid)+r'\1\s*,?\s*','',t)
+              if nt!=t:f.write_text(nt)
+            print('Removed',cardcode or name,cid)
+          remove_card('EVO1-008','Diamond Dust','becky-lynch')
+          remove_card('NG1-075','Crucifix','british-bulldog')
+          # Bret 03/04 were handled by their prior workflow; guard that they are absent below.
+          # Add Charlotte Moonsault if still absent, using the already benchmarked balance.
+          if 'charlotte-flair-moonsault' not in s:
+            new={'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'type':'Move','setId':'evolution','superstarId':'charlotte-flair','trademark':True,'method':'agility','cost':6,'damage':10,'rulesText':'Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline.'}
+            marker='export const allGameplayCards = ['; start=s.find(marker)
+            if start<0: raise SystemExit('allGameplayCards missing')
+            i=start+len(marker); depth=1; quote=None; esc=False
+            while i<len(s) and depth:
+              c=s[i]
+              if quote:
+                if esc:esc=False
+                elif c=='\\':esc=True
+                elif c==quote:quote=None
+              else:
+                if c in ('"',"'",'`'):quote=c
+                elif c=='[':depth+=1
+                elif c==']':depth-=1
+              i+=1
+            close=i-1
+            s=s[:close].rstrip()+',\n  '+json.dumps(new,indent=2).replace('\n','\n  ')+'\n'+s[close:]
+            nums=[int(x) for x in re.findall(r'"cardCode":\s*"EVO1-(\d+)"',ms)]
+            nxt=max(nums)+1; code=f'EVO1-{nxt:03d}'; mend=ms.rfind('];')
+            ms=ms[:mend].rstrip()+',\n  '+json.dumps({'id':'charlotte-flair-moonsault','setId':'evolution','cardNumber':nxt,'cardCode':code})+'\n'+ms[mend:]
+            print('Added',code,"Charlotte's Moonsault")
+          cp.write_text(s); mp.write_text(ms)
+      - name: Regenerate Card Studio and verify requested state
+        run: |
+          node tools/generate-card-studio-data.mjs
+          ! grep -q 'EVO1-008' js/data/card-number-manifest.js
+          ! grep -q 'NG1-075' js/data/card-number-manifest.js
+          ! grep -qi 'Diamond Dust' js/tools/card-art-studio-data.js
+          ! grep -qi 'Green with Envy' js/tools/card-art-studio-data.js
+          grep -q "Charlotte's Moonsault" js/tools/card-art-studio-data.js
+          ! grep -qi 'Hitman T-Shirt' js/tools/card-art-studio-data.js
+      - name: Commit exact resolved state
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/data js/tools/card-art-studio-data.js
+          git diff --cached --check
+          git commit -m "Resolve outstanding WWE Legacy card changes"
+          git push origin main
