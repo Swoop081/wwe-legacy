@@ -4,6 +4,7 @@ import { applyCardIdentityPass, finalizeCardIdentityPass } from "../shared/v1.1.
 import { FUTURE_ROADMAP_GAMEPLAY_CARDS } from "./future-roadmap-v1.1.74.js?v=1.1.132";
 import { V1175_AUTHENTICITY_CARDS } from "./v1.1.75-recommended-deck-authenticity.js?v=1.1.132";
 import { AJ_STYLES_GAMEPLAY_CARDS } from "./aj-styles-v1.1.80.js?v=1.1.132";
+import { BECKY_LYNCH_V11200_CARDS } from "./becky-lynch-v1.1.200.js?v=1.1.200";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -19828,6 +19829,7 @@ allGameplayCards.push(...FUTURE_ROADMAP_GAMEPLAY_CARDS, ...V1175_AUTHENTICITY_CA
 // v1.1.71 Reward Vault reset: only the current Trish Stratus monthly reward
 // remains active. Obsolete pre-launch reward experiments are removed rather
 allGameplayCards.push(...AJ_STYLES_GAMEPLAY_CARDS);
+allGameplayCards.push(...BECKY_LYNCH_V11200_CARDS);
 // than carried into a fresh-save economy.
 const RETIRED_REWARD_SET_IDS = new Set(["season-1-final-boss","parked-chyna","season-2-whos-next"]);
 for (let i=allGameplayCards.length-1;i>=0;i--) {

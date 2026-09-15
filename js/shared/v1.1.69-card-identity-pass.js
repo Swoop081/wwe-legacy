@@ -118,10 +118,15 @@ const APPROVED_AUDIT_OVERRIDES = Object.freeze({
     }
   },
   'becky-lynch-dis-arm-her': {
-    cost:7, damage:0, requirements:{technical:2}, method:'technical', trademark:true,
+    name:'Dis-arm-her', cost:9, damage:0, requirements:{}, method:null, moveType:'submission',
+    submission:{bodyPart:'arms',pressure:6}, finisher:true, trademark:false,
+    rulesText:'Becky Lynch-exclusive Finisher Submission. No Method requirement.',
     printingStats:{
-      base:{cost:8,damage:0}, emerald:{cost:8,damage:0}, sapphire:{cost:7,damage:0},
-      ruby:{cost:7,damage:0}, amethyst:{cost:7,damage:0}
+      base:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:3}},
+      emerald:{cost:10,damage:0,submission:{bodyPart:'arms',pressure:4}},
+      sapphire:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:4}},
+      ruby:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:5}},
+      amethyst:{cost:9,damage:0,submission:{bodyPart:'arms',pressure:6}}
     }
   },
   'chelsea-green-im-prettier': {
