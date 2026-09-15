@@ -7752,32 +7752,54 @@ export const allGameplayCards = [
     "counterState": "body-elevated"
   },
 {
-    "id": "entrance-damian-priest",
-    "name": "Rise of the Punisher",
-    "kind": "entrance",
-    "setId": "smackdown-series-1",
-    "rarity": 4,
-    "superstarId": "damian-priest",
-    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {
-      "strength": 1
+  "id": "entrance-damian-priest",
+  "name": "Archer of Infamy",
+  "kind": "entrance",
+  "setId": "smackdown-series-1",
+  "rarity": 4,
+  "superstarId": "damian-priest",
+  "rulesText": "Damian Priest enters as The Archer of Infamy. Gain +1 Strength Momentum and +1 Adrenaline.",
+  "preMatchMomentum": {
+    "strength": 1
+  },
+  "preMatchAdrenaline": 1,
+  "delayedTurn5": false,
+  "effects": [
+    {
+      "type": "gainMomentum",
+      "method": "strength",
+      "amount": 1
     },
-    "preMatchAdrenaline": 1,
-    "delayedTurn5": false
-  },
-  {
-    "id": "special-damian-priest",
-    "name": "Last Rites",
-    "kind": "action",
-    "setId": "smackdown-series-1",
-    "rarity": 4,
-    "superstarId": "damian-priest",
-    "rulesText": "Once per match during your Control sequence: search/draw a Trademark or Finisher. Your next Strength Move this Control sequence costs 1 less.",
-    "special": {
-      "type": "lastRites",
-      "strengthDiscount": 1
+    {
+      "type": "gainAdrenaline",
+      "amount": 1
     }
+  ]
+},
+  {
+  "id": "special-damian-priest",
+  "name": "Wepa!",
+  "kind": "action",
+  "setId": "smackdown-series-1",
+  "rarity": 4,
+  "superstarId": "damian-priest",
+  "rulesText": "Damian Priest fires up the WWE Universe with Wepa! Gain +1 Adrenaline; your next Priest Trademark this Control costs 1 less.",
+  "special": {
+    "type": "lastRites",
+    "strengthDiscount": 1
   },
+  "effects": [
+    {
+      "type": "gainAdrenaline",
+      "amount": 1
+    },
+    {
+      "type": "discountNextTrademark",
+      "superstarId": "damian-priest",
+      "amount": 1
+    }
+  ]
+},
   {
     "id": "mexican-surfboard",
     "name": "Mexican Surfboard",
@@ -19754,6 +19776,52 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "running-aerial"
+  },
+  {
+    "id": "damian-priest-broken-arrow",
+    "name": "Broken Arrow",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 7,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "damian-priest",
+    "rarity": 3,
+    "trademark": true,
+    "finisher": false,
+    "rulesText": "Damian Priest-exclusive Trademark. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated",
+    "printingStats": {
+      "base": {
+        "cost": 8,
+        "damage": 7
+      },
+      "emerald": {
+        "cost": 8,
+        "damage": 8
+      },
+      "sapphire": {
+        "cost": 7,
+        "damage": 8
+      },
+      "ruby": {
+        "cost": 7,
+        "damage": 9
+      },
+      "amethyst": {
+        "cost": 7,
+        "damage": 10
+      }
+    }
   }
 ];
 allGameplayCards.push(...FUTURE_ROADMAP_GAMEPLAY_CARDS, ...V1175_AUTHENTICITY_CARDS);

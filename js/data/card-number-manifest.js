@@ -5699,7 +5699,8 @@ export const CARD_NUMBER_MANIFEST = [
   {"id": "chris-jericho-springboard-dropkick", "setId": "attitude-era-series-1", "cardNumber": 84, "cardCode": "AE1-084"},
   {"id": "charlotte-flair-moonsault", "setId": "evolution-series-1", "cardNumber": 77, "cardCode": "EVO1-077"},
   {"id": "chelsea-green-missile-dropkick", "setId": "smackdown-series-1", "cardNumber": 73, "cardCode": "SD1-073"},
-  {"id": "chelsea-green-rough-ryder", "setId": "smackdown-series-1", "cardNumber": 74, "cardCode": "SD1-074"}
+  {"id": "chelsea-green-rough-ryder", "setId": "smackdown-series-1", "cardNumber": 74, "cardCode": "SD1-074"},
+  {"id": "damian-priest-broken-arrow", "setId": "smackdown-series-1", "cardNumber": 75, "cardCode": "SD1-075"}
 ];
 export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));
 export const CARD_IDS_BY_SET = {};

@@ -2830,7 +2830,8 @@ export const superstars = {
       "damian-priest-south-of-heaven",
       "damian-priest-razors-edge",
       "damian-priest-south-of-heaven"
-    ],
+    ,
+      "damian-priest-broken-arrow"],
     "archetype": "counter-punishment-heavy-hitter",
     "hp": 66,
     "methodLimits": {

@@ -2541,7 +2541,9 @@ export const deckIds={
     "rollover-counter",
     "jawbreaker",
     "back-elbow"
-  ],
+  ,
+    "damian-priest-broken-arrow",
+    "damian-priest-broken-arrow"],
   "bron-breakker": [
     "momentum-strength",
     "momentum-agility",
