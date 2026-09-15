@@ -1,0 +1,25 @@
+name: Global move balance and printing runtime
+on:
+  push:
+    paths: ['.github/global-move-balance-runtime-trigger']
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Audit global move population and runtime tier plumbing
+        run: |
+          set -euo pipefail
+          echo '=== High damage move definitions ==='
+          grep -RniE 'damage["'"']?[[:space:]]*:[[:space:]]*(1[2-9]|2[0-9])' js --include='*.js' | head -400 || true
+          echo '=== Printing tier/runtime references ==='
+          grep -RniE 'printingStats|gameplayStatsForPrinting|printingTier|fixedPrintingTier|cardTier|rarityTier|tier' js --include='*.js' | head -1000 || true
+          echo '=== Combat/play resolution candidates ==='
+          grep -RniE 'playCard|resolve.*card|card\.damage|damage.*card|selectedCard|playedCard|resolveMove|connect.*damage' js --include='*.js' | head -1000 || true
+      - name: Run existing tier audit
+        run: |
+          set -euo pipefail
+          if [ -f tools/full-card-tier-audit.mjs ]; then node tools/full-card-tier-audit.mjs; fi
