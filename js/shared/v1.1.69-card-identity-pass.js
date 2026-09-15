@@ -161,6 +161,39 @@ function applyApprovedAuditOverride(card){
   card.authenticityAudit='approved-2026-09';
 }
 
+const AUTHORED_HIGH_DAMAGE_CURVES=Object.freeze({
+  'andre-the-giant-double-underhook-suplex':[7,8,9,10,11],
+  'kevin-owens-avalanche-fishermans-buster':[7,8,9,10,11],
+  'aj-styles-phenomenal-forearm':[7,8,9,10,11],
+  'kevin-owens-package-piledriver':[7,8,9,10,11],
+  'rey-fenix-mexican-destroyer':[7,8,9,10,11],
+  'baron-corbin-deep-six':[7,8,9,10,11],
+  'cody-rhodes-cody-cutter':[7,8,9,10,11],
+  'finn-balor-1916':[7,8,9,10,11],
+  'jacob-fatu-pop-up-samoan-drop':[7,8,9,10,11],
+  'jaida-parker-samoan-drop':[7,8,9,10,11],
+  'kane-chokeslam-from-hell':[7,8,9,10,11],
+  'last-symphony':[7,8,9,10,11],
+  'montez-ford-450-splash':[7,8,9,10,11],
+  'nia-jax-avalanche-samoan-drop':[7,8,9,10,11],
+  'penta-driver':[7,8,9,10,11],
+  'pop-up-powerbomb':[7,8,9,10,11],
+  'rob-van-dam-van-daminator':[7,8,9,10,11],
+  'superplex':[7,8,9,10,11],
+  'the-rock-attitude-people-s-elbow':[7,8,9,10,11],
+  'trick-williams-trick-knee':[7,8,9,10,11],
+  'vikingo-twisting-450-splash':[7,8,9,10,11],
+  'bayley-diving-elbow':[6,7,8,9,10],
+  'seth-rollins-phoenix-splash':[6,7,8,9,10]
+});
+function applyAuthoredHighDamageCurve(card){
+  const curve=AUTHORED_HIGH_DAMAGE_CURVES[card?.id];
+  if(!curve || card?.finisher || card?.submission || card?.moveType==='submission') return;
+  card.damage=curve[4];
+  card.printingStats={base:{damage:curve[0]},emerald:{damage:curve[1]},sapphire:{damage:curve[2]},ruby:{damage:curve[3]},amethyst:{damage:curve[4]}};
+  card.balanceAuditVersion='v1.1.198';
+}
+
 const EXCEPTIONAL_FINISHER_IDS=new Set(['brock-lesnar-f-5']);
 const LOWER_FINISHER_IDS=new Set([]);
 function ensureFinisherPrintingCurve(card){
@@ -169,6 +202,7 @@ function ensureFinisherPrintingCurve(card){
   card.printingStats={base:{damage:damage[0]},emerald:{damage:damage[1]},sapphire:{damage:damage[2]},ruby:{damage:damage[3]},amethyst:{damage:damage[4]}};
 }
 function enforceAuditedMoveStructure(card){
+  applyAuthoredHighDamageCurve(card);
   if(card?.finisher){ card.method=null; card.requirements={}; ensureFinisherPrintingCurve(card); }
   if(card?.moveType==='submission' || card?.submission) card.damage=0;
   card.tierGrowthProfile=auditedTierGrowthProfile(card);
