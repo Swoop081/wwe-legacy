@@ -14391,31 +14391,7 @@ export const allGameplayCards = [
     ],
     "counterState": "body-elevated"
   },
-  {
-    "id": "british-bulldog-crucifix",
-    "name": "Bulldog’s Crucifix",
-    "kind": "move",
-    "setId": "new-generation-series-1",
-    "cost": 5,
-    "damage": 7,
-    "requirements": {
-      "technical": 2
-    },
-    "moveType": "grapple",
-    "method": "technical",
-    "superstarId": "british-bulldog",
-    "rarity": 3,
-    "trademark": true,
-    "rulesText": "British Bulldog-exclusive Trademark. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them −5 percentage points to their kickout chance.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [],
-    "counterState": "front-control",
-    "pinKickoutPenalty": 5
-  },
-  {
+{
     "id": "british-bulldog-military-press-slam",
     "name": "Bulldog’s Military Press Slam",
     "kind": "move",

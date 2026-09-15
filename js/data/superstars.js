@@ -4512,7 +4512,6 @@ export const superstars = {
     ],
     "signatures": [
       "british-bulldog-delayed-vertical-suplex",
-      "british-bulldog-crucifix",
       "british-bulldog-military-press-slam",
       "british-bulldog-running-powerslam"
     ],

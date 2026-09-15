@@ -443,13 +443,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardNumber": 74,
     "cardCode": "NG1-074"
   },
-  {
-    "id": "british-bulldog-crucifix",
-    "setId": "new-generation-series-1",
-    "cardNumber": 75,
-    "cardCode": "NG1-075"
-  },
-  {
+{
     "id": "british-bulldog-military-press-slam",
     "setId": "new-generation-series-1",
     "cardNumber": 76,
