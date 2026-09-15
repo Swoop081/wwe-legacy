@@ -3,20 +3,12 @@ on:
   push:
     paths: ['.github/becky-authentic-60-apply-trigger']
 permissions:
-  contents: write
+  contents: read
 jobs:
   apply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Apply and certify Becky
-        run: python3 tools/becky-final-lock.py
-      - name: Commit Becky lock
-        run: |
-          git config user.name 'WWE Legacy Build Bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add js/data/content.js js/data/decks.js js/shared/v1.1.69-card-identity-pass.js
-          git diff --cached --check
-          git commit -m 'Lock Becky Lynch final authentic 60-card deck'
-          git push origin main
+      - name: Audit Becky five-tier move curves
+        run: node tools/becky-five-tier-audit.mjs
