@@ -1,0 +1,58 @@
+name: Remove Chelsea Green With Envy
+on:
+  push:
+    paths: ['.github/remove-chelsea-green-with-envy-trigger']
+permissions:
+  contents: write
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Identify and remove exact Chelsea Green card
+        shell: python
+        run: |
+          from pathlib import Path
+          import json,re
+          cp=Path('js/data/content.js'); s=cp.read_text(); dec=json.JSONDecoder(); matches=[]; i=0
+          while True:
+            a=s.find('{',i)
+            if a<0: break
+            try: o,n=dec.raw_decode(s[a:])
+            except: i=a+1; continue
+            if isinstance(o,dict) and str(o.get('name','')).strip().lower()=='green with envy': matches.append((a,n,o))
+            i=a+n
+          if len(matches)!=1: raise SystemExit(f'Expected exactly one Green with Envy card, found {len(matches)}')
+          a,n,o=matches[0]; cid=o.get('id'); sid=str(o.get('superstarId','')).lower()
+          print('Found',cid,o.get('name'),'superstar',sid)
+          if sid not in ('chelsea-green','chelsea_green','chelseagreen'): raise SystemExit('Green with Envy is not Chelsea Green-owned; refusing removal')
+          b=a+n
+          while b<len(s) and s[b] in ' \t\r\n': b+=1
+          if b<len(s) and s[b]==',': b+=1
+          cp.write_text(s[:a].rstrip()+"\n"+s[b:].lstrip())
+          mp=Path('js/data/card-number-manifest.js'); ms=mp.read_text(); needle='"id": "'+cid+'"'; pos=ms.find(needle)
+          if pos<0: raise SystemExit('Exact card ID missing from manifest')
+          ma=ms.rfind('{',0,pos); _,mn=dec.raw_decode(ms[ma:]); mb=ma+mn
+          while mb<len(ms) and ms[mb] in ' \t\r\n': mb+=1
+          if mb<len(ms) and ms[mb]==',': mb+=1
+          mp.write_text(ms[:ma].rstrip()+"\n"+ms[mb:].lstrip())
+          # Remove exact-ID references only; do not renumber or replace cards.
+          for p in Path('js/data').glob('*.js'):
+            if p in (cp,mp): continue
+            t=p.read_text(); nt=re.sub(r'(["\'])'+re.escape(cid)+r'\1\s*,?\s*','',t)
+            if nt!=t: p.write_text(nt)
+      - name: Regenerate Card Studio and audit
+        run: |
+          node tools/generate-card-studio-data.mjs
+          ! grep -qi 'Green with Envy' js/data/content.js
+          ! grep -qi 'Green with Envy' js/tools/card-art-studio-data.js
+          node tools/full-card-tier-audit.mjs
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/data js/tools/card-art-studio-data.js
+          git diff --cached --check
+          git commit -m "Remove Chelsea Green Green with Envy"
+          git push origin main
