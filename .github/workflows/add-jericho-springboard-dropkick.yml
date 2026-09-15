@@ -1,0 +1,60 @@
+name: Add Jericho Springboard Dropkick
+on:
+  push:
+    paths: ['.github/add-jericho-springboard-dropkick-trigger']
+permissions:
+  contents: write
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Benchmark aerial trademarks and add Jericho move
+        shell: python
+        run: |
+          from pathlib import Path
+          import json,re,statistics
+          cp=Path('js/data/content.js');s=cp.read_text();dec=json.JSONDecoder();cards=[];i=0
+          while True:
+            a=s.find('{',i)
+            if a<0:break
+            try:o,n=dec.raw_decode(s[a:])
+            except:i=a+1;continue
+            if isinstance(o,dict) and 'id' in o:cards.append(o)
+            i=a+n
+          aerial=[o for o in cards if o.get('trademark') is True and any(x in (' '.join(str(o.get(k,'')) for k in ('name','rulesText','method'))).lower() for x in ('aerial','springboard','diving','splash','moonsault'))]
+          if not aerial:raise SystemExit('No aerial Trademark comparables')
+          for o in aerial:print('COMPARABLE',o.get('name'),o.get('cost'),o.get('damage'),o.get('rulesText'))
+          costs=[o['cost'] for o in aerial if isinstance(o.get('cost'),(int,float))];dmgs=[o['damage'] for o in aerial if isinstance(o.get('damage'),(int,float))]
+          cost=int(round(statistics.median(costs)));damage=int(round(statistics.median(dmgs)))
+          if 'chris-jericho-springboard-dropkick' in s:raise SystemExit('Already exists')
+          new={'id':'chris-jericho-springboard-dropkick','name':"Jericho's Springboard Dropkick",'type':'Move','setId':'attitude-era','superstarId':'chris-jericho','trademark':True,'method':'agility','cost':cost,'damage':damage,'rulesText':'Chris Jericho-exclusive Trademark. Running Aerial. On Connect: gain +1 Adrenaline.'}
+          marker='export const allGameplayCards = [';start=s.find(marker);i=start+len(marker);depth=1;q=None;esc=False
+          while depth:
+            c=s[i]
+            if q:
+              if esc:esc=False
+              elif c=='\\':esc=True
+              elif c==q:q=None
+            else:
+              if c in ('"',"'",'`'):q=c
+              elif c=='[':depth+=1
+              elif c==']':depth-=1
+            i+=1
+          close=i-1;s=s[:close].rstrip()+',\n  '+json.dumps(new,indent=2).replace('\n','\n  ')+'\n'+s[close:];cp.write_text(s)
+          mp=Path('js/data/card-number-manifest.js');ms=mp.read_text();nums=[int(x) for x in re.findall(r'"cardCode":\s*"ATT1-(\d+)"',ms)]
+          n=max(nums)+1;mend=ms.rfind('];');mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps({'id':new['id'],'setId':'attitude-era','cardNumber':n,'cardCode':f'ATT1-{n:03d}'})+'\n'+ms[mend:])
+          print('ADDED',f'ATT1-{n:03d}','cost',cost,'damage',damage)
+      - name: Card Studio and validation
+        run: |
+          node tools/generate-card-studio-data.mjs
+          grep -q "Jericho's Springboard Dropkick" js/tools/card-art-studio-data.js
+      - name: Commit
+        run: |
+          git config user.name "WWE Legacy Build Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add js/data/content.js js/data/card-number-manifest.js js/tools/card-art-studio-data.js
+          git diff --cached --check
+          git commit -m "Add Jericho's Springboard Dropkick Attitude trademark"
+          git push origin main
