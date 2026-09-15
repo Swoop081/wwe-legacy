@@ -143,9 +143,9 @@ const APPROVED_AUDIT_OVERRIDES = Object.freeze({
     }
   },
   'damian-priest-razors-edge': {
-    name:"Priest’s Crucifix Powerbomb", cost:8, damage:11, requirements:{strength:3}, method:'strength',
+    name:"Priest’s Razor’s Edge", cost:8, damage:11, requirements:{strength:3}, method:'strength',
     moveType:'grapple', trademark:true, finisher:false, groundOpponent:true,
-    rulesText:"Damian Priest-exclusive Trademark. Priest’s Crucifix Powerbomb. Grounds opponent. On Connect: opponent loses 1 Adrenaline.",
+    rulesText:"Damian Priest-exclusive Trademark. Priest’s Razor’s Edge. Grounds opponent. On Connect: opponent loses 1 Adrenaline.",
     printingStats:{
       base:{cost:9,damage:8}, emerald:{cost:9,damage:9}, sapphire:{cost:8,damage:9},
       ruby:{cost:8,damage:10}, amethyst:{cost:8,damage:11}
@@ -180,41 +180,16 @@ export function applyCardIdentityPass(cards=[]){
   }
   for(const group of groups.values()) broadenCloneGroup(group);
   seedMissingLowDamage(moves);
-  for(const card of moves){ applyApprovedAuditOverride(card); enforceAuditedMoveStructure(card); }
-  return cards;
+  for(const card of moves){
+    applyApprovedAuditOverride(card);
+    enforceAuditedMoveStructure(card);
+  }
 }
 
 export function finalizeCardIdentityPass(cards=[]){
-  const moves=cards.filter(c=>c?.kind==='move').sort((a,b)=>a.id.localeCompare(b.id));
-  const sig=card=>JSON.stringify({
-    cost:card.cost,damage:card.damage,rarity:card.rarity,method:card.method??null,moveType:card.moveType??null,
-    requirements:sortedObject(card.requirements),groundOpponent:!!card.groundOpponent,groundedOnly:!!card.groundedOnly,
-    standingOnly:!!card.standingOnly,stun:Number(card.stun)||0,selfDamage:Number(card.selfDamage)||0,
-    effects:card.effects??[],submission:card.submission??null,bodyDamage:card.bodyDamage??null,
-    counterState:card.counterState??null,counterStates:[...(card.counterStates??[])].sort(),
-    defensiveOnly:!!card.defensiveOnly,finisher:!!card.finisher,trademark:!!card.trademark
-  });
-  const seen=new Set();
-  const deltas=[[0,0],[0,1],[1,0],[0,-1],[-1,0],[1,1],[-1,1],[1,-1],[-1,-1],[0,2],[2,0],[0,-2],[-2,0]];
+  const moves=cards.filter(c=>c?.kind==='move');
   for(const card of moves){
-    if(!seen.has(sig(card))){seen.add(sig(card));continue;}
-    const lim=limits(card),baseCost=Number(card.cost)||0,baseDamage=Number(card.damage)||0;
-    let resolved=false;
-    for(const [dc,dd] of deltas.slice(1)){
-      const nextCost=clamp(baseCost+dc,lim.cost[0],lim.cost[1]);
-      const nextDamage=card.moveType==='submission'?0:clamp(baseDamage+dd,lim.damage[0],lim.damage[1]);
-      const oldCost=card.cost,oldDamage=card.damage;
-      card.cost=nextCost; card.damage=nextDamage;
-      if(!seen.has(sig(card))){resolved=true;break;}
-      card.cost=oldCost; card.damage=oldDamage;
-    }
-    if(!resolved) card.cost=clamp(baseCost+1,lim.cost[0],lim.cost[1]);
+    applyApprovedAuditOverride(card);
     enforceAuditedMoveStructure(card);
-    card.identityPass='v1.1.69';
-    seen.add(sig(card));
   }
-  // Approved authenticity/balance decisions are authoritative and must survive
-  // the generic clone de-duplication pass above.
-  for(const card of moves){ applyApprovedAuditOverride(card); enforceAuditedMoveStructure(card); }
-  return cards;
 }
