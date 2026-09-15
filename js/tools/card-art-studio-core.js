@@ -351,11 +351,11 @@ async function urlToImage(rawUrl){
 }
 function canvasToBlob(type,quality){return new Promise((resolve,reject)=>{if(typeof canvas.toBlob!=="function")return reject(new Error("This browser does not support canvas export."));try{canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("The browser could not create an image file.")),type,quality);}catch(error){reject(error);}});}
 function exportFilename(card,extension="webp"){const target=destinationFor(card).split("/").pop()||`${exportId(card)}.webp`;return target.replace(/\.webp$/i,`.${extension}`);}
-async function encodedCardFile(){const quality=Number($("#quality").value)/100,card=currentCard();let blob=await canvasToBlob("image/webp",quality);if(blob?.type==="image/webp")return {blob,name:exportFilename(card,"webp"),format:"WebP"};blob=await canvasToBlob("image/png");return {blob,name:exportFilename(card,"png"),format:"PNG"};}
+async function encodedCardFile(){const __previewCanvas=canvas,__previewCtx=ctx;const __exportCanvas=globalThis.__WWE_CARD_STUDIO_EXPORT_CANVAS;if(__exportCanvas){canvas=__exportCanvas;ctx=__exportCanvas.getContext('2d',{alpha:true});}try{const quality=Number($("#quality").value)/100,card=currentCard();let blob=await canvasToBlob("image/webp",quality);if(blob?.type==="image/webp")return {blob,name:exportFilename(card,"webp"),format:"WebP"};blob=await canvasToBlob("image/png");return {blob,name:exportFilename(card,"png"),format:"PNG"};}finally{canvas=__previewCanvas;ctx=__previewCtx;globalThis.__WWE_CARD_STUDIO_EXPORT_CANVAS=null;}}
 function renderForExport(){state.exportingPlate=isLayeredFormat();state.renderPlateOnly=state.exportingPlate;draw();}
 function restorePreviewAfterExport(){state.exportingPlate=false;state.renderPlateOnly=previewPlateOnly();draw();}
 function download(blob,name){const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name;a.style.display="none";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);}
-async function prepareExport(){
+async function prepareExport(){const card=currentCard();
   const originalCanvas=canvas,originalCtx=ctx;
   const clean=document.createElement('canvas');
   clean.width=canvas.width;clean.height=canvas.height;
@@ -380,7 +380,7 @@ async function prepareExport(){
     await new Promise(requestAnimationFrame);
     try{cleanCtx.getImageData(0,0,1,1);}catch(e){throw new Error('Clean export canvas is still cross-origin after isolated rendering.');}
     if(skipped.length)console.warn('[WWE Legacy Card Studio] skipped unsafe export layers',skipped);
-    return clean;
+    globalThis.__WWE_CARD_STUDIO_EXPORT_CANVAS=clean;return card;
   }finally{canvas=originalCanvas;ctx=originalCtx;}
 }
 async function exportWebp(){try{const card=await prepareExport();status(isLayeredFormat()?"Encoding canonical base plate…":"Encoding finished front…");const file=await encodedCardFile();download(file.blob,file.name);const layeredNote=isLayeredFormat()?" This is the canonical base-plate path from ASSET-MIGRATION.csv.":"";const note=file.format==="WebP"?`Put it at ${destinationFor(card)}.${layeredNote}`:`PNG fallback saved. Use the Bulk PNG/JPG → WebP Converter before installing it at ${destinationFor(card)}.${layeredNote}`;status(`Saved ${file.name} (${file.format}). ${note}`,true);}catch(error){status(`Export failed: ${error?.message||error}`,false);}finally{restorePreviewAfterExport();}}
