@@ -356,42 +356,32 @@ function renderForExport(){state.exportingPlate=isLayeredFormat();state.renderPl
 function restorePreviewAfterExport(){state.exportingPlate=false;state.renderPlateOnly=previewPlateOnly();draw();}
 function download(blob,name){const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name;a.style.display="none";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);}
 async function prepareExport(){
-  const originalCanvas=canvas;
-  const originalCtx=ctx;
-  const originalImages=[];
-  const revoke=[];
-  try{
-    // Localise all loaded image elements used anywhere by the Studio renderer.
-    const imgs=[...document.images];
-    for(const img of imgs){
-      const src=String(img.currentSrc||img.src||'');
-      if(!src||src.startsWith('blob:')||src.startsWith('data:'))continue;
-      let u;
-      try{u=new URL(src,location.href)}catch(_){continue}
-      if(u.origin===location.origin)continue;
-      const r=await fetch(src,{mode:'cors',credentials:'omit',cache:'no-store'});
-      if(!r.ok)throw new Error('Export layer could not be localised: '+r.status);
-      const b=await r.blob();
-      const local=URL.createObjectURL(b); revoke.push(local);
-      originalImages.push([img,img.src]);
-      await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=local;});
+  const originalCanvas=canvas,originalCtx=ctx;
+  const clean=document.createElement('canvas');
+  clean.width=canvas.width;clean.height=canvas.height;
+  const cleanCtx=clean.getContext('2d',{alpha:true});
+  const nativeDraw=cleanCtx.drawImage.bind(cleanCtx);
+  const skipped=[];
+  cleanCtx.drawImage=function(source,...args){
+    try{
+      const probe=document.createElement('canvas');probe.width=1;probe.height=1;
+      const pc=probe.getContext('2d');
+      pc.drawImage(source,0,0,1,1);
+      pc.getImageData(0,0,1,1);
+    }catch(e){
+      skipped.push(String(source?.currentSrc||source?.src||source?.tagName||'unknown layer'));
+      return;
     }
-    // Render from state onto a completely new surface. Never export the live preview canvas.
-    const clean=document.createElement('canvas');
-    clean.width=canvas.width; clean.height=canvas.height;
-    canvas=clean; ctx=clean.getContext('2d',{alpha:true});
-    resetCanvasSurface();
-    renderForExport();
+    return nativeDraw(source,...args);
+  };
+  try{
+    canvas=clean;ctx=cleanCtx;
+    resetCanvasSurface();renderForExport();
     await new Promise(requestAnimationFrame);
-    if(!canvasIsOriginClean())throw new Error('A rendered card layer is still cross-origin after clean export reconstruction.');
+    if(!canvasIsOriginClean())throw new Error('Clean export canvas was tainted outside drawImage.');
+    if(skipped.length)console.warn('[WWE Legacy Card Studio] skipped unsafe export layers',skipped);
     return clean;
-  }catch(error){
-    throw error;
-  }finally{
-    canvas=originalCanvas; ctx=originalCtx;
-    for(const [img,src] of originalImages){img.src=src;}
-    for(const u of revoke)URL.revokeObjectURL(u);
-  }
+  }finally{canvas=originalCanvas;ctx=originalCtx;}
 }
 async function exportWebp(){try{const card=await prepareExport();status(isLayeredFormat()?"Encoding canonical base plate…":"Encoding finished front…");const file=await encodedCardFile();download(file.blob,file.name);const layeredNote=isLayeredFormat()?" This is the canonical base-plate path from ASSET-MIGRATION.csv.":"";const note=file.format==="WebP"?`Put it at ${destinationFor(card)}.${layeredNote}`:`PNG fallback saved. Use the Bulk PNG/JPG → WebP Converter before installing it at ${destinationFor(card)}.${layeredNote}`;status(`Saved ${file.name} (${file.format}). ${note}`,true);}catch(error){status(`Export failed: ${error?.message||error}`,false);}finally{restorePreviewAfterExport();}}
 async function shareCard(){try{const card=await prepareExport();status(isLayeredFormat()?"Preparing canonical base plate for the iPhone share sheet…":"Preparing finished front for the iPhone share sheet…");const out=await encodedCardFile(),file=new File([out.blob],out.name,{type:out.blob.type});if(navigator.share&&navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:`WWE Legacy — ${card.name}`});status(`Shared ${out.name}. Choose Google Drive or Files in the iOS share sheet.`,true);return;}download(out.blob,out.name);status(`Native file sharing is unavailable here, so ${out.name} was downloaded instead.`,true);}catch(error){if(error?.name==="AbortError")return status("Share cancelled.");status(`Share failed: ${error?.message||error}`,false);}finally{restorePreviewAfterExport();}}
