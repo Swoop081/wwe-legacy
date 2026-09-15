@@ -49,7 +49,6 @@ jobs:
           remove_card('becky-lynch-diamond-dust')
           remove_card('becky-lynch-bexploder','becky-lynch-diving-leg-drop')
           remove_card('damian-priest-hit-the-lights','damian-priest-south-of-heaven')
-          # Green With Envy was already removed in the guarded earlier pass.
           newcards=[
             {'id':'chelsea-green-missile-dropkick','name':"Chelsea’s Missile Dropkick",'kind':'move','setId':'smackdown-series-1','cost':9,'damage':9,'requirements':{'agility':2},'moveType':'aerial','method':'agility','superstarId':'chelsea-green','rarity':3,'trademark':True,'rulesText':"Chelsea Green-exclusive Trademark. Grounds opponent.",'groundOpponent':True,'groundedOnly':False,'stun':0,'selfDamage':0,'effects':[],'counterState':'diving-aerial'},
             {'id':'chelsea-green-rough-ryder','name':"Chelsea’s Rough Ryder",'kind':'move','setId':'smackdown-series-1','cost':10,'damage':10,'requirements':{'agility':2},'moveType':'strike','method':'agility','superstarId':'chelsea-green','rarity':3,'trademark':True,'rulesText':"Chelsea Green-exclusive Trademark. Grounds opponent. On Connect: Un-Pretty-Her costs 1 less this Control sequence.",'groundOpponent':True,'groundedOnly':False,'stun':0,'selfDamage':0,'effects':[{'type':'discountNextByName','name':'Un-Pretty-Her','amount':1}],'counterState':'running-aerial'}]
@@ -78,24 +77,28 @@ jobs:
             entry={'id':card['id'],'setId':'smackdown-series-1','cardNumber':nxt,'cardCode':f'SD1-{nxt:03d}'}; nxt+=1
             ms=ms[:mend].rstrip()+',\n  '+json.dumps(entry)+'\n'+ms[mend:]; mend=ms.rfind('];')
           cp.write_text(s); mp.write_text(ms)
-          # Put the two new current Chelsea trademarks into her recommended deck.
           dp=Path('js/data/decks.js'); d=dp.read_text()
           key='"chelsea-green": ['; a=d.find(key)
           if a>=0:
             b=d.find(']',a)
             block=d[a:b]
+            additions_text=''
             for cid in ['chelsea-green-missile-dropkick','chelsea-green-rough-ryder']:
-              if cid not in block: block += '\n    "'+cid+'",\n    "'+cid+'",'
-            d=d[:a]+block+d[b:]; dp.write_text(d)
-          # Keep Chelsea signature identity synchronized.
+              if cid not in block: additions_text += ',\n    "'+cid+'",\n    "'+cid+'"'
+            if additions_text:
+              d=d[:b]+additions_text+d[b:]
+              dp.write_text(d)
           sp=Path('js/data/superstars.js'); t=sp.read_text(); pos=t.find('"id": "chelsea-green"')
           if pos>=0:
             sig=t.find('"signatures": [',pos); end=t.find(']',sig)
             if sig>=0 and end>=0:
               chunk=t[sig:end]
+              additions_text=''
               for cid in ['chelsea-green-missile-dropkick','chelsea-green-rough-ryder']:
-                if cid not in chunk: chunk += '\n      "'+cid+'",'
-              t=t[:sig]+chunk+t[end:]; sp.write_text(t)
+                if cid not in chunk: additions_text += ',\n      "'+cid+'"'
+              if additions_text:
+                t=t[:end]+additions_text+t[end:]
+                sp.write_text(t)
       - name: Fix audit stamp compatibility and regenerate
         run: |
           python - <<'PY'

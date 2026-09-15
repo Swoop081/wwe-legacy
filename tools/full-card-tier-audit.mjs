@@ -58,7 +58,7 @@ let adjacentComparisons=0;
 for(const card of moves){
   profileCounts[card.tierGrowthProfile]=(profileCounts[card.tierGrowthProfile]??0)+1;
 
-  if(card.balanceAuditVersion!=='v1.1.198'){
+  if(!['v1.1.198','v1.1.199'].includes(card.balanceAuditVersion)){
     failures.push(`${card.id}: missing v1.1.198 full-library balance audit stamp`);
   }
 

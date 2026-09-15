@@ -905,13 +905,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardNumber": 24,
     "cardCode": "SD1-024"
   },
-  {
-    "id": "damian-priest-hit-the-lights",
-    "setId": "smackdown-series-1",
-    "cardNumber": 25,
-    "cardCode": "SD1-025"
-  },
-  {
+{
     "id": "entrance-damian-priest",
     "setId": "smackdown-series-1",
     "cardNumber": 26,
@@ -3347,13 +3341,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardNumber": 7,
     "cardCode": "EVO1-007"
   },
-  {
-    "id": "becky-lynch-diamond-dust",
-    "setId": "evolution-series-1",
-    "cardNumber": 8,
-    "cardCode": "EVO1-008"
-  },
-  {
+{
     "id": "becky-lynch-diving-leg-drop",
     "setId": "evolution-series-1",
     "cardNumber": 9,
@@ -3725,13 +3713,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardNumber": 71,
     "cardCode": "EVO1-071"
   },
-  {
-    "id": "becky-lynch-bexploder",
-    "setId": "evolution-series-1",
-    "cardNumber": 72,
-    "cardCode": "EVO1-072"
-  },
-  {
+{
     "id": "spinning-heel-kick",
     "setId": "evolution-series-1",
     "cardNumber": 73,
@@ -5715,7 +5697,9 @@ export const CARD_NUMBER_MANIFEST = [
   {"id":"entrance-aj-styles","setId":"rewards-october-2026","cardNumber":8,"cardCode":"RAJ26-008"},
   {"id":"superstar-aj-styles","setId":"rewards-october-2026","cardNumber":9,"cardCode":"RAJ26-009"},
   {"id": "chris-jericho-springboard-dropkick", "setId": "attitude-era-series-1", "cardNumber": 84, "cardCode": "AE1-084"},
-  {"id": "charlotte-flair-moonsault", "setId": "evolution-series-1", "cardNumber": 77, "cardCode": "EVO1-077"}
+  {"id": "charlotte-flair-moonsault", "setId": "evolution-series-1", "cardNumber": 77, "cardCode": "EVO1-077"},
+  {"id": "chelsea-green-missile-dropkick", "setId": "smackdown-series-1", "cardNumber": 73, "cardCode": "SD1-073"},
+  {"id": "chelsea-green-rough-ryder", "setId": "smackdown-series-1", "cardNumber": 74, "cardCode": "SD1-074"}
 ];
 export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));
 export const CARD_IDS_BY_SET = {};
