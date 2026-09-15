@@ -1,7 +1,7 @@
 name: Add Jericho Springboard Dropkick
 on:
   push:
-    paths: ['.github/add-jericho-springboard-dropkick-trigger']
+    paths: ['.github/add-jericho-springboard-dropkick-trigger-v2']
 permissions:
   contents: write
 jobs:
@@ -23,14 +23,21 @@ jobs:
             except:i=a+1;continue
             if isinstance(o,dict) and 'id' in o:cards.append(o)
             i=a+n
-          aerial=[o for o in cards if o.get('trademark') is True and any(x in (' '.join(str(o.get(k,'')) for k in ('name','rulesText','method'))).lower() for x in ('aerial','springboard','diving','splash','moonsault'))]
-          if not aerial:raise SystemExit('No aerial Trademark comparables')
+          aerial=[]
+          for o in cards:
+            text=' '.join(str(o.get(k,'')) for k in ('name','rulesText','method','moveType')).lower()
+            is_tm=o.get('trademark') is True or 'trademark' in str(o.get('rulesText','')).lower()
+            if is_tm and any(x in text for x in ('aerial','springboard','diving','splash','moonsault','top rope')):aerial.append(o)
+          if not aerial:raise SystemExit('No aerial Trademark comparables found')
           for o in aerial:print('COMPARABLE',o.get('name'),o.get('cost'),o.get('damage'),o.get('rulesText'))
           costs=[o['cost'] for o in aerial if isinstance(o.get('cost'),(int,float))];dmgs=[o['damage'] for o in aerial if isinstance(o.get('damage'),(int,float))]
+          if not costs or not dmgs:raise SystemExit('Aerial comparables missing numeric cost/damage')
           cost=int(round(statistics.median(costs)));damage=int(round(statistics.median(dmgs)))
           if 'chris-jericho-springboard-dropkick' in s:raise SystemExit('Already exists')
-          new={'id':'chris-jericho-springboard-dropkick','name':"Jericho's Springboard Dropkick",'type':'Move','setId':'attitude-era','superstarId':'chris-jericho','trademark':True,'method':'agility','cost':cost,'damage':damage,'rulesText':'Chris Jericho-exclusive Trademark. Running Aerial. On Connect: gain +1 Adrenaline.'}
-          marker='export const allGameplayCards = [';start=s.find(marker);i=start+len(marker);depth=1;q=None;esc=False
+          new={'id':'chris-jericho-springboard-dropkick','name':"Jericho's Springboard Dropkick",'kind':'move','setId':'attitude-era-series-1','superstarId':'chris-jericho','trademark':True,'method':'agility','moveType':'agility','cost':cost,'damage':damage,'requirements':{'agility':1},'rarity':3,'rulesText':'Chris Jericho-exclusive Trademark. Running Aerial. On Connect: gain +1 Adrenaline.','groundOpponent':False,'groundedOnly':False,'stun':0,'selfDamage':0,'effects':[],'counterState':'running-aerial'}
+          marker='export const allGameplayCards = [';start=s.find(marker)
+          if start<0:raise SystemExit('allGameplayCards missing')
+          i=start+len(marker);depth=1;q=None;esc=False
           while depth:
             c=s[i]
             if q:
@@ -44,7 +51,8 @@ jobs:
             i+=1
           close=i-1;s=s[:close].rstrip()+',\n  '+json.dumps(new,indent=2).replace('\n','\n  ')+'\n'+s[close:];cp.write_text(s)
           mp=Path('js/data/card-number-manifest.js');ms=mp.read_text();nums=[int(x) for x in re.findall(r'"cardCode":\s*"ATT1-(\d+)"',ms)]
-          n=max(nums)+1;mend=ms.rfind('];');mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps({'id':new['id'],'setId':'attitude-era','cardNumber':n,'cardCode':f'ATT1-{n:03d}'})+'\n'+ms[mend:])
+          if not nums:raise SystemExit('No ATT1 numbering found')
+          n=max(nums)+1;mend=ms.rfind('];');mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps({'id':new['id'],'setId':'attitude-era-series-1','cardNumber':n,'cardCode':f'ATT1-{n:03d}'})+'\n'+ms[mend:])
           print('ADDED',f'ATT1-{n:03d}','cost',cost,'damage',damage)
       - name: Card Studio and validation
         run: |
