@@ -10,24 +10,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Extract Becky deck structure and definitions
+      - name: Produce compact Becky deck report
         run: |
           set -euo pipefail
-          OUT=.github/becky-current-60-audit.txt
+          OUT=.github/becky-current-60-compact.txt
           : > "$OUT"
           {
-            echo '=== BECKY REFERENCES ==='
-            grep -RniE 'becky[- ]lynch|Becky Lynch|Manhandle Slam|Dis-arm-her|Straight Fire|Tap or Snap' js --include='*.js' || true
-            echo
-            echo '=== DECK BUILDERS / 60 CARD STRUCTURE ==='
-            grep -RniE -B8 -A30 '60|recommendedDeck|starterDeck|deckList|deckIds|momentum|reversal' js/data js/shared js/engine --include='*.js' || true
-            echo
-            echo '=== BECKY CONTEXT ==='
-            grep -RniE -B20 -A60 'becky[- ]lynch|Becky Lynch' js/data js/shared --include='*.js' || true
+            echo '=== FILES WITH BECKY ==='
+            grep -RilE 'becky[- ]lynch|Becky Lynch|Manhandle Slam|Dis-arm-her|Straight Fire|Tap or Snap' js --include='*.js' | sort
+            echo '=== BECKY LINES ==='
+            grep -RniE 'becky[- ]lynch|Becky Lynch|Manhandle Slam|Dis-arm-her|Straight Fire|Tap or Snap' js/data js/shared --include='*.js' | head -n 500
           } >> "$OUT"
-          test -s "$OUT"
+          echo '=== COMPACT REPORT ==='
+          cat "$OUT"
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add "$OUT"
-          git commit -m 'Capture Becky current 60-card deck audit' || exit 0
+          git commit -m 'Capture compact Becky deck source report' || exit 0
+          git pull --rebase origin main
           git push origin main
