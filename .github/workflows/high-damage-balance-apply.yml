@@ -1,0 +1,76 @@
+name: Authored high damage move balance
+on:
+  push:
+    paths: ['.github/high-damage-balance-trigger']
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Apply intentional non-finisher damage ceilings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('js/shared/v1.1.69-card-identity-pass.js'); s=p.read_text()
+          marker="const EXCEPTIONAL_FINISHER_IDS=new Set(['brock-lesnar-f-5']);"
+          if 'AUTHORED_HIGH_DAMAGE_CURVES' not in s:
+            block="""const AUTHORED_HIGH_DAMAGE_CURVES=Object.freeze({
+  'andre-the-giant-double-underhook-suplex':[8,9,9,10,11],
+  'kevin-owens-avalanche-fishermans-buster':[8,9,9,10,11],
+  'aj-styles-phenomenal-forearm':[8,9,9,10,11],
+  'kevin-owens-package-piledriver':[8,9,9,10,11],
+  'rey-fenix-mexican-destroyer':[8,9,9,10,11],
+  'baron-corbin-deep-six':[8,9,9,10,11],
+  'bayley-diving-elbow':[7,8,8,9,10],
+  'cody-rhodes-cody-cutter':[8,9,9,10,11],
+  'finn-balor-1916':[8,9,9,10,11],
+  'jacob-fatu-pop-up-samoan-drop':[8,9,9,10,11],
+  'jaida-parker-samoan-drop':[8,9,9,10,11],
+  'kane-chokeslam-from-hell':[8,9,9,10,11],
+  'last-symphony':[8,9,9,10,11],
+  'montez-ford-450-splash':[8,9,9,10,11],
+  'nia-jax-avalanche-samoan-drop':[8,9,9,10,11],
+  'penta-driver':[8,9,9,10,11],
+  'pop-up-powerbomb':[8,9,9,10,11],
+  'rob-van-dam-van-daminator':[8,9,9,10,11],
+  'seth-rollins-phoenix-splash':[7,8,8,9,10],
+  'superplex':[8,9,9,10,11],
+  'the-rock-attitude-people-s-elbow':[8,9,9,10,11],
+  'trick-williams-trick-knee':[8,9,9,10,11],
+  'vikingo-twisting-450-splash':[8,9,9,10,11]
+});
+function applyAuthoredHighDamageCurve(card){
+  const curve=AUTHORED_HIGH_DAMAGE_CURVES[card?.id];
+  if(!curve || card?.finisher || card?.submission || card?.moveType==='submission') return;
+  card.damage=curve[4];
+  card.printingStats={base:{damage:curve[0]},emerald:{damage:curve[1]},sapphire:{damage:curve[2]},ruby:{damage:curve[3]},amethyst:{damage:curve[4]}};
+  card.balanceAuditVersion='v1.1.200';
+}
+
+"""
+            s=s.replace(marker,block+marker)
+            s=s.replace("function enforceAuditedMoveStructure(card){\n  if(card?.finisher)","function enforceAuditedMoveStructure(card){\n  applyAuthoredHighDamageCurve(card);\n  if(card?.finisher)")
+            p.write_text(s)
+          PY
+      - name: Validate
+        run: |
+          set -euo pipefail
+          node --check js/shared/v1.1.69-card-identity-pass.js
+          node --input-type=module <<'NODE'
+          const {allGameplayCards}=await import('./js/data/content.js');
+          const bad=allGameplayCards.filter(c=>c.kind==='move'&&!c.finisher&&!c.submission&&c.moveType!=='submission'&&Number(c.damage)>=12);
+          if(bad.length){ console.error(bad.map(c=>[c.id,c.damage])); process.exit(1); }
+          console.log('PASS: no non-finisher Move remains at 12+ authored damage.');
+          NODE
+          if [ -f tools/full-card-tier-audit.mjs ]; then node tools/full-card-tier-audit.mjs; fi
+      - name: Commit
+        run: |
+          git config user.name 'WWE Legacy Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add js/shared/v1.1.69-card-identity-pass.js
+          git diff --cached --check
+          git commit -m 'Rebalance high damage non-finisher moves'
+          git push origin main
