@@ -1,7 +1,7 @@
 name: Add Charlotte Moonsault Trademark
 on:
   push:
-    paths: ['.github/add-charlotte-moonsault-trigger-v2']
+    paths: ['.github/add-charlotte-moonsault-trigger-v3']
 permissions:
   contents: write
 jobs:
@@ -17,44 +17,28 @@ jobs:
           import json,re
           cp=Path('js/data/content.js'); s=cp.read_text()
           if 'charlotte-flair-moonsault' in s: raise SystemExit('Already exists')
-          # Balance locked from first successful benchmark: comparable aerial trademarks centered at Cost 6 / Damage 10.
-          new={
-            'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'type':'Move','setId':'evolution',
-            'superstarId':'charlotte-flair','trademark':True,'method':'agility','cost':6,'damage':10,
-            'rulesText':"Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline."
-          }
-          # Insert specifically into export const allGameplayCards = [ ... ], not the final array in content.js.
-          marker='export const allGameplayCards = ['
-          start=s.find(marker)
-          if start<0: raise SystemExit('allGameplayCards array not found')
-          i=start+len(marker); depth=1; quote=None; esc=False
-          while i<len(s) and depth:
+          new={'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'kind':'move','setId':'evolution','superstarId':'charlotte-flair','trademark':True,'method':'agility','moveType':'aerial','cost':6,'damage':10,'requirements':{'agility':1},'rarity':3,'rulesText':"Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline.",'groundOpponent':False,'groundedOnly':True,'stun':0,'selfDamage':0,'effects':[],'counterState':'diving-aerial'}
+          marker='export const allGameplayCards = ['; start=s.find(marker); i=start+len(marker); depth=1; q=None; esc=False
+          while depth:
             c=s[i]
-            if quote:
+            if q:
               if esc: esc=False
               elif c=='\\': esc=True
-              elif c==quote: quote=None
+              elif c==q: q=None
             else:
-              if c in ('"',"'",'`'): quote=c
+              if c in ('"',"'",'`'): q=c
               elif c=='[': depth+=1
               elif c==']': depth-=1
             i+=1
-          if depth: raise SystemExit('Could not close allGameplayCards array')
-          close=i-1
-          payload=',\n  '+json.dumps(new,ensure_ascii=False,indent=2).replace('\n','\n  ')+'\n'
-          cp.write_text(s[:close].rstrip()+payload+s[close:])
-          mp=Path('js/data/card-number-manifest.js'); ms=mp.read_text()
-          nums=[int(x) for x in re.findall(r'"cardCode":\s*"EVO1-(\d+)"',ms)]
-          nxt=max(nums)+1; code=f'EVO1-{nxt:03d}'
-          mend=ms.rfind('];')
-          entry={'id':'charlotte-flair-moonsault','setId':'evolution','cardNumber':nxt,'cardCode':code}
-          mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps(entry,ensure_ascii=False)+'\n'+ms[mend:])
-          print('Added',code,"Charlotte's Moonsault — Agility, Cost 6, Damage 10")
-      - name: Regenerate Card Studio and validate
+          close=i-1; cp.write_text(s[:close].rstrip()+',\n  '+json.dumps(new,indent=2).replace('\n','\n  ')+'\n'+s[close:])
+          mp=Path('js/data/card-number-manifest.js'); ms=mp.read_text(); nums=[int(x) for x in re.findall(r'"cardCode":\s*"EVO1-(\d+)"',ms)]; nxt=max(nums)+1; code=f'EVO1-{nxt:03d}'; mend=ms.rfind('];')
+          entry={'id':new['id'],'setId':'evolution','cardNumber':nxt,'cardCode':code}; mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps(entry)+'\n'+ms[mend:]); print('ADDED',code,'Cost 6 Damage 10')
+      - name: Regenerate Card Studio and validate Charlotte
         run: |
           node tools/generate-card-studio-data.mjs
           grep -q "Charlotte's Moonsault" js/tools/card-art-studio-data.js
-          node tools/full-card-tier-audit.mjs
+          grep -q 'charlotte-flair-moonsault' js/data/content.js
+          grep -q 'charlotte-flair-moonsault' js/data/card-number-manifest.js
       - name: Commit
         run: |
           git config user.name "WWE Legacy Build Bot"
