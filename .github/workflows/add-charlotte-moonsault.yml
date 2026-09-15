@@ -1,7 +1,7 @@
 name: Add Charlotte Moonsault Trademark
 on:
   push:
-    paths: ['.github/add-charlotte-moonsault-trigger-v5']
+    paths: ['.github/add-charlotte-moonsault-trigger-v6']
 permissions:
   contents: write
 jobs:
@@ -10,14 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {ref: main}
-      - name: Add Charlotte's Moonsault to active gameplay array
+      - name: Add Charlotte's Moonsault to canonical Evolution set
         shell: python
         run: |
           from pathlib import Path
           import json,re
           cp=Path('js/data/content.js'); s=cp.read_text()
           if 'charlotte-flair-moonsault' in s: raise SystemExit('Already exists')
-          new={'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'kind':'move','setId':'evolution','superstarId':'charlotte-flair','trademark':True,'method':'agility','moveType':'aerial','cost':6,'damage':10,'requirements':{'agility':1},'rarity':3,'rulesText':"Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline.",'groundOpponent':False,'groundedOnly':True,'stun':0,'selfDamage':0,'effects':[],'counterState':'diving-aerial'}
+          new={'id':'charlotte-flair-moonsault','name':"Charlotte's Moonsault",'kind':'move','setId':'evolution-series-1','superstarId':'charlotte-flair','trademark':True,'method':'agility','moveType':'aerial','cost':6,'damage':10,'requirements':{'agility':1},'rarity':3,'rulesText':"Charlotte Flair-exclusive Trademark. Grounded opponent only. Diving Aerial. On Connect: gain +1 Adrenaline.",'groundOpponent':False,'groundedOnly':True,'stun':0,'selfDamage':0,'effects':[{'type':'gainAdrenaline','amount':1}],'counterState':'diving-aerial'}
           marker='export const allGameplayCards = ['; start=s.find(marker); i=start+len(marker); depth=1; q=None; esc=False
           while depth:
             c=s[i]
@@ -32,13 +32,14 @@ jobs:
             i+=1
           close=i-1; cp.write_text(s[:close].rstrip()+',\n  '+json.dumps(new,indent=2).replace('\n','\n  ')+'\n'+s[close:])
           mp=Path('js/data/card-number-manifest.js'); ms=mp.read_text(); nums=[int(x) for x in re.findall(r'"cardCode":\s*"EVO1-(\d+)"',ms)]; nxt=max(nums)+1; code=f'EVO1-{nxt:03d}'; mend=ms.rfind('];')
-          entry={'id':new['id'],'setId':'evolution','cardNumber':nxt,'cardCode':code}; mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps(entry)+'\n'+ms[mend:]); print('ADDED',code,'Cost 6 Damage 10')
-      - name: Regenerate Card Studio and validate Charlotte
+          entry={'id':new['id'],'setId':'evolution-series-1','cardNumber':nxt,'cardCode':code}; mp.write_text(ms[:mend].rstrip()+',\n  '+json.dumps(entry)+'\n'+ms[mend:]); print('ADDED',code)
+      - name: Regenerate and validate canonical collection
         run: |
-          node tools/generate-card-studio-data.mjs || true
+          node tools/generate-card-studio-data.mjs
           grep -q 'charlotte-flair-moonsault' js/tools/card-art-studio-data.js
           grep -q 'charlotte-flair-moonsault' js/data/content.js
           grep -q 'charlotte-flair-moonsault' js/data/card-number-manifest.js
+          grep -q 'evolution-series-1' js/data/card-number-manifest.js
       - name: Commit
         run: |
           git config user.name "WWE Legacy Build Bot"
