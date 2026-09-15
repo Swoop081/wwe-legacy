@@ -1,0 +1,54 @@
+name: Printing aware combat integration
+on:
+  push:
+    paths: ['.github/printing-aware-combat-trigger']
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Wire authored five-tier stats into playable cards
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('js/data/variants.js'); s=p.read_text()
+          old="""    out.damage=Math.max(0,authoredDamage+damageOffset);\n    out.cost=Math.max(card.defensiveOnly?0:1,authoredCost+costOffset);\n    out.effects=scaleEffectArray(card.effects,moveEffectDelta);"""
+          new="""    // Explicit authored printing curves are canonical. They override the legacy\n    // profile offsets so a Base/Ruby/Amethyst copy resolves with the exact\n    // cost and damage authored for that physical printing. Cards without an\n    // explicit curve retain the existing profile fallback.\n    const printingKey = resolvedTier === 'normal' ? 'base' : resolvedTier;\n    const printingSpec = card.printingStats?.[printingKey] ?? null;\n    out.damage=Number.isFinite(Number(printingSpec?.damage))\n      ? Math.max(0,Number(printingSpec.damage))\n      : Math.max(0,authoredDamage+damageOffset);\n    out.cost=Number.isFinite(Number(printingSpec?.cost))\n      ? Math.max(card.defensiveOnly?0:1,Number(printingSpec.cost))\n      : Math.max(card.defensiveOnly?0:1,authoredCost+costOffset);\n    out.tierDamageOffset=out.damage-authoredDamage;\n    out.tierCostOffset=out.cost-authoredCost;\n    out.effects=scaleEffectArray(card.effects,moveEffectDelta);"""
+          if old not in s: raise SystemExit('applyCardTier target not found')
+          p.write_text(s.replace(old,new,1))
+          PY
+      - name: Validate exact printing curves and runtime
+        run: |
+          set -euo pipefail
+          node --check js/data/variants.js
+          node tools/full-card-tier-audit.mjs
+          node --input-type=module <<'JS'
+          import { allGameplayCards } from './js/data/content.js';
+          import { applyCardTier } from './js/data/variants.js';
+          const checks=[
+            ['liv-morgan-oblivion',[12,13,14,15,16]],
+            ['becky-lynch-manhandle-slam',[12,13,14,15,16]],
+            ['chelsea-green-im-prettier',[12,13,14,15,16]],
+            ['damian-priest-south-of-heaven',[12,13,14,15,16]],
+            ['brock-lesnar-f-5',[13,14,15,16,17]]
+          ];
+          const tiers=['normal','emerald','sapphire','ruby','amethyst'];
+          for(const [id,want] of checks){
+            const card=allGameplayCards.find(c=>c.id===id);
+            if(!card) throw new Error(`Missing ${id}`);
+            const got=tiers.map(t=>applyCardTier(card,t).damage);
+            if(got.join(',')!==want.join(',')) throw new Error(`${id}: ${got} != ${want}`);
+            console.log(id,got.join('/'));
+          }
+          JS
+      - name: Commit
+        run: |
+          git config user.name 'WWE Legacy Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add js/data/variants.js
+          git diff --cached --check
+          git commit -m 'Use exact printing stats in live combat' || exit 0
+          git push origin main
