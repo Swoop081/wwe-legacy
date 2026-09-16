@@ -1,14 +1,12 @@
-// WWE Legacy v1.1.205 — single player-facing runtime overlay entry point.
-// Historical implementation filenames are imported here only as implementation modules;
-// index.html no longer executes a version ladder directly.
-import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.205";
-import "../shared/v1.1.151-placeholder-card-cleanup.js?v=1.1.205";
-import "../shared/v1.1.155-card-copy-pack-logo-nav.js?v=1.1.205";
-import "../shared/v1.1.201-starter-draft.js?v=1.1.205";
-import "../shared/v1.1.154-roster-order.js?v=1.1.205";
-import "../shared/v1.1.177-championship-road-select.js?v=1.1.205";
+// WWE Legacy v1.1.206 — canonical player-facing runtime entry.
+import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.206";
+import "../shared/v1.1.151-placeholder-card-cleanup.js?v=1.1.206";
+import "../shared/v1.1.155-card-copy-pack-logo-nav.js?v=1.1.206";
+import "../shared/v1.1.201-starter-draft.js?v=1.1.206";
+import "../shared/v1.1.154-roster-order.js?v=1.1.206";
+import "../shared/v1.1.177-championship-road-select.js?v=1.1.206";
 
-import "../ui/app.js?v=1.1.205";
+await import("../ui/app.js?v=1.1.206");
 
 const classicScripts = [
   "../shared/card-face-renderer.js",
@@ -27,13 +25,17 @@ const classicScripts = [
   "../shared/v1.1.148-pack-summary-runtime-layout.js"
 ];
 
-// The pack-branding shim contained no behavior beyond setting a legacy global flag;
-// it is intentionally retired from the runtime.
-for (const path of classicScripts) {
-  const script = document.createElement("script");
-  script.src = `${path}?v=1.1.205`;
-  script.async = false;
-  document.head.appendChild(script);
+function loadClassicScript(path) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = `${path}?v=1.1.206`;
+    script.async = false;
+    script.onload = resolve;
+    script.onerror = () => reject(new Error(`Failed to load runtime module ${path}`));
+    document.head.appendChild(script);
+  });
 }
 
-globalThis.__WWE_LEGACY_RUNTIME__ = Object.freeze({ version: "1.1.205", entry: "js/runtime/current.js" });
+for (const path of classicScripts) await loadClassicScript(path);
+
+globalThis.__WWE_LEGACY_RUNTIME__ = Object.freeze({ version: "1.1.206", entry: "js/runtime/current.js", bootComplete: true });
