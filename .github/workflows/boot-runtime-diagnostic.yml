@@ -14,33 +14,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: app.js syntax
-        continue-on-error: true
-        run: node --check js/ui/app.js
-      - name: collection.js syntax
-        continue-on-error: true
-        run: node --check js/data/collection.js
-      - name: superstars.js syntax
-        continue-on-error: true
-        run: node --check js/data/superstars.js
-      - name: decks.js syntax
-        continue-on-error: true
-        run: node --check js/data/decks.js
-      - name: artwork.js syntax
-        continue-on-error: true
-        run: node --check js/data/artwork.js
-      - name: MatchEngine.js syntax
-        continue-on-error: true
-        run: node --check js/engine/MatchEngine.js
-      - name: WrestlingAI.js syntax
-        continue-on-error: true
-        run: node --check js/ai/WrestlingAI.js
-      - name: identity pass syntax
-        continue-on-error: true
-        run: node --check js/shared/v1.1.69-card-identity-pass.js
+      - name: Find duplicate gameplay card IDs
+        run: |
+          node --input-type=module <<'NODE'
+          import { allGameplayCards } from './js/data/content.js';
+          const byId = new Map();
+          for (const card of allGameplayCards) {
+            if (!byId.has(card.id)) byId.set(card.id, []);
+            byId.get(card.id).push(card);
+          }
+          const dupes = [...byId].filter(([,cards]) => cards.length > 1);
+          console.log('GAMEPLAY_CARD_COUNT', allGameplayCards.length);
+          console.log('DUPLICATE_ID_COUNT', dupes.length);
+          for (const [id,cards] of dupes) console.log('DUPLICATE', id, JSON.stringify(cards.map(c=>({name:c.name,setId:c.setId,superstarId:c.superstarId,kind:c.kind}))));
+          if (dupes.length) process.exit(1);
+          NODE
       - name: collection import runtime
-        continue-on-error: true
+        if: always()
         run: node --input-type=module -e "import('./js/data/collection.js').then(()=>console.log('COLLECTION_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
-      - name: app import runtime
-        continue-on-error: true
-        run: node --input-type=module -e "import('./js/ui/app.js').then(()=>console.log('APP_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
