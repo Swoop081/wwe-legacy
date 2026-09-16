@@ -14,6 +14,11 @@ try {
   throw error;
 }
 
+// Launch poster is presentation-only: no visible button/text. The app's existing
+// launch action remains authoritative, with its hit target expanded to the viewport.
+try { await import(`./splash-tap-anywhere.js?v=${VERSION}`); }
+catch (error) { console.error("Non-fatal launch splash interaction failed", error); }
+
 // Enhancements are deliberately isolated from core boot. A retired/broken
 // enhancement can no longer strand the player on the static launch poster.
 const enhancementModules = [
