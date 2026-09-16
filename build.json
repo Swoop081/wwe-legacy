@@ -1,11 +1,11 @@
 {
-  "version": "1.1.202",
+  "version": "1.1.204",
   "releasedAt": "2026-09-16",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.202",
+  "physicalIphoneSmoke": "pending-v1.1.204",
   "launchStatus": "released",
-  "name": "v1.1.202 — Released Finisher Audit Implementation"
+  "name": "v1.1.204 — Canonical Runtime Version Consolidation"
 }
