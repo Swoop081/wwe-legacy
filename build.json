@@ -1,11 +1,11 @@
 {
-  "version": "1.1.200",
+  "version": "1.1.201",
   "releasedAt": "2026-09-16",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.200",
+  "physicalIphoneSmoke": "pending-v1.1.201",
   "launchStatus": "released",
-  "name": "v1.1.200 — Launch Population Cleanup"
+  "name": "v1.1.201 — Four-Round Starter Draft"
 }
