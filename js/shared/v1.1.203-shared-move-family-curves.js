@@ -22,11 +22,13 @@ const EXCLUDED = card => !card || card.kind !== 'move' || !!card.superstarId || 
 
 export function applySharedMoveFamilyCurvesV11203(cards=[]){
   const byId = new Map(cards.map(card => [card?.id, card]));
+  let expected = 0;
   let applied = 0;
   for(const [family, curves] of Object.entries(SHARED_MOVE_FAMILY_CURVES_V11203)){
     for(const [id, printingStats] of Object.entries(curves)){
+      expected += 1;
       const card = byId.get(id);
-      if(!card) continue;
+      if(!card) throw new Error(`v1.1.203 shared ${family} family missing production card ${id}`);
       if(EXCLUDED(card)) throw new Error(`v1.1.203 shared ${family} family attempted excluded card ${id}`);
       card.printingStats = structuredClone(printingStats);
       card.cost = printingStats.amethyst.cost;
@@ -36,5 +38,6 @@ export function applySharedMoveFamilyCurvesV11203(cards=[]){
       applied += 1;
     }
   }
+  if(applied !== expected) throw new Error(`v1.1.203 shared family application incomplete: ${applied}/${expected}`);
   return applied;
 }
