@@ -1,51 +1,25 @@
-name: Boot runtime repair
+name: Boot runtime verification
 on:
   push:
     paths:
       - '.github/workflows/boot-runtime-diagnostic.yml'
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
-  repair-and-verify:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Repair six missing RAW collector identities
-        run: |
-          node <<'NODE'
-          const fs = require('fs');
-          const p = 'js/data/card-number-manifest.js';
-          let s = fs.readFileSync(p,'utf8');
-          const entries = [
-            ['becky-lynch-bex-plex',90],
-            ['becky-lynch-flying-fire-arm',91],
-            ['armbar',92],
-            ['calf-kick',93],
-            ['hammerlock',94],
-            ['grab-the-ropes',95],
-          ];
-          const missing = entries.filter(([id]) => !s.includes(`\"id\": \"${id}\"`));
-          if (missing.length) {
-            const marker = '\n];\nexport const CARD_NUMBER_BY_ID';
-            if (!s.includes(marker)) throw new Error('Manifest export marker not found');
-            const block = missing.map(([id,n]) => `  {\"id\": \"${id}\", \"setId\": \"raw-series-1\", \"cardNumber\": ${n}, \"cardCode\": \"RAW1-${String(n).padStart(3,'0')}\"}`).join(',\n');
-            s = s.replace(marker, `,\n${block}\n];\nexport const CARD_NUMBER_BY_ID`);
-            fs.writeFileSync(p,s);
-          }
-          NODE
       - name: Verify collection import
         run: node --input-type=module -e "import('./js/data/collection.js').then(()=>console.log('COLLECTION_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
-      - name: Commit repair
+      - name: Verify boot module syntax
         run: |
-          if git diff --quiet; then exit 0; fi
-          git config user.name 'Swoop081'
-          git config user.email 'justinbelot8@gmail.com'
-          git add js/data/card-number-manifest.js
-          git commit -m 'Fix boot-blocking RAW card manifest drift'
-          git push origin HEAD:main
+          node --check js/ui/app.js
+          node --check js/data/collection.js
+          node --check js/data/content.js
+          node --check js/data/card-number-manifest.js
+          node --check js/shared/v1.1.69-card-identity-pass.js
