@@ -1,34 +1,51 @@
-name: Boot runtime diagnostic
+name: Boot runtime repair
 on:
   push:
     paths:
       - '.github/workflows/boot-runtime-diagnostic.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
-  diagnose:
+  repair-and-verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Report collection identity drift
+      - name: Repair six missing RAW collector identities
         run: |
-          node --input-type=module <<'NODE'
-          import { allGameplayCards } from './js/data/content.js';
-          import { superstars } from './js/data/superstars.js';
-          import { CARD_NUMBER_MANIFEST } from './js/data/card-number-manifest.js';
-          const active = [...allGameplayCards, ...Object.values(superstars).map(s=>({id:`superstar-${s.id}`,setId:s.setId,name:s.name,kind:'superstar'}))];
-          const activeById = new Map(active.map(c=>[c.id,c]));
-          const manifestById = new Map(CARD_NUMBER_MANIFEST.map(c=>[c.id,c]));
-          const missing = active.filter(c=>!manifestById.has(c.id));
-          const inactive = CARD_NUMBER_MANIFEST.filter(c=>!activeById.has(c.id));
-          const mismatch = active.filter(c=>manifestById.has(c.id)&&manifestById.get(c.id).setId!==c.setId);
-          console.log('ACTIVE', active.length, 'MANIFEST', CARD_NUMBER_MANIFEST.length);
-          console.log('MISSING_FROM_MANIFEST', JSON.stringify(missing.map(c=>({id:c.id,name:c.name,setId:c.setId,kind:c.kind}))));
-          console.log('INACTIVE_IN_MANIFEST', JSON.stringify(inactive));
-          console.log('SET_MISMATCH', JSON.stringify(mismatch.map(c=>({id:c.id,active:c.setId,manifest:manifestById.get(c.id).setId}))));
-          if (missing.length || inactive.length || mismatch.length) process.exit(1);
+          node <<'NODE'
+          const fs = require('fs');
+          const p = 'js/data/card-number-manifest.js';
+          let s = fs.readFileSync(p,'utf8');
+          const entries = [
+            ['becky-lynch-bex-plex',90],
+            ['becky-lynch-flying-fire-arm',91],
+            ['armbar',92],
+            ['calf-kick',93],
+            ['hammerlock',94],
+            ['grab-the-ropes',95],
+          ];
+          const missing = entries.filter(([id]) => !s.includes(`\"id\": \"${id}\"`));
+          if (missing.length) {
+            const marker = '\n];\nexport const CARD_NUMBER_BY_ID';
+            if (!s.includes(marker)) throw new Error('Manifest export marker not found');
+            const block = missing.map(([id,n]) => `  {\"id\": \"${id}\", \"setId\": \"raw-series-1\", \"cardNumber\": ${n}, \"cardCode\": \"RAW1-${String(n).padStart(3,'0')}\"}`).join(',\n');
+            s = s.replace(marker, `,\n${block}\n];\nexport const CARD_NUMBER_BY_ID`);
+            fs.writeFileSync(p,s);
+          }
           NODE
+      - name: Verify collection import
+        run: node --input-type=module -e "import('./js/data/collection.js').then(()=>console.log('COLLECTION_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
+      - name: Commit repair
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'Swoop081'
+          git config user.email 'justinbelot8@gmail.com'
+          git add js/data/card-number-manifest.js
+          git commit -m 'Fix boot-blocking RAW card manifest drift'
+          git push origin HEAD:main
