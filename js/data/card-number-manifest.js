@@ -5700,7 +5700,13 @@ export const CARD_NUMBER_MANIFEST = [
   {"id": "charlotte-flair-moonsault", "setId": "evolution-series-1", "cardNumber": 77, "cardCode": "EVO1-077"},
   {"id": "chelsea-green-missile-dropkick", "setId": "smackdown-series-1", "cardNumber": 73, "cardCode": "SD1-073"},
   {"id": "chelsea-green-rough-ryder", "setId": "smackdown-series-1", "cardNumber": 74, "cardCode": "SD1-074"},
-  {"id": "damian-priest-broken-arrow", "setId": "smackdown-series-1", "cardNumber": 75, "cardCode": "SD1-075"}
+  {"id": "damian-priest-broken-arrow", "setId": "smackdown-series-1", "cardNumber": 75, "cardCode": "SD1-075"},
+  {"id": "becky-lynch-bex-plex", "setId": "raw-series-1", "cardNumber": 90, "cardCode": "RAW1-090"},
+  {"id": "becky-lynch-flying-fire-arm", "setId": "raw-series-1", "cardNumber": 91, "cardCode": "RAW1-091"},
+  {"id": "armbar", "setId": "raw-series-1", "cardNumber": 92, "cardCode": "RAW1-092"},
+  {"id": "calf-kick", "setId": "raw-series-1", "cardNumber": 93, "cardCode": "RAW1-093"},
+  {"id": "hammerlock", "setId": "raw-series-1", "cardNumber": 94, "cardCode": "RAW1-094"},
+  {"id": "grab-the-ropes", "setId": "raw-series-1", "cardNumber": 95, "cardCode": "RAW1-095"}
 ];
 export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));
 export const CARD_IDS_BY_SET = {};
