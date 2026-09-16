@@ -14,56 +14,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Find duplicate gameplay card IDs
+      - name: Report collection identity drift
         run: |
           node --input-type=module <<'NODE'
           import { allGameplayCards } from './js/data/content.js';
-          const byId = new Map();
-          for (const card of allGameplayCards) {
-            if (!byId.has(card.id)) byId.set(card.id, []);
-            byId.get(card.id).push(card);
-          }
-          const dupes = [...byId].filter(([,cards]) => cards.length > 1);
-          console.log('GAMEPLAY_CARD_COUNT', allGameplayCards.length);
-          console.log('DUPLICATE_ID_COUNT', dupes.length);
-          for (const [id,cards] of dupes) console.log('DUPLICATE', id, JSON.stringify(cards.map(c=>({name:c.name,setId:c.setId,superstarId:c.superstarId,kind:c.kind}))));
-          if (dupes.length) process.exit(1);
-          NODE
-      - name: collection import runtime
-        run: node --input-type=module -e "import('./js/data/collection.js').then(()=>console.log('COLLECTION_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
-      - name: Full app boot runtime with browser globals
-        run: |
-          node --input-type=module <<'NODE'
-          const store = new Map();
-          globalThis.localStorage = {
-            getItem:k => store.has(k) ? store.get(k) : null,
-            setItem:(k,v) => store.set(k,String(v)),
-            removeItem:k => store.delete(k),
-            clear:() => store.clear()
-          };
-          const game = { innerHTML:'', className:'', dataset:{}, style:{}, addEventListener(){}, removeEventListener(){}, querySelector(){return null}, querySelectorAll(){return []} };
-          globalThis.document = {
-            getElementById:id => id === 'game' ? game : null,
-            querySelector(){return null}, querySelectorAll(){return []},
-            addEventListener(){}, removeEventListener(){},
-            createElement(){return {style:{},dataset:{},classList:{add(){},remove(){},toggle(){}},append(){},appendChild(){},remove(){},click(){},setAttribute(){},addEventListener(){},querySelector(){return null},querySelectorAll(){return []}}},
-            body:{classList:{add(){},remove(){},toggle(){}},append(){},dataset:{}},
-            documentElement:{classList:{add(){},remove(){},toggle(){}},style:{}}
-          };
-          globalThis.window = globalThis;
-          globalThis.navigator = { userAgent:'GitHub Actions boot diagnostic' };
-          globalThis.location = { href:'https://example.test/wwe-legacy/', search:'', pathname:'/wwe-legacy/', replace(){} };
-          globalThis.history = { replaceState(){}, pushState(){} };
-          globalThis.requestAnimationFrame = fn => { fn(0); return 1; };
-          globalThis.cancelAnimationFrame = () => {};
-          globalThis.matchMedia = () => ({matches:false,addEventListener(){},removeEventListener(){}});
-          globalThis.fetch = async () => ({ok:true,json:async()=>({version:'1.1.199'}),text:async()=>''});
-          try {
-            await import('./js/ui/app.js');
-            console.log('APP_IMPORT_OK');
-            console.log('GAME_HTML_LENGTH', game.innerHTML.length);
-          } catch (e) {
-            console.error('APP_BOOT_ERROR', e?.stack || e);
-            process.exit(1);
-          }
+          import { superstars } from './js/data/superstars.js';
+          import { CARD_NUMBER_MANIFEST } from './js/data/card-number-manifest.js';
+          const active = [...allGameplayCards, ...Object.values(superstars).map(s=>({id:`superstar-${s.id}`,setId:s.setId,name:s.name,kind:'superstar'}))];
+          const activeById = new Map(active.map(c=>[c.id,c]));
+          const manifestById = new Map(CARD_NUMBER_MANIFEST.map(c=>[c.id,c]));
+          const missing = active.filter(c=>!manifestById.has(c.id));
+          const inactive = CARD_NUMBER_MANIFEST.filter(c=>!activeById.has(c.id));
+          const mismatch = active.filter(c=>manifestById.has(c.id)&&manifestById.get(c.id).setId!==c.setId);
+          console.log('ACTIVE', active.length, 'MANIFEST', CARD_NUMBER_MANIFEST.length);
+          console.log('MISSING_FROM_MANIFEST', JSON.stringify(missing.map(c=>({id:c.id,name:c.name,setId:c.setId,kind:c.kind}))));
+          console.log('INACTIVE_IN_MANIFEST', JSON.stringify(inactive));
+          console.log('SET_MISMATCH', JSON.stringify(mismatch.map(c=>({id:c.id,active:c.setId,manifest:manifestById.get(c.id).setId}))));
+          if (missing.length || inactive.length || mismatch.length) process.exit(1);
           NODE
