@@ -1,10 +1,9 @@
 import { sets } from "./sets.js?v=1.1.132";
 
-// v1.1.0 — player-facing set slate: five current-brand/event sets plus four Legends sets.
+// v1.1.200 — launch-facing slate. NXT Series 1 remains authored but is banked for later release.
 export const LAUNCH_LIVE_SET_IDS = Object.freeze([
   "raw-series-1",
   "smackdown-series-1",
-  "nxt-series-1",
   "evolution-series-1",
   "summerslam-series-1",
   "golden-era-series-1",
@@ -13,9 +12,11 @@ export const LAUNCH_LIVE_SET_IDS = Object.freeze([
   "ruthless-aggression-series-1"
 ]);
 
-export const LIVE_SEASON_REWARD_SET_IDS = Object.freeze(["season-1-last-time-is-now"]);
+// Season 1 Last Time Is Now was scrapped; keep no player-facing reward-set release here.
+export const LIVE_SEASON_REWARD_SET_IDS = Object.freeze([]);
 
 export const BANKED_PLAYER_SET_IDS = Object.freeze([
+  "nxt-series-1",
   "worlds-collide-series-1",
   "money-in-the-bank-series-1",
   "survivor-series-series-1"
@@ -50,6 +51,7 @@ export function playerReleaseCalendar() {
 }
 
 export const PRE_RELEASE_TEST_SET_IDS = Object.freeze([
+  "nxt-series-1",
   "worlds-collide-series-1",
   "money-in-the-bank-series-1",
   "survivor-series-series-1"
