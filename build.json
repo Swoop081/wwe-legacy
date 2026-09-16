@@ -1,11 +1,11 @@
 {
-  "version": "1.1.206",
+  "version": "1.1.207",
   "releasedAt": "2026-09-16",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.206",
+  "physicalIphoneSmoke": "pending-v1.1.207",
   "launchStatus": "released",
-  "name": "v1.1.206 — Canonical Runtime Boot Recovery"
+  "name": "v1.1.207 — Launch Boot Isolation Recovery"
 }
