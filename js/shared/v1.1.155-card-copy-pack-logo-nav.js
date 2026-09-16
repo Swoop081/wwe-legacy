@@ -1,5 +1,7 @@
 // v1.1.155 — production copy cleanup, sealed-pack logo hardening, premium nav icons.
 // v1.1.165 — stale-build update recovery for iPhone Safari.
+// v1.1.200 — use the actual transparent source logos on sealed packs. Safari can fail to
+// paint SVG wrappers that themselves reference another image, which left packs blank.
 import { allGameplayCards } from "../data/content.js?v=1.1.132";
 import "./v1.1.163-wwe-photo-refresh.js?v=1.1.163";
 
@@ -18,15 +20,15 @@ for (const card of allGameplayCards) {
 }
 
 const LOGOS = {
-  "raw-series-1":"./assets/images/pack-logos/raw-series-1-transparent.svg?v=1.1.155",
-  "smackdown-series-1":"./assets/images/pack-logos/smackdown-series-1-transparent.svg?v=1.1.155",
-  "nxt-series-1":"./assets/images/pack-logos/nxt-series-1-transparent.svg?v=1.1.155",
-  "evolution-series-1":"./assets/images/pack-logos/evolution-series-1-transparent.svg?v=1.1.155",
-  "summerslam-series-1":"./assets/images/pack-logos/summerslam-series-1-transparent.svg?v=1.1.155",
-  "golden-era-series-1":"./assets/images/pack-logos/golden-era-series-1-transparent.svg?v=1.1.155",
-  "new-generation-series-1":"./assets/images/pack-logos/new-generation-series-1-transparent.svg?v=1.1.155",
-  "attitude-era-series-1":"./assets/images/pack-logos/attitude-era-series-1-transparent.svg?v=1.1.155",
-  "ruthless-aggression-series-1":"./assets/images/pack-logos/ruthless-aggression-series-1-transparent.svg?v=1.1.155"
+  "raw-series-1":"./assets/images/onboarding-raw-logo.svg?v=1.1.200",
+  "smackdown-series-1":"./assets/images/onboarding-smackdown-logo.svg?v=1.1.200",
+  "nxt-series-1":"./assets/images/onboarding-nxt-logo.svg?v=1.1.200",
+  "evolution-series-1":"./assets/images/art-evolution-series-1-evolution-logo.png?v=1.1.200",
+  "summerslam-series-1":"./assets/images/art-summerslam-series-1-summerslam-2026-logo.png?v=1.1.200",
+  "golden-era-series-1":"./assets/images/set-logos/golden-era-set-logo.png?v=1.1.200",
+  "new-generation-series-1":"./assets/images/branding-new-generation-series-1-new-generation-logo.png?v=1.1.200",
+  "attitude-era-series-1":"./assets/images/branding-attitude-era-series-1-wwf-scratch-logo-card.png?v=1.1.200",
+  "ruthless-aggression-series-1":"https://images.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/39850/1526513686-11744-2621/WWE_20Ruthless_20Aggression_20logo_large.png"
 };
 function setFromPack(pack) {
   const classes = [...pack.classList];
@@ -54,9 +56,10 @@ function hardenPackLogo(pack) {
     logo.className = "v1155-pack-logo";
     logo.alt = "";
     logo.setAttribute("aria-hidden", "true");
-    (pack.querySelector(".pack-face,.pack-body,.pack-front,.physical-pack-face") || pack).appendChild(logo);
+    pack.appendChild(logo);
   }
   logo.src = src;
+  logo.referrerPolicy = "no-referrer";
   pack.classList.add("v1155-has-pack-logo");
 }
 const ICONS = {
