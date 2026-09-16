@@ -26,6 +26,8 @@ export function createStarterDraftProfile(route,selections){
   addOwnedCard(p,"entrance-amazing",{tier:"normal",amount:1});
   for(const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"])addOwnedCard(p,id,{tier:"normal",amount:5});
   for(const sid of selections)grantSuperstarUnlockPackage(p,sid,{celebrate:false});
-  p.onboarding={complete:false,step:0};
+  // The four-choice Starter Draft IS onboarding. A completed draft must never
+  // be handed to persistence as an incomplete onboarding profile.
+  p.onboarding={complete:true,step:4};
   return p;
 }
