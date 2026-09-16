@@ -1,12 +1,34 @@
-// WWE Legacy v1.1.206 — canonical player-facing runtime entry.
-import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.206";
-import "../shared/v1.1.151-placeholder-card-cleanup.js?v=1.1.206";
-import "../shared/v1.1.155-card-copy-pack-logo-nav.js?v=1.1.206";
-import "../shared/v1.1.201-starter-draft.js?v=1.1.206";
-import "../shared/v1.1.154-roster-order.js?v=1.1.206";
-import "../shared/v1.1.177-championship-road-select.js?v=1.1.206";
+// WWE Legacy v1.1.207 — canonical player-facing runtime entry.
+// Critical boot invariant: the application module loads FIRST. No static imports
+// are allowed above it because ES-module imports are hoisted and one failing
+// compatibility module would prevent app.js from ever attaching the launch UI.
 
-await import("../ui/app.js?v=1.1.206");
+const VERSION = "1.1.207";
+
+try {
+  await import(`../ui/app.js?v=${VERSION}`);
+  globalThis.__WWE_LEGACY_APP_BOOTED__ = true;
+} catch (error) {
+  globalThis.__WWE_LEGACY_BOOT_ERROR__ = String(error?.stack || error?.message || error);
+  console.error("WWE Legacy application boot failed", error);
+  throw error;
+}
+
+// Enhancements are deliberately isolated from core boot. A retired/broken
+// enhancement can no longer strand the player on the static launch poster.
+const enhancementModules = [
+  "../shared/v1.1.66-featured-superstar-ability-audit.js",
+  "../shared/v1.1.151-placeholder-card-cleanup.js",
+  "../shared/v1.1.155-card-copy-pack-logo-nav.js",
+  "../shared/v1.1.201-starter-draft.js",
+  "../shared/v1.1.154-roster-order.js",
+  "../shared/v1.1.177-championship-road-select.js"
+];
+
+for (const path of enhancementModules) {
+  try { await import(`${path}?v=${VERSION}`); }
+  catch (error) { console.error(`Non-fatal WWE Legacy enhancement failed: ${path}`, error); }
+}
 
 const classicScripts = [
   "../shared/card-face-renderer.js",
@@ -26,16 +48,16 @@ const classicScripts = [
 ];
 
 function loadClassicScript(path) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const script = document.createElement("script");
-    script.src = `${path}?v=1.1.206`;
+    script.src = `${path}?v=${VERSION}`;
     script.async = false;
-    script.onload = resolve;
-    script.onerror = () => reject(new Error(`Failed to load runtime module ${path}`));
+    script.onload = () => resolve(true);
+    script.onerror = error => { console.error(`Non-fatal WWE Legacy compatibility script failed: ${path}`, error); resolve(false); };
     document.head.appendChild(script);
   });
 }
 
 for (const path of classicScripts) await loadClassicScript(path);
 
-globalThis.__WWE_LEGACY_RUNTIME__ = Object.freeze({ version: "1.1.206", entry: "js/runtime/current.js", bootComplete: true });
+globalThis.__WWE_LEGACY_RUNTIME__ = Object.freeze({ version: VERSION, entry: "js/runtime/current.js", bootComplete: true });
