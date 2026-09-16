@@ -933,16 +933,15 @@ export const allGameplayCards = [
     "name": "Ooh Ahh!!",
     "kind": "action",
     "setId": "summerslam-series-1",
-    "cost": 2,
+    "cost": 0,
     "rarity": 3,
     "superstarId": "roman-reigns",
     "maxCopies": 1,
-    "rulesText": "Roman Reigns-exclusive Action. Search/draw Roman’s Spear. If Roman’s Spear is already in hand, gain +1 Adrenaline instead. Roman’s next Spear this Control sequence costs 1 less.",
+    "rulesText": "Roman Reigns-exclusive Action. Gain +1 Adrenaline. If the next card you play this Control is Roman’s Spear, that Spear cannot be Countered. The protection expires if you play another card first or lose Control.",
     "effect": {
       "type": "romanOohAhh",
-      "name": "Roman's Spear",
-      "discount": 1,
-      "adrenalineIfInHand": 1
+      "adrenaline": 1,
+      "protectCardId": "roman-reigns-spear"
     }
   },
   {
