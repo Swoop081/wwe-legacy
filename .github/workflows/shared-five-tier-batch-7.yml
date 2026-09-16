@@ -1,0 +1,24 @@
+name: Shared five-tier batch 7
+on:
+  push:
+    paths: ['.github/shared-five-tier-batch-7-trigger']
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - name: Apply shared batch 7 curves
+        run: python3 tools/shared-five-tier-batch-7.py
+      - name: Syntax check
+        run: node --check js/shared/v1.1.69-card-identity-pass.js
+      - name: Commit batch
+        run: |
+          git config user.name 'WWE Legacy Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add js/shared/v1.1.69-card-identity-pass.js
+          git diff --cached --check
+          git commit -m 'Lock shared five-tier batch 7'
+          git push origin main
