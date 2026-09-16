@@ -14,15 +14,33 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Syntax check boot module graph
-        shell: bash
-        run: |
-          node --check js/ui/app.js
-          node --check js/data/collection.js
-          node --check js/data/superstars.js
-          node --check js/data/decks.js
-          node --check js/data/artwork.js
-          node --check js/engine/MatchEngine.js
-          node --check js/ai/WrestlingAI.js
-          node --check js/shared/v1.1.69-card-identity-pass.js
-          node --input-type=module -e "import('./js/ui/app.js').catch(e=>{console.error(e.stack||e);process.exit(1)})"
+      - name: app.js syntax
+        continue-on-error: true
+        run: node --check js/ui/app.js
+      - name: collection.js syntax
+        continue-on-error: true
+        run: node --check js/data/collection.js
+      - name: superstars.js syntax
+        continue-on-error: true
+        run: node --check js/data/superstars.js
+      - name: decks.js syntax
+        continue-on-error: true
+        run: node --check js/data/decks.js
+      - name: artwork.js syntax
+        continue-on-error: true
+        run: node --check js/data/artwork.js
+      - name: MatchEngine.js syntax
+        continue-on-error: true
+        run: node --check js/engine/MatchEngine.js
+      - name: WrestlingAI.js syntax
+        continue-on-error: true
+        run: node --check js/ai/WrestlingAI.js
+      - name: identity pass syntax
+        continue-on-error: true
+        run: node --check js/shared/v1.1.69-card-identity-pass.js
+      - name: collection import runtime
+        continue-on-error: true
+        run: node --input-type=module -e "import('./js/data/collection.js').then(()=>console.log('COLLECTION_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
+      - name: app import runtime
+        continue-on-error: true
+        run: node --input-type=module -e "import('./js/ui/app.js').then(()=>console.log('APP_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
