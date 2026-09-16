@@ -100,6 +100,12 @@ function auditedTierGrowthProfile(card){
 }
 
 const APPROVED_AUDIT_OVERRIDES = Object.freeze({
+  // ROMAN_EXCLUSIVE_FIVE_TIER_V11204 — Roman signature package; preserve card identity/effects.
+  'roman-reigns-corner-clotheslines': {printingStats:{base:{cost:6,damage:5},emerald:{cost:6,damage:6},sapphire:{cost:5,damage:7},ruby:{cost:5,damage:7},amethyst:{cost:5,damage:8}}},
+  'roman-reigns-drive-by': {printingStats:{base:{cost:6,damage:5},emerald:{cost:6,damage:6},sapphire:{cost:5,damage:7},ruby:{cost:5,damage:7},amethyst:{cost:5,damage:8}}},
+  'roman-reigns-guillotine': {printingStats:{base:{cost:8,damage:0,submission:{pressure:3}},emerald:{cost:8,damage:0,submission:{pressure:4}},sapphire:{cost:7,damage:0,submission:{pressure:4}},ruby:{cost:7,damage:0,submission:{pressure:5}},amethyst:{cost:7,damage:0,submission:{pressure:6}}}},
+  'roman-reigns-superman-punch': {printingStats:{base:{cost:8,damage:7},emerald:{cost:8,damage:8},sapphire:{cost:7,damage:9},ruby:{cost:7,damage:9},amethyst:{cost:7,damage:10}}},
+  'roman-reigns-spear': {requirements:{},method:null,printingStats:{base:{cost:11,damage:12},emerald:{cost:11,damage:13},sapphire:{cost:10,damage:14},ruby:{cost:10,damage:15},amethyst:{cost:10,damage:16}}},
   // SHARED_FIVE_TIER_BATCH_2_V11203 — Roman-heavy shared pool; authored by move impact, not formula.
   'shoulder-tackle': {cost:2,damage:4,printingStats:{base:{cost:3,damage:2},emerald:{cost:3,damage:3},sapphire:{cost:2,damage:3},ruby:{cost:2,damage:4},amethyst:{cost:2,damage:4}}},
   'throat-thrust': {cost:2,damage:4,printingStats:{base:{cost:3,damage:2},emerald:{cost:3,damage:3},sapphire:{cost:2,damage:3},ruby:{cost:2,damage:4},amethyst:{cost:2,damage:4}}},
