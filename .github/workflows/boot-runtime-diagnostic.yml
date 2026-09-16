@@ -30,5 +30,40 @@ jobs:
           if (dupes.length) process.exit(1);
           NODE
       - name: collection import runtime
-        if: always()
         run: node --input-type=module -e "import('./js/data/collection.js').then(()=>console.log('COLLECTION_IMPORT_OK')).catch(e=>{console.error(e.stack||e);process.exit(1)})"
+      - name: Full app boot runtime with browser globals
+        run: |
+          node --input-type=module <<'NODE'
+          const store = new Map();
+          globalThis.localStorage = {
+            getItem:k => store.has(k) ? store.get(k) : null,
+            setItem:(k,v) => store.set(k,String(v)),
+            removeItem:k => store.delete(k),
+            clear:() => store.clear()
+          };
+          const game = { innerHTML:'', className:'', dataset:{}, style:{}, addEventListener(){}, removeEventListener(){}, querySelector(){return null}, querySelectorAll(){return []} };
+          globalThis.document = {
+            getElementById:id => id === 'game' ? game : null,
+            querySelector(){return null}, querySelectorAll(){return []},
+            addEventListener(){}, removeEventListener(){},
+            createElement(){return {style:{},dataset:{},classList:{add(){},remove(){},toggle(){}},append(){},appendChild(){},remove(){},click(){},setAttribute(){},addEventListener(){},querySelector(){return null},querySelectorAll(){return []}}},
+            body:{classList:{add(){},remove(){},toggle(){}},append(){},dataset:{}},
+            documentElement:{classList:{add(){},remove(){},toggle(){}},style:{}}
+          };
+          globalThis.window = globalThis;
+          globalThis.navigator = { userAgent:'GitHub Actions boot diagnostic' };
+          globalThis.location = { href:'https://example.test/wwe-legacy/', search:'', pathname:'/wwe-legacy/', replace(){} };
+          globalThis.history = { replaceState(){}, pushState(){} };
+          globalThis.requestAnimationFrame = fn => { fn(0); return 1; };
+          globalThis.cancelAnimationFrame = () => {};
+          globalThis.matchMedia = () => ({matches:false,addEventListener(){},removeEventListener(){}});
+          globalThis.fetch = async () => ({ok:true,json:async()=>({version:'1.1.199'}),text:async()=>''});
+          try {
+            await import('./js/ui/app.js');
+            console.log('APP_IMPORT_OK');
+            console.log('GAME_HTML_LENGTH', game.innerHTML.length);
+          } catch (e) {
+            console.error('APP_BOOT_ERROR', e?.stack || e);
+            process.exit(1);
+          }
+          NODE
