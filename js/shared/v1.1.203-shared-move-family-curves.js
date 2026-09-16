@@ -15,7 +15,7 @@ export const SHARED_MOVE_FAMILY_CURVES_V11203 = Object.freeze({
     'german-suplex': Object.freeze({base:{cost:6,damage:3},emerald:{cost:5,damage:3},sapphire:{cost:5,damage:4},ruby:{cost:4,damage:4},amethyst:{cost:4,damage:5}}),
     'fisherman-suplex': Object.freeze({base:{cost:7,damage:3},emerald:{cost:6,damage:3},sapphire:{cost:6,damage:4},ruby:{cost:5,damage:4},amethyst:{cost:5,damage:5}}),
     'overhead-belly-to-belly-suplex': Object.freeze({base:{cost:7,damage:3},emerald:{cost:6,damage:3},sapphire:{cost:6,damage:4},ruby:{cost:5,damage:4},amethyst:{cost:5,damage:5}}),
-    'superplex': Object.freeze({base:{cost:8,damage:4},emerald:{cost:7,damage:4},sapphire:{cost:7,damage:5},ruby:{cost:6,damage:5},amethyst:{cost:6,damage:6}})
+    'superplex': Object.freeze({base:{cost:9,damage:5},emerald:{cost:8,damage:6},sapphire:{cost:7,damage:7},ruby:{cost:7,damage:8},amethyst:{cost:6,damage:9}})
   })
 });
 
