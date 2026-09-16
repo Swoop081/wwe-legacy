@@ -1,0 +1,28 @@
+name: Boot runtime diagnostic
+on:
+  push:
+    paths:
+      - '.github/workflows/boot-runtime-diagnostic.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check boot module graph
+        shell: bash
+        run: |
+          node --check js/ui/app.js
+          node --check js/data/collection.js
+          node --check js/data/superstars.js
+          node --check js/data/decks.js
+          node --check js/data/artwork.js
+          node --check js/engine/MatchEngine.js
+          node --check js/ai/WrestlingAI.js
+          node --check js/shared/v1.1.69-card-identity-pass.js
+          node --input-type=module -e "import('./js/ui/app.js').catch(e=>{console.error(e.stack||e);process.exit(1)})"
