@@ -4,6 +4,7 @@ import { sets } from "./sets.js?v=1.1.132";
 import { allGameplayCards } from "./content.js?v=1.1.132";
 import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=1.1.132";
 import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.132";
+import { applySharedMoveFamilyCurvesV11203 } from "../shared/v1.1.203-shared-move-family-curves.js?v=1.1.203";
 
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
 const orderedStars = Object.values(superstars);
@@ -22,6 +23,7 @@ const starCards = orderedStars.map(s => ({
 }));
 
 const base = [...allGameplayCards, ...starCards];
+applySharedMoveFamilyCurvesV11203(base);
 const baseById = new Map(base.map(card => [card.id, card]));
 
 if (baseById.size !== base.length) {
@@ -34,8 +36,6 @@ for (const card of base) {
   const manifest = CARD_NUMBER_BY_ID[card.id];
   if (!manifest) throw new Error(`Active card ${card.id} is missing from the canonical card-number manifest.`);
   if (manifest.setId !== card.setId) throw new Error(`Canonical manifest set mismatch for ${card.id}: ${manifest.setId} != ${card.setId}.`);
-  // Preserve the existing shared card objects used by decks/gameplay, but stamp
-  // their collector identity from the one authoritative manifest.
   card.cardNumber = manifest.cardNumber;
   card.cardCode = manifest.cardCode;
 }
