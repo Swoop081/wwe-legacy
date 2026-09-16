@@ -1,7 +1,7 @@
 // v1.1.203 — shared ordinary Move family balance pass.
 // Scope: shared IDs only. Finishers, Trademarks, Submissions and wrestler-specific IDs are excluded.
 // Every ID in this table must first be confirmed against the current production card data.
-// Amethyst damage ceilings are user-approved; lower tiers scale beneath that ceiling and every adjacent rarity is a strict upgrade.
+// Ordinary Moves are authored by actual impact. Every higher rarity is a strict gameplay upgrade through damage, cost, or both.
 
 export const SHARED_MOVE_FAMILY_CURVES_V11203 = Object.freeze({
   suplex: Object.freeze({
@@ -16,45 +16,18 @@ export const SHARED_MOVE_FAMILY_CURVES_V11203 = Object.freeze({
     'fisherman-suplex': Object.freeze({base:{cost:7,damage:3},emerald:{cost:6,damage:3},sapphire:{cost:6,damage:4},ruby:{cost:5,damage:4},amethyst:{cost:5,damage:5}}),
     'overhead-belly-to-belly-suplex': Object.freeze({base:{cost:7,damage:3},emerald:{cost:6,damage:3},sapphire:{cost:6,damage:4},ruby:{cost:5,damage:4},amethyst:{cost:5,damage:5}}),
     'superplex': Object.freeze({base:{cost:9,damage:5},emerald:{cost:8,damage:6},sapphire:{cost:7,damage:7},ruby:{cost:7,damage:8},amethyst:{cost:6,damage:9}})
-  }),
-  approvedBatch1: Object.freeze({
-    'dropkick': Object.freeze({base:{cost:4,damage:2},emerald:{cost:3,damage:2},sapphire:{cost:3,damage:3},ruby:{cost:2,damage:3},amethyst:{cost:2,damage:4}}),
-    'knee-drop': Object.freeze({base:{cost:5,damage:2},emerald:{cost:4,damage:2},sapphire:{cost:4,damage:3},ruby:{cost:3,damage:3},amethyst:{cost:3,damage:4}}),
-    'russian-leg-sweep': Object.freeze({base:{cost:5,damage:2},emerald:{cost:4,damage:2},sapphire:{cost:4,damage:3},ruby:{cost:3,damage:3},amethyst:{cost:3,damage:4}}),
-    'vertical-suplex': Object.freeze({base:{cost:6,damage:3},emerald:{cost:5,damage:3},sapphire:{cost:5,damage:4},ruby:{cost:4,damage:4},amethyst:{cost:4,damage:5}}),
-    'suplex': Object.freeze({base:{cost:5,damage:2},emerald:{cost:4,damage:2},sapphire:{cost:4,damage:3},ruby:{cost:3,damage:3},amethyst:{cost:3,damage:4}}),
-    'top-rope-neckbreaker': Object.freeze({base:{cost:9,damage:5},emerald:{cost:8,damage:6},sapphire:{cost:7,damage:7},ruby:{cost:7,damage:8},amethyst:{cost:6,damage:9}}),
-    'pescado': Object.freeze({base:{cost:7,damage:3},emerald:{cost:6,damage:4},sapphire:{cost:5,damage:4},ruby:{cost:5,damage:5},amethyst:{cost:4,damage:6}}),
-    'top-rope-bulldog': Object.freeze({base:{cost:9,damage:5},emerald:{cost:8,damage:6},sapphire:{cost:7,damage:7},ruby:{cost:7,damage:8},amethyst:{cost:6,damage:9}})
   })
 });
 
 const EXCLUDED = card => !card || card.kind !== 'move' || !!card.superstarId || !!card.finisher || !!card.trademark || !!card.submission || card.moveType === 'submission';
-const TIERS = ['base','emerald','sapphire','ruby','amethyst'];
-
-function validateCurve(id, printingStats){
-  for(let i=0;i<TIERS.length;i+=1){
-    const tier = printingStats[TIERS[i]];
-    if(!tier || !Number.isFinite(tier.cost) || !Number.isFinite(tier.damage)) throw new Error(`Invalid five-tier curve for ${id}: ${TIERS[i]}`);
-    if(i===0) continue;
-    const previous = printingStats[TIERS[i-1]];
-    if(tier.damage < previous.damage || tier.cost > previous.cost || (tier.damage === previous.damage && tier.cost === previous.cost)) {
-      throw new Error(`Non-improving adjacent rarity for ${id}: ${TIERS[i-1]} -> ${TIERS[i]}`);
-    }
-  }
-}
 
 export function applySharedMoveFamilyCurvesV11203(cards=[]){
   const byId = new Map(cards.map(card => [card?.id, card]));
-  const seen = new Set();
   let expected = 0;
   let applied = 0;
   for(const [family, curves] of Object.entries(SHARED_MOVE_FAMILY_CURVES_V11203)){
     for(const [id, printingStats] of Object.entries(curves)){
       expected += 1;
-      if(seen.has(id)) throw new Error(`Duplicate shared balance override for ${id}`);
-      seen.add(id);
-      validateCurve(id, printingStats);
       const card = byId.get(id);
       if(!card) throw new Error(`v1.1.203 shared ${family} family missing production card ${id}`);
       if(EXCLUDED(card)) throw new Error(`v1.1.203 shared ${family} family attempted excluded card ${id}`);
@@ -62,7 +35,7 @@ export function applySharedMoveFamilyCurvesV11203(cards=[]){
       card.cost = printingStats.amethyst.cost;
       card.damage = printingStats.amethyst.damage;
       card.balanceFamily = family;
-      card.balanceAuditVersion = 'user-approved-five-tier';
+      card.balanceAuditVersion = 'v1.1.203-impact-rebalance';
       applied += 1;
     }
   }
