@@ -100,6 +100,28 @@ function auditedTierGrowthProfile(card){
 }
 
 const APPROVED_AUDIT_OVERRIDES = Object.freeze({
+  // SHARED_FIVE_TIER_BATCH_9_V11211 — ordinary offensive Moves; reversals, submissions, Finishers/Trademarks and special-case 619 excluded.
+  'razor-ramon-bulldog': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'diesel-snake-eyes': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'diesel-big-boot': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'diesel-sidewalk-slam': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'doink-drop-toe-hold': {printingStats:{base:{cost:3,damage:2},emerald:{cost:3,damage:3},sapphire:{cost:2,damage:4},ruby:{cost:2,damage:4},amethyst:{cost:2,damage:5}}},
+  'doink-flying-body-press': {printingStats:{base:{cost:6,damage:5},emerald:{cost:6,damage:6},sapphire:{cost:5,damage:7},ruby:{cost:5,damage:7},amethyst:{cost:5,damage:8}}},
+  'yokozuna-savate-kick': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'yokozuna-belly-to-belly-suplex': {printingStats:{base:{cost:7,damage:7},emerald:{cost:7,damage:8},sapphire:{cost:6,damage:9},ruby:{cost:6,damage:9},amethyst:{cost:6,damage:10}}},
+  'dropkick-to-the-knee': {printingStats:{base:{cost:4,damage:3},emerald:{cost:4,damage:4},sapphire:{cost:3,damage:5},ruby:{cost:3,damage:5},amethyst:{cost:3,damage:6}}},
+  'owen-hart-enzuigiri': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'owen-hart-dragon-suplex': {printingStats:{base:{cost:7,damage:7},emerald:{cost:7,damage:8},sapphire:{cost:6,damage:9},ruby:{cost:6,damage:9},amethyst:{cost:6,damage:10}}},
+  'owen-hart-missile-dropkick': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'wheel-kick': {printingStats:{base:{cost:5,damage:4},emerald:{cost:5,damage:5},sapphire:{cost:4,damage:6},ruby:{cost:4,damage:6},amethyst:{cost:4,damage:7}}},
+  'gutbuster': {printingStats:{base:{cost:6,damage:5},emerald:{cost:6,damage:6},sapphire:{cost:5,damage:7},ruby:{cost:5,damage:7},amethyst:{cost:5,damage:8}}},
+  'bridging-german-suplex': {printingStats:{base:{cost:7,damage:7},emerald:{cost:7,damage:8},sapphire:{cost:6,damage:9},ruby:{cost:6,damage:9},amethyst:{cost:6,damage:10}}},
+  'step-up-enzuigiri': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'spinning-heel-kick': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'british-bulldog-delayed-vertical-suplex': {printingStats:{base:{cost:7,damage:8},emerald:{cost:7,damage:9},sapphire:{cost:6,damage:10},ruby:{cost:6,damage:10},amethyst:{cost:6,damage:11}}},
+  'british-bulldog-military-press-slam': {printingStats:{base:{cost:7,damage:8},emerald:{cost:7,damage:9},sapphire:{cost:6,damage:10},ruby:{cost:6,damage:10},amethyst:{cost:6,damage:11}}},
+  'knee-facebuster': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+
   // SHARED_FIVE_TIER_BATCH_8_V11210 — shared ordinary offensive Moves; reversals, submissions and special-case 619 excluded.
   'jawbreaker': {printingStats:{base:{cost:4,damage:3},emerald:{cost:4,damage:4},sapphire:{cost:3,damage:5},ruby:{cost:3,damage:5},amethyst:{cost:3,damage:6}}},
   'corner-avalanche': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
