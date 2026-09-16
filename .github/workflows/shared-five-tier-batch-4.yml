@@ -1,0 +1,26 @@
+name: Shared five-tier batch 4
+on:
+  push:
+    paths: ['.github/shared-five-tier-batch-4-trigger']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Apply shared batch 4 curves
+        run: python3 tools/shared-five-tier-batch-4.py
+      - name: Syntax check
+        run: node --check js/shared/v1.1.69-card-identity-pass.js
+      - name: Commit batch
+        run: |
+          git config user.name 'WWE Legacy Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add js/shared/v1.1.69-card-identity-pass.js
+          git diff --cached --check
+          git commit -m 'Lock high reuse shared five-tier batch 4'
+          git push origin main
