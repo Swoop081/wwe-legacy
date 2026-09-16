@@ -1,9 +1,9 @@
-// WWE Legacy v1.1.209 — canonical player-facing runtime entry.
+// WWE Legacy v1.1.210 — canonical player-facing runtime entry.
 // Critical boot invariant: the application module loads FIRST. No static imports
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.209";
+const VERSION = "1.1.210";
 
 try {
   await import(`../ui/app.js?v=${VERSION}`);
@@ -14,13 +14,31 @@ try {
   throw error;
 }
 
+function loadClassicScript(path) {
+  return new Promise(resolve => {
+    const script = document.createElement("script");
+    script.src = `${path}?v=${VERSION}`;
+    script.async = false;
+    script.onload = () => resolve(true);
+    script.onerror = error => { console.error(`Non-fatal WWE Legacy compatibility script failed: ${path}`, error); resolve(false); };
+    document.head.appendChild(script);
+  });
+}
+
+// The shared card-face renderer is a dependency of Starter Draft, pack reveals,
+// Deck Assistance and every other live collectible surface. Load it immediately
+// after the app boot, before any enhancement can ask a card to paint itself.
+await loadClassicScript("../shared/card-face-renderer.js");
+await loadClassicScript("../shared/card-face-readability-hotfix.js");
+await loadClassicScript("../shared/card-face-animation-layout-hotfix.js");
+await loadClassicScript("../shared/card-face-animation-black-field-hotfix.js");
+await loadClassicScript("../data/superstar-nameplates.js");
+
 // Launch poster is presentation-only: no visible button/text. The app's existing
 // launch action remains authoritative, with its hit target expanded to the viewport.
 try { await import(`./splash-tap-anywhere.js?v=${VERSION}`); }
 catch (error) { console.error("Non-fatal launch splash interaction failed", error); }
 
-// Enhancements are deliberately isolated from core boot. A retired/broken
-// enhancement can no longer strand the player on the static launch poster.
 const enhancementModules = [
   "../shared/v1.1.66-featured-superstar-ability-audit.js",
   "../shared/v1.1.151-placeholder-card-cleanup.js",
@@ -36,11 +54,6 @@ for (const path of enhancementModules) {
 }
 
 const classicScripts = [
-  "../shared/card-face-renderer.js",
-  "../shared/card-face-readability-hotfix.js",
-  "../shared/card-face-animation-layout-hotfix.js",
-  "../shared/card-face-animation-black-field-hotfix.js",
-  "../data/superstar-nameplates.js",
   "../shared/v1.1.136-onboarding-local-assets.js",
   "../shared/v1.1.166-live-event-branding.js",
   "../shared/v1.1.172-survivor-series-unlock.js",
@@ -51,17 +64,6 @@ const classicScripts = [
   "../shared/v1.1.104-pack-reward-hotfix.js",
   "../shared/v1.1.148-pack-summary-runtime-layout.js"
 ];
-
-function loadClassicScript(path) {
-  return new Promise(resolve => {
-    const script = document.createElement("script");
-    script.src = `${path}?v=${VERSION}`;
-    script.async = false;
-    script.onload = () => resolve(true);
-    script.onerror = error => { console.error(`Non-fatal WWE Legacy compatibility script failed: ${path}`, error); resolve(false); };
-    document.head.appendChild(script);
-  });
-}
 
 for (const path of classicScripts) await loadClassicScript(path);
 
