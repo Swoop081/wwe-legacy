@@ -7,13 +7,6 @@ import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.132";
 import { applySharedMoveFamilyCurvesV11203 } from "../shared/v1.1.203-shared-move-family-curves.js?v=1.1.203";
 
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
-const PRINTING_TIERS = Object.freeze([
-  { id: "base", label: "Base", rarity: 1 },
-  { id: "emerald", label: "Emerald", rarity: 2 },
-  { id: "sapphire", label: "Sapphire", rarity: 3 },
-  { id: "ruby", label: "Ruby", rarity: 4 },
-  { id: "amethyst", label: "Amethyst", rarity: 5 },
-]);
 const orderedStars = Object.values(superstars);
 const starCards = orderedStars.map(s => ({
   id: `superstar-${s.id}`,
@@ -50,31 +43,10 @@ for (const manifest of CARD_NUMBER_MANIFEST) {
   if (!baseById.has(manifest.id)) throw new Error(`Canonical manifest contains inactive card ${manifest.id}.`);
 }
 
-function cataloguePrintingsFor(card) {
-  if (!card?.printingStats) return [card];
-  return PRINTING_TIERS.map(tier => {
-    const stats = card.printingStats[tier.id];
-    if (!stats) throw new Error(`Missing ${tier.id} printing stats for ${card.id}`);
-    return {
-      ...card,
-      id: `${card.id}--${tier.id}`,
-      baseCardId: card.id,
-      printingTier: tier.id,
-      printingTierLabel: tier.label,
-      fixedPrintingTier: tier.id,
-      rarity: tier.rarity,
-      cost: stats.cost,
-      damage: stats.damage,
-      cardCode: `${card.cardCode}-${tier.id.toUpperCase()}`,
-      collectorBaseCardCode: card.cardCode,
-    };
-  });
-}
-
 export const collectionCardsBySet = {};
 for (const setId of Object.keys(sets)) {
   const ids = CARD_IDS_BY_SET[setId] ?? [];
-  const list = ids.map(id => baseById.get(id)).filter(Boolean).flatMap(cataloguePrintingsFor);
+  const list = ids.map(id => baseById.get(id)).filter(Boolean);
   collectionCardsBySet[setId] = list;
 }
 
