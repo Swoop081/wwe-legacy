@@ -100,6 +100,28 @@ function auditedTierGrowthProfile(card){
 }
 
 const APPROVED_AUDIT_OVERRIDES = Object.freeze({
+  // SHARED_FIVE_TIER_BATCH_13_V11215 — wrestler-specific ordinary offensive Moves; reversals, submissions, Finishers/Trademarks and special-case 619 excluded.
+  'flair-chop': {printingStats:{base:{cost:4,damage:3},emerald:{cost:4,damage:4},sapphire:{cost:3,damage:5},ruby:{cost:3,damage:5},amethyst:{cost:3,damage:6}}},
+  'kane-flying-clothesline': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'kane-two-handed-choke-lift': {printingStats:{base:{cost:7,damage:7},emerald:{cost:7,damage:8},sapphire:{cost:6,damage:9},ruby:{cost:6,damage:9},amethyst:{cost:6,damage:10}}},
+  'the-undertaker-running-big-boot': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'the-undertaker-snake-eyes': {printingStats:{base:{cost:5,damage:4},emerald:{cost:5,damage:5},sapphire:{cost:4,damage:6},ruby:{cost:4,damage:6},amethyst:{cost:4,damage:7}}},
+  'ultimate-warrior-clothesline': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'ultimate-warrior-diving-shoulder-block': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'ultimate-warrior-gorilla-press-slam': {printingStats:{base:{cost:7,damage:8},emerald:{cost:7,damage:9},sapphire:{cost:6,damage:10},ruby:{cost:6,damage:10},amethyst:{cost:6,damage:11}}},
+  'rhea-ripley-electric-chair-facebuster': {printingStats:{base:{cost:7,damage:7},emerald:{cost:7,damage:8},sapphire:{cost:6,damage:9},ruby:{cost:6,damage:9},amethyst:{cost:6,damage:10}}},
+  'rhea-ripley-reverse-alabama-slam': {printingStats:{base:{cost:7,damage:8},emerald:{cost:7,damage:9},sapphire:{cost:6,damage:10},ruby:{cost:6,damage:10},amethyst:{cost:6,damage:11}}},
+  'cody-rhodes-dropdown-uppercut': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'cody-rhodes-bionic-elbow': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'oba-femi-running-elbow': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
+  'oba-femi-one-handed-backbreaker': {printingStats:{base:{cost:7,damage:7},emerald:{cost:7,damage:8},sapphire:{cost:6,damage:9},ruby:{cost:6,damage:9},amethyst:{cost:6,damage:10}}},
+  'stone-cold-steve-austin-pointed-elbow-drop': {printingStats:{base:{cost:5,damage:4},emerald:{cost:5,damage:5},sapphire:{cost:4,damage:6},ruby:{cost:4,damage:6},amethyst:{cost:4,damage:7}}},
+  'stone-cold-steve-austin-mudhole-stomps': {printingStats:{base:{cost:6,damage:5},emerald:{cost:6,damage:6},sapphire:{cost:5,damage:7},ruby:{cost:5,damage:7},amethyst:{cost:5,damage:8}}},
+  'stone-cold-steve-austin-lou-thesz-press': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'gunther-gunther-s-chop': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'gunther-front-dropkick': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
+  'gunther-burning-lariat': {printingStats:{base:{cost:7,damage:8},emerald:{cost:7,damage:9},sapphire:{cost:6,damage:10},ruby:{cost:6,damage:10},amethyst:{cost:6,damage:11}}},
+
   // SHARED_FIVE_TIER_BATCH_12_V11214 — ordinary offensive Moves; reversals, submissions, Finishers/Trademarks and special-case 619 excluded.
   'iyo-sky-bullet-train-attack': {printingStats:{base:{cost:6,damage:6},emerald:{cost:6,damage:7},sapphire:{cost:5,damage:8},ruby:{cost:5,damage:8},amethyst:{cost:5,damage:9}}},
   'mankind-clothesline': {printingStats:{base:{cost:5,damage:5},emerald:{cost:5,damage:6},sapphire:{cost:4,damage:7},ruby:{cost:4,damage:7},amethyst:{cost:4,damage:8}}},
