@@ -11227,3 +11227,29 @@ body[data-screen="starter-summary"] #game{
   .starter-roster-summary-cards{gap:3px!important}
   .starter-roster-summary-cards .starter-summary-superstar-card{width:min(31.4vw,126px)!important}
 }
+
+
+/* v1.1.212 — restore deterministic DOM/SVG printed fronts.
+   Base plates are artwork only. The live SVG/nameplate layer is the authoritative
+   printed face on every layered collectible; do not depend on iOS canvas painting. */
+.ccg-card.is-layered-front .ccg-card-studio-ink{display:none!important}
+.ccg-card.is-layered-front .ccg-live-front-svg,
+.ccg-card.is-layered-front .ccg-live-superstar-rarity,
+.ccg-card.is-layered-front .ccg-superstar-nameplate{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:5!important;
+  pointer-events:none!important;
+}
+.ccg-card.is-layered-front .ccg-live-front-svg,
+.ccg-card.is-layered-front .ccg-live-superstar-rarity{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+}
+.ccg-card.is-layered-front .ccg-superstar-nameplate{position:absolute!important}
+.ccg-card.has-active-animation .ccg-live-front-svg,
+.ccg-card.has-active-animation .ccg-live-superstar-rarity,
+.ccg-card.has-active-animation .ccg-superstar-nameplate{z-index:6!important}
