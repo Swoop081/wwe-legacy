@@ -2807,6 +2807,8 @@ function renderCardStudioInkLayers(scope=document){
   const canvases=scope.querySelectorAll?.("canvas.ccg-card-studio-ink:not([data-card-studio-painted='1'])")??[];
   canvases.forEach(canvas=>{try{const raw=decodeURIComponent(canvas.dataset.cardStudioInk||"");if(!raw)return;const card=JSON.parse(raw);paintCardStudioInk(canvas,card);canvas.dataset.cardStudioPainted="1";}catch(error){console.warn("WWE Legacy Card Studio live face failed",error);}});
 }
+globalThis.WWELegacyRenderCardFaces = (scope=document) => renderCardStudioInkLayers(scope);
+
 
 
 function tribalChiefFrontOverlayMarkup(card) {
