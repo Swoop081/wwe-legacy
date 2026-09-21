@@ -1,11 +1,11 @@
 {
-  "version": "1.1.211",
+  "version": "1.1.212",
   "releasedAt": "2026-09-17",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.211",
+  "physicalIphoneSmoke": "pending-v1.1.212",
   "launchStatus": "released",
-  "name": "v1.1.211 — Live Card Face Repaint Recovery"
+  "name": "v1.1.212 — Printed Card Face SVG Recovery"
 }
