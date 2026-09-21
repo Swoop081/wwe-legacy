@@ -34,6 +34,12 @@ await loadClassicScript("../shared/card-face-animation-layout-hotfix.js");
 await loadClassicScript("../shared/card-face-animation-black-field-hotfix.js");
 await loadClassicScript("../data/superstar-nameplates.js");
 
+// app.js necessarily boots before compatibility scripts. Repaint the card canvases
+// once the renderer exists so cards already present in the DOM are not left as
+// bare printing plates with empty plaques.
+try { globalThis.WWELegacyRenderCardFaces?.(document); }
+catch (error) { console.error("Initial WWE Legacy card-face repaint failed", error); }
+
 // Launch poster is presentation-only: no visible button/text. The app's existing
 // launch action remains authoritative, with its hit target expanded to the viewport.
 try { await import(`./splash-tap-anywhere.js?v=${VERSION}`); }
