@@ -1,11 +1,11 @@
 {
-  "version": "1.1.210",
+  "version": "1.1.211",
   "releasedAt": "2026-09-17",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.210",
+  "physicalIphoneSmoke": "pending-v1.1.211",
   "launchStatus": "released",
-  "name": "v1.1.210 — Starter Draft + Card Render Recovery"
+  "name": "v1.1.211 — Live Card Face Repaint Recovery"
 }
