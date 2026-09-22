@@ -1,11 +1,11 @@
 {
-  "version": "1.1.212",
+  "version": "1.1.213",
   "releasedAt": "2026-09-17",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.212",
+  "physicalIphoneSmoke": "pending-v1.1.213",
   "launchStatus": "released",
-  "name": "v1.1.212 — Printed Card Face SVG Recovery"
+  "name": "v1.1.213 — Superstar Nameplates + Momentum Dots Recovery"
 }
