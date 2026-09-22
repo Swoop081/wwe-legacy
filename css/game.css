@@ -11273,3 +11273,11 @@ body[data-screen="starter-summary"] #game{
   visibility:visible!important;
   opacity:1!important;
 }
+
+
+/* v1.1.215 — Card Studio top-right logo inset parity.
+   Match new 5.5% right / 4.5% top Card Studio base-plate placement. */
+.ccg-card.has-active-animation .ccg-animated-set-logo{
+  top:4.5%!important;
+  right:5.5%!important;
+}
