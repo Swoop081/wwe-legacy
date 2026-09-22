@@ -224,7 +224,7 @@ const SET_LOGO_SAFE_PROFILES={
 function drawSetLogo(){
   const card=currentCard(),id=card?.setId||$("#set-select").value,im=state.setLogos.get(id);if(!im)return;
   const w=canvas.width,h=canvas.height,isReward=studioRewardSet(card);
-  const safeRight=w*(1-.088),safeTop=h*.072;
+  const safeRight=w*(1-.055),safeTop=h*.045;
   const profile=isReward?{maxW:.285,maxH:.12}:(SET_LOGO_SAFE_PROFILES[id]||{maxW:.255,maxH:.105});
   drawImageContainTopRight(im,{right:safeRight,top:safeTop,maxW:w*profile.maxW,maxH:h*profile.maxH});
 }
