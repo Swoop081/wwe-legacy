@@ -2762,7 +2762,7 @@ function layeredFrontOverlayMarkup(card) {
       ${rarity}
       <text class="ccg-live-svg-name" x="340" y="787" font-size="${nameSize}" text-anchor="middle" dominant-baseline="middle" fill="url(#${gradientId})">${safeName}</text>
       <text class="ccg-live-svg-stat-label" x="108.8" y="829" text-anchor="middle" dominant-baseline="middle">COST</text>
-      <text class="ccg-live-svg-stat-label" x="571.2" y="829" text-anchor="middle" dominant-baseline="middle">DAMAGE</text>
+      <text class="ccg-live-svg-stat-label" x="571.2" y="829" text-anchor="middle" dominant-baseline="middle">DMG</text>
       <text class="ccg-live-svg-stat-value" x="108.8" y="884" text-anchor="middle" dominant-baseline="middle">${liveFrontSvgEscape(card.cost ?? 0)}</text>
       <text class="ccg-live-svg-stat-value" x="571.2" y="884" text-anchor="middle" dominant-baseline="middle">${liveFrontSvgEscape(card.damage ?? 0)}</text>
       ${dots}
