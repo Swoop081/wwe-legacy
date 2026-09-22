@@ -44,12 +44,12 @@ import { canEnterSurvivorSeries, survivorSeriesState, currentSurvivorSeriesRun, 
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
-  if (!card?.superstarId) return "";
-  const p = SUPERSTAR_NAMEPLATE_PROFILES[card.superstarId];
-  if (!p) return "";
+  if (!card || card.kind !== "superstar") return "";
+  const superstarId = card.superstarId ?? String(card.id ?? "").replace(/^superstar-/,"") ?? "superstar";
+  const p = SUPERSTAR_NAMEPLATE_PROFILES[superstarId] ?? {};
   const font = String(p.fontFamily ?? '"Avenir Next Condensed", Arial, sans-serif').replaceAll('"', "'");
   const style = [`--np-font:${font}`,`--np-weight:${p.weight ?? 900}`,`--np-style:normal`,`--np-tracking:${Number(p.tracking ?? 0)}px`,`--np-skew:${Number(p.skew ?? 0)}deg`,`--np-scale-x:${Number(p.scaleX ?? 1)}`,`--np-font-scale:${Number(p.fontScale ?? 1)}`,`--np-stroke:${Number(p.strokeWidth ?? 3)}px`,`--np-glow:${Number(p.glow ?? 6)}px`].join(';');
-  return `<span class="ccg-superstar-nameplate" data-nameplate-superstar="${card.superstarId}" data-nameplate-style="${p.styleName ?? card.superstarId}" style="${style}"><strong>${card.name}</strong><small>SUPERSTAR</small></span>`;
+  return `<span class="ccg-superstar-nameplate" data-nameplate-superstar="${superstarId}" data-nameplate-style="${p.styleName ?? superstarId}" style="${style}"><strong>${card.name ?? "SUPERSTAR"}</strong><small>SUPERSTAR</small></span>`;
 }
 
 const HUMAN = "p1";
