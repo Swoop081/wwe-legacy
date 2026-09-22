@@ -11253,3 +11253,23 @@ body[data-screen="starter-summary"] #game{
 .ccg-card.has-active-animation .ccg-live-front-svg,
 .ccg-card.has-active-animation .ccg-live-superstar-rarity,
 .ccg-card.has-active-animation .ccg-superstar-nameplate{z-index:6!important}
+
+
+/* v1.1.213 — SVG Method dots must stay in the renderer's 680x1000 coordinate
+   system. Legacy HTML-dot positioning rules were also matching the SVG <g>
+   and translating the requirement group off its authored position. */
+.ccg-card.is-layered-front svg.ccg-live-front-svg .ccg-live-requirement{
+  display:block!important;
+  position:static!important;
+  width:auto!important;
+  height:auto!important;
+  padding:0!important;
+  transform:none!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.ccg-card.is-layered-front svg.ccg-live-front-svg .ccg-live-method-dot{
+  display:inline!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
