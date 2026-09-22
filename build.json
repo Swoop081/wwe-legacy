@@ -1,11 +1,11 @@
 {
-  "version": "1.1.214",
+  "version": "1.1.215",
   "releasedAt": "2026-09-17",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.214",
+  "physicalIphoneSmoke": "pending-v1.1.215",
   "launchStatus": "released",
-  "name": "v1.1.214 — Move DMG Label Spacing"
+  "name": "v1.1.215 — Tighter Top-Right Set Logo Inset"
 }
