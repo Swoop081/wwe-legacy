@@ -11,6 +11,9 @@
     maxH: SET_LOGO_SAFE_PROFILES.premiere.maxH
   };
 
+  // Lift the MITB overlay logo only; leave shared Card Studio rendering untouched.
+  SET_LOGO_SAFE_PROFILES[SET_ID].top = .018;
+
   // Keep the existing renderer intact for every other set, but allow this chase
   // set to use its supplied photographic background in preview and export.
   const previousDrawTemplate = drawTemplate;
