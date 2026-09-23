@@ -1,4 +1,5 @@
 export const sets = {
+  "premiere": {"id":"premiere","name":"Premiere","series":1,"type":"launch-set","displayName":"Premiere","shortCode":"PREM","lifecycleDefault":"featured","developmentOnly":false,"plannedSuperstarIds":["roman-reigns","cody-rhodes","cm-punk","seth-rollins","randy-orton","sami-zayn","stone-cold-steve-austin","john-cena","rhea-ripley","liv-morgan","becky-lynch","charlotte-flair","tiffany-stratton","iyo-sky","alexa-bliss","trish-stratus"],"lifecycleLabels":{"featured":"Featured"}},
   "new-generation-series-1": {
     "id": "new-generation-series-1",
     "name": "New Generation",
