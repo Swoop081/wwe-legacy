@@ -12,6 +12,8 @@ const aliases=Object.freeze({
   "air canada":"air canada",
   "flat of the foot":"flat of foot",
  "PREM97":{id:"PREM97",name:"ACKNOWLEDGE ME",kind:"action",setId:"premiere",cost:0,rarity:4,superstarId:"roman-reigns",maxCopies:1,rulesText:"Roman Reigns-exclusive Action. When played while Roman has Control: gain +1 Adrenaline. Your next Roman Trademark this Control sequence cannot be Countered.",special:{type:"premiereRomanAcknowledge",adrenaline:1,protectTrademark:true},cardCode:"PREM97",source:"premiere"},
+ "PREM98":{id:"PREM98",name:"FINISH THE STORY",kind:"action",setId:"premiere",cost:0,rarity:4,superstarId:"cody-rhodes",maxCopies:1,rulesText:"Cody Rhodes-exclusive Action. When played while Cody has Control: draw 2 pages, gain +1 Adrenaline, then search/draw Cody Cutter or Cross Rhodes.",special:{type:"premiereCodyFinishStory",draw:2,adrenaline:1,names:["Cody Cutter","Cross Rhodes"]},cardCode:"PREM98",source:"premiere"},
+ "PREM99":{id:"PREM99",name:"BEST IN THE WORLD",kind:"action",setId:"premiere",cost:0,rarity:4,superstarId:"cm-punk",maxCopies:1,rulesText:"CM Punk-exclusive Action. Play when Punk is being pinned: stop the Pin. Resolve Control using the normal failed-pin rules.",special:{type:"pinEscape"},cardCode:"PREM99",source:"premiere"},
  "PREM100":{id:"PREM100",name:"THE ARCHITECT",kind:"action",setId:"premiere",cost:0,rarity:4,superstarId:"seth-rollins",maxCopies:1,rulesText:"Seth Rollins-exclusive Action. When played while Seth has Control: draw 2 pages. The next Move you play this Control sequence costs 2 less.",special:{type:"premiereSethArchitect",draw:2,discountNextMove:2},cardCode:"PREM100",source:"premiere"}
 });
 
