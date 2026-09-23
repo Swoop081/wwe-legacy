@@ -22,6 +22,13 @@ const starCards = orderedStars.map(s => ({
   era: s.era ?? null,
 }));
 
+const premiereStarterSuperstars = [
+  ["PREM01","Roman Reigns","roman-reigns"],["PREM02","Cody Rhodes","cody-rhodes"],["PREM03","CM Punk","cm-punk"],["PREM04","Seth Rollins","seth-rollins"],
+  ["PREM05","Randy Orton","randy-orton"],["PREM06","Sami Zayn","sami-zayn"],["PREM07","Stone Cold Steve Austin","stone-cold-steve-austin"],["PREM08","John Cena","john-cena"],
+  ["PREM09","Rhea Ripley","rhea-ripley"],["PREM10","Liv Morgan","liv-morgan"],["PREM11","Becky Lynch","becky-lynch"],["PREM12","Charlotte Flair","charlotte-flair"],
+  ["PREM13","Tiffany Stratton","tiffany-stratton"],["PREM14","IYO SKY","iyo-sky"],["PREM15","Alexa Bliss","alexa-bliss"],["PREM16","Trish Stratus","trish-stratus"]
+].map(([id,name,superstarId],index)=>({id,name,kind:"superstar",superstarId,setId:"premiere",rarity:1,cardNumber:index+1,cardCode:id}));
+
 const mitbLaKnightRewards = [
   { id:"MITB01", name:"LA Knight", kind:"superstar", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:1, cardCode:"MITB01" },
   { id:"MITB02", name:"YEAH!!", kind:"entrance", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:2, cardCode:"MITB02" },
@@ -33,14 +40,14 @@ const mitbLaKnightRewards = [
   { id:"MITB08", name:"LA Knight T-Shirt", kind:"merch", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:8, cardCode:"MITB08" }
 ];
 
-const base = [...allGameplayCards, ...starCards, ...mitbLaKnightRewards];
+const base = [...allGameplayCards, ...starCards, ...premiereStarterSuperstars, ...mitbLaKnightRewards];
 applySharedMoveFamilyCurvesV11203(base);
 const baseById = new Map(base.map(card => [card.id, card]));
 
 if (baseById.size !== base.length) {
   throw new Error("WWE Legacy collection contains duplicate active card IDs.");
 }
-const canonicalBase = base.filter(card => !String(card.id).startsWith("MITB"));
+const canonicalBase = base.filter(card => !String(card.id).startsWith("MITB") && !String(card.id).startsWith("PREM"));
 if (CARD_NUMBER_MANIFEST.length !== canonicalBase.length) {
   throw new Error(`Canonical card manifest has ${CARD_NUMBER_MANIFEST.length} entries for ${canonicalBase.length} canonical active cards.`);
 }
@@ -60,6 +67,7 @@ for (const setId of Object.keys(sets)) {
   const ids = CARD_IDS_BY_SET[setId] ?? [];
   const list = ids.map(id => baseById.get(id)).filter(Boolean);
   if (setId === "season-1-last-time-is-now") list.push(...mitbLaKnightRewards);
+  if (setId === "premiere") list.push(...premiereStarterSuperstars);
   collectionCardsBySet[setId] = list;
 }
 
