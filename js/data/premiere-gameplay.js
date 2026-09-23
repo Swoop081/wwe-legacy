@@ -11,6 +11,7 @@ const aliases=Object.freeze({
   "stomp a mudhole":"stomp a mudhole",
   "air canada":"air canada",
   "flat of the foot":"flat of foot",
+ "PREM132":{id:"PREM132",name:"DIVING CLOTHESLINE",kind:"move",setId:"premiere",cost:4,damage:6,requirements:{agility:1},moveType:"aerial",method:"agility",superstarId:null,rarity:1,rulesText:"Standing opponent only. Ground opponent.",standingOnly:true,groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"diving-aerial",cardCode:"PREM132",source:"premiere"},
  "PREM127":{id:"PREM127",name:"CHOKESLAM",kind:"move",setId:"premiere",cost:5,damage:9,requirements:{strength:2},moveType:"grapple",method:"strength",superstarId:null,rarity:2,rulesText:"Ground opponent.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"body-elevated",cardCode:"PREM127",source:"premiere"},
  "PREM122":{id:"PREM122",name:"BOOTS IN THE CORNER",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:1,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"leg-extended",cardCode:"PREM122",source:"premiere"},
  "PREM121":{id:"PREM121",name:"BODYSLAM",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strength:1},moveType:"grapple",method:"strength",superstarId:null,rarity:1,rulesText:"Ground opponent.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"body-elevated",cardCode:"PREM121",source:"premiere"},
