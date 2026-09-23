@@ -12,6 +12,26 @@ const aliases=Object.freeze({
   "air canada":"air canada",
   "flat of the foot":"flat of foot"
 });
+
+const ENTRANCES=[
+ ["PREM17","I AM GREATNESS","roman-reigns","entrance-roman-reigns"],
+ ["PREM18","KINGDOM","cody-rhodes","entrance-cody-rhodes"],
+ ["PREM19","CULT OF PERSONALITY","cm-punk","entrance-cm-punk"],
+ ["PREM20","BURN IT DOWN","seth-rollins","entrance-seth-rollins"],
+ ["PREM21","I HEAR VOICES","randy-orton","entrance-randy-orton"],
+ ["PREM22","WORLDS APART","sami-zayn","entrance-sami-zayn"],
+ ["PREM23","AUSTIN 3:16","stone-cold-steve-austin","entrance-stone-cold-steve-austin"],
+ ["PREM24","THE TIME IS NOW","john-cena","entrance-john-cena"],
+ ["PREM25","THIS IS MY BRUTALITY","rhea-ripley","entrance-rhea-ripley"],
+ ["PREM26","WATCH ME LIV","liv-morgan","entrance-liv-morgan"],
+ ["PREM27","THE MAN","becky-lynch","entrance-becky-lynch"],
+ ["PREM28","ALL HAIL THE QUEEN","charlotte-flair","entrance-charlotte-flair"],
+ ["PREM29","IT'S TIFFY TIME","tiffany-stratton","entrance-tiffany-stratton"],
+ ["PREM30","TOKYO SHOCK","iyo-sky","entrance-iyo-sky"],
+ ["PREM31","THE GODDESS","alexa-bliss","entrance-alexa-bliss"],
+ ["PREM32","IT'S TIME TO ROCK AND ROLL","trish-stratus","entrance-trish-stratus"]
+];
+
 const SPECIFIC=[
 ["PREM33","ROMAN'S SPEAR","roman-reigns"],["PREM34","CROSS RHODES","cody-rhodes"],["PREM35","GTS","cm-punk"],["PREM36","CURB STOMP","seth-rollins"],["PREM37","RKO","randy-orton"],["PREM38","HELLUVA KICK","sami-zayn"],["PREM39","STONE COLD STUNNER","stone-cold-steve-austin"],["PREM40","ATTITUDE ADJUSTMENT","john-cena"],["PREM41","RIPTIDE","rhea-ripley"],["PREM42","OBLIVION","liv-morgan"],["PREM43","DIS-ARM-HER","becky-lynch"],["PREM44","FIGURE 8","charlotte-flair"],["PREM45","PRETTIEST MOONSAULT EVER","tiffany-stratton"],["PREM46","OVER THE MOONSAULT","iyo-sky"],["PREM47","SISTER ABIGAIL","alexa-bliss"],["PREM48","STRATUSFACTION","trish-stratus"],
 ["PREM49","SUPERMAN PUNCH","roman-reigns"],["PREM50","GUILLOTINE","roman-reigns"],["PREM51","DRIVE-BY","roman-reigns"],["PREM52","CODY CUTTER","cody-rhodes"],["PREM53","DISASTER KICK","cody-rhodes"],["PREM54","BIONIC ELBOW","cody-rhodes"],["PREM55","ANACONDA VISE","cm-punk"],["PREM56","RUNNING HIGH KNEE","cm-punk"],["PREM57","DIVING ELBOW DROP","cm-punk"],["PREM58","PEDIGREE","seth-rollins"],["PREM59","PHOENIX SPLASH","seth-rollins"],["PREM60","FALCON ARROW","seth-rollins"],["PREM61","THE PUNT","randy-orton"],["PREM62","DRAPING DDT","randy-orton"],["PREM63","SCOOP POWERSLAM","randy-orton"],["PREM64","BLUE THUNDER BOMB","sami-zayn"],["PREM65","EXPLODER SUPLEX","sami-zayn"],["PREM66","YAKUZA KICK","sami-zayn"],["PREM67","LOU THESZ PRESS","stone-cold-steve-austin"],["PREM68","STOMP A MUDHOLE","stone-cold-steve-austin"],["PREM69","POINTED ELBOW DROP","stone-cold-steve-austin"],["PREM70","FIVE KNUCKLE SHUFFLE","john-cena"],["PREM71","STF","john-cena"],["PREM72","DIVING SHOULDER TACKLE","john-cena"],["PREM73","PRISM TRAP","rhea-ripley"],["PREM74","RAZOR'S EDGE","rhea-ripley"],["PREM75","MISSILE DROPKICK","rhea-ripley"],["PREM76","JERSEY CODEBREAKER","liv-morgan"],["PREM77","COMPLETE SHOT","liv-morgan"],["PREM78","BACKSTABBER","liv-morgan"],["PREM79","THE MAN SLAM","becky-lynch"],["PREM80","BEXPLODER","becky-lynch"],["PREM81","DIVING LEG DROP","becky-lynch"],["PREM82","NATURAL SELECTION","charlotte-flair"],["PREM83","CHARLOTTE'S MOONSAULT","charlotte-flair"],["PREM84","FLAIR CHOP","charlotte-flair"],["PREM85","ROLLING FIREMAN'S CARRY SLAM","tiffany-stratton"],["PREM86","HANDSPRING CORNER SPLASH","tiffany-stratton"],["PREM87","CARTWHEEL ALABAMA SLAM","tiffany-stratton"],["PREM88","SPANISH FLY","iyo-sky"],["PREM89","METEORA","iyo-sky"],["PREM90","ASAI MOONSAULT","iyo-sky"],["PREM91","TWISTED BLISS","alexa-bliss"],["PREM92","SNAP DDT","alexa-bliss"],["PREM93","INSULT TO INJURY","alexa-bliss"],["PREM94","STRATUSPHERE","trish-stratus"],["PREM95","CHICK KICK","trish-stratus"],["PREM96","AIR-CANADA","trish-stratus"]
@@ -169,6 +189,9 @@ export function buildPremiereGameplayCards(cards=[]){
  for(const card of source){const k=norm(card.name); if(!byName.has(k))byName.set(k,[]);byName.get(k).push(card);}
  const find=(name,sid=null)=>{const key=norm(aliases[norm(name)]??name);const pool=byName.get(key)??[];return pool.find(c=>sid&&c.superstarId===sid)||pool.find(c=>!c.superstarId)||pool[0]||null;};
  const out=[];
+ const sourceById=new Map(source.map(card=>[card.id,card]));
+ for(const [id,name,sid,sourceId] of ENTRANCES){const base=sourceById.get(sourceId);if(!base)continue;out.push({...structuredClone(base),id,name,kind:"entrance",setId:"premiere",superstarId:sid,cardCode:id,source:"premiere",fixedPrintingTier:"amethyst"});}
+ const genericEntrance=sourceById.get("entrance-amazing"); if(genericEntrance)out.push({...structuredClone(genericEntrance),id:"PREM241",name:"AMAZING ENTRANCE",kind:"entrance",setId:"premiere",superstarId:null,cardCode:"PREM241",source:"premiere",fixedPrintingTier:"amethyst",boosterEligible:false});
  for(const [id,name,sid] of SPECIFIC){let base=find(name,sid);if(!base&&id==="PREM35")base=find("Go to Sleep",sid);if(!base&&id==="PREM44")base=find("Figure-Eight Leglock",sid);if(!base&&id==="PREM58")base=find("Seth Rollins Pedigree",sid)||find("Pedigree");if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:sid,cardCode:id,source:"premiere"});}
  for(const [id,name,sid] of ACTIONS){const base=source.find(card=>card.kind==="action"&&card.superstarId===sid)||source.find(card=>card.id===`special-${sid}`);if(!base)continue;out.push({...structuredClone(base),id,name,kind:"action",setId:"premiere",superstarId:sid,cardCode:id,source:"premiere"});}
  for(const [id,name] of SHARED){const base=find(name);if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:null,cardCode:id,source:"premiere"});}
