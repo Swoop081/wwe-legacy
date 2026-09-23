@@ -147,6 +147,23 @@ PREM237 TOP-ROPE SPLASH
 PREM238 TORNADO DDT
 PREM239 VERTICAL SUPLEX
 PREM240 WRISTLOCK`.split("\n").map(line=>{const [id,...p]=line.split(" ");return [id,p.join(" ")];});
+
+const UNIVERSAL_ACTIONS=[
+ {id:"PREM242",name:"ARGUE WITH THE REFEREE",kind:"action",rulesText:"Reaction — after an opponent's Move connects, reduce that Move's damage. Base −2 / Emerald −3 / Sapphire −4 / Ruby −5 / Amethyst −6.",effects:[{type:"reduceIncomingMoveDamage",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
+ {id:"PREM243",name:"CAUGHT 'EM",kind:"counter",defensiveOnly:true,cost:0,damage:0,counterState:"diving-aerial",counterStates:["diving-aerial"],rulesText:"Counter a Diving Move.",effects:[]},
+ {id:"PREM244",name:"C'MON",kind:"action",rulesText:"Your next Move this turn deals bonus damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusNextMoveDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
+ {id:"PREM245",name:"DISTRACT THE REFEREE",kind:"action",rulesText:"Your next illegal Move this turn cannot be countered.",effects:[{type:"nextIllegalMoveUncounterable"}]},
+ {id:"PREM246",name:"FACE TO FACE",kind:"action",rulesText:"Both Superstars' next Move deals bonus damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusBothNextMoveDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
+ {id:"PREM247",name:"FIGHT FOREVER",kind:"action",oneUse:true,rulesText:"Once per match, when a Move would reduce your Superstar to 0 HP, survive instead. Base 1 / Emerald 2 / Sapphire 3 / Ruby 4 / Amethyst 5 HP.",effects:[{type:"surviveLethalMove",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
+ {id:"PREM248",name:"GENERAL MANAGER ADAM PEARCE",kind:"action",rulesText:"Reset both players' Momentum to 0.",effects:[{type:"resetBothMomentum"}]},
+ {id:"PREM249",name:"GENERAL MANAGER NICK ALDIS",kind:"action",oneUse:true,rulesText:"Once per match, when the match would end, restart it. Both Superstars return with the printed restart HP and 0 Momentum.",effects:[{type:"restartMatch",restartHpByPrinting:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5},resetBothMomentum:true}]},
+ {id:"PREM250",name:"GOT ALL OF IT",kind:"action",rulesText:"Reaction — after your Move connects, that Move deals bonus damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusConnectedMoveDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
+ {id:"PREM251",name:"LET'S GO",kind:"action",rulesText:"Gain Adrenaline. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"gainAdrenaline",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
+ {id:"PREM252",name:"RESPECT",kind:"action",rulesText:"Both Superstars recover HP. Base +2 / Emerald +3 / Sapphire +4 / Ruby +5 / Amethyst +6.",effects:[{type:"healBoth",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
+ {id:"PREM253",name:"STRETCH IT OUT",kind:"action",rulesText:"Recover permanent Submission damage. Base 2 / Emerald 3 / Sapphire 4 / Ruby 5 / Amethyst 6.",effects:[{type:"recoverPermanentSubmissionDamage",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
+ {id:"PREM254",name:"THAT WAS THREE",kind:"action",rulesText:"After your opponent kicks out of your pin attempt, gain Adrenaline. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"gainAdrenalineAfterOpponentKickout",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]}
+].map(card=>({setId:"premiere",cardCode:card.id,source:"premiere",superstarId:null,cost:card.cost??0,damage:card.damage??0,requirements:{},printingStats:{base:{cost:card.cost??0,damage:card.damage??0},emerald:{cost:card.cost??0,damage:card.damage??0},sapphire:{cost:card.cost??0,damage:card.damage??0},ruby:{cost:card.cost??0,damage:card.damage??0},amethyst:{cost:card.cost??0,damage:card.damage??0}},...card}));
+
 export function buildPremiereGameplayCards(cards=[]){
  const source=[...cards], byName=new Map();
  for(const card of source){const k=norm(card.name); if(!byName.has(k))byName.set(k,[]);byName.get(k).push(card);}
@@ -155,5 +172,6 @@ export function buildPremiereGameplayCards(cards=[]){
  for(const [id,name,sid] of SPECIFIC){let base=find(name,sid);if(!base&&id==="PREM35")base=find("Go to Sleep",sid);if(!base&&id==="PREM44")base=find("Figure-Eight Leglock",sid);if(!base&&id==="PREM58")base=find("Seth Rollins Pedigree",sid)||find("Pedigree");if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:sid,cardCode:id,source:"premiere"});}
  for(const [id,name,sid] of ACTIONS){const base=source.find(card=>card.kind==="action"&&card.superstarId===sid)||source.find(card=>card.id===`special-${sid}`);if(!base)continue;out.push({...structuredClone(base),id,name,kind:"action",setId:"premiere",superstarId:sid,cardCode:id,source:"premiere"});}
  for(const [id,name] of SHARED){const base=find(name);if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:null,cardCode:id,source:"premiere"});}
+ out.push(...UNIVERSAL_ACTIONS);
  return out;
 }
