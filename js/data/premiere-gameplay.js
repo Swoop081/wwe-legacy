@@ -11,6 +11,7 @@ const aliases=Object.freeze({
   "stomp a mudhole":"stomp a mudhole",
   "air canada":"air canada",
   "flat of the foot":"flat of foot",
+ "PREM145":{id:"PREM145",name:"ENZIGURI",kind:"move",setId:"premiere",cost:5,damage:8,requirements:{strike:2},moveType:"strike",method:"strike",superstarId:null,rarity:2,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"leg-extended",cardCode:"PREM145",source:"premiere"},
  "PREM144":{id:"PREM144",name:"ELECTRIC CHAIR DROP",kind:"move",setId:"premiere",cost:5,damage:8,requirements:{strength:2},moveType:"grapple",method:"strength",superstarId:null,rarity:2,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"front-control",cardCode:"PREM144",source:"premiere"},
  "PREM141":{id:"PREM141",name:"DROP-DOWN UPPERCUT",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:2,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"arm-extended",cardCode:"PREM141",source:"premiere"},
  "PREM138":{id:"PREM138",name:"DOUBLE CLOTHESLINE",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:1,rulesText:"Both Superstars take 5 damage and are grounded. May only Counter Clothesline-family Moves.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:5,effects:[],countersMoveFamily:"clothesline",cardCode:"PREM138",source:"premiere"},
