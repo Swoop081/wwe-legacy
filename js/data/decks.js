@@ -6022,6 +6022,15 @@ for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
  if(deckIds[sid].length!==60)throw new Error(`Premiere authenticity deck length failed for ${sid}: ${deckIds[sid].length}`);
 }
 
+const RELAUNCH_ALLOWED_NONSET=new Set(["once-too-often","shoulder-up","fire-up","game-plan","no-sell","jawbreaker","dodge","duck","sidestep","standing-switch","rollover-counter","block","arm-drag","chain-wrestling","up-and-over","knees-up","catch-the-foot","grab-the-ropes","backflip-counter","got-all-of-it","crowd-support","knee-to-the-gut"]);
+for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
+ const ids=deckIds[sid]??[];
+ if(ids.length!==60)throw new Error(`${sid} relaunch deck is ${ids.length}, expected 60`);
+ for(const id of ids){
+   if(id.startsWith("momentum-")||RELAUNCH_ALLOWED_NONSET.has(id)||/^PREM\d+$/.test(id)||/^MITB0[3-7]$/.test(id))continue;
+   throw new Error(`${sid} relaunch deck leaked retired card ${id}`);
+ }
+}
 export const ONCE_TOO_OFTEN_ID="once-too-often";
 const onceTooOftenReplacementPriority=["crowd-support","fire-up","game-plan","got-all-of-it","punch"];
 for(const ids of Object.values(deckIds)){if(!Array.isArray(ids)||ids.includes(ONCE_TOO_OFTEN_ID))continue;let replaceAt=-1;for(const id of onceTooOftenReplacementPriority){const i=ids.lastIndexOf(id);if(i>=5){replaceAt=i;break;}}if(replaceAt<5)replaceAt=ids.findIndex((id,i)=>i>=5&&!id.startsWith("momentum-"));if(replaceAt>=5)ids[replaceAt]=ONCE_TOO_OFTEN_ID;}
