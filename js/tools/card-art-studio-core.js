@@ -47,13 +47,13 @@ if(typeof STUDIO_SETS!=="undefined")for(const item of STUDIO_SETS){if(!SETS[item
 
 const $=s=>document.querySelector(s);
 let canvas=$("#card-canvas"),ctx=canvas.getContext("2d");
-const state={studioMode:"normal",art:null,artIsProjectAsset:false,animatedFile:null,animatedExtension:null,animatedLinkedUrl:"",artZoom:1,artX:0,artY:0,setLogos:new Map(),setBackgrounds:new Map(),pointerMap:new Map(),dragPointerId:null,dragLast:null,lastPinchDistance:null,activeLayoutKey:"card",renderPlateOnly:false,layouts:{card:{zoom:1,x:0,y:0},headshot:{zoom:1,x:0,y:0}}};
+const state={studioMode:"normal",art:null,artIsProjectAsset:false,artWhiteGlow:false,animatedFile:null,animatedExtension:null,animatedLinkedUrl:"",artZoom:1,artX:0,artY:0,setLogos:new Map(),setBackgrounds:new Map(),pointerMap:new Map(),dragPointerId:null,dragLast:null,lastPinchDistance:null,activeLayoutKey:"card",renderPlateOnly:false,layouts:{card:{zoom:1,x:0,y:0},headshot:{zoom:1,x:0,y:0}}};
 const SET_BACKGROUND_ASSETS=Object.freeze({"premiere":"assets/images/premiere-background.jpg"});
 const LINKED_ANIMATION_STORAGE_KEY="wweLegacyAnimatedCardLinks.v1";
 function linkedAnimationMap(){try{const raw=localStorage.getItem(LINKED_ANIMATION_STORAGE_KEY);if(!raw)return {};const parsed=JSON.parse(raw);return parsed&&typeof parsed==="object"&&!Array.isArray(parsed)?parsed:{};}catch{return {};}}
 function savedLinkedAnimation(card=currentCard()){if(!card?.id)return "";return String(linkedAnimationMap()[card.id]||"").trim();}
 function saveLinkedAnimation(card,url){if(!card?.id)return false;try{const map=linkedAnimationMap(),value=String(url||"").trim();if(value)map[card.id]=value;else delete map[card.id];localStorage.setItem(LINKED_ANIMATION_STORAGE_KEY,JSON.stringify(map));return true;}catch{return false;}}
-const BUILD_VERSION="1.1.220";
+const BUILD_VERSION="1.1.221";
 function assetUrl(path){
   if(/^https?:\/\//i.test(String(path||""))) return String(path);
   const url=new URL(`../${path}`,document.location.href);
@@ -189,15 +189,25 @@ function drawArt(){
   if(!state.art)return;
   const w=canvas.width,h=canvas.height,im=state.art,ref=referenceSize(),iw=im.naturalWidth||im.width,ih=im.naturalHeight||im.height;
   const base=Math.max(w/iw,h/ih),k=base*state.artZoom,dw=iw*k,dh=ih*k,x=(w-dw)/2+state.artX*(w/ref.w),y=(h-dh)/2+state.artY*(h/ref.h);
-  const card=currentCard();
+  const card=currentCard(),drawArtwork=()=>{
+    if(!state.artWhiteGlow){ctx.drawImage(im,x,y,dw,dh);return;}
+    ctx.save();
+    ctx.shadowColor="rgba(255,255,255,.98)";
+    ctx.shadowBlur=18*scale();
+    ctx.shadowOffsetX=0;
+    ctx.shadowOffsetY=0;
+    ctx.drawImage(im,x,y,dw,dh);
+    ctx.restore();
+    ctx.drawImage(im,x,y,dw,dh);
+  };
   // v1.1.30 — Merch art is a continuous full-face layer. The plaque is drawn
   // over it later, while plate-only exports clear the plaque footprint to true
   // alpha. Never expose a solid set-colour strip behind or around the plaque.
   if(card?.kind==="merch"){
-    ctx.drawImage(im,x,y,dw,dh);
+    drawArtwork();
     return;
   }
-  ctx.drawImage(im,x,y,dw,dh);
+  drawArtwork();
 }
 function drawImageContain(im,{cx,cy,maxW,maxH}){if(!im)return;const iw=im.naturalWidth||im.width,ih=im.naturalHeight||im.height,k=Math.min(maxW/iw,maxH/ih),dw=iw*k,dh=ih*k;ctx.drawImage(im,cx-dw/2,cy-dh/2,dw,dh);}
 const LOGO_VISIBLE_BOUNDS_CACHE=new WeakMap();
@@ -427,5 +437,5 @@ $("#export-target")?.addEventListener("change",()=>{saveLayout(state.activeLayou
 $("#front-format")?.addEventListener("change",()=>{const layered=isLayeredFormat();$("#preview-mode").disabled=!layered;$("#export-webp").textContent=layered?"Export Base Plate":"Export Finished Front";$("#share-card").textContent=layered?"Save / Share Base Plate":"Save / Share Finished Front";state.renderPlateOnly=previewPlateOnly();updateSummary();draw();status(layered?"Base Plate selected. Export uses the exact canonical -base-plate filename from the asset manifest.":"Finished Front selected. Export uses the exact canonical readable card filename.",true);});
 $("#preview-mode")?.addEventListener("change",()=>{state.renderPlateOnly=previewPlateOnly();draw();});
 $("#printing-tier-preview")?.addEventListener("change",()=>{draw();status(`${PRINTING_TIER_FRAMES[selectedPrintingTier()].label} physical printing frame preview selected. Base Plate exports remain tier-neutral; Finished Front exports include this frame.`,true);});
-$("#set-select").addEventListener("change",()=>{refreshSuperstarFilter();refreshCardList();});$("#type-select").addEventListener("change",refreshCardList);$("#superstar-select").addEventListener("change",()=>{refreshSuperstarLibrarySummary();refreshCardList();});$("#superstar-focus").addEventListener("change",refreshCardList);$("#card-search").addEventListener("input",refreshCardList);$("#card-select").addEventListener("change",prepareSelectedCard);$("#art-file").addEventListener("change",e=>fileToImage(e.target.files?.[0]));$("#animated-art-file")?.addEventListener("change",e=>animatedFileSelected(e.target.files?.[0]));$("#load-animated-url")?.addEventListener("click",()=>animatedUrlSelected($("#animated-art-url")?.value));$("#animated-art-url")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();animatedUrlSelected(e.currentTarget.value);}});$("#export-animated-art")?.addEventListener("click",exportAnimatedArtwork);$("#remove-linked-animation")?.addEventListener("click",removeLinkedAnimation);$("#load-art-url").addEventListener("click",()=>urlToImage($("#art-url").value));$("#art-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();urlToImage(e.currentTarget.value);}});$("#use-current-art").addEventListener("click",useCurrentArt);$("#clear-art").addEventListener("click",()=>{state.art=null;state.artIsProjectAsset=false;draw();urlStatus("");status("Artwork cleared.");});$("#reset-layout").addEventListener("click",resetLayout);$("#art-x-minus").addEventListener("click",()=>nudgeArtwork("x",-1));$("#art-x-plus").addEventListener("click",()=>nudgeArtwork("x",1));$("#art-y-minus").addEventListener("click",()=>nudgeArtwork("y",-1));$("#art-y-plus").addEventListener("click",()=>nudgeArtwork("y",1));$("#output-size").addEventListener("change",setCanvasSize);$("#quality").addEventListener("input",updateOutputs);$("#export-webp").addEventListener("click",exportWebp);$("#share-card")?.addEventListener("click",shareCard);[["#art-zoom",v=>state.artZoom=Number(v)/100],["#art-x",v=>state.artX=Number(v)],["#art-y",v=>state.artY=Number(v)]].forEach(([sel,set])=>$(sel).addEventListener("input",e=>{set(e.target.value);saveLayout();updateOutputs();draw();}));wireCanvasEvents();
+$("#set-select").addEventListener("change",()=>{refreshSuperstarFilter();refreshCardList();});$("#type-select").addEventListener("change",refreshCardList);$("#superstar-select").addEventListener("change",()=>{refreshSuperstarLibrarySummary();refreshCardList();});$("#superstar-focus").addEventListener("change",refreshCardList);$("#card-search").addEventListener("input",refreshCardList);$("#card-select").addEventListener("change",prepareSelectedCard);$("#art-file").addEventListener("change",e=>fileToImage(e.target.files?.[0]));$("#animated-art-file")?.addEventListener("change",e=>animatedFileSelected(e.target.files?.[0]));$("#load-animated-url")?.addEventListener("click",()=>animatedUrlSelected($("#animated-art-url")?.value));$("#animated-art-url")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();animatedUrlSelected(e.currentTarget.value);}});$("#export-animated-art")?.addEventListener("click",exportAnimatedArtwork);$("#remove-linked-animation")?.addEventListener("click",removeLinkedAnimation);$("#load-art-url").addEventListener("click",()=>urlToImage($("#art-url").value));$("#art-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();urlToImage(e.currentTarget.value);}});$("#use-current-art").addEventListener("click",useCurrentArt);$("#clear-art").addEventListener("click",()=>{state.art=null;state.artIsProjectAsset=false;draw();urlStatus("");status("Artwork cleared.");});$("#art-white-glow")?.addEventListener("change",e=>{state.artWhiteGlow=!!e.currentTarget.checked;draw();status(state.artWhiteGlow?"White artwork glow enabled. It will be included in Base Plate exports.":"White artwork glow disabled.");});$("#reset-layout").addEventListener("click",resetLayout);$("#art-x-minus").addEventListener("click",()=>nudgeArtwork("x",-1));$("#art-x-plus").addEventListener("click",()=>nudgeArtwork("x",1));$("#art-y-minus").addEventListener("click",()=>nudgeArtwork("y",-1));$("#art-y-plus").addEventListener("click",()=>nudgeArtwork("y",1));$("#output-size").addEventListener("change",setCanvasSize);$("#quality").addEventListener("input",updateOutputs);$("#export-webp").addEventListener("click",exportWebp);$("#share-card")?.addEventListener("click",shareCard);[["#art-zoom",v=>state.artZoom=Number(v)/100],["#art-x",v=>state.artX=Number(v)],["#art-y",v=>state.artY=Number(v)]].forEach(([sel,set])=>$(sel).addEventListener("input",e=>{set(e.target.value);saveLayout();updateOutputs();draw();}));wireCanvasEvents();
 try{setStudioMode("normal");$("#export-webp").textContent=isLayeredFormat()?"Export Base Plate":"Export Finished Front";$("#share-card").textContent=isLayeredFormat()?"Save / Share Base Plate":"Save / Share Finished Front";refreshSetFilter();refreshSuperstarFilter();refreshCardList();updateOutputs();preloadSetLogos();preloadSetBackgrounds();window.WWE_LEGACY_CARD_ART_STUDIO_READY=true;}catch(error){console.error("Card Art Studio failed to initialise",error);status(`Studio failed to initialise: ${error?.message||error}`,false);}
