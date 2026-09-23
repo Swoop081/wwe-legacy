@@ -1,3 +1,4 @@
+import { superstars } from "./superstars.js?v=1.1.223";
 // Premiere relaunch gameplay bridge.
 // Reuses the already-audited production gameplay definition for the same move/action,
 // but gives the relaunch card its canonical PREM identity. This preserves approved
@@ -240,20 +241,49 @@ PREM238 TORNADO DDT
 PREM239 VERTICAL SUPLEX
 PREM240 WRISTLOCK`.split("\n").map(line=>{const [id,...p]=line.split(" ");return [id,p.join(" ")];});
 
+const PREMIERE_SUPERSTARS=[
+ ["PREM01","roman-reigns"],["PREM02","cody-rhodes"],["PREM03","cm-punk"],["PREM04","seth-rollins"],
+ ["PREM05","randy-orton"],["PREM06","sami-zayn"],["PREM07","stone-cold-steve-austin"],["PREM08","john-cena"],
+ ["PREM09","rhea-ripley"],["PREM10","liv-morgan"],["PREM11","becky-lynch"],["PREM12","charlotte-flair"],
+ ["PREM13","tiffany-stratton"],["PREM14","iyo-sky"],["PREM15","alexa-bliss"],["PREM16","trish-stratus"]
+];
+
+const PREMIERE_MERCH=[
+ ["PREM255","ROMAN REIGNS T-SHIRT","roman-reigns"],["PREM256","CODY RHODES T-SHIRT","cody-rhodes"],
+ ["PREM257","CM PUNK T-SHIRT","cm-punk"],["PREM258","SETH ROLLINS T-SHIRT","seth-rollins"],
+ ["PREM259","RANDY ORTON T-SHIRT","randy-orton"],["PREM260","SAMI ZAYN T-SHIRT","sami-zayn"],
+ ["PREM261","STONE COLD T-SHIRT","stone-cold-steve-austin"],["PREM262","JOHN CENA T-SHIRT","john-cena"],
+ ["PREM263","RHEA RIPLEY T-SHIRT","rhea-ripley"],["PREM264","LIV MORGAN T-SHIRT","liv-morgan"],
+ ["PREM265","BECKY LYNCH T-SHIRT","becky-lynch"],["PREM266","CHARLOTTE FLAIR T-SHIRT","charlotte-flair"],
+ ["PREM267","TIFFANY STRATTON T-SHIRT","tiffany-stratton"],["PREM268","IYO SKY T-SHIRT","iyo-sky"],
+ ["PREM269","ALEXA BLISS T-SHIRT","alexa-bliss"],["PREM270","TRISH STRATUS T-SHIRT","trish-stratus"]
+].map(([id,name,superstarId])=>({
+ id,name,kind:"merch",setId:"premiere",cardCode:id,source:"premiere",superstarId,rarity:3,
+ boosterOnly:true,boosterEligible:true,deckEligible:false,consumable:true,
+ rulesText:"Booster-only consumable. Boost this Superstar's primary Momentum for a limited number of matches.",
+ effects:[{type:"boostPrimaryMomentumConsumable",printingStats:{
+  base:{primaryMomentum:1,adrenaline:0,matches:1},
+  emerald:{primaryMomentum:1,adrenaline:1,matches:2},
+  sapphire:{primaryMomentum:2,adrenaline:0,matches:3},
+  ruby:{primaryMomentum:2,adrenaline:1,matches:4},
+  amethyst:{primaryMomentum:3,adrenaline:0,matches:5}
+ }}]
+}));
+
 const UNIVERSAL_ACTIONS=[
  {id:"PREM242",name:"ARGUE WITH THE REFEREE",kind:"action",rarity:3,rulesText:"Your opponent\'s next damaging Move deals reduced damage. Base −2 / Emerald −3 / Sapphire −4 / Ruby −5 / Amethyst −6.",effects:[{type:"reduceNextOpponentMoveDamage",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
  {id:"PREM243",name:"CAUGHT 'EM",kind:"counter",rarity:2,defensiveOnly:true,cost:0,damage:0,counterState:"diving-aerial",counterStates:["diving-aerial"],rulesText:"Counter a Diving/Aerial Move. On a successful Counter, your next damaging Move gets +2 Damage.",effects:[{type:"bonusNextDamagingMove",amount:2}]},
  {id:"PREM244",name:"C'MON",kind:"action",rarity:3,rulesText:"Your next Move this turn deals bonus damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusNextMoveDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
  {id:"PREM245",name:"DISTRACT THE REFEREE",kind:"action",rarity:3,rulesText:"Your next illegal Move this turn cannot be countered.",effects:[{type:"nextIllegalMoveUncounterable"}]},
- {id:"PREM246",name:"FACE TO FACE",kind:"action",rulesText:"Both Superstars' next Move deals bonus damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusBothNextMoveDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
- {id:"PREM247",name:"FIGHT FOREVER",kind:"action",oneUse:true,rulesText:"Once per match, when a Move would reduce your Superstar to 0 HP, survive instead. Base 1 / Emerald 2 / Sapphire 3 / Ruby 4 / Amethyst 5 HP.",effects:[{type:"surviveLethalMove",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
- {id:"PREM248",name:"GENERAL MANAGER ADAM PEARCE",kind:"action",rulesText:"Reset both players' Momentum to 0.",effects:[{type:"resetBothMomentum"}]},
- {id:"PREM249",name:"GENERAL MANAGER NICK ALDIS",kind:"action",oneUse:true,rulesText:"Once per match, when the match would end, restart it. Both Superstars return with the printed restart HP and 0 Momentum.",effects:[{type:"restartMatch",restartHpByPrinting:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5},resetBothMomentum:true}]},
- {id:"PREM250",name:"GOT ALL OF IT",kind:"action",rulesText:"Reaction — after your Move connects, that Move deals bonus damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusConnectedMoveDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
- {id:"PREM251",name:"LET'S GO",kind:"action",rulesText:"Gain Adrenaline. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"gainAdrenaline",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
- {id:"PREM252",name:"RESPECT",kind:"action",rulesText:"Both Superstars recover HP. Base +2 / Emerald +3 / Sapphire +4 / Ruby +5 / Amethyst +6.",effects:[{type:"healBoth",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
- {id:"PREM253",name:"STRETCH IT OUT",kind:"action",rulesText:"Recover permanent Submission damage. Base 2 / Emerald 3 / Sapphire 4 / Ruby 5 / Amethyst 6.",effects:[{type:"recoverPermanentSubmissionDamage",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
- {id:"PREM254",name:"THAT WAS THREE",kind:"action",rulesText:"After your opponent kicks out of your pin attempt, gain Adrenaline. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"gainAdrenalineAfterOpponentKickout",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]}
+ {id:"PREM246",name:"FACE TO FACE",kind:"action",rarity:3,rulesText:"Both Superstars' next damaging Move gets bonus Damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusBothNextDamagingMove",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
+ {id:"PREM247",name:"FIGHT FOREVER",kind:"action",rarity:3,rulesText:"Both Superstars regain Health. Base +2 / Emerald +4 / Sapphire +6 / Ruby +8 / Amethyst +10.",effects:[{type:"healBoth",printingAmounts:{base:2,emerald:4,sapphire:6,ruby:8,amethyst:10}}]},
+ {id:"PREM248",name:"GENERAL MANAGER ADAM PEARCE",kind:"action",rarity:3,cost:10,rulesText:"Reset both players' Momentum to 0.",effects:[{type:"resetBothMomentum"}]},
+ {id:"PREM249",name:"GENERAL MANAGER NICK ALDIS",kind:"action",rarity:3,cost:10,oneUse:true,rulesText:"Once per match, when the match would end, restart it. Both Superstars return with the approved restart Health and 0 Momentum.",effects:[{type:"restartMatch",restartHpByPrinting:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5},resetBothMomentum:true}]},
+ {id:"PREM250",name:"GOT ALL OF IT",kind:"action",rarity:3,cost:5,rulesText:"Your next damaging Move gets bonus Damage. Base +2 / Emerald +4 / Sapphire +6 / Ruby +8 / Amethyst +10.",effects:[{type:"bonusNextDamagingMove",printingAmounts:{base:2,emerald:4,sapphire:6,ruby:8,amethyst:10}}]},
+ {id:"PREM251",name:"LET'S GO",kind:"action",rarity:3,cost:0,rulesText:"Gain Momentum immediately. Base +2 / Emerald +4 / Sapphire +6 / Ruby +8 / Amethyst +10.",effects:[{type:"gainMomentum",printingAmounts:{base:2,emerald:4,sapphire:6,ruby:8,amethyst:10}}]},
+ {id:"PREM252",name:"RESPECT",kind:"action",rarity:3,cost:6,rulesText:"Both Superstars regain Health. Base +2 / Emerald +4 / Sapphire +6 / Ruby +8 / Amethyst +10.",effects:[{type:"healBoth",printingAmounts:{base:2,emerald:4,sapphire:6,ruby:8,amethyst:10}}]},
+ {id:"PREM253",name:"STRETCH IT OUT",kind:"action",rarity:3,cost:4,rulesText:"Choose a body part with persistent damage and remove damage from it. Base 1 / Emerald 2 / Sapphire 3 / Ruby 4 / Amethyst 5.",effects:[{type:"recoverSelectedPersistentBodyDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
+ {id:"PREM254",name:"THAT WAS THREE",kind:"action",rarity:3,rulesText:"When a Move reduces you to 0 Health or below, kick out and continue the match. The Move's damage, persistent damage and other effects remain.",effects:[{type:"kickoutAfterLethalMove",retainDamage:true,retainEffects:true}]}
 ].map(card=>({setId:"premiere",cardCode:card.id,source:"premiere",superstarId:null,cost:card.cost??0,damage:card.damage??0,requirements:{},printingStats:{base:{cost:card.cost??0,damage:card.damage??0},emerald:{cost:card.cost??0,damage:card.damage??0},sapphire:{cost:card.cost??0,damage:card.damage??0},ruby:{cost:card.cost??0,damage:card.damage??0},amethyst:{cost:card.cost??0,damage:card.damage??0}},...card}));
 
 export function buildPremiereGameplayCards(cards=[]){
@@ -262,6 +292,11 @@ export function buildPremiereGameplayCards(cards=[]){
  const find=(name,sid=null)=>{const key=norm(aliases[norm(name)]??name);const pool=byName.get(key)??[];return pool.find(c=>sid&&c.superstarId===sid)||pool.find(c=>!c.superstarId)||pool[0]||null;};
  const out=[];
  const sourceById=new Map(source.map(card=>[card.id,card]));
+ for(const [id,sid] of PREMIERE_SUPERSTARS){
+  const star=Object.values(superstars).find(item=>item.id===sid);
+  if(!star)continue;
+  out.push({id,name:star.name,kind:"superstar",setId:"premiere",cardCode:id,source:"premiere",superstarId:sid,rarity:4,fixedPrintingTier:"amethyst",hp:star.hp,methodLimits:structuredClone(star.methodLimits??{}),starterMomentum:structuredClone(star.starterMomentum??{}),ability:structuredClone(star.ability??null),abilityText:star.ability?.text??"",rulesText:star.ability?.text??""});
+ }
  for(const [id,name,sid,sourceId] of ENTRANCES){const base=sourceById.get(sourceId);if(!base)continue;out.push({...structuredClone(base),id,name,kind:"entrance",setId:"premiere",superstarId:sid,cardCode:id,source:"premiere",fixedPrintingTier:"amethyst"});}
  const genericEntrance=sourceById.get("entrance-amazing"); if(genericEntrance)out.push({...structuredClone(genericEntrance),id:"PREM241",name:"AMAZING ENTRANCE",kind:"entrance",setId:"premiere",superstarId:null,cardCode:"PREM241",source:"premiere",rarity:4,fixedPrintingTier:"amethyst",boosterEligible:false});
  const exactLegacySourceIds=Object.freeze({"PREM33":"roman-reigns-spear","PREM35":"cm-punk-g-t-s","PREM44":"charlotte-flair-figure-eight-leglock","PREM56":"cm-punk-corner-running-knee","PREM58":"pedigree","PREM61":"randy-orton-punt-kick","PREM64":"sami-zayn-blue-thunder-bomb","PREM67":"stone-cold-steve-austin-lou-thesz-press","PREM68":"stone-cold-steve-austin-mudhole-stomps","PREM69":"stone-cold-steve-austin-pointed-elbow-drop","PREM70":"john-cena-five-knuckle-shuffle","PREM71":"john-cena-stf","PREM73":"rhea-ripley-prism-trap","PREM74":"razor-s-edge","PREM76":"liv-morgan-jersey-codebreaker","PREM81":"becky-lynch-diving-leg-drop","PREM82":"charlotte-flair-natural-selection","PREM83":"charlotte-flair-moonsault","PREM84":"flair-chop","PREM86":"tiffany-stratton-handspring-back-elbow","PREM88":"spanish-fly","PREM90":"asai-moonsault","PREM94":"trish-stratus-stratusphere","PREM95":"trish-stratus-chick-kick","PREM96":"trish-stratus-air-canada"});
@@ -286,5 +321,6 @@ export function buildPremiereGameplayCards(cards=[]){
  for(const [id,name,sid] of ACTIONS){const base=source.find(card=>card.kind==="action"&&card.superstarId===sid)||source.find(card=>card.id===`special-${sid}`);if(!base)continue;out.push({...structuredClone(base),id,name,kind:"action",setId:"premiere",superstarId:sid,cardCode:id,source:"premiere"});}
  for(const [id,name] of SHARED){const base=find(name);if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:null,cardCode:id,source:"premiere"});}
  out.push(...UNIVERSAL_ACTIONS);
+ out.push(...PREMIERE_MERCH);
  return out;
 }
