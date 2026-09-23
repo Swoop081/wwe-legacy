@@ -22,8 +22,8 @@ export const canonicalImageKeyForCard=card=>{
   if(card.kind==="action") return card.superstarId ? `${name}-action-${card.superstarId}` : `${name}-action`;
   return card.superstarId ? `${name}-${card.superstarId}` : name;
 };
-export const canonicalCardImagePath=card=>{if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}.webp`:null;};
-export const canonicalBasePlatePath=card=>{if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}-base-plate.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}-base-plate.webp`:null;};
+export const canonicalCardImagePath=card=>{if(/^PREM(?:0[1-9]|1[0-6])$/.test(String(card?.id)))return `assets/cards/art/premiere/${String(card.id).toLowerCase()}.webp`;if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}.webp`:null;};
+export const canonicalBasePlatePath=card=>{if(/^PREM(?:0[1-9]|1[0-6])$/.test(String(card?.id)))return `assets/cards/art/premiere/${String(card.id).toLowerCase()}-base-plate.webp`;if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}-base-plate.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}-base-plate.webp`:null;};
 export const canonicalSuperstarPath=(id,type="superstar")=>`${ROOT}/${id}-${type}.webp`;
 
 export const superstarArtwork=Object.freeze(Object.fromEntries(starIds.map(id=>[id,assetUrl(canonicalSuperstarPath(id,"superstar"))])));
