@@ -10,7 +10,9 @@ const aliases=Object.freeze({
   "the punt":"punt kick",
   "stomp a mudhole":"stomp a mudhole",
   "air canada":"air canada",
-  "flat of the foot":"flat of foot"
+  "flat of the foot":"flat of foot",
+ "PREM97":{id:"PREM97",name:"ACKNOWLEDGE ME",kind:"action",setId:"premiere",cost:0,rarity:4,superstarId:"roman-reigns",maxCopies:1,rulesText:"Roman Reigns-exclusive Action. Once per match while Roman has Control: gain +1 Adrenaline. Your next Roman Trademark this Control sequence cannot be Countered.",special:{type:"premiereRomanAcknowledge",adrenaline:1,protectTrademark:true},oncePerMatch:true,cardCode:"PREM97",source:"premiere"},
+ "PREM100":{id:"PREM100",name:"THE ARCHITECT",kind:"action",setId:"premiere",cost:0,rarity:4,superstarId:"seth-rollins",maxCopies:1,rulesText:"Seth Rollins-exclusive Action. Once per match while Seth has Control: draw 2 pages. The next Move you play this Control sequence costs 2 less.",special:{type:"premiereSethArchitect",draw:2,discountNextMove:2},oncePerMatch:true,cardCode:"PREM100",source:"premiere"}
 });
 
 const ENTRANCES=[
