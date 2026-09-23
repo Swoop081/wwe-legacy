@@ -5952,6 +5952,34 @@ deckIds["aj-styles"] = cloneRoadmapDeck("rob-van-dam","aj-styles",["aj-styles-pe
 replaceDeckCard("aj-styles","fire-up","aj-styles-house-that-aj-styles-built",1);
 replaceDeckCard("aj-styles","momentum-agility","momentum-strength",1);
 
+// Premiere relaunch: preserve each Superstar's audited 60-page structure, but
+// replace every move that has a canonical Premiere equivalent with that PREM identity.
+// Momentum/support pages remain system cards; offensive pages now come from Premiere.
+const PREMIERE_RELAUNCH_SUPERSTARS=new Set(["roman-reigns","cody-rhodes","cm-punk","seth-rollins","randy-orton","sami-zayn","stone-cold-steve-austin","john-cena","rhea-ripley","liv-morgan","becky-lynch","charlotte-flair","tiffany-stratton","iyo-sky","alexa-bliss","trish-stratus"]);
+const relaunchNorm=s=>String(s??"").toLowerCase().replace(/[’‘]/g,"'").replace(/[^a-z0-9]+/g," ").trim();
+const premiereByName=new Map(allGameplayCards.filter(card=>/^PREM(?:3[3-9]|[4-9][0-9]|1[0-9]{2}|2[0-4][0-9])$/.test(card.id)).map(card=>[relaunchNorm(card.name),card.id]));
+const relaunchAliases=new Map([["go to sleep","gts"],["figure eight leglock","figure 8"],["figure eight leg lock","figure 8"],["punt kick","the punt"],["spear","roman's spear"]]);
+for(const sid of PREMIERE_RELAUNCH_SUPERSTARS){
+ const ids=deckIds[sid]??[];
+ deckIds[sid]=ids.map(id=>{
+   const card=byId.get(id); if(!card||card.kind!=="move")return id;
+   const own=card.superstarId&&card.superstarId!==sid; if(own)return id;
+   let key=relaunchNorm(card.name);
+   const alias=relaunchAliases.get(key); if(alias)key=relaunchNorm(alias);
+   const prem=premiereByName.get(key);
+   return prem??id;
+ });
+}
+// LA Knight uses his MITB signature package and the Premiere shared move library.
+if(deckIds["la-knight"]){
+ deckIds["la-knight"]=deckIds["la-knight"].map(id=>{
+   const card=byId.get(id); if(!card||card.kind!=="move"||card.superstarId)return id;
+   return premiereByName.get(relaunchNorm(card.name))??id;
+ });
+ const signatures=["MITB03","MITB04","MITB05","MITB06","MITB07"];
+ signatures.forEach((id,index)=>{const slot=24+(index*2);deckIds["la-knight"][slot]=id;if(slot+1<60)deckIds["la-knight"][slot+1]=id;});
+}
+
 export const ONCE_TOO_OFTEN_ID="once-too-often";
 const onceTooOftenReplacementPriority=["crowd-support","fire-up","game-plan","got-all-of-it","punch"];
 for(const ids of Object.values(deckIds)){if(!Array.isArray(ids)||ids.includes(ONCE_TOO_OFTEN_ID))continue;let replaceAt=-1;for(const id of onceTooOftenReplacementPriority){const i=ids.lastIndexOf(id);if(i>=5){replaceAt=i;break;}}if(replaceAt<5)replaceAt=ids.findIndex((id,i)=>i>=5&&!id.startsWith("momentum-"));if(replaceAt>=5)ids[replaceAt]=ONCE_TOO_OFTEN_ID;}
