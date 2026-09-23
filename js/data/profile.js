@@ -303,61 +303,39 @@ export function grantStoreSuperstarUnlockPackage(profile, sid, options = {}) {
   return grantSuperstarUnlockPackage(profile, sid, options);
 }
 
+export const PREMIERE_STARTER_MALES = Object.freeze(["roman-reigns","cody-rhodes","cm-punk","seth-rollins","randy-orton","sami-zayn","stone-cold-steve-austin","john-cena"]);
+export const PREMIERE_STARTER_FEMALES = Object.freeze(["rhea-ripley","liv-morgan","becky-lynch","charlotte-flair","tiffany-stratton","iyo-sky","alexa-bliss","trish-stratus"]);
+const PREMIERE_STARTER_IDS = Object.freeze([...PREMIERE_STARTER_MALES,...PREMIERE_STARTER_FEMALES]);
+
 export function createProfile(starterInput) {
   const starterIds = Array.isArray(starterInput) ? [...starterInput] : [starterInput];
-  const brandOrder = ["raw", "smackdown", "nxt"];
-  const validThreeBrandSelection = starterIds.length === brandOrder.length && starterIds.every((id, index) =>
-    STARTER_BRAND_CHOICES[brandOrder[index]].includes(id) && decks[id]?.length === 60
-  );
-  if (!validThreeBrandSelection) throw new Error("Choose one RAW, one SmackDown and one NXT starter Superstar");
+  const validPremierePair = starterIds.length === 2 &&
+    PREMIERE_STARTER_MALES.includes(starterIds[0]) &&
+    PREMIERE_STARTER_FEMALES.includes(starterIds[1]);
+  if (!validPremierePair) throw new Error("A new Legacy starts with one random male and one random female Premiere Superstar.");
   const starterId = starterIds[0];
   const p = {
-    version: PROFILE_VERSION,
-    starterId,
-    starterIds: [...starterIds],
-    universePoints: 0,
-    unlockedSuperstars: [],
-    favouriteSuperstars: [],
-    ownedCards: {},
-    savedDecks: {},
-    selectedEntrances: {},
-    deckNeedsCards: {},
-    deckAssistance: "ask",
-    boosterCredits: 0,
-    boosterCreditsBySet: blankSetCounters(),
-    packsOpened: 0,
-    packsOpenedBySet: blankSetCounters(),
-    packsSinceSuperstarUnlock: 0,
-    packsSinceSuperstarUnlockBySet: blankSetCounters(),
-    ladder: { activeRun: null, clears: 0, bestRung: 0, completionPackCredits: 0, completionPackCreditsBySet: blankSetCounters(), firstClearSuperstarPending: false },
-    kingOfTheRing: { activeRun: null, clears: 0, bestRound: 0, reigningKingId: null, reigningKingAt: null },
-    survivorSeries: { activeRun: null, clears: 0 },
-    dailySpin: { lastSpinAt: null, nextSpinAt: null, totalSpins: 0, lastReward: null },
-    ownedMerch: {},
-    activeMerchBySuperstar: {},
-    activeMerch: null,
-    ownedSuperstarVariants: {},
-    equippedSuperstarVariants: {},
-    championshipRoad: { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [] },
-    weeklyLiveEvents: { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [] },
-    liveEventTowers: { states: {}, totalClears: 0, completedKeys: [] },
-    career: null,
-    challenges: {},
-    seasons: { "season-1": defaultSeasonState() },
-    setProgress: defaultSetProgress(),
-    storePurchases: [],
-    pendingUnlockCelebrations: [],
-    onboarding: { complete: false, step: 0 },
-    welcomeSuperstar: { claimed: false, setId: null, superstarId: null, packType: null, cardIds: [] },
-    createdAt: new Date().toISOString()
+    version: PROFILE_VERSION, starterId, starterIds:[...starterIds], universePoints:0,
+    unlockedSuperstars:[...starterIds], favouriteSuperstars:[], ownedCards:{}, savedDecks:{}, selectedEntrances:{}, deckNeedsCards:{},
+    deckAssistance:"ask", boosterCredits:0, boosterCreditsBySet:blankSetCounters(), packsOpened:0, packsOpenedBySet:blankSetCounters(),
+    packsSinceSuperstarUnlock:0, packsSinceSuperstarUnlockBySet:blankSetCounters(),
+    ladder:{activeRun:null,clears:0,bestRung:0,completionPackCredits:0,completionPackCreditsBySet:blankSetCounters(),firstClearSuperstarPending:false},
+    kingOfTheRing:{activeRun:null,clears:0,bestRound:0,reigningKingId:null,reigningKingAt:null}, survivorSeries:{activeRun:null,clears:0},
+    dailySpin:{lastSpinAt:null,nextSpinAt:null,totalSpins:0,lastReward:null}, ownedMerch:{}, activeMerchBySuperstar:{}, activeMerch:null,
+    ownedSuperstarVariants:{}, equippedSuperstarVariants:{}, championshipRoad:{activeRun:null,clears:0,bestStage:0,championshipPackCredits:0,championshipPackCreditsBySet:blankSetCounters(),completedBy:[]},
+    weeklyLiveEvents:{weekKey:null,eventId:null,activeRun:null,clearedThisWeek:false,totalClears:0,bestStage:0,completedWeeks:[]},
+    liveEventTowers:{states:{},totalClears:0,completedKeys:[]}, career:null, challenges:{}, seasons:{"season-1":defaultSeasonState()},
+    setProgress:defaultSetProgress(), storePurchases:[], pendingUnlockCelebrations:[], onboarding:{complete:false,step:0},
+    welcomeSuperstar:{claimed:true,setId:"premiere",superstarId:null,packType:"premiere-starter",cardIds:[]}, createdAt:new Date().toISOString()
   };
-  // Every new Legacy begins with a reusable baseline Entrance plus enough of
-  // every Method Momentum colour to build freely without booster dependence.
-  addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { tier: DEFAULT_STARTER_TIER, amount: 1 });
-  for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
-    addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES, tier: DEFAULT_STARTER_TIER });
-  }
-  for (const sid of starterIds) grantInitialStarterPackage(p, sid, { celebrate: false });
+  addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { tier:DEFAULT_STARTER_TIER, amount:1 });
+  for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) addOwnedCard(p,id,{amount:STARTING_MOMENTUM_COPIES,tier:DEFAULT_STARTER_TIER});
+  starterIds.forEach((sid,index)=>{
+    const premiereCardId=`PREM${String(index===0 ? PREMIERE_STARTER_MALES.indexOf(sid)+1 : PREMIERE_STARTER_FEMALES.indexOf(sid)+9).padStart(2,"0")}`;
+    addOwnedCard(p,premiereCardId,{tier:DEFAULT_STARTER_TIER,amount:1});
+    p.deckNeedsCards[sid]=60;
+    p.welcomeSuperstar.cardIds.push(premiereCardId);
+  });
   ensureCareerState(p);
   return p;
 }
