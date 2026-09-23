@@ -10,7 +10,7 @@ export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
 export const MATCH_XP = { win: 5, loss: 0 };
 export const DAILY_CHALLENGE_XP = 10;
 export const WEEKLY_CHALLENGE_XP = 25;
-export const SEASON_1_COMPLETION_SUPERSTAR = "trish-stratus";
+export const SEASON_1_COMPLETION_SUPERSTAR = "la-knight";
 export const FEATURED_SET_IDS = ["raw-series-1", "smackdown-series-1", "nxt-series-1", "evolution-series-1", "summerslam-series-1", "golden-era-series-1", "new-generation-series-1", "attitude-era-series-1", "ruthless-aggression-series-1"];
 
 // Season 1 prestige chase: Trish Stratus — Stratusfaction Guaranteed is assembled
@@ -24,29 +24,30 @@ export const FEATURED_SET_IDS = ["raw-series-1", "smackdown-series-1", "nxt-seri
 // Merch remains in the universal one-Merch-per-booster pool and is collected
 // independently from the premium Amethyst Rewards chase.
 export const SEASON_1_CHASE_TIER_REWARDS = Object.freeze({
-  2:  { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
-  3:  { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  5:  { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  7:  { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
-  10: { cardId: "special-trish-stratus", name: "Stratusfaction Guaranteed", amount: 1, rewardType: "action", label: "AMETHYST ACTION", printingTier: "amethyst" },
-  11: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
-  13: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  15: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  17: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
-  21: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
-  23: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  25: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  27: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
-  31: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
-  33: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  35: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  37: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
-  41: { cardId: "trish-stratus-stratusphere", name: "Stratusphere", amount: 1, rewardType: "exclusive-move", label: "AMETHYST EXCLUSIVE MOVE", printingTier: "amethyst" },
-  43: { cardId: "trish-stratus-chick-kick", name: "Chick Kick", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  45: { cardId: "trish-stratus-air-canada", name: "Air Canada", amount: 1, rewardType: "signature", label: "AMETHYST SIGNATURE · TRADEMARK", printingTier: "amethyst" },
-  47: { cardId: "trish-stratus-stratusfaction", name: "Stratusfaction", amount: 1, rewardType: "finisher", label: "AMETHYST FINISHER", printingTier: "amethyst" },
-  48: { cardId: "entrance-trish-stratus", name: "Time to Rock & Roll", amount: 1, rewardType: "entrance", label: "AMETHYST ENTRANCE", printingTier: "amethyst" },
-  50: { cardId: "superstar-trish-stratus", name: "Trish Stratus — Stratusfaction Guaranteed", amount: 1, rewardType: "superstar", label: "AMETHYST SUPERSTAR", printingTier: "amethyst", superstarId: SEASON_1_COMPLETION_SUPERSTAR }
+  2: { cardId: "MITB05", name: "LA Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  3: { cardId: "MITB04", name: "The Megastar’s Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  5: { cardId: "MITB06", name: "Burning Hammer", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  7: { cardId: "MITB03", name: "Blunt Force Trauma", amount: 1, rewardType: "finisher", label: "LA KNIGHT · FINISHER", printingTier: "amethyst" },
+  10: { cardId: "MITB07", name: "Let Me Talk to Ya!", amount: 1, rewardType: "action", label: "LA KNIGHT · ACTION", printingTier: "amethyst" },
+  11: { cardId: "MITB05", name: "LA Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  13: { cardId: "MITB04", name: "The Megastar’s Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  15: { cardId: "MITB06", name: "Burning Hammer", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  17: { cardId: "MITB03", name: "Blunt Force Trauma", amount: 1, rewardType: "finisher", label: "LA KNIGHT · FINISHER", printingTier: "amethyst" },
+  21: { cardId: "MITB05", name: "LA Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  23: { cardId: "MITB04", name: "The Megastar’s Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  25: { cardId: "MITB06", name: "Burning Hammer", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  27: { cardId: "MITB03", name: "Blunt Force Trauma", amount: 1, rewardType: "finisher", label: "LA KNIGHT · FINISHER", printingTier: "amethyst" },
+  31: { cardId: "MITB05", name: "LA Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  33: { cardId: "MITB04", name: "The Megastar’s Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  35: { cardId: "MITB06", name: "Burning Hammer", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  37: { cardId: "MITB03", name: "Blunt Force Trauma", amount: 1, rewardType: "finisher", label: "LA KNIGHT · FINISHER", printingTier: "amethyst" },
+  41: { cardId: "MITB05", name: "LA Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  43: { cardId: "MITB04", name: "The Megastar’s Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  45: { cardId: "MITB06", name: "Burning Hammer", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
+  47: { cardId: "MITB03", name: "Blunt Force Trauma", amount: 1, rewardType: "finisher", label: "LA KNIGHT · FINISHER", printingTier: "amethyst" },
+  48: { cardId: "MITB02", name: "YEAH!!", amount: 1, rewardType: "entrance", label: "LA KNIGHT · ENTRANCE", printingTier: "amethyst" },
+  49: { cardId: "MITB08", name: "LA Knight T-Shirt", amount: 1, rewardType: "merch", label: "LA KNIGHT · MERCH", printingTier: "amethyst" },
+  50: { cardId: "MITB01", name: "LA Knight", amount: 1, rewardType: "superstar", label: "LA KNIGHT · SUPERSTAR", printingTier: "amethyst", superstarId: SEASON_1_COMPLETION_SUPERSTAR }
 });
 // Backwards-compatible export name for older internal tooling. Season 1 is no
 // longer the Final Boss road.
@@ -56,7 +57,7 @@ export const SEASON_1 = {
   id: SEASON_ID,
   number: 1,
   name: "Season 1",
-  subtitle: "Stratusfaction Guaranteed",
+  subtitle: "The Megastar",
   start: SEASON_START,
   end: SEASON_END,
   tierCount: SEASON_TIER_COUNT,
@@ -177,8 +178,6 @@ export function claimSeasonTier(profile, tier, now = new Date()) {
       // gifted, but the game immediately assembles the strongest owned version
       // of Trish's authored 60-page blueprint and equips her Ruby Entrance.
       grantSuperstarIdentityUnlockPackage(profile, reward.superstarId, { tier: reward.printingTier ?? "ruby", celebrate: false });
-      profile.selectedEntrances ??= {};
-      if ((profile.ownedCards?.["entrance-trish-stratus"]?.ruby ?? 0) > 0) profile.selectedEntrances[reward.superstarId] = "entrance-trish-stratus";
       profile.savedDecks ??= {};
       profile.savedDecks[reward.superstarId] = buildBestOwnedRecommendedDraft(profile, reward.superstarId);
       profile.deckNeedsCards ??= {};
