@@ -19837,6 +19837,7 @@ allGameplayCards.push(...buildPremiereGameplayCards(allGameplayCards));
   const sourceById=new Map(allGameplayCards.map(card=>[card.id,card]));
   const clone=(sourceId,id,name,extra={})=>{const base=sourceById.get(sourceId);if(!base)return null;return {...structuredClone(base),id,name,setId:"money-in-the-bank",superstarId:"la-knight",cardCode:id,source:"money-in-the-bank",...extra};};
   const mitb=[
+    clone("entrance-la-knight","MITB02","YEAH!!",{kind:"entrance",rarity:4,rulesText:"Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",preMatchMomentum:{strike:1},preMatchAdrenaline:1,delayedTurn5:false}),
     clone("la-knight-bft","MITB03","Blunt Force Trauma",{finisher:true,trademark:false}),
     clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true}),
     clone("diving-elbow-drop","MITB05","LA Elbow",{finisher:false,trademark:true}),
