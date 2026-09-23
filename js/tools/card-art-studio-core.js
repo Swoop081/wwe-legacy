@@ -400,8 +400,11 @@ async function prepareExport(){const card=currentCard();
     return nativeDraw(source,...args);
   };
   try{
+    // Render directly into the clean export canvas. Do not call resetCanvasSurface()
+    // here: that replaces the canvas object and previously left `clean` blank while
+    // the card was rendered into an unreferenced clone.
     canvas=clean;ctx=cleanCtx;
-    resetCanvasSurface();renderForExport();
+    renderForExport();
     await new Promise(requestAnimationFrame);
     try{cleanCtx.getImageData(0,0,1,1);}catch(e){throw new Error('Clean export canvas is still cross-origin after isolated rendering.');}
     if(skipped.length)console.warn('[WWE Legacy Card Studio] skipped unsafe export layers',skipped);
