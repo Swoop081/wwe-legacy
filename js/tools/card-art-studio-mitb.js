@@ -50,5 +50,20 @@
     }
   }
 
+  // MITB-specific optical adjustment: lift only the set logo without
+  // changing its size or horizontal placement. 36px is the 680x1000 reference.
+  const nativeDrawImage = ctx.drawImage.bind(ctx);
+  ctx.drawImage = function (source, ...args) {
+    const activeCard = currentCard();
+    const activeSet = activeCard?.setId || $("#set-select").value;
+    const mitbLogo = state.logos.get(SET_ID);
+    if (activeSet === SET_ID && mitbLogo && source === mitbLogo) {
+      const lift = canvas.height * 0.036;
+      if (args.length === 2 || args.length === 4) args[1] -= lift;
+      else if (args.length === 8) args[5] -= lift;
+    }
+    return nativeDrawImage(source, ...args);
+  };
+
   loadMoneyInTheBankPresentation();
 })();
