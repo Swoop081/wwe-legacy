@@ -53,7 +53,7 @@ const LINKED_ANIMATION_STORAGE_KEY="wweLegacyAnimatedCardLinks.v1";
 function linkedAnimationMap(){try{const raw=localStorage.getItem(LINKED_ANIMATION_STORAGE_KEY);if(!raw)return {};const parsed=JSON.parse(raw);return parsed&&typeof parsed==="object"&&!Array.isArray(parsed)?parsed:{};}catch{return {};}}
 function savedLinkedAnimation(card=currentCard()){if(!card?.id)return "";return String(linkedAnimationMap()[card.id]||"").trim();}
 function saveLinkedAnimation(card,url){if(!card?.id)return false;try{const map=linkedAnimationMap(),value=String(url||"").trim();if(value)map[card.id]=value;else delete map[card.id];localStorage.setItem(LINKED_ANIMATION_STORAGE_KEY,JSON.stringify(map));return true;}catch{return false;}}
-const BUILD_VERSION="1.1.219";
+const BUILD_VERSION="1.1.220";
 function assetUrl(path){
   if(/^https?:\/\//i.test(String(path||""))) return String(path);
   const url=new URL(`../${path}`,document.location.href);
@@ -221,7 +221,7 @@ delete EXPORT_SAFE_SET_LOGOS["golden-era-series-1"];
 
 const CARD_STUDIO_SET_LOGO_OVERRIDES={};
 const SET_LOGO_SAFE_PROFILES={
-  "premiere":{maxW:.3525,maxH:.1275},
+  "premiere":{maxW:.459,maxH:.189},
   "nxt-series-1":{maxW:.235,maxH:.105},
   "smackdown-series-1":{maxW:.255,maxH:.10},
   "ruthless-aggression-series-1":{maxW:.285,maxH:.10},
