@@ -11,6 +11,7 @@ const aliases=Object.freeze({
   "stomp a mudhole":"stomp a mudhole",
   "air canada":"air canada",
   "flat of the foot":"flat of foot",
+ "PREM160":{id:"PREM160",name:"GROUNDED PUNCHES",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:1,rulesText:"Grounded opponent only.",groundOpponent:false,groundedOnly:true,stun:0,selfDamage:0,effects:[],counterState:"arm-extended",cardCode:"PREM160",source:"premiere"},
  "PREM159":{id:"PREM159",name:"GROUNDED ELBOWS",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:1,rulesText:"Grounded opponent only.",groundOpponent:false,groundedOnly:true,stun:0,selfDamage:0,effects:[],counterState:"arm-extended",cardCode:"PREM159",source:"premiere"},
  "PREM156":{id:"PREM156",name:"FRONT FACEBUSTER",kind:"move",setId:"premiere",cost:4,damage:6,requirements:{technical:1},moveType:"grapple",method:"technical",superstarId:null,rarity:1,rulesText:"Standing opponent only. Grounds opponent.",standingOnly:true,groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"front-control",cardCode:"PREM156",source:"premiere"},
  "PREM154":{id:"PREM154",name:"FOREARM STRIKE",kind:"move",setId:"premiere",cost:2,damage:4,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:1,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"arm-extended",cardCode:"PREM154",source:"premiere"},
