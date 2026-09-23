@@ -13,6 +13,7 @@ const CARD_IMAGE_KEY_OVERRIDES=Object.freeze({
   "springboard-crossbody":"springboard-crossbody-raw",
   "nxt1-springboard-crossbody":"springboard-crossbody-nxt"
 });
+const MITB_REWARD_IDS=new Set(["MITB01","MITB02","MITB03","MITB04","MITB05","MITB06","MITB07","MITB08"]);
 export const canonicalImageKeyForCard=card=>{
   if(!card)return null;
   if(CARD_IMAGE_KEY_OVERRIDES[card.id])return CARD_IMAGE_KEY_OVERRIDES[card.id];
@@ -21,8 +22,8 @@ export const canonicalImageKeyForCard=card=>{
   if(card.kind==="action") return card.superstarId ? `${name}-action-${card.superstarId}` : `${name}-action`;
   return card.superstarId ? `${name}-${card.superstarId}` : name;
 };
-export const canonicalCardImagePath=card=>{const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}.webp`:null;};
-export const canonicalBasePlatePath=card=>{const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}-base-plate.webp`:null;};
+export const canonicalCardImagePath=card=>{if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}.webp`:null;};
+export const canonicalBasePlatePath=card=>{if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}-base-plate.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}-base-plate.webp`:null;};
 export const canonicalSuperstarPath=(id,type="superstar")=>`${ROOT}/${id}-${type}.webp`;
 
 export const superstarArtwork=Object.freeze(Object.fromEntries(starIds.map(id=>[id,assetUrl(canonicalSuperstarPath(id,"superstar"))])));
