@@ -319,7 +319,7 @@ export function buildPremiereGameplayCards(cards=[]){
 });
  for(const [id,name,sid] of SPECIFIC){if(authoredSpecific[id]){out.push(structuredClone(authoredSpecific[id]));continue;}let base=exactLegacySourceIds[id]?sourceById.get(exactLegacySourceIds[id]):find(name,sid);if(!base&&id==="PREM58")base=find("Seth Rollins Pedigree",sid)||find("Pedigree");if(!base)continue;const cloned={...structuredClone(base),id,name,setId:"premiere",superstarId:sid,cardCode:id,source:"premiere"};if(id==="PREM71"){cloned.rarity=3;cloned.trademark=true;delete cloned.finisher;cloned.rulesText=cloned.rulesText.replace("John Cena-exclusive Finisher.","John Cena-exclusive Trademark.");}if(id==="PREM74"){cloned.rarity=3;cloned.trademark=true;cloned.rulesText="Rhea Ripley-exclusive Trademark.";cloned.groundOpponent=true;}out.push(cloned);}
  for(const [id,name,sid] of ACTIONS){const base=source.find(card=>card.kind==="action"&&card.superstarId===sid)||source.find(card=>card.id===`special-${sid}`);if(!base)continue;out.push({...structuredClone(base),id,name,kind:"action",setId:"premiere",superstarId:sid,cardCode:id,source:"premiere"});}
- for(const [id,name] of SHARED){const base=find(name);if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:null,cardCode:id,source:"premiere"});}
+ for(const [id,name] of SHARED){const authored=aliases[id]&&typeof aliases[id]==="object"?aliases[id]:null;const base=authored||find(name);if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:null,cardCode:id,source:"premiere"});}
  out.push(...UNIVERSAL_ACTIONS);
  out.push(...PREMIERE_MERCH);
  return out;
