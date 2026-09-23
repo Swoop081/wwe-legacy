@@ -2550,8 +2550,8 @@ function chooseStarter(starterIds) {
 function renderStarterSummary(starterIds = profile?.starterIds ?? []) {
   setChrome({ hideTopbar: true });
   const root = $("#game");
-  const ids = [...new Set((starterIds ?? []).filter(Boolean))].slice(0, 3);
-  const cards = ids.map(id => superstarPreviewCardMarkup(id, "starter-summary-superstar-card")).join("");
+  const ids = [...new Set((starterIds ?? []).filter(Boolean))].slice(0, 2);
+  const cards = ids.map(id => { const index = PREMIERE_STARTER_MALES.includes(id) ? PREMIERE_STARTER_MALES.indexOf(id)+1 : PREMIERE_STARTER_FEMALES.indexOf(id)+9; const cardId=`PREM${String(index).padStart(2,"0")}`; return `<img class="starter-summary-superstar-card" src="./assets/cards/art/premiere/${cardId.toLowerCase()}.webp?v=${BUILD_VERSION}" alt="${superstarById[id]?.name ?? "Premiere Superstar"}">`; }).join("");
   root.innerHTML = `<section class="starter-roster-summary" aria-label="Here’s Your Starting Roster"><h1>HERE’S YOUR STARTING ROSTER</h1><div class="starter-roster-summary-cards">${cards}</div><button id="starter-summary-continue" type="button" class="start-match">CONTINUE</button></section>`;
   $("#starter-summary-continue")?.addEventListener("click", () => { screen = "menu"; message = ""; renderMainMenu(); });
 }
