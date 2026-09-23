@@ -11,6 +11,7 @@ const aliases=Object.freeze({
   "stomp a mudhole":"stomp a mudhole",
   "air canada":"air canada",
   "flat of the foot":"flat of foot",
+ "PREM121":{id:"PREM121",name:"BODYSLAM",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strength:1},moveType:"grapple",method:"strength",superstarId:null,rarity:1,rulesText:"Ground opponent.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"body-elevated",cardCode:"PREM121",source:"premiere"},
  "PREM119":{id:"PREM119",name:"BELT SHOT",kind:"move",setId:"premiere",cost:4,damage:7,requirements:{},moveType:"strike",method:"strike",superstarId:null,rarity:2,rulesText:"On Connect: opponent loses 1 Adrenaline.",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[{type:"loseOpponentAdrenaline",amount:1}],counterState:"arm-extended",cardCode:"PREM119",source:"premiere"},
  "PREM117":{id:"PREM117",name:"BACK KICK",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:1,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"leg-extended",cardCode:"PREM117",source:"premiere"},
  "PREM97":{id:"PREM97",name:"ACKNOWLEDGE ME",kind:"action",setId:"premiere",cost:0,rarity:3,superstarId:"roman-reigns",maxCopies:1,rulesText:"Roman Reigns-exclusive Action. Gain +1 Adrenaline. Your next Roman Trademark this Control sequence cannot be Countered.",effect:{type:"premiereRomanAcknowledge",adrenaline:1,protectTrademark:true},cardCode:"PREM97",source:"premiere"},
