@@ -1,11 +1,11 @@
 {
-  "version": "1.1.215",
-  "releasedAt": "2026-09-17",
+  "version": "1.1.216",
+  "releasedAt": "2026-09-23",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.215",
+  "physicalIphoneSmoke": "pending-v1.1.216",
   "launchStatus": "released",
-  "name": "v1.1.215 — Tighter Top-Right Set Logo Inset"
+  "name": "v1.1.216 — Premiere Card Studio Reset"
 }
