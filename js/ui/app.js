@@ -7,7 +7,7 @@ import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisible
 import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=1.1.132";
 import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=1.1.132";
 import { isAnimatedCardEligible, canonicalAnimatedCardPaths } from "../data/animated-card-art.js?v=1.1.132";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.132";
+import { STARTER_CHOICES, PREMIERE_STARTER_MALES, PREMIERE_STARTER_FEMALES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, profilePersistenceStatus, setDeckAssistance, ownedCount } from "../data/profile.js?v=1.1.132";
 import { openBooster, grantBooster, grantRandomBoosters, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=1.1.132";
 import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=1.1.132";
 import { randomExhibitionOpponent } from "../data/matchmaking.js?v=1.1.132";
@@ -2559,38 +2559,34 @@ function renderStarterSummary(starterIds = profile?.starterIds ?? []) {
 function renderStarter() {
   setChrome({ hideTopbar: true });
   const root = $("#game");
-  const rounds = [
-    { key: "raw", label: "RAW", setId: "raw-series-1", ids: ["roman-reigns", "liv-morgan"] },
-    { key: "smackdown", label: "SmackDown", setId: "smackdown-series-1", ids: ["cm-punk", "rhea-ripley"] },
-    { key: "nxt", label: "NXT", setId: "nxt-series-1", ids: ["tony-dangelo", "kendal-grey"] }
-  ];
-  const round = rounds[Math.max(0, Math.min(rounds.length - 1, starterOnboardingStep))];
-  const choices = round.ids.map(id => superstarById[id]).filter(Boolean);
-  root.innerHTML = `<section class="starter-screen onboarding-screen champion-card-onboarding three-brand-starter-onboarding starter-brand-${round.key}">
-    <div class="onboarding-brand starter-brand-logo">${setLogoMarkup(round.setId, "starter-onboarding-set-logo")}</div>
-    <div class="starter-hero"><span class="eyebrow">STARTING ROSTER · ${starterOnboardingStep + 1}/3</span><h2>Choose Your ${round.label} Superstar</h2><p>Choose one Superstar from ${round.label}. You start with one RAW, one SmackDown and one NXT Superstar.</p></div>
-    <div class="starter-choice-grid champion-choice-grid">${choices.map(star => { const card = collectionCards.find(c => c.id === `superstar-${star.id}`); return `<button class="starter-choice champion-starter starter-superstar-card-choice" data-starter="${star.id}">
-      <div class="starter-superstar-card-face">${card ? collectibleCardMarkup(card,{tier:'normal',interactive:false,eagerArt:true,extraClass:'starter-onboarding-ccg'}) : superstarPreviewCardMarkup(star.id,'starter-onboarding-fallback')}</div>
-      <strong>${star.name}</strong><small>${star.nickname}</small>
-      <b class="choose-starter-cta">CHOOSE ${star.name.toUpperCase()}</b>
-    </button>`; }).join("")}</div>
-
+  const maleId = PREMIERE_STARTER_MALES[Math.floor(Math.random() * PREMIERE_STARTER_MALES.length)];
+  const femaleId = PREMIERE_STARTER_FEMALES[Math.floor(Math.random() * PREMIERE_STARTER_FEMALES.length)];
+  const maleIndex = PREMIERE_STARTER_MALES.indexOf(maleId) + 1;
+  const femaleIndex = PREMIERE_STARTER_FEMALES.indexOf(femaleId) + 9;
+  const maleCardId = `PREM${String(maleIndex).padStart(2,"0")}`;
+  const femaleCardId = `PREM${String(femaleIndex).padStart(2,"0")}`;
+  const pack = (label,cardId,id) => `<button type="button" class="starter-premiere-pack" data-premiere-pack="${id}">
+    <span class="starter-premiere-pack-kicker">PREMIERE</span><strong>${label}</strong>
+    <span class="starter-premiere-pack-count">1 CARD</span>
+    <img src="./assets/cards/art/premiere/${cardId.toLowerCase()}.webp?v=${BUILD_VERSION}" alt="" loading="eager">
+    <b>OPEN PACK</b>
+  </button>`;
+  root.innerHTML = `<section class="starter-screen premiere-starter-onboarding">
+    <div class="starter-hero"><span class="eyebrow">WELCOME TO WWE LEGACY</span><h2>OPEN YOUR PREMIERE PACKS</h2><p>Start with two Premiere Superstar cards: one random male and one random female.</p></div>
+    <div class="premiere-starter-packs">${pack("MALE SUPERSTAR",maleCardId,"male")}${pack("FEMALE SUPERSTAR",femaleCardId,"female")}</div>
+    <button id="premiere-starter-continue" type="button" class="start-match" hidden>START YOUR LEGACY</button>
   </section>`;
-  root.querySelectorAll("[data-starter]").forEach(btn => btn.addEventListener("click", () => {
-    starterOnboardingSelections[round.key] = btn.dataset.starter;
-    if (starterOnboardingStep < rounds.length - 1) {
-      starterOnboardingStep += 1;
-      renderStarter();
-      return;
-    }
-    chooseStarter([
-      starterOnboardingSelections.raw,
-      starterOnboardingSelections.smackdown,
-      starterOnboardingSelections.nxt
-    ]);
+  const opened = new Set();
+  root.querySelectorAll("[data-premiere-pack]").forEach(btn=>btn.addEventListener("click",()=>{
+    btn.classList.add("is-open");
+    btn.querySelector("b").textContent="REVEALED";
+    opened.add(btn.dataset.premierePack);
+    if(opened.size===2) $("#premiere-starter-continue").hidden=false;
   }));
+  $("#premiere-starter-continue")?.addEventListener("click",()=>{
+    chooseStarter([maleId,femaleId]);
+  });
 }
-
 
 function renderSetup() {
   setChrome();
