@@ -241,7 +241,7 @@ PREM239 VERTICAL SUPLEX
 PREM240 WRISTLOCK`.split("\n").map(line=>{const [id,...p]=line.split(" ");return [id,p.join(" ")];});
 
 const UNIVERSAL_ACTIONS=[
- {id:"PREM242",name:"ARGUE WITH THE REFEREE",kind:"action",rarity:3,rulesText:"Reaction — after an opponent's Move connects, reduce that Move's damage. Base −2 / Emerald −3 / Sapphire −4 / Ruby −5 / Amethyst −6.",effects:[{type:"reduceIncomingMoveDamage",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
+ {id:"PREM242",name:"ARGUE WITH THE REFEREE",kind:"action",rarity:3,rulesText:"Your opponent\'s next damaging Move deals reduced damage. Base −2 / Emerald −3 / Sapphire −4 / Ruby −5 / Amethyst −6.",effects:[{type:"reduceNextOpponentMoveDamage",printingAmounts:{base:2,emerald:3,sapphire:4,ruby:5,amethyst:6}}]},
  {id:"PREM243",name:"CAUGHT 'EM",kind:"counter",defensiveOnly:true,cost:0,damage:0,counterState:"diving-aerial",counterStates:["diving-aerial"],rulesText:"Counter a Diving Move.",effects:[]},
  {id:"PREM244",name:"C'MON",kind:"action",rulesText:"Your next Move this turn deals bonus damage. Base +1 / Emerald +2 / Sapphire +3 / Ruby +4 / Amethyst +5.",effects:[{type:"bonusNextMoveDamage",printingAmounts:{base:1,emerald:2,sapphire:3,ruby:4,amethyst:5}}]},
  {id:"PREM245",name:"DISTRACT THE REFEREE",kind:"action",rulesText:"Your next illegal Move this turn cannot be countered.",effects:[{type:"nextIllegalMoveUncounterable"}]},
