@@ -11,6 +11,7 @@ const aliases=Object.freeze({
   "stomp a mudhole":"stomp a mudhole",
   "air canada":"air canada",
   "flat of the foot":"flat of foot",
+ "PREM169":{id:"PREM169",name:"KNEELING SHOTGUN DROPKICK",kind:"move",setId:"premiere",cost:4,damage:7,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:2,rulesText:"Grounded opponent only.",groundOpponent:false,groundedOnly:true,stun:0,selfDamage:0,effects:[],counterState:"leg-extended",cardCode:"PREM169",source:"premiere"},
  "PREM167":{id:"PREM167",name:"KICK TO THE GUT",kind:"move",setId:"premiere",cost:3,damage:4,requirements:{strike:1},moveType:"strike",method:"strike",superstarId:null,rarity:1,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"leg-extended",cardCode:"PREM167",source:"premiere"},
  "PREM166":{id:"PREM166",name:"JUMPING DDT",kind:"move",setId:"premiere",cost:5,damage:8,requirements:{technical:2},moveType:"grapple",method:"technical",superstarId:null,rarity:2,rulesText:"Grounds opponent.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"front-control",cardCode:"PREM166",source:"premiere"},
  "PREM165":{id:"PREM165",name:"INVERTED SUPLEX",kind:"move",setId:"premiere",cost:5,damage:8,requirements:{strength:2},moveType:"grapple",method:"strength",superstarId:null,rarity:2,rulesText:"Grounds opponent.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"rear-control",cardCode:"PREM165",source:"premiere"},
