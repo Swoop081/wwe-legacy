@@ -5982,6 +5982,46 @@ if(deckIds["la-knight"]){
  signatures.forEach((id,index)=>{const slot=24+(index*2);deckIds["la-knight"][slot]=id;if(slot+1<60)deckIds["la-knight"][slot+1]=id;});
 }
 
+// v1.1.221 Premiere authenticity lock.
+// No retired offensive move identities may remain in any of the 17 relaunch decks.
+// Where an old deck used a move absent from Premiere, substitute a style-appropriate
+// canonical PREM move already in the 128-card shared pool.
+const PREM_SHARED_FALLBACKS=Object.freeze({
+ "roman-reigns":["PREM187","PREM206","PREM233","PREM120","PREM173","PREM196","PREM219","PREM183","PREM158"],
+ "cody-rhodes":["PREM141","PREM204","PREM217","PREM168","PREM195","PREM239","PREM133","PREM124","PREM227","PREM177","PREM229","PREM238"],
+ "cm-punk":["PREM187","PREM204","PREM153","PREM232","PREM239","PREM133","PREM124","PREM238","PREM227","PREM194"],
+ "seth-rollins":["PREM204","PREM153","PREM215","PREM238","PREM145","PREM227","PREM139","PREM155","PREM229","PREM194"],
+ "randy-orton":["PREM187","PREM217","PREM131","PREM146","PREM129","PREM203","PREM115","PREM229","PREM184","PREM193","PREM157","PREM143"],
+ "sami-zayn":["PREM187","PREM204","PREM220","PREM131","PREM230","PREM227","PREM129","PREM223","PREM177","PREM145","PREM133"],
+ "stone-cold-steve-austin":["PREM187","PREM167","PREM161","PREM168","PREM121","PREM114","PREM129","PREM118","PREM160","PREM219"],
+ "john-cena":["PREM206","PREM121","PREM187","PREM193","PREM158","PREM129","PREM115","PREM211","PREM230"],
+ "rhea-ripley":["PREM161","PREM121","PREM187","PREM226","PREM204","PREM129","PREM120","PREM118","PREM158","PREM144","PREM184"],
+ "liv-morgan":["PREM153","PREM187","PREM226","PREM198","PREM145","PREM194","PREM163","PREM129","PREM133","PREM204"],
+ "becky-lynch":["PREM187","PREM192","PREM204","PREM175","PREM146","PREM230","PREM158","PREM229","PREM157"],
+ "charlotte-flair":["PREM187","PREM128","PREM204","PREM131","PREM179","PREM120","PREM148","PREM133","PREM177","PREM218"],
+ "tiffany-stratton":["PREM204","PREM121","PREM223","PREM157","PREM230","PREM198","PREM139","PREM219","PREM177","PREM133"],
+ "iyo-sky":["PREM163","PREM153","PREM187","PREM204","PREM145","PREM133","PREM139","PREM158","PREM227","PREM177"],
+ "alexa-bliss":["PREM187","PREM204","PREM153","PREM168","PREM131","PREM179","PREM163","PREM133","PREM199","PREM194"],
+ "trish-stratus":["PREM204","PREM187","PREM153","PREM194","PREM129","PREM131","PREM179","PREM133","PREM165"],
+ "la-knight":["PREM187","PREM206","PREM188","PREM116","PREM129","PREM179","PREM217","PREM184","PREM131","PREM229"]
+});
+const SYSTEM_PAGE=id=>id.startsWith("momentum-")||["once-too-often","shoulder-up","fire-up","game-plan","no-sell","jawbreaker","dodge","duck","sidestep","standing-switch","rollover-counter","block","arm-drag","chain-wrestling","up-and-over","knees-up","catch-the-foot","grab-the-ropes","backflip-counter","got-all-of-it","crowd-support","knee-to-the-gut"].includes(id);
+for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
+ const pool=PREM_SHARED_FALLBACKS[sid]??["PREM187","PREM129","PREM230"];
+ let cursor=0;
+ deckIds[sid]=(deckIds[sid]??[]).map(id=>{
+   if(/^PREM\d+$/.test(id)||/^MITB0[3-7]$/.test(id)||id.startsWith("momentum-")||SYSTEM_PAGE(id))return id;
+   const card=byId.get(id);
+   if(card?.kind==="action"&&card.superstarId===sid){
+     if(sid==="la-knight")return "MITB07";
+     const action=allGameplayCards.find(x=>x.setId==="premiere"&&x.kind==="action"&&x.superstarId===sid); if(action)return action.id;
+   }
+   if(card?.kind==="move")return pool[(cursor++)%pool.length];
+   return id;
+ });
+ if(deckIds[sid].length!==60)throw new Error(`Premiere authenticity deck length failed for ${sid}: ${deckIds[sid].length}`);
+}
+
 export const ONCE_TOO_OFTEN_ID="once-too-often";
 const onceTooOftenReplacementPriority=["crowd-support","fire-up","game-plan","got-all-of-it","punch"];
 for(const ids of Object.values(deckIds)){if(!Array.isArray(ids)||ids.includes(ONCE_TOO_OFTEN_ID))continue;let replaceAt=-1;for(const id of onceTooOftenReplacementPriority){const i=ids.lastIndexOf(id);if(i>=5){replaceAt=i;break;}}if(replaceAt<5)replaceAt=ids.findIndex((id,i)=>i>=5&&!id.startsWith("momentum-"));if(replaceAt>=5)ids[replaceAt]=ONCE_TOO_OFTEN_ID;}
