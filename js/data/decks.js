@@ -5962,7 +5962,9 @@ const relaunchAliases=new Map([["go to sleep","gts"],["figure eight leglock","fi
 for(const sid of PREMIERE_RELAUNCH_SUPERSTARS){
  const ids=deckIds[sid]??[];
  deckIds[sid]=ids.map(id=>{
-   const card=byId.get(id); if(!card||card.kind!=="move")return id;
+   const card=byId.get(id); if(!card)return id;
+   if(card.kind==="action"&&card.superstarId===sid){const action=allGameplayCards.find(x=>x.setId==="premiere"&&x.kind==="action"&&x.superstarId===sid);return action?.id??id;}
+   if(card.kind!=="move")return id;
    const own=card.superstarId&&card.superstarId!==sid; if(own)return id;
    let key=relaunchNorm(card.name);
    const alias=relaunchAliases.get(key); if(alias)key=relaunchNorm(alias);
