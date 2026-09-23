@@ -1,9 +1,9 @@
-// WWE Legacy v1.1.220 — canonical player-facing runtime entry.
+// WWE Legacy v1.1.221 — canonical player-facing runtime entry.
 // Critical boot invariant: the application module loads FIRST. No static imports
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.220";
+const VERSION = "1.1.221";
 
 try {
   await import(`../ui/app.js?v=${VERSION}`);
