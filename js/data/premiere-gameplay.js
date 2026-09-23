@@ -11,6 +11,7 @@ const aliases=Object.freeze({
   "stomp a mudhole":"stomp a mudhole",
   "air canada":"air canada",
   "flat of the foot":"flat of foot",
+ "PREM208":{id:"PREM208",name:"SHOVE",kind:"move",setId:"premiere",cost:1,damage:1,requirements:{},moveType:"grapple",method:"strength",superstarId:null,rarity:1,rulesText:"",groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"torso-trapped",cardCode:"PREM208",source:"premiere"},
  "PREM207":{id:"PREM207",name:"SHOULDER THRUSTS",kind:"move",setId:"premiere",cost:3,damage:5,requirements:{strength:1},moveType:"strike",method:"strength",superstarId:null,rarity:1,rulesText:"Standing opponent only.",standingOnly:true,groundOpponent:false,groundedOnly:false,stun:0,selfDamage:0,effects:[],counterState:"torso-trapped",cardCode:"PREM207",source:"premiere"},
  "PREM204":{id:"PREM204",name:"SHOTGUN DROPKICK",kind:"move",setId:"premiere",cost:5,damage:8,requirements:{strike:2,agility:1},moveType:"strike",method:"strike",superstarId:null,rarity:2,rulesText:"Grounds opponent. Stun 1.",groundOpponent:true,groundedOnly:false,stun:1,selfDamage:0,effects:[],counterState:"leg-extended",cardCode:"PREM204",source:"premiere"},
  "PREM200":{id:"PREM200",name:"SENTON BOMB",kind:"move",setId:"premiere",cost:6,damage:10,requirements:{agility:2},moveType:"aerial",method:"agility",superstarId:null,rarity:2,rulesText:"Grounded opponent only.",groundOpponent:true,groundedOnly:true,stun:0,selfDamage:0,effects:[],counterState:"diving-aerial",cardCode:"PREM200",source:"premiere"},
