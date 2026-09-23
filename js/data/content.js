@@ -19831,6 +19831,20 @@ allGameplayCards.push(...FUTURE_ROADMAP_GAMEPLAY_CARDS, ...V1175_AUTHENTICITY_CA
 allGameplayCards.push(...AJ_STYLES_GAMEPLAY_CARDS);
 allGameplayCards.push(...BECKY_LYNCH_V11200_CARDS);
 allGameplayCards.push(...buildPremiereGameplayCards(allGameplayCards));
+// Money in the Bank LA Knight reward gameplay identities. Reuse the audited
+// LA Knight/Burning Hammer/Diving Elbow production behavior under canonical MITB IDs.
+{
+  const sourceById=new Map(allGameplayCards.map(card=>[card.id,card]));
+  const clone=(sourceId,id,name,extra={})=>{const base=sourceById.get(sourceId);if(!base)return null;return {...structuredClone(base),id,name,setId:"money-in-the-bank",superstarId:"la-knight",cardCode:id,source:"money-in-the-bank",...extra};};
+  const mitb=[
+    clone("la-knight-bft","MITB03","Blunt Force Trauma",{finisher:true,trademark:false}),
+    clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true}),
+    clone("diving-elbow-drop","MITB05","LA Elbow",{finisher:false,trademark:true}),
+    clone("burning-hammer","MITB06","Burning Hammer",{finisher:false,trademark:true}),
+    clone("special-la-knight","MITB07","Let Me Talk to Ya!",{kind:"action"})
+  ].filter(Boolean);
+  allGameplayCards.push(...mitb);
+}
 // than carried into a fresh-save economy.
 const RETIRED_REWARD_SET_IDS = new Set(["season-1-final-boss","parked-chyna","season-2-whos-next"]);
 for (let i=allGameplayCards.length-1;i>=0;i--) {
