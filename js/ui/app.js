@@ -63,7 +63,7 @@ let game = null;
 let profile = loadProfile();
 const bootPersistenceStatus = profilePersistenceStatus();
 let message = profile && bootPersistenceStatus.recovered ? "Local save recovered automatically from the last healthy copy." : "";
-let screen = "splash";
+let screen = profile ? "menu" : "starter";
 let playMenuPage = 1;
 let selection = { p1: profile?.starterId ?? "cm-punk", p2: profile?.starterId === "roman-reigns" ? "cm-punk" : "roman-reigns" };
 let starterOnboardingStep = 0;
