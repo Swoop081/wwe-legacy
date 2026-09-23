@@ -42,7 +42,7 @@ if (baseById.size !== base.length) {
 }
 const canonicalBase = base.filter(card => !String(card.id).startsWith("MITB"));
 if (CARD_NUMBER_MANIFEST.length !== canonicalBase.length) {
-  throw new Error(`Canonical card manifest has ${CARD_NUMBER_MANIFEST.length} entries for ${base.length} active cards.`);
+  throw new Error(`Canonical card manifest has ${CARD_NUMBER_MANIFEST.length} entries for ${canonicalBase.length} canonical active cards.`);
 }
 for (const card of canonicalBase) {
   const manifest = CARD_NUMBER_BY_ID[card.id];
