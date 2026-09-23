@@ -1,9 +1,9 @@
-// WWE Legacy v1.1.216 — canonical player-facing runtime entry.
+// WWE Legacy v1.1.217 — canonical player-facing runtime entry.
 // Critical boot invariant: the application module loads FIRST. No static imports
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.216";
+const VERSION = "1.1.217";
 
 try {
   await import(`../ui/app.js?v=${VERSION}`);
@@ -40,10 +40,6 @@ await loadClassicScript("../data/superstar-nameplates.js");
 try { globalThis.WWELegacyRenderCardFaces?.(document); }
 catch (error) { console.error("Initial WWE Legacy card-face repaint failed", error); }
 
-// Launch poster is presentation-only: no visible button/text. The app's existing
-// launch action remains authoritative, with its hit target expanded to the viewport.
-try { await import(`./splash-tap-anywhere.js?v=${VERSION}`); }
-catch (error) { console.error("Non-fatal launch splash interaction failed", error); }
 
 const enhancementModules = [
   "../shared/v1.1.66-featured-superstar-ability-audit.js",
