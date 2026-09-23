@@ -332,8 +332,12 @@ export function createProfile(starterInput) {
   for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) addOwnedCard(p,id,{amount:STARTING_MOMENTUM_COPIES,tier:DEFAULT_STARTER_TIER});
   starterIds.forEach((sid,index)=>{
     const premiereCardId=`PREM${String(index===0 ? PREMIERE_STARTER_MALES.indexOf(sid)+1 : PREMIERE_STARTER_FEMALES.indexOf(sid)+9).padStart(2,"0")}`;
+    const deck = freshNormalDeckBlueprint(sid);
+    if (deck.length !== 60) throw new Error(`${sid} does not have a complete 60-card starter deck.`);
+    ensureSavedRecommendedDeck(p, sid);
+    topUpNormalDeckOwnership(p, deck);
     addOwnedCard(p,premiereCardId,{tier:DEFAULT_STARTER_TIER,amount:1});
-    p.deckNeedsCards[sid]=60;
+    p.deckNeedsCards[sid]=0;
     p.welcomeSuperstar.cardIds.push(premiereCardId);
   });
   ensureCareerState(p);
