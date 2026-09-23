@@ -292,7 +292,7 @@
   });
 
   const core = document.createElement("script");
-  core.src = "../js/tools/card-art-studio-core.js?v=1.1.220-premiere-logo-180";
+  core.src = "../js/tools/card-art-studio-core.js?v=1.1.221-baseplate-export-fix";
   core.async = false;
   document.body.appendChild(core);
 })();
