@@ -354,7 +354,11 @@ export function createProfile(starterInput) {
     for (const id of authoredIds) needed.set(id, (needed.get(id) ?? 0) + 1);
     for (const [id, amount] of needed) {
       p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
-      p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, amount);
+      // Each starter is granted independently. Shared cards between the male
+      // and female decks therefore add their required copies; using Math.max()
+      // silently short-granted overlapping cards and made the saved 60-page
+      // decks impossible to own/edit in Deck Lab.
+      p.ownedCards[id].normal = (Number(p.ownedCards[id].normal) || 0) + amount;
     }
     addOwnedCard(p,premiereCardId,{tier:DEFAULT_STARTER_TIER,amount:1});
     p.selectedEntrances[sid] = "PREM241";
