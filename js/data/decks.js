@@ -3,7 +3,13 @@ import { allGameplayCards } from "./content.js?v=1.1.320";
 // WWE Legacy relaunch deck registry. Only the 17 active starter Superstars exist here.
 // Collectible card references are restricted to PREM01-PREM270 and MITB01-MITB08;
 // Momentum is a non-collectible system resource used by the approved starter decks.
-const byId = new Map(allGameplayCards.map(card => [card.id, card]));
+export const momentumCards = Object.freeze([
+  {id:"PREM271",name:"STRIKE MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM271",momentumType:"strike",rarity:1,boosterEligible:false},
+  {id:"PREM272",name:"STRENGTH MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM272",momentumType:"strength",rarity:1,boosterEligible:false},
+  {id:"PREM273",name:"TECHNICAL MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM273",momentumType:"technical",rarity:1,boosterEligible:false},
+  {id:"PREM274",name:"AGILITY MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM274",momentumType:"agility",rarity:1,boosterEligible:false}
+]);
+const byId = new Map([...allGameplayCards, ...momentumCards].map(card => [card.id, card]));
 
 export const deckIds = {
   "roman-reigns": [
