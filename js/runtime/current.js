@@ -3,7 +3,7 @@
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.304";
+const VERSION = "1.1.305";
 
 function showBootError(error, stage = "Application boot") {
   const detail = String(error?.stack || error?.message || error || "Unknown error");
@@ -71,7 +71,7 @@ const bootProbeModules = [
 
 let bootProbeFailed = false;
 try {
-  await import(`../ui/app.js?v=${VERSION}`);
+  await import(`../ui/app.js?v=${VERSION}&boot=${Date.now()}`);
   globalThis.__WWE_LEGACY_APP_BOOTED__ = true;
   if (globalThis.__WWE_LEGACY_BOOT_FALLBACK__) {
     clearTimeout(globalThis.__WWE_LEGACY_BOOT_FALLBACK__);
