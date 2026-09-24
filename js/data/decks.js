@@ -1062,8 +1062,8 @@ export const deckIds = {
   ]
 };
 
-const ACTIVE_CARD_ID = id => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(id) || /^MITB0[1-8]$/.test(id);
-const SYSTEM_PAGE_ID = id => /^momentum-(strength|strike|technical|agility)$/.test(id);
+const ACTIVE_CARD_ID = id => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|27[0-4])$/.test(id) || /^MITB0[1-8]$/.test(id);
+const SYSTEM_PAGE_ID = () => false;
 for (const [sid, ids] of Object.entries(deckIds)) {
   if (ids.length !== 60) throw new Error(`Starter deck ${sid} must contain exactly 60 pages; found ${ids.length}.`);
   const invalid = ids.filter(id => !ACTIVE_CARD_ID(id) && !SYSTEM_PAGE_ID(id));
