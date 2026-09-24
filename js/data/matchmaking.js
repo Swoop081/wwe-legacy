@@ -1,6 +1,6 @@
-import { superstars } from "./superstars.js?v=1.1.297";
-import { decks } from "./decks.js?v=1.1.297";
-import { PREMIERE_STARTER_MALES, PREMIERE_STARTER_FEMALES } from "./profile.js?v=1.1.297";
+import { superstars } from "./superstars.js?v=1.1.298";
+import { decks } from "./decks.js?v=1.1.298";
+import { PREMIERE_STARTER_MALES, PREMIERE_STARTER_FEMALES } from "./profile.js?v=1.1.298";
 
 const PREMIERE_EXHIBITION_ROSTER = new Set([...PREMIERE_STARTER_MALES, ...PREMIERE_STARTER_FEMALES, "la-knight"]);
 
