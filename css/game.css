@@ -11427,3 +11427,6 @@ body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continu
 
 /* v1.1.266 — Premiere set mark on every PREM card front, mirrored against left rarity-star inset. */
 .ccg-card.set-premiere .ccg-card-front .ccg-premiere-front-set-logo{position:absolute!important;top:4.5%!important;right:4.5%!important;width:19%!important;height:auto!important;max-height:14%!important;object-fit:contain!important;object-position:top right!important;z-index:76!important;display:block!important;pointer-events:none!important;filter:none!important}
+
+/* v1.1.267 — Premiere mark: larger and optically equal top/right border inset. */
+.ccg-card.set-premiere .ccg-card-front .ccg-premiere-front-set-logo{top:3.1%!important;right:4.5%!important;width:22.8%!important;max-height:16.8%!important}
