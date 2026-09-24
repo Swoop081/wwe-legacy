@@ -22,7 +22,7 @@ export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "n
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
 export const PROFILE_VERSION = 48;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
-export const STARTING_MOMENTUM_COPIES = 5;
+export const STARTING_MOMENTUM_COPIES = 12;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
@@ -328,15 +328,23 @@ export function createProfile(starterInput) {
     setProgress:defaultSetProgress(), storePurchases:[], pendingUnlockCelebrations:[], onboarding:{complete:false,step:0},
     welcomeSuperstar:{claimed:true,setId:"premiere",superstarId:null,packType:"premiere-starter",cardIds:[]}, createdAt:new Date().toISOString()
   };
-  addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { tier:DEFAULT_STARTER_TIER, amount:1 });
-  for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) addOwnedCard(p,id,{amount:STARTING_MOMENTUM_COPIES,tier:DEFAULT_STARTER_TIER});
+  // Premiere onboarding package: Amazing Entrance + 12 of every Momentum type,
+  // then the complete authored 60-card Base deck for BOTH starter Superstars.
+  // Momentum is a gameplay resource and is intentionally not constrained by the
+  // collectible five-copy-per-tier cap used by normal cards.
+  addOwnedCard(p, "PREM241", { tier:DEFAULT_STARTER_TIER, amount:1 });
+  p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID] = { normal:1, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+  for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+    p.ownedCards[id] = { normal:STARTING_MOMENTUM_COPIES, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+  }
   starterIds.forEach((sid,index)=>{
     const premiereCardId=`PREM${String(index===0 ? PREMIERE_STARTER_MALES.indexOf(sid)+1 : PREMIERE_STARTER_FEMALES.indexOf(sid)+9).padStart(2,"0")}`;
     const deck = freshNormalDeckBlueprint(sid);
-    if (deck.length !== 60) console.warn(`Premiere starter deck for ${sid} currently resolves to ${deck.length} cards; onboarding will continue and Deck Lab can surface the authored deck issue.`);
-    ensureSavedRecommendedDeck(p, sid);
+    if (deck.length !== 60) throw new Error(`Premiere starter deck for ${sid} must contain exactly 60 cards; found ${deck.length}.`);
+    p.savedDecks[sid] = deck.map(card => ({ id:card.id, tier:DEFAULT_STARTER_TIER }));
     topUpNormalDeckOwnership(p, deck);
     addOwnedCard(p,premiereCardId,{tier:DEFAULT_STARTER_TIER,amount:1});
+    p.selectedEntrances[sid] = "PREM241";
     p.deckNeedsCards[sid]=0;
     p.welcomeSuperstar.cardIds.push(premiereCardId);
   });
