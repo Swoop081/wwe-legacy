@@ -19856,30 +19856,5 @@ for (let i=allGameplayCards.length-1;i>=0;i--) {
   const id=String(allGameplayCards[i]?.id??"");
   if (!/^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(id) && !/^MITB0[2-7]$/.test(id)) allGameplayCards.splice(i,1);
 }
-export const linkedGameplayCards = [
-  {
-    "id": "linked-street-profits-revelation",
-    "artKey": "street-profits-revelation",
-    "name": "Revelation",
-    "kind": "move",
-    "setId": "raw-series-1",
-    "cost": 10,
-    "damage": 16,
-    "requirements": {},
-    "moveType": "grapple",
-    "method": null,
-    "superstarId": "montez-ford",
-    "rarity": 4,
-    "rulesText": "Linked Street Profits Finisher. Created only by Angelo Dawkins. No Method requirement. Grounds opponent. Not collectible.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "finisher": true,
-    "oneUse": true,
-    "linkedOnly": true,
-    "effects": [],
-    "counterState": "body-elevated"
-  }
-];
-linkedGameplayCards.forEach(enrichCounterState);
+export const linkedGameplayCards = [];
+
