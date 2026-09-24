@@ -5974,6 +5974,27 @@ for(const sid of PREMIERE_RELAUNCH_SUPERSTARS){
    return prem??id;
  });
 }
+
+// The legacy Trish blueprint uses pre-Premiere signature IDs whose names do not
+// resolve through byId above. Lock her approved Premiere signature package
+// explicitly before the authenticity pass so none can be replaced as retired IDs.
+if (deckIds["trish-stratus"]) {
+  const trishMap = new Map([
+    ["trish-stratus-stratusfaction","PREM48"],
+    ["trish-stratus-stratusphere","PREM94"],
+    ["trish-stratus-chick-kick","PREM95"],
+    ["trish-stratus-air-canada","PREM96"],
+    ["special-trish-stratus","PREM112"]
+  ]);
+  deckIds["trish-stratus"] = deckIds["trish-stratus"].map(id => trishMap.get(id) ?? id);
+  // The approved deck requires three copies of every Trademark and Finisher.
+  // The old blueprint contained only two AIR-CANADA slots.
+  const airCanadaCount = deckIds["trish-stratus"].filter(id => id === "PREM96").length;
+  if (airCanadaCount < 3) {
+    const replaceAt = deckIds["trish-stratus"].findIndex((id,index) => index > 35 && id === "PREM187");
+    if (replaceAt >= 0) deckIds["trish-stratus"][replaceAt] = "PREM96";
+  }
+}
 // LA Knight uses his MITB signature package and the Premiere shared move library.
 if(deckIds["la-knight"]){
  deckIds["la-knight"]=deckIds["la-knight"].map(id=>{
