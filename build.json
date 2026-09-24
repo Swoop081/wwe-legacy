@@ -1,11 +1,11 @@
 {
-  "version": "1.1.285",
+  "version": "1.1.287",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.285",
+  "physicalIphoneSmoke": "pending-v1.1.287",
   "launchStatus": "released",
-  "name": "v1.1.285 — Deck Lab Route Repair"
+  "name": "v1.1.287 — Premiere Starter Grant Repair"
 }
