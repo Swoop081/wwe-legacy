@@ -20,7 +20,7 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 51;
+export const PROFILE_VERSION = 52;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 12;
 
@@ -1323,6 +1323,33 @@ export function migrateProfile(old) {
         p.deckNeedsCards[sid] = recommendedOwnedMissingCount(p, sid);
       }
     }
+  }
+  // v52 final relaunch invariant. This MUST run after every historical migration:
+  // older migration code below the earlier scrub can otherwise remove/rewrite the
+  // two onboarding starters and their saved decks again.
+  const finalStarterPair = Array.isArray(p.starterIds)
+    ? p.starterIds.filter(id => PREMIERE_STARTER_IDS.includes(id) && authoredDeckIds[id]?.length === 60)
+    : [];
+  if (finalStarterPair.length === 2) {
+    p.unlockedSuperstars = [...new Set([...finalStarterPair, ...(p.unlockedSuperstars ?? []).filter(id => PREMIERE_STARTER_IDS.includes(id) || id === "la-knight")])];
+    const combinedNeeded = new Map();
+    for (const sid of finalStarterPair) {
+      const ids = authoredDeckIds[sid];
+      p.savedDecks[sid] = ids.map(id => ({ id, tier: DEFAULT_STARTER_TIER }));
+      p.deckNeedsCards[sid] = 0;
+      p.selectedEntrances[sid] = "PREM241";
+      for (const id of ids) combinedNeeded.set(id, (combinedNeeded.get(id) ?? 0) + 1);
+    }
+    for (const [id, amount] of combinedNeeded) {
+      p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+      p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, amount);
+    }
+    for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+      p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+      p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, STARTING_MOMENTUM_COPIES);
+    }
+    p.ownedCards["PREM241"] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+    p.ownedCards["PREM241"].normal = Math.max(Number(p.ownedCards["PREM241"].normal) || 0, 1);
   }
   refreshCareerAchievements(p);
   return p;
