@@ -20,7 +20,7 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 48;
+export const PROFILE_VERSION = 49;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 12;
 
@@ -761,6 +761,36 @@ export function migrateProfile(old) {
   p.savedDecks ??= {};
   p.selectedEntrances ??= {};
   p.deckNeedsCards ??= {};
+
+  // v49: repair Premiere onboarding saves created while the two starter decks
+  // were merged with Math.max() ownership. Rebuild BOTH selected starter decks
+  // from their exact authored 60 slots and grant every required Base copy.
+  // This is intentionally scoped to onboarding starterIds; later Superstar
+  // unlocks keep their normal progression rules.
+  const premiereStarterPair = Array.isArray(p.starterIds)
+    ? p.starterIds.filter(id => PREMIERE_STARTER_IDS.includes(id) && authoredDeckIds[id]?.length === 60)
+    : [];
+  if (sourceVersion < 49 && premiereStarterPair.length === 2) {
+    p.unlockedSuperstars = [...new Set([...p.unlockedSuperstars, ...premiereStarterPair])];
+    const combinedNeeded = new Map();
+    for (const sid of premiereStarterPair) {
+      const ids = authoredDeckIds[sid];
+      p.savedDecks[sid] = ids.map(id => ({ id, tier: DEFAULT_STARTER_TIER }));
+      p.deckNeedsCards[sid] = 0;
+      p.selectedEntrances[sid] = "PREM241";
+      for (const id of ids) combinedNeeded.set(id, (combinedNeeded.get(id) ?? 0) + 1);
+    }
+    for (const [id, amount] of combinedNeeded) {
+      p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+      p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, amount);
+    }
+    for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+      p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+      p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, STARTING_MOMENTUM_COPIES);
+    }
+    p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+    p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal = Math.max(Number(p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal) || 0, 1);
+  }
   p.seasons ??= {};
   p.survivorSeries ??= { activeRun: null, clears: 0 };
   p.dailySpin ??= { lastSpinAt: null, nextSpinAt: null, totalSpins: 0, lastReward: null };
