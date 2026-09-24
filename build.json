@@ -1,11 +1,11 @@
 {
-  "version": "1.1.244",
+  "version": "1.1.245",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.244",
+  "physicalIphoneSmoke": "pending-v1.1.245",
   "launchStatus": "released",
-  "name": "v1.1.244 — Premiere Starter Pack Opening Flow"
+  "name": "v1.1.245 — Premiere Starter Presentation Polish"
 }
