@@ -878,13 +878,15 @@ export const superstars = {
     "leadOffIds": [
       "momentum-strength",
       "momentum-strike",
-      "punch",
-      "shoulder-tackle",
-      "throat-thrust"
+      "PREM187",
+      "PREM206",
+      "PREM233"
     ],
     "signatures": [
-      "roman-reigns-superman-punch",
-      "roman-reigns-spear"
+      "PREM49",
+      "PREM50",
+      "PREM51",
+      "PREM33"
     ],
     "archetype": "reviewed-starter",
     "hp": 67,
