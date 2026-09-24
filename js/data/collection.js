@@ -67,10 +67,6 @@ export const collectionCardsBySet = {
   "money-in-the-bank": activeCards.filter(card => card.id.startsWith("MITB")).sort((a,b)=>Number(a.id.slice(4))-Number(b.id.slice(4)))
 };
 export const collectionCards = [...collectionCardsBySet.premiere, ...collectionCardsBySet["money-in-the-bank"]];
-export const setCollections = {
-  premiere: { ...sets.premiere, cardCount:270, superstarCount:collectionCardsBySet.premiere.filter(c=>c.kind==="superstar").length, rarityLabels },
-  "money-in-the-bank": { id:"money-in-the-bank", name:"Money in the Bank", displayName:"Money in the Bank", shortCode:"MITB", cardCount:8, superstarCount:1, rarityLabels }
-};
 export const setCollections = Object.fromEntries(
   Object.entries(collectionCardsBySet).map(([setId, list]) => [setId, {
     ...sets[setId],
