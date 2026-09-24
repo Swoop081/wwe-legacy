@@ -2450,13 +2450,13 @@ export const superstars = {
     },
     "ability": {
       "name": "The Megastar",
-      "text": "The first 2 times each match LA Knight connects with a Move dealing 7+ printed Damage, gain +1 Adrenaline and draw 1 page.",
+      "text": "The first 2 times each match LA Knight connects with a Move dealing 8+ printed Damage, gain +1 Adrenaline. If he had 4+ Adrenaline before the Move connected, also draw 1 page.",
       "trigger": {
         "type": "laKnightMegastar",
         "maxUses": 2,
-        "minPrintedDamage": 7,
+        "minPrintedDamage": 8,
         "adrenaline": 1,
-        "drawThreshold": 0,
+        "drawThreshold": 4,
         "draw": 1
       },
       "maxUses": 2
