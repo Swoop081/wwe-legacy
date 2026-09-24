@@ -18184,7 +18184,7 @@ export const allGameplayCards = [
   "superstarId": "batista",
   "rarity": 3,
   "trademark": true,
-  "rulesText": "Batista-exclusive Trademark. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them \u22125 percentage points to their kickout chance. On Connect: +1 persistent Arm damage.",
+  "rulesText": "Batista-exclusive Trademark. Grounds opponent. If the opponent is Amber or Red after this Connects, your immediate Pin gives them −5 percentage points to their kickout chance. On Connect: +1 persistent Arm damage.",
   "groundOpponent": true,
   "groundedOnly": false,
   "stun": 0,
@@ -19723,7 +19723,7 @@ export const allGameplayCards = [
   },
   {
     "id": "chelsea-green-missile-dropkick",
-    "name": "Chelsea\u2019s Missile Dropkick",
+    "name": "Chelsea’s Missile Dropkick",
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 9,
@@ -19746,7 +19746,7 @@ export const allGameplayCards = [
   },
   {
     "id": "chelsea-green-rough-ryder",
-    "name": "Chelsea\u2019s Rough Ryder",
+    "name": "Chelsea’s Rough Ryder",
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 10,
