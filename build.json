@@ -1,11 +1,11 @@
 {
-  "version": "1.1.249",
+  "version": "1.1.250",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.249",
+  "physicalIphoneSmoke": "pending-v1.1.250",
   "launchStatus": "released",
-  "name": "v1.1.249 — Premiere Artwork Layers"
+  "name": "v1.1.250 — Premiere Starter Artwork Fix"
 }
