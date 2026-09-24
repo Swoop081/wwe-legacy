@@ -5,7 +5,7 @@ import { FUTURE_ROADMAP_GAMEPLAY_CARDS } from "./future-roadmap-v1.1.74.js?v=1.1
 import { V1175_AUTHENTICITY_CARDS } from "./v1.1.75-recommended-deck-authenticity.js?v=1.1.132";
 import { AJ_STYLES_GAMEPLAY_CARDS } from "./aj-styles-v1.1.80.js?v=1.1.132";
 import { BECKY_LYNCH_V11200_CARDS } from "./becky-lynch-v1.1.200.js?v=1.1.200";
-import { buildPremiereGameplayCards } from "./premiere-gameplay.js?v=1.1.276";
+import { buildPremiereGameplayCards } from "./premiere-gameplay.js?v=1.1.300";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -19854,7 +19854,7 @@ finalizeCardIdentityPass(allGameplayCards);
 // Player-facing gameplay may expose PREM01–PREM270 and MITB02–MITB07 only; MITB01/08 are collection identities.
 for (let i=allGameplayCards.length-1;i>=0;i--) {
   const id=String(allGameplayCards[i]?.id??"");
-  if (!/^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(id) && !/^MITB0[2-7]$/.test(id)) allGameplayCards.splice(i,1);
+  if (!/^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(id) && !/^MITB0[2-7]$/.test(id) && !/^momentum-(strength|strike|technical|agility)$/.test(id)) allGameplayCards.splice(i,1);
 }
 export const linkedGameplayCards = [];
 
