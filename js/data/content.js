@@ -5,8 +5,15 @@ import { FUTURE_ROADMAP_GAMEPLAY_CARDS } from "./future-roadmap-v1.1.74.js?v=1.1
 import { V1175_AUTHENTICITY_CARDS } from "./v1.1.75-recommended-deck-authenticity.js?v=1.1.132";
 import { AJ_STYLES_GAMEPLAY_CARDS } from "./aj-styles-v1.1.80.js?v=1.1.132";
 import { BECKY_LYNCH_V11200_CARDS } from "./becky-lynch-v1.1.200.js?v=1.1.200";
-import { buildPremiereGameplayCards } from "./premiere-gameplay.js?v=1.1.301";
-export const allGameplayCards = [
+import { buildPremiereGameplayCards } from "./premiere-gameplay.js?v=1.1.302";
+const PREMIERE_MOMENTUM_CARDS = Object.freeze([
+  { id:"PREM271", cardCode:"PREM271", name:"Strength Momentum", kind:"momentum", setId:"premiere", rarity:1, method:"strength", amount:1, maxCopies:12, rulesText:"+1 permanent Strength Momentum.", source:"premiere", boosterEligible:false },
+  { id:"PREM272", cardCode:"PREM272", name:"Strike Momentum", kind:"momentum", setId:"premiere", rarity:1, method:"strike", amount:1, maxCopies:12, rulesText:"+1 permanent Strike Momentum.", source:"premiere", boosterEligible:false },
+  { id:"PREM273", cardCode:"PREM273", name:"Technical Momentum", kind:"momentum", setId:"premiere", rarity:1, method:"technical", amount:1, maxCopies:12, rulesText:"+1 permanent Technical Momentum.", source:"premiere", boosterEligible:false },
+  { id:"PREM274", cardCode:"PREM274", name:"Agility Momentum", kind:"momentum", setId:"premiere", rarity:1, method:"agility", amount:1, maxCopies:12, rulesText:"+1 permanent Agility Momentum.", source:"premiere", boosterEligible:false }
+]);
+
+export const allGameplayCards = [...PREMIERE_MOMENTUM_CARDS, 
   {
     "id": "cody-rhodes-dropdown-uppercut",
     "name": "Dropdown Uppercut",
@@ -4940,7 +4947,7 @@ export const allGameplayCards = [
     "rulesText": "Savage only. Once per match below 50% HP, draw 2 then put 1 page on the bottom of the Playbook."
   },
   {
-    "id": "momentum-strength",
+    "id": "PREM271",
     "name": "Strength Momentum",
     "kind": "momentum",
     "setId": "summerslam-series-1",
@@ -4950,7 +4957,7 @@ export const allGameplayCards = [
     "rulesText": "+1 permanent Strength Momentum."
   },
   {
-    "id": "momentum-strike",
+    "id": "PREM272",
     "name": "Strike Momentum",
     "kind": "momentum",
     "setId": "summerslam-series-1",
@@ -4960,7 +4967,7 @@ export const allGameplayCards = [
     "rulesText": "+1 permanent Strike Momentum."
   },
   {
-    "id": "momentum-technical",
+    "id": "PREM273",
     "name": "Technical Momentum",
     "kind": "momentum",
     "setId": "summerslam-series-1",
@@ -4970,7 +4977,7 @@ export const allGameplayCards = [
     "rulesText": "+1 permanent Technical Momentum."
   },
   {
-    "id": "momentum-agility",
+    "id": "PREM274",
     "name": "Agility Momentum",
     "kind": "momentum",
     "setId": "summerslam-series-1",
