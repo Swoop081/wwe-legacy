@@ -1,4 +1,4 @@
-import { decks, momentumCards } from "./decks.js?v=1.1.321";
+import { decks, momentumCards } from "./decks.js?v=1.1.330";
 import { collectionCards } from "./collection.js?v=1.1.320";
 import { allGameplayCards } from "./content.js?v=1.1.320";
 import { superstars } from "./superstars.js?v=1.1.320";
