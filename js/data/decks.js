@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.320";
+import { allGameplayCards } from "./content.js?v=1.1.321";
 
 // WWE Legacy relaunch deck registry. Only the 17 active starter Superstars exist here.
 // Collectible card references are restricted to PREM01-PREM270 and MITB01-MITB08;
