@@ -1,11 +1,11 @@
 {
-  "version": "1.1.343",
+  "version": "1.1.344",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.343",
+  "physicalIphoneSmoke": "pending-v1.1.344",
   "launchStatus": "released",
   "name": "Premiere starter deck and Momentum integration fix"
 }
