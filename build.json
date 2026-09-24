@@ -1,11 +1,11 @@
 {
-  "version": "1.1.239",
+  "version": "1.1.240",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.239",
+  "physicalIphoneSmoke": "pending-v1.1.240",
   "launchStatus": "released",
-  "name": "v1.1.239 — Remove Boot-Blocking Deck Audit"
+  "name": "v1.1.240 — Remove Legacy Shared Move Boot Audit"
 }
