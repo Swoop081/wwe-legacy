@@ -11551,3 +11551,11 @@ body[data-screen="starter-summary"] .starter-summary-logo{width:min(82vw,460px)!
 .challenge-milestones-group > summary b i { display:inline-block; font-style:normal; transition:transform .18s ease; }
 .challenge-milestones-group[open] > summary b i { transform:rotate(180deg); }
 .challenge-set-milestone-list { display:grid; gap:12px; margin-top:12px; }
+
+.challenge-reward-sets > summary { list-style:none; cursor:pointer; }
+.challenge-reward-sets > summary::-webkit-details-marker { display:none; }
+.challenge-reward-sets-heading { margin-top:0; }
+.challenge-reward-sets-heading > b { margin-left:auto; font-size:12px; letter-spacing:.14em; }
+.challenge-reward-sets-heading > b i { display:inline-block; font-style:normal; transition:transform .18s ease; }
+.challenge-reward-sets[open] .challenge-reward-sets-heading > b i { transform:rotate(180deg); }
+.challenge-reward-set-list { display:grid; gap:12px; margin-top:12px; padding-left:14px; border-left:2px solid rgba(255,255,255,.08); }
