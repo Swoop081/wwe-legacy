@@ -11402,3 +11402,12 @@ body[data-screen="starter-summary"] .start-match{height:58px!important;min-heigh
 /* v1.1.258 — keep starter wrapper labels fully inside the foil face. */
 .premiere-starter-onboarding .starter-premiere-physical-pack .pack-series-name{bottom:15%!important}
 .premiere-starter-onboarding .starter-premiere-physical-pack .pack-contents-line{bottom:10.5%!important}
+
+
+/* v1.1.263 — standalone starter reveal. Do not inherit the two-card summary grid. */
+body[data-screen="starter"] .starter-pack-reveal-rebuilt{flex:1 1 0!important;min-height:0!important;width:100%!important;display:grid!important;grid-template-rows:auto minmax(0,1fr) 58px!important;gap:10px!important;align-items:center!important;justify-items:center!important;overflow:hidden!important;padding:0 12px 8px!important;box-sizing:border-box!important}
+body[data-screen="starter"] .starter-pack-reveal-rebuilt h1{margin:0!important;font-size:30px!important;line-height:1!important;text-align:center!important}
+body[data-screen="starter"] .starter-pack-reveal-card-host{width:100%!important;height:100%!important;min-height:0!important;display:grid!important;place-items:center!important;overflow:visible!important}
+body[data-screen="starter"] .starter-pack-reveal-card{display:inline-block!important;width:auto!important;height:min(100%,58dvh)!important;max-width:76vw!important;aspect-ratio:680/1000!important;min-width:0!important;min-height:0!important;visibility:visible!important;opacity:1!important;position:relative!important}
+body[data-screen="starter"] .starter-pack-reveal-card .ccg-card-inner,body[data-screen="starter"] .starter-pack-reveal-card .ccg-card-face{width:100%!important;height:100%!important}
+body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continue{width:92%!important;height:58px!important;margin:0!important}
