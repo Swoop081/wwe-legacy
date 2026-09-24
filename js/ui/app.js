@@ -2584,7 +2584,16 @@ function renderStarter() {
     if(opened.size===2) $("#premiere-starter-continue").hidden=false;
   }));
   $("#premiere-starter-continue")?.addEventListener("click",()=>{
-    chooseStarter([maleId,femaleId]);
+    const button = $("#premiere-starter-continue");
+    if (button) { button.disabled = true; button.textContent = "STARTING…"; }
+    try {
+      chooseStarter([maleId,femaleId]);
+    } catch (error) {
+      console.error("Premiere starter creation failed", error);
+      if (button) { button.disabled = false; button.textContent = "START YOUR LEGACY"; }
+      message = String(error?.message || error || "Unable to start your Legacy.");
+      alert(message);
+    }
   });
 }
 
