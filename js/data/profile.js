@@ -1,6 +1,6 @@
 import { decks } from "./decks.js?v=1.1.277";
 import { collectionCards } from "./collection.js?v=1.1.132";
-import { superstars } from "./superstars.js?v=1.1.132";
+import { superstars } from "./superstars.js?v=1.1.278";
 import { isUnreleasedSetId } from "./release.js?v=1.1.132";
 import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=1.1.132";
 import { CARD_TIERS, DEFAULT_STARTER_TIER, fixedPrintingTierFor, normalizeCardTier } from "./variants.js?v=1.1.132";
@@ -129,8 +129,10 @@ const MOMENTUM_METHODS = Object.freeze(["strength", "strike", "technical", "agil
 // those excess Momentum pages are redistributed; moves/actions are untouched.
 export function freshNormalDeckBlueprint(sid) {
   const source = decks[sid] ?? [];
-  const star = starById.get(sid);
-  if (!star || source.length !== 60) return [];
+  // The authored deck is authoritative. Do not reject a valid 60-card deck
+  // merely because the legacy superstar registry has not resolved this ID yet.
+  const star = starById.get(sid) ?? { id:sid, name:sid, methodLimits:{} };
+  if (source.length !== 60) return [];
   const out = [];
   const counts = new Map();
   const deferred = [];
