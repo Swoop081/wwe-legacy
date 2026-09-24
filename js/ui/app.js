@@ -307,7 +307,7 @@ const superstarRenderMarkup = menuSuperstarPhotoMarkup;
 const GENERIC_SUPERSTAR_PLACEHOLDER = assetUrl("assets/images/card-temp-superstar-placeholder.svg");
 
 const SET_LOGO_ASSETS = {
-  "premiere": assetUrl("assets/images/premiere-logo.PNG"),
+  "premiere": assetUrl("assets/images/premiere-logo.png"),
   "survivor-series-series-1": assetUrl("assets/images/branding-survivor-series-series-1-survivor-series-wargames-houston-2026.png"),
   "summerslam-series-1": assetUrl("assets/images/art-summerslam-series-1-summerslam-2026-logo.png"),
   "golden-era-series-1": "https://loodibee.com/wp-content/uploads/World-Wrestling-Federation-WWF-Logo-1985-1998-3D.png",
