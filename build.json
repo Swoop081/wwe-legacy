@@ -1,11 +1,11 @@
 {
-  "version": "1.1.237",
+  "version": "1.1.238",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.237",
+  "physicalIphoneSmoke": "pending-v1.1.238",
   "launchStatus": "released",
-  "name": "v1.1.237 — Deck Regex Parser Fix"
+  "name": "v1.1.238 — Conservative Deck Validation Syntax"
 }
