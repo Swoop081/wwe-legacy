@@ -1,11 +1,11 @@
 {
-  "version": "1.1.241",
+  "version": "1.1.242",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.241",
+  "physicalIphoneSmoke": "pending-v1.1.242",
   "launchStatus": "released",
-  "name": "v1.1.241 — Remove Legacy Starter Draft"
+  "name": "v1.1.242 — Premiere Onboarding Progression Fix"
 }
