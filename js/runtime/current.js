@@ -122,7 +122,6 @@ const enhancementModules = [
   "../shared/v1.1.66-featured-superstar-ability-audit.js",
   "../shared/v1.1.151-placeholder-card-cleanup.js",
   "../shared/v1.1.155-card-copy-pack-logo-nav.js",
-  "../shared/v1.1.201-starter-draft.js",
   "../shared/v1.1.154-roster-order.js",
   "../shared/v1.1.177-championship-road-select.js"
 ];
