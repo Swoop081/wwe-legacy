@@ -1,7 +1,7 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.132";
-import { superstars } from "./superstars.js?v=1.1.132";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.132";
-import { awardSeasonXp } from "./seasons.js?v=1.1.132";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.333";
+import { superstars } from "./superstars.js?v=1.1.333";
+import { grantRandomBoosters } from "./boosters.js?v=1.1.333";
+import { awardSeasonXp } from "./seasons.js?v=1.1.333";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -22,284 +22,48 @@ function releasedRewardSet(setId, fallbackIndex = 0, now = new Date()) {
 
 // The daily slot keeps the branded RAW/NXT/SmackDown rhythm, with original
 // WWE Legacy event identities on the other four days.
-export const DAILY_LIVE_EVENTS = Object.freeze({
-  1: {
-    id: "raw-live",
-    dayLabel: "MONDAY",
-    name: "RAW",
-    kicker: "MONDAY NIGHT",
-    description: "Five escalating fights under the bright lights of Monday Night RAW.",
-    method: "strike",
-    heroId: "cm-punk",
-    rewardSetId: "raw-series-1",
-    logoMode: "raw",
-    opponentPool: ["seth-rollins", "gunther", "kevin-owens", "cody-rhodes", "roman-reigns", "cm-punk", "brock-lesnar", "bayley"]
-  },
-  2: {
-    id: "powerhouse-collision",
-    dayLabel: "TUESDAY",
-    name: "Powerhouse Collision",
-    kicker: "STRENGTH TAKES CENTRE STAGE",
-    description: "Five escalating fights against WWE's heavy hitters.",
-    method: "strength",
-    heroId: "brock-lesnar",
-    rewardSetId: "summerslam-series-1",
-    logoMode: "legacy",
-    opponentPool: ["andre-the-giant", "hulk-hogan", "roman-reigns", "kevin-owens", "kane", "the-undertaker", "ultimate-warrior", "rhea-ripley", "oba-femi", "brock-lesnar", "gunther"]
-  },
-  3: {
-    id: "nxt-rising",
-    dayLabel: "WEDNESDAY",
-    name: "NXT",
-    kicker: "WEDNESDAY NIGHT",
-    description: "A five-match showcase built around tomorrow's standouts and breakout threats.",
-    method: "agility",
-    heroId: "oba-femi",
-    rewardSetId: "summerslam-series-1",
-    logoMode: "nxt",
-    opponentPool: ["oba-femi", "stephanie-vaquer", "chelsea-green", "damian-priest", "tiffany-stratton", "finn-balor", "bron-breakker", "paige", "liv-morgan", "seth-rollins"]
-  },
-  4: {
-    id: "technical-showcase",
-    dayLabel: "THURSDAY",
-    name: "Technical Showcase",
-    kicker: "OUTWRESTLE THE BEST",
-    description: "Five matches where ring IQ matters as much as damage.",
-    method: "technical",
-    heroId: "cm-punk",
-    rewardSetId: "attitude-era-series-1",
-    logoMode: "legacy",
-    opponentPool: ["cm-punk", "bayley", "paige", "stephanie-vaquer", "charlotte-flair", "cody-rhodes", "liv-morgan", "gunther", "becky-lynch", "randy-savage"]
-  },
-  5: {
-    id: "strike-zone",
-    dayLabel: "FRIDAY",
-    name: "Strike Zone",
-    kicker: "HANDS UP · CHIN DOWN",
-    description: "A daily tower built around WWE's hardest strikers.",
-    method: "strike",
-    heroId: "mankind",
-    rewardSetId: "attitude-era-series-1",
-    logoMode: "legacy",
-    opponentPool: ["mankind", "bayley", "cm-punk", "paige", "seth-rollins", "randy-savage", "stephanie-vaquer", "stone-cold-steve-austin", "gunther", "becky-lynch"]
-  },
-  6: {
-    id: "smackdown-showcase",
-    dayLabel: "SATURDAY",
-    name: "SmackDown",
-    kicker: "SATURDAY NIGHT",
-    description: "Five escalating fights from the world of SmackDown.",
-    method: "strength",
-    heroId: "roman-reigns",
-    rewardSetId: "smackdown-series-1",
-    logoMode: "smackdown",
-    opponentPool: ["roman-reigns", "cody-rhodes", "la-knight", "randy-orton", "charlotte-flair", "solo-sikoa", "kevin-owens", "the-rock-attitude"]
-  },
-  0: {
-    id: "evolution-night",
-    dayLabel: "SUNDAY",
-    name: "Evolution Night",
-    kicker: "THE WOMEN'S DIVISION TAKES OVER",
-    description: "Five fights through the women's division spotlight.",
-    method: "technical",
-    heroId: "rhea-ripley",
-    rewardSetId: "evolution-series-1",
-    logoMode: "legacy",
-    opponentPool: ["iyo-sky", "bayley", "paige", "stephanie-vaquer", "charlotte-flair", "rhea-ripley", "liv-morgan", "becky-lynch"]
-  }
-});
-
-export const THREE_DAY_TOWERS = Object.freeze([
-  {
-    id: "submission-specialists",
-    name: "Submission Specialists",
-    kicker: "ESCAPE OR TAP",
-    description: "A three-day technical tower built around persistent submission pressure.",
-    method: "technical",
-    heroId: "rhea-ripley",
-    rewardSetId: "evolution-series-1",
-    logoMode: "legacy",
-    opponentPool: ["rhea-ripley", "becky-lynch", "bret-hart", "kurt-angle", "chad-gable", "tony-dangelo", "rowdy-roddy-piper", "eddie-guerrero", "cm-punk", "gunther"]
-  },
-  {
-    id: "high-risk-showcase",
-    name: "High Risk Showcase",
-    kicker: "TAKE TO THE AIR",
-    description: "Three days of speed, aerial counters and high-risk offense.",
-    method: "agility",
-    heroId: "iyo-sky",
-    rewardSetId: "summerslam-series-1",
-    logoMode: "legacy",
-    opponentPool: ["iyo-sky", "seth-rollins", "rey-mysterio", "sol-ruca", "logan-paul", "randy-savage", "jeff-hardy", "rob-van-dam", "kelani-jordan", "liv-morgan"]
-  },
-  {
-    id: "fight-night",
-    name: "Fight Night",
-    kicker: "STRIKE FIRST",
-    description: "A three-day brawl against WWE's toughest punchers and strikers.",
-    method: "strike",
-    heroId: "stone-cold-steve-austin",
-    rewardSetId: "attitude-era-series-1",
-    logoMode: "legacy",
-    opponentPool: ["stone-cold-steve-austin", "mankind", "cm-punk", "jbl", "gunther", "kevin-owens", "roman-reigns", "tony-dangelo", "ted-dibiase", "randy-orton"]
-  },
-  {
-    id: "giants-and-monsters",
-    name: "Giants & Monsters",
-    kicker: "SURVIVE THE HEAVYWEIGHTS",
-    description: "Three days against the biggest power threats in WWE Legacy.",
-    method: "strength",
-    heroId: "kane",
-    rewardSetId: "golden-era-series-1",
-    logoMode: "legacy",
-    opponentPool: ["kane", "andre-the-giant", "brock-lesnar", "ultimate-warrior", "batista", "roman-reigns", "gunther", "oba-femi", "diesel", "zilla-fatu"]
-  }
-]);
-
-export const RAW_LIVE_EVENT = Object.freeze({
-  id: "raw-live-spotlight",
-  name: "RAW LIVE",
-  kicker: "RAW SERIES 1 · LIVE NOW",
-  description: "A five-match RAW Series 1 tower. Complete all five matches to earn one random released-set booster.",
-  method: "strike",
-  heroId: "logan-paul",
-  rewardSetId: "raw-series-1",
-  logoMode: "raw",
-  opponentPool: ["logan-paul", "raquel-rodriguez", "sol-ruca", "chad-gable", "roxanne-perez", "austin-theory", "montez-ford", "joe-hendry"]
-});
-
-export const WEEKLY_TOWERS = Object.freeze([
-  {
-    id: "legends-collide",
-    name: "Legends Collide",
-    kicker: "SEVEN DAYS · ONE GAUNTLET",
-    description: "A weekly tower against Golden Era and Attitude Era icons.",
-    method: "strength",
-    heroId: "the-undertaker",
-    rewardSetId: "attitude-era-series-1",
-    logoMode: "legacy",
-    opponentPool: ["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "bret-hart", "john-cena", "randy-orton", "eddie-guerrero", "shawn-michaels", "andre-the-giant", "the-rock-attitude"]
-  },
-  {
-    id: "champions-clash",
-    name: "Champions Clash",
-    kicker: "THE BEST OF THE BEST",
-    description: "A seven-day tower stacked with championship-level opponents.",
-    method: "strength",
-    heroId: "roman-reigns",
-    rewardSetId: "summerslam-series-1",
-    logoMode: "legacy",
-    opponentPool: ["roman-reigns", "cody-rhodes", "gunther", "cm-punk", "rhea-ripley", "john-cena", "bret-hart", "tony-dangelo", "the-undertaker", "randy-orton", "charlotte-flair"]
-  },
-  {
-    id: "method-masterclass",
-    name: "Method Masterclass",
-    kicker: "ADAPT OR FALL",
-    description: "A weekly tower that tests every Method across five escalating fights.",
-    method: "technical",
-    heroId: "cm-punk",
-    rewardSetId: "summerslam-series-1",
-    logoMode: "legacy",
-    opponentPool: ["cm-punk", "bret-hart", "kurt-angle", "eddie-guerrero", "tony-dangelo", "gunther", "becky-lynch", "mr-perfect", "cody-rhodes", "roman-reigns"]
-  },
-  {
-    id: "evolution-showcase",
-    name: "Evolution Showcase",
-    kicker: "WOMEN'S DIVISION WEEK",
-    description: "Seven days to survive the deepest women's division tower.",
-    method: "technical",
-    heroId: "becky-lynch",
-    rewardSetId: "evolution-series-1",
-    logoMode: "legacy",
-    opponentPool: ["becky-lynch", "rhea-ripley", "charlotte-flair", "iyo-sky", "bayley", "paige", "liv-morgan", "stephanie-vaquer", "kendal-grey", "jaida-parker", "tatum-paxley"]
-  }
-]);
-
-
-// v1.1.20 — Daily Live Events now rotate from the complete nine-set launch slate
-// plus the established specialist gauntlets. Exactly three are active per local
-// day. The rotation advances three positions daily, so an event that was active
-// yesterday is automatically on cooldown for the whole next day.
+// Premiere relaunch: Live Events use only the active current roster. Legacy
+// launch-era towers referenced removed Superstars and sets and could not render.
+export const DAILY_LIVE_EVENTS = Object.freeze({});
+export const THREE_DAY_TOWERS = Object.freeze([]);
+export const RAW_LIVE_EVENT = null;
+export const WEEKLY_TOWERS = Object.freeze([]);
 export const LAUNCH_THEME_TOWERS = Object.freeze([
   {
-    id: "current-raw",
-    name: "Current RAW",
-    kicker: "MONDAY NIGHT ROSTER",
-    description: "A five-match tower drawn from WWE Legacy Superstars currently appearing across the RAW roster.",
-    method: "strike", heroId: "seth-rollins", rewardSetId: "raw-series-1", logoMode: "raw",
-    opponentPool: ["roman-reigns","seth-rollins","sol-ruca","raquel-rodriguez","liv-morgan","montez-ford","bron-breakker","austin-theory","chad-gable","oba-femi","logan-paul","dominik-mysterio","rey-mysterio","becky-lynch","stephanie-vaquer","jey-uso","solo-sikoa","jacob-fatu","joe-hendry"]
+    id: "premiere-showcase",
+    name: "Premiere Showcase",
+    kicker: "OWN THE RING",
+    description: "Five fights drawn exclusively from the WWE Legacy Premiere roster.",
+    method: "strike",
+    heroId: "cody-rhodes",
+    rewardSetId: "premiere",
+    logoMode: "legacy",
+    opponentPool: ["roman-reigns","cody-rhodes","seth-rollins","cm-punk","sami-zayn","randy-orton","rhea-ripley","liv-morgan","iyo-sky","becky-lynch","alexa-bliss","charlotte-flair"]
   },
   {
-    id: "current-smackdown",
-    name: "Current SmackDown",
-    kicker: "FRIDAY NIGHT ROSTER",
-    description: "A five-match tower drawn from WWE Legacy Superstars currently appearing across the SmackDown roster.",
-    method: "technical", heroId: "cody-rhodes", rewardSetId: "smackdown-series-1", logoMode: "smackdown",
-    opponentPool: ["kevin-owens","cm-punk","gunther","finn-balor","chelsea-green","tiffany-stratton","nia-jax","paige","jacy-jayne","cody-rhodes","randy-orton","charlotte-flair","alexa-bliss","jade-cargill","sami-zayn","damian-priest","trick-williams"]
+    id: "premiere-power",
+    name: "Powerhouse Collision",
+    kicker: "POWER TAKES CENTRE STAGE",
+    description: "Five fights against the power side of the Premiere roster.",
+    method: "strength",
+    heroId: "roman-reigns",
+    rewardSetId: "premiere",
+    logoMode: "legacy",
+    opponentPool: ["roman-reigns","cody-rhodes","randy-orton","rhea-ripley","charlotte-flair","sami-zayn"]
   },
   {
-    id: "current-nxt",
-    name: "Current NXT",
-    kicker: "THE NEXT GENERATION",
-    description: "Five matches against WWE Legacy's current NXT prospects, champions and breakout threats.",
-    method: "agility", heroId: "tony-dangelo", rewardSetId: "nxt-series-1", logoMode: "nxt",
-    opponentPool: ["kendal-grey","tony-dangelo","jaida-parker","kelani-jordan","mason-rook","tatum-paxley","lexis-king","zilla-fatu"]
-  },
-  {
-    id: "evolution-women",
-    name: "Evolution",
-    kicker: "WOMEN'S DIVISION ONLY",
-    description: "A women-only five-match tower spanning the launch roster.",
-    method: "technical", heroId: "rhea-ripley", rewardSetId: "evolution-series-1", logoMode: "legacy",
-    opponentPool: ["iyo-sky","bayley","paige","stephanie-vaquer","charlotte-flair","rhea-ripley","liv-morgan","becky-lynch","sol-ruca","raquel-rodriguez","roxanne-perez","tiffany-stratton","chelsea-green","blake-monroe","jacy-jayne","kendal-grey","jaida-parker","kelani-jordan","tatum-paxley"]
-  },
-  {
-    id: "summerslam-showcase",
-    name: "SummerSlam Showcase",
-    kicker: "THE BIGGEST PARTY OF THE SUMMER",
-    description: "A launch-set showcase built from SummerSlam Series 1.",
-    method: "strike", heroId: "cm-punk", rewardSetId: "summerslam-series-1", logoMode: "legacy",
-    opponentPool: ["cm-punk","seth-rollins","roman-reigns","kevin-owens","cody-rhodes","oba-femi","brock-lesnar","gunther"]
-  },
-  {
-    id: "golden-era-showcase",
-    name: "Golden Era",
-    kicker: "LEGENDS OF THE 1980s",
-    description: "Five matches against the Golden Era launch roster.",
-    method: "strength", heroId: "hulk-hogan", rewardSetId: "golden-era-series-1", logoMode: "legacy",
-    opponentPool: ["hulk-hogan","andre-the-giant","randy-savage","ultimate-warrior","rowdy-roddy-piper","ted-dibiase","jake-roberts","mr-perfect"]
-  },
-  {
-    id: "new-generation-showcase",
-    name: "New Generation",
-    kicker: "A NEW GENERATION",
-    description: "Five matches against the New Generation launch roster.",
-    method: "technical", heroId: "bret-hart", rewardSetId: "new-generation-series-1", logoMode: "legacy",
-    opponentPool: ["bret-hart","shawn-michaels","razor-ramon","diesel","doink-the-clown","yokozuna","owen-hart","british-bulldog"]
-  },
-  {
-    id: "attitude-era-showcase",
-    name: "Attitude Era",
-    kicker: "ATTITUDE IS EVERYTHING",
-    description: "Five matches against the Attitude Era launch roster.",
-    method: "strike", heroId: "stone-cold-steve-austin", rewardSetId: "attitude-era-series-1", logoMode: "legacy",
-    opponentPool: ["mankind","the-rock-attitude","kane","the-undertaker","stone-cold-steve-austin","triple-h","chris-jericho","kurt-angle"]
-  },
-  {
-    id: "ruthless-aggression-showcase",
-    name: "Ruthless Aggression",
-    kicker: "RUTHLESS AGGRESSION",
-    description: "Five matches against the Ruthless Aggression launch roster.",
-    method: "strength", heroId: "john-cena", rewardSetId: "ruthless-aggression-series-1", logoMode: "legacy",
-    opponentPool: ["john-cena","randy-orton","batista","jbl","eddie-guerrero","edge","jeff-hardy","rob-van-dam"]
+    id: "premiere-speed",
+    name: "High Risk Showcase",
+    kicker: "SPEED AND PRECISION",
+    description: "Five fights against Premiere's fastest and most technical Superstars.",
+    method: "agility",
+    heroId: "iyo-sky",
+    rewardSetId: "premiere",
+    logoMode: "legacy",
+    opponentPool: ["iyo-sky","liv-morgan","seth-rollins","cm-punk","becky-lynch","alexa-bliss"]
   }
 ]);
-
-export const LIVE_EVENT_ROTATION_POOL = Object.freeze([
-  ...LAUNCH_THEME_TOWERS,
-  ...THREE_DAY_TOWERS,
-  ...WEEKLY_TOWERS
-]);
+export const LIVE_EVENT_ROTATION_POOL = Object.freeze([...LAUNCH_THEME_TOWERS]);
 export const LIVE_EVENT_COOLDOWN_DAYS = 1;
 
 // v0.13.82 — 24-hour Birthday Bash towers for the complete currently released launch roster.
