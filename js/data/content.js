@@ -19834,9 +19834,9 @@ allGameplayCards.push(...buildPremiereGameplayCards(allGameplayCards));
   const mitb=[
     clone("entrance-la-knight","MITB02","YEAH!!",{kind:"entrance",rarity:4,rulesText:"Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",preMatchMomentum:{strike:1},preMatchAdrenaline:1,delayedTurn5:false}),
     clone("la-knight-bft","MITB03","Blunt Force Trauma",{finisher:true,trademark:false,cost:9,damage:16,requirements:{}}),
-    clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true,rarity:3,damage:10,cost:6,requirements:{agility:2},rulesText:"LA Knight-exclusive Trademark. Top-rope elbow drop. Grounds opponent."}),
-    clone("diving-elbow-drop","MITB05","LA Elbow",{finisher:false,trademark:true,rarity:3,damage:9,cost:6,requirements:{agility:2},rulesText:"LA Knight-exclusive Trademark. Elbow drop. Grounds opponent."}),
-    clone("burning-hammer","MITB06","Burning Hammer",{finisher:false,trademark:true}),
+    clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true,rarity:3,damage:10,cost:6,requirements:{strike:1,agility:1},rulesText:"LA Knight-exclusive Trademark. Top-rope elbow drop. Grounds opponent."}),
+    clone("diving-elbow-drop","MITB05","LA Elbow",{finisher:false,trademark:true,rarity:3,damage:9,cost:6,requirements:{strike:1,agility:1},rulesText:"LA Knight-exclusive Trademark. Elbow drop. Grounds opponent."}),
+    clone("burning-hammer","MITB06","Burning Hammer",{finisher:false,trademark:true,requirements:{strength:2},method:"strength"}),
     clone("special-la-knight","MITB07","Let Me Talk to Ya!",{kind:"action",cost:6,rarity:3,oncePerMatch:true,oneUse:true,special:null,effect:{type:"laKnightTalkToYa",draw:2,adrenaline:2},rulesText:"Once per match: Your next Move cannot be countered. If that Move connects, draw 2 pages and gain +2 Adrenaline."}),
     {id:"MITB08",name:"LA Knight T-Shirt",kind:"merch",setId:"money-in-the-bank",cardCode:"MITB08",source:"money-in-the-bank",superstarId:"la-knight",rarity:3,boosterOnly:true,boosterEligible:true,deckEligible:false,consumable:true,rulesText:"Booster-only consumable. Boost LA Knight's primary Momentum for a limited number of matches.",effects:[{type:"boostPrimaryMomentumConsumable",printingStats:{base:{strike:1,adrenaline:0,matches:1},emerald:{strike:1,adrenaline:1,matches:2},sapphire:{strike:2,adrenaline:0,matches:3},ruby:{strike:2,adrenaline:1,matches:4},amethyst:{strike:3,adrenaline:0,matches:5}}}]}
   ].filter(Boolean);
