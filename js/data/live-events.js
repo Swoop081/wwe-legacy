@@ -213,10 +213,12 @@ function daySerial(now = new Date()) {
 // exact event name cannot repeat on consecutive days.
 export function liveEventRotation(now = new Date()) {
   const start = localDayStart(now);
-  const source = DAILY_LIVE_EVENTS[start.getDay()] ?? DAILY_LIVE_EVENTS[1];
+  // Premiere no longer has the legacy weekday RAW/NXT/SmackDown table.
+  // Use the current Premiere rotation pool as the authoritative daily source.
+  const source = LIVE_EVENT_ROTATION_POOL[daySerial(now) % LIVE_EVENT_ROTATION_POOL.length] ?? LAUNCH_THEME_TOWERS[0];
   const nextAt = new Date(start.getTime());
   nextAt.setDate(nextAt.getDate() + 1);
-  const event = cloneEvent(source, releasedRewardSet(source.rewardSetId, start.getDay() % LIVE_REWARD_FALLBACKS.length, now), now);
+  const event = cloneEvent(source, source.rewardSetId, now);
   const dayKey = dateKey(start);
   return {
     weekKey: dayKey,
