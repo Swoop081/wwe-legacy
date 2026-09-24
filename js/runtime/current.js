@@ -3,15 +3,30 @@
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.224";
+const VERSION = "1.1.225";
+
+function showBootError(error, stage = "Application boot") {
+  const detail = String(error?.stack || error?.message || error || "Unknown error");
+  globalThis.__WWE_LEGACY_BOOT_ERROR__ = detail;
+  const paint = () => {
+    document.body.innerHTML = `<main style="min-height:100vh;background:#09090b;color:#fff;padding:24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;box-sizing:border-box"><section style="max-width:760px;margin:8vh auto;background:#17171b;border:2px solid #d22;border-radius:16px;padding:20px;box-shadow:0 10px 40px #000"><h1 style="margin:0 0 12px;font-size:24px">WWE LEGACY BOOT ERROR</h1><p style="margin:0 0 12px;color:#ff8b8b;font-weight:800">${stage}</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:#050506;border-radius:10px;padding:14px;font-size:12px;line-height:1.45;user-select:text;-webkit-user-select:text">${detail.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}</pre><p style="margin:12px 0 0;color:#aaa;font-size:12px">Version ${VERSION} — take a screenshot of this screen.</p></section></main>`;
+  };
+  if (document.body) paint(); else addEventListener("DOMContentLoaded", paint, { once:true });
+}
+
+addEventListener("error", event => {
+  if (!globalThis.__WWE_LEGACY_APP_BOOTED__) showBootError(event.error || event.message, "JavaScript error before boot completed");
+});
+addEventListener("unhandledrejection", event => {
+  if (!globalThis.__WWE_LEGACY_APP_BOOTED__) showBootError(event.reason, "Unhandled promise rejection during boot");
+});
 
 try {
   await import(`../ui/app.js?v=${VERSION}`);
   globalThis.__WWE_LEGACY_APP_BOOTED__ = true;
 } catch (error) {
-  globalThis.__WWE_LEGACY_BOOT_ERROR__ = String(error?.stack || error?.message || error);
   console.error("WWE Legacy application boot failed", error);
-  throw error;
+  showBootError(error, "Failed loading js/ui/app.js");
 }
 
 function loadClassicScript(path) {
