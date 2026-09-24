@@ -11491,3 +11491,6 @@ body[data-screen="starter-summary"] .starter-roster-summary .start-match{width:8
 
 /* v1.1.329 — 5x visual treatment for roster-summary WWE Legacy logo. */
 body[data-screen="starter-summary"] .starter-summary-logo{width:min(90vw,520px)!important;max-width:none!important;max-height:28dvh!important;margin:-4dvh auto -4dvh!important;object-fit:contain!important;transform:scale(1.55)!important;transform-origin:center!important}
+
+/* v1.1.329 adjustment — roster logo approximately 4x original. */
+body[data-screen="starter-summary"] .starter-summary-logo{width:min(82vw,460px)!important;max-height:24dvh!important;margin:-3dvh auto -3dvh!important;transform:scale(1.4)!important}
