@@ -306,7 +306,7 @@ function drawPhysicalPrintingFrame(){
 }
 function drawFrameOverlay(){const card=currentCard();if(!state.renderPlateOnly){drawPhysicalPrintingFrame();const renderer=globalThis.WWELegacyCardFaceRenderer;if(!renderer)throw new Error("Shared Card Studio face renderer is not loaded.");renderer.drawRarityStars(ctx,card,{width:canvas.width,height:canvas.height});}}
 function drawHeadshot(){const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);drawArt();}
-function draw(){if(isHeadshotMode()){drawHeadshot();return;}if(!state.exportingPlate)state.renderPlateOnly=previewPlateOnly();drawTemplate();const momentumMock=drawMomentumMockup();drawArt();const veil=ctx.createLinearGradient(0,0,0,canvas.height);veil.addColorStop(0,"rgba(0,0,0,.05)");veil.addColorStop(.63,"rgba(0,0,0,0)");veil.addColorStop(1,"rgba(0,0,0,.22)");ctx.fillStyle=veil;ctx.fillRect(0,0,canvas.width,canvas.height);if(!momentumMock){drawSetLogo();drawBottomIdentity();}drawFrameOverlay();}
+function draw(){if(isHeadshotMode()){drawHeadshot();return;}if(!state.exportingPlate)state.renderPlateOnly=previewPlateOnly();drawTemplate();const momentumMock=drawMomentumMockup();drawArt();const veil=ctx.createLinearGradient(0,0,0,canvas.height);veil.addColorStop(0,"rgba(0,0,0,.05)");veil.addColorStop(.63,"rgba(0,0,0,0)");veil.addColorStop(1,"rgba(0,0,0,.22)");ctx.fillStyle=veil;ctx.fillRect(0,0,canvas.width,canvas.height);const card=currentCard();const superstarPlate=state.renderPlateOnly&&card?.kind==="superstar";if(!momentumMock&&!superstarPlate){drawSetLogo();drawBottomIdentity();}drawFrameOverlay();}
 function studioFallbackLogoData(id){return "";}
 async function loadStudioSetLogo(src,id){
   if(/^https?:\/\//i.test(String(src||""))){
