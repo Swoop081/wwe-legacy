@@ -2531,7 +2531,7 @@ function renderStarterSummary(starterIds = profile?.starterIds ?? []) {
     const card = collectionById.get(cardId) ?? collectionCards.find(c => c.cardCode === cardId || c.id === cardId);
     return card ? `<div class="starter-summary-card-slot">${collectibleCardMarkup(card,{flipped:false,tier:"normal",interactive:false,eagerArt:true,extraClass:"starter-summary-rendered-card"})}</div>` : "";
   }).join("");
-  root.innerHTML = `<section class="starter-roster-summary" aria-label="Here’s Your Starting Roster"><h1>HERE’S YOUR STARTING ROSTER</h1><div class="starter-roster-summary-cards">${cards}</div><button id="starter-summary-continue" type="button" class="start-match">CONTINUE</button></section>`;
+  root.innerHTML = `<section class="starter-roster-summary" aria-label="Here’s Your Starting Roster"><img class="starter-summary-logo" src="assets/images/branding-wwe-legacy-logo.png" alt="WWE Legacy"><h1>HERE’S YOUR STARTING ROSTER</h1><div class="starter-roster-summary-cards">${cards}</div><button id="starter-summary-continue" type="button" class="start-match">CONTINUE</button></section>`;
   globalThis.WWELegacyRenderCardFaces?.(root);
   $("#starter-summary-continue")?.addEventListener("click", () => {
     profile.onboarding = { ...(profile.onboarding ?? {}), complete: true, step: 4 };
