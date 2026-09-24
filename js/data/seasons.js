@@ -1,9 +1,9 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.132";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.132";
-import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.132";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=1.1.341";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=1.1.341";
+import { buildBestOwnedRecommendedDraft, recommendedDeckMissingCount } from "./deck-builder.js?v=1.1.341";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-22T00:00:00";
-export const SEASON_END = "2026-09-21T00:00:00";
+export const SEASON_END = "2026-10-30T23:59:59";
 export const SEASON_TIER_COUNT = 50;
 export const XP_PER_TIER = 100;
 export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
@@ -11,7 +11,7 @@ export const MATCH_XP = { win: 5, loss: 0 };
 export const DAILY_CHALLENGE_XP = 10;
 export const WEEKLY_CHALLENGE_XP = 25;
 export const SEASON_1_COMPLETION_SUPERSTAR = "la-knight";
-export const FEATURED_SET_IDS = ["raw-series-1", "smackdown-series-1", "nxt-series-1", "evolution-series-1", "summerslam-series-1", "golden-era-series-1", "new-generation-series-1", "attitude-era-series-1", "ruthless-aggression-series-1"];
+export const FEATURED_SET_IDS = ["premiere"];
 
 // Season 1 prestige chase: Trish Stratus — Stratusfaction Guaranteed is assembled
 // across a 50-tier / 30-day road. Trish Stratus’ Season-exclusive identities are
@@ -134,7 +134,7 @@ const SEASON_1_PACK_SET_IDS = Object.freeze([...FEATURED_SET_IDS]);
 
 function seasonPackPoolForTier(_tier, now = new Date()) {
   const released = SEASON_1_PACK_SET_IDS.filter(setId => isPlayerReleasedSetId(setId, now));
-  return released.length ? released : ["summerslam-series-1"];
+  return released.length ? released : ["premiere"];
 }
 
 function seasonBoosterOrdinal(tier) {
