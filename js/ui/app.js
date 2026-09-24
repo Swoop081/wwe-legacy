@@ -2225,18 +2225,15 @@ function splashPromoMarkup() {
 function renderSplash() {
   setChrome({ hideTopbar: true });
   const root = $("#game");
-  root.innerHTML = `<section class="splash-screen launch-poster-splash" aria-label="WWE Legacy Season 1 launch screen">
-    <div class="launch-poster-frame">
-      <img class="launch-poster-image" src="./assets/images/season1-stratusfaction-launch-poster.jpg?v=${BUILD_VERSION}" alt="WWE Legacy Season 1. Get Some Stratusfaction. Reach Tier 50 before September 30.">
-      <button type="button" id="launch-poster-play" class="launch-poster-play-hotspot" aria-label="Play Now — enter WWE Legacy"></button>
+  root.innerHTML = `<section class="splash-screen legacy-brand-splash" aria-label="WWE Legacy start screen">
+    <div class="legacy-brand-splash-inner">
+      <img class="legacy-brand-splash-logo" src="${assetUrl("assets/images/branding-wwe-legacy-logo.png")}" alt="WWE Legacy">
+      <button type="button" id="legacy-start-game" class="legacy-brand-start-button">START GAME <i>›</i></button>
+      <small class="legacy-brand-version">VERSION ${BUILD_VERSION}</small>
     </div>
   </section>`;
 
-  // v1.1.17 — the visible PLAY NOW artwork is part of the supplied launch poster.
-  // This percentage-based hotspot stays aligned with the button as the poster scales.
-  // Legacy returning-profile destination contract: if (profile) showMainMenu().
-  // v1.1.43 inserts due daily rewards before that same Home destination.
-  $("#launch-poster-play")?.addEventListener("click", () => {
+  $("#legacy-start-game")?.addEventListener("click", () => {
     if (profile) beginLaunchDailyRewards();
     else { screen = "starter"; message = ""; renderStarter(); }
   });
