@@ -1,19 +1,22 @@
-import { superstars } from "./superstars.js?v=1.1.132";
-import { grantBooster } from "./boosters.js?v=1.1.132";
-import { isPlayerVisibleSuperstar } from "./release.js?v=1.1.132";
+import { superstars } from "./superstars.js?v=1.1.337";
+import { grantBooster } from "./boosters.js?v=1.1.337";
+import { isPlayerVisibleSuperstar } from "./release.js?v=1.1.337";
 
-export const CHAMPIONSHIP_ROAD_LENGTH = 64;
-export const LEGACY_CHAMPIONSHIP_ROAD_LENGTH = 40;
-export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";
+export const CHAMPIONSHIP_ROAD_LENGTH = 16;
+export const LEGACY_CHAMPIONSHIP_ROAD_LENGTH = 64;
+export const CHAMPIONSHIP_SET_ID = "premiere";
 export const WORLD_CHAMPIONS = ["cm-punk", "roman-reigns"];
 export const CHAMPIONSHIP_DIFFICULTY_ORDER = ["easy", "normal", "hard", "hardcore"];
 export const CHAMPIONSHIP_DIFFICULTIES = Object.freeze({easy:{id:"easy",label:"Easy",hpModifier:-5,description:"Opponents start with 5 less HP."},normal:{id:"normal",label:"Normal",hpModifier:0,description:"Opponents use their normal HP."},hard:{id:"hard",label:"Hard",hpModifier:5,description:"Opponents start with 5 extra HP."},hardcore:{id:"hardcore",label:"Hardcore",hpModifier:10,description:"Opponents start with 10 extra HP."}});
 
-// v1.1.200: NXT is banked. Championship Road now contains only the eight launch-live sets.
+// Premiere relaunch: four blocks of four. Each completed block awards one Premiere booster.
 export const CHAMPIONSHIP_ROAD_SECTIONS = Object.freeze([
-{id:"smackdown-a",label:"SmackDown · Part I",start:1,end:4,accent:"blue",setId:"smackdown-series-1"},{id:"raw-a",label:"RAW · Part I",start:5,end:8,accent:"red",setId:"raw-series-1"},{id:"smackdown-b",label:"SmackDown · Part II",start:9,end:12,accent:"blue",setId:"smackdown-series-1"},{id:"raw-b",label:"RAW · Part II",start:13,end:16,accent:"red",setId:"raw-series-1"},{id:"evolution-a",label:"Evolution · Part I",start:17,end:20,accent:"violet",setId:"evolution-series-1"},{id:"summerslam-a",label:"SummerSlam · Part I",start:21,end:24,accent:"blue",setId:"summerslam-series-1"},{id:"evolution-b",label:"Evolution · Part II",start:25,end:28,accent:"violet",setId:"evolution-series-1"},{id:"summerslam-b",label:"SummerSlam · Part II",start:29,end:32,accent:"blue",setId:"summerslam-series-1"},{id:"golden-era-a",label:"Golden Era · Part I",start:33,end:36,accent:"gold",setId:"golden-era-series-1"},{id:"new-generation-a",label:"New Generation · Part I",start:37,end:40,accent:"blue",setId:"new-generation-series-1"},{id:"attitude-era-a",label:"Attitude Era · Part I",start:41,end:44,accent:"red",setId:"attitude-era-series-1"},{id:"ruthless-aggression-a",label:"Ruthless Aggression · Part I",start:45,end:48,accent:"gold",setId:"ruthless-aggression-series-1"},{id:"golden-era-b",label:"Golden Era · Part II",start:49,end:52,accent:"gold",setId:"golden-era-series-1"},{id:"new-generation-b",label:"New Generation · Part II",start:53,end:56,accent:"blue",setId:"new-generation-series-1"},{id:"attitude-era-b",label:"Attitude Era · Part II",start:57,end:60,accent:"red",setId:"attitude-era-series-1"},{id:"ruthless-aggression-b",label:"Ruthless Aggression · Part II",start:61,end:64,accent:"gold",setId:"ruthless-aggression-series-1"}
+  {id:"premiere-a",label:"Premiere · Part 1",start:1,end:4,accent:"gold",setId:"premiere"},
+  {id:"premiere-b",label:"Premiere · Part 2",start:5,end:8,accent:"gold",setId:"premiere"},
+  {id:"premiere-c",label:"Premiere · Part 3",start:9,end:12,accent:"gold",setId:"premiere"},
+  {id:"premiere-d",label:"Premiere · Part 4",start:13,end:16,accent:"gold",setId:"premiere"}
 ]);
-const ROAD_NAMES=Object.freeze(["Shinsuke Nakamura","Blake Monroe","Trick Williams","Chelsea Green","Austin Theory","Sol Ruca","Chad Gable","Raquel Rodriguez","Danhausen","Jacy Jayne","Damian Priest","Tiffany Stratton","Montez Ford","Joe Hendry","Roxanne Perez","Logan Paul","Bayley","Paige","Charlotte Flair","Becky Lynch","Kevin Owens","Oba Femi","Gunther","Brock Lesnar","Stephanie Vaquer","IYO SKY","Liv Morgan","Rhea Ripley","Seth Rollins","Cody Rhodes","CM Punk","Roman Reigns","Ted DiBiase","Jake Roberts","Mr. Perfect","Rowdy Roddy Piper","Doink the Clown","British Bulldog","Owen Hart","Yokozuna","Chris Jericho","Kurt Angle","Mankind","Kane","Jeff Hardy","JBL","Rob Van Dam","Eddie Guerrero","Randy Savage","Ultimate Warrior","Andre the Giant","Hulk Hogan","Razor Ramon","Diesel","Shawn Michaels","Bret Hart","Triple H","The Undertaker","The Rock","Stone Cold Steve Austin","Edge","Batista","Randy Orton","John Cena"]);
+const ROAD_NAMES=Object.freeze(["John Cena","Alexa Bliss","Seth Rollins","Becky Lynch","Liv Morgan","Randy Orton","IYO SKY","Cody Rhodes","Stone Cold Steve Austin","Charlotte Flair","Sami Zayn","Rhea Ripley","Tiffany Stratton","CM Punk","Trish Stratus","Roman Reigns"]);
 const ROAD_ID_FALLBACKS=Object.freeze({"Raquel Rodriguez":"raquel-rodriguez","Damian Priest":"damian-priest","Joe Hendry":"joe-hendry","IYO SKY":"iyo-sky","CM Punk":"cm-punk","Ted DiBiase":"ted-dibiase","Mr. Perfect":"mr-perfect","Rowdy Roddy Piper":"rowdy-roddy-piper","Doink the Clown":"doink-the-clown","British Bulldog":"british-bulldog","Rob Van Dam":"rob-van-dam","Randy Savage":"randy-savage","Andre the Giant":"andre-the-giant","Stone Cold Steve Austin":"stone-cold-steve-austin","The Rock":"the-rock-attitude"});
 const normalizeRoadName=value=>String(value??"").toLowerCase().normalize("NFKD").replace(/[’']/g,"").replace(/[^a-z0-9]+/g,"");
 const resolveRoadSuperstarId=name=>{const wanted=normalizeRoadName(name),match=Object.values(superstars).find(star=>normalizeRoadName(star?.name)===wanted);return match?.id??ROAD_ID_FALLBACKS[name]??String(name).toLowerCase().replace(/[’']/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");};
