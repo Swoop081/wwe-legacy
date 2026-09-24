@@ -1,5 +1,5 @@
-import { assetUrl } from "../config/build.js?v=1.1.257";
-import { superstars } from "./superstars.js?v=1.1.257";
+import { assetUrl } from "../config/build.js?v=1.1.336";
+import { superstars } from "./superstars.js?v=1.1.336";
 
 const ROOT="assets/images";
 const slug=value=>String(value??"").toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
@@ -22,8 +22,8 @@ export const canonicalImageKeyForCard=card=>{
   if(card.kind==="action") return card.superstarId ? `${name}-action-${card.superstarId}` : `${name}-action`;
   return card.superstarId ? `${name}-${card.superstarId}` : name;
 };
-export const canonicalCardImagePath=card=>{if(/^PREM\d{2,3}$/.test(String(card?.id)))return `${ROOT}/${String(card.id).toLowerCase()}-base-plate.webp`;if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}.webp`:null;};
-export const canonicalBasePlatePath=card=>{if(/^PREM\d{2,3}$/.test(String(card?.id)))return `${ROOT}/${String(card.id).toLowerCase()}-base-plate.webp`;if(MITB_REWARD_IDS.has(card?.id))return `assets/cards/art/money-in-the-bank/${String(card.id).toLowerCase()}-base-plate.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}-base-plate.webp`:null;};
+export const canonicalCardImagePath=card=>{if(/^PREM\d{2,3}$/.test(String(card?.id)))return `${ROOT}/${String(card.id).toLowerCase()}-base-plate.webp`;if(MITB_REWARD_IDS.has(card?.id))return `${ROOT}/${String(card.id).toLowerCase()}-base-plate.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}.webp`:null;};
+export const canonicalBasePlatePath=card=>{if(/^PREM\d{2,3}$/.test(String(card?.id)))return `${ROOT}/${String(card.id).toLowerCase()}-base-plate.webp`;if(MITB_REWARD_IDS.has(card?.id))return `${ROOT}/${String(card.id).toLowerCase()}-base-plate.webp`;const key=canonicalImageKeyForCard(card);return key?`${ROOT}/${key}-base-plate.webp`:null;};
 export const canonicalSuperstarPath=(id,type="superstar")=>`${ROOT}/${id}-${type}.webp`;
 
 export const superstarArtwork=Object.freeze(Object.fromEntries(starIds.map(id=>[id,assetUrl(canonicalSuperstarPath(id,"superstar"))])));
