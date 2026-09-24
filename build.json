@@ -1,11 +1,11 @@
 {
-  "version": "1.1.257",
+  "version": "1.1.258",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.257",
+  "physicalIphoneSmoke": "pending-v1.1.258",
   "launchStatus": "released",
-  "name": "v1.1.257 — PREM Artwork Path Repair"
+  "name": "v1.1.258 — Superstar Studio Background Export"
 }
