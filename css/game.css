@@ -11415,3 +11415,12 @@ body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continu
 /* v1.1.264 — balance starter wrapper vertical spacing: lift the lower copy block. */
 .premiere-starter-onboarding .starter-premiere-physical-pack .pack-series-name{bottom:19%!important}
 .premiere-starter-onboarding .starter-premiere-physical-pack .pack-contents-line{bottom:14.5%!important}
+
+/* v1.1.265 — fit starter Superstar reveal completely within one mobile viewport. */
+body[data-screen="starter"] .premiere-starter-onboarding:has(.starter-pack-reveal-rebuilt){padding-top:12px!important;padding-bottom:8px!important;gap:8px!important;overflow:hidden!important}
+body[data-screen="starter"] .premiere-starter-onboarding:has(.starter-pack-reveal-rebuilt)>.eyebrow{font-size:.72rem!important;margin:0!important;line-height:1!important}
+body[data-screen="starter"] .premiere-starter-onboarding:has(.starter-pack-reveal-rebuilt)>.starter-title{font-size:clamp(2rem,9vw,2.8rem)!important;line-height:.9!important;margin:0 0 4px!important}
+body[data-screen="starter"] .starter-pack-reveal-rebuilt{grid-template-rows:auto minmax(0,1fr) 52px!important;gap:8px!important;padding:0 10px 4px!important}
+body[data-screen="starter"] .starter-pack-reveal-rebuilt h1{font-size:26px!important;line-height:.95!important;margin:0!important}
+body[data-screen="starter"] .starter-pack-reveal-card{height:min(100%,52dvh)!important;max-width:68vw!important}
+body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continue{height:52px!important;width:88%!important;font-size:.92rem!important}
