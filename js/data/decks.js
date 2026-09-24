@@ -6025,11 +6025,13 @@ for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
 }
 
 const RELAUNCH_ALLOWED_NONSET=new Set(["once-too-often","shoulder-up","fire-up","game-plan","no-sell","jawbreaker","dodge","duck","sidestep","standing-switch","rollover-counter","block","arm-drag","chain-wrestling","up-and-over","knees-up","catch-the-foot","grab-the-ropes","backflip-counter","got-all-of-it","crowd-support","knee-to-the-gut"]);
-for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
- const ids=deckIds[sid]??[];
- if(ids.length!==60)throw new Error(`${sid} relaunch deck is ${ids.length}, expected 60`);
+for(const sid of PREMIERE_RELAUNCH_SUPERSTARS.concat(["la-knight"])){
+ const ids=deckIds[sid] || [];
+ if(ids.length!==60)throw new Error(String(sid)+" relaunch deck is "+String(ids.length)+", expected 60");
  for(const id of ids){
-   if(id.startsWith("momentum-")||RELAUNCH_ALLOWED_NONSET.has(id)||/^PREM[0-9]+$/.test(id)||/^MITB0[3-7]$/.test(id))continue;
+   const isPrem=id.indexOf("PREM")===0 && /^[0-9]+$/.test(id.slice(4));
+   const isMitb=/^MITB0[3-7]$/.test(id);
+   if(id.indexOf("momentum-")===0||RELAUNCH_ALLOWED_NONSET.has(id)||isPrem||isMitb)continue;
    throw new Error(String(sid)+" relaunch deck leaked retired card "+String(id));
  }
 }
