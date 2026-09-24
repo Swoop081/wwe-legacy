@@ -10,7 +10,9 @@ export function deckBucket(card) {
   if (card.kind === "momentum") return "momentum";
   if (["action", "manager"].includes(card.kind)) return "utility";
   if (card.kind !== "move") return "other";
-  if (card.finisher || card.trademark) return "signature";
+  if (card.finisher) return "finisher";
+  if (card.trademark) return "trademark";
+  if (card.defensiveOnly || card.moveType === "counter" || card.counters?.length || card.counterStates?.length || card.counterSubmissionTargets?.length || card.countersCardIds?.length) return "counter";
   const cost = Number(card.cost ?? 0);
   if (cost <= 3) return "low";
   if (cost <= 6) return "mid";
