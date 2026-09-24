@@ -1,11 +1,11 @@
 {
-  "version": "1.1.294",
+  "version": "1.1.295",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.294",
+  "physicalIphoneSmoke": "pending-v1.1.295",
   "launchStatus": "released",
-  "name": "Relaunch Profile + Deck Lab Route Repair"
+  "name": "Starter Pack Full Deck Grant"
 }
