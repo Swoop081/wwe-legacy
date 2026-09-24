@@ -1,5 +1,5 @@
 {
-  "version": "1.1.271",
+  "version": "1.1.272",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
@@ -7,5 +7,5 @@
   "criticalFixOnly": false,
   "physicalIphoneSmoke": "pending-v1.1.269",
   "launchStatus": "released",
-  "name": "v1.1.271 — My Legacy Dead Route Repair"
+  "name": "v1.1.272 — Restored My Legacy"
 }
