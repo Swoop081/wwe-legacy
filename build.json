@@ -1,11 +1,11 @@
 {
-  "version": "1.1.280",
+  "version": "1.1.281",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.280",
+  "physicalIphoneSmoke": "pending-v1.1.281",
   "launchStatus": "released",
-  "name": "v1.1.280 — Direct Premiere Deck Grant"
+  "name": "v1.1.281 — Lossless Starter Deck IDs"
 }
