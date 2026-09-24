@@ -19833,7 +19833,7 @@ allGameplayCards.push(...buildPremiereGameplayCards(allGameplayCards));
   const clone=(sourceId,id,name,extra={})=>{const base=sourceById.get(sourceId);if(!base)return null;return {...structuredClone(base),id,name,setId:"money-in-the-bank",superstarId:"la-knight",cardCode:id,source:"money-in-the-bank",...extra};};
   const mitb=[
     clone("entrance-la-knight","MITB02","YEAH!!",{kind:"entrance",rarity:4,rulesText:"Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",preMatchMomentum:{strike:1},preMatchAdrenaline:1,delayedTurn5:false}),
-    clone("la-knight-bft","MITB03","Blunt Force Trauma",{finisher:true,trademark:false}),
+    clone("la-knight-bft","MITB03","Blunt Force Trauma",{finisher:true,trademark:false,cost:9,damage:16,requirements:{}}),
     clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true,rarity:3,damage:10,cost:6,requirements:{agility:2},rulesText:"LA Knight-exclusive Trademark. Top-rope elbow drop. Grounds opponent."}),
     clone("diving-elbow-drop","MITB05","LA Elbow",{finisher:false,trademark:true,rarity:3,damage:9,cost:6,requirements:{agility:2},rulesText:"LA Knight-exclusive Trademark. Elbow drop. Grounds opponent."}),
     clone("burning-hammer","MITB06","Burning Hammer",{finisher:false,trademark:true}),
