@@ -7008,7 +7008,7 @@ export const allGameplayCards = [
   },
   {
     "id": "la-knight-bft",
-    "name": "BFT",
+    "name": "Blunt Force Trauma",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 8,
@@ -7018,17 +7018,13 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "la-knight",
     "rarity": 4,
-    "rulesText": "LA Knight-exclusive Finisher. No Method requirement. Grounds opponent. If played immediately after Diving Elbow Drop in the same Control sequence, +1 Damage.",
+    "rulesText": "LA Knight-exclusive Finisher. No Method requirement. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "bonusDamageAfterNamed": {
-      "name": "Diving Elbow Drop",
-      "damage": 1
-    },
     "counterState": "front-control"
   },
   {
