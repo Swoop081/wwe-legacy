@@ -20,7 +20,7 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 50;
+export const PROFILE_VERSION = 51;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 12;
 
@@ -770,7 +770,7 @@ export function migrateProfile(old) {
   const premiereStarterPair = Array.isArray(p.starterIds)
     ? p.starterIds.filter(id => PREMIERE_STARTER_IDS.includes(id) && authoredDeckIds[id]?.length === 60)
     : [];
-  if (sourceVersion < 50 && premiereStarterPair.length === 2) {
+  if (sourceVersion < 51 && premiereStarterPair.length === 2) {
     p.unlockedSuperstars = [...new Set([...p.unlockedSuperstars, ...premiereStarterPair])];
     const combinedNeeded = new Map();
     for (const sid of premiereStarterPair) {
@@ -791,7 +791,16 @@ export function migrateProfile(old) {
     p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
     p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal = Math.max(Number(p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal) || 0, 1);
   }
-  p.seasons ??= {};
+  // v51 hard relaunch save scrub: remove every retired collectible identity.
+  // Momentum remains a system resource; all collectible ownership/decks are PREM/MITB only.
+  const activeCollectibleId = id => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(String(id)) || /^MITB0[1-8]$/.test(String(id));
+  const activeSystemId = id => /^momentum-(strength|strike|technical|agility)$/.test(String(id));
+  for (const id of Object.keys(p.ownedCards)) if (!activeCollectibleId(id) && !activeSystemId(id)) delete p.ownedCards[id];
+  for (const sid of Object.keys(p.savedDecks)) if (![...PREMIERE_STARTER_IDS,"la-knight"].includes(sid)) delete p.savedDecks[sid];
+  for (const [sid,saved] of Object.entries(p.savedDecks)) if (Array.isArray(saved)) {
+    p.savedDecks[sid] = saved.filter(entry => activeCollectibleId(typeof entry==="string"?entry:entry?.id) || activeSystemId(typeof entry==="string"?entry:entry?.id));
+  }
+    p.seasons ??= {};
   p.survivorSeries ??= { activeRun: null, clears: 0 };
   p.dailySpin ??= { lastSpinAt: null, nextSpinAt: null, totalSpins: 0, lastReward: null };
   p.ownedMerch ??= {};
