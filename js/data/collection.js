@@ -1,7 +1,7 @@
 import { superstars } from "./superstars.js?v=1.1.132";
 import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.132";
 import { sets } from "./sets.js?v=1.1.132";
-import { allGameplayCards } from "./content.js?v=1.1.132";
+import { allGameplayCards } from "./content.js?v=1.1.310";
 import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=1.1.132";
 import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.132";
 
@@ -40,7 +40,7 @@ const mitbLaKnightRewards = [
   { id:"MITB08", name:"LA Knight T-Shirt", kind:"merch", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:8, cardCode:"MITB08" }
 ];
 
-const premiereGameplayCards = allGameplayCards.filter(card => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(String(card.id)));
+const premiereGameplayCards = allGameplayCards.filter(card => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|27[0-4])$/.test(String(card.id)));
 const mitbGameplayCards = allGameplayCards.filter(card => /^MITB0[2-7]$/.test(String(card.id)));
 const activeCards = [
   ...premiereGameplayCards,
