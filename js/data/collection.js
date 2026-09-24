@@ -40,38 +40,36 @@ const mitbLaKnightRewards = [
   { id:"MITB08", name:"LA Knight T-Shirt", kind:"merch", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:8, cardCode:"MITB08" }
 ];
 
-const base = [...allGameplayCards, ...starCards, ...premiereStarterSuperstars, ...mitbLaKnightRewards];
-applySharedMoveFamilyCurvesV11203(base);
-const baseById = new Map(base.map(card => [card.id, card]));
+const premiereGameplayCards = allGameplayCards.filter(card => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(String(card.id)));
+const mitbGameplayCards = allGameplayCards.filter(card => /^MITB0[2-7]$/.test(String(card.id)));
+const activeCards = [
+  ...premiereGameplayCards,
+  ...premiereStarterSuperstars.filter(card => !premiereGameplayCards.some(existing => existing.id === card.id)),
+  { id:"MITB01", name:"LA Knight", kind:"superstar", superstarId:"la-knight", setId:"money-in-the-bank", rarity:4, fixedPrintingTier:"amethyst", cardNumber:1, cardCode:"MITB01" },
+  ...mitbGameplayCards,
+  { id:"MITB08", name:"LA Knight T-Shirt", kind:"merch", superstarId:"la-knight", setId:"money-in-the-bank", rarity:4, fixedPrintingTier:"amethyst", cardNumber:8, cardCode:"MITB08" }
+];
+const byId = new Map(activeCards.map(card => [card.id, card]));
+if (byId.size !== 278) throw new Error(`Active relaunch collection must contain exactly 278 unique cards; found ${byId.size}.`);
+for (let i=1;i<=270;i++) {
+  const id=`PREM${String(i).padStart(2,"0")}`;
+  if (!byId.has(id)) throw new Error(`Active Premiere collection is missing ${id}.`);
+}
+for (let i=1;i<=8;i++) {
+  const id=`MITB0${i}`;
+  if (!byId.has(id)) throw new Error(`Active Money in the Bank collection is missing ${id}.`);
+}
+applySharedMoveFamilyCurvesV11203(activeCards);
 
-if (baseById.size !== base.length) {
-  throw new Error("WWE Legacy collection contains duplicate active card IDs.");
-}
-const canonicalBase = base.filter(card => !String(card.id).startsWith("MITB") && !String(card.id).startsWith("PREM"));
-if (CARD_NUMBER_MANIFEST.length !== canonicalBase.length) {
-  throw new Error(`Canonical card manifest has ${CARD_NUMBER_MANIFEST.length} entries for ${canonicalBase.length} canonical active cards.`);
-}
-for (const card of canonicalBase) {
-  const manifest = CARD_NUMBER_BY_ID[card.id];
-  if (!manifest) throw new Error(`Active card ${card.id} is missing from the canonical card-number manifest.`);
-  if (manifest.setId !== card.setId) throw new Error(`Canonical manifest set mismatch for ${card.id}: ${manifest.setId} != ${card.setId}.`);
-  card.cardNumber = manifest.cardNumber;
-  card.cardCode = manifest.cardCode;
-}
-for (const manifest of CARD_NUMBER_MANIFEST) {
-  if (!baseById.has(manifest.id)) throw new Error(`Canonical manifest contains inactive card ${manifest.id}.`);
-}
-
-export const collectionCardsBySet = {};
-for (const setId of Object.keys(sets)) {
-  const ids = CARD_IDS_BY_SET[setId] ?? [];
-  const list = ids.map(id => baseById.get(id)).filter(Boolean);
-  if (setId === "season-1-last-time-is-now") list.push(...mitbLaKnightRewards);
-  if (setId === "premiere") list.push(...premiereStarterSuperstars);
-  collectionCardsBySet[setId] = list;
-}
-
-export const collectionCards = Object.values(collectionCardsBySet).flat();
+export const collectionCardsBySet = {
+  premiere: activeCards.filter(card => card.id.startsWith("PREM")).sort((a,b)=>Number(a.id.slice(4))-Number(b.id.slice(4))),
+  "money-in-the-bank": activeCards.filter(card => card.id.startsWith("MITB")).sort((a,b)=>Number(a.id.slice(4))-Number(b.id.slice(4)))
+};
+export const collectionCards = [...collectionCardsBySet.premiere, ...collectionCardsBySet["money-in-the-bank"]];
+export const setCollections = {
+  premiere: { ...sets.premiere, cardCount:270, superstarCount:collectionCardsBySet.premiere.filter(c=>c.kind==="superstar").length, rarityLabels },
+  "money-in-the-bank": { id:"money-in-the-bank", name:"Money in the Bank", displayName:"Money in the Bank", shortCode:"MITB", cardCount:8, superstarCount:1, rarityLabels }
+};
 export const setCollections = Object.fromEntries(
   Object.entries(collectionCardsBySet).map(([setId, list]) => [setId, {
     ...sets[setId],
@@ -80,6 +78,6 @@ export const setCollections = Object.fromEntries(
     rarityLabels,
   }])
 );
-export const setCollection = setCollections["summerslam-series-1"];
+export const setCollection = setCollections["premiere"];
 export function cardsForSet(setId) { return collectionCardsBySet[setId] ?? []; }
 export function setCollectionFor(setId) { return setCollections[setId] ?? null; }
