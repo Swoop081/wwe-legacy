@@ -5890,7 +5890,8 @@ export const deckIds={
     "PREM177",
     "PREM238",
     "PREM227"
-  ],rt { allGameplayCards } from "./content.js?v=1.1.132";
+  ];
+import { allGameplayCards } from "./content.js?v=1.1.227";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
