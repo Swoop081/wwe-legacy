@@ -1338,14 +1338,15 @@ export const superstars = {
     "leadOffIds": [
       "momentum-technical",
       "momentum-strike",
-      "cody-rhodes-dropdown-uppercut",
-      "dropkick",
-      "snap-powerslam"
+      "momentum-agility",
+      "PREM187",
+      "PREM217"
     ],
     "signatures": [
-      "cody-rhodes-cody-cutter",
-      "cody-rhodes-cross-rhodes",
-      "cody-rhodes-what-do-you-want-to-talk-about"
+      "PREM52",
+      "PREM53",
+      "PREM54",
+      "PREM34"
     ],
     "archetype": "reviewed-starter",
     "hp": 64,
