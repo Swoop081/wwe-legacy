@@ -11488,3 +11488,6 @@ body[data-screen="starter-summary"] .starter-roster-summary-cards{width:100%!imp
 body[data-screen="starter-summary"] .starter-summary-card-slot{width:100%!important;display:flex!important;justify-content:center!important;align-items:flex-start!important}
 body[data-screen="starter-summary"] .starter-summary-card-slot>.ccg-card{width:min(42vw,170px)!important;height:auto!important;max-height:48dvh!important;margin:0!important}
 body[data-screen="starter-summary"] .starter-roster-summary .start-match{width:88%!important;height:54px!important;min-height:54px!important;margin:5px auto 0!important;padding:0 18px!important;flex:0 0 54px!important}
+
+/* v1.1.329 — 5x visual treatment for roster-summary WWE Legacy logo. */
+body[data-screen="starter-summary"] .starter-summary-logo{width:min(90vw,520px)!important;max-width:none!important;max-height:28dvh!important;margin:-4dvh auto -4dvh!important;object-fit:contain!important;transform:scale(1.55)!important;transform-origin:center!important}
