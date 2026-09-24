@@ -1,11 +1,11 @@
 {
-  "version": "1.1.281",
+  "version": "1.1.282",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.281",
+  "physicalIphoneSmoke": "pending-v1.1.282",
   "launchStatus": "released",
-  "name": "v1.1.281 — Lossless Starter Deck IDs"
+  "name": "v1.1.282 — Starter Deck Import Repair"
 }
