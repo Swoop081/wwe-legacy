@@ -1,11 +1,11 @@
 {
-  "version": "1.1.243",
+  "version": "1.1.244",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.243",
+  "physicalIphoneSmoke": "pending-v1.1.244",
   "launchStatus": "released",
-  "name": "v1.1.243 — Premiere Starter Reveal + Home Exit Fix"
+  "name": "v1.1.244 — Premiere Starter Pack Opening Flow"
 }
