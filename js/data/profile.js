@@ -20,8 +20,8 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 52;
-export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
+export const PROFILE_VERSION = 53;
+export const DEFAULT_PLAYER_ENTRANCE_ID = "PREM241";
 export const STARTING_MOMENTUM_COPIES = 12;
 
 const blankSetCounters = () => ({
@@ -735,7 +735,14 @@ function repairLeakedRheaCrucifix(profile, sid, saved = []) {
 
 export function migrateProfile(old) {
   const sourceVersion = Number(old?.version) || 0;
-  if (!old?.starterId || !STARTER_CHOICES.includes(old.starterId) || !decks[old.starterId]) return null;
+  // Relaunch saves use the two Premiere onboarding starters. Do not reject them
+  // through the retired brand-based STARTER_CHOICES gate before migration can repair them.
+  const incomingStarterIds = Array.isArray(old?.starterIds) ? old.starterIds : [];
+  const validRelaunchPair = incomingStarterIds.length === 2 &&
+    PREMIERE_STARTER_MALES.includes(incomingStarterIds[0]) &&
+    PREMIERE_STARTER_FEMALES.includes(incomingStarterIds[1]);
+  const validLegacyStarter = !!old?.starterId && STARTER_CHOICES.includes(old.starterId) && !!decks[old.starterId];
+  if (!validRelaunchPair && !validLegacyStarter) return null;
   // Snapshot genuinely owned reward-exclusive cards before any historical
   // migration helpers can synthesize unlock-package ownership. Only cards that
   // existed in the incoming save qualify for grandfathering if their reward set
