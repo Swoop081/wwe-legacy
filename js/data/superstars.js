@@ -19,9 +19,9 @@ export const superstars = {
           "PREM153"
     ],
     "signatures": [
-          "PREM62",
-          "PREM63",
-          "PREM64",
+          "PREM88",
+          "PREM89",
+          "PREM90",
           "PREM46"
     ],
     "archetype": "reviewed-starter",
@@ -286,9 +286,9 @@ export const superstars = {
           "PREM187"
     ],
     "signatures": [
-          "PREM56",
-          "PREM57",
-          "PREM58",
+          "PREM70",
+          "PREM71",
+          "PREM72",
           "PREM40"
     ],
     "archetype": "resilient-powerhouse-technician",
@@ -491,9 +491,9 @@ export const superstars = {
           "PREM157"
     ],
     "signatures": [
-          "PREM51",
-          "PREM52",
-          "PREM53",
+          "PREM55",
+          "PREM56",
+          "PREM57",
           "PREM35"
     ],
     "archetype": "reviewed-starter",
@@ -629,9 +629,9 @@ export const superstars = {
           "PREM215"
     ],
     "signatures": [
-          "PREM52",
-          "PREM53",
-          "PREM54",
+          "PREM58",
+          "PREM59",
+          "PREM60",
           "PREM36"
     ],
     "archetype": "reviewed-starter",
@@ -952,9 +952,9 @@ export const superstars = {
           "PREM187"
     ],
     "signatures": [
-          "PREM60",
-          "PREM61",
-          "PREM62",
+          "PREM82",
+          "PREM83",
+          "PREM84",
           "PREM44"
     ],
     "archetype": "reviewed-starter",
@@ -1279,9 +1279,9 @@ export const superstars = {
           "PREM121"
     ],
     "signatures": [
-          "PREM57",
-          "PREM58",
-          "PREM59",
+          "PREM73",
+          "PREM74",
+          "PREM75",
           "PREM41"
     ],
     "archetype": "reviewed-starter",
@@ -1348,9 +1348,9 @@ export const superstars = {
           "PREM217"
     ],
     "signatures": [
-          "PREM50",
-          "PREM51",
           "PREM52",
+          "PREM53",
+          "PREM54",
           "PREM34"
     ],
     "archetype": "reviewed-starter",
@@ -1482,9 +1482,9 @@ export const superstars = {
           "PREM161"
     ],
     "signatures": [
-          "PREM55",
-          "PREM56",
-          "PREM57",
+          "PREM67",
+          "PREM68",
+          "PREM69",
           "PREM39"
     ],
     "archetype": "reviewed-starter",
@@ -1547,9 +1547,9 @@ export const superstars = {
           "PREM198"
     ],
     "signatures": [
-          "PREM58",
-          "PREM59",
-          "PREM60",
+          "PREM76",
+          "PREM77",
+          "PREM78",
           "PREM42"
     ],
     "archetype": "reviewed-starter",
@@ -1753,9 +1753,9 @@ export const superstars = {
           "PREM157"
     ],
     "signatures": [
-          "PREM59",
-          "PREM60",
-          "PREM61",
+          "PREM79",
+          "PREM80",
+          "PREM81",
           "PREM43"
     ],
     "archetype": "reviewed-starter",
@@ -2506,9 +2506,9 @@ export const superstars = {
           "PREM154"
     ],
     "signatures": [
-          "PREM63",
-          "PREM64",
-          "PREM65",
+          "PREM91",
+          "PREM92",
+          "PREM93",
           "PREM47"
     ],
     "archetype": "stun-setup-resource-control",
@@ -2706,9 +2706,9 @@ export const superstars = {
           "PREM223"
     ],
     "signatures": [
-          "PREM61",
-          "PREM62",
-          "PREM63",
+          "PREM85",
+          "PREM86",
+          "PREM87",
           "PREM45"
     ],
     "archetype": "strength-to-agility-showstopper",
@@ -3033,9 +3033,9 @@ export const superstars = {
           "PREM131"
     ],
     "signatures": [
-          "PREM53",
-          "PREM54",
-          "PREM55",
+          "PREM61",
+          "PREM62",
+          "PREM63",
           "PREM37"
     ],
     "archetype": "technical-control-sudden-finish",
@@ -3098,9 +3098,9 @@ export const superstars = {
           "PREM157"
     ],
     "signatures": [
-          "PREM54",
-          "PREM55",
-          "PREM56",
+          "PREM64",
+          "PREM65",
+          "PREM66",
           "PREM38"
     ],
     "archetype": "underdog-comeback-sequencer",
@@ -6368,9 +6368,9 @@ export const superstars = {
           "PREM157"
     ],
     "signatures": [
-          "PREM64",
-          "PREM65",
-          "PREM66",
+          "PREM94",
+          "PREM95",
+          "PREM96",
           "PREM48"
     ],
     "archetype": "reward-technical-agility-striker",
