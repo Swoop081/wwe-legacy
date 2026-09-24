@@ -11283,7 +11283,7 @@ body[data-screen="starter-summary"] #game{
 }
 
 
-/* v1.1.250 — Premiere starter onboarding: one-screen reveal + two-card roster */
+/* v1.1.251 — Premiere starter onboarding: one-screen reveal + two-card roster */
 body[data-screen="starter"] .premiere-starter-onboarding{box-sizing:border-box;min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom));gap:8px;overflow:hidden}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero h2{font-size:clamp(30px,8vw,43px);margin:.08em 0}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{font-size:13px;line-height:1.25;margin:6px 0}
@@ -11300,11 +11300,11 @@ body[data-screen="starter-summary"] .starter-roster-summary-cards .starter-summa
 body[data-screen="starter-summary"] .starter-roster-summary{grid-template-rows:auto minmax(0,1fr) 54px!important}
 @media(max-height:750px){body[data-screen="starter"] .starter-superstar-reveal{height:calc(100dvh - 145px)}body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{display:none}}
 
-/* v1.1.250 — starter summary wrapper keeps full rendered cards side by side */
+/* v1.1.251 — starter summary wrapper keeps full rendered cards side by side */
 body[data-screen="starter-summary"] .starter-summary-superstar-card{width:min(44vw,180px)!important;max-width:180px!important;aspect-ratio:680/1000!important;display:grid;place-items:center;min-width:0}
 body[data-screen="starter-summary"] .starter-summary-superstar-card .starter-summary-rendered-card{width:100%!important;height:auto!important;aspect-ratio:680/1000!important}
 
-/* v1.1.250 — iPhone starter flow hard layout override */
+/* v1.1.251 — iPhone starter flow hard layout override */
 body[data-screen="starter"] #game{height:100dvh!important;overflow:hidden!important}
 body[data-screen="starter"] .premiere-starter-onboarding{height:100dvh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;padding:10px 8px!important}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero{flex:0 0 auto!important}
@@ -11325,7 +11325,7 @@ body[data-screen="starter-summary"] .starter-summary-rendered-card{width:100%!im
 body[data-screen="starter-summary"] .start-match{width:92%!important;justify-self:center!important;margin:0!important}
 .pack-set-premiere .pack-set-logo{display:block!important;max-width:74%!important;max-height:28%!important;width:auto!important;height:auto!important;object-fit:contain!important}
 
-/* v1.1.250 — exact starter onboarding composition */
+/* v1.1.251 — exact starter onboarding composition */
 body[data-screen="starter"] .premiere-starter-onboarding{padding:10px 14px 8px!important;gap:8px!important}
 body[data-screen="starter"] .starter-superstar-reveal{position:relative!important;display:grid!important;grid-template-rows:28px minmax(0,1fr) 22px!important;gap:4px!important;padding:0!important;width:100%!important}
 body[data-screen="starter"] .starter-superstar-reveal .single-card-slot{width:100%!important;height:100%!important;overflow:visible!important;display:grid!important;place-items:center!important}
@@ -11343,17 +11343,22 @@ body[data-screen="starter-summary"] .start-match{height:58px!important;min-heigh
 .pack-set-premiere .pack-brand-lockup{width:76%!important;height:24%!important;display:grid!important;place-items:center!important}
 .pack-set-premiere .pack-set-logo{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important}
 
-/* v1.1.250 — Premiere authored background + logo */
+/* v1.1.251 — Premiere authored background + logo */
 .ccg-card.set-premiere .ccg-card-front{background:#050508 url("../assets/images/premiere-background.jpg") center/cover no-repeat!important}
 .ccg-card.set-premiere .ccg-card-art{background:transparent!important}
 .ccg-card.set-premiere .ccg-layered-card-plate{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;z-index:2!important;background:transparent!important}
 .ccg-card.set-premiere .ccg-superstar-nameplate,.ccg-card.set-premiere .ccg-live-front-data,.ccg-card.set-premiere .ccg-card-studio-ink,.ccg-card.set-premiere .ccg-print-frame{z-index:3!important}
 .pack-set-premiere .pack-set-logo{display:block!important;opacity:1!important;visibility:visible!important;object-fit:contain!important}
 
-/* v1.1.250 — starter Premiere wrapper logo + correct layered Superstar composition */
+/* v1.1.251 — starter Premiere wrapper logo + correct layered Superstar composition */
 .pack-set-premiere .pack-wrapper-face .pack-brand-lockup{position:absolute!important;left:50%!important;top:16%!important;transform:translateX(-50%)!important;width:72%!important;height:25%!important;z-index:12!important;display:flex!important;align-items:center!important;justify-content:center!important}
 .pack-set-premiere .pack-wrapper-face .pack-set-logo{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;opacity:1!important;visibility:visible!important;position:relative!important;z-index:13!important}
 .ccg-card.set-premiere.type-superstar .ccg-card-front{background:#050508!important}
 .ccg-card.set-premiere.type-superstar .ccg-card-art{position:absolute!important;inset:0!important;z-index:1!important;display:block!important;background:transparent!important}
 .ccg-card.set-premiere.type-superstar .ccg-layered-card-plate{z-index:2!important}
 .ccg-card.set-premiere.type-superstar .ccg-superstar-full-art:before{content:"";position:absolute;inset:2.7% 3.5% 3.8%;background:url("../assets/images/premiere-background.jpg") center/cover no-repeat;z-index:0}
+
+/* v1.1.251 — explicit Premiere background image layer; no pseudo-element dependency */
+.ccg-card.set-premiere.type-superstar .ccg-superstar-full-art:before{content:none!important}
+.ccg-card.set-premiere.type-superstar .ccg-premiere-card-background{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;z-index:0!important;pointer-events:none!important}
+.ccg-card.set-premiere.type-superstar .ccg-layered-card-plate{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:contain!important;z-index:2!important}
