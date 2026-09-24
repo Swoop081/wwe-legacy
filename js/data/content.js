@@ -5,7 +5,7 @@ import { FUTURE_ROADMAP_GAMEPLAY_CARDS } from "./future-roadmap-v1.1.74.js?v=1.1
 import { V1175_AUTHENTICITY_CARDS } from "./v1.1.75-recommended-deck-authenticity.js?v=1.1.132";
 import { AJ_STYLES_GAMEPLAY_CARDS } from "./aj-styles-v1.1.80.js?v=1.1.132";
 import { BECKY_LYNCH_V11200_CARDS } from "./becky-lynch-v1.1.200.js?v=1.1.200";
-import { buildPremiereGameplayCards } from "./premiere-gameplay.js?v=1.1.320";
+import { buildPremiereGameplayCards } from "./premiere-gameplay.js?v=1.1.321";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
