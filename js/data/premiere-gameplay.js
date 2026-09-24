@@ -286,7 +286,27 @@ const UNIVERSAL_ACTIONS=[
  {id:"PREM254",name:"THAT WAS THREE",kind:"action",rarity:3,rulesText:"When a Move reduces you to 0 Health or below, kick out and continue the match. The Move's damage, persistent damage and other effects remain.",effects:[{type:"kickoutAfterLethalMove",retainDamage:true,retainEffects:true}]}
 ].map(card=>({setId:"premiere",cardCode:card.id,source:"premiere",superstarId:null,cost:card.cost??0,damage:card.damage??0,requirements:{},printingStats:{base:{cost:card.cost??0,damage:card.damage??0},emerald:{cost:card.cost??0,damage:card.damage??0},sapphire:{cost:card.cost??0,damage:card.damage??0},ruby:{cost:card.cost??0,damage:card.damage??0},amethyst:{cost:card.cost??0,damage:card.damage??0}},...card}));
 
-export function buildPremiereGameplayCards(cards=[]){
+
+function normalizePremiereMoveRequirements(card){
+ if(card?.kind!=="move") return card;
+ const target={1:0,2:1,3:2,4:0}[Number(card.rarity)];
+ if(target===undefined) return card;
+ const req={strength:Number(card.requirements?.strength||0),strike:Number(card.requirements?.strike||0),technical:Number(card.requirements?.technical||0),agility:Number(card.requirements?.agility||0)};
+ if(target===0){card.requirements={};return card;}
+ const preferred=["strength","strike","technical","agility"].filter(k=>req[k]>0);
+ const method=card.method&&["strength","strike","technical","agility"].includes(card.method)?card.method:null;
+ if(target===1){card.requirements={ [method||preferred[0]]:1 }; return card;}
+ // Rare moves require exactly two total attribute points. Preserve an existing split where possible;
+ // otherwise use the move's existing method as the second point. If no method/requirement exists,
+ // leave the data untouched so the audit can flag it rather than inventing an attribute.
+ const total=Object.values(req).reduce((a,b)=>a+b,0);
+ if(total===2){card.requirements=Object.fromEntries(Object.entries(req).filter(([,v])=>v>0));return card;}
+ if(total>2){let remaining=2;const ordered=[method,...preferred].filter((v,i,a)=>v&&a.indexOf(v)===i);const out={};for(const k of ordered){if(remaining<=0)break;const take=Math.min(req[k]||0,remaining);if(take)out[k]=take;remaining-=take;}card.requirements=out;return card;}
+ if(total===1&&method){const k=preferred[0];if(k===method)card.requirements={[method]:2};else card.requirements={[k]:1,[method]:1};return card;}
+ if(total===0&&method){card.requirements={[method]:2};}
+ return card;
+}
+\nexport function buildPremiereGameplayCards(cards=[]){
  const source=[...cards], byName=new Map();
  for(const card of source){const k=norm(card.name); if(!byName.has(k))byName.set(k,[]);byName.get(k).push(card);}
  const find=(name,sid=null)=>{const key=norm(aliases[norm(name)]??name);const pool=byName.get(key)??[];return pool.find(c=>sid&&c.superstarId===sid)||pool.find(c=>!c.superstarId)||pool[0]||null;};
