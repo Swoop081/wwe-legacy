@@ -1,11 +1,11 @@
 {
-  "version": "1.1.253",
+  "version": "1.1.254",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.253",
+  "physicalIphoneSmoke": "pending-v1.1.254",
   "launchStatus": "released",
-  "name": "v1.1.253 — Premiere Boot and Layer Stack Repair"
+  "name": "v1.1.254 — Premiere Pack Logo and Card Background"
 }
