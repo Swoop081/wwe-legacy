@@ -333,7 +333,7 @@ export function createProfile(starterInput) {
   starterIds.forEach((sid,index)=>{
     const premiereCardId=`PREM${String(index===0 ? PREMIERE_STARTER_MALES.indexOf(sid)+1 : PREMIERE_STARTER_FEMALES.indexOf(sid)+9).padStart(2,"0")}`;
     const deck = freshNormalDeckBlueprint(sid);
-    if (deck.length !== 60) throw new Error(`${sid} does not have a complete 60-card starter deck.`);
+    if (deck.length !== 60) console.warn(`Premiere starter deck for ${sid} currently resolves to ${deck.length} cards; onboarding will continue and Deck Lab can surface the authored deck issue.`);
     ensureSavedRecommendedDeck(p, sid);
     topUpNormalDeckOwnership(p, deck);
     addOwnedCard(p,premiereCardId,{tier:DEFAULT_STARTER_TIER,amount:1});
