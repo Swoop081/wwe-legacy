@@ -1,4 +1,5 @@
 export const sets = {
+  "money-in-the-bank": {"id":"money-in-the-bank","name":"Money in the Bank","series":1,"type":"event-reward","displayName":"Money in the Bank","shortCode":"MITB","lifecycleDefault":"featured","developmentOnly":false,"plannedSuperstarIds":["la-knight"],"lifecycleLabels":{"featured":"Featured"}},
   "premiere": {"id":"premiere","name":"Premiere","series":1,"type":"launch-set","displayName":"Premiere","shortCode":"PREM","lifecycleDefault":"featured","developmentOnly":false,"plannedSuperstarIds":["roman-reigns","cody-rhodes","cm-punk","seth-rollins","randy-orton","sami-zayn","stone-cold-steve-austin","john-cena","rhea-ripley","liv-morgan","becky-lynch","charlotte-flair","tiffany-stratton","iyo-sky","alexa-bliss","trish-stratus"],"lifecycleLabels":{"featured":"Featured"}},
   "new-generation-series-1": {
     "id": "new-generation-series-1",
@@ -332,3 +333,6 @@ delete sets["season-1-final-boss"];
 delete sets["parked-chyna"];
 delete sets["season-2-whos-next"];
 
+
+// Relaunch archive boundary: legacy authored sets remain in-repo as reference data only.
+for (const [id,set] of Object.entries(sets)) if (!["premiere","money-in-the-bank"].includes(id)) set.developmentOnly=true;
