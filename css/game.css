@@ -11531,3 +11531,17 @@ body[data-screen="starter-summary"] .starter-summary-logo{width:min(82vw,460px)!
     margin-top:6px!important;
   }
 }
+
+
+/* v1.1.342 — streamlined Challenges hierarchy */
+.challenge-collapsible > summary { list-style:none; cursor:pointer; }
+.challenge-collapsible > summary::-webkit-details-marker { display:none; }
+.challenge-collapsible > summary b i { display:inline-block; font-style:normal; transition:transform .18s ease; }
+.challenge-collapsible[open] > summary b i { transform:rotate(180deg); }
+.challenge-milestones-group { display:grid; gap:12px; }
+.challenge-milestones-master-heading { display:flex; align-items:center; gap:14px; padding:18px 20px; border:1px solid rgba(255,255,255,.14); border-radius:22px; background:rgba(8,18,17,.88); }
+.challenge-milestones-master-heading > span { display:grid; place-items:center; width:46px; height:46px; border-radius:14px; background:rgba(61,255,160,.08); }
+.challenge-milestones-master-heading > div { flex:1; }
+.challenge-milestones-master-heading small { display:block; font-size:11px; letter-spacing:.18em; opacity:.62; }
+.challenge-milestones-master-heading h3 { margin:3px 0 0; font-size:24px; }
+.challenge-milestones-master-heading > b { font-size:12px; letter-spacing:.14em; }
