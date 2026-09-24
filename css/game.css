@@ -11445,3 +11445,10 @@ body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continu
 .legacy-brand-start-button{width:min(86vw,520px)!important;min-height:66px!important;border:1px solid #e4bd5d!important;border-radius:10px!important;background:linear-gradient(180deg,#f4d777 0,#c99831 100%)!important;color:#100b08!important;font:900 1.25rem/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;letter-spacing:.08em!important;box-shadow:0 8px 28px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.6)!important}
 .legacy-brand-start-button i{font-style:normal!important;margin-left:12px!important;font-size:1.5em!important}
 .legacy-brand-version{font:700 .7rem/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;letter-spacing:.18em!important;color:rgba(255,255,255,.48)!important}
+
+/* v1.1.323 — center Premiere starter pack and tighten vertical composition. */
+body[data-screen="starter"] .starter-pack-opening-flow .starter-hero{margin-top:5dvh!important}
+body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage{flex:1 1 0!important;min-height:0!important;display:grid!important;place-items:center!important;padding:0!important}
+body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage .sealed-pack-button{height:100%!important;min-height:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;padding:0!important}
+body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage .sealed-pack-button>strong{margin-top:0!important}
+body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage .sealed-pack-button>small{margin-top:0!important}
