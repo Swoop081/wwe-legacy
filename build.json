@@ -1,11 +1,11 @@
 {
-  "version": "1.1.254",
+  "version": "1.1.255",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.254",
+  "physicalIphoneSmoke": "pending-v1.1.255",
   "launchStatus": "released",
-  "name": "v1.1.254 — Premiere Pack Logo and Card Background"
+  "name": "v1.1.255 — Direct Premiere Starter Asset Layers"
 }
