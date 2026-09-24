@@ -1,4 +1,4 @@
-import { decks } from "./decks.js?v=1.1.277";
+import { decks, authoredDeckIds } from "./decks.js?v=1.1.282";
 import { collectionCards } from "./collection.js?v=1.1.132";
 import { superstars } from "./superstars.js?v=1.1.278";
 import { isUnreleasedSetId } from "./release.js?v=1.1.132";
