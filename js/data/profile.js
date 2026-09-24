@@ -342,7 +342,7 @@ export function createProfile(starterInput) {
   // collectible five-copy-per-tier cap used by normal cards.
   addOwnedCard(p, "PREM241", { tier:DEFAULT_STARTER_TIER, amount:1 });
   p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID] = { normal:1, emerald:0, sapphire:0, ruby:0, amethyst:0 };
-  for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+  for (const id of ["PREM271","PREM272","PREM273","PREM274"]) {
     p.ownedCards[id] = { normal:STARTING_MOMENTUM_COPIES, emerald:0, sapphire:0, ruby:0, amethyst:0 };
   }
   starterIds.forEach((sid,index)=>{
@@ -791,7 +791,7 @@ export function migrateProfile(old) {
       p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
       p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, amount);
     }
-    for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+    for (const id of ["PREM271","PREM272","PREM273","PREM274"]) {
       p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
       p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, STARTING_MOMENTUM_COPIES);
     }
@@ -821,7 +821,7 @@ export function migrateProfile(old) {
       p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
       p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, amount);
     }
-    for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+    for (const id of ["PREM271","PREM272","PREM273","PREM274"]) {
       p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
       p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, STARTING_MOMENTUM_COPIES);
     }
@@ -1130,7 +1130,7 @@ export function migrateProfile(old) {
       if (card?.kind === "entrance" && card.superstarId) delete p.ownedCards[id];
     }
     addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { foil: true, amount: 1 });
-    for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
+    for (const id of ["PREM271", "PREM272", "PREM273", "PREM274"]) {
       const missing = Math.max(0, STARTING_MOMENTUM_COPIES - totalOwnedCopies(p, id));
       if (missing) addOwnedCard(p, id, { amount: missing });
     }
@@ -1309,7 +1309,7 @@ export function migrateProfile(old) {
   if (sourceVersion < 39) {
     const sid = "razor-ramon";
     const saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
-    const desiredLead = ["momentum-strength", "momentum-strike", "momentum-technical", "fallaway-slam", "punch"];
+    const desiredLead = ["PREM271", "PREM272", "PREM273", "fallaway-slam", "punch"];
     if (saved?.length === 60) {
       const idOf = entry => typeof entry === "string" ? entry : entry?.id;
       const used = new Set();
@@ -1383,7 +1383,7 @@ export function migrateProfile(old) {
       p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
       p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, amount);
     }
-    for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+    for (const id of ["PREM271","PREM272","PREM273","PREM274"]) {
       p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
       p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, STARTING_MOMENTUM_COPIES);
     }
