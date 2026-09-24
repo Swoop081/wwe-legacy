@@ -3,7 +3,7 @@
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.233";
+const VERSION = "1.1.234";
 
 function showBootError(error, stage = "Application boot") {
   const detail = String(error?.stack || error?.message || error || "Unknown error");
@@ -21,12 +21,74 @@ addEventListener("unhandledrejection", event => {
   if (!globalThis.__WWE_LEGACY_APP_BOOTED__) showBootError(event.reason, "Unhandled promise rejection during boot");
 });
 
-try {
-  await import(`../ui/app.js?v=${VERSION}`);
-  globalThis.__WWE_LEGACY_APP_BOOTED__ = true;
-} catch (error) {
-  console.error("WWE Legacy application boot failed", error);
-  showBootError(error, "Failed loading js/ui/app.js");
+const bootProbeModules = [
+  "../config/build.js",
+  "../config/update.js",
+  "../data/superstars.js",
+  "../data/content.js",
+  "../data/premiere-gameplay.js",
+  "../data/decks.js",
+  "../data/sets.js",
+  "../data/release.js",
+  "../data/collection.js",
+  "../data/artwork.js",
+  "../data/animated-card-art.js",
+  "../data/profile.js",
+  "../data/boosters.js",
+  "../data/store.js",
+  "../data/matchmaking.js",
+  "../data/deck-assistant.js",
+  "../data/variants.js",
+  "../data/cpu-tier-scaling.js",
+  "../engine/MatchEngine.js",
+  "../engine/rules.js",
+  "../engine/utils.js",
+  "../engine/health.js",
+  "../ai/WrestlingAI.js",
+  "../ui/turn-driver.js",
+  "../ui/play-pile.js",
+  "../ui/play-pile-mats.js",
+  "../data/ladder.js",
+  "../data/king-of-the-ring.js",
+  "../data/championship-road.js",
+  "../data/live-events.js",
+  "../data/challenges.js",
+  "../data/career.js",
+  "../data/set-progression.js",
+  "../data/move-types.js",
+  "../data/counter-states.js",
+  "../data/catalogue.js",
+  "../data/deck-builder.js",
+  "../data/deck-health.js",
+  "../data/seasons.js",
+  "../data/game-rules.js",
+  "../data/save-backup.js",
+  "../data/daily-spin.js",
+  "../data/merch.js",
+  "../data/superstar-variants.js",
+  "../data/survivor-series-mode.js"
+];
+
+let bootProbeFailed = false;
+for (const path of bootProbeModules) {
+  try {
+    await import(`${path}?bootprobe=${VERSION}`);
+  } catch (error) {
+    bootProbeFailed = true;
+    console.error(`WWE Legacy boot probe failed: ${path}`, error);
+    showBootError(error, `Failed module: ${path.replace("../", "js/")}`);
+    break;
+  }
+}
+
+if (!bootProbeFailed) {
+  try {
+    await import(`../ui/app.js?v=${VERSION}`);
+    globalThis.__WWE_LEGACY_APP_BOOTED__ = true;
+  } catch (error) {
+    console.error("WWE Legacy application boot failed after module probes passed", error);
+    showBootError(error, "All dependency probes passed — failed executing js/ui/app.js");
+  }
 }
 
 function loadClassicScript(path) {
