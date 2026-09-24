@@ -1,11 +1,11 @@
 {
-  "version": "1.1.265",
+  "version": "1.1.266",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.265",
+  "physicalIphoneSmoke": "pending-v1.1.266",
   "launchStatus": "released",
-  "name": "v1.1.265 — One-Screen Starter Reveal"
+  "name": "v1.1.266 — Premiere Card Set Logo"
 }
