@@ -3,7 +3,7 @@
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.252";
+const VERSION = "1.1.253";
 
 function showBootError(error, stage = "Application boot") {
   const detail = String(error?.stack || error?.message || error || "Unknown error");
@@ -70,25 +70,17 @@ const bootProbeModules = [
 ];
 
 let bootProbeFailed = false;
-for (const path of bootProbeModules) {
-  try {
-    await import(`${path}?bootprobe=${VERSION}`);
-  } catch (error) {
-    bootProbeFailed = true;
-    console.error(`WWE Legacy boot probe failed: ${path}`, error);
-    showBootError(error, `Failed module: ${path.replace("../", "js/")}`);
-    break;
+try {
+  await import(`../ui/app.js?v=${VERSION}`);
+  globalThis.__WWE_LEGACY_APP_BOOTED__ = true;
+  if (globalThis.__WWE_LEGACY_BOOT_FALLBACK__) {
+    clearTimeout(globalThis.__WWE_LEGACY_BOOT_FALLBACK__);
+    globalThis.__WWE_LEGACY_BOOT_FALLBACK__ = null;
   }
-}
-
-if (!bootProbeFailed) {
-  try {
-    await import(`../ui/app.js?v=${VERSION}`);
-    globalThis.__WWE_LEGACY_APP_BOOTED__ = true;
-  } catch (error) {
-    console.error("WWE Legacy application boot failed after module probes passed", error);
-    showBootError(error, "All dependency probes passed — failed executing js/ui/app.js");
-  }
+} catch (error) {
+  bootProbeFailed = true;
+  console.error("WWE Legacy application boot failed", error);
+  showBootError(error, "js/ui/app.js");
 }
 
 function loadClassicScript(path) {
