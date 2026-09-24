@@ -11559,3 +11559,55 @@ body[data-screen="starter-summary"] .starter-summary-logo{width:min(82vw,460px)!
 .challenge-reward-sets-heading > b i { display:inline-block; font-style:normal; transition:transform .18s ease; }
 .challenge-reward-sets[open] .challenge-reward-sets-heading > b i { transform:rotate(180deg); }
 .challenge-reward-set-list { display:grid; gap:12px; margin-top:12px; padding-left:14px; border-left:2px solid rgba(255,255,255,.08); }
+
+
+/* v1.1.348 — iPhone readability pass: larger information hierarchy, less dead padding. */
+@media(max-width:600px){
+  /* Collection summary */
+  body[data-screen="collection"] .collection-quickbar{padding:10px 8px!important;gap:7px!important}
+  body[data-screen="collection"] .collection-quick-stats span{padding:7px 3px!important;min-height:50px!important;align-content:center!important}
+  body[data-screen="collection"] .collection-quick-stats b{font-size:1.25rem!important;line-height:.95!important}
+  body[data-screen="collection"] .collection-quick-stats small{font-size:.48rem!important;line-height:1.12!important;letter-spacing:.07em!important;margin-top:3px!important}
+  body[data-screen="collection"] .collection-count{font-size:.95rem!important}
+  body[data-screen="collection"] .collection-tools{padding:9px!important}
+  body[data-screen="collection"] .collection-toolbar-head strong{font-size:1rem!important;line-height:1!important}
+  body[data-screen="collection"] .collection-toolbar-head span{font-size:.72rem!important}
+  body[data-screen="collection"] .collection-set-rail button{font-size:.76rem!important;min-height:44px!important;padding:8px 12px!important}
+
+  /* My Legacy — the old .3-.6rem labels were not acceptable on a phone. */
+  body[data-screen="profile"] .career-record-panel,body[data-screen="profile"] .career-achievements-panel{padding:12px!important}
+  body[data-screen="profile"] .career-record-panel .section-title small,body[data-screen="profile"] .career-achievements-panel .section-title small{font-size:.68rem!important;line-height:1.25!important}
+  body[data-screen="profile"] .career-record-panel .section-title>span,body[data-screen="profile"] .career-achievements-panel .section-title>span{font-size:.62rem!important}
+  body[data-screen="profile"] .career-record-card{min-height:94px!important;padding:12px!important;gap:5px!important}
+  body[data-screen="profile"] .career-record-card>span{font-size:.62rem!important;line-height:1.15!important}
+  body[data-screen="profile"] .career-record-card>strong{font-size:1.55rem!important}
+  body[data-screen="profile"] .career-record-card>small{font-size:.55rem!important}
+  body[data-screen="profile"] .career-superstar-record{min-height:72px!important;padding:7px 10px 7px 6px!important;grid-template-columns:54px minmax(0,1fr) auto!important;gap:10px!important}
+  body[data-screen="profile"] .career-superstar-record>div strong{font-size:.82rem!important}
+  body[data-screen="profile"] .career-superstar-record>div small{font-size:.58rem!important}
+  body[data-screen="profile"] .career-record-score b{font-size:1.15rem!important}
+  body[data-screen="profile"] .career-record-score small{font-size:.52rem!important}
+  body[data-screen="profile"] .profile-compact-stats span{min-height:58px!important;padding:7px 4px!important}
+  body[data-screen="profile"] .profile-compact-stats small{font-size:.48rem!important;line-height:1.1!important}
+  body[data-screen="profile"] .profile-compact-stats b{font-size:1rem!important}
+
+  /* Season reward road: reward identity is primary content, not microcopy. */
+  body[data-screen="seasons"] .season-road-node,body[data-screen="seasons"] .season-road-node.road-left,body[data-screen="seasons"] .season-road-node.road-right{grid-template-columns:74px 80px minmax(0,1fr)!important;gap:10px!important;padding:10px!important;min-height:126px!important}
+  body[data-screen="seasons"] .season-road-reward{gap:7px!important}
+  body[data-screen="seasons"] .season-road-reward>div{gap:6px!important}
+  body[data-screen="seasons"] .season-road-reward strong{font-size:1.12rem!important;line-height:1.02!important;letter-spacing:.01em!important}
+  body[data-screen="seasons"] .season-road-reward small{font-size:.72rem!important;line-height:1.18!important}
+  body[data-screen="seasons"] .season-road-reward em{font-size:.60rem!important;line-height:1.1!important}
+  body[data-screen="seasons"] .season-road-reward button{font-size:.68rem!important;min-height:44px!important;padding:7px 9px!important}
+}
+@media(max-width:390px){
+  body[data-screen="collection"] .collection-quick-stats b{font-size:1.15rem!important}
+  body[data-screen="collection"] .collection-quick-stats small{font-size:.44rem!important}
+  body[data-screen="profile"] .career-record-card{min-height:88px!important;padding:10px!important}
+  body[data-screen="profile"] .career-record-card>span{font-size:.58rem!important}
+  body[data-screen="profile"] .career-record-card>strong{font-size:1.42rem!important}
+  body[data-screen="seasons"] .season-road-node,body[data-screen="seasons"] .season-road-node.road-left,body[data-screen="seasons"] .season-road-node.road-right{grid-template-columns:68px 70px minmax(0,1fr)!important;gap:8px!important;padding:9px!important}
+  body[data-screen="seasons"] .season-road-reward strong{font-size:1rem!important}
+  body[data-screen="seasons"] .season-road-reward small{font-size:.66rem!important}
+  body[data-screen="seasons"] .season-road-reward em{font-size:.56rem!important}
+}
