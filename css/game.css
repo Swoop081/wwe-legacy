@@ -11283,7 +11283,7 @@ body[data-screen="starter-summary"] #game{
 }
 
 
-/* v1.1.247 — Premiere starter onboarding: one-screen reveal + two-card roster */
+/* v1.1.248 — Premiere starter onboarding: one-screen reveal + two-card roster */
 body[data-screen="starter"] .premiere-starter-onboarding{box-sizing:border-box;min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom));gap:8px;overflow:hidden}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero h2{font-size:clamp(30px,8vw,43px);margin:.08em 0}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{font-size:13px;line-height:1.25;margin:6px 0}
@@ -11300,11 +11300,11 @@ body[data-screen="starter-summary"] .starter-roster-summary-cards .starter-summa
 body[data-screen="starter-summary"] .starter-roster-summary{grid-template-rows:auto minmax(0,1fr) 54px!important}
 @media(max-height:750px){body[data-screen="starter"] .starter-superstar-reveal{height:calc(100dvh - 145px)}body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{display:none}}
 
-/* v1.1.247 — starter summary wrapper keeps full rendered cards side by side */
+/* v1.1.248 — starter summary wrapper keeps full rendered cards side by side */
 body[data-screen="starter-summary"] .starter-summary-superstar-card{width:min(44vw,180px)!important;max-width:180px!important;aspect-ratio:680/1000!important;display:grid;place-items:center;min-width:0}
 body[data-screen="starter-summary"] .starter-summary-superstar-card .starter-summary-rendered-card{width:100%!important;height:auto!important;aspect-ratio:680/1000!important}
 
-/* v1.1.247 — iPhone starter flow hard layout override */
+/* v1.1.248 — iPhone starter flow hard layout override */
 body[data-screen="starter"] #game{height:100dvh!important;overflow:hidden!important}
 body[data-screen="starter"] .premiere-starter-onboarding{height:100dvh!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;padding:10px 8px!important}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero{flex:0 0 auto!important}
@@ -11324,3 +11324,21 @@ body[data-screen="starter-summary"] .starter-summary-card-slot{width:100%!import
 body[data-screen="starter-summary"] .starter-summary-rendered-card{width:100%!important;height:auto!important;aspect-ratio:680/1000!important;max-height:62dvh!important}
 body[data-screen="starter-summary"] .start-match{width:92%!important;justify-self:center!important;margin:0!important}
 .pack-set-premiere .pack-set-logo{display:block!important;max-width:74%!important;max-height:28%!important;width:auto!important;height:auto!important;object-fit:contain!important}
+
+/* v1.1.248 — exact starter onboarding composition */
+body[data-screen="starter"] .premiere-starter-onboarding{padding:10px 14px 8px!important;gap:8px!important}
+body[data-screen="starter"] .starter-superstar-reveal{position:relative!important;display:grid!important;grid-template-rows:28px minmax(0,1fr) 22px!important;gap:4px!important;padding:0!important;width:100%!important}
+body[data-screen="starter"] .starter-superstar-reveal .single-card-slot{width:100%!important;height:100%!important;overflow:visible!important;display:grid!important;place-items:center!important}
+body[data-screen="starter"] .starter-superstar-reveal .booster-card-halo{width:100%!important;height:100%!important;display:grid!important;place-items:center!important}
+body[data-screen="starter"] .starter-superstar-reveal .starter-reveal-ccg{width:auto!important;height:auto!important;max-width:min(68vw,290px)!important;max-height:calc(100dvh - 245px)!important;aspect-ratio:680/1000!important;justify-self:center!important;align-self:center!important}
+body[data-screen="starter"] .starter-superstar-reveal .starter-reveal-set-logo{position:absolute!important;right:8px!important;top:40px!important;width:92px!important;height:46px!important;display:grid!important;place-items:center!important;z-index:8!important}
+body[data-screen="starter"] .starter-superstar-reveal .starter-card-set-logo{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+body[data-screen="starter"] .starter-superstar-reveal .booster-reveal-meta{display:none!important}
+body[data-screen="starter"] .starter-superstar-reveal .reveal-progress{height:22px!important;min-height:22px!important;font-size:10px!important}
+body[data-screen="starter-summary"] .starter-roster-summary{padding:32px 16px 18px!important;grid-template-rows:auto minmax(0,1fr) 58px!important;gap:12px!important}
+body[data-screen="starter-summary"] .starter-roster-summary-cards{align-items:center!important;gap:16px!important;padding:0 12px!important}
+body[data-screen="starter-summary"] .starter-summary-card-slot{width:min(40vw,168px)!important;max-width:168px!important}
+body[data-screen="starter-summary"] .starter-summary-rendered-card{width:100%!important;max-width:168px!important;height:auto!important;max-height:54dvh!important;aspect-ratio:680/1000!important}
+body[data-screen="starter-summary"] .start-match{height:58px!important;min-height:58px!important;align-self:end!important}
+.pack-set-premiere .pack-brand-lockup{width:76%!important;height:24%!important;display:grid!important;place-items:center!important}
+.pack-set-premiere .pack-set-logo{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important}
