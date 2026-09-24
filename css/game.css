@@ -11452,3 +11452,6 @@ body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stag
 body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage .sealed-pack-button{height:100%!important;min-height:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;padding:0!important}
 body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage .sealed-pack-button>strong{margin-top:0!important}
 body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage .sealed-pack-button>small{margin-top:0!important}
+
+/* v1.1.324 — move the complete starter pack unit upward as one block. */
+body[data-screen="starter"] .starter-pack-opening-flow .starter-single-pack-stage{transform:translateY(-5.5dvh)!important}
