@@ -1,7 +1,7 @@
-import { decks } from "./decks.js?v=1.1.310";
-import { collectionCards } from "./collection.js?v=1.1.310";
-import { allGameplayCards } from "./content.js?v=1.1.310";
-import { superstars } from "./superstars.js?v=1.1.310";
+import { decks } from "./decks.js?v=1.1.311";
+import { collectionCards } from "./collection.js?v=1.1.311";
+import { allGameplayCards } from "./content.js?v=1.1.311";
+import { superstars } from "./superstars.js?v=1.1.311";
 import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=1.1.132";
 import { isPlayerReleasedSetId } from "./release.js?v=1.1.132";
 import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=1.1.132";
