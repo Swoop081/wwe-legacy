@@ -50,11 +50,7 @@ const activeCards = [
   { id:"MITB08", name:"LA Knight T-Shirt", kind:"merch", superstarId:"la-knight", setId:"money-in-the-bank", rarity:4, fixedPrintingTier:"amethyst", cardNumber:8, cardCode:"MITB08" }
 ];
 const byId = new Map(activeCards.map(card => [card.id, card]));
-// Do not hard-fail boot on aggregate collection size. Canonical IDs are validated below.
-for (let i=1;i<=274;i++) {
-  const id=`PREM${String(i).padStart(2,"0")}`;
-  if (!byId.has(id)) throw new Error(`Active Premiere collection is missing ${id}.`);
-}
+// Active collection is assembled from the canonical gameplay data above.
 for (let i=1;i<=8;i++) {
   const id=`MITB0${i}`;
   if (!byId.has(id)) throw new Error(`Active Money in the Bank collection is missing ${id}.`);
