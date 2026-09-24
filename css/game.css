@@ -11433,3 +11433,7 @@ body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continu
 
 /* v1.1.268 — white halo behind the Premiere mark on all Premiere card fronts. */
 .ccg-card.set-premiere .ccg-card-front .ccg-premiere-front-set-logo{filter:drop-shadow(0 0 3px rgba(255,255,255,.98)) drop-shadow(0 0 7px rgba(255,255,255,.82)) drop-shadow(0 0 13px rgba(255,255,255,.52))!important}
+
+/* v1.1.269 — keep My Legacy home tile and mobile Legacy tab above decorative/scroll layers. */
+#menu-profile,[data-mobile-nav="profile"]{pointer-events:auto!important;touch-action:manipulation!important;position:relative!important;z-index:40!important}
+#mobile-game-nav{pointer-events:auto!important;z-index:1000!important}
