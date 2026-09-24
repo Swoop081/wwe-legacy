@@ -1,11 +1,11 @@
 {
-  "version": "1.1.267",
+  "version": "1.1.268",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.267",
+  "physicalIphoneSmoke": "pending-v1.1.268",
   "launchStatus": "released",
-  "name": "v1.1.267 — Premiere Logo Alignment"
+  "name": "v1.1.268 — Premiere Logo White Glow"
 }
