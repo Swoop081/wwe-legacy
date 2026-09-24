@@ -484,13 +484,15 @@ export const superstars = {
     "leadOffIds": [
       "momentum-strike",
       "momentum-technical",
-      "punch",
-      "dropkick",
-      "running-forearm"
+      "momentum-agility",
+      "PREM187",
+      "PREM157"
     ],
     "signatures": [
-      "cm-punk-anaconda-vise",
-      "cm-punk-g-t-s"
+      "PREM55",
+      "PREM56",
+      "PREM57",
+      "PREM35"
     ],
     "archetype": "reviewed-starter",
     "hp": 64,
