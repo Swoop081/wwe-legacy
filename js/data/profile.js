@@ -20,7 +20,7 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 53;
+export const PROFILE_VERSION = 54;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "PREM241";
 export const STARTING_MOMENTUM_COPIES = 12;
 
@@ -777,7 +777,7 @@ export function migrateProfile(old) {
   const premiereStarterPair = Array.isArray(p.starterIds)
     ? p.starterIds.filter(id => PREMIERE_STARTER_IDS.includes(id) && authoredDeckIds[id]?.length === 60)
     : [];
-  if (sourceVersion < 51 && premiereStarterPair.length === 2) {
+  if (premiereStarterPair.length === 2) {
     p.unlockedSuperstars = [...new Set([...p.unlockedSuperstars, ...premiereStarterPair])];
     const combinedNeeded = new Map();
     for (const sid of premiereStarterPair) {
@@ -798,6 +798,38 @@ export function migrateProfile(old) {
     p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
     p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal = Math.max(Number(p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal) || 0, 1);
   }
+  // v54: the starter pack is the authoritative grant point for a playable
+  // onboarding roster. Always repair the exact two authored starter decks here,
+  // even for saves created by recent broken builds. This makes Deck Lab depend
+  // on actual saved 60-card decks rather than merely owning Superstar cards.
+  if (premiereStarterPair.length === 2) {
+    const combinedNeeded = new Map();
+    for (const sid of premiereStarterPair) {
+      const ids = authoredDeckIds[sid];
+      p.savedDecks[sid] = ids.map(id => ({ id, tier: DEFAULT_STARTER_TIER }));
+      p.deckNeedsCards[sid] = 0;
+      p.selectedEntrances[sid] = DEFAULT_PLAYER_ENTRANCE_ID;
+      for (const id of ids) combinedNeeded.set(id, (combinedNeeded.get(id) ?? 0) + 1);
+      const cardIndex = PREMIERE_STARTER_MALES.includes(sid)
+        ? PREMIERE_STARTER_MALES.indexOf(sid) + 1
+        : PREMIERE_STARTER_FEMALES.indexOf(sid) + 9;
+      const superstarCardId = `PREM${String(cardIndex).padStart(2,"0")}`;
+      p.ownedCards[superstarCardId] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+      p.ownedCards[superstarCardId].normal = Math.max(Number(p.ownedCards[superstarCardId].normal) || 0, 1);
+    }
+    for (const [id, amount] of combinedNeeded) {
+      p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+      p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, amount);
+    }
+    for (const id of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) {
+      p.ownedCards[id] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+      p.ownedCards[id].normal = Math.max(Number(p.ownedCards[id].normal) || 0, STARTING_MOMENTUM_COPIES);
+    }
+    p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID] ??= { normal:0, emerald:0, sapphire:0, ruby:0, amethyst:0 };
+    p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal = Math.max(Number(p.ownedCards[DEFAULT_PLAYER_ENTRANCE_ID].normal) || 0, 1);
+    p.unlockedSuperstars = [...new Set([...p.unlockedSuperstars, ...premiereStarterPair])];
+  }
+
   // v51 hard relaunch save scrub: remove every retired collectible identity.
   // Momentum remains a system resource; all collectible ownership/decks are PREM/MITB only.
   const activeCollectibleId = id => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(String(id)) || /^MITB0[1-8]$/.test(String(id));
