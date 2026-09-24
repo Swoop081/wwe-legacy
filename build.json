@@ -1,11 +1,11 @@
 {
-  "version": "1.1.279",
+  "version": "1.1.280",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.279",
+  "physicalIphoneSmoke": "pending-v1.1.280",
   "launchStatus": "released",
-  "name": "v1.1.279 — Preserve Approved Premiere Decks"
+  "name": "v1.1.280 — Direct Premiere Deck Grant"
 }
