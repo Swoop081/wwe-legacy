@@ -6041,4 +6041,10 @@ for (const [sid, ids] of Object.entries(deckIds)) {
     if (template) premiereFallbackById.set(id, { ...structuredClone(template), id, cardCode:id, setId:"premiere", source:"premiere" });
   }
 }
+// Keep the exact authored 60-slot ID lists available to onboarding. The playable
+// deck map below resolves IDs to card objects and may legitimately omit identities
+// that are not yet in the gameplay registry; onboarding must never use that lossy map.
+export const authoredDeckIds = Object.freeze(Object.fromEntries(
+  Object.entries(deckIds).map(([sid,ids]) => [sid, Object.freeze([...ids])])
+));
 export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id) ?? premiereFallbackById.get(id)).filter(Boolean)]));
