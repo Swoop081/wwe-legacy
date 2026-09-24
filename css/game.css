@@ -11494,3 +11494,40 @@ body[data-screen="starter-summary"] .starter-summary-logo{width:min(90vw,520px)!
 
 /* v1.1.329 adjustment — roster logo approximately 4x original. */
 body[data-screen="starter-summary"] .starter-summary-logo{width:min(82vw,460px)!important;max-height:24dvh!important;margin:-3dvh auto -3dvh!important;transform:scale(1.4)!important}
+
+
+/* v1.1.335 — matchup splash: larger show logo, tighter vertical rhythm. */
+@media(max-width:600px){
+  .matchup-splash{
+    justify-content:flex-start!important;
+    gap:6px!important;
+    padding-top:max(calc(env(safe-area-inset-top) + 10px),2.5svh)!important;
+    padding-bottom:max(10px,env(safe-area-inset-bottom))!important;
+    min-height:100svh!important;
+  }
+  .matchup-splash .prematch-brand{
+    width:94vw!important;
+    min-height:150px!important;
+    height:150px!important;
+    margin:0 auto!important;
+  }
+  .matchup-splash .prematch-show-logo{
+    height:150px!important;
+    width:100%!important;
+  }
+  .matchup-splash .prematch-heading{
+    margin:0 0 -2px!important;
+  }
+  .matchup-splash .prematch-heading span{font-size:.76rem!important}
+  .matchup-splash .prematch-heading h2{font-size:2.28rem!important;margin-top:0!important}
+  .matchup-splash .prematch-versus{
+    margin-top:0!important;
+    flex:0 0 auto!important;
+  }
+  .matchup-splash .prematch-superstar-card{max-width:40vw!important}
+  .matchup-splash .prematch-vs{font-size:2.7rem!important}
+  .matchup-splash .prematch-start{
+    min-height:52px!important;
+    margin-top:6px!important;
+  }
+}
