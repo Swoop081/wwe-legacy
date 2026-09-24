@@ -5,22 +5,24 @@ export const superstars = {
     "id": "iyo-sky",
     "name": "IYO SKY",
     "nickname": "The Genius of the Sky",
-    "setId": "evolution-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM14",
     "entranceId": "PREM30",
     "specialId": "PREM46",
     "leadOffIds": [
-      "momentum-agility",
-      "momentum-strike",
-      "dropkick",
-      "hurricanrana",
-      "running-forearm"
+          "momentum-agility",
+          "momentum-strike",
+          "momentum-technical",
+          "PREM163",
+          "PREM153"
     ],
     "signatures": [
-      "iyo-sky-bullet-train-attack",
-      "iyo-sky-over-the-moonsault"
+          "PREM62",
+          "PREM63",
+          "PREM64",
+          "PREM46"
     ],
     "archetype": "reviewed-starter",
     "hp": 58,
@@ -269,7 +271,7 @@ export const superstars = {
     "id": "john-cena",
     "name": "John Cena",
     "nickname": "The Champ",
-    "setId": "ruthless-aggression-series-1",
+    "setId": "premiere",
     "era": "Ruthless Aggression",
     "developmentOnly": false,
     "seasonExclusive": false,
@@ -277,17 +279,17 @@ export const superstars = {
     "entranceId": "PREM24",
     "specialId": "PREM40",
     "leadOffIds": [
-      "momentum-strength",
-      "momentum-strike",
-      "shoulder-tackle",
-      "body-slam",
-      "punch"
+          "momentum-strength",
+          "momentum-strike",
+          "momentum-technical",
+          "PREM205",
+          "PREM187"
     ],
     "signatures": [
-      "john-cena-protobomb",
-      "john-cena-five-knuckle-shuffle",
-      "john-cena-stf",
-      "john-cena-attitude-adjustment"
+          "PREM56",
+          "PREM57",
+          "PREM58",
+          "PREM40"
     ],
     "archetype": "resilient-powerhouse-technician",
     "hp": 68,
@@ -475,24 +477,24 @@ export const superstars = {
     "id": "cm-punk",
     "name": "CM Punk",
     "nickname": "The Best in the World",
-    "setId": "summerslam-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM03",
     "entranceId": "PREM19",
     "specialId": "PREM35",
     "leadOffIds": [
-      "momentum-strike",
-      "momentum-technical",
-      "momentum-agility",
-      "PREM187",
-      "PREM157"
+          "momentum-strike",
+          "momentum-technical",
+          "momentum-agility",
+          "PREM187",
+          "PREM157"
     ],
     "signatures": [
-      "PREM55",
-      "PREM56",
-      "PREM57",
-      "PREM35"
+          "PREM51",
+          "PREM52",
+          "PREM53",
+          "PREM35"
     ],
     "archetype": "reviewed-starter",
     "hp": 64,
@@ -613,24 +615,24 @@ export const superstars = {
     "id": "seth-rollins",
     "name": "Seth Rollins",
     "nickname": "The Visionary",
-    "setId": "summerslam-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM04",
     "entranceId": "PREM20",
     "specialId": "PREM36",
     "leadOffIds": [
-      "momentum-agility",
-      "momentum-technical",
-      "momentum-strike",
-      "PREM154",
-      "PREM215"
+          "momentum-agility",
+          "momentum-technical",
+          "momentum-strike",
+          "PREM154",
+          "PREM215"
     ],
     "signatures": [
-      "PREM58",
-      "PREM59",
-      "PREM60",
-      "PREM36"
+          "PREM52",
+          "PREM53",
+          "PREM54",
+          "PREM36"
     ],
     "archetype": "reviewed-starter",
     "hp": 64,
@@ -871,24 +873,24 @@ export const superstars = {
     "id": "roman-reigns",
     "name": "Roman Reigns",
     "nickname": "The OTC",
-    "setId": "summerslam-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM01",
     "entranceId": "PREM17",
     "specialId": "PREM33",
     "leadOffIds": [
-      "momentum-strength",
-      "momentum-strike",
-      "PREM187",
-      "PREM206",
-      "PREM233"
+          "momentum-strength",
+          "momentum-strike",
+          "PREM187",
+          "PREM206",
+          "PREM233"
     ],
     "signatures": [
-      "PREM49",
-      "PREM50",
-      "PREM51",
-      "PREM33"
+          "PREM49",
+          "PREM50",
+          "PREM51",
+          "PREM33"
     ],
     "archetype": "reviewed-starter",
     "hp": 67,
@@ -936,24 +938,24 @@ export const superstars = {
     "id": "charlotte-flair",
     "name": "Charlotte Flair",
     "nickname": "The Queen",
-    "setId": "evolution-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM12",
     "entranceId": "PREM28",
     "specialId": "PREM44",
     "leadOffIds": [
-      "momentum-technical",
-      "momentum-agility",
-      "punch",
-      "flair-chop",
-      "arm-drag"
+          "momentum-technical",
+          "momentum-strike",
+          "momentum-agility",
+          "PREM128",
+          "PREM187"
     ],
     "signatures": [
-      "flair-chop",
-      "charlotte-flair-natural-selection",
-      "charlotte-flair-figure-eight-leglock",
-      "charlotte-flair-spear"
+          "PREM60",
+          "PREM61",
+          "PREM62",
+          "PREM44"
     ],
     "archetype": "reviewed-starter",
     "hp": 66,
@@ -1263,23 +1265,24 @@ export const superstars = {
     "id": "rhea-ripley",
     "name": "Rhea Ripley",
     "nickname": "Mami",
-    "setId": "evolution-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM09",
     "entranceId": "PREM25",
     "specialId": "PREM41",
     "leadOffIds": [
-      "momentum-strength",
-      "momentum-strike",
-      "punch",
-      "headbutt",
-      "body-slam"
+          "momentum-strength",
+          "momentum-strike",
+          "momentum-agility",
+          "PREM161",
+          "PREM121"
     ],
     "signatures": [
-      "rhea-ripley-prism-trap",
-      "rhea-ripley-riptide",
-      "rhea-ripley-mamis-always-on-top"
+          "PREM57",
+          "PREM58",
+          "PREM59",
+          "PREM41"
     ],
     "archetype": "reviewed-starter",
     "hp": 66,
@@ -1331,24 +1334,24 @@ export const superstars = {
     "id": "cody-rhodes",
     "name": "Cody Rhodes",
     "nickname": "The American Nightmare",
-    "setId": "summerslam-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM02",
     "entranceId": "PREM18",
     "specialId": "PREM34",
     "leadOffIds": [
-      "momentum-technical",
-      "momentum-strike",
-      "momentum-agility",
-      "PREM187",
-      "PREM217"
+          "momentum-technical",
+          "momentum-strike",
+          "momentum-agility",
+          "PREM187",
+          "PREM217"
     ],
     "signatures": [
-      "PREM52",
-      "PREM53",
-      "PREM54",
-      "PREM34"
+          "PREM50",
+          "PREM51",
+          "PREM52",
+          "PREM34"
     ],
     "archetype": "reviewed-starter",
     "hp": 64,
@@ -1465,23 +1468,24 @@ export const superstars = {
     "id": "stone-cold-steve-austin",
     "name": "Stone Cold Steve Austin",
     "nickname": "Stone Cold",
-    "setId": "attitude-era-series-1",
+    "setId": "premiere",
     "era": "attitude-era",
     "seasonExclusive": false,
     "cardId": "PREM07",
     "entranceId": "PREM23",
     "specialId": "PREM39",
     "leadOffIds": [
-      "momentum-strike",
-      "momentum-strength",
-      "punch",
-      "kick-to-the-gut",
-      "headbutt"
+          "momentum-strike",
+          "momentum-strength",
+          "PREM187",
+          "PREM167",
+          "PREM161"
     ],
     "signatures": [
-      "stone-cold-steve-austin-lou-thesz-press",
-      "stone-cold-steve-austin-stone-cold-stunner",
-      "stone-cold-give-me-a-hell-yeah"
+          "PREM55",
+          "PREM56",
+          "PREM57",
+          "PREM39"
     ],
     "archetype": "reviewed-starter",
     "hp": 67,
@@ -1529,22 +1533,24 @@ export const superstars = {
     "id": "liv-morgan",
     "name": "Liv Morgan",
     "nickname": "Watch Me",
-    "setId": "evolution-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM10",
     "entranceId": "PREM26",
     "specialId": "PREM42",
     "leadOffIds": [
-      "momentum-agility",
-      "momentum-strike",
-      "punch",
-      "running-forearm",
-      "dropkick"
+          "momentum-agility",
+          "momentum-strike",
+          "momentum-technical",
+          "PREM187",
+          "PREM198"
     ],
     "signatures": [
-      "liv-morgan-jersey-codebreaker",
-      "liv-morgan-oblivion"
+          "PREM58",
+          "PREM59",
+          "PREM60",
+          "PREM42"
     ],
     "archetype": "reviewed-starter",
     "hp": 64,
@@ -1733,23 +1739,24 @@ export const superstars = {
     "id": "becky-lynch",
     "name": "Becky Lynch",
     "nickname": "The Man",
-    "setId": "evolution-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM11",
     "entranceId": "PREM27",
     "specialId": "PREM43",
     "leadOffIds": [
-      "momentum-strike",
-      "momentum-technical",
-      "punch",
-      "running-forearm",
-      "arm-drag"
+          "momentum-strength",
+          "momentum-strike",
+          "momentum-agility",
+          "PREM187",
+          "PREM157"
     ],
     "signatures": [
-      "becky-lynch-dis-arm-her",
-      "becky-lynch-manhandle-slam",
-      "becky-lynch-diving-leg-drop"
+          "PREM59",
+          "PREM60",
+          "PREM61",
+          "PREM43"
     ],
     "archetype": "reviewed-starter",
     "hp": 65,
@@ -2426,17 +2433,17 @@ export const superstars = {
     "entranceId": "MITB02",
     "specialId": "MITB07",
     "leadOffIds": [
-      "momentum-strike",
-      "momentum-strength",
-      "punch",
-      "shoulder-tackle",
-      "clothesline"
+          "momentum-strike",
+          "momentum-strength",
+          "momentum-agility",
+          "PREM187",
+          "PREM206"
     ],
     "signatures": [
-      "MITB04",
-      "MITB05",
-      "MITB06",
-      "MITB03"
+          "MITB04",
+          "MITB05",
+          "MITB06",
+          "MITB03"
     ],
     "archetype": "crowd-powered-all-rounder",
     "hp": 64,
@@ -2485,22 +2492,24 @@ export const superstars = {
     "id": "alexa-bliss",
     "name": "Alexa Bliss",
     "nickname": "Five Feet of Fury",
-    "setId": "money-in-the-bank-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM15",
     "entranceId": "PREM31",
     "specialId": "PREM47",
     "leadOffIds": [
-      "momentum-agility",
-      "momentum-strike",
-      "punch",
-      "dropkick",
-      "forearm-smash"
+          "momentum-agility",
+          "momentum-technical",
+          "momentum-strike",
+          "PREM187",
+          "PREM154"
     ],
     "signatures": [
-      "alexa-bliss-sister-abigail",
-      "alexa-bliss-twisted-bliss"
+          "PREM63",
+          "PREM64",
+          "PREM65",
+          "PREM47"
     ],
     "archetype": "stun-setup-resource-control",
     "hp": 62,
@@ -2683,22 +2692,24 @@ export const superstars = {
     "id": "tiffany-stratton",
     "name": "Tiffany Stratton",
     "nickname": "The Center of the Universe",
-    "setId": "smackdown-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "cardId": "PREM13",
     "entranceId": "PREM29",
     "specialId": "PREM45",
     "leadOffIds": [
-      "momentum-agility",
-      "momentum-strength",
-      "dropkick",
-      "body-slam",
-      "standing-moonsault"
+          "momentum-agility",
+          "momentum-strength",
+          "momentum-technical",
+          "PREM121",
+          "PREM223"
     ],
     "signatures": [
-      "tiffany-stratton-handspring-back-elbow",
-      "tiffany-stratton-prettiest-moonsault-ever"
+          "PREM61",
+          "PREM62",
+          "PREM63",
+          "PREM45"
     ],
     "archetype": "strength-to-agility-showstopper",
     "hp": 62,
@@ -3007,7 +3018,7 @@ export const superstars = {
     "id": "randy-orton",
     "name": "Randy Orton",
     "nickname": "The Viper",
-    "setId": "ruthless-aggression-series-1",
+    "setId": "premiere",
     "era": "Ruthless Aggression",
     "seasonExclusive": false,
     "developmentOnly": false,
@@ -3015,17 +3026,17 @@ export const superstars = {
     "entranceId": "PREM21",
     "specialId": "PREM37",
     "leadOffIds": [
-      "momentum-technical",
-      "momentum-strike",
-      "PREM187",
-      "PREM217",
-      "PREM131"
+          "momentum-technical",
+          "momentum-strike",
+          "PREM187",
+          "PREM217",
+          "PREM131"
     ],
     "signatures": [
-      "PREM61",
-      "PREM62",
-      "PREM63",
-      "PREM37"
+          "PREM53",
+          "PREM54",
+          "PREM55",
+          "PREM37"
     ],
     "archetype": "technical-control-sudden-finish",
     "hp": 67,
@@ -3072,7 +3083,7 @@ export const superstars = {
     "id": "sami-zayn",
     "name": "Sami Zayn",
     "nickname": "The Underdog from the Underground",
-    "setId": "survivor-series-series-1",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": false,
     "developmentOnly": true,
@@ -3080,17 +3091,17 @@ export const superstars = {
     "entranceId": "PREM22",
     "specialId": "PREM38",
     "leadOffIds": [
-      "momentum-technical",
-      "momentum-agility",
-      "momentum-strike",
-      "PREM187",
-      "PREM157"
+          "momentum-technical",
+          "momentum-agility",
+          "momentum-strike",
+          "PREM187",
+          "PREM157"
     ],
     "signatures": [
-      "PREM64",
-      "PREM65",
-      "PREM66",
-      "PREM38"
+          "PREM54",
+          "PREM55",
+          "PREM56",
+          "PREM38"
     ],
     "archetype": "underdog-comeback-sequencer",
     "hp": 64,
@@ -6343,24 +6354,24 @@ export const superstars = {
     "id": "trish-stratus",
     "name": "Trish Stratus",
     "nickname": "Stratusfaction Guaranteed",
-    "setId": "season-1-last-time-is-now",
+    "setId": "premiere",
     "era": null,
     "seasonExclusive": true,
     "cardId": "PREM16",
     "entranceId": "PREM32",
     "specialId": "PREM48",
     "leadOffIds": [
-      "momentum-technical",
-      "momentum-agility",
-      "punch",
-      "trish-stratus-air-canada",
-      "dropkick"
+          "momentum-strike",
+          "momentum-agility",
+          "momentum-technical",
+          "PREM187",
+          "PREM157"
     ],
     "signatures": [
-      "trish-stratus-stratusphere",
-      "trish-stratus-chick-kick",
-      "trish-stratus-air-canada",
-      "trish-stratus-stratusfaction"
+          "PREM64",
+          "PREM65",
+          "PREM66",
+          "PREM48"
     ],
     "archetype": "reward-technical-agility-striker",
     "hp": 62,
