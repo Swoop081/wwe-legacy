@@ -19834,7 +19834,7 @@ allGameplayCards.push(...buildPremiereGameplayCards(allGameplayCards));
   const mitb=[
     clone("entrance-la-knight","MITB02","YEAH!!",{kind:"entrance",rarity:4,rulesText:"Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",preMatchMomentum:{strike:1},preMatchAdrenaline:1,delayedTurn5:false}),
     clone("la-knight-bft","MITB03","Blunt Force Trauma",{finisher:true,trademark:false}),
-    clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true}),
+    clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true,rarity:3,damage:10,cost:6,requirements:{agility:2},rulesText:"LA Knight-exclusive Trademark. Top-rope elbow drop. Grounds opponent."}),
     clone("diving-elbow-drop","MITB05","LA Elbow",{finisher:false,trademark:true}),
     clone("burning-hammer","MITB06","Burning Hammer",{finisher:false,trademark:true}),
     clone("special-la-knight","MITB07","Let Me Talk to Ya!",{kind:"action"})
