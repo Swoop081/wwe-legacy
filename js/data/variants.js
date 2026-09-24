@@ -247,7 +247,7 @@ export function applyCardTier(card, tier = DEFAULT_AUTHORED_TIER) {
   const note=card.kind==='move'
     ? tierBonusText(card,resolvedTier,moveEffectDelta,costOffset,damageOffset)
     : (normalizeCardTier(resolvedTier)==='sapphire' ? tierIdentityNote(card,resolvedTier) : tierIdentityNote(card,resolvedTier));
-  if(note){out.tierRulesText=note;out.rulesText=`${card.rulesText}${card.rulesText?' ':''}${note}`;}
+  if(note) out.tierRulesText=note;
   return out;
 }
 
