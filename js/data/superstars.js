@@ -503,9 +503,8 @@ export const superstars = {
       "technical": null
     },
     "starterMomentum": {
-      "agility": 2,
       "strike": 6,
-      "technical": 4
+      "technical": 6
     },
     "ability": {
       "name": "Pipe Bomb",
@@ -622,14 +621,16 @@ export const superstars = {
     "specialId": "special-seth-rollins",
     "leadOffIds": [
       "momentum-agility",
+      "momentum-technical",
       "momentum-strike",
-      "dropkick",
-      "running-forearm",
-      "sling-blade"
+      "PREM154",
+      "PREM215"
     ],
     "signatures": [
-      "seth-rollins-buckle-bomb",
-      "seth-rollins-curb-stomp"
+      "PREM58",
+      "PREM59",
+      "PREM60",
+      "PREM36"
     ],
     "archetype": "reviewed-starter",
     "hp": 64,
@@ -640,9 +641,8 @@ export const superstars = {
       "technical": null
     },
     "starterMomentum": {
-      "agility": 5,
-      "strike": 3,
-      "technical": 4
+      "agility": 6,
+      "technical": 6
     },
     "ability": {
       "name": "The Architect",
@@ -1359,9 +1359,8 @@ export const superstars = {
       "technical": null
     },
     "starterMomentum": {
-      "agility": 4,
-      "strike": 3,
-      "technical": 5
+      "technical": 6,
+      "strike": 6
     },
     "ability": {
       "name": "Undeniable",
