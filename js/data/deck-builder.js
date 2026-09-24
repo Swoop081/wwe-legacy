@@ -1,14 +1,14 @@
-import { decks } from "./decks.js?v=1.1.307";
+import { decks } from "./decks.js?v=1.1.308";
 import { collectionCards } from "./collection.js?v=1.1.132";
-import { allGameplayCards } from "./content.js?v=1.1.307";
-import { superstars } from "./superstars.js?v=1.1.307";
+import { allGameplayCards } from "./content.js?v=1.1.308";
+import { superstars } from "./superstars.js?v=1.1.308";
 import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=1.1.132";
 import { isPlayerReleasedSetId } from "./release.js?v=1.1.132";
 import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=1.1.132";
 
 // Deck Lab must resolve gameplay identities, including the four Momentum resources.
 // Collection alone omits non-collectible system pages and caused saved 60-page starter decks to materialize as 45/60.
-const byId = new Map([...allGameplayCards, ...collectionCards].map(c => [c.id, c]));
+const cardById = new Map([...allGameplayCards, ...collectionCards].map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
 const DEFAULT_PLAYER_ENTRANCE_ID = "PREM241";
 
@@ -23,11 +23,11 @@ export const DECK_LAB_CATEGORIES = Object.freeze([
 
 export function leadOffIds(sid) { return (decks[sid] ?? []).slice(0, 5).map(c => c.id); }
 export function recommendedDeckDraft(sid) { return (decks[sid] ?? []).map(c => ({ id: c.id, tier: DEFAULT_AUTHORED_TIER })); }
-export function materializeDraft(d = []) { return d.map(e => { const entry = typeof e === "string" ? { id: e, tier: DEFAULT_AUTHORED_TIER } : e; const card = byId.get(entry?.id); return card ? applyCardTier(card, normalizeCardTier(entry?.tier, DEFAULT_AUTHORED_TIER)) : null; }).filter(Boolean); }
+export function materializeDraft(d = []) { return d.map(e => { const entry = typeof e === "string" ? { id: e, tier: DEFAULT_AUTHORED_TIER } : e; const card = cardById.get(entry?.id); return card ? applyCardTier(card, normalizeCardTier(entry?.tier, DEFAULT_AUTHORED_TIER)) : null; }).filter(Boolean); }
 export function usedCount(d, id) { return d.filter(e => (e.id ?? e) === id).length; }
 export function usedCopyFamilyCount(d, card) {
   if (!card?.copyFamily) return usedCount(d, card?.id);
-  return d.reduce((n, e) => { const c = byId.get(e.id ?? e); return n + (c?.copyFamily === card.copyFamily ? 1 : 0); }, 0);
+  return d.reduce((n, e) => { const c = cardById.get(e.id ?? e); return n + (c?.copyFamily === card.copyFamily ? 1 : 0); }, 0);
 }
 export function ownedTotal(p, id) { const o = p?.ownedCards?.[id] ?? {}; return CARD_TIERS.reduce((sum,tier)=>sum+Math.max(0,Number(o[tier])||0),0); }
 export function ownedTier(p, id, tier) { return Math.max(0, Number(p?.ownedCards?.[id]?.[normalizeCardTier(tier)]) || 0); }
@@ -138,7 +138,7 @@ export function aggregateDeck(d, { tailOnly = false } = {}) {
     row.tiers[tier] = (row.tiers[tier] ?? 0) + 1;
     map.set(id, row);
   }
-  return [...map.values()].map(row => ({ ...row, normal: row.tiers.normal, emerald: row.tiers.emerald, sapphire: row.tiers.sapphire, ruby: row.tiers.ruby, card: byId.get(row.id) }));
+  return [...map.values()].map(row => ({ ...row, normal: row.tiers.normal, emerald: row.tiers.emerald, sapphire: row.tiers.sapphire, ruby: row.tiers.ruby, card: cardById.get(row.id) }));
 }
 
 function preferredOwnedTier(profile, draft, id) {
@@ -149,7 +149,7 @@ function preferredOwnedTier(profile, draft, id) {
 }
 
 export function canAddCard(profile, sid, draft, id) {
-  const card = byId.get(id), star = starById.get(sid);
+  const card = cardById.get(id), star = starById.get(sid);
   if (!card || !legalForSuperstar(star, card) || draft.length >= 60) return false;
   const defaultCap = card.kind === "momentum" ? 12 : 5;
   const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
@@ -169,7 +169,7 @@ export function removeCardFromDraft(_profile, _sid, draft, index) { return draft
 export function replaceLeadOffSlot(profile, sid, draft, slot, id) {
   const index = Number(slot);
   if (!Number.isInteger(index) || index < 0 || index > 4 || index >= draft.length) return draft;
-  const card = byId.get(id), star = starById.get(sid);
+  const card = cardById.get(id), star = starById.get(sid);
   if (!card || !["move", "momentum"].includes(card.kind) || !legalForSuperstar(star, card)) return draft;
   const oldId = draft[index]?.id ?? draft[index];
   if (oldId === id) return draft;
@@ -196,14 +196,14 @@ export function replaceLeadOffSlot(profile, sid, draft, slot, id) {
 export function selectedEntranceId(profile, sid) {
   const star = starById.get(sid);
   const saved = profile?.selectedEntrances?.[sid];
-  const card = saved ? byId.get(saved) : null;
+  const card = saved ? cardById.get(saved) : null;
   if (card && ownedTotal(profile, saved) > 0 && entranceEligibilityForSuperstar(star, card).legal) return saved;
-  const baseline = byId.get(DEFAULT_PLAYER_ENTRANCE_ID);
+  const baseline = cardById.get(DEFAULT_PLAYER_ENTRANCE_ID);
   if (baseline && ownedTotal(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0 && entranceEligibilityForSuperstar(star, baseline).legal) return DEFAULT_PLAYER_ENTRANCE_ID;
   return null;
 }
 export function setSelectedEntrance(profile, sid, entranceId) {
-  const star = starById.get(sid), card = byId.get(entranceId);
+  const star = starById.get(sid), card = cardById.get(entranceId);
   if (!card || ownedTotal(profile, entranceId) < 1) return false;
   if (!entranceEligibilityForSuperstar(star, card).legal) return false;
   profile.selectedEntrances ??= {};
@@ -226,10 +226,10 @@ export function validateDeckDraft(profile, sid, draft, entranceId = selectedEntr
   }
   for (const [id, count] of counts) {
     const owned = ownedTotal(profile, id);
-    if (count > owned) violations.push(`${byId.get(id)?.name ?? id}: deck uses ${count}, Collection owns ${owned}.`);
+    if (count > owned) violations.push(`${cardById.get(id)?.name ?? id}: deck uses ${count}, Collection owns ${owned}.`);
     for (const tier of CARD_TIERS) {
       const usedTier = usedTierCount(draft,id,tier), owned = ownedTier(profile,id,tier);
-      if (usedTier > owned) violations.push(`${byId.get(id)?.name ?? id}: deck uses ${usedTier} ${tier[0].toUpperCase()+tier.slice(1)}, Collection owns ${owned}.`);
+      if (usedTier > owned) violations.push(`${cardById.get(id)?.name ?? id}: deck uses ${usedTier} ${tier[0].toUpperCase()+tier.slice(1)}, Collection owns ${owned}.`);
     }
   }
 
@@ -239,7 +239,7 @@ export function validateDeckDraft(profile, sid, draft, entranceId = selectedEntr
   if (lead.length === 5 && !lead.some(card => card.kind === "momentum")) violations.push("Lead Off 5 needs at least one Momentum page.");
   if (lead.length === 5 && !lead.some(card => card.kind === "move")) violations.push("Lead Off 5 needs at least one Move.");
 
-  const entrance = entranceId ? byId.get(entranceId) : null;
+  const entrance = entranceId ? cardById.get(entranceId) : null;
   if (!entrance) violations.push("Choose an Entrance.");
   else {
     const e = entranceEligibilityForSuperstar(star, entrance);
@@ -279,7 +279,7 @@ export function enforceOwnedDraft(profile, sid, draft = []) {
   if (!star) return [];
   const out = [];
   for (const raw of draft) {
-    const id = raw?.id ?? raw, card = byId.get(id);
+    const id = raw?.id ?? raw, card = cardById.get(id);
     if (!card || !legalForSuperstar(star, card)) continue;
     const ownedCap = Math.min(maxDeckCopies(card), ownedTotal(profile, id));
     if (usedCount(out, id) >= ownedCap) continue;
@@ -379,7 +379,7 @@ export function recommendedDeckMissingCount(sid, draft = []) {
 export function recommendedEntranceId(profile, sid) {
   const star = starById.get(sid);
   if (!star) return selectedEntranceId(profile, sid);
-  const authored = star.entranceId ? byId.get(star.entranceId) : null;
+  const authored = star.entranceId ? cardById.get(star.entranceId) : null;
   if (authored && ownedTotal(profile, authored.id) > 0 && entranceEligibilityForSuperstar(star, authored).legal) return authored.id;
   return selectedEntranceId(profile, sid);
 }
@@ -400,11 +400,11 @@ export function recommendedDeckComparison(profile, sid, draft = [], entranceId =
     const count = Math.max(0, wanted - have);
     if (!count) continue;
     const ownedReady = Math.min(count, Math.max(0, ownedTotal(profile, id) - have));
-    missingRows.push({ id, card: byId.get(id), count, ownedReady, toCollect: count - ownedReady });
+    missingRows.push({ id, card: cardById.get(id), count, ownedReady, toCollect: count - ownedReady });
   }
   for (const [id, have] of current) {
     const excess = Math.max(0, have - (recommended.get(id) ?? 0));
-    if (excess) extras.push({ id, card: byId.get(id), count: excess });
+    if (excess) extras.push({ id, card: cardById.get(id), count: excess });
   }
 
   const extraPool = extras.map(row => ({ ...row }));
@@ -424,7 +424,7 @@ export function recommendedDeckComparison(profile, sid, draft = [], entranceId =
     }
   }
   const authoredEntrance = starById.get(sid)?.entranceId ?? null;
-  const entranceReady = !!authoredEntrance && authoredEntrance !== entranceId && ownedTotal(profile, authoredEntrance) > 0 && entranceEligibilityForSuperstar(starById.get(sid), byId.get(authoredEntrance)).legal;
+  const entranceReady = !!authoredEntrance && authoredEntrance !== entranceId && ownedTotal(profile, authoredEntrance) > 0 && entranceEligibilityForSuperstar(starById.get(sid), cardById.get(authoredEntrance)).legal;
   return {
     matched,
     missing: Math.max(0, 60 - matched),
