@@ -1,4 +1,4 @@
-import { superstars } from "./superstars.js?v=1.1.300";
+import { superstars } from "./superstars.js?v=1.1.301";
 // Premiere relaunch gameplay bridge.
 // Reuses the already-audited production gameplay definition for the same move/action,
 // but gives the relaunch card its canonical PREM identity. This preserves approved
