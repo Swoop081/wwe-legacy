@@ -3082,14 +3082,15 @@ export const superstars = {
     "leadOffIds": [
       "momentum-technical",
       "momentum-agility",
-      "punch",
-      "dropkick",
-      "arm-drag"
+      "momentum-strike",
+      "PREM187",
+      "PREM157"
     ],
     "signatures": [
-      "sami-zayn-exploder-turnbuckle",
-      "sami-zayn-blue-thunder-bomb",
-      "sami-zayn-helluva-kick"
+      "PREM64",
+      "PREM65",
+      "PREM66",
+      "PREM38"
     ],
     "archetype": "underdog-comeback-sequencer",
     "hp": 64,
@@ -3100,10 +3101,8 @@ export const superstars = {
       "strength": 2
     },
     "starterMomentum": {
-      "technical": 5,
-      "agility": 4,
-      "strike": 2,
-      "strength": 1
+      "technical": 6,
+      "agility": 6
     },
     "ability": {
       "name": "Underdog From the Underground",
