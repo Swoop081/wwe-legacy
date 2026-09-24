@@ -1,11 +1,11 @@
 {
-  "version": "1.1.302",
+  "version": "1.1.303",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.302",
+  "physicalIphoneSmoke": "pending-v1.1.303",
   "launchStatus": "released",
-  "name": "Premiere Momentum PREM271-PREM274"
+  "name": "Premiere Momentum validation fix"
 }
