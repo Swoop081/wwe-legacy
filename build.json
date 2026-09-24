@@ -1,11 +1,11 @@
 {
-  "version": "1.1.296",
+  "version": "1.1.297",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.296",
+  "physicalIphoneSmoke": "pending-v1.1.297",
   "launchStatus": "released",
-  "name": "Premiere Starter Runtime Roster Fix"
+  "name": "Boot Profile Route Guard"
 }
