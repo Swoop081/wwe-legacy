@@ -360,5 +360,11 @@ export function buildPremiereGameplayCards(cards=[]){
  for(const [id,name] of SHARED){const authored=aliases[id]&&typeof aliases[id]==="object"?aliases[id]:null;const base=authored||find(name);if(!base)continue;out.push({...structuredClone(base),id,name,setId:"premiere",superstarId:null,cardCode:id,source:"premiere"});}
  out.push(...UNIVERSAL_ACTIONS);
  out.push(...PREMIERE_MERCH);
+ out.push(
+  {id:"PREM271",name:"STRIKE MOMENTUM",kind:"momentum",setId:"premiere",cardCode:"PREM271",source:"premiere",momentumType:"strike",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Strike Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"strike",amount:1}],boosterEligible:false},
+  {id:"PREM272",name:"STRENGTH MOMENTUM",kind:"momentum",setId:"premiere",cardCode:"PREM272",source:"premiere",momentumType:"strength",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Strength Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"strength",amount:1}],boosterEligible:false},
+  {id:"PREM273",name:"TECHNICAL MOMENTUM",kind:"momentum",setId:"premiere",cardCode:"PREM273",source:"premiere",momentumType:"technical",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Technical Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"technical",amount:1}],boosterEligible:false},
+  {id:"PREM274",name:"AGILITY MOMENTUM",kind:"momentum",setId:"premiere",cardCode:"PREM274",source:"premiere",momentumType:"agility",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Agility Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"agility",amount:1}],boosterEligible:false}
+ );
  return out.map(card=>normalizePremiereMoveRequirements(card));
 }
