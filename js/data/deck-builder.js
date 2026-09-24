@@ -7,7 +7,7 @@ import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, nor
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
-const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
+const DEFAULT_PLAYER_ENTRANCE_ID = "PREM241";
 
 export const DECK_LAB_CATEGORIES = Object.freeze([
   { id: "signature", label: "Finishers & Trademarks" },
