@@ -2,7 +2,7 @@ import { decks, momentumCards } from "./decks.js?v=1.1.321";
 import { collectionCards } from "./collection.js?v=1.1.320";
 import { allGameplayCards } from "./content.js?v=1.1.320";
 import { superstars } from "./superstars.js?v=1.1.320";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=1.1.132";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=1.1.322";
 import { isPlayerReleasedSetId } from "./release.js?v=1.1.132";
 import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=1.1.132";
 
@@ -13,10 +13,12 @@ const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
 const DEFAULT_PLAYER_ENTRANCE_ID = "PREM241";
 
 export const DECK_LAB_CATEGORIES = Object.freeze([
-  { id: "signature", label: "Finishers & Trademarks" },
+  { id: "finisher", label: "Finishers" },
+  { id: "trademark", label: "Trademarks" },
   { id: "high", label: "High-Level Moves" },
   { id: "mid", label: "Mid-Level Moves" },
   { id: "low", label: "Low-Level Moves" },
+  { id: "counter", label: "Counters" },
   { id: "utility", label: "Actions" },
   { id: "momentum", label: "Momentum" }
 ]);
