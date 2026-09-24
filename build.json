@@ -1,11 +1,11 @@
 {
-  "version": "1.1.264",
+  "version": "1.1.265",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.264",
+  "physicalIphoneSmoke": "pending-v1.1.265",
   "launchStatus": "released",
-  "name": "v1.1.264 — Starter Pack Copy Alignment"
+  "name": "v1.1.265 — One-Screen Starter Reveal"
 }
