@@ -49,7 +49,6 @@ const activeCards = [
   ...mitbGameplayCards,
   { id:"MITB08", name:"LA Knight T-Shirt", kind:"merch", superstarId:"la-knight", setId:"money-in-the-bank", rarity:4, fixedPrintingTier:"amethyst", cardNumber:8, cardCode:"MITB08" }
 ];
-const byId = new Map(activeCards.map(card => [card.id, card]));
 // Active collection is assembled from the canonical gameplay data above.
 
 export const collectionCardsBySet = {
