@@ -1,11 +1,11 @@
 {
-  "version": "1.1.283",
+  "version": "1.1.284",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.283",
+  "physicalIphoneSmoke": "pending-v1.1.284",
   "launchStatus": "released",
-  "name": "v1.1.283 — Premiere Collection Repair"
+  "name": "v1.1.284 — Deck Lab Premiere Roster Repair"
 }
