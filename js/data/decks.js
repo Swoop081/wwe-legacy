@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=1.1.304";
+import { allGameplayCards } from "./content.js?v=1.1.306";
 
 // WWE Legacy relaunch deck registry. Only the 17 active starter Superstars exist here.
 // Collectible card references are restricted to PREM01-PREM270 and MITB01-MITB08;
@@ -1066,7 +1066,7 @@ export const authoredDeckIds = Object.freeze(Object.fromEntries(
   Object.entries(deckIds).map(([sid, ids]) => [sid, Object.freeze([...ids])])
 ));
 
-export const decks = Object.fromEntries(Object.entries(deckIds).map(([sid, ids]) => [
-  sid,
-  ids.map(id => byId.get(id)).filter(Boolean)
-]));
+export const decks = Object.fromEntries(Object.entries(deckIds).map(([sid, ids]) => {
+  const cards = ids.map(id => byId.get(id)).filter(Boolean);
+  return [sid, cards];
+}));
