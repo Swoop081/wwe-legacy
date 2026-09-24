@@ -1,7 +1,8 @@
 import { superstars } from "./superstars.js?v=1.1.132";
 import "../shared/v1.1.66-featured-superstar-ability-audit.js?v=1.1.132";
 import { sets } from "./sets.js?v=1.1.132";
-import { allGameplayCards } from "./content.js?v=1.1.320";
+import { allGameplayCards } from "./content.js?v=1.1.321";
+import { momentumCards } from "./decks.js?v=1.1.321";
 import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=1.1.132";
 import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.132";
 
@@ -44,6 +45,7 @@ const premiereGameplayCards = allGameplayCards.filter(card => /^PREM(?:0[1-9]|[1
 const mitbGameplayCards = allGameplayCards.filter(card => /^MITB0[2-7]$/.test(String(card.id)));
 const activeCards = [
   ...premiereGameplayCards,
+  ...momentumCards.filter(card => !premiereGameplayCards.some(existing => existing.id === card.id)),
   ...premiereStarterSuperstars.filter(card => !premiereGameplayCards.some(existing => existing.id === card.id)),
   { id:"MITB01", name:"LA Knight", kind:"superstar", superstarId:"la-knight", setId:"money-in-the-bank", rarity:4, fixedPrintingTier:"amethyst", cardNumber:1, cardCode:"MITB01" },
   ...mitbGameplayCards,
