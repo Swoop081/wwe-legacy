@@ -4,7 +4,6 @@ import { sets } from "./sets.js?v=1.1.132";
 import { allGameplayCards } from "./content.js?v=1.1.132";
 import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=1.1.132";
 import { rewardPrintingTierForSet } from "./reward-printings.js?v=1.1.132";
-import { applySharedMoveFamilyCurvesV11203 } from "../shared/v1.1.203-shared-move-family-curves.js?v=1.1.203";
 
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
 const orderedStars = Object.values(superstars);
@@ -60,7 +59,6 @@ for (let i=1;i<=8;i++) {
   const id=`MITB0${i}`;
   if (!byId.has(id)) throw new Error(`Active Money in the Bank collection is missing ${id}.`);
 }
-applySharedMoveFamilyCurvesV11203(activeCards);
 
 export const collectionCardsBySet = {
   premiere: activeCards.filter(card => card.id.startsWith("PREM")).sort((a,b)=>Number(a.id.slice(4))-Number(b.id.slice(4))),
