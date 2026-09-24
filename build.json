@@ -1,11 +1,11 @@
 {
-  "version": "1.1.293",
+  "version": "1.1.294",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.293",
+  "physicalIphoneSmoke": "pending-v1.1.294",
   "launchStatus": "released",
-  "name": "v1.1.293 — Onboarding Deck Final Invariant"
+  "name": "Relaunch Profile + Deck Lab Route Repair"
 }
