@@ -19837,7 +19837,7 @@ allGameplayCards.push(...buildPremiereGameplayCards(allGameplayCards));
     clone("diving-elbow-drop","MITB04","The Megastar’s Elbow",{finisher:false,trademark:true,rarity:3,damage:10,cost:6,requirements:{agility:2},rulesText:"LA Knight-exclusive Trademark. Top-rope elbow drop. Grounds opponent."}),
     clone("diving-elbow-drop","MITB05","LA Elbow",{finisher:false,trademark:true,rarity:3,damage:9,cost:6,requirements:{agility:2},rulesText:"LA Knight-exclusive Trademark. Elbow drop. Grounds opponent."}),
     clone("burning-hammer","MITB06","Burning Hammer",{finisher:false,trademark:true}),
-    clone("special-la-knight","MITB07","Let Me Talk to Ya!",{kind:"action"})
+    clone("special-la-knight","MITB07","Let Me Talk to Ya!",{kind:"action",cost:6,rarity:3,rulesText:"Once per match: Your next Move cannot be countered. If that Move connects, draw 2 pages and gain +2 Adrenaline."})
   ].filter(Boolean);
   allGameplayCards.push(...mitb);
 }
