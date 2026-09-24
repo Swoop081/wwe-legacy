@@ -29,6 +29,7 @@ const premiereStarterSuperstars = [
   ["PREM13","Tiffany Stratton","tiffany-stratton"],["PREM14","IYO SKY","iyo-sky"],["PREM15","Alexa Bliss","alexa-bliss"],["PREM16","Trish Stratus","trish-stratus"]
 ].map(([id,name,superstarId],index)=>({id,name,kind:"superstar",superstarId,setId:"premiere",rarity:1,cardNumber:index+1,cardCode:id}));
 
+// Archived pre-relaunch reward definitions below are retained as reference only and are not added to collectionCards.
 const mitbLaKnightRewards = [
   { id:"MITB01", name:"LA Knight", kind:"superstar", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:1, cardCode:"MITB01" },
   { id:"MITB02", name:"YEAH!!", kind:"entrance", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:2, cardCode:"MITB02" },
