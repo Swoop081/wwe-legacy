@@ -1,11 +1,11 @@
 {
-  "version": "1.1.297",
+  "version": "1.1.298",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.297",
+  "physicalIphoneSmoke": "pending-v1.1.298",
   "launchStatus": "released",
-  "name": "Boot Profile Route Guard"
+  "name": "Superstar Runtime Lookup Syntax Fix"
 }
