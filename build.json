@@ -1,11 +1,11 @@
 {
-  "version": "1.1.299",
+  "version": "1.1.302",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.299",
+  "physicalIphoneSmoke": "pending-v1.1.302",
   "launchStatus": "released",
-  "name": "Deck Lab Full 60 + Premiere Identity Art"
+  "name": "Premiere Momentum PREM271-PREM274"
 }
