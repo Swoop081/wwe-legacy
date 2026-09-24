@@ -6030,7 +6030,7 @@ for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
  if(ids.length!==60)throw new Error(`${sid} relaunch deck is ${ids.length}, expected 60`);
  for(const id of ids){
    if(id.startsWith("momentum-")||RELAUNCH_ALLOWED_NONSET.has(id)||/^PREM\d+$/.test(id)||/^MITB0[3-7]$/.test(id))continue;
-   throw new Error(`${sid} relaunch deck leaked retired card ${id}`);
+   throw new Error(String(sid)+" relaunch deck leaked retired card "+String(id));
  }
 }
 export const ONCE_TOO_OFTEN_ID="once-too-often";
