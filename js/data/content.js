@@ -6992,8 +6992,7 @@ export const allGameplayCards = [
     "cost": 7,
     "damage": 11,
     "requirements": {
-      "strength": 2,
-      "technical": 1
+      "strength": 2
     },
     "moveType": "grapple",
     "method": "strength",
