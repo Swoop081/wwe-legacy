@@ -306,7 +306,7 @@ function normalizePremiereMoveRequirements(card){
  if(total===0&&method){card.requirements={[method]:2};}
  return card;
 }
-\nexport function buildPremiereGameplayCards(cards=[]){
+export function buildPremiereGameplayCards(cards=[]){
  const source=[...cards], byName=new Map();
  for(const card of source){const k=norm(card.name); if(!byName.has(k))byName.set(k,[]);byName.get(k).push(card);}
  const find=(name,sid=null)=>{const key=norm(aliases[norm(name)]??name);const pool=byName.get(key)??[];return pool.find(c=>sid&&c.superstarId===sid)||pool.find(c=>!c.superstarId)||pool[0]||null;};
