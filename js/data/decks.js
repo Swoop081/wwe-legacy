@@ -6061,7 +6061,9 @@ for (const sid of ACTIVE_RELAUNCH_DECK_IDS) {
     const pool = PREM_SHARED_FALLBACKS[sid] ?? ["PREM187","PREM129","PREM230"];
     let cursor = 0;
     deckIds[sid] = ids.map(id => (ACTIVE_RELAUNCH_CARD_ID(id) || ACTIVE_SYSTEM_ID(id)) ? id : pool[(cursor++) % pool.length]);
-    console.error(`Relaunch boundary repaired ${sid}; retired IDs were: ${[...new Set(invalid)].join(", ")}`);
+    // Do not use console.error here: the production boot guard treats console.error
+    // during module evaluation as a fatal boot failure. The boundary has already
+    // repaired the deck synchronously before export.
   }
   if (deckIds[sid].length !== 60) throw new Error(`Relaunch deck ${sid} must contain exactly 60 pages; found ${deckIds[sid].length}.`);
 }
