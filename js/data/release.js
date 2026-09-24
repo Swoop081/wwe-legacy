@@ -1,38 +1,19 @@
 import { sets } from "./sets.js?v=1.1.132";
 
 // v1.1.200 — launch-facing slate. NXT Series 1 remains authored but is banked for later release.
-export const LAUNCH_LIVE_SET_IDS = Object.freeze([
-  "raw-series-1",
-  "smackdown-series-1",
-  "evolution-series-1",
-  "summerslam-series-1",
-  "golden-era-series-1",
-  "new-generation-series-1",
-  "attitude-era-series-1",
-  "ruthless-aggression-series-1"
-]);
+export const LAUNCH_LIVE_SET_IDS = Object.freeze(["premiere","money-in-the-bank"]);
 
 // Season 1 Last Time Is Now was scrapped; keep no player-facing reward-set release here.
 export const LIVE_SEASON_REWARD_SET_IDS = Object.freeze([]);
 
-export const BANKED_PLAYER_SET_IDS = Object.freeze([
-  "nxt-series-1",
-  "worlds-collide-series-1",
-  "money-in-the-bank-series-1",
-  "survivor-series-series-1"
-]);
+export const BANKED_PLAYER_SET_IDS = Object.freeze([]);
 
 export const PLAYER_COLLECTIBLE_SET_IDS = Object.freeze([
   ...LAUNCH_LIVE_SET_IDS,
   ...BANKED_PLAYER_SET_IDS
 ]);
 
-export const SCHEDULED_SET_RELEASES = Object.freeze({
-  "worlds-collide-series-1": "2026-09-26T00:00:00-05:00",
-  "money-in-the-bank-series-1": "2026-10-10T00:00:00-05:00",
-  "survivor-series-series-1": "2026-11-28T00:00:00-06:00",
-  "rewards-october-2026": "2026-10-01T00:00:00Z"
-});
+export const SCHEDULED_SET_RELEASES = Object.freeze({});
 export function setReleaseAt(setId) { return SCHEDULED_SET_RELEASES[setId] ?? null; }
 export function isLaunchLiveSetId(setId) { return LAUNCH_LIVE_SET_IDS.includes(setId); }
 export function isScheduledSetReleased(setId, now = new Date()) {
@@ -45,17 +26,12 @@ export function isPlayerReleasedSetId(setId, now = new Date()) {
 export function playerReleasedCollectibleSetIds(now = new Date()) {
   return PLAYER_COLLECTIBLE_SET_IDS.filter(setId=>isPlayerReleasedSetId(setId,now));
 }
-export const SCHEDULED_REWARD_SET_IDS = Object.freeze(["rewards-october-2026"]);
+export const SCHEDULED_REWARD_SET_IDS = Object.freeze([]);
 export function playerReleaseCalendar() {
   return [...PLAYER_COLLECTIBLE_SET_IDS,...SCHEDULED_REWARD_SET_IDS].map(setId => ({ setId, releaseDate: setReleaseAt(setId), launch: LAUNCH_LIVE_SET_IDS.includes(setId) }));
 }
 
-export const PRE_RELEASE_TEST_SET_IDS = Object.freeze([
-  "nxt-series-1",
-  "worlds-collide-series-1",
-  "money-in-the-bank-series-1",
-  "survivor-series-series-1"
-]);
+export const PRE_RELEASE_TEST_SET_IDS = Object.freeze([]);
 export function isInternalTestSetId(setId, now = new Date()) {
   return isPlayerReleasedSetId(setId, now) || PRE_RELEASE_TEST_SET_IDS.includes(setId);
 }
