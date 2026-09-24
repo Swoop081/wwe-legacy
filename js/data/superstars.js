@@ -3017,14 +3017,15 @@ export const superstars = {
     "leadOffIds": [
       "momentum-technical",
       "momentum-strike",
-      "punch",
-      "snap-powerslam",
-      "ddt"
+      "PREM187",
+      "PREM217",
+      "PREM131"
     ],
     "signatures": [
-      "randy-orton-draping-ddt",
-      "randy-orton-rko",
-      "randy-orton-punt-kick"
+      "PREM61",
+      "PREM62",
+      "PREM63",
+      "PREM37"
     ],
     "archetype": "technical-control-sudden-finish",
     "hp": 67,
@@ -3035,10 +3036,8 @@ export const superstars = {
       "agility": 2
     },
     "starterMomentum": {
-      "technical": 5,
-      "strength": 3,
-      "strike": 3,
-      "agility": 1
+      "technical": 6,
+      "strike": 6
     },
     "ability": {
       "name": "Apex Predator",
