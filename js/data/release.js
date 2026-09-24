@@ -43,8 +43,13 @@ export function isLaunchRosterSuperstar(star) {
   return !!star && !star.developmentOnly && isLaunchLiveSetId(star.setId);
 }
 export function isPlayerVisibleSuperstar(star, profile = null, now = new Date()) {
-  if (!star || isUnreleasedSetId(star.setId, now)) return false;
+  if (!star) return false;
+  // Relaunch profiles deliberately reuse the canonical Superstar records while
+  // their collectible identities live in Premiere. An owned/unlocked Superstar
+  // must therefore remain player-visible even when the legacy source record's
+  // historical setId is no longer released.
+  if (profile?.unlockedSuperstars?.includes(star.id)) return true;
+  if (isUnreleasedSetId(star.setId, now)) return false;
   if (star.developmentOnly && !isScheduledSetReleased(star.setId,now)) return false;
-  if (PLAYER_COLLECTIBLE_SET_IDS.includes(star.setId)) return true;
-  return !!profile?.unlockedSuperstars?.includes(star.id);
+  return PLAYER_COLLECTIBLE_SET_IDS.includes(star.setId);
 }
