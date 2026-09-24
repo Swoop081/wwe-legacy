@@ -1,11 +1,12 @@
 import { decks } from "./decks.js?v=1.1.132";
 import { collectionCards } from "./collection.js?v=1.1.132";
+import { allGameplayCards } from "./content.js?v=1.1.299";
 import { superstars } from "./superstars.js?v=1.1.132";
 import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=1.1.132";
 import { isPlayerReleasedSetId } from "./release.js?v=1.1.132";
 import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=1.1.132";
 
-const byId = new Map(collectionCards.map(c => [c.id, c]));
+// Deck Lab must resolve gameplay identities, including the four Momentum resources.\n// Collection alone omits non-collectible system pages and caused saved 60-page starter decks to materialize as 45/60.\nconst byId = new Map([...allGameplayCards, ...collectionCards].map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
 const DEFAULT_PLAYER_ENTRANCE_ID = "PREM241";
 
