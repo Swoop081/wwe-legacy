@@ -1,11 +1,11 @@
 {
-  "version": "1.1.282",
+  "version": "1.1.283",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.282",
+  "physicalIphoneSmoke": "pending-v1.1.283",
   "launchStatus": "released",
-  "name": "v1.1.282 — Starter Deck Import Repair"
+  "name": "v1.1.283 — Premiere Collection Repair"
 }
