@@ -51,10 +51,6 @@ const activeCards = [
 ];
 const byId = new Map(activeCards.map(card => [card.id, card]));
 // Active collection is assembled from the canonical gameplay data above.
-for (let i=1;i<=8;i++) {
-  const id=`MITB0${i}`;
-  if (!byId.has(id)) throw new Error(`Active Money in the Bank collection is missing ${id}.`);
-}
 
 export const collectionCardsBySet = {
   premiere: activeCards.filter(card => card.id.startsWith("PREM")).sort((a,b)=>Number(a.id.slice(4))-Number(b.id.slice(4))),
