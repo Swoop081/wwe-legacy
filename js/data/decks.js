@@ -6012,7 +6012,7 @@ for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
  const pool=PREM_SHARED_FALLBACKS[sid]??["PREM187","PREM129","PREM230"];
  let cursor=0;
  deckIds[sid]=(deckIds[sid]??[]).map(id=>{
-   if(/^PREM\d+$/.test(id)||/^MITB0[3-7]$/.test(id)||id.startsWith("momentum-")||SYSTEM_PAGE(id))return id;
+   if(/^PREM[0-9]+$/.test(id)||/^MITB0[3-7]$/.test(id)||id.startsWith("momentum-")||SYSTEM_PAGE(id))return id;
    const card=byId.get(id);
    if(card?.kind==="action"&&card.superstarId===sid){
      if(sid==="la-knight")return "MITB07";
@@ -6029,7 +6029,7 @@ for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
  const ids=deckIds[sid]??[];
  if(ids.length!==60)throw new Error(`${sid} relaunch deck is ${ids.length}, expected 60`);
  for(const id of ids){
-   if(id.startsWith("momentum-")||RELAUNCH_ALLOWED_NONSET.has(id)||/^PREM\d+$/.test(id)||/^MITB0[3-7]$/.test(id))continue;
+   if(id.startsWith("momentum-")||RELAUNCH_ALLOWED_NONSET.has(id)||/^PREM[0-9]+$/.test(id)||/^MITB0[3-7]$/.test(id))continue;
    throw new Error(String(sid)+" relaunch deck leaked retired card "+String(id));
  }
 }
