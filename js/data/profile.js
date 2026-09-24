@@ -20,7 +20,7 @@ export const STARTER_BRAND_CHOICES = Object.freeze({
 export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 49;
+export const PROFILE_VERSION = 50;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 12;
 
@@ -770,7 +770,7 @@ export function migrateProfile(old) {
   const premiereStarterPair = Array.isArray(p.starterIds)
     ? p.starterIds.filter(id => PREMIERE_STARTER_IDS.includes(id) && authoredDeckIds[id]?.length === 60)
     : [];
-  if (sourceVersion < 49 && premiereStarterPair.length === 2) {
+  if (sourceVersion < 50 && premiereStarterPair.length === 2) {
     p.unlockedSuperstars = [...new Set([...p.unlockedSuperstars, ...premiereStarterPair])];
     const combinedNeeded = new Map();
     for (const sid of premiereStarterPair) {
