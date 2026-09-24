@@ -11281,3 +11281,21 @@ body[data-screen="starter-summary"] #game{
   top:4.5%!important;
   right:5.5%!important;
 }
+
+
+/* v1.1.245 — Premiere starter onboarding: one-screen reveal + two-card roster */
+body[data-screen="starter"] .premiere-starter-onboarding{box-sizing:border-box;min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom));gap:8px;overflow:hidden}
+body[data-screen="starter"] .premiere-starter-onboarding .starter-hero h2{font-size:clamp(30px,8vw,43px);margin:.08em 0}
+body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{font-size:13px;line-height:1.25;margin:6px 0}
+body[data-screen="starter"] .starter-single-pack-stage{min-height:0;padding:6px}
+body[data-screen="starter"] .starter-premiere-physical-pack{width:min(238px,58vw)}
+body[data-screen="starter"] .starter-superstar-reveal{box-sizing:border-box;min-height:0;height:calc(100dvh - 165px);padding:8px 6px 4px;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:5px;overflow:hidden}
+body[data-screen="starter"] .starter-superstar-reveal .single-card-slot{min-height:0;height:100%;display:grid;place-items:center}
+body[data-screen="starter"] .starter-superstar-reveal .booster-card-halo{height:100%;width:auto;max-width:100%;display:grid;place-items:center}
+body[data-screen="starter"] .starter-superstar-reveal .starter-reveal-ccg{height:min(100%,570px)!important;width:auto!important;max-width:82vw!important;aspect-ratio:680/1000}
+body[data-screen="starter"] .starter-superstar-reveal .booster-reveal-meta{margin:0}
+body[data-screen="starter"] .starter-superstar-reveal .reveal-progress{margin:0;font-size:10px}
+body[data-screen="starter-summary"] .starter-roster-summary-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;padding:0 10px;box-sizing:border-box}
+body[data-screen="starter-summary"] .starter-roster-summary-cards .starter-summary-superstar-card{width:min(44vw,180px)!important;max-width:180px!important;height:auto!important;aspect-ratio:680/1000!important}
+body[data-screen="starter-summary"] .starter-roster-summary{grid-template-rows:auto minmax(0,1fr) 54px!important}
+@media(max-height:750px){body[data-screen="starter"] .starter-superstar-reveal{height:calc(100dvh - 145px)}body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{display:none}}
