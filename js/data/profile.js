@@ -128,11 +128,14 @@ const MOMENTUM_METHODS = Object.freeze(["strength", "strike", "technical", "agil
 // blueprints intentionally used 6-10 copies of one Momentum colour, so only
 // those excess Momentum pages are redistributed; moves/actions are untouched.
 export function freshNormalDeckBlueprint(sid) {
+  // Premiere starter decks are already fully authored and approved at exactly
+  // 60 slots. Do not run them through the legacy five-copy deck normalizer:
+  // starter Momentum intentionally exceeds that old per-card cap.
   const source = decks[sid] ?? [];
-  // The authored deck is authoritative. Do not reject a valid 60-card deck
-  // merely because the legacy superstar registry has not resolved this ID yet.
-  const star = starById.get(sid) ?? { id:sid, name:sid, methodLimits:{} };
-  if (source.length !== 60) return [];
+  if (PREMIERE_STARTER_IDS.includes(sid)) return source.length === 60 ? [...source] : [];
+
+  const star = starById.get(sid);
+  if (!star || source.length !== 60) return [];
   const out = [];
   const counts = new Map();
   const deferred = [];
