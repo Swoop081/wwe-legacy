@@ -1,11 +1,11 @@
 {
-  "version": "1.1.260",
+  "version": "1.1.261",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.260",
+  "physicalIphoneSmoke": "pending-v1.1.261",
   "launchStatus": "released",
-  "name": "v1.1.260 — Starter Superstar Reveal Canonical Card Fix"
+  "name": "v1.1.261 — Starter Reveal Summary Renderer Fix"
 }
