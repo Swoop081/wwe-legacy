@@ -2415,12 +2415,12 @@ export const superstars = {
     "id": "la-knight",
     "name": "LA Knight",
     "nickname": "The Megastar",
-    "setId": "money-in-the-bank-series-1",
+    "setId": "money-in-the-bank",
     "era": null,
     "seasonExclusive": false,
-    "cardId": "superstar-la-knight",
-    "entranceId": "entrance-la-knight",
-    "specialId": "special-la-knight",
+    "cardId": "MITB01",
+    "entranceId": "MITB02",
+    "specialId": "MITB07",
     "leadOffIds": [
       "momentum-strike",
       "momentum-strength",
@@ -2429,8 +2429,10 @@ export const superstars = {
       "clothesline"
     ],
     "signatures": [
-      "diving-elbow-drop",
-      "la-knight-bft"
+      "MITB04",
+      "MITB05",
+      "MITB06",
+      "MITB03"
     ],
     "archetype": "crowd-powered-all-rounder",
     "hp": 64,
@@ -2460,30 +2462,20 @@ export const superstars = {
       "maxUses": 2
     },
     "entrance": {
-      "id": "entrance-la-knight",
-      "name": "Let Me Talk to Ya!",
+      "id": "MITB02",
+      "name": "YEAH!!",
       "kind": "entrance",
-      "setId": "money-in-the-bank-series-1",
+      "setId": "money-in-the-bank",
       "rarity": 4,
       "superstarId": "la-knight",
-      "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "strike": 1,
-        "strength": 1,
-        "technical": 1
+        "strike": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
-    "special": {
-      "type": "yeahTutor",
-      "afterName": "Diving Elbow Drop",
-      "searchName": "BFT",
-      "discount": 4,
-      "draw": 2,
-      "adrenaline": 1,
-      "bonusDamage": 2
-    }
+    "special": null
   },
   "alexaBliss": {
     "id": "alexa-bliss",
