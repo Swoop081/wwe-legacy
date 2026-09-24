@@ -11430,3 +11430,6 @@ body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continu
 
 /* v1.1.267 — Premiere mark: larger and optically equal top/right border inset. */
 .ccg-card.set-premiere .ccg-card-front .ccg-premiere-front-set-logo{top:3.1%!important;right:4.5%!important;width:22.8%!important;max-height:16.8%!important}
+
+/* v1.1.268 — white halo behind the Premiere mark on all Premiere card fronts. */
+.ccg-card.set-premiere .ccg-card-front .ccg-premiere-front-set-logo{filter:drop-shadow(0 0 3px rgba(255,255,255,.98)) drop-shadow(0 0 7px rgba(255,255,255,.82)) drop-shadow(0 0 13px rgba(255,255,255,.52))!important}
