@@ -6045,12 +6045,23 @@ for(const sid of [...PREMIERE_RELAUNCH_SUPERSTARS,"la-knight"]){
  if(deckIds[sid].length!==60)throw new Error(`Premiere authenticity deck length failed for ${sid}: ${deckIds[sid].length}`);
 }
 
+// Hard relaunch boundary: only the 16 Premiere starters plus LA Knight remain
+// addressable. Deck pages may reference PREM01-PREM270, MITB01-MITB08, or the
+// four non-collectible Momentum resources. No archived card/support ID survives.
+const ACTIVE_RELAUNCH_DECK_IDS = Object.freeze([...PREMIERE_RELAUNCH_SUPERSTARS, "la-knight"]);
+const ACTIVE_RELAUNCH_CARD_ID = id => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(id) || /^MITB0[1-8]$/.test(id);
+const ACTIVE_SYSTEM_ID = id => /^momentum-(strength|strike|technical|agility)$/.test(id);
+for (const sid of Object.keys(deckIds)) if (!ACTIVE_RELAUNCH_DECK_IDS.includes(sid)) delete deckIds[sid];
+for (const sid of ACTIVE_RELAUNCH_DECK_IDS) {
+  const ids = deckIds[sid] ?? [];
+  const invalid = ids.filter(id => !ACTIVE_RELAUNCH_CARD_ID(id) && !ACTIVE_SYSTEM_ID(id));
+  if (invalid.length) throw new Error(`Relaunch deck ${sid} still references retired card IDs: ${[...new Set(invalid)].join(", ")}`);
+  if (ids.length !== 60) throw new Error(`Relaunch deck ${sid} must contain exactly 60 pages; found ${ids.length}.`);
+}
+
 // Relaunch deck validation temporarily disabled during boot recovery.
 // Re-enable as a non-fatal development audit after startup is stable.
-export const ONCE_TOO_OFTEN_ID="once-too-often";
-const onceTooOftenReplacementPriority=["crowd-support","fire-up","game-plan","got-all-of-it","punch"];
-for(const ids of Object.values(deckIds)){if(!Array.isArray(ids)||ids.includes(ONCE_TOO_OFTEN_ID))continue;let replaceAt=-1;for(const id of onceTooOftenReplacementPriority){const i=ids.lastIndexOf(id);if(i>=5){replaceAt=i;break;}}if(replaceAt<5)replaceAt=ids.findIndex((id,i)=>i>=5&&!id.startsWith("momentum-"));if(replaceAt>=5)ids[replaceAt]=ONCE_TOO_OFTEN_ID;}
-for (const retiredRewardId of ["the-rock","chyna","goldberg"]) delete deckIds[retiredRewardId];
+// Archived support-card injectors are intentionally disabled by the hard relaunch boundary.
 // Resolve deck pages after all Premiere identities are present. Keep the authored
 // 60 slots intact; a missing card must never silently collapse an entire starter deck.
 const premiereFallbackById = new Map();
