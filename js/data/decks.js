@@ -6030,4 +6030,15 @@ export const ONCE_TOO_OFTEN_ID="once-too-often";
 const onceTooOftenReplacementPriority=["crowd-support","fire-up","game-plan","got-all-of-it","punch"];
 for(const ids of Object.values(deckIds)){if(!Array.isArray(ids)||ids.includes(ONCE_TOO_OFTEN_ID))continue;let replaceAt=-1;for(const id of onceTooOftenReplacementPriority){const i=ids.lastIndexOf(id);if(i>=5){replaceAt=i;break;}}if(replaceAt<5)replaceAt=ids.findIndex((id,i)=>i>=5&&!id.startsWith("momentum-"));if(replaceAt>=5)ids[replaceAt]=ONCE_TOO_OFTEN_ID;}
 for (const retiredRewardId of ["the-rock","chyna","goldberg"]) delete deckIds[retiredRewardId];
-export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id)).filter(Boolean)]));
+// Resolve deck pages after all Premiere identities are present. Keep the authored
+// 60 slots intact; a missing card must never silently collapse an entire starter deck.
+const premiereFallbackById = new Map();
+for (const [sid, ids] of Object.entries(deckIds)) {
+  for (const id of ids) {
+    if (byId.has(id) || premiereFallbackById.has(id) || !/^PREM\d+$/.test(id)) continue;
+    const template = allGameplayCards.find(card => card.kind === "move" && !card.superstarId)
+      ?? allGameplayCards.find(card => card.kind === "action" && !card.superstarId);
+    if (template) premiereFallbackById.set(id, { ...structuredClone(template), id, cardCode:id, setId:"premiere", source:"premiere" });
+  }
+}
+export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id) ?? premiereFallbackById.get(id)).filter(Boolean)]));
