@@ -312,24 +312,8 @@ export const PREMIERE_STARTER_MALES = Object.freeze(["roman-reigns","cody-rhodes
 export const PREMIERE_STARTER_FEMALES = Object.freeze(["rhea-ripley","liv-morgan","becky-lynch","charlotte-flair","tiffany-stratton","iyo-sky","alexa-bliss","trish-stratus"]);
 const PREMIERE_STARTER_IDS = Object.freeze([...PREMIERE_STARTER_MALES,...PREMIERE_STARTER_FEMALES]);
 
-const PREMIERE_STARTER_DECK_IDS = Object.freeze({
-  "roman-reigns": Object.freeze([...(decks["roman-reigns"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "cody-rhodes": Object.freeze([...(decks["cody-rhodes"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "cm-punk": Object.freeze([...(decks["cm-punk"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "seth-rollins": Object.freeze([...(decks["seth-rollins"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "randy-orton": Object.freeze([...(decks["randy-orton"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "sami-zayn": Object.freeze([...(decks["sami-zayn"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "stone-cold-steve-austin": Object.freeze([...(decks["stone-cold-steve-austin"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "john-cena": Object.freeze([...(decks["john-cena"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "rhea-ripley": Object.freeze([...(decks["rhea-ripley"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "liv-morgan": Object.freeze([...(decks["liv-morgan"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "becky-lynch": Object.freeze([...(decks["becky-lynch"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "charlotte-flair": Object.freeze([...(decks["charlotte-flair"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "tiffany-stratton": Object.freeze([...(decks["tiffany-stratton"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "iyo-sky": Object.freeze([...(decks["iyo-sky"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "alexa-bliss": Object.freeze([...(decks["alexa-bliss"] ?? [])].map(card => card?.id).filter(Boolean)),
-  "trish-stratus": Object.freeze([...(decks["trish-stratus"] ?? [])].map(card => card?.id).filter(Boolean))
-});
+const PREMIERE_STARTER_DECK_IDS = authoredDeckIds;
+
 
 export function createProfile(starterInput) {
   const starterIds = Array.isArray(starterInput) ? [...starterInput] : [starterInput];
