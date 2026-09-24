@@ -1,11 +1,11 @@
 {
-  "version": "1.1.290",
+  "version": "1.1.291",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.290",
+  "physicalIphoneSmoke": "pending-v1.1.291",
   "launchStatus": "released",
-  "name": "v1.1.290 — Boot-Safe Relaunch Boundary"
+  "name": "v1.1.291 — Relaunch Boundary Boot Guard Fix"
 }
