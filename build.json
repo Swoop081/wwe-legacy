@@ -1,11 +1,11 @@
 {
-  "version": "1.1.235",
+  "version": "1.1.236",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.235",
+  "physicalIphoneSmoke": "pending-v1.1.236",
   "launchStatus": "released",
-  "name": "v1.1.235 — Content Parser Fix"
+  "name": "v1.1.236 — Deck Parser Line 6033 Fix"
 }
