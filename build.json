@@ -1,11 +1,11 @@
 {
-  "version": "1.1.298",
+  "version": "1.1.299",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.298",
+  "physicalIphoneSmoke": "pending-v1.1.299",
   "launchStatus": "released",
-  "name": "Superstar Runtime Lookup Syntax Fix"
+  "name": "Deck Lab Full 60 + Premiere Identity Art"
 }
