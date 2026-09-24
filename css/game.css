@@ -11283,7 +11283,7 @@ body[data-screen="starter-summary"] #game{
 }
 
 
-/* v1.1.245 — Premiere starter onboarding: one-screen reveal + two-card roster */
+/* v1.1.246 — Premiere starter onboarding: one-screen reveal + two-card roster */
 body[data-screen="starter"] .premiere-starter-onboarding{box-sizing:border-box;min-height:100dvh;padding:max(18px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom));gap:8px;overflow:hidden}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero h2{font-size:clamp(30px,8vw,43px);margin:.08em 0}
 body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{font-size:13px;line-height:1.25;margin:6px 0}
@@ -11299,3 +11299,7 @@ body[data-screen="starter-summary"] .starter-roster-summary-cards{grid-template-
 body[data-screen="starter-summary"] .starter-roster-summary-cards .starter-summary-superstar-card{width:min(44vw,180px)!important;max-width:180px!important;height:auto!important;aspect-ratio:680/1000!important}
 body[data-screen="starter-summary"] .starter-roster-summary{grid-template-rows:auto minmax(0,1fr) 54px!important}
 @media(max-height:750px){body[data-screen="starter"] .starter-superstar-reveal{height:calc(100dvh - 145px)}body[data-screen="starter"] .premiere-starter-onboarding .starter-hero p{display:none}}
+
+/* v1.1.246 — starter summary wrapper keeps full rendered cards side by side */
+body[data-screen="starter-summary"] .starter-summary-superstar-card{width:min(44vw,180px)!important;max-width:180px!important;aspect-ratio:680/1000!important;display:grid;place-items:center;min-width:0}
+body[data-screen="starter-summary"] .starter-summary-superstar-card .starter-summary-rendered-card{width:100%!important;height:auto!important;aspect-ratio:680/1000!important}
