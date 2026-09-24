@@ -11479,3 +11479,12 @@ body[data-screen="starter"] .starter-pack-reveal-card-host{width:100%!important;
 body[data-screen="starter"] .starter-pack-reveal-card-host>.ccg-card.starter-pack-reveal-card{height:46dvh!important;max-height:500px!important;width:auto!important;max-width:62vw!important;margin:0!important}
 body[data-screen="starter"] .starter-pack-reveal-rebuilt h1{height:auto!important;line-height:1!important;margin:0 0 4px!important}
 body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continue{flex:0 0 50px!important;margin:4px 0 0!important}
+
+/* v1.1.328 — compact one-screen starting roster summary. */
+body[data-screen="starter-summary"] .starter-roster-summary{height:100dvh!important;min-height:0!important;box-sizing:border-box!important;padding:max(10px,env(safe-area-inset-top)) 14px max(10px,env(safe-area-inset-bottom))!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:center!important;gap:7px!important;overflow:hidden!important}
+body[data-screen="starter-summary"] .starter-summary-logo{display:block!important;width:min(54vw,220px)!important;height:auto!important;max-height:10dvh!important;object-fit:contain!important;margin:0 auto!important}
+body[data-screen="starter-summary"] .starter-roster-summary h1{font-size:30px!important;line-height:.9!important;margin:0!important;text-align:center!important;flex:0 0 auto!important}
+body[data-screen="starter-summary"] .starter-roster-summary-cards{width:100%!important;height:auto!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important;justify-items:center!important;gap:12px!important;padding:4px 4px 0!important;margin:0!important;flex:0 0 auto!important}
+body[data-screen="starter-summary"] .starter-summary-card-slot{width:100%!important;display:flex!important;justify-content:center!important;align-items:flex-start!important}
+body[data-screen="starter-summary"] .starter-summary-card-slot>.ccg-card{width:min(42vw,170px)!important;height:auto!important;max-height:48dvh!important;margin:0!important}
+body[data-screen="starter-summary"] .starter-roster-summary .start-match{width:88%!important;height:54px!important;min-height:54px!important;margin:5px auto 0!important;padding:0 18px!important;flex:0 0 54px!important}
