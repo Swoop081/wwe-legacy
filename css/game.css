@@ -11472,3 +11472,10 @@ body[data-screen="starter"] .starter-pack-reveal-rebuilt h1{font-size:24px!impor
 body[data-screen="starter"] .starter-pack-reveal-card-host{height:100%!important;min-height:0!important;overflow:hidden!important}
 body[data-screen="starter"] .starter-pack-reveal-card-host>.ccg-card.starter-pack-reveal-card{height:min(46dvh,500px)!important;width:auto!important;max-width:62vw!important;max-height:100%!important}
 body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continue{height:50px!important;min-height:50px!important;width:88%!important;margin:0!important}
+
+/* v1.1.327 — remove dead vertical space around starter reveal card. */
+body[data-screen="starter"] .starter-pack-reveal-rebuilt{flex:0 0 auto!important;height:auto!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:8px!important;overflow:visible!important;padding:0!important}
+body[data-screen="starter"] .starter-pack-reveal-card-host{width:100%!important;height:auto!important;min-height:0!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:visible!important;margin:0!important}
+body[data-screen="starter"] .starter-pack-reveal-card-host>.ccg-card.starter-pack-reveal-card{height:46dvh!important;max-height:500px!important;width:auto!important;max-width:62vw!important;margin:0!important}
+body[data-screen="starter"] .starter-pack-reveal-rebuilt h1{height:auto!important;line-height:1!important;margin:0 0 4px!important}
+body[data-screen="starter"] .starter-pack-reveal-rebuilt .starter-reveal-continue{flex:0 0 50px!important;margin:4px 0 0!important}
