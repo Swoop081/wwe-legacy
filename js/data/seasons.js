@@ -13,16 +13,12 @@ export const WEEKLY_CHALLENGE_XP = 25;
 export const SEASON_1_COMPLETION_SUPERSTAR = "la-knight";
 export const FEATURED_SET_IDS = ["premiere"];
 
-// Season 1 prestige chase: Trish Stratus — Stratusfaction Guaranteed is assembled
-// across a 50-tier / 30-day road. Trish Stratus’ Season-exclusive identities are
-// Amethyst-only: there are no Normal, Emerald, Sapphire or legacy fifth-tier printings. Each of her
-// four exclusive Moves is awarded as five separate Amethyst copies, with her Action,
-// Entrance and Amethyst Superstar also earned on the road. Tier 50 then installs the best owned version of Trish’s
-// authored deck so Season completion is immediately playable at maximum owned
-// printing quality.
-// Merch is deliberately NOT awarded on this 50-tier road. Trish-specific
-// Merch remains in the universal one-Merch-per-booster pool and is collected
-// independently from the premium Amethyst Rewards chase.
+// Season 1 prestige chase: LA Knight — YEAH! is assembled across the 50-tier road.
+// Chase-exclusive identities are Amethyst-only: no lower-tier printings exist.
+// LA Knight's exclusive Moves are awarded as repeated Amethyst copies, with his
+// Action, Entrance, Merch and Amethyst Superstar completing the reward package.
+// Tier 50 installs the best owned version of LA Knight's authored deck so Season
+// completion is immediately playable at maximum owned printing quality.
 export const SEASON_1_CHASE_TIER_REWARDS = Object.freeze({
   2: { cardId: "MITB05", name: "LA Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
   3: { cardId: "MITB04", name: "The Megastar’s Elbow", amount: 1, rewardType: "trademark", label: "LA KNIGHT · TRADEMARK", printingTier: "amethyst" },
@@ -174,9 +170,9 @@ export function claimSeasonTier(profile, tier, now = new Date()) {
   const reward = tierReward(n, now);
   if (reward.kind === "season-card") {
     if (reward.rewardType === "superstar") {
-      // Tier 50 completes Trish Stratus’ Amethyst-only Season package. Shared cards are not
+      // Tier 50 completes LA Knight's Amethyst-only Season package. Shared cards are not
       // gifted, but the game immediately assembles the strongest owned version
-      // of Trish's authored 60-page blueprint and equips her Ruby Entrance.
+      // of LA Knight's authored 60-page blueprint.
       grantSuperstarIdentityUnlockPackage(profile, reward.superstarId, { tier: reward.printingTier ?? "ruby", celebrate: false });
       profile.savedDecks ??= {};
       profile.savedDecks[reward.superstarId] = buildBestOwnedRecommendedDraft(profile, reward.superstarId);
