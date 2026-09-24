@@ -1,13 +1,9 @@
-import { superstars } from "./superstars.js?v=1.1.132";
-import { collectionCards } from "./collection.js?v=1.1.132";
-import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=1.1.132";
-import { isPlayerReleasedSetId } from "./release.js?v=1.1.132";
+import { superstars } from "./superstars.js?v=1.1.347";
+import { collectionCards } from "./collection.js?v=1.1.347";
+import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=1.1.347";
+import { isPlayerReleasedSetId } from "./release.js?v=1.1.347";
 
-export const STORE_SET_ROTATION = [
-  "summerslam-series-1", "golden-era-series-1", "attitude-era-series-1", "evolution-series-1",
-  "raw-series-1", "new-generation-series-1", "worlds-collide-series-1", "money-in-the-bank-series-1",
-  "smackdown-series-1", "survivor-series-series-1"
-];
+export const STORE_SET_ROTATION = ["premiere"];
 export function releasedStoreSetIds(now = new Date()) { return STORE_SET_ROTATION.filter(setId => isPlayerReleasedSetId(setId, now)); }
 export const STORE_BOOSTER_PRICE = 300;
 export const STORE_SUPERSTAR_PRICE = 2500;
@@ -37,8 +33,8 @@ export function storeRotation(now = new Date()) {
 }
 
 export function storeSuperstars(setId, now = new Date()) {
-  if (!isPlayerReleasedSetId(setId, now)) return [];
-  return roster.filter(star => star.setId === setId && !star.developmentOnly);
+  if (setId !== "premiere" || !isPlayerReleasedSetId("premiere", now)) return [];
+  return roster.filter(star => star.setId === "premiere" && !star.developmentOnly);
 }
 
 export function storeLeadOffCards(starId) {
@@ -57,7 +53,7 @@ export function purchaseStoreBooster(profile, setId, now = new Date()) {
   spendUniversePoints(profile, STORE_BOOSTER_PRICE);
   profile.boosterCreditsBySet ??= {};
   profile.boosterCreditsBySet[setId] = (profile.boosterCreditsBySet[setId] ?? 0) + 1;
-  if (setId === "summerslam-series-1") profile.boosterCredits = profile.boosterCreditsBySet[setId];
+  if (setId === "premiere") profile.boosterCredits = profile.boosterCreditsBySet[setId];
   profile.storePurchases ??= [];
   profile.storePurchases.push({ type: "booster", setId, price: STORE_BOOSTER_PRICE, at: now.toISOString() });
   return { type: "booster", setId, price: STORE_BOOSTER_PRICE, balance: profile.universePoints };
