@@ -1,11 +1,11 @@
 {
-  "version": "1.1.288",
+  "version": "1.1.289",
   "releasedAt": "2026-09-24",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.288",
+  "physicalIphoneSmoke": "pending-v1.1.289",
   "launchStatus": "released",
-  "name": "v1.1.288 — Premiere Authored Deck Repair"
+  "name": "v1.1.289 — Hard Relaunch Content Boundary"
 }
