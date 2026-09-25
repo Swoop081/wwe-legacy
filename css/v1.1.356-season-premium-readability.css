@@ -61,3 +61,6 @@
 /* Free booster label should dominate its bar */
 .season-road-redesign .season-free-pack-cta.season-free-pack-strip{height:36px!important;min-height:36px!important}
 .season-road-redesign .season-free-pack-cta .season-free-pack-button strong{font-size:27px!important;line-height:36px!important}
+
+/* Current Tier XP must fit worst-case 4,999 / 5,000 XP on iPhone */
+.season-road-redesign .season-road-command .season-current-tier span{font-size:17px!important;white-space:nowrap!important;letter-spacing:-.02em!important}
