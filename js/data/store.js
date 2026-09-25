@@ -1,7 +1,7 @@
-import { superstars } from "./superstars.js?v=1.1.348";
-import { collectionCards } from "./collection.js?v=1.1.348";
-import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=1.1.348";
-import { isPlayerReleasedSetId } from "./release.js?v=1.1.348";
+import { superstars } from "./superstars.js?v=1.1.349";
+import { collectionCards } from "./collection.js?v=1.1.349";
+import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=1.1.349";
+import { isPlayerReleasedSetId } from "./release.js?v=1.1.349";
 
 export const STORE_SET_ROTATION = ["premiere"];
 export function releasedStoreSetIds(now = new Date()) { return STORE_SET_ROTATION.filter(setId => isPlayerReleasedSetId(setId, now)); }
