@@ -1,15 +1,14 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=1.1.132";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.1.132";
-import { duplicateUniversePointsFor } from "./store.js?v=1.1.132";
-import { sets } from "./sets.js?v=1.1.132";
-import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.1.132";
-import { CARD_TIERS, TIER_PULL_WEIGHTS, fixedPrintingTierFor, rollCardTier } from "./variants.js?v=1.1.132";
-import { grantMerch, rollMerch } from "./merch.js?v=1.1.132";
-import { grantSuperstarVariant, rollSuperstarVariant } from "./superstar-variants.js?v=1.1.132";
+import { cardsForSet, collectionCards } from "./collection.js?v=1.1.349";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=1.1.349";
+import { duplicateUniversePointsFor } from "./store.js?v=1.1.349";
+import { sets } from "./sets.js?v=1.1.349";
+import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=1.1.349";
+import { CARD_TIERS, TIER_PULL_WEIGHTS, fixedPrintingTierFor, rollCardTier } from "./variants.js?v=1.1.349";
+import { grantSuperstarVariant, rollSuperstarVariant } from "./superstar-variants.js?v=1.1.349";
 
 export const BOOSTER_SIZE = 5;
-export const BOOSTER_GAMEPLAY_SLOTS = 4;
-export const BOOSTER_MERCH_SLOTS = 1;
+export const BOOSTER_GAMEPLAY_SLOTS = 5;
+export const BOOSTER_MERCH_SLOTS = 0;
 export const SUPERSTAR_VARIANT_CHANCE = .005;
 export const MAX_VERY_RARE_PULLS = 1;
 export const MAX_NON_NORMAL_PRINTINGS = 2;
@@ -221,9 +220,6 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
     });
   }
 
-  const merch = rollMerch(setId, rng);
-  grantMerch(profile, merch, 1);
-  pack.push({ card: merch, tier: null, isNewCard: (profile.ownedMerch?.[merch.id] ?? 0) === 1, isMerch: true, replacedNormal: false, superstarUnlocked: false, overflowCopies: 0, duplicateUnitValue: 0, universePointsValue: 0, universePointsCredited: true, ownershipBefore: Math.max(0,(profile.ownedMerch?.[merch.id] ?? 1)-1), ownershipCap: null });
 
   if (pendingSuperstarUnlockId) grantSuperstarUnlockPackage(profile, pendingSuperstarUnlockId);
   recordSuperstarChase(profile, superstarAdded);
