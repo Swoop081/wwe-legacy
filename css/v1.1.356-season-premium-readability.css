@@ -41,3 +41,7 @@
  .season-road-redesign .season-road-node{min-height:108px!important;height:108px!important}
  .season-road-redesign .season-road-reward strong{font-size:26px!important}
 }
+/* Current Tier: two-line, edge-to-edge readable treatment */
+.season-road-redesign .season-road-command .season-current-tier{padding:0 4px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important}
+.season-road-redesign .season-road-command .season-current-tier small{font-size:18px!important;line-height:1!important;letter-spacing:.025em!important}
+.season-road-redesign .season-road-command .season-current-tier span{font-size:21px!important;line-height:1!important;font-weight:900!important;letter-spacing:0!important}
