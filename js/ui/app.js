@@ -318,7 +318,7 @@ function setLogoMarkup(setId, className = "") {
 
 function physicalBoosterPackMarkup({ setId, title = "WWE LEGACY", series = "SERIES 1", subtitle = "5 CARDS", extraClass = "", opening = false } = {}) {
   const hasSetLogo = setId === "premiere" || Boolean(SET_LOGO_ASSETS[setId]);
-  const logo = setId === "premiere" ? `<img class="set-brand-logo pack-set-logo" src="${assetUrl("assets/images/premiere-logo.png")}" alt="Premiere">` : (setLogoMarkup(setId, "pack-set-logo") || `<span class="pack-text-logo"><b>${String(title).toUpperCase()}</b><small>${series}</small></span>`);
+  const logo = setLogoMarkup(setId, "pack-set-logo") || `<span class="pack-text-logo"><b>${String(title).toUpperCase()}</b><small>${series}</small></span>`;
   return `<span class="booster-pack physical-booster-pack pack-set-${setId} ${extraClass}">
     <span class="pack-crimp pack-crimp-top" aria-hidden="true"></span>
     <span class="pack-side-seam pack-side-seam-left" aria-hidden="true"></span>
