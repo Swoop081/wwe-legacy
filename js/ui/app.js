@@ -103,7 +103,7 @@ let deckLabEntranceId = null;
 let deckLabInspectCardId = null;
 let deckLabInspectFlipped = false;
 let activeCollectionSetId = "all";
-let activeBoosterSetId = "summerslam-series-1";
+let activeBoosterSetId = "premiere";
 let unlockCelebration = null;
 let unlockCelebrationIndex = 0;
 let unlockCelebrationReturnScreen = null;
@@ -220,16 +220,10 @@ const superstarById = Object.fromEntries(Object.values(superstars).filter(star =
 const launchCollectionCards = collectionCards.filter(card => CURRENT_PLAYER_SET_IDS.includes(card.setId));
 const launchSetCollections = Object.fromEntries(Object.entries(setCollections).filter(([setId]) => CURRENT_PLAYER_SET_IDS.includes(setId)));
 function playerFacingCollectionCards() {
-  // Season reward cards are part of the current player-facing catalogue from
-  // day one. Ownership controls whether they are marked OWNED / NOT OWNED; it
-  // must never hide the authored Season 1 chase reward package from Catalogue filters.
-  const rewardCards = collectionCards.filter(card => card.setId === "season-1-last-time-is-now");
-  return [...launchCollectionCards, ...rewardCards];
+  return [...launchCollectionCards];
 }
 function playerFacingSetCollections() {
-  const out = { ...launchSetCollections };
-  if (setCollections["season-1-last-time-is-now"]) out["season-1-last-time-is-now"] = setCollections["season-1-last-time-is-now"];
-  return out;
+  return { ...launchSetCollections };
 }
 const collectionById = new Map(collectionCards.map(card => [card.id, card]));
 function onboardingMarkup() {
@@ -310,25 +304,9 @@ const GENERIC_SUPERSTAR_PLACEHOLDER = assetUrl("assets/images/card-temp-supersta
 
 const SET_LOGO_ASSETS = {
   "premiere": assetUrl("assets/images/premiere-logo.png"),
-  "survivor-series-series-1": assetUrl("assets/images/branding-survivor-series-series-1-survivor-series-wargames-houston-2026.png"),
-  "summerslam-series-1": assetUrl("assets/images/art-summerslam-series-1-summerslam-2026-logo.png"),
-  "golden-era-series-1": "https://loodibee.com/wp-content/uploads/World-Wrestling-Federation-WWF-Logo-1985-1998-3D.png",
-  "attitude-era-series-1": assetUrl("assets/images/branding-attitude-era-series-1-wwf-scratch-logo-card.png"),
-  "evolution-series-1": assetUrl("assets/images/art-evolution-series-1-evolution-logo.png"),
-  "season-1-final-boss": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
-  "season-1-last-time-is-now": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
-  "season-2-whos-next": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
-  "parked-chyna": assetUrl("assets/images/branding-wwe-legacy-reward-logo.png"),
-  "raw-series-1": "https://commons.wikimedia.org/wiki/Special:Redirect/file/WWE_RAW_Logo_2025.svg",
-  "new-generation-series-1": assetUrl("assets/images/branding-new-generation-series-1-new-generation-logo.png"),
-  "worlds-collide-series-1": assetUrl("assets/images/branding-worlds-collide-series-1-worlds-collide-logo.webp"),
-  "money-in-the-bank-series-1": assetUrl("assets/images/branding-money-in-the-bank-series-1-money-in-the-bank-logo.webp"),
-  "smackdown-series-1": "https://commons.wikimedia.org/wiki/Special:Redirect/file/WWE_SmackDown_%282024%29_Logo.svg",
-  // v1.1.5 — exact approved live originals; no substitute text-logo fallback.
-  "nxt-series-1": "https://corporate.wwe.com/f/inline-images/NXT-logo.png",
-  "ruthless-aggression-series-1": "https://images.hobbydb.com/processed_uploads/subject_photo/subject_photo/image/39850/1526513686-11744-2621/WWE_20Ruthless_20Aggression_20logo_large.png"
+  "money-in-the-bank": assetUrl("assets/images/branding-money-in-the-bank-series-1-money-in-the-bank-logo.webp")
 };
-const SET_LOGO_FALLBACK_ASSETS = { "golden-era-series-1": assetUrl("assets/images/set-logos/golden-era-set-logo.png") };
+const SET_LOGO_FALLBACK_ASSETS = {};
 function setLogoMarkup(setId, className = "") {
   const src = SET_LOGO_ASSETS[setId];
   if (!src) return "";
@@ -377,9 +355,9 @@ function uiIcon(name, className = "ui-icon") {
 
 const MATCH_PRESENTATION_SETS = [...CURRENT_PLAYER_SET_IDS];
 function randomMatchPresentationSet() {
-  return MATCH_PRESENTATION_SETS[Math.floor(Math.random() * MATCH_PRESENTATION_SETS.length)] ?? "summerslam-series-1";
+  return MATCH_PRESENTATION_SETS[Math.floor(Math.random() * MATCH_PRESENTATION_SETS.length)] ?? "premiere";
 }
-function presentationThemeClass(setId) { return `presentation-${setId ?? "summerslam-series-1"}`; }
+function presentationThemeClass(setId) { return `presentation-${setId ?? "premiere"}`; }
 function superstarCollectibleFor(starId) {
   const star = superstarById[starId];
   return collectionCards.find(card => card.kind === "superstar" && card.superstarId === starId)
@@ -2243,19 +2221,11 @@ function wireSelectionCarousel(context, onPick) {
 }
 
 function setVisualClass(setId) {
-  if (setId === "golden-era-series-1") return "theme-golden";
-  if (setId === "attitude-era-series-1") return "theme-attitude";
-  if (setId === "evolution-series-1") return "theme-evolution";
-  if (setId === "survivor-series-series-1") return "theme-survivor";
-  return "theme-summerslam";
+  return setId === "money-in-the-bank" ? "theme-mitb" : "theme-premiere";
 }
 
 function setHeroSuperstars(setId) {
-  if (setId === "golden-era-series-1") return ["hulk-hogan", "randy-savage", "ultimate-warrior"];
-  if (setId === "attitude-era-series-1") return ["stone-cold-steve-austin", "the-rock-attitude", "the-undertaker"];
-  if (setId === "evolution-series-1") return ["rhea-ripley", "becky-lynch", "iyo-sky"];
-  if (setId === "survivor-series-series-1") return ["bron-breakker", "drew-mcintyre", "randy-orton"];
-  return ["cody-rhodes", "roman-reigns", "gunther"];
+  return setId === "money-in-the-bank" ? ["la-knight"] : ["roman-reigns", "cody-rhodes", "rhea-ripley"];
 }
 
 function splashPromoMarkup() {
@@ -2413,7 +2383,7 @@ function renderPlayMenu() {
   const secondPageCards = `
       <article id="play-championship" role="button" tabindex="0" class="legacy-mode-banner mode-championship"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="legacy-mode-copy"><em>24 MATCHES · FOUR DIFFICULTIES</em>${modeLogoMarkup("championship",true)}<small>EASY → NORMAL → HARD → HARDCORE</small><b>START THE ROAD<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">24</span></article>
       <article id="play-survivor-series" role="button" tabindex="0" class="legacy-mode-banner mode-survivor-series"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("hulk-hogan","Hulk Hogan")}</span><span class="legacy-mode-copy"><em>4 VS 4 · CAPTURE THE ROSTER</em>${modeLogoMarkup("survivor-series",true)}<small>WIN THE MATCH · TAKE THEIR SUPERSTAR · OWN ALL 8</small><b>${survivorAvailable?'ENTER SURVIVOR SERIES':'4 SUPERSTARS REQUIRED'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">4V4</span></article>
-      <article id="play-ladder" role="button" tabindex="0" class="legacy-mode-banner mode-ladder"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar legacy-mode-set-logo">${setLogoMarkup("money-in-the-bank-series-1","play-mitb-set-logo")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · THREE LIVES · ${mitbStatus}</em>${modeLogoMarkup("ladder",true)}<small>${mitbProgress}/${LADDER_LENGTH} LEVELS · ${mitbActive ? mitbRun.lives : LADDER_LIVES} LIVES · 2 RANDOM PACKS ON CLEAR</small><b>${mitb.dailyCleared ? 'VIEW COMPLETED RUN' : mitbActive ? `CONTINUE ${mitbStatus}` : 'ENTER MONEY IN THE BANK'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">$</span></article>`;
+      <article id="play-ladder" role="button" tabindex="0" class="legacy-mode-banner mode-ladder"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar legacy-mode-set-logo">${setLogoMarkup("money-in-the-bank","play-mitb-set-logo")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · THREE LIVES · ${mitbStatus}</em>${modeLogoMarkup("ladder",true)}<small>${mitbProgress}/${LADDER_LENGTH} LEVELS · ${mitbActive ? mitbRun.lives : LADDER_LIVES} LIVES · 2 RANDOM PACKS ON CLEAR</small><b>${mitb.dailyCleared ? 'VIEW COMPLETED RUN' : mitbActive ? `CONTINUE ${mitbStatus}` : 'ENTER MONEY IN THE BANK'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">$</span></article>`;
   root.innerHTML = `<section class="play-menu-screen premium-screen legacy-play-v3 play-menu-page-${page}">
     <header class="legacy-play-heading"><span>PLAY</span><h2>CHOOSE YOUR PATH</h2><p>Six ways to build your WWE Legacy. <b>${page} / 2</b></p></header>
     <div class="legacy-mode-stack">${page === 1 ? firstPageCards : secondPageCards}</div>
@@ -2767,7 +2737,7 @@ function layeredFrontRequirementDotsMarkup(card) {
   return groups ? `<span class="ccg-method-dots" aria-hidden="true">${groups}</span>` : "";
 }
 
-const PREMIUM_REWARD_SET_IDS = new Set(["season-1-final-boss","season-1-last-time-is-now","season-2-whos-next","parked-chyna"]);
+const PREMIUM_REWARD_SET_IDS = new Set(["money-in-the-bank"]);
 function isPremiumRewardCard(card) {
   const setType = sets?.[card?.setId]?.type ?? "";
   return PREMIUM_REWARD_SET_IDS.has(card?.setId) || setType === "future-reward" || setType === "season-exclusive";
@@ -3942,7 +3912,7 @@ function handCardMeta(card) {
 
 function renderPlayPile() {
   const items = currentPlayPile();
-  const pileSetId = pendingMatch?.brandSetId ?? matchPresentationSetId ?? "summerslam-series-1";
+  const pileSetId = pendingMatch?.brandSetId ?? matchPresentationSetId ?? "premiere";
   const pileMatStyle = playPileMatStyle(pileSetId);
   const pileSetLogo = setLogoMarkup(matchPresentationSetId,"ring-centre-logo") || setLogoMarkup(pileSetId,"ring-centre-logo");
   if (!items.length) return `<section class="play-pile premium-play-pile ${presentationThemeClass(pileSetId)}"><div class="play-pile-label"><span>PLAY PILE</span><small>${sets[pileSetId]?.displayName ?? sets[pileSetId]?.name ?? "WWE Legacy"} mat</small></div><div class="ring-play-surface" data-ring-mat-set="${pileSetId}" style="${pileMatStyle}"><span class="ring-ropes"></span>${pileSetLogo}</div></section>`;
@@ -4323,7 +4293,7 @@ function render() {
   // A successful pin/submission may already have resolved in the engine, but the
   // finish presentation must complete before Match Complete is allowed to render.
   if (game.state().phase === "MATCH_OVER" && matchSpectacle) {
-    document.body.dataset.matchTheme = matchPresentationSetId ?? "summerslam-series-1";
+    document.body.dataset.matchTheme = matchPresentationSetId ?? "premiere";
     root.innerHTML = `<section class="match-experience ${presentationThemeClass(matchPresentationSetId)} match-finish-presentation">${renderMatchHud()}${renderPlayPile()}</section>${renderMatchSpectacle()}`;
     return;
   }
@@ -4339,7 +4309,7 @@ function render() {
     $("#results-rematch")?.addEventListener("click", restartMatch);
     return;
   }
-  document.body.dataset.matchTheme = matchPresentationSetId ?? "summerslam-series-1";
+  document.body.dataset.matchTheme = matchPresentationSetId ?? "premiere";
   root.innerHTML = `<section class="match-experience ${presentationThemeClass(matchPresentationSetId)} ${(!profile?.onboarding || profile.onboarding.complete)?"":"has-onboarding"}">${onboardingMarkup()}${renderMatchHud()}${renderPlayPile()}${renderCommandBar()}${renderSubmissionChooser()}${renderTopDeckTutorChoice()}${renderHumanHand()}${renderMatchLog()}</section>${renderSubmissionResponseOverlay()}${renderSuperstarOverlay()}${renderPlayPileOverlay()}${renderHandOverlay()}${renderMatchSpectacle()}`;
   if (autoCounterSelecting && Number.isFinite(autoCounterHandScrollLeft)) { const rail=root.querySelector('.horizontal-card-hand'); if (rail) rail.scrollLeft=autoCounterHandScrollLeft; autoCounterHandScrollLeft=null; }
   $("#skip-onboarding")?.addEventListener("click",()=>{ profile.onboarding={complete:true,step:0}; saveProfile(profile); render(); });
