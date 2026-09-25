@@ -12,44 +12,18 @@ import { ownershipCapFor, isUniqueCollectionCard, totalOwnershipCapFor } from ".
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const PROFILE_RECOVERY_KEY = "wa-modern-profile-v3-recovery-v1";
 export const PROFILE_RECOVERY_META_KEY = "wa-modern-profile-v3-recovery-meta-v1";
-export const STARTER_BRAND_CHOICES = Object.freeze({
-  raw: Object.freeze(["roman-reigns", "liv-morgan"]),
-  smackdown: Object.freeze(["cm-punk", "rhea-ripley"]),
-  nxt: Object.freeze(["tony-dangelo", "kendal-grey"])
-});
-export const STARTER_CHOICES = Object.freeze(Object.values(STARTER_BRAND_CHOICES).flat());
-export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "ruthless-aggression-series-1", "summerslam-series-1", "raw-series-1", "smackdown-series-1", "nxt-series-1"]);
+export const STARTER_BRAND_CHOICES = Object.freeze({});
+export const STARTER_CHOICES = Object.freeze([]);
+export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["premiere"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
 export const PROFILE_VERSION = 54;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "PREM241";
 export const STARTING_MOMENTUM_COPIES = 12;
 
-const blankSetCounters = () => ({
-  "summerslam-series-1": 0,
-  "golden-era-series-1": 0,
-  "attitude-era-series-1": 0,
-  "evolution-series-1": 0,
-  "season-1-final-boss": 0,
-  "raw-series-1": 0,
-  "new-generation-series-1": 0,
-  "worlds-collide-series-1": 0,
-  "money-in-the-bank-series-1": 0,
-  "smackdown-series-1": 0,
-  "nxt-series-1": 0,
-  "ruthless-aggression-series-1": 0
-});
+const blankSetCounters = () => ({ premiere: 0, "money-in-the-bank": 0 });
 const defaultSetProgress = () => ({
-  "summerslam-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "golden-era-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "attitude-era-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "evolution-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "new-generation-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "raw-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "worlds-collide-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
-  "money-in-the-bank-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
-  "smackdown-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "nxt-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
-  "ruthless-aggression-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] }
+  premiere: { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "money-in-the-bank": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] }
 });
 const defaultSeasonState = () => ({ xp: 0, claimedTiers: [], freePackLastClaimAt: null, freePacksClaimed: 0, matchXpEarned: 0, challengeXpEarned: 0 });
 const cardById = new Map(collectionCards.map(c => [c.id, c]));
