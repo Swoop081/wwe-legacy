@@ -2511,7 +2511,7 @@ function renderProfile() {
     </section>
   </section>`;
   $("#open-rulebook")?.addEventListener("click", showRules);
-  $("#check-app-update")?.addEventListener("click", () => { checkForAppUpdate({ manual:true, autoApply:false }); });
+  $("#check-app-update")?.addEventListener("click", () => { checkForAppUpdate({ manual:true, autoApply:true }); });
   $("#reset-progress")?.addEventListener("click",()=>{optionsResetArmed=true;message="Confirm the reset below to erase all local progress.";renderProfile();});
   $("#cancel-reset-progress")?.addEventListener("click",()=>{optionsResetArmed=false;message="Reset cancelled.";renderProfile();});
   $("#confirm-reset-progress")?.addEventListener("click",()=>{resetProfile();profile=null;game=null;optionsResetArmed=false;selection={p1:"cm-punk",p2:"roman-reigns"};lastMatchup={...selection};lastPack=null;pendingUpgrades=[];message="";showSplash();});
