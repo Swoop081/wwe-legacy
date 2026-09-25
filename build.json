@@ -1,11 +1,11 @@
 {
-  "version": "1.1.360",
+  "version": "1.1.361",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.360",
+  "physicalIphoneSmoke": "pending-v1.1.361",
   "launchStatus": "released",
-  "name": "Ultra-dense Season readability pass"
+  "name": "Season iPhone readability correction"
 }
