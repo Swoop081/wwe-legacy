@@ -1,11 +1,11 @@
 {
-  "version": "1.1.356",
+  "version": "1.1.357",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.356",
+  "physicalIphoneSmoke": "pending-v1.1.357",
   "launchStatus": "released",
-  "name": "Season premium mobile readability pass"
+  "name": "Season premium stylesheet load fix"
 }
