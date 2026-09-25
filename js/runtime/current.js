@@ -3,7 +3,7 @@
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.349";
+const VERSION = "1.1.350";
 
 function showBootError(error, stage = "Application boot") {
   const detail = String(error?.stack || error?.message || error || "Unknown error");
@@ -111,7 +111,6 @@ catch (error) { console.error("Initial WWE Legacy card-face repaint failed", err
 
 
 const enhancementModules = [
-  "../shared/v1.1.66-featured-superstar-ability-audit.js",
   "../shared/v1.1.151-placeholder-card-cleanup.js",
   "../shared/v1.1.155-card-copy-pack-logo-nav.js",
   "../shared/v1.1.154-roster-order.js",
@@ -125,11 +124,8 @@ for (const path of enhancementModules) {
 
 const classicScripts = [
   "../shared/v1.1.136-onboarding-local-assets.js",
-  "../shared/v1.1.166-live-event-branding.js",
   "../shared/v1.1.172-survivor-series-unlock.js",
-  "../shared/v1.1.56-consolidated-fixes.js",
   "../shared/v1.1.61-home-stat-links.js",
-  "../shared/v1.1.62-home-cena-legacy.js",
   "../shared/v1.1.63-play-path-portraits.js",
   "../shared/v1.1.104-pack-reward-hotfix.js",
   "../shared/v1.1.148-pack-summary-runtime-layout.js"
