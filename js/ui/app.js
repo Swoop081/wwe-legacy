@@ -580,7 +580,16 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
   const p1Star = superstarWithConfiguredEntrance(p1Id), p2Star = superstarById[p2Id];
   if (!p1Star || !p2Star) { message = "That Superstar is not active in this build."; renderSetup(); return; }
   const p1Deck = buildPlayableDeck(profile, p1Id), p2Deck = scaleCpuDeckToPlayer(p1Deck, decks[p2Id] ?? []);
-  if (p1Deck.length !== 60 || p2Deck.length !== 60) { message = "One of these Superstar decks is not yet complete."; renderSetup(); return; }
+  if (p1Deck.length !== 60 || p2Deck.length !== 60) {
+    message = "One of these Superstar decks is not yet complete.";
+    if (mode === "live-event") {
+      liveEventMatchupOpen = true;
+      renderLiveEvents();
+    } else {
+      renderSetup();
+    }
+    return;
+  }
   const equippedVariantModifier = superstarVariantMatchModifier(profile,p1Id);
   const equippedMerchModifier = merchMatchModifier(profile,p1Id);
   const combinedModifier = mergeMatchModifiers(modifier,equippedVariantModifier,equippedMerchModifier);
