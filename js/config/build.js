@@ -1,6 +1,6 @@
 // WWE Legacy build identity + local asset cache-busting.
 // `npm run stamp-cache` rewrites this value from package.json on each release.
-export const BUILD_VERSION = "1.1.356";
+export const BUILD_VERSION = "1.1.357";
 
 export function assetUrl(path) {
   if (!path || /^(?:data:|blob:)/i.test(path)) return path;
