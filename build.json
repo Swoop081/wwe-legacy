@@ -1,11 +1,11 @@
 {
-  "version": "1.1.358",
+  "version": "1.1.359",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.358",
+  "physicalIphoneSmoke": "pending-v1.1.359",
   "launchStatus": "released",
-  "name": "Correct Season stylesheet asset path"
+  "name": "Dense premium Season mobile redesign"
 }
