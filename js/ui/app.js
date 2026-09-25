@@ -316,7 +316,7 @@ function setLogoMarkup(setId, className = "") {
   return `<img loading="lazy" decoding="async" referrerpolicy="no-referrer" class="set-brand-logo ${className}" src="${src}"${fallbackAttr} alt="${label}" onerror="if(this.dataset.fallbackSrc&&!this.dataset.fallbackTried){this.dataset.fallbackTried='1';this.src=this.dataset.fallbackSrc;}else{this.classList.add('is-source-logo-unavailable');this.style.display='none';}">`;
 }
 
-function physicalBoosterPackMarkup({ setId, title = "WWE LEGACY", series = "SERIES 1", subtitle = "5 CARDS · RUBY CHASE", extraClass = "", opening = false } = {}) {
+function physicalBoosterPackMarkup({ setId, title = "WWE LEGACY", series = "SERIES 1", subtitle = "5 CARDS", extraClass = "", opening = false } = {}) {
   const hasSetLogo = setId === "premiere" || Boolean(SET_LOGO_ASSETS[setId]);
   const logo = setId === "premiere" ? `<img class="set-brand-logo pack-set-logo" src="${assetUrl("assets/images/premiere-logo.png")}" alt="Premiere">` : (setLogoMarkup(setId, "pack-set-logo") || `<span class="pack-text-logo"><b>${String(title).toUpperCase()}</b><small>${series}</small></span>`);
   return `<span class="booster-pack physical-booster-pack pack-set-${setId} ${extraClass}">
@@ -1210,7 +1210,7 @@ function renderBoostersUnsafe() {
   const vaultBuckets = [];
   for (const vaultSet of vaultSets) {
     const standard = boosterCreditsFor(profile, vaultSet.id);
-    if (standard > 0) vaultBuckets.push({ setId:vaultSet.id, type:"standard", count:standard, label:"BOOSTER", subtitle:"5 CARDS · RUBY CHASE" });
+    if (standard > 0) vaultBuckets.push({ setId:vaultSet.id, type:"standard", count:standard, label:"BOOSTER", subtitle:"5 CARDS" });
   }
   const totalVaultPacks = vaultBuckets.reduce((sum,b)=>sum+b.count,0);
   const vaultShelf = vaultBuckets.length ? `<section class="booster-vault-shelf ${vaultBuckets.length === 1 ? "single-pack" : ""}" aria-label="Openable booster packs">${vaultBuckets.map((bucket,index)=>{
@@ -1397,8 +1397,8 @@ function renderStore() {
   root.innerHTML=`<section class="store-screen premium-screen store-redesign" data-store-set="${rotation.setId}">
     ${premiumHubHeading("MY", "STORE", "DAILY ROTATION", "Boosters · Superstar unlocks", "hub-store")}
     ${message?`<p class="setup-message">${message}</p>`:''}
-    <section class="store-booster-offer card-shop-counter premium-panel"><div class="shop-pack-display">${physicalBoosterPackMarkup({setId:rotation.setId,title:setInfo?.name ?? "WWE LEGACY",series:"SERIES 1",subtitle:"5 CARDS · RUBY CHASE",extraClass:"shop-pack"})}</div><div class="store-offer-copy"><span>FEATURED BOOSTER</span><h3>${setInfo?.displayName ?? setInfo?.name ?? rotation.setId}</h3><div class="store-offer-price"><b>${STORE_BOOSTER_PRICE.toLocaleString()} <em>UP</em></b><button id="buy-store-booster" class="start-match" ${balance<STORE_BOOSTER_PRICE?'disabled':''}>BUY PACK</button></div></div></section>
-    <section class="store-roster-section"><div class="store-section-heading"><div><span>SUPERSTAR SHOP</span><h3>PREMIERE SUPERSTARS</h3></div><strong>${STORE_SUPERSTAR_PRICE.toLocaleString()} <em>UP</em> EACH</strong></div><p class="store-roster-note">Unlock a Superstar. Their Entrance remains a Very Rare booster chase.</p><div class="store-superstar-shelf store-superstar-product-list">${starRows}</div></section>
+    <section class="store-booster-offer card-shop-counter premium-panel"><div class="shop-pack-display">${physicalBoosterPackMarkup({setId:rotation.setId,title:setInfo?.name ?? "WWE LEGACY",series:"SERIES 1",subtitle:"5 CARDS",extraClass:"shop-pack"})}</div><div class="store-offer-copy"><span>FEATURED BOOSTER</span><h3>${setInfo?.displayName ?? setInfo?.name ?? rotation.setId}</h3><div class="store-offer-price"><b>${STORE_BOOSTER_PRICE.toLocaleString()} <em>UP</em></b><button id="buy-store-booster" class="start-match" ${balance<STORE_BOOSTER_PRICE?'disabled':''}>BUY PACK</button></div></div></section>
+    <section class="store-roster-section"><div class="store-section-heading"><div><span>SUPERSTAR SHOP</span><h3>PREMIERE SUPERSTARS</h3></div><strong>${STORE_SUPERSTAR_PRICE.toLocaleString()} <em>UP</em> EACH</strong></div><div class="store-superstar-shelf store-superstar-product-list">${starRows}</div></section>
   </section>${renderRecommendedDeckPrompt()}${renderSuperstarOverlay()}`;
   $("#buy-store-booster")?.addEventListener("click",()=>{ try { const result=purchaseStoreBooster(profile,rotation.setId,new Date()); saveProfile(profile); message=`${setInfo?.name ?? 'Featured'} booster purchased for ${result.price} UP. ${result.balance} UP remaining.`; } catch(e){message=e.message;} renderStore(); });
   root.querySelectorAll('[data-buy-store-star]').forEach(btn=>btn.addEventListener('click',()=>{ try { const star=superstarById[btn.dataset.buyStoreStar]; const result=purchaseStoreSuperstar(profile,btn.dataset.buyStoreStar,new Date()); saveProfile(profile); message=`${star.name} unlocked for ${result.price.toLocaleString()} UP.`; if (beginUnlockCelebration("store")) return; } catch(e){message=e.message;} renderStore(); }));
