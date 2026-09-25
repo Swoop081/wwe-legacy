@@ -50,3 +50,14 @@
 .season-road-redesign .season-free-pack-cta.season-free-pack-strip{padding:0!important;margin:0!important;min-height:42px!important;height:42px!important;display:block!important}
 .season-road-redesign .season-free-pack-cta .season-free-pack-button{margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-height:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
 .season-road-redesign .season-free-pack-cta .season-free-pack-button strong{margin:0!important;padding:0!important;width:100%!important;font-size:24px!important;line-height:42px!important;white-space:nowrap!important;text-align:center!important;letter-spacing:0!important}
+
+/* All three command boxes use the same large two-line treatment */
+.season-road-redesign .season-road-command .season-rewards-ready,
+.season-road-redesign .season-road-command .season-universe-points{padding:0 4px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important}
+.season-road-redesign .season-road-command .season-rewards-ready small,
+.season-road-redesign .season-road-command .season-universe-points small{font-size:18px!important;line-height:1!important;letter-spacing:.025em!important}
+.season-road-redesign .season-road-command .season-rewards-ready strong,
+.season-road-redesign .season-road-command .season-universe-points strong{font-size:21px!important;line-height:1!important;font-weight:900!important;letter-spacing:0!important;margin:0!important}
+/* Free booster label should dominate its bar */
+.season-road-redesign .season-free-pack-cta.season-free-pack-strip{height:36px!important;min-height:36px!important}
+.season-road-redesign .season-free-pack-cta .season-free-pack-button strong{font-size:27px!important;line-height:36px!important}
