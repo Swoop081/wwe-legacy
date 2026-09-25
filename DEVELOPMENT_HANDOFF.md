@@ -1,6 +1,6 @@
 # WWE Legacy Development Handoff
 
-Updated: 24 September 2026
+Updated: 26 September 2026
 Branch: main
 Repository: Swoop081/wwe-legacy
 
@@ -233,3 +233,31 @@ Earlier approved starter/requirement commits are already on main.
 6. Preserve the 60-card starter rules unless the user explicitly changes them.
 7. Continue WWE Legacy development from the completed 17-deck milestone.
 
+
+
+## 26 September 2026 — latest UI/store/catalogue work
+
+Current client work has moved beyond the 24 September starter-deck milestone.
+
+Latest completed changes on main:
+- Store over-explanation cleanup: removed "RUBY CHASE" from active Premiere pack subtitle and removed the explanatory line under PREMIERE SUPERSTARS about Entrances remaining a Very Rare booster chase. Commit: 705b7274.
+- Premiere Store pack logo fix: physical booster packs now use the canonical set-logo markup instead of a separate Premiere-only logo path, so the Store pack should match other Premiere packs. Commit: ac023746.
+- Card Catalogue rework: each normal card now presents its five collectible printings as five separate cards — Base, Emerald, Sapphire, Ruby and Amethyst — instead of showing one card with five tier ownership counts stacked beneath it. Fixed-printing cards still show only their valid printing. Commit: 1ea30294.
+- Added mobile catalogue readability CSS: larger catalogue/search/filter/stat/card metadata text and a five-column printing row. File: css/v1.1.355-catalogue-five-printings.css. Commit: 16d331b8.
+- index.html now loads that stylesheet and cache references were bumped to v1.1.355. Commit: 61f9af3b.
+- js/config/build.js was bumped to 1.1.355. Commit: f88c54a2.
+
+Important immediate follow-up:
+- build.json is STILL 1.1.354 at the time of this handoff even though js/config/build.js/index cache refs are 1.1.355. Synchronize build.json/version plumbing before treating 1.1.355 as fully deployed.
+- Physical iPhone verification of the new Catalogue layout is still needed. The five cards are deliberately separate visual cards, but on a narrow phone the five-column sizing may need refinement after the user's screenshot.
+- Continue the user's global UI direction: avoid tutorial-like explanatory copy on ordinary game screens. Prefer concise game labels/statuses unless explanation is genuinely required.
+- Do not revert the Store pack to the old purple SERIES 1 text wrapper. Premiere boosters should use the Premiere logo treatment consistently everywhere.
+
+## Current user-requested visual direction
+
+The user wants WWE Legacy to feel like a finished commercial mobile CCG rather than a prototype:
+- Bigger, immediately readable text on iPhone.
+- Less explanatory/helper prose across screens.
+- Premiere branding used consistently.
+- The five collectible printings are visually distinct physical cards, not text rows or tier counts under one card.
+- Preserve the established card frames/baseplates/artwork rather than redesigning cards unnecessarily.
