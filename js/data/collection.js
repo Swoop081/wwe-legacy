@@ -30,16 +30,6 @@ const premiereStarterSuperstars = [
 ].map(([id,name,superstarId],index)=>({id,name,kind:"superstar",superstarId,setId:"premiere",rarity:1,cardNumber:index+1,cardCode:id}));
 
 // Archived pre-relaunch reward definitions below are retained as reference only and are not added to collectionCards.
-const mitbLaKnightRewards = [
-  { id:"MITB01", name:"LA Knight", kind:"superstar", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:1, cardCode:"MITB01" },
-  { id:"MITB02", name:"YEAH!!", kind:"entrance", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:2, cardCode:"MITB02" },
-  { id:"MITB03", name:"Blunt Force Trauma", kind:"move", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", finisher:true, cost:8, damage:16, cardNumber:3, cardCode:"MITB03" },
-  { id:"MITB04", name:"The Megastar’s Elbow", kind:"move", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", trademark:true, cardNumber:4, cardCode:"MITB04" },
-  { id:"MITB05", name:"LA Elbow", kind:"move", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", trademark:true, cardNumber:5, cardCode:"MITB05" },
-  { id:"MITB06", name:"Burning Hammer", kind:"move", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", trademark:true, cardNumber:6, cardCode:"MITB06" },
-  { id:"MITB07", name:"Let Me Talk to Ya!", kind:"action", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:7, cardCode:"MITB07" },
-  { id:"MITB08", name:"LA Knight T-Shirt", kind:"merch", superstarId:"la-knight", setId:"season-1-last-time-is-now", rarity:4, fixedPrintingTier:"amethyst", cardNumber:8, cardCode:"MITB08" }
-];
 
 const premiereGameplayCards = allGameplayCards.filter(card => /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|27[0-4])$/.test(String(card.id)));
 const mitbGameplayCards = allGameplayCards.filter(card => /^MITB0[2-7]$/.test(String(card.id)));
