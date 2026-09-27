@@ -1812,7 +1812,12 @@ function renderLiveEventTowerDetail(towerKey) {
       });
     }
     $("#back-live-event-route")?.addEventListener("click", () => { liveEventMatchupOpen = false; renderLiveEvents(); });
-    $("#live-event-matchup-fight")?.addEventListener("click", () => { if (active) startCurrentLiveEventMatch(towerKey); else beginLiveEventTower(); });
+    $("#live-event-matchup-fight")?.addEventListener("click", () => {
+      const latest = liveEventTowerState(profile, towerKey, new Date());
+      const latestRun = latest?.state?.activeRun;
+      if (latestRun?.status === "active") startCurrentLiveEventMatch(towerKey);
+      else beginLiveEventTower();
+    });
     return;
   }
 
