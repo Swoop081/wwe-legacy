@@ -20,3 +20,8 @@
 .legacy-detail-screen>.legacy-section-back{margin:12px 18px 16px}
 .legacy-detail-screen .career-record-card{border-width:1px}
 .legacy-detail-screen .career-record-card:nth-child(6n+1){border-color:#4fd7ef}.legacy-detail-screen .career-record-card:nth-child(6n+2){border-color:#ff6685}.legacy-detail-screen .career-record-card:nth-child(6n+3){border-color:#f1c95d}.legacy-detail-screen .career-record-card:nth-child(6n+4){border-color:#ad7cff}.legacy-detail-screen .career-record-card:nth-child(6n+5){border-color:#56dda2}.legacy-detail-screen .career-record-card:nth-child(6n){border-color:#ff934f}
+
+/* v1.1.378 — Superstar Records use the actual rendered collectible card */
+.career-superstar-record .career-record-card-thumb{display:flex;width:74px;min-width:74px;height:104px;align-items:center;justify-content:center;overflow:visible;background:none;border:0}
+.career-superstar-record .career-record-card-thumb .ccg-card{width:66px!important;height:auto!important;aspect-ratio:680/1000;transform:none!important;transform-origin:center center;pointer-events:none}
+.career-superstar-record .career-record-card-thumb .ccg-card img{max-width:100%}
