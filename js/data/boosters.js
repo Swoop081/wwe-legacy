@@ -212,8 +212,8 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
       replacedNormal: false,
       superstarUnlocked,
       overflowCopies: result.overflowed,
-      duplicateUnitValue: duplicateUniversePointsFor(card),
-      universePointsValue: result.overflowed * duplicateUniversePointsFor(card),
+      duplicateUnitValue: duplicateUniversePointsFor(card, pullTier),
+      universePointsValue: result.overflowed * duplicateUniversePointsFor(card, pullTier),
       universePointsCredited: false,
       ownershipBefore: beforeTotal,
       ownershipCap: result.cap
