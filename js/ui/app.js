@@ -1843,15 +1843,17 @@ function renderLiveEventTowerDetail(towerKey) {
           const starId = selection.p1 || chosenId;
           latestRun = startLiveEventTower(profile, towerKey, starId, roster.map(star => star.id), Math.random, now);
           saveProfile(profile);
-          latest = liveEventTowerState(profile, towerKey, now);
         }
-        const opponentId = latestRun?.opponents?.[Number(latestRun?.stage ?? 0)] ?? opponentIds[matchupStageIndex] ?? matchupOpponentId;
-        const stageIndex = Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(latestRun?.stage ?? matchupStageIndex)));
-        const directStage = liveEventStage(event, stageIndex);
-        if (!latestRun?.superstarId || !opponentId) throw new Error("Live Event matchup could not resolve both Superstars.");
+        // The rendered matchup is authoritative. Do not re-resolve a different
+        // opponent from the saved run when the player presses Fight.
+        const playerId = selection.p1 || latestRun?.superstarId || chosenId;
+        const opponentId = matchupOpponentId;
+        const stageIndex = matchupStageIndex;
+        const directStage = matchupStage;
+        if (!playerId || !opponentId) throw new Error("Live Event matchup could not resolve both Superstars.");
         activeLiveEventTowerKey = towerKey;
         selectedLiveEventKey = towerKey;
-        startMatch(latestRun.superstarId, opponentId, {
+        startMatch(playerId, opponentId, {
           mode: "live-event",
           modifier: directStage.modifier ? { ...directStage.modifier, name: directStage.ruleName, ruleText: directStage.ruleText } : null,
           eventMeta: {
