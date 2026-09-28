@@ -601,7 +601,14 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
   }
   const equippedVariantModifier = superstarVariantMatchModifier(profile,p1Id);
   const equippedMerchModifier = merchMatchModifier(profile,p1Id);
-  const combinedModifier = mergeMatchModifiers(modifier,equippedVariantModifier,equippedMerchModifier);
+  let combinedModifier;
+  try {
+    combinedModifier = mergeMatchModifiers(modifier,equippedVariantModifier,equippedMerchModifier);
+  } catch (error) {
+    if (mode !== "live-event") throw error;
+    console.error("Live Event modifier rejected; launching standard match rules", error);
+    combinedModifier = mergeMatchModifiers(null,equippedVariantModifier,equippedMerchModifier);
+  }
   activeMode = mode;
   activeMatchContext = Object.freeze({
     mode,
@@ -645,7 +652,14 @@ function createPendingMatchEngine() {
   if (!pendingMatch) return false;
   const { p1Star, p2Star, p1Deck, p2Deck, modifier } = pendingMatch;
   game = new MatchEngine({ p1: p1Star, p2: p2Star, decks: { [p1Star.id]: p1Deck, [p2Star.id]: p2Deck } });
-  if (modifier) game.applyMatchModifier(modifier);
+  if (modifier) {
+    try { game.applyMatchModifier(modifier); }
+    catch (error) {
+      if (pendingMatch?.mode !== "live-event") throw error;
+      console.error("Live Event match modifier could not be applied; continuing with standard rules", error);
+      pendingMatch.modifier = null;
+    }
+  }
   return true;
 }
 
