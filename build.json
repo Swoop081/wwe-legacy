@@ -1,11 +1,11 @@
 {
-  "version": "1.1.372",
+  "version": "1.1.373",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.372",
+  "physicalIphoneSmoke": "pending-v1.1.373",
   "launchStatus": "released",
-  "name": "Fix IYO SKY and Randy Orton Live Event portraits"
+  "name": "Seasons start at Tier 1"
 }
