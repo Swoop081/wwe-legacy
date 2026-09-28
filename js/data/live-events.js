@@ -443,7 +443,9 @@ function chooseOpponents(profile, tower, superstarId, eligibleOpponentIds, rng =
   const fallback = visibleEligible.filter(id => id !== superstarId && !pool.includes(id));
   const bossId = tower.event.bossId && tower.event.bossId !== superstarId && eligible.has(tower.event.bossId) ? tower.event.bossId : null;
   const withoutBoss = pool.filter(id => id !== bossId);
-  const opponents = [...shuffle(withoutBoss, rng), ...shuffle(fallback.filter(id => id !== bossId), rng)].slice(0, LIVE_EVENT_LENGTH - (bossId ? 1 : 0));
+  // Authored Live Events keep their approved Match 1–4 order; Match 5 is the boss.
+  // Only use fallback opponents when the player's chosen Superstar would otherwise create a self-match.
+  const opponents = [...withoutBoss, ...fallback.filter(id => id !== bossId)].slice(0, LIVE_EVENT_LENGTH - (bossId ? 1 : 0));
   if (bossId) opponents.push(bossId);
   return opponents.slice(0, LIVE_EVENT_LENGTH);
 }
