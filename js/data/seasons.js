@@ -6,7 +6,7 @@ export const SEASON_START = "2026-08-22T00:00:00";
 export const SEASON_END = "2026-10-30T23:59:59";
 export const SEASON_TIER_COUNT = 50;
 export const XP_PER_TIER = 100;
-export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
+export const MAX_SEASON_XP = (SEASON_TIER_COUNT - 1) * XP_PER_TIER;
 export const MATCH_XP = { win: 5, loss: 0 };
 export const DAILY_CHALLENGE_XP = 10;
 export const WEEKLY_CHALLENGE_XP = 25;
@@ -89,7 +89,7 @@ function ensure(profile) {
 }
 
 export function seasonState(profile) { return ensure(profile); }
-export function seasonTier(profile) { return Math.min(SEASON_TIER_COUNT, Math.floor(ensure(profile).xp / XP_PER_TIER)); }
+export function seasonTier(profile) { return Math.min(SEASON_TIER_COUNT, 1 + Math.floor(ensure(profile).xp / XP_PER_TIER)); }
 export function seasonLevelProgress(profile) {
   const xp = ensure(profile).xp;
   const tier = seasonTier(profile);
@@ -114,7 +114,7 @@ export function awardSeasonXp(profile, amount, source = "other") {
   if (source === "match") state.matchXpEarned += actual;
   if (source === "challenge") state.challengeXpEarned += actual;
   if (source === "live-event-daily-set") state.liveEventBonusXpEarned += actual;
-  return { awarded: actual, before, after: state.xp, tierBefore: Math.floor(before / XP_PER_TIER), tierAfter: seasonTier(profile) };
+  return { awarded: actual, before, after: state.xp, tierBefore: Math.min(SEASON_TIER_COUNT, 1 + Math.floor(before / XP_PER_TIER)), tierAfter: seasonTier(profile) };
 }
 export function awardMatchSeasonXp(profile, result) {
   const amount = MATCH_XP[result] ?? MATCH_XP.loss;
