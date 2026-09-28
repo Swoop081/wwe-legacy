@@ -8,9 +8,11 @@ export function releasedStoreSetIds(now = new Date()) { return STORE_SET_ROTATIO
 export const STORE_BOOSTER_PRICE = 300;
 export const STORE_SUPERSTAR_PRICE = 2500;
 export const DUPLICATE_UP_BY_RARITY = Object.freeze({ 1: 1, 2: 2, 3: 3, 4: 4 });
-export function duplicateUniversePointsFor(cardOrRarity) {
+export const DUPLICATE_UP_PRINTING_MULTIPLIER = Object.freeze({ normal:1, emerald:2, sapphire:4, ruby:10, amethyst:25 });
+export function duplicateUniversePointsFor(cardOrRarity, printingTier = "normal") {
   const rarity = typeof cardOrRarity === "object" ? Number(cardOrRarity?.rarity) : Number(cardOrRarity);
-  return DUPLICATE_UP_BY_RARITY[rarity] ?? 1;
+  const tier = String(printingTier ?? "normal").toLowerCase();
+  return (DUPLICATE_UP_BY_RARITY[rarity] ?? 1) * (DUPLICATE_UP_PRINTING_MULTIPLIER[tier] ?? 1);
 }
 // Compatibility aliases now represent the 1★ floor only; actual overflow value
 // is rarity-scaled through duplicateUniversePointsFor(). Foils use the same rate.
