@@ -1813,10 +1813,44 @@ function renderLiveEventTowerDetail(towerKey) {
     }
     $("#back-live-event-route")?.addEventListener("click", () => { liveEventMatchupOpen = false; renderLiveEvents(); });
     $("#live-event-matchup-fight")?.addEventListener("click", () => {
-      const latest = liveEventTowerState(profile, towerKey, new Date());
-      const latestRun = latest?.state?.activeRun;
-      if (latestRun?.status === "active") startCurrentLiveEventMatch(towerKey);
-      else beginLiveEventTower();
+      const now = new Date();
+      try {
+        let latest = liveEventTowerState(profile, towerKey, now);
+        let latestRun = latest?.state?.activeRun;
+        if (latestRun?.status !== "active") {
+          const starId = selection.p1 || chosenId;
+          latestRun = startLiveEventTower(profile, towerKey, starId, roster.map(star => star.id), Math.random, now);
+          saveProfile(profile);
+          latest = liveEventTowerState(profile, towerKey, now);
+        }
+        const opponentId = latestRun?.opponents?.[Number(latestRun?.stage ?? 0)] ?? opponentIds[matchupStageIndex] ?? matchupOpponentId;
+        const stageIndex = Math.max(0, Math.min(LIVE_EVENT_LENGTH - 1, Number(latestRun?.stage ?? matchupStageIndex)));
+        const directStage = liveEventStage(event, stageIndex);
+        if (!latestRun?.superstarId || !opponentId) throw new Error("Live Event matchup could not resolve both Superstars.");
+        activeLiveEventTowerKey = towerKey;
+        selectedLiveEventKey = towerKey;
+        startMatch(latestRun.superstarId, opponentId, {
+          mode: "live-event",
+          modifier: directStage.modifier ? { ...directStage.modifier, name: directStage.ruleName, ruleText: directStage.ruleText } : null,
+          eventMeta: {
+            towerKey,
+            cadenceLabel: tower.cadenceLabel,
+            eventId: event.id,
+            eventName: event.name,
+            stageIndex,
+            stageLabel: directStage.label,
+            ruleName: directStage.ruleName,
+            ruleText: directStage.ruleText,
+            rewardSetId: event.rewardSetId,
+            presentationSetId: event.logoMode === "raw" ? "raw-series-1" : event.rewardSetId,
+            logoMode: event.logoMode
+          }
+        });
+      } catch (error) {
+        message = `MATCH START ERROR · ${error?.message ?? error}`;
+        liveEventMatchupOpen = true;
+        renderLiveEvents();
+      }
     });
     return;
   }
