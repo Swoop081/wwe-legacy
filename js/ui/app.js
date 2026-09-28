@@ -626,6 +626,19 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
   screen = "matchup";
   message = "";
   renderMatchupSplash();
+  // Live Events already have their own full matchup screen. Do not force a
+  // second pre-match splash: create the engine and go straight to entrances.
+  if (mode === "live-event" && pendingMatch) {
+    if (!createPendingMatchEngine()) {
+      globalThis.alert?.("Live Event match engine could not be created.");
+      return;
+    }
+    entranceIntroPlayerId = HUMAN;
+    entranceIntroFlipped = false;
+    entranceIntroRevealed = false;
+    screen = "entrance-intro";
+    renderEntranceIntro();
+  }
 }
 
 function createPendingMatchEngine() {
