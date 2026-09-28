@@ -1,0 +1,15 @@
+/* v1.1.377 — My Challenges hub */
+.challenge-hub-sections{display:grid;gap:14px;padding:16px 18px 110px}
+.challenge-hub-tile{position:relative;display:block;width:100%;min-height:190px;overflow:hidden;padding:0;border:1px solid rgba(255,255,255,.16);border-radius:22px;text-align:left;color:#fff;background:radial-gradient(circle at 88% 45%,rgba(70,229,139,.22),transparent 40%),linear-gradient(120deg,#0b1b13,#080b11 72%);box-shadow:0 12px 24px rgba(0,0,0,.24)}
+.challenge-hub-weekly{background:radial-gradient(circle at 88% 45%,rgba(77,124,255,.22),transparent 40%),linear-gradient(120deg,#0b1224,#080b11 72%)}
+.challenge-hub-milestones{background:radial-gradient(circle at 88% 45%,rgba(244,194,73,.22),transparent 40%),linear-gradient(120deg,#1b1608,#080b11 72%)}
+.challenge-hub-copy{position:relative;z-index:2;display:flex;width:67%;min-height:190px;box-sizing:border-box;flex-direction:column;justify-content:center;padding:20px}
+.challenge-hub-copy small{font-size:9px;font-weight:900;letter-spacing:.2em;color:#63e8a1}
+.challenge-hub-weekly .challenge-hub-copy small{color:#79a2ff}.challenge-hub-milestones .challenge-hub-copy small{color:#f2c75d}
+.challenge-hub-copy strong{font-size:29px;line-height:.98;font-style:italic}
+.challenge-hub-copy p{margin:8px 0 13px;font-size:12px;line-height:1.35;color:#aeb7c5}
+.challenge-hub-copy b{font-size:10px;letter-spacing:.1em;color:#fff}
+.challenge-hub-star{position:absolute;right:0;bottom:0;width:44%;height:100%;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;pointer-events:none}
+.challenge-hub-star-render{display:block;width:100%;height:96%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 12px rgba(0,0,0,.55))}
+.challenge-detail-screen>.challenge-hub-back{margin:12px 18px 16px}
+.challenge-detail-screen>.challenge-section,.challenge-detail-screen>.challenge-milestones-group{margin-left:12px;margin-right:12px}
