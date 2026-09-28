@@ -630,12 +630,11 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
   superstarOverlayFlipped = false;
   matchPresentationSetId = eventMeta?.presentationSetId ?? eventMeta?.rewardSetId ?? randomMatchPresentationSet();
   pendingMatch = { p1Id, p2Id, mode, p1Star, p2Star, p1Deck, p2Deck, brandSetId: matchPresentationSetId, modifier: combinedModifier, eventMeta };
-  screen = "matchup";
   message = "";
-  renderMatchupSplash();
-  // Live Events already have their own full matchup screen. Do not force a
-  // second pre-match splash: create the engine and go straight to entrances.
-  if (mode === "live-event" && pendingMatch) {
+  // Rotating Live Events already provide their own matchup screen. Unlike
+  // Exhibition, never render the generic matchup splash first because its
+  // render mutates the route/UI before the Live Event transition can complete.
+  if (mode === "live-event") {
     if (!createPendingMatchEngine()) {
       globalThis.alert?.("Live Event match engine could not be created.");
       return;
@@ -645,7 +644,10 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
     entranceIntroRevealed = false;
     screen = "entrance-intro";
     renderEntranceIntro();
+    return;
   }
+  screen = "matchup";
+  renderMatchupSplash();
 }
 
 function createPendingMatchEngine() {
