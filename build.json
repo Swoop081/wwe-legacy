@@ -1,11 +1,11 @@
 {
-  "version": "1.1.366",
+  "version": "1.1.367",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.366",
+  "physicalIphoneSmoke": "pending-v1.1.367",
   "launchStatus": "released",
-  "name": "Rotating Live Event modifier launch isolation"
+  "name": "Live Event route transition fix"
 }
