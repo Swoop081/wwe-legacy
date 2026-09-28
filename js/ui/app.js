@@ -1716,10 +1716,6 @@ function renderLiveEventHub() {
     const parts=String(title).trim().split(/\s+/), first=parts.shift()??title, rest=parts.join(' ')||'EVENT';
     return `<h3 class="live-event-split-title title-${accent}"><span>${first}</span><b>${rest}</b></h3>`;
   };
-  const dailySet = dailyLiveEventSetStatus(profile, now);
-  const dailySetRewardText = dailySet.claimed
-    ? `DAILY SET COMPLETE · +${DAILY_LIVE_EVENT_SET_XP} SEASON XP CLAIMED`
-    : `CLEAR ALL 3 DAILY LIVE EVENTS · +${DAILY_LIVE_EVENT_SET_XP} SEASON XP`;
   const cards = towers.map((tower, index) => {
     const entry = liveEventTowerState(profile, tower.key, now);
     const state = entry?.state;
@@ -1735,17 +1731,14 @@ function renderLiveEventHub() {
       <div class="live-tower-hub-copy">
         <span class="live-tower-cadence">${tower.cadenceLabel} · ${status}</span>
         ${titleMarkup}
-        <small class="live-choice-summary">${progress}/${LIVE_EVENT_LENGTH} MATCHES · 1 RANDOM PACK ON CLEAR</small>
+        <small class="live-choice-summary">${progress}/${LIVE_EVENT_LENGTH} MATCHES · 1 PREMIERE PACK ON CLEAR</small>
         <div class="live-tower-hub-footer"><b class="live-tower-enter">${status === "COMPLETE" ? "VIEW COMPLETED TOWER" : status === "AVAILABLE" ? "PLAY" : `CONTINUE ${status}`} <i>›</i></b></div>
       </div>
+      <div class="live-tower-boss-art" aria-hidden="true">${menuSuperstarPhotoMarkup(tower.event.bossId ?? tower.event.heroId, superstarById[tower.event.bossId ?? tower.event.heroId]?.name ?? tower.event.name, "live-tower-boss-render")}</div>
     </article>`;
   }).join("");
   root.innerHTML = `<section class="live-events-hub premium-screen">
     <header class="live-events-hub-heading">${modeLogoMarkup("live-event", false)}<p>Live Events reset daily at local midnight. New themes rotate every day.</p></header>
-    <section class="daily-live-set-progress ${dailySet.claimed ? 'is-claimed' : dailySet.complete ? 'is-complete' : ''}" aria-label="Daily Live Event completion reward">
-      <div><span>DAILY LIVE EVENT SET</span><strong>${Math.min(dailySet.completed,dailySet.required)}/${dailySet.required} COMPLETE</strong></div>
-      <b>${dailySetRewardText}</b>
-    </section>
     <section class="live-tower-hub-grid">${cards}</section>
   </section>`;
   root.querySelectorAll('[data-open-live-tower]').forEach(card => {
@@ -2464,7 +2457,7 @@ function renderPlayMenu() {
   try { survivorAvailable = canEnterSurvivorSeries(profile); } catch (error) { console.warn("Survivor Series state reset required", error); }
   const page = playMenuPage === 2 ? 2 : 1;
   const firstPageCards = `
-      <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · 1 RANDOM PACK ON CLEAR</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
+      <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · 1 PREMIERE PACK ON CLEAR</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
       <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("rhea-ripley","Rhea Ripley")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · 1 RANDOM PACK EVERY 5 WINS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
       <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr ${reigningKingId?'has-reigning-king':''}"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${reigningKingId ? portraitMarkup(reigningKingId,reigningKingName) : kotrDefaultPortrait}</span><span class="legacy-mode-copy"><em>${reigningKingName ? `♛ REIGNING KING · ${reigningKingName.toUpperCase()}` : '8 SUPERSTARS · SINGLE ELIMINATION'}</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>${reigningKingName?'RETURN TO THE THRONE':'ENTER THE TOURNAMENT'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>`;
   const secondPageCards = `
