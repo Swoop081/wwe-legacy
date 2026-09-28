@@ -261,6 +261,9 @@ function themedDailyTower(now, slot, templates, offset = 0) {
   });
 }
 function rawLiveTower(profile, now = new Date()) {
+  // RAW LIVE was retired in the Premiere cleanup. Keep this compatibility
+  // function inert instead of dereferencing the removed null definition.
+  if (!RAW_LIVE_EVENT) return null;
   const start = localDayStart(now);
   if (start.getDay() === 1 || isUnreleasedSetId("raw-series-1", now)) return null;
   const key = `raw-live:${dateKey(start)}:${RAW_LIVE_EVENT.id}`;
@@ -478,7 +481,7 @@ export function startLiveEventTower(profile, towerKey, superstarId, eligibleOppo
   if (state.cleared) throw new Error("This Live Event is already complete.");
   if (state.activeRun?.status === "active") return state.activeRun;
   if (!liveEventPlayerEligible(profile, superstarId, now)) throw new Error("Choose an unlocked Superstar for this Live Event.");
-  if (tower.event.id === RAW_LIVE_EVENT.id) {
+  if (RAW_LIVE_EVENT && tower.event.id === RAW_LIVE_EVENT.id) {
     const store = ensureTowerStore(profile, now);
     store.rawLiveLastUsedAt = (now instanceof Date ? now : new Date(now)).toISOString();
   }
