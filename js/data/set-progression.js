@@ -7,23 +7,25 @@ export const SET_LIFECYCLES = ['featured','vaulted','returning'];
 export const COLLECTION_MILESTONES = [
   { percent: 25, reward: 1 }, { percent: 50, reward: 1 }, { percent: 75, reward: 1 }, { percent: 100, reward: 1 }
 ];
-// v0.14.16 — all four collection-printing tracks share the same simple
+// v1.1.383 — all five collection-printing tracks share the same simple
 // 25/50/75/100 reward cadence. Base remains the overall unique-card track
-// (own any printing); Emerald/Sapphire/Ruby count unique cards at that exact tier.
+// (own any printing); Emerald/Sapphire/Ruby/Amethyst count unique cards at that exact tier.
 export const EMERALD_MILESTONES = COLLECTION_MILESTONES;
 export const SAPPHIRE_MILESTONES = COLLECTION_MILESTONES;
 export const RUBY_MILESTONES = COLLECTION_MILESTONES;
+export const AMETHYST_MILESTONES = COLLECTION_MILESTONES;
 export const FOIL_MILESTONES = RUBY_MILESTONES; // legacy internal alias
-export const MILESTONE_TRACKS = Object.freeze(['collection','emerald','sapphire','ruby']);
+export const MILESTONE_TRACKS = Object.freeze(['collection','emerald','sapphire','ruby','amethyst']);
 
 function ensure(profile, setId = 'summerslam-series-1') {
   profile.setProgress ??= {};
-  profile.setProgress[setId] ??= { lifecycle: 'featured', claimedCollection: [], claimedEmerald: [], claimedSapphire: [], claimedRuby: [] };
+  profile.setProgress[setId] ??= { lifecycle: 'featured', claimedCollection: [], claimedEmerald: [], claimedSapphire: [], claimedRuby: [], claimedAmethyst: [] };
   const state = profile.setProgress[setId];
   state.claimedCollection ??= [];
   state.claimedEmerald ??= [];
   state.claimedSapphire ??= [];
   state.claimedRuby ??= state.claimedFoil ?? [];
+  state.claimedAmethyst ??= [];
   delete state.claimedFoil;
   return state;
 }
@@ -39,12 +41,14 @@ export function collectionProgress(profile, setId = 'summerslam-series-1') {
   const emeraldUnique = collectionCards.filter(c=>ownedCount(profile,c.id,'emerald')>0).length;
   const sapphireUnique = collectionCards.filter(c=>ownedCount(profile,c.id,'sapphire')>0).length;
   const rubyUnique = collectionCards.filter(c=>ownedCount(profile,c.id,'ruby')>0).length;
+  const amethystUnique = collectionCards.filter(c=>ownedCount(profile,c.id,'amethyst')>0).length;
   return {
-    setId,total,ownedUnique,emeraldUnique,sapphireUnique,rubyUnique,
+    setId,total,ownedUnique,emeraldUnique,sapphireUnique,rubyUnique,amethystUnique,
     percent: total ? Math.floor((ownedUnique/total)*100) : 0,
     emeraldPercent: total ? Math.floor((emeraldUnique/total)*100) : 0,
     sapphirePercent: total ? Math.floor((sapphireUnique/total)*100) : 0,
     rubyPercent: total ? Math.floor((rubyUnique/total)*100) : 0,
+    amethystPercent: total ? Math.floor((amethystUnique/total)*100) : 0,
     foilUnique: rubyUnique, foilPercent: total ? Math.floor((rubyUnique/total)*100) : 0
   };
 }
@@ -55,6 +59,7 @@ export function availableMilestoneRewards(profile, setId = 'summerslam-series-1'
     emerald: EMERALD_MILESTONES.filter(m => progress.emeraldPercent >= m.percent && !state.claimedEmerald.includes(m.percent)),
     sapphire: SAPPHIRE_MILESTONES.filter(m => progress.sapphirePercent >= m.percent && !state.claimedSapphire.includes(m.percent)),
     ruby: RUBY_MILESTONES.filter(m => progress.rubyPercent >= m.percent && !state.claimedRuby.includes(m.percent)),
+    amethyst: AMETHYST_MILESTONES.filter(m => progress.amethystPercent >= m.percent && !state.claimedAmethyst.includes(m.percent)),
     foil: []
   };
 }
@@ -64,7 +69,8 @@ export function claimMilestone(profile, type, percent, setId = 'summerslam-serie
     collection: { list: COLLECTION_MILESTONES, claimedKey: 'claimedCollection', progressKey: 'percent' },
     emerald: { list: EMERALD_MILESTONES, claimedKey: 'claimedEmerald', progressKey: 'emeraldPercent' },
     sapphire: { list: SAPPHIRE_MILESTONES, claimedKey: 'claimedSapphire', progressKey: 'sapphirePercent' },
-    ruby: { list: RUBY_MILESTONES, claimedKey: 'claimedRuby', progressKey: 'rubyPercent' }
+    ruby: { list: RUBY_MILESTONES, claimedKey: 'claimedRuby', progressKey: 'rubyPercent' },
+    amethyst: { list: AMETHYST_MILESTONES, claimedKey: 'claimedAmethyst', progressKey: 'amethystPercent' }
   }[normalizedType];
   if (!trackConfig) throw new Error('Invalid milestone track');
   const state = ensure(profile,setId);
