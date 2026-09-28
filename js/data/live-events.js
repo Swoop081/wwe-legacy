@@ -1,6 +1,6 @@
 import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=1.1.333";
 import { superstars } from "./superstars.js?v=1.1.333";
-import { grantRandomBoosters } from "./boosters.js?v=1.1.333";
+import { grantBooster } from "./boosters.js?v=1.1.333";
 import { awardSeasonXp } from "./seasons.js?v=1.1.333";
 
 export const LIVE_EVENT_LENGTH = 5;
@@ -28,42 +28,38 @@ export const DAILY_LIVE_EVENTS = Object.freeze({});
 export const THREE_DAY_TOWERS = Object.freeze([]);
 export const RAW_LIVE_EVENT = null;
 export const WEEKLY_TOWERS = Object.freeze([]);
-export const LAUNCH_THEME_TOWERS = Object.freeze([
-  {
-    id: "premiere-showcase",
-    name: "Premiere Showcase",
-    kicker: "OWN THE RING",
-    description: "Five fights drawn exclusively from the WWE Legacy Premiere roster.",
-    method: "strike",
-    heroId: "cody-rhodes",
-    rewardSetId: "premiere",
-    logoMode: "legacy",
-    opponentPool: ["roman-reigns","cody-rhodes","seth-rollins","cm-punk","sami-zayn","randy-orton","rhea-ripley","liv-morgan","iyo-sky","becky-lynch","alexa-bliss","charlotte-flair"]
-  },
-  {
-    id: "premiere-power",
-    name: "Powerhouse Collision",
-    kicker: "POWER TAKES CENTRE STAGE",
-    description: "Five fights against the power side of the Premiere roster.",
-    method: "strength",
-    heroId: "roman-reigns",
-    rewardSetId: "premiere",
-    logoMode: "legacy",
-    opponentPool: ["roman-reigns","cody-rhodes","randy-orton","rhea-ripley","charlotte-flair","sami-zayn"]
-  },
-  {
-    id: "premiere-speed",
-    name: "High Risk Showcase",
-    kicker: "SPEED AND PRECISION",
-    description: "Five fights against Premiere's fastest and most technical Superstars.",
-    method: "agility",
-    heroId: "iyo-sky",
-    rewardSetId: "premiere",
-    logoMode: "legacy",
-    opponentPool: ["iyo-sky","liv-morgan","seth-rollins","cm-punk","becky-lynch","alexa-bliss"]
-  }
+export const WEEKLY_PREMIERE_LIVE_EVENTS = Object.freeze([
+  // Monday
+  { id:"monday-night-raw", name:"Monday Night Raw", kicker:"MONDAY NIGHT RAW", method:"strike", heroId:"roman-reigns", bossId:"roman-reigns", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["liv-morgan","la-knight","seth-rollins","becky-lynch","roman-reigns"] },
+  { id:"big-time-becks", name:"Big Time Becks", kicker:"BIG TIME", method:"technical", heroId:"becky-lynch", bossId:"becky-lynch", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["seth-rollins","cm-punk","randy-orton","cody-rhodes","becky-lynch"] },
+  { id:"never-give-up", name:"Never Give Up", kicker:"NEVER GIVE UP", method:"strength", heroId:"john-cena", bossId:"john-cena", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["la-knight","rhea-ripley","roman-reigns","stone-cold-steve-austin","john-cena"] },
+  // Tuesday
+  { id:"finish-the-story", name:"Finish the Story", kicker:"FINISH THE STORY", method:"technical", heroId:"cody-rhodes", bossId:"cody-rhodes", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["charlotte-flair","seth-rollins","roman-reigns","trish-stratus","cody-rhodes"] },
+  { id:"tokyo-shock", name:"Tokyo Shock", kicker:"TOKYO SHOCK", method:"agility", heroId:"iyo-sky", bossId:"iyo-sky", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["randy-orton","tiffany-stratton","la-knight","alexa-bliss","iyo-sky"] },
+  { id:"legend-killer", name:"Legend Killer", kicker:"LEGEND KILLER", method:"strike", heroId:"randy-orton", bossId:"randy-orton", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["alexa-bliss","charlotte-flair","seth-rollins","rhea-ripley","randy-orton"] },
+  // Wednesday
+  { id:"nxt-live", name:"NXT Live", kicker:"NXT LIVE", method:"agility", heroId:"rhea-ripley", bossId:"rhea-ripley", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["tiffany-stratton","charlotte-flair","becky-lynch","iyo-sky","rhea-ripley"] },
+  { id:"best-in-the-world", name:"Best in the World", kicker:"BEST IN THE WORLD", method:"technical", heroId:"cm-punk", bossId:"cm-punk", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["tiffany-stratton","john-cena","alexa-bliss","charlotte-flair","cm-punk"] },
+  { id:"revenge-tour", name:"Revenge Tour", kicker:"REVENGE TOUR", method:"agility", heroId:"liv-morgan", bossId:"liv-morgan", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["cm-punk","trish-stratus","sami-zayn","becky-lynch","liv-morgan"] },
+  // Thursday
+  { id:"head-of-the-table", name:"Head of the Table", kicker:"HEAD OF THE TABLE", method:"strength", heroId:"roman-reigns", bossId:"roman-reigns", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["iyo-sky","liv-morgan","john-cena","stone-cold-steve-austin","roman-reigns"] },
+  { id:"twisted-bliss", name:"Twisted Bliss", kicker:"TWISTED BLISS", method:"agility", heroId:"alexa-bliss", bossId:"alexa-bliss", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["cody-rhodes","seth-rollins","trish-stratus","becky-lynch","alexa-bliss"] },
+  { id:"the-bottom-line", name:"The Bottom Line", kicker:"THE BOTTOM LINE", method:"strike", heroId:"stone-cold-steve-austin", bossId:"stone-cold-steve-austin", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["iyo-sky","seth-rollins","sami-zayn","cm-punk","stone-cold-steve-austin"] },
+  // Friday
+  { id:"friday-night-smackdown", name:"Friday Night SmackDown", kicker:"FRIDAY NIGHT SMACKDOWN", method:"technical", heroId:"cody-rhodes", bossId:"cody-rhodes", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["randy-orton","alexa-bliss","sami-zayn","cm-punk","cody-rhodes"] },
+  { id:"justice-for-sami", name:"Justice for Sami", kicker:"JUSTICE FOR SAMI", method:"technical", heroId:"sami-zayn", bossId:"sami-zayn", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["john-cena","cody-rhodes","iyo-sky","tiffany-stratton","sami-zayn"] },
+  { id:"tiffy-time", name:"Tiffy Time", kicker:"TIFFY TIME", method:"agility", heroId:"tiffany-stratton", bossId:"tiffany-stratton", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["sami-zayn","rhea-ripley","john-cena","iyo-sky","tiffany-stratton"] },
+  // Saturday
+  { id:"saturday-nights-main-event", name:"Saturday Night's Main Event", kicker:"SATURDAY NIGHT'S MAIN EVENT", method:"strike", heroId:"liv-morgan", bossId:"liv-morgan", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["roman-reigns","stone-cold-steve-austin","la-knight","sami-zayn","liv-morgan"] },
+  { id:"burn-it-down", name:"Burn It Down", kicker:"BURN IT DOWN", method:"strike", heroId:"seth-rollins", bossId:"seth-rollins", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["cm-punk","john-cena","trish-stratus","becky-lynch","seth-rollins"] },
+  { id:"bow-down-to-the-queen", name:"Bow Down to the Queen", kicker:"BOW DOWN TO THE QUEEN", method:"technical", heroId:"charlotte-flair", bossId:"charlotte-flair", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["stone-cold-steve-austin","liv-morgan","trish-stratus","rhea-ripley","charlotte-flair"] },
+  // Sunday
+  { id:"my-brutality", name:"My Brutality", kicker:"MY BRUTALITY", method:"strength", heroId:"rhea-ripley", bossId:"rhea-ripley", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["randy-orton","cody-rhodes","cm-punk","la-knight","rhea-ripley"] },
+  { id:"megastar-tour", name:"Megastar Tour", kicker:"MEGASTAR TOUR", method:"strike", heroId:"la-knight", bossId:"la-knight", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["roman-reigns","stone-cold-steve-austin","charlotte-flair","liv-morgan","la-knight"] },
+  { id:"stratusfaction-guaranteed", name:"Stratusfaction Guaranteed", kicker:"STRATUSFACTION GUARANTEED", method:"technical", heroId:"trish-stratus", bossId:"trish-stratus", rewardSetId:"premiere", logoMode:"legacy", opponentPool:["randy-orton","tiffany-stratton","alexa-bliss","charlotte-flair","trish-stratus"] }
 ]);
-export const LIVE_EVENT_ROTATION_POOL = Object.freeze([...LAUNCH_THEME_TOWERS]);
+export const LAUNCH_THEME_TOWERS = WEEKLY_PREMIERE_LIVE_EVENTS;
+export const LIVE_EVENT_ROTATION_POOL = WEEKLY_PREMIERE_LIVE_EVENTS;
 export const LIVE_EVENT_COOLDOWN_DAYS = 1;
 
 // v0.13.82 — 24-hour Birthday Bash towers for the complete currently released launch roster.
@@ -295,11 +291,11 @@ function birthdayTowers(_now) {
 }
 
 export function rotatingLiveEventTemplates(now = new Date()) {
-  const serial = daySerial(now);
-  const pool = LIVE_EVENT_ROTATION_POOL;
-  if (pool.length < 3) return [...pool];
-  const startIndex = (serial * 3) % pool.length;
-  return [0,1,2].map(offset => pool[(startIndex + offset) % pool.length]);
+  // Sunday=0, Monday=1. The authored table is Monday-first, three events per day.
+  const day = localDayStart(now).getDay();
+  const mondayFirstDay = (day + 6) % 7;
+  const startIndex = mondayFirstDay * 3;
+  return WEEKLY_PREMIERE_LIVE_EVENTS.slice(startIndex, startIndex + 3);
 }
 
 function recentLiveEventOpponentUse(profile, now = new Date()) {
@@ -317,30 +313,8 @@ function recentLiveEventOpponentUse(profile, now = new Date()) {
 }
 
 function dailyVarietyEvents(templates, profile = null, now = new Date()) {
-  const usedToday = new Set();
-  const recentUse = recentLiveEventOpponentUse(profile, now);
-  return templates.map((template,index) => {
-    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, (daySerial(now)+index) % LIVE_REWARD_FALLBACKS.length, now), now);
-    const themed = releasedLiveEventOpponentIds(event, profile, now);
-    // Theme eligibility and five-match tower length are absolute. Daily variety is
-    // only a preference: unused Superstars lead the pool, but already-used themed
-    // opponents backfill when necessary so a tower can never collapse below five.
-    const candidates = [...new Set(themed)];
-    candidates.sort((a,b) => {
-      const aLast = recentUse.get(a) ?? -Infinity, bLast = recentUse.get(b) ?? -Infinity;
-      if (aLast !== bLast) return aLast - bLast;
-      const seed = `${dateKey(localDayStart(now))}:${event.id}:`;
-      return `${seed}${a}`.localeCompare(`${seed}${b}`);
-    });
-    const unused = candidates.filter(id => !usedToday.has(id));
-    const reused = candidates.filter(id => usedToday.has(id));
-    const ordered = [...unused, ...reused];
-    if (ordered.length < LIVE_EVENT_LENGTH) {
-      throw new Error(`Live Event ${event.id} has only ${ordered.length} released themed opponents; five are required.`);
-    }
-    ordered.slice(0, LIVE_EVENT_LENGTH).forEach(id => usedToday.add(id));
-    return { ...event, opponentPool: ordered };
-  });
+  // Preserve the approved authored Match 1–5 order. Release filtering still applies.
+  return templates.map(template => cloneEvent(template, "premiere", now));
 }
 
 export function activeLiveEventTowers(now = new Date(), profile = null) {
@@ -569,7 +543,8 @@ export function recordLiveEventTowerMatch(profile, towerKey, result, now = new D
     aggregate.totalClears = (aggregate.totalClears ?? 0) + 1;
     if (!aggregate.completedKeys.includes(tower.key)) aggregate.completedKeys.push(tower.key);
     profile.weeklyLiveEvents.totalClears = aggregate.totalClears;
-    const rewardSetIds = grantRandomBoosters(profile, LIVE_EVENT_CLEAR_BOOSTERS, rng, now);
+    grantBooster(profile, LIVE_EVENT_CLEAR_BOOSTERS, "premiere");
+    const rewardSetIds = Array(LIVE_EVENT_CLEAR_BOOSTERS).fill("premiere");
     run.rewardSetIds = rewardSetIds;
     const dailySetBonus = awardDailyLiveEventSetCompletionXp(profile, now);
     return {
