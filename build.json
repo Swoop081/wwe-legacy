@@ -1,11 +1,11 @@
 {
-  "version": "1.1.374",
+  "version": "1.1.375",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.374",
+  "physicalIphoneSmoke": "pending-v1.1.375",
   "launchStatus": "released",
-  "name": "Normalize Live Event boss image positioning"
+  "name": "My Legacy career hub redesign"
 }
