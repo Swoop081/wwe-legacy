@@ -69,3 +69,36 @@
   .live-tower-hub-copy{max-width:67%}
   .live-tower-boss-art{right:-5%;width:46%}
 }
+
+
+/* v1.1.374 — normalize portrait/headshot boss artwork to the same card position */
+.live-tower-boss-art{
+  right:0!important;
+  bottom:0!important;
+  width:42%!important;
+  height:100%!important;
+  overflow:hidden!important;
+  align-items:flex-end!important;
+}
+.live-tower-boss-render{
+  position:absolute!important;
+  right:0!important;
+  bottom:0!important;
+  width:100%!important;
+  height:94%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:none!important;
+}
+.live-tower-boss-render[src*="-headshot.webp"]{
+  right:3%!important;
+  bottom:-1%!important;
+  width:94%!important;
+  height:88%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+@media(max-width:430px){
+  .live-tower-boss-art{right:0!important;width:42%!important}
+  .live-tower-boss-render[src*="-headshot.webp"]{right:2%!important;width:96%!important;height:90%!important}
+}
