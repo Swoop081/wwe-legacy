@@ -1,11 +1,11 @@
 {
-  "version": "1.1.373",
+  "version": "1.1.374",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.373",
+  "physicalIphoneSmoke": "pending-v1.1.374",
   "launchStatus": "released",
-  "name": "Seasons start at Tier 1"
+  "name": "Normalize Live Event boss image positioning"
 }
