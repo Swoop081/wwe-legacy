@@ -25,3 +25,24 @@
 .career-superstar-record .career-record-card-thumb{display:flex;width:74px;min-width:74px;height:104px;align-items:center;justify-content:center;overflow:visible;background:none;border:0}
 .career-superstar-record .career-record-card-thumb .ccg-card{width:66px!important;height:auto!important;aspect-ratio:680/1000;transform:none!important;transform-origin:center center;pointer-events:none}
 .career-superstar-record .career-record-card-thumb .ccg-card img{max-width:100%}
+
+/* v1.1.379 — Achievements mobile readability */
+.legacy-detail-screen .career-achievements-panel{padding:20px 16px}
+.legacy-detail-screen .career-achievements-panel .section-title h3{font-size:30px;line-height:1.05}
+.legacy-detail-screen .career-achievements-panel .section-title small{font-size:16px;line-height:1.35}
+.legacy-detail-screen .career-achievements-panel .section-title>span{font-size:15px;letter-spacing:.12em}
+.legacy-detail-screen .career-achievement-grid{gap:12px}
+.legacy-detail-screen .career-achievement{min-height:104px;padding:16px 16px;gap:16px;border-radius:18px}
+.legacy-detail-screen .career-achievement-medal{width:56px;height:56px;min-width:56px;font-size:27px}
+.legacy-detail-screen .career-achievement>div{min-width:0;flex:1}
+.legacy-detail-screen .career-achievement>div strong{display:block;font-size:20px;line-height:1.15;margin-bottom:5px}
+.legacy-detail-screen .career-achievement>div p{margin:0;font-size:14px;line-height:1.35;color:#aeb7c5}
+.legacy-detail-screen .career-achievement>b{font-size:11px;letter-spacing:.13em;white-space:nowrap}
+@media(max-width:430px){
+ .legacy-detail-screen .career-achievements-panel{padding:18px 12px}
+ .legacy-detail-screen .career-achievement{padding:15px 13px;gap:13px}
+ .legacy-detail-screen .career-achievement-medal{width:52px;height:52px;min-width:52px}
+ .legacy-detail-screen .career-achievement>div strong{font-size:19px}
+ .legacy-detail-screen .career-achievement>div p{font-size:13.5px}
+ .legacy-detail-screen .career-achievement>b{font-size:10px}
+}
