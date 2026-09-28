@@ -1,11 +1,11 @@
 {
-  "version": "1.1.371",
+  "version": "1.1.372",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.371",
+  "physicalIphoneSmoke": "pending-v1.1.372",
   "launchStatus": "released",
-  "name": "Complete Live Event headliner artwork"
+  "name": "Fix IYO SKY and Randy Orton Live Event portraits"
 }
