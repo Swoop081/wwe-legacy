@@ -1,11 +1,11 @@
 {
-  "version": "1.1.380",
+  "version": "1.1.381",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.380",
+  "physicalIphoneSmoke": "pending-v1.1.381",
   "launchStatus": "released",
-  "name": "Evergreen five-tier rulebook"
+  "name": "Printing-tier duplicate UP rewards"
 }
