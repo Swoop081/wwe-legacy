@@ -1,11 +1,11 @@
 {
-  "version": "1.1.361",
+  "version": "1.1.362",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.361",
+  "physicalIphoneSmoke": "pending-v1.1.362",
   "launchStatus": "released",
-  "name": "Season iPhone readability correction"
+  "name": "Live Event match launch fix"
 }
