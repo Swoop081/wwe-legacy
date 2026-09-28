@@ -1,11 +1,11 @@
 {
-  "version": "1.1.367",
+  "version": "1.1.368",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.367",
+  "physicalIphoneSmoke": "pending-v1.1.368",
   "launchStatus": "released",
-  "name": "Live Event route transition fix"
+  "name": "Premiere Live Event cleanup repair"
 }
