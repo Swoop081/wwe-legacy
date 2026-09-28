@@ -4,12 +4,6 @@ export const PIN_CHANCE_TABLE = Object.freeze([
   ["14 HP", "25%"], ["15 HP", "20%"], ["16+ HP", "5%"]
 ]);
 
-export const LIVE_EVENT_WEEK = Object.freeze([
-  ["Monday", "RAW"], ["Tuesday", "Original WWE Legacy event"], ["Wednesday", "NXT"],
-  ["Thursday", "Original WWE Legacy event"], ["Friday", "Original WWE Legacy event"],
-  ["Saturday", "SmackDown"], ["Sunday", "Original WWE Legacy event"]
-]);
-
 export const GAME_RULE_SECTIONS = Object.freeze([
   {
     id: "match-basics", group: "MATCH", title: "Winning & Match Basics",
@@ -67,7 +61,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Method check", "Non-Finishers must also meet every printed Method requirement. Finishers ignore generic Method requirements."],
       ["Position", "Grounded-only Moves need the opponent on the mat. Standing-only Submissions need the opponent standing. Other card text can impose additional position requirements."],
       ["Exclusivity", "A Superstar-exclusive card can only be played by its named Superstar. Cards with an allowed-Superstar family restriction are legal only for that listed family."],
-      ["Printed Damage", "Sapphire is the authored Damage baseline. Normal is −2 Damage, Emerald is −1, Sapphire is authored Damage, and Ruby is +1. Submission pressure uses the same tier ladder. Cost and authored secondary effects do not change by tier."]
+      ["Printing tiers", "Collectible cards use five printing tiers: Base, Emerald, Sapphire, Ruby and Amethyst. Sapphire is the authored midpoint. The live card face shows the resolved values for the printing being used; higher and lower printings can adjust Damage, Cost, submission pressure or effect magnitude according to that card type."]
     ]
   },
   {
@@ -79,7 +73,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Counter-attacks", "An offensive Counter becomes a counter-attack. Counter-attacks are terminal by default and resolve without opening another generic Counter window."],
       ["Punch / Elbow exchange", "Punch and Elbow are the explicit exchange family that may answer each other and continue the exchange when legal."],
       ["Mirror locks", "Jawbreaker cannot answer Jawbreaker. Offensive counter-attacks such as Arm Drag resolve terminally and do not recursively open a generic Counter window."],
-      ["Once Too Often", "Once Too Often is a reactive Action. If the opponent plays the exact same Move card they already connected with earlier in this match, you may play Once Too Often during that Counter window to reverse the repeat and gain Control. It can answer a repeated Finisher, but not a counter-attack."],
+      ["Reactive reversals", "Some reactive Actions can reverse an incoming Move when their printed trigger is satisfied. These cards follow their own printed timing and restrictions; a card-specific reversal may create an exception to the normal Counter rules."],
       ["Auto Counter", "Auto Counter is the fallback when you do not use a matching reversal. Its discard Cost is 5 pages the first time, then 6, 7, 8 and so on. You must still have at least 2 pages left in hand afterward."],
       ["Auto Counter limits", "Auto Counter cannot answer a Finisher or a counter-attack. The CPU prefers a real matching Counter and only considers Auto Counter in its authored decision rules."]
     ]
@@ -126,23 +120,22 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Lead Off 5", "The first 5 pages are your opening hand. Lead Off may contain only Moves and Momentum, and must contain at least 1 Move and at least 1 Momentum page."],
       ["Copy caps", "Normal deck cards have a default maximum of 5 copies. Momentum cards may use up to 12 copies of the same Momentum card. A card-specific lower maxCopies value overrides those defaults."],
       ["Copy families", "Cards that share a copyFamily have a combined family cap of 5 copies."],
-      ["Ownership", "You can only save copies you actually own. Standard five-copy cards track Normal, Emerald, Sapphire and Ruby separately, while deck legality still allows at most 5 total copies of that card identity."],
+      ["Ownership", "You can only save copies you actually own. Collectible cards track Base, Emerald, Sapphire, Ruby and Amethyst printings separately. Collection ownership limits and deck-construction copy limits are separate rules."],
       ["Superstar legality", "Deck Lab enforces Superstar-exclusive cards, allowed-Superstar families, Method Limits and any card-specific restrictions."],
       ["Entrance", "A legal deck also needs one owned compatible Entrance selected outside the 60 pages."],
       ["Merch slot", "Deck Lab also has one active Merch slot outside the 60-page deck. Merch never stacks. Each Merch card lasts 1, 3 or 5 completed eligible matches, consuming one match of duration after each completed match in which its effect applies. Generic Merch is assigned to one eligible unlocked Superstar when equipped; it is not copied across multiple decks. Superstar-specific Merch can only be equipped for that unlocked Superstar. Momentum-granting Merch is illegal if that Superstar has a 0 limit for the Method or if the Merch bonus itself exceeds a finite Method limit."],
-      ["Recommended decks", "Your first Superstar receives the complete authored 60-page onboarding deck. Later Superstar unlocks grant only the Superstar identity plus at most one authored Finisher, one Trademark and one Action; they do not grant a complete deck, shared filler, or the Superstar-specific Entrance. Deck Lab compares your Collection against the authored 60-page recommended build, uses owned recommended cards first, fills gaps only with legal shared cards you already own, and recommends missing authored cards and the Superstar-specific Entrance as you collect them. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap."]
+      ["Recommended decks", "Starter selections receive playable starter decks during onboarding. Deck Lab compares your Collection against each Superstar\'s authored recommended build, uses owned recommended cards first, fills gaps only with legal shared cards you already own, and identifies missing authored cards as you collect them."]
     ]
   },
   {
     id: "collection-rarity", group: "COLLECTION", title: "Rarity, Ownership & Card Tiers",
-    summary: "Card rarity stays intrinsic; Normal, Emerald, Sapphire and Ruby are separate pull tiers with progressively stronger offensive values.",
+    summary: "Card rarity stays intrinsic while five collectible printing tiers provide progressively stronger versions.",
     items: [
       ["Rarity", "1★ Common, 2★ Uncommon, 3★ Rare and 4★ Very Rare."],
-      ["Exclusive rarity policy", "Cards exclusive to one wrestler must be Rare or Very Rare. Wrestler-exclusive Trademarks are generally Rare; Finishers and wrestler one-use/reactive Actions are Very Rare."],
-      ["Ownership caps", "Every collectible card tracks Normal, Emerald, Sapphire and Ruby separately. Each tier can hold up to 5 owned copies; copy 6+ of that same tier converts to Universe Points. Deck-construction limits remain separate from Collection ownership limits."],
-      ["Card tiers", "Normal has no glow and is −2 Damage; Emerald has a green glow and is −1; Sapphire has a blue glow and uses authored Damage; Ruby has a red glow and is +1. Submission pressure scales on the same ladder. Cost, Method requirements, Counter states and secondary effects remain unchanged."],
+      ["Ownership caps", "Collectible cards track Base, Emerald, Sapphire, Ruby and Amethyst separately. Each eligible printing can hold up to its Collection cap; overflow copies convert to Universe Points. Deck-construction limits remain separate from Collection ownership limits."],
+      ["Card tiers", "The five printing tiers are Base, Emerald, Sapphire, Ruby and Amethyst. Sapphire is the authored midpoint. The resolved card face displays the active values for that printing, including any tier-based changes to Damage, Cost, submission pressure or effect magnitude. Core card identity and printed legality restrictions remain intact."],
       ["Tier deck use", "Deck Lab and Deck Assistance prefer the strongest owned tier. The live card plate shows the active Damage and submission pressure so tier strength is never a hidden modifier."],
-      ["Collection milestones", "Each released set has Base, Emerald, Sapphire and Ruby collection tracks. Every track awards 1 random released-set booster at 25%, 50%, 75% and 100% completion. Base counts a collector identity once if any printing is owned; premium tracks count unique cards at that exact printing tier."]
+      ["Collection milestones", "Released sets can provide collection-progress tracks and milestone rewards. Base completion counts collector identities, while printing-specific tracks count unique cards owned at that exact printing tier. The Collection screen displays the active milestones and rewards for each set."]
     ]
   },
   {
@@ -152,40 +145,37 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Pack size", "A standard booster contains 5 pulls."],
       ["Rarity weights", "Ordinary slots roll from the current available pool using 50% Common, 30% Uncommon, 15% Rare and 5% Very Rare weighting until a Very Rare has been hit."],
       ["Very Rare ceiling", "A standard five-card booster can contain at most 1 Very Rare total. A Superstar chase consumes that one Very Rare slot."],
-      ["Tier chase", "Every booster slot independently rolls a printing tier after the card rarity/identity is selected. Normal is most common, Emerald is less common, Sapphire is rare, and Ruby is the premium chase."],
+      ["Tier chase", "Eligible booster pulls can appear at Base, Emerald, Sapphire, Ruby or Amethyst printing tier. Higher tiers are progressively rarer; the active booster screen and card face identify the printing received."],
       ["Superstar chase", "Eligible Superstar identities use a separate 2% pack-level chase with a 100-pack hard pity for an available unowned Superstar in that set."],
       ["Duplicate conversion", "Ordinary collectible cards track each of the five printing tiers separately with a five-copy cap: up to 5 Base, 5 Emerald, 5 Sapphire, 5 Ruby and 5 Amethyst copies (25 total). Copy 6+ of a tier converts to Universe Points. Superstar and Entrance cards are unique collectibles: only one printing of that identity can be owned, and every later copy converts to Universe Points. Overflow value remains based on the card’s intrinsic rarity: Common 1 UP, Uncommon 2 UP, Rare 3 UP and Very Rare 4 UP."],
       ["Released sets only", "Only currently released player-facing sets can be opened or awarded from live reward pools. Future subset boosters remain unavailable until their release pass goes live."],
-      ["Universal booster cards", "A small number of shared WWE Legacy staples may appear in any currently released set booster while retaining one collector identity. Once Too Often is the first universal booster card."],
+      ["Universal booster cards", "Some shared WWE Legacy cards may appear across multiple eligible booster pools while retaining one collector identity."],
       ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build and prefers the strongest owned printing tier for each card. If a booster reveals usable Merch while the single Merch slot is empty, Deck Assistance can flag one equip suggestion. Superstar-specific Merch targets its owner; Generic Merch is scored against the actual effect and your eligible unlocked roster, then suggested once for the best legal fit."]
     ]
   },
   {
     id: "modes", group: "PLAY", title: "Game Modes",
-    summary: "The same core match engine powers Exhibition, Live Events, King of the Ring, Money in the Bank and Championship Road.",
+    summary: "WWE Legacy modes use the same core match engine with different structures, progression and rewards.",
     items: [
-      ["Exhibition", "Choose an owned Superstar and play a standard one-off match against an eligible CPU opponent. Every fifth Exhibition win awards 1 random released-set booster."],
-      ["Live Events", "Live Events is a 24-hour rotating tower hub. Every standard tower refreshes together at local midnight, and the same named theme cannot return on the immediately following day. Limited 24-hour birthday towers can also appear on a Superstar's real birthday. Clearing all 5 matches in a Live Event awards 1 random released-set booster; individual event wins do not award packs."],
-      ["Daily brand schedule", "The Daily Tower uses RAW branding on Monday, NXT on Wednesday and SmackDown on Saturday; Tuesday, Thursday, Friday and Sunday use original WWE Legacy event identities."],
-      ["Tower rotation", "The Live Events header communicates the shared daily reset. Individual tower cards focus on theme, progress, reward and action instead of repeating countdown timers. Progress belongs to that day's tower and expires at local midnight."],
-      ["Match rewards", "A match win awards 5 Season XP and a loss awards no XP. Pack rewards are tied to mode milestones and completion rather than every individual win."],
-      ["King of the Ring", "An 8-Superstar single-elimination tournament. Your Superstar must win a Quarterfinal, Semifinal and Final in succession. One loss eliminates you. Winning the tournament awards 1 random released-set booster; the Quarterfinal and Semifinal do not award packs."],
-      ["Money in the Bank", "Money in the Bank is a standalone Play mode on the second Choose Your Path page. It is a daily 8-opponent tower with 3 lives. A loss costs one life; losing all 3 restarts the tower from Level 1 against the same daily field. Clearing all 8 levels awards 2 random released-set boosters, and a fresh random tower arrives at local midnight."],
-      ["Championship Road", "Every unlocked Superstar has a separate persistent 40-match Season 1 road split into ten four-match themed regions. Progress, current match and difficulty unlocks are saved independently for each Superstar. Completing each four-match region awards 1 booster from that region’s set. A loss retries the current node. Each Superstar begins on Easy, where opponents start at -5 HP. Completing that Superstar’s full road unlocks Normal (standard HP), then Hard (+5 opponent HP), then Hardcore (+10 opponent HP). The player Superstar receives no HP modifier."],
-      ["Career records", "Completed matches feed My Legacy's overall W/L, W/L by unlocked Superstar and W/L by mode."]
+      ["Exhibition", "Exhibition is a standard one-off match using an owned Superstar against an eligible CPU opponent. Any active milestone rewards are shown on the mode screen."],
+      ["Live Events", "Live Events are rotating limited-time match towers. Each event has its own opponent lineup, progress and completion reward. The Live Events screen shows the currently active events, their reset time and their rewards; expired event progress does not carry into a new rotation."],
+      ["King of the Ring", "King of the Ring is a single-elimination tournament. Win each round in succession to become tournament champion; a loss ends the current run. The mode screen displays the current bracket and completion reward."],
+      ["Money in the Bank", "Money in the Bank is a multi-match tower with limited lives. Losses consume lives, while clearing the full tower completes the run. The mode screen displays the active tower, lives, reset timing and completion reward."],
+      ["Survivor Series", "Survivor Series is a team-based elimination mode. Its match structure, available participants and active rewards are displayed on the mode screen."],
+      ["Championship Road", "Championship Road gives each eligible Superstar persistent individual progression through a sequence of matches and difficulty levels. Progress is saved separately for each Superstar, and the mode screen displays the current road, difficulty and rewards."],
+      ["Career records", "Completed tracked matches feed My Legacy's overall record, Superstar records and mode records."]
     ]
   },
   {
     id: "season-challenges", group: "PROGRESSION", title: "Season, Challenges & Rewards",
-    summary: "Matches, challenges and rewards feed the 50-tier, 30-day Season 1 road.",
+    summary: "Season XP, challenges and rotating rewards provide long-term progression.",
     items: [
-      ["Season 1", "Season 1 runs for 30 days and contains 50 tiers at 100 XP per tier, for 5,000 XP total. Tier 50 awards the Amethyst Trish Stratus — Stratusfaction Guaranteed Superstar identity."],
-      ["Match XP", "A match win awards 5 Season XP and a loss awards 0 Season XP."],
-      ["Daily challenges", "Three Daily Challenges rotate each local day. Each completed Daily Challenge awards 10 Season XP and no booster."],
-      ["Weekly challenges", "Three Weekly Challenges rotate each week. Each completed Weekly Challenge awards 25 Season XP plus 1 random released-set booster."],
-      ["Daily free booster", "The Season page provides one free booster on a 24-hour timer. Claiming it opens the booster immediately."],
-      ["Season reward gating", "Season booster tiers can only resolve to sets that are actually released at that time; future subsets cannot appear early."],
-      ["Season 1 chase", "Trish Stratus’ Season 1 cards are Amethyst-only. The road awards 5 Ruby copies each of Stratusphere, Chick Kick, Air Canada and Stratusfaction, plus Stratusfaction Guaranteed and Time to Rock & Roll, culminating in the Amethyst Trish Stratus Superstar at Tier 50. Completing the Season automatically assembles Trish’s strongest owned version of her authored deck."]
+      ["Season progression", "The active Season has a tiered XP progression road. Tier requirements, duration and rewards are displayed on the Season screen so the Rulebook remains independent of a particular Season."],
+      ["Match XP", "Eligible match results award Season XP according to the active progression rules shown in game."],
+      ["Daily challenges", "Daily Challenges rotate on their displayed schedule and award the rewards shown on the Challenges screen."],
+      ["Weekly challenges", "Weekly Challenges rotate on their displayed schedule and award the rewards shown on the Challenges screen."],
+      ["Free rewards", "Any timed free Season reward is shown on the Season screen together with its next availability time."],
+      ["Reward gating", "Reward pools only use content that is released and eligible at the time the reward is granted. Unreleased content cannot appear early."]
     ]
   },
   {
@@ -194,7 +184,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     items: [
       ["Overall record", "My Legacy stores total wins and losses from the career-record tracking build onward."],
       ["Superstar record", "Every unlocked Superstar has their own W/L record."],
-      ["Mode record", "Exhibition, Live Event, King of the Ring, Money in the Bank and Championship Road each keep their own W/L totals."],
+      ["Mode record", "Each tracked game mode keeps its own W/L totals in My Legacy."],
       ["Achievements", "Achievements are persistent career milestones for wins, modes, finish methods and roster use. Previously stored clear counters can legitimately satisfy matching achievements."],
       ["Local profile", "Progress, collection, decks, Season state, records and achievements are stored in the local WWE Legacy profile on this device / browser."],
       ["Reset Progress", "Reset Progress in My Legacy permanently clears the local profile when confirmed."]
@@ -207,11 +197,11 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Control", "The right to take normal offensive actions."],
       ["Control sequence", "The uninterrupted stretch during which one Superstar keeps Control. Many bonuses check what happened earlier in the same sequence."],
       ["Printed", "The number or rule physically authored on the card before temporary match effects modify it."],
-      ["Trademark", "A signature wrestler move, generally Rare when exclusive."],
-      ["Finisher", "A top-tier finishing Move. Finishers ignore generic Method requirements and wrestler-exclusive Finishers are Very Rare."],
+      ["Trademark", "A signature Superstar Move with its own authored card rules and restrictions."],
+      ["Finisher", "A finishing Move. Finishers ignore generic Method requirements unless an explicit card effect says otherwise."],
       ["Counter State", "The physical state an incoming Move exposes to the defender for reversal matching. Card backs label this CAN BE COUNTERED AS; it does not mean the Move reverses anything itself. Actual reversal abilities are labeled REVERSES."],
       ["UP", "Universe Points, the store currency also earned from duplicate overflow and selected game rewards."],
-      ["Card tiers", "The four printing tiers are Normal, Emerald, Sapphire and Ruby. Sapphire is the authored baseline; Damage and submission pressure step −2 / −1 / 0 / +1 across the ladder."],
+      ["Card tiers", "The five printing tiers are Base, Emerald, Sapphire, Ruby and Amethyst. Sapphire is the authored midpoint, and the resolved card face displays the active values for the printing in use."],
       ["REWARD pack", "A special completion-pack wrapper used for Money in the Bank and Championship-style completion rewards; its underlying set still determines the cards inside."]
     ]
   }
