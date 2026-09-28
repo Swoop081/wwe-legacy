@@ -1,11 +1,11 @@
 {
-  "version": "1.1.370",
+  "version": "1.1.371",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.370",
+  "physicalIphoneSmoke": "pending-v1.1.371",
   "launchStatus": "released",
-  "name": "21-event weekly Live Events"
+  "name": "Complete Live Event headliner artwork"
 }
