@@ -1,11 +1,11 @@
 {
-  "version": "1.1.362",
+  "version": "1.1.363",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.362",
+  "physicalIphoneSmoke": "pending-v1.1.363",
   "launchStatus": "released",
-  "name": "Live Event match launch fix"
+  "name": "Live Event authored deck fallback"
 }
