@@ -579,10 +579,19 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
   if (!profile) { screen = "starter"; renderStarter(); return; }
   const p1Star = superstarWithConfiguredEntrance(p1Id), p2Star = superstarById[p2Id];
   if (!p1Star || !p2Star) { message = "That Superstar is not active in this build."; renderSetup(); return; }
-  const p1Deck = buildPlayableDeck(profile, p1Id), p2Deck = scaleCpuDeckToPlayer(p1Deck, decks[p2Id] ?? []);
+  let p1Deck = buildPlayableDeck(profile, p1Id);
+  // Live Events must always be playable with the selected Superstar. If an old
+  // saved/custom deck is invalid, fall back to the authored 60-card starter deck.
+  if (mode === "live-event" && p1Deck.length !== 60 && Array.isArray(decks[p1Id]) && decks[p1Id].length === 60) {
+    p1Deck = decks[p1Id].map(card => applyCardTier(card, "normal"));
+  }
+  const authoredCpuDeck = decks[p2Id] ?? [];
+  const p2Deck = scaleCpuDeckToPlayer(p1Deck, authoredCpuDeck);
   if (p1Deck.length !== 60 || p2Deck.length !== 60) {
-    message = `Deck validation failed: ${p1Star.name} ${p1Deck.length}/60 · ${p2Star.name} ${p2Deck.length}/60.`;
+    const detail = `Deck validation failed: ${p1Star.name} ${p1Deck.length}/60 · ${p2Star.name} ${p2Deck.length}/60.`;
+    message = detail;
     if (mode === "live-event") {
+      globalThis.alert?.(detail);
       liveEventMatchupOpen = true;
       renderLiveEvents();
     } else {
