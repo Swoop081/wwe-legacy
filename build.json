@@ -1,11 +1,11 @@
 {
-  "version": "1.1.365",
+  "version": "1.1.366",
   "releasedAt": "2026-09-26",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.365",
+  "physicalIphoneSmoke": "pending-v1.1.366",
   "launchStatus": "released",
-  "name": "Live Event rendered matchup launch fix"
+  "name": "Rotating Live Event modifier launch isolation"
 }
