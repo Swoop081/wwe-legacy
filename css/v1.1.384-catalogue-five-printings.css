@@ -381,3 +381,48 @@
   font-size:clamp(2px,.5vw,3.3px)!important;
   line-height:.95!important;
 }
+
+
+/* Catalogue plaque renderer — clean rebuild. These rules intentionally supersede
+   all earlier experimental thumbnail-copy positioning. */
+.catalogue-screen .catalogue-thumb-copy{display:none!important}
+.catalogue-screen .catalogue-card-image::before,
+.catalogue-screen .catalogue-card-image::after{content:none!important;display:none!important}
+.catalogue-screen .catalogue-plaque{
+  position:absolute!important;z-index:6!important;
+  left:5.5%!important;right:5.5%!important;bottom:3.6%!important;
+  height:14.2%!important;box-sizing:border-box!important;
+  display:block!important;overflow:hidden!important;
+  color:#fff!important;text-transform:uppercase!important;
+  font-style:normal!important;pointer-events:none!important;
+}
+.catalogue-screen .catalogue-plaque-name{
+  position:absolute!important;left:4%!important;right:4%!important;top:10%!important;
+  display:block!important;margin:0!important;padding:0!important;
+  font-size:clamp(2.8px,.78vw,5.1px)!important;font-weight:950!important;
+  line-height:1!important;letter-spacing:.01em!important;text-align:center!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;
+  transform:none!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat{
+  position:absolute!important;top:48%!important;width:37%!important;height:48%!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;
+  gap:4%!important;margin:0!important;padding:0!important;line-height:1!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-cost{left:7%!important}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-dmg{right:7%!important}
+.catalogue-screen .catalogue-plaque-stat b{
+  display:block!important;font-size:clamp(1.8px,.43vw,2.8px)!important;font-weight:900!important;
+  line-height:1!important;letter-spacing:.08em!important;
+}
+.catalogue-screen .catalogue-plaque-stat em{
+  display:block!important;margin-top:3%!important;font-size:clamp(2.2px,.55vw,3.6px)!important;
+  font-weight:950!important;font-style:normal!important;line-height:1!important;
+}
+.catalogue-screen .catalogue-label-plaque small{
+  position:absolute!important;left:4%!important;right:4%!important;top:57%!important;
+  display:block!important;margin:0!important;padding:0!important;
+  font-size:clamp(1.8px,.45vw,3px)!important;font-weight:850!important;
+  line-height:1!important;letter-spacing:.06em!important;text-align:center!important;
+  white-space:nowrap!important;
+}
