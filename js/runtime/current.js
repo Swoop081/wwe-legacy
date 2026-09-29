@@ -3,7 +3,7 @@
 // are allowed above it because ES-module imports are hoisted and one failing
 // compatibility module would prevent app.js from ever attaching the launch UI.
 
-const VERSION = "1.1.416";
+const VERSION = "1.1.417";
 
 function showBootError(error, stage = "Application boot") {
   const detail = String(error?.stack || error?.message || error || "Unknown error");
