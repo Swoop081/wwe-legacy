@@ -1,11 +1,11 @@
 {
-  "version": "1.1.393",
+  "version": "1.1.394",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.393",
+  "physicalIphoneSmoke": "pending-v1.1.394",
   "launchStatus": "released",
-  "name": "Complete compact Card Catalogue"
+  "name": "Isolated compact Catalogue renderer"
 }
