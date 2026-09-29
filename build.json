@@ -1,11 +1,11 @@
 {
-  "version": "1.1.417",
+  "version": "1.1.418",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.417",
+  "physicalIphoneSmoke": "pending-v1.1.418",
   "launchStatus": "released",
-  "name": "Updater recovery plus Catalogue text overlay"
+  "name": "Atomic updater release"
 }
