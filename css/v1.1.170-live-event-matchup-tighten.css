@@ -63,3 +63,44 @@
     margin-top:12px!important;
   }
 }
+
+
+/* v1.1.435 — Live Event matchup typography readability pass.
+   Typography only: card/image dimensions are intentionally untouched. */
+@media (max-width:600px){
+  .live-event-matchup-head small,
+  .live-event-matchup-head > span{
+    font-size:14px!important;
+    line-height:1.15!important;
+  }
+  .live-event-matchup-head h1,
+  .live-event-matchup-head h2,
+  .live-event-matchup-head strong{
+    font-size:28px!important;
+    line-height:1.05!important;
+  }
+  .live-event-matchup-player > span,
+  .live-event-matchup-opponent > span{
+    font-size:14px!important;
+    line-height:1.2!important;
+    letter-spacing:.16em!important;
+  }
+  .live-event-matchup-vs{
+    font-size:28px!important;
+    font-weight:900!important;
+  }
+  .live-event-matchup-opponent > strong{
+    font-size:21px!important;
+    line-height:1.15!important;
+  }
+  .live-event-matchup-opponent > small{
+    font-size:15px!important;
+    line-height:1.25!important;
+  }
+  .live-event-matchup-fight,
+  .live-event-matchup-fight button{
+    font-size:18px!important;
+    line-height:1.15!important;
+    letter-spacing:.06em!important;
+  }
+}
