@@ -1,11 +1,11 @@
 {
-  "version": "1.1.411",
+  "version": "1.1.412",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.411",
+  "physicalIphoneSmoke": "pending-v1.1.412",
   "launchStatus": "released",
-  "name": "Forced stale-cache updater recovery"
+  "name": "Module graph cache-bust recovery"
 }
