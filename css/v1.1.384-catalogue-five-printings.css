@@ -1,0 +1,22 @@
+/* v1.1.384 — compact five-printing Card Catalogue */
+.master-catalogue-sections{padding:0 16px 110px;display:grid;gap:22px}
+.catalogue-type-section{display:grid;gap:10px}
+.catalogue-type-heading{display:flex;align-items:end;justify-content:space-between;padding:0 4px 8px;border-bottom:1px solid rgba(82,207,255,.35)}
+.catalogue-type-heading strong{font-size:24px;font-style:italic;letter-spacing:.03em}
+.catalogue-type-heading small{font-size:10px;font-weight:900;letter-spacing:.14em;color:#59d8ff}
+.catalogue-identity-list{display:grid;gap:14px}
+.catalogue-identity-row{padding:12px;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:linear-gradient(135deg,rgba(20,26,35,.96),rgba(8,10,15,.96));overflow:hidden}
+.catalogue-identity-meta{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:baseline;margin-bottom:9px}
+.catalogue-identity-meta>span{font-size:9px;font-weight:900;letter-spacing:.12em;color:#59d8ff}
+.catalogue-identity-meta>b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.catalogue-identity-meta>small{grid-column:1/-1;margin-top:3px;font-size:9px;color:#8f99a9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.catalogue-five-printings{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.catalogue-tier-thumb{min-width:0;padding:0 0 5px;border:0;background:none;color:#fff;text-align:center;overflow:hidden}
+.catalogue-thumb-card{display:block;width:100%;aspect-ratio:680/1000;overflow:hidden;border-radius:4px;background:#090b10}
+.catalogue-thumb-card>.ccg-card{width:100%!important;height:100%!important;min-height:0!important;transform:none!important}
+.catalogue-thumb-card .ccg-card img{max-width:100%}
+.catalogue-tier-thumb>b{display:block;margin-top:4px;font-size:7px;line-height:1;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.catalogue-tier-thumb>small{display:block;margin-top:3px;font-size:6.5px;color:#8e98a7;white-space:nowrap}
+.catalogue-tier-thumb.is-unowned .catalogue-thumb-card{filter:grayscale(1) brightness(.42)}
+.catalogue-tier-thumb.is-owned .catalogue-thumb-card{filter:none}
+@media(max-width:430px){.master-catalogue-sections{padding-left:12px;padding-right:12px}.catalogue-identity-row{padding:10px}.catalogue-five-printings{gap:4px}.catalogue-type-heading strong{font-size:22px}}
