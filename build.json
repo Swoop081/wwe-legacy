@@ -1,11 +1,11 @@
 {
-  "version": "1.1.414",
+  "version": "1.1.415",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.414",
+  "physicalIphoneSmoke": "pending-v1.1.415",
   "launchStatus": "released",
-  "name": "Catalogue explicit compact text plaques"
+  "name": "Catalogue authored plaque restoration"
 }
