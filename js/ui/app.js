@@ -3450,7 +3450,7 @@ function renderCardCatalogue() {
         : `<div class="catalogue-multiprint-list">${cards.map(card=>`<article class="catalogue-multiprint-row"><div class="catalogue-print-grid">${printingTiersFor(card).map(tier=>tile(card,tier)).join("")}</div></article>`).join("")}</div>`;
       return `<section class="catalogue-type-section catalogue-type-${sectionKey}"><div class="catalogue-type-heading"><strong>${label}</strong><small>${cards.reduce((n,c)=>n+printingTiersFor(c).length,0)} PRINTINGS</small></div>${body}</section>`;
     }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>\n    \n    ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
-    ${catalogueInspect ? `<div class="superstar-card-modal deck-lab-card-modal catalogue-working-inspect" data-catalogue-modal-backdrop="1"><div class="superstar-card-modal-inner deck-lab-card-modal-inner">${collectibleCardMarkup(catalogueInspect.card,{flipped:catalogueInspect.flipped,tier:catalogueInspect.tier,extraClass:"hud-superstar-modal-card deck-lab-inspect-card",flipAttr:'data-flip-catalogue-modal="1"',eagerArt:true})}<small>Tap card to ${catalogueInspect.flipped ? "show front" : "view effects"} · Tap outside to close</small></div></div>` : ""}
+    ${catalogueInspect ? `<div class="superstar-card-modal deck-lab-card-modal catalogue-working-inspect" data-catalogue-modal-backdrop="1"><div class="superstar-card-modal-inner deck-lab-card-modal-inner"><button type="button" class="deck-lab-card-modal-close" data-close-catalogue-modal="1" aria-label="Close card inspector">×</button>${collectibleCardMarkup(catalogueInspect.card,{flipped:catalogueInspect.flipped,tier:catalogueInspect.tier,extraClass:"hud-superstar-modal-card deck-lab-inspect-card",flipAttr:'data-flip-catalogue-modal="1"',eagerArt:true})}<small>Tap card to ${catalogueInspect.flipped ? "show front" : "view effects"} · Tap × to close</small></div></div>` : ""}
   </section>`;
 
   $("#catalogue-filter-drawer")?.addEventListener("toggle", e => { catalogueFiltersOpen = e.currentTarget.open; });
@@ -3477,6 +3477,7 @@ function renderCardCatalogue() {
     catalogueInspect={...catalogueInspect,flipped:!catalogueInspect.flipped};
     renderCardCatalogue();
   }));
+  root.querySelectorAll("[data-close-catalogue-modal]").forEach(btn=>btn.addEventListener("click",event=>{ event.preventDefault(); event.stopPropagation(); closeCatalogueInspect(); }));
   root.querySelectorAll("[data-catalogue-modal-backdrop]").forEach(backdrop=>{
     backdrop.addEventListener("click",event=>{
       // The modal's inner wrapper occupies the backdrop on iPhone, so checking
