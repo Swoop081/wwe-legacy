@@ -135,3 +135,9 @@
 .catalogue-screen .catalogue-card-image>.ccg-card .ccg-live-front-data,.catalogue-screen .catalogue-card-image>.ccg-card .ccg-superstar-nameplate,.catalogue-screen .catalogue-card-image>.ccg-card .ccg-layered-card-studio-ink{display:flex!important}
 .catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image>.ccg-card{filter:grayscale(.72) brightness(.68) contrast(.92)!important;opacity:.88!important}
 .catalogue-screen .catalogue-card-tile.is-unowned .catalogue-owned-overlay{filter:none!important;opacity:1!important}
+
+/* v1.1.401 — lightweight layered thumbnails; avoids hundreds of live card DOM trees */
+.catalogue-screen .catalogue-card-image>.catalogue-premiere-bg,.catalogue-screen .catalogue-card-image>.catalogue-base-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;margin:0!important;transform:none!important}
+.catalogue-screen .catalogue-card-image>.catalogue-premiere-bg{z-index:0!important}.catalogue-screen .catalogue-card-image>.catalogue-base-art{z-index:1!important}
+.catalogue-screen .catalogue-card-image>.ccg-superstar-nameplate,.catalogue-screen .catalogue-card-image>.ccg-live-front-data,.catalogue-screen .catalogue-card-image>.ccg-layered-card-studio-ink,.catalogue-screen .catalogue-card-image>.ccg-superstar-rarity{z-index:2!important}
+.catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image>.catalogue-premiere-bg,.catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image>.catalogue-base-art{filter:grayscale(.72) brightness(.68) contrast(.92)!important;opacity:.88!important}
