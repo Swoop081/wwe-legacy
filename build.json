@@ -1,11 +1,11 @@
 {
-  "version": "1.1.413",
+  "version": "1.1.414",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.413",
+  "physicalIphoneSmoke": "pending-v1.1.414",
   "launchStatus": "released",
-  "name": "Catalogue plaque alignment calibration"
+  "name": "Catalogue explicit compact text plaques"
 }
