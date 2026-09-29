@@ -3401,16 +3401,31 @@ function renderCardCatalogue() {
     </details>
 
     <section id="catalogue-results" class="catalogue-results-head"><div><span>${matchingPrintingCount} printings match</span><b>${filtered.length ? `${start + 1}–${Math.min(start + CATALOGUE_PAGE_SIZE, filtered.length)} shown` : "Nothing to show"}</b></div>${pagination}</section>
-    <section class="master-catalogue-sections">${pageCards.length ? ["superstar","entrance","move","action","merch","momentum","manager"].map(kind => {
-      const cards = pageCards.filter(card=>card.kind===kind);
+    <section class="master-catalogue-sections">${pageCards.length ? [
+      ["superstar","SUPERSTARS",card=>card.kind==="superstar"],
+      ["entrance","ENTRANCES",card=>card.kind==="entrance"],
+      ["finisher","FINISHERS",card=>card.kind==="move"&&card.finisher===true],
+      ["trademark","TRADEMARKS",card=>card.kind==="move"&&card.trademark===true&&!card.finisher],
+      ["move","MOVES",card=>card.kind==="move"&&!card.finisher&&!card.trademark],
+      ["action","ACTIONS",card=>card.kind==="action"],
+      ["merch","MERCH",card=>card.kind==="merch"],
+      ["momentum","MOMENTUM",card=>card.kind==="momentum"],
+      ["manager","MANAGERS",card=>card.kind==="manager"]
+    ].map(([sectionKey,label,test]) => {
+      const cards = pageCards.filter(test);
       if (!cards.length) return "";
-      const label = kind === "superstar" ? "SUPERSTARS" : kind === "entrance" ? "ENTRANCES" : kind === "move" ? "MOVES" : kind === "action" ? "ACTIONS" : kind === "merch" ? "MERCH" : kind === "momentum" ? "MOMENTUM" : "MANAGERS";
-      const thumbFor = card => finishedCardArtFor(card) || legacyFinishedCardArtFor(card) || layeredCardArtFor(card) || "";
-      const singlePrinting = kind === "superstar" || kind === "entrance";
+      const singlePrinting = sectionKey==="superstar" || sectionKey==="entrance";
+      const renderThumb = (card,tier) => {
+        const finished=finishedCardArtFor(card) || legacyFinishedCardArtFor(card) || "";
+        const layered=layeredCardArtFor(card) || "";
+        const thumb=finished || layered;
+        const count=ownedCount(profile,card.id,tier);
+        return `<div class="catalogue-tier-thumb ${count>0?'is-owned':'is-unowned'}"><span class="catalogue-thumb-card ${tierCssClass(tier)}">${thumb ? `<img loading="lazy" decoding="async" src="${thumb}" alt="${card.name}">` : `<span class="catalogue-thumb-placeholder">${card.name}</span>`}</span><small>${count} OWNED</small></div>`;
+      };
       const body = singlePrinting
-        ? `<div class="catalogue-single-print-grid">${cards.map(card=>{const tier=printingTiersFor(card)[0];const count=ownedCount(profile,card.id,tier);const thumb=thumbFor(card);return `<article class="catalogue-single-card ${count>0?'is-owned':'is-unowned'}"><span class="catalogue-thumb-card ${tierCssClass(tier)}">${thumb?`<img loading="lazy" decoding="async" src="${thumb}" alt="">`:`<span class="catalogue-thumb-placeholder">${card.name}</span>`}</span><small>${card.cardCode}</small></article>`;}).join("")}</div>`
-        : `<div class="catalogue-identity-list">${cards.map(card=>{const thumb=thumbFor(card);return `<article class="catalogue-identity-row"><div class="catalogue-identity-meta"><span>${card.cardCode}</span><b>${card.name}</b></div><div class="catalogue-five-printings">${printingTiersFor(card).map(tier=>{const count=ownedCount(profile,card.id,tier);return `<div class="catalogue-tier-thumb ${count>0?'is-owned':'is-unowned'}"><span class="catalogue-thumb-card ${tierCssClass(tier)}">${thumb?`<img loading="lazy" decoding="async" src="${thumb}" alt="">`:`<span class="catalogue-thumb-placeholder">${card.name}</span>`}</span><small>${count}</small></div>`;}).join("")}</div></article>`;}).join("")}</div>`;
-      return `<section class="catalogue-type-section catalogue-type-${kind}"><div class="catalogue-type-heading"><strong>${label}</strong><small>${cards.reduce((n,c)=>n+printingTiersFor(c).length,0)} PRINTINGS</small></div>${body}</section>`;
+        ? `<div class="catalogue-single-printing-grid">${cards.map(card=>`<article class="catalogue-single-card"><div class="catalogue-single-thumb">${renderThumb(card,printingTiersFor(card)[0])}</div><span>${card.cardCode}</span><b>${card.name}</b></article>`).join("")}</div>`
+        : `<div class="catalogue-five-printing-list">${cards.map(card=>`<article class="catalogue-five-row"><div class="catalogue-five-meta"><span>${card.cardCode}</span><b>${card.name}</b></div><div class="catalogue-five-printings">${printingTiersFor(card).map(tier=>renderThumb(card,tier)).join("")}</div></article>`).join("")}</div>`;
+      return `<section class="catalogue-type-section catalogue-type-${sectionKey}"><div class="catalogue-type-heading"><strong>${label}</strong><small>${cards.reduce((n,c)=>n+printingTiersFor(c).length,0)} PRINTINGS</small></div>${body}</section>`;
     }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>
     ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
   </section>`;
