@@ -1,11 +1,11 @@
 {
-  "version": "1.1.434",
-  "releasedAt": "2026-09-29",
+  "version": "1.1.435",
+  "releasedAt": "2026-09-30",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.434",
+  "physicalIphoneSmoke": "pending-v1.1.435",
   "launchStatus": "released",
-  "name": "Catalogue close binding after body mount"
+  "name": "Live Event matchup typography readability"
 }
