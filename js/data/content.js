@@ -19864,7 +19864,16 @@ for (let i=allGameplayCards.length-1;i>=0;i--) {
   if (RETIRED_REWARD_SET_IDS.has(allGameplayCards[i]?.setId)) allGameplayCards.splice(i,1);
 }
 applyCardIdentityPass(allGameplayCards);
-allGameplayCards.forEach(card => { const rewardTier=rewardPrintingTierForSet(card.setId); if(card.kind === "entrance") card.fixedPrintingTier="amethyst"; else if(rewardTier) card.fixedPrintingTier=rewardTier; enrichCounterState(card); });
+allGameplayCards.forEach(card => {
+  const activeRelaunch = /^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(String(card.id??"")) || /^MITB0[2-7]$/.test(String(card.id??""));
+  if (activeRelaunch) delete card.fixedPrintingTier;
+  else {
+    const rewardTier=rewardPrintingTierForSet(card.setId);
+    if(card.kind === "entrance") card.fixedPrintingTier="amethyst";
+    else if(rewardTier) card.fixedPrintingTier=rewardTier;
+  }
+  enrichCounterState(card);
+});
 finalizeCardIdentityPass(allGameplayCards);
 // Relaunch runtime boundary: legacy cards above remain available only as source/reference data.
 // Player-facing gameplay may expose PREM01–PREM270 and MITB02–MITB07 only; MITB01/08 are collection identities.
