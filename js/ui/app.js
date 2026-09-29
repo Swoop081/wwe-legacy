@@ -3431,13 +3431,13 @@ function renderCardCatalogue() {
       const singlePrinting = sectionKey==="superstar" || sectionKey==="entrance";
       const tile = (card,tier) => {
         const count=card.kind==="superstar" ? Math.max(ownedCount(profile,card.id,tier), profile?.unlockedSuperstars?.includes?.(card.superstarId)?1:0, profile?.starterIds?.includes?.(card.superstarId)?1:0, profile?.starterId===card.superstarId?1:0) : ownedCount(profile,card.id,tier);
-        const art=finishedCardArtFor(card) || legacyFinishedCardArtFor(card) || layeredCardArtFor(card) || "";
+        const art=layeredCardArtFor(card) || finishedCardArtFor(card) || legacyFinishedCardArtFor(card) || "";
         const applied=applyCardTier(card,tier);
         const superstarBg=card.kind==="superstar" && card.setId==="premiere" ? assetUrl("assets/images/premiere-background.jpg") : "";
         const type=card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : String(card.kind??"CARD").toUpperCase();
         const detail=card.kind==="move" ? `COST ${applied.cost??0}  ·  DAMAGE ${applied.damage??0}` : type;
         const esc=value=>String(value??"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;");
-        return `<button type="button" class="catalogue-card-tile ${count>0?'is-owned':'is-unowned'}" data-catalogue-inspect="${card.id}" data-catalogue-tier="${tier}"><div class="catalogue-card-image ${tierCssClass(tier)} ${card.kind==="superstar"?"is-superstar-thumb":""}" data-thumb-title="${esc(card.name)}" data-thumb-detail="${esc(detail)}">${superstarBg?`<img class="catalogue-superstar-bg" loading="lazy" decoding="async" src="${superstarBg}" alt="">`:""}${art?`<img class="catalogue-base-art" loading="lazy" decoding="async" src="${art}" alt="">`:""}<span class="catalogue-owned-overlay">×${count}</span></div></button>`;
+        return `<button type="button" class="catalogue-card-tile ${count>0?'is-owned':'is-unowned'}" data-catalogue-inspect="${card.id}" data-catalogue-tier="${tier}"><div class="catalogue-card-image ${tierCssClass(tier)} ${card.kind==="superstar"?"is-superstar-thumb":""}" data-thumb-title="${esc(card.name)}" data-thumb-detail="${esc(detail)}">${superstarBg?`<img class="catalogue-superstar-bg" loading="lazy" decoding="async" src="${superstarBg}" alt="">`:""}${art?`<img class="catalogue-base-art" loading="lazy" decoding="async" src="${art}" alt="">`:""}<span class="catalogue-thumb-plate"><span class="catalogue-thumb-title">${esc(card.name)}</span><span class="catalogue-thumb-detail">${esc(detail)}</span></span><span class="catalogue-owned-overlay">×${count}</span></div></button>`;
       };
       const body = singlePrinting
         ? `<div class="catalogue-singles-grid">${cards.map(card=>`<article class="catalogue-single-item">${tile(card,printingTiersFor(card)[0])}<small>${card.cardCode}</small></article>`).join("")}</div>`
