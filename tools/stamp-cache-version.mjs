@@ -1,23 +1,49 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const pkg=JSON.parse(fs.readFileSync(path.join(root,"package.json"),"utf8"));
+const pkgPath=path.join(root,"package.json");
+const pkg=JSON.parse(fs.readFileSync(pkgPath,"utf8"));
 const version=pkg.version;
-const skipDirs=new Set([".git","node_modules","reference"]);
-const textExt=new Set([".js",".mjs",".html",".css",".json",".webmanifest",".md"]);
+const versionPattern=/\d+\.\d+\.\d+/g;
+
+const files=[
+  "build.json",
+  "js/config/build.js",
+  "js/runtime/current.js",
+  "js/ui/app.js",
+  "index.html"
+];
+
+function replaceVersion(text){
+  return text.replace(versionPattern,version);
+}
+
 let changed=0;
-function walk(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){if(entry.isDirectory()&&skipDirs.has(entry.name))continue;const full=path.join(dir,entry.name);if(entry.isDirectory()){walk(full);continue;}if(!textExt.has(path.extname(entry.name))&&entry.name!=="manifest.webmanifest")continue;let s=fs.readFileSync(full,"utf8"),next=s;
-  next=next.replace(/([?&]v=)\d+\.\d+\.\d+/g,`$1${version}`);
-  if(path.extname(entry.name)===".js"){
-    next=next.replace(/(from\s+["\'](?:\.\.?\/)[^"\'?]+\.js)(?:\?v=\d+\.\d+\.\d+)?(["\'])/g,`$1?v=${version}$2`);
-    next=next.replace(/(import\s*\(\s*["\'](?:\.\.?\/)[^"\'?]+\.js)(?:\?v=\d+\.\d+\.\d+)?(["\']\s*\))/g,`$1?v=${version}$2`);
+for(const rel of files){
+  const full=path.join(root,rel);
+  const before=fs.readFileSync(full,"utf8");
+  let after=before;
+
+  if(rel==="build.json"){
+    const manifest=JSON.parse(before);
+    manifest.version=version;
+    after=JSON.stringify(manifest,null,2)+"\n";
+  }else if(rel==="js/config/build.js"){
+    after=before.replace(/(BUILD_VERSION\s*=\s*["'])\d+\.\d+\.\d+(["'])/, `$1${version}$2`);
+  }else if(rel==="js/runtime/current.js"){
+    after=before.replace(/(const VERSION\s*=\s*["'])\d+\.\d+\.\d+(["'])/, `$1${version}$2`);
+  }else if(rel==="js/ui/app.js"){
+    after=before.replace(/([?&]v=)\d+\.\d+\.\d+/g,`$1${version}`);
+  }else if(rel==="index.html"){
+    after=before
+      .replace(/([?&]v=)\d+\.\d+\.\d+/g,`$1${version}`)
+      .replace(/(__WWE_LEGACY_BOOT_VERSION__\s*=\s*["'])\d+\.\d+\.\d+(["'])/, `$1${version}$2`)
+      .replace(/(wanted===["'])\d+\.\d+\.\d+(["'])/, `$1${version}$2`)
+      .replace(/(Version:\s*)\d+\.\d+\.\d+/, `$1${version}`);
   }
-  next=next.replace(/(BUILD_VERSION\s*=\s*["'])\d+\.\d+\.\d+(["'])/g,`$1${version}$2`);
-  next=next.replace(/(currentBuild\s*=\s*["'])\d+\.\d+\.\d+(["'])/g,`$1${version}$2`);
-  next=next.replace(/(CARD ART STUDIO · v)\d+\.\d+\.\d+/g,`$1${version}`);
-  if(entry.name==="build.json") next=next.replace(/("version"\s*:\s*")\d+\.\d+\.\d+("\s*)/,`$1${version}$2`);
-  if(next!==s){fs.writeFileSync(full,next);changed++;}
-}}
-walk(root);
-console.log(JSON.stringify({version,changedFiles:changed},null,2));
+  if(after!==before){fs.writeFileSync(full,after);changed++;}
+}
+
+console.log(JSON.stringify({version,changedFiles:changed,files},null,2));
