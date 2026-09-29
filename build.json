@@ -1,11 +1,11 @@
 {
-  "version": "1.1.427",
+  "version": "1.1.428",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.427",
+  "physicalIphoneSmoke": "pending-v1.1.428",
   "launchStatus": "released",
-  "name": "Catalogue inspector button selector fix"
+  "name": "Catalogue inspector modal repair"
 }
