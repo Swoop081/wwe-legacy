@@ -1,11 +1,11 @@
 {
-  "version": "1.1.436",
+  "version": "1.1.437",
   "releasedAt": "2026-09-30",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.436",
+  "physicalIphoneSmoke": "pending-v1.1.437",
   "launchStatus": "released",
-  "name": "Restore layered card text overlays globally"
+  "name": "Premiere reward pack branding and 2-1-2 summary"
 }
