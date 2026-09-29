@@ -1,5 +1,5 @@
 import { assetUrl, BUILD_VERSION } from "../config/build.js?v=1.1.417";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=1.1.417";
+import { fetchLatestBuild, isNewerBuild } from "../config/update.js?v=1.1.417";
 import { superstars } from "../data/superstars.js?v=1.1.417";
 import { decks } from "../data/decks.js?v=1.1.417";
 import { sets } from "../data/sets.js?v=1.1.417";
@@ -177,12 +177,16 @@ async function applyAppUpdate(version = appUpdateState.latest) {
   try {
     localStorage.setItem("wweLegacyForcedBuild", String(version || ""));
   } catch {}
-  const url = new URL(globalThis.location.href);
-  url.search = "";
-  url.hash = "";
-  url.searchParams.set("build", String(version || Date.now()));
-  url.searchParams.set("_update", String(Date.now()));
-  globalThis.location.href = url.toString();
+  // Navigate to the exact release entry document, not the currently cached
+  // document URL. The release token is unique and forces iOS to fetch the new
+  // index/runtime while localStorage remains on the same origin.
+  const targetVersion = String(version || BUILD_VERSION);
+  const entryUrl = new URL("./index.html", globalThis.location.href);
+  entryUrl.search = "";
+  entryUrl.hash = "";
+  entryUrl.searchParams.set("build", targetVersion);
+  entryUrl.searchParams.set("_update", String(Date.now()));
+  globalThis.location.replace(entryUrl.toString());
   return true;
 }
 
