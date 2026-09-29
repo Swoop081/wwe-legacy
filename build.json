@@ -1,11 +1,11 @@
 {
-  "version": "1.1.387",
+  "version": "1.1.388",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.387",
+  "physicalIphoneSmoke": "pending-v1.1.388",
   "launchStatus": "released",
-  "name": "Lightweight Card Catalogue renderer"
+  "name": "Correct Catalogue printing counts and thumbnail sizing"
 }
