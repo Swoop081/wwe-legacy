@@ -556,3 +556,9 @@
 .catalogue-screen .catalogue-preview-overlay>.catalogue-inspect-card>.ccg-card-inner{
   display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:100%!important;
 }
+
+
+/* v1.1.428 — Catalogue now reuses the physically proven Season inspector modal. */
+.catalogue-inspect-modal.season-card-inspect-v1155{z-index:2147483000!important}
+.catalogue-inspect-modal.season-card-inspect-v1155 .superstar-card-modal-inner{pointer-events:none!important}
+.catalogue-inspect-modal.season-card-inspect-v1155 .catalogue-inspect-card{pointer-events:auto!important}
