@@ -210,3 +210,64 @@
   grid-column:auto!important;
   grid-row:auto!important;
 }
+
+
+/* v1.1.439 — approved Premiere pack proportions + definitive 2/1/2 summary. */
+.physical-booster-pack.pack-set-premiere .pack-brand-lockup{
+  width:min(92%,390px)!important;
+  min-height:190px!important;
+  margin:0 auto!important;
+  position:absolute!important;
+  left:4%!important;
+  right:4%!important;
+  top:auto!important;
+  bottom:21%!important;
+}
+.physical-booster-pack.pack-set-premiere .pack-brand-lockup>.pack-set-logo{
+  width:100%!important;
+  height:190px!important;
+  max-height:190px!important;
+  object-fit:contain!important;
+}
+.physical-booster-pack.pack-set-premiere .pack-copy{
+  position:absolute!important;
+  left:8%!important;
+  right:8%!important;
+  top:auto!important;
+  bottom:7%!important;
+  transform:none!important;
+  margin:0!important;
+}
+.physical-booster-pack.pack-set-premiere .pack-copy strong,
+.physical-booster-pack.pack-set-premiere .pack-copy b{
+  margin:0!important;
+}
+
+/* No legacy absolute/fan positioning may survive on Pack Complete. */
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid{
+  display:grid!important;
+  grid-template-columns:126px 126px!important;
+  grid-template-rows:auto auto auto!important;
+  width:264px!important;
+  max-width:264px!important;
+  margin:8px auto 0!important;
+  gap:8px 12px!important;
+  place-content:start center!important;
+  place-items:start center!important;
+  position:relative!important;
+  overflow:visible!important;
+}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid>.pack-summary-card{
+  position:relative!important;
+  inset:auto!important;
+  translate:none!important;
+  transform:none!important;
+  width:126px!important;
+  max-width:126px!important;
+  margin:0!important;
+}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid>.summary-top-left{grid-column:1!important;grid-row:1!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid>.summary-top-right{grid-column:2!important;grid-row:1!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid>.summary-center{grid-column:1 / span 2!important;grid-row:2!important;justify-self:center!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid>.summary-bottom-left{grid-column:1!important;grid-row:3!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid>.summary-bottom-right{grid-column:2!important;grid-row:3!important}
