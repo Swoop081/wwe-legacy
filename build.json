@@ -1,11 +1,11 @@
 {
-  "version": "1.1.429",
+  "version": "1.1.430",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.429",
+  "physicalIphoneSmoke": "pending-v1.1.430",
   "launchStatus": "released",
-  "name": "Independent Catalogue inspector"
+  "name": "Catalogue Deck Lab inspector reuse"
 }
