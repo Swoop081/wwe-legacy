@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=1.1.132";
-import { superstars } from "./superstars.js?v=1.1.132";
-import { sets } from "./sets.js?v=1.1.132";
-import { isPlayerReleasedSetId } from "./release.js?v=1.1.132";
-import { MOVE_TYPE_LABELS } from "./move-types.js?v=1.1.132";
+import { decks } from "./decks.js?v=1.1.398";
+import { superstars } from "./superstars.js?v=1.1.398";
+import { sets } from "./sets.js?v=1.1.398";
+import { isPlayerReleasedSetId } from "./release.js?v=1.1.398";
+import { MOVE_TYPE_LABELS } from "./move-types.js?v=1.1.398";
 
 // Keep catalogue pages deliberately small: each identity renders five tier thumbnails on iPhone.
 export const CATALOGUE_PAGE_SIZE = 500;
@@ -11,7 +11,7 @@ export const CATALOGUE_REQUIREMENT_METHODS = ["strength", "strike", "technical",
 
 const starList = Object.values(superstars).filter(star => !star.developmentOnly && isPlayerReleasedSetId(star.setId));
 const starById = Object.fromEntries(starList.map(star => [star.id, star]));
-const setOrder = Object.keys(sets);
+const setOrder = ["premiere","money-in-the-bank", ...Object.keys(sets).filter(id => id !== "premiere" && id !== "money-in-the-bank")];
 const setRank = Object.fromEntries(setOrder.map((id, index) => [id, index]));
 
 const usageByCardId = new Map();
