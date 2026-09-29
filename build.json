@@ -1,11 +1,11 @@
 {
-  "version": "1.1.425",
+  "version": "1.1.426",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.425",
+  "physicalIphoneSmoke": "pending-v1.1.426",
   "launchStatus": "released",
-  "name": "Catalogue full card inspector"
+  "name": "Catalogue isolated card inspector"
 }
