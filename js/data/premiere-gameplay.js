@@ -306,6 +306,28 @@ function normalizePremiereMoveRequirements(card){
  if(total===0&&method){card.requirements={[method]:2};}
  return card;
 }
+const DECK_MOMENTUM_METHODS=Object.freeze({
+ "roman-reigns":["strike","strength"],"cody-rhodes":["technical","strength","agility"],"cm-punk":["strength","technical","agility"],
+ "seth-rollins":["agility","technical","strength"],"randy-orton":["technical","strength"],"sami-zayn":["technical","agility","strength"],
+ "stone-cold-steve-austin":["strength","strike"],"john-cena":["strike","strength","technical"],"rhea-ripley":["strike","strength","agility"],
+ "liv-morgan":["agility","strength","technical"],"becky-lynch":["strike","strength","agility"],"charlotte-flair":["technical","strength","agility"],
+ "tiffany-stratton":["agility","strike","technical"],"iyo-sky":["agility","strength","technical"],"alexa-bliss":["agility","technical","strength"],
+ "trish-stratus":["strength","agility","technical"],"la-knight":["strength","strike","agility"]
+});
+function alignExclusiveRequirementsToDeck(card){
+ const allowed=DECK_MOMENTUM_METHODS[card?.superstarId];
+ if(!allowed||card?.kind!=="move"||!card.requirements) return card;
+ const entries=Object.entries(card.requirements).filter(([,v])=>Number(v)>0);
+ if(entries.every(([k])=>allowed.includes(k))) return card;
+ const total=entries.reduce((n,[,v])=>n+Number(v||0),0);
+ const kept=entries.filter(([k])=>allowed.includes(k));
+ const out=Object.fromEntries(kept);
+ let used=Object.values(out).reduce((a,b)=>a+b,0);
+ for(let i=0;used<total;i++,used++){const k=allowed[i%allowed.length];out[k]=(out[k]||0)+1;}
+ card.requirements=out;
+ if(!allowed.includes(card.method)) card.method=allowed.find(k=>out[k])||allowed[0];
+ return card;
+}
 export function buildPremiereGameplayCards(cards=[]){
  const source=[...cards], byName=new Map();
  for(const card of source){const k=norm(card.name); if(!byName.has(k))byName.set(k,[]);byName.get(k).push(card);}
@@ -348,7 +370,7 @@ export function buildPremiereGameplayCards(cards=[]){
  "PREM78":{id:"PREM78",name:"BACKSTABBER",kind:"move",setId:"premiere",cost:6,damage:9,requirements:{agility:1,technical:1},moveType:"grapple",method:"agility",superstarId:"liv-morgan",rarity:3,rulesText:"Liv Morgan-exclusive Trademark. Grounds opponent. May Counter a Diving Aerial Move. When used as a successful Counter, +3 Damage.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,trademark:true,counters:["aerial"],counterBonusDamage:3,effects:[],counterState:"rear-control",counterStates:["diving-aerial"],cardCode:"PREM78",source:"premiere"},
  "PREM79":{id:"PREM79",name:"THE MAN SLAM",kind:"move",setId:"premiere",cost:7,damage:12,requirements:{strength:2},moveType:"grapple",method:"strength",superstarId:"becky-lynch",rarity:3,rulesText:"Becky Lynch-exclusive Trademark. Grounds opponent.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,trademark:true,effects:[],counterState:"body-elevated",cardCode:"PREM79",source:"premiere"},
  "PREM80":{id:"PREM80",name:"BEXPLODER",kind:"move",setId:"premiere",cost:6,damage:10,requirements:{strength:2},moveType:"grapple",method:"strength",superstarId:"becky-lynch",rarity:3,rulesText:"Becky Lynch-exclusive Trademark. Grounds opponent. On Connect: draw 1 page.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,trademark:true,effects:[{type:"drawSelf",amount:1}],counterState:"torso-trapped",cardCode:"PREM80",source:"premiere"},
- "PREM85":{id:"PREM85",name:"ROLLING FIREMAN'S CARRY SLAM",kind:"move",setId:"premiere",cost:6,damage:9,requirements:{strength:2},moveType:"grapple",method:"strength",superstarId:"tiffany-stratton",rarity:3,rulesText:"Tiffany Stratton-exclusive Trademark. Grounds opponent. On Connect: your next Aerial Move costs 2 less this Control sequence.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,trademark:true,effects:[{type:"discountNextMoveType",moveType:"aerial",amount:2}],counterState:"body-elevated",cardCode:"PREM85",source:"premiere"},
+ "PREM85":{id:"PREM85",name:"ROLLING FIREMAN'S CARRY SLAM",kind:"move",setId:"premiere",cost:6,damage:9,requirements:{strike:1,agility:1},moveType:"grapple",method:"agility",superstarId:"tiffany-stratton",rarity:3,rulesText:"Tiffany Stratton-exclusive Trademark. Grounds opponent. On Connect: your next Aerial Move costs 2 less this Control sequence.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,trademark:true,effects:[{type:"discountNextMoveType",moveType:"aerial",amount:2}],counterState:"body-elevated",cardCode:"PREM85",source:"premiere"},
  "PREM87":{id:"PREM87",name:"CARTWHEEL ALABAMA SLAM",kind:"move",setId:"premiere",cost:6,damage:9,requirements:{agility:1,technical:1},moveType:"grapple",method:"agility",superstarId:"tiffany-stratton",rarity:3,rulesText:"Tiffany Stratton-exclusive Trademark. Grounds opponent. On Connect: gain +1 Adrenaline.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,trademark:true,effects:[{type:"gainAdrenaline",amount:1}],counterState:"body-elevated",cardCode:"PREM87",source:"premiere"},
  "PREM89":{id:"PREM89",name:"METEORA",kind:"move",setId:"premiere",cost:5,damage:9,requirements:{strike:1,agility:1},moveType:"aerial",method:"agility",superstarId:"iyo-sky",rarity:3,rulesText:"IYO SKY-exclusive Trademark. Grounds opponent. On Connect: gain +1 Adrenaline.",groundOpponent:true,groundedOnly:false,stun:0,selfDamage:0,trademark:true,effects:[{type:"gainAdrenaline",amount:1}],counterState:"running-aerial",cardCode:"PREM89",source:"premiere"},
  "PREM91":{id:"PREM91",name:"TWISTED BLISS",kind:"move",setId:"premiere",cost:7,damage:12,requirements:{agility:2},moveType:"aerial",method:"agility",superstarId:"alexa-bliss",rarity:3,rulesText:"Alexa Bliss-exclusive Trademark. Grounded opponent only. If played immediately after Sister Abigail in the same Control sequence, +2 Damage.",groundOpponent:false,groundedOnly:true,stun:0,selfDamage:0,trademark:true,effects:[],bonusDamageAfterNamed:{name:"SISTER ABIGAIL",damage:2},counterState:"diving-aerial",cardCode:"PREM91",source:"premiere"},
@@ -366,5 +388,5 @@ export function buildPremiereGameplayCards(cards=[]){
   {id:"PREM273",name:"TECHNICAL MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM273",source:"premiere",momentumType:"technical",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Technical Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"technical",amount:1}],boosterEligible:false},
   {id:"PREM274",name:"AGILITY MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM274",source:"premiere",momentumType:"agility",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Agility Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"agility",amount:1}],boosterEligible:false}
  );
- return out.map(card=>normalizePremiereMoveRequirements(card));
+ return out.map(card=>alignExclusiveRequirementsToDeck(normalizePremiereMoveRequirements(card)));
 }
