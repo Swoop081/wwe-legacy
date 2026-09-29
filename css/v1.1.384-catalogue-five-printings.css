@@ -119,3 +119,10 @@
 .catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image{filter:grayscale(.72) brightness(.68) contrast(.92)!important}
 .catalogue-screen .catalogue-card-tile.is-unowned .catalogue-owned-overlay{filter:none!important}
 @media(max-width:390px){.catalogue-screen .catalogue-print-grid{gap:3px!important}}
+
+/* v1.1.399 — tappable 60% catalogue inspection */
+.catalogue-screen button.catalogue-card-tile{appearance:none!important;border:0!important;background:none!important;padding:0!important;font:inherit!important;text-align:inherit!important;cursor:pointer!important}
+.catalogue-inspect-backdrop{position:fixed!important;z-index:9999!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:16px!important;background:rgba(0,0,0,.82)!important;backdrop-filter:blur(4px)!important}
+.catalogue-inspect-card{appearance:none!important;border:0!important;background:none!important;padding:0!important;width:min(60vw,330px)!important;max-height:82vh!important;cursor:pointer!important}
+.catalogue-inspect-card>.collectible-card,.catalogue-inspect-card>.card-shell,.catalogue-inspect-card>*{max-width:100%!important;margin-left:auto!important;margin-right:auto!important}
+@media(max-width:430px){.catalogue-inspect-card{width:60vw!important}}
