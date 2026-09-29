@@ -24,7 +24,7 @@ const starCards = orderedStars.map(s => ({
 
 const premiereStarterSuperstars = [
   ["PREM01","Roman Reigns","roman-reigns"],["PREM02","Cody Rhodes","cody-rhodes"],["PREM03","CM Punk","cm-punk"],["PREM04","Seth Rollins","seth-rollins"],
-  ["PREM05","Randy Orton","randy-orton"],["PREM06","Sami Zayn","sami-zayn"],["PREM07","Stone Cold Steve Austin","stone-cold-steve-austin"],["PREM08","John Cena","john-cena"],
+  ["PREM05","Randy Orton","randy-orton"],["PREM06","Sami Zayn","sami-zayn"],["PREM07","Stone Cold","stone-cold-steve-austin"],["PREM08","John Cena","john-cena"],
   ["PREM09","Rhea Ripley","rhea-ripley"],["PREM10","Liv Morgan","liv-morgan"],["PREM11","Becky Lynch","becky-lynch"],["PREM12","Charlotte Flair","charlotte-flair"],
   ["PREM13","Tiffany Stratton","tiffany-stratton"],["PREM14","IYO SKY","iyo-sky"],["PREM15","Alexa Bliss","alexa-bliss"],["PREM16","Trish Stratus","trish-stratus"]
 ].map(([id,name,superstarId],index)=>({id,name,kind:"superstar",superstarId,setId:"premiere",rarity:1,cardNumber:index+1,cardCode:id}));
