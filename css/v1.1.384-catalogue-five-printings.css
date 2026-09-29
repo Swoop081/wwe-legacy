@@ -462,3 +462,30 @@
 .catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat em{
   margin-top:0!important;
 }
+
+
+/* v1.1.424 — compact Move plaque typography.
+   Use the full plaque height while preserving a readable name/stat separation. */
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-name{
+  top:8%!important;
+  height:30%!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:clamp(3.2px,.9vw,5.8px)!important;
+  line-height:.95!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat{
+  top:43%!important;
+  height:50%!important;
+  gap:3%!important;
+  align-content:space-between!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat b,
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat em{
+  font-size:clamp(3.2px,.9vw,5.8px)!important;
+  line-height:.92!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat em{
+  margin-top:1px!important;
+}
