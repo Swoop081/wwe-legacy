@@ -1,11 +1,11 @@
 {
-  "version": "1.1.424",
+  "version": "1.1.425",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.424",
+  "physicalIphoneSmoke": "pending-v1.1.425",
   "launchStatus": "released",
-  "name": "Compact readable Move plaques"
+  "name": "Catalogue full card inspector"
 }
