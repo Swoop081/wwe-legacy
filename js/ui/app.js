@@ -54,7 +54,12 @@ function superstarNameplateMarkup(card) {
 
 const HUMAN = "p1";
 const CPU = "p2";
-const printingTiersFor = card => card?.fixedPrintingTier ? [normalizeCardTier(card.fixedPrintingTier)] : CARD_TIERS;
+const printingTiersFor = card => {
+  const id=String(card?.id??"");
+  if (id==="MITB01" || id==="MITB08") return ["amethyst"];
+  if (/^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(id)) return CARD_TIERS;
+  return card?.fixedPrintingTier ? [normalizeCardTier(card.fixedPrintingTier)] : CARD_TIERS;
+};
 const ownedTierCountsFor = card => Object.fromEntries(CARD_TIERS.map(tier => [tier, ownedCount(profile, card?.id, tier)]));
 const totalTierOwnedFor = card => CARD_TIERS.reduce((sum,tier)=>sum + ownedCount(profile, card?.id, tier), 0);
 const bestOwnedTierFor = card => highestOwnedTier(ownedTierCountsFor(card), printingTiersFor(card)) ?? normalizeCardTier(card?.fixedPrintingTier ?? "normal");
@@ -3433,7 +3438,7 @@ function renderCardCatalogue() {
         ? `<div class="catalogue-singles-grid">${cards.map(card=>`<article class="catalogue-single-item">${tile(card,printingTiersFor(card)[0])}<small>${card.cardCode}</small></article>`).join("")}</div>`
         : `<div class="catalogue-multiprint-list">${cards.map(card=>`<article class="catalogue-multiprint-row"><div class="catalogue-print-grid">${printingTiersFor(card).map(tier=>tile(card,tier)).join("")}</div></article>`).join("")}</div>`;
       return `<section class="catalogue-type-section catalogue-type-${sectionKey}"><div class="catalogue-type-heading"><strong>${label}</strong><small>${cards.reduce((n,c)=>n+printingTiersFor(c).length,0)} PRINTINGS</small></div>${body}</section>`;
-    }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>\n    ${catalogueInspect ? `<div class="catalogue-inspect-backdrop" data-catalogue-close>${collectibleCardMarkup(catalogueInspect.card,{flipped:catalogueInspect.flipped,tier:catalogueInspect.tier,extraClass:"catalogue-inspect-card",flipAttr:'data-catalogue-flip="1"'})}</div>` : ""}\n    ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
+    }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>\n    ${catalogueInspect ? `<div class="catalogue-inspect-backdrop" data-catalogue-close><div class="catalogue-inspect-stage">${collectibleCardMarkup(catalogueInspect.card,{flipped:catalogueInspect.flipped,tier:catalogueInspect.tier,extraClass:"catalogue-inspect-card",flipAttr:'data-catalogue-flip="1"'})}</div></div>` : ""}\n    ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
   </section>`;
 
   $("#catalogue-filter-drawer")?.addEventListener("toggle", e => { catalogueFiltersOpen = e.currentTarget.open; });
