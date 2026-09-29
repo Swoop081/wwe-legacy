@@ -1,11 +1,11 @@
 {
-  "version": "1.1.426",
+  "version": "1.1.427",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.426",
+  "physicalIphoneSmoke": "pending-v1.1.427",
   "launchStatus": "released",
-  "name": "Catalogue isolated card inspector"
+  "name": "Catalogue inspector button selector fix"
 }
