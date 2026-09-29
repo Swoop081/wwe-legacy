@@ -1,11 +1,11 @@
 {
-  "version": "1.1.398",
+  "version": "1.1.399",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.398",
+  "physicalIphoneSmoke": "pending-v1.1.399",
   "launchStatus": "released",
-  "name": "Catalogue collector order and complete card faces"
+  "name": "Ordered interactive Card Catalogue"
 }
