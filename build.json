@@ -1,11 +1,11 @@
 {
-  "version": "1.1.422",
+  "version": "1.1.423",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.422",
+  "physicalIphoneSmoke": "pending-v1.1.423",
   "launchStatus": "released",
-  "name": "Raise Move plaque content"
+  "name": "Move plaque typography spacing"
 }
