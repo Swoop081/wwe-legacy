@@ -1,11 +1,11 @@
 {
-  "version": "1.1.437",
+  "version": "1.1.438",
   "releasedAt": "2026-09-30",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.437",
+  "physicalIphoneSmoke": "pending-v1.1.438",
   "launchStatus": "released",
-  "name": "Premiere reward pack branding and 2-1-2 summary"
+  "name": "Independent iPhone boot-shell update recovery"
 }
