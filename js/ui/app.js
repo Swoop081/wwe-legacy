@@ -56,7 +56,7 @@ const HUMAN = "p1";
 const CPU = "p2";
 const printingTiersFor = card => {
   const id=String(card?.id??"");
-  if (id==="MITB01" || id==="MITB08") return ["amethyst"];
+  if (/^MITB0[1-8]$/.test(id)) return ["amethyst"];
   if (/^PREM(?:0[1-9]|[1-9][0-9]|1[0-9]{2}|2[0-6][0-9]|270)$/.test(id)) return CARD_TIERS;
   return card?.fixedPrintingTier ? [normalizeCardTier(card.fixedPrintingTier)] : CARD_TIERS;
 };
@@ -3425,7 +3425,7 @@ function renderCardCatalogue() {
       if (!cards.length) return "";
       const singlePrinting = sectionKey==="superstar" || sectionKey==="entrance";
       const tile = (card,tier) => {
-        const count=ownedCount(profile,card.id,tier);
+        const count=card.kind==="superstar" ? Math.max(ownedCount(profile,card.id,tier), profile?.ownedSuperstars?.includes?.(card.superstarId)?1:0, profile?.starterId===card.superstarId?1:0) : ownedCount(profile,card.id,tier);
         const art=finishedCardArtFor(card) || legacyFinishedCardArtFor(card) || layeredCardArtFor(card) || "";
         const applied=applyCardTier(card,tier);
         const superstarBg=card.kind==="superstar" && card.setId==="premiere" ? assetUrl("assets/images/premiere-background.jpg") : "";
