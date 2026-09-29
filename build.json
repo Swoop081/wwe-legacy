@@ -1,11 +1,11 @@
 {
-  "version": "1.1.431",
+  "version": "1.1.432",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.431",
+  "physicalIphoneSmoke": "pending-v1.1.432",
   "launchStatus": "released",
-  "name": "Catalogue inspector CSS isolation"
+  "name": "Catalogue inspector outside-tap close"
 }
