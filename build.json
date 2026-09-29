@@ -1,11 +1,11 @@
 {
-  "version": "1.1.406",
+  "version": "1.1.407",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.406",
+  "physicalIphoneSmoke": "pending-v1.1.407",
   "launchStatus": "released",
-  "name": "Catalogue presentation and printing correction"
+  "name": "Catalogue ownership chase and inspector fixes"
 }
