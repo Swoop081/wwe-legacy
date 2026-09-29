@@ -306,28 +306,6 @@ function normalizePremiereMoveRequirements(card){
  if(total===0&&method){card.requirements={[method]:2};}
  return card;
 }
-const DECK_MOMENTUM_METHODS=Object.freeze({
- "roman-reigns":["strike","strength"],"cody-rhodes":["technical","strength","agility"],"cm-punk":["strength","technical","agility"],
- "seth-rollins":["agility","technical","strength"],"randy-orton":["technical","strength"],"sami-zayn":["technical","agility","strength"],
- "stone-cold-steve-austin":["strength","strike"],"john-cena":["strike","strength","technical"],"rhea-ripley":["strike","strength","agility"],
- "liv-morgan":["agility","strength","technical"],"becky-lynch":["strike","strength","agility"],"charlotte-flair":["technical","strength","agility"],
- "tiffany-stratton":["agility","strike","technical"],"iyo-sky":["agility","strength","technical"],"alexa-bliss":["agility","technical","strength"],
- "trish-stratus":["strength","agility","technical"],"la-knight":["strength","strike","agility"]
-});
-function alignExclusiveRequirementsToDeck(card){
- const allowed=DECK_MOMENTUM_METHODS[card?.superstarId];
- if(!allowed||card?.kind!=="move"||!card.requirements) return card;
- const entries=Object.entries(card.requirements).filter(([,v])=>Number(v)>0);
- if(entries.every(([k])=>allowed.includes(k))) return card;
- const total=entries.reduce((n,[,v])=>n+Number(v||0),0);
- const kept=entries.filter(([k])=>allowed.includes(k));
- const out=Object.fromEntries(kept);
- let used=Object.values(out).reduce((a,b)=>a+b,0);
- for(let i=0;used<total;i++,used++){const k=allowed[i%allowed.length];out[k]=(out[k]||0)+1;}
- card.requirements=out;
- if(!allowed.includes(card.method)) card.method=allowed.find(k=>out[k])||allowed[0];
- return card;
-}
 export function buildPremiereGameplayCards(cards=[]){
  const source=[...cards], byName=new Map();
  for(const card of source){const k=norm(card.name); if(!byName.has(k))byName.set(k,[]);byName.get(k).push(card);}
@@ -388,5 +366,5 @@ export function buildPremiereGameplayCards(cards=[]){
   {id:"PREM273",name:"TECHNICAL MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM273",source:"premiere",momentumType:"technical",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Technical Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"technical",amount:1}],boosterEligible:false},
   {id:"PREM274",name:"AGILITY MOMENTUM",kind:"momentum",type:"momentum",setId:"premiere",cardCode:"PREM274",source:"premiere",momentumType:"agility",rarity:1,cost:0,damage:0,requirements:{},rulesText:"Gain 1 Agility Momentum.",effects:[{type:"gainAttributeMomentum",attribute:"agility",amount:1}],boosterEligible:false}
  );
- return out.map(card=>alignExclusiveRequirementsToDeck(normalizePremiereMoveRequirements(card)));
+ return out.map(card=>normalizePremiereMoveRequirements(card));
 }
