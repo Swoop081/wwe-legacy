@@ -1,11 +1,11 @@
 {
-  "version": "1.1.404",
+  "version": "1.1.406",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "rollback-manifest-to-stop-loop",
+  "physicalIphoneSmoke": "pending-v1.1.406",
   "launchStatus": "released",
-  "name": "Emergency updater loop brake"
+  "name": "Catalogue presentation and printing correction"
 }
