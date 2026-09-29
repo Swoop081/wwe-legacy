@@ -1,11 +1,11 @@
 {
-  "version": "1.1.409",
+  "version": "1.1.410",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.409",
+  "physicalIphoneSmoke": "pending-v1.1.410",
   "launchStatus": "released",
-  "name": "Isolated Catalogue preview and plaque calibration"
+  "name": "Updater root resolution and Catalogue fixes"
 }
