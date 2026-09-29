@@ -225,3 +225,18 @@
 .catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:2.05%!important}
 .catalogue-inspect-stage{width:min(60vw,330px)!important;aspect-ratio:680/1000!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important}
 .catalogue-inspect-stage>.ccg-card.catalogue-inspect-card{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;margin:0!important;display:block!important;position:relative!important}
+
+
+/* Catalogue authored plaque alignment: center labels inside the visible lower boxes. */
+.catalogue-screen .catalogue-card-image::before{
+  left:8%!important;right:8%!important;bottom:7.9%!important;
+  height:4.2%!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  font-size:clamp(3px,1.02vw,6.4px)!important;line-height:.92!important;white-space:nowrap!important
+}
+.catalogue-screen .catalogue-card-image::after{
+  left:8%!important;right:8%!important;bottom:3.2%!important;
+  height:3.1%!important;display:flex!important;align-items:center!important;justify-content:center!important;
+  font-size:clamp(2.5px,.72vw,4.6px)!important;line-height:.9!important;white-space:nowrap!important
+}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::before{bottom:8.1%!important}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:3.25%!important}
