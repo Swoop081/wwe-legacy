@@ -20,3 +20,8 @@
 .catalogue-tier-thumb.is-unowned .catalogue-thumb-card{filter:grayscale(1) brightness(.38)}
 .catalogue-tier-thumb.is-owned .catalogue-thumb-card{filter:none}
 @media(max-width:430px){.master-catalogue-sections{padding-left:10px;padding-right:10px}.catalogue-identity-row{padding:9px}.catalogue-five-printings{gap:4px!important}.catalogue-type-heading strong{font-size:21px}}
+
+/* v1.1.387 — catalogue thumbnails are lightweight images, never full live card components */
+.catalogue-thumb-card{position:relative;contain:layout paint;}
+.catalogue-thumb-card>img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;}
+.catalogue-thumb-placeholder{display:flex;width:100%;height:100%;align-items:center;justify-content:center;padding:3px;font-size:6px;line-height:1.1;text-align:center;color:#8f99a9;background:#0b0e14;}
