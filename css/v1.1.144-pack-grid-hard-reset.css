@@ -161,3 +161,52 @@
   .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{column-gap:10px!important;row-gap:6px!important}
   .streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary{width:min(30vw,118px)!important;max-width:118px!important}
 }
+
+/* v1.1.437 — reward pack branding + locked 2/1/2 summary.
+   Premiere reward/opening packs use the same set logo as every other Premiere pack. */
+.physical-booster-pack.pack-set-premiere .pack-brand-lockup{
+  display:grid!important;
+  place-items:center!important;
+  width:min(68%,270px)!important;
+  min-height:112px!important;
+  margin:0 auto 14px!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.physical-booster-pack.pack-set-premiere .pack-brand-lockup>.pack-set-logo{
+  display:block!important;
+  width:100%!important;
+  height:112px!important;
+  max-height:112px!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+/* Hard-lock the five-card result to 2 / rarest featured centre / 2.
+   app.js assigns summary-center to the rarest pull before rendering. */
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-rows:auto auto auto!important;
+  grid-template-areas:"tl tr" "cc cc" "bl br"!important;
+  justify-items:center!important;
+  align-items:start!important;
+  justify-content:center!important;
+  column-gap:12px!important;
+  row-gap:7px!important;
+  width:100%!important;
+  max-width:390px!important;
+  margin:4px auto 0!important;
+}
+.streamlined-pack-summary .pack-summary-grid>.summary-top-left{grid-area:tl!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-top-right{grid-area:tr!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-center{grid-area:cc!important;justify-self:center!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-bottom-left{grid-area:bl!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-bottom-right{grid-area:br!important}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary{
+  width:min(31vw,126px)!important;
+  max-width:126px!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+}
