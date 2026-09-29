@@ -62,3 +62,11 @@
 .catalogue-five-row .catalogue-tier-thumb>b{display:none!important}
 .catalogue-five-row .catalogue-tier-thumb>small,.catalogue-single-card .catalogue-tier-thumb>small{font-size:6px!important}
 @media(max-width:390px){.catalogue-single-printing-grid{gap:4px!important}.catalogue-five-row{grid-template-columns:minmax(78px,.7fr) minmax(0,2.8fr)!important;gap:6px!important;padding:7px!important}.catalogue-five-meta>b{font-size:10px}}
+
+/* v1.1.391 — ownership count lives on the card thumbnail */
+.catalogue-thumb-card{position:relative!important}
+.catalogue-owned-overlay{position:absolute!important;z-index:5!important;top:3px!important;left:3px!important;display:flex!important;align-items:center!important;justify-content:center!important;min-width:18px!important;height:18px!important;padding:0 4px!important;border:1px solid rgba(255,255,255,.55)!important;border-radius:6px!important;background:rgba(5,8,13,.88)!important;box-shadow:0 2px 5px rgba(0,0,0,.6)!important;color:#fff!important;font-size:9px!important;font-weight:950!important;line-height:1!important}
+.catalogue-tier-thumb.is-unowned .catalogue-thumb-card{filter:grayscale(1) brightness(.34)!important}
+.catalogue-tier-thumb.is-unowned .catalogue-owned-overlay{filter:none!important;color:#b8bec8!important;background:rgba(8,10,14,.92)!important}
+.catalogue-tier-thumb>small{display:none!important}
+@media(max-width:390px){.catalogue-owned-overlay{top:2px!important;left:2px!important;min-width:16px!important;height:16px!important;padding:0 3px!important;font-size:8px!important}}
