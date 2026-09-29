@@ -182,3 +182,30 @@
 .catalogue-screen .catalogue-card-image::after{bottom:2.6%!important}
 .catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::before{bottom:8.2%!important}
 .catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:3.1%!important}
+
+
+/* v1.1.405 — restore lightweight thumbnail labels.
+   .catalogue-card-image is a div, but the base catalogue rule suppressed
+   ::before/::after on every div. Override that suppression explicitly. */
+.catalogue-screen .catalogue-card-image::before{
+  content:attr(data-thumb-title)!important;
+  display:block!important;
+  position:absolute!important;z-index:4!important;left:7%!important;right:7%!important;top:auto!important;bottom:7.2%!important;
+  width:auto!important;height:auto!important;border:0!important;border-radius:0!important;background:transparent!important;
+  color:#fff!important;font-size:clamp(4px,1.45vw,9px)!important;font-weight:950!important;line-height:.96!important;
+  letter-spacing:-.025em!important;text-align:center!important;text-transform:uppercase!important;white-space:nowrap!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;text-shadow:0 1px 2px #000,0 0 3px #000!important;
+  opacity:1!important;transform:none!important;pointer-events:none!important
+}
+.catalogue-screen .catalogue-card-image::after{
+  content:attr(data-thumb-detail)!important;
+  display:block!important;
+  position:absolute!important;z-index:4!important;left:7%!important;right:7%!important;top:auto!important;bottom:2.6%!important;
+  width:auto!important;height:auto!important;border:0!important;border-radius:0!important;background:transparent!important;
+  color:#fff!important;font-size:clamp(3px,.92vw,6px)!important;font-weight:900!important;line-height:1!important;
+  letter-spacing:.04em!important;text-align:center!important;text-transform:uppercase!important;white-space:nowrap!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;text-shadow:0 1px 2px #000!important;
+  opacity:1!important;transform:none!important;pointer-events:none!important
+}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::before{bottom:8.2%!important}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:3.1%!important}
