@@ -126,3 +126,12 @@
 .catalogue-inspect-card{appearance:none!important;border:0!important;background:none!important;padding:0!important;width:min(60vw,330px)!important;max-height:82vh!important;cursor:pointer!important}
 .catalogue-inspect-card>.collectible-card,.catalogue-inspect-card>.card-shell,.catalogue-inspect-card>*{max-width:100%!important;margin-left:auto!important;margin-right:auto!important}
 @media(max-width:430px){.catalogue-inspect-card{width:60vw!important}}
+
+/* v1.1.400 — catalogue thumbnails contain the real complete card component */
+.catalogue-screen .catalogue-card-image>.ccg-card{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;transform:none!important;border-radius:4px!important;pointer-events:none!important}
+.catalogue-screen .catalogue-card-image>.ccg-card .ccg-card-inner{width:100%!important;height:100%!important}
+.catalogue-screen .catalogue-card-image>.ccg-card .ccg-card-face{width:100%!important;height:100%!important}
+.catalogue-screen .catalogue-card-image>.ccg-card .ccg-premiere-card-background{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.catalogue-screen .catalogue-card-image>.ccg-card .ccg-live-front-data,.catalogue-screen .catalogue-card-image>.ccg-card .ccg-superstar-nameplate,.catalogue-screen .catalogue-card-image>.ccg-card .ccg-layered-card-studio-ink{display:flex!important}
+.catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image>.ccg-card{filter:grayscale(.72) brightness(.68) contrast(.92)!important;opacity:.88!important}
+.catalogue-screen .catalogue-card-tile.is-unowned .catalogue-owned-overlay{filter:none!important;opacity:1!important}
