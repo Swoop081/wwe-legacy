@@ -3477,7 +3477,7 @@ function renderCardCatalogue() {
     catalogueInspect={...catalogueInspect,flipped:!catalogueInspect.flipped};
     renderCardCatalogue();
   }));
-  root.querySelectorAll("[data-close-catalogue-modal]").forEach(btn=>btn.addEventListener("click",event=>{ event.preventDefault(); event.stopPropagation(); closeCatalogueInspect(); }));
+  document.querySelectorAll("[data-close-catalogue-modal]").forEach(btn=>btn.addEventListener("click",event=>{ event.preventDefault(); event.stopPropagation(); catalogueInspect=null; document.querySelector("[data-catalogue-modal-backdrop]")?.remove(); }));
   root.querySelectorAll("[data-catalogue-modal-backdrop]").forEach(backdrop=>{
     backdrop.addEventListener("click",event=>{
       // The modal's inner wrapper occupies the backdrop on iPhone, so checking
@@ -3490,6 +3490,13 @@ function renderCardCatalogue() {
     // .catalogue-screen. Deck Lab's proven inspector must live outside that
     // subtree or those overrides suppress/distort the full CCG card.
     document.body.appendChild(backdrop);
+    // The modal has just left #game, so bind controls after the move.
+    // Querying #game here cannot find them anymore.
+    backdrop.querySelector("[data-close-catalogue-modal]")?.addEventListener("click",event=>{
+      event.preventDefault(); event.stopPropagation();
+      catalogueInspect=null;
+      backdrop.remove();
+    });
   });
 }
 
