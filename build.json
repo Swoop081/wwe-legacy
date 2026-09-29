@@ -1,11 +1,11 @@
 {
-  "version": "1.1.385",
+  "version": "1.1.386",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.385",
+  "physicalIphoneSmoke": "pending-v1.1.386",
   "launchStatus": "released",
-  "name": "Catalogue five-tier layout correction"
+  "name": "Catalogue iPhone crash hotfix"
 }
