@@ -1,11 +1,11 @@
 {
-  "version": "1.1.416",
+  "version": "1.1.417",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.416",
+  "physicalIphoneSmoke": "pending-v1.1.417",
   "launchStatus": "released",
-  "name": "Catalogue authored plaque text overlay"
+  "name": "Updater recovery plus Catalogue text overlay"
 }
