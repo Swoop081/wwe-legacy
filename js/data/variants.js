@@ -199,8 +199,15 @@ export function applyCardTier(card, tier = DEFAULT_AUTHORED_TIER) {
     out.tierCostOffset=costOffset;
     const printingKey = resolvedTier === 'normal' ? 'base' : resolvedTier;
     const printingSpec = card.printingStats?.[printingKey] ?? null;
-    out.damage=Number.isFinite(Number(printingSpec?.damage)) ? Math.max(0,Number(printingSpec.damage)) : Math.max(0,authoredDamage+damageOffset);
-    out.cost=Number.isFinite(Number(printingSpec?.cost)) ? Math.max(card.defensiveOnly?0:1,Number(printingSpec.cost)) : Math.max(card.defensiveOnly?0:1,authoredCost+costOffset);
+    // Every Move printing must expose a visibly distinct stat line in the Catalogue.
+    // Sapphire remains the authored midpoint: Base -2 DMG/+2 COST, Emerald -1/+1,
+    // Sapphire authored, Ruby +1/-1, Amethyst +2/-2. Explicit authored
+    // printingStats still win when present.
+    const catalogueRankDelta=tierRank(resolvedTier)-tierRank('sapphire');
+    const steppedDamage=authoredDamage+catalogueRankDelta;
+    const steppedCost=authoredCost-catalogueRankDelta;
+    out.damage=Number.isFinite(Number(printingSpec?.damage)) ? Math.max(0,Number(printingSpec.damage)) : Math.max(0,steppedDamage);
+    out.cost=Number.isFinite(Number(printingSpec?.cost)) ? Math.max(card.defensiveOnly?0:1,Number(printingSpec.cost)) : Math.max(card.defensiveOnly?0:1,steppedCost);
     out.tierDamageOffset=out.damage-authoredDamage;
     out.tierCostOffset=out.cost-authoredCost;
     out.effects=scaleEffectArray(card.effects,moveEffectDelta);
