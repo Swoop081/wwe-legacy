@@ -426,3 +426,17 @@
   line-height:1!important;letter-spacing:.06em!important;text-align:center!important;
   white-space:nowrap!important;
 }
+
+
+/* v1.1.422 — Move plaque geometry only.
+   Superstar/Entrance/other label plaques are intentionally untouched. */
+.catalogue-screen .catalogue-move-plaque{
+  bottom:8.8%!important;
+  height:14.2%!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-name{
+  top:8%!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat{
+  top:43%!important;
+}
