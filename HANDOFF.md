@@ -2,19 +2,117 @@
 
 Updated: 2026-09-29  
 Branch: `main`  
-Current release: **v1.1.402**
+Current release: **v1.1.434**  
+Physical iPhone status: **Catalogue inspector confirmed working by user on v1.1.434**
 
 ## Immediate status
 
-The active work is the **Card Catalogue redesign**. The game itself loads, but the Catalogue has repeatedly crashed iPhone Safari when too many complex card-renderer DOM trees/layers are created at once.
+The Card Catalogue inspector issue is finally resolved. **Do not rewrite or refactor this working implementation.**
 
-**v1.1.402 is a crash hotfix.** It restores the lightweight Catalogue thumbnail path that was stable around v1.1.399 while preserving the corrected ordering and tap-to-inspect work. The user has not yet confirmed whether v1.1.402 opens Catalogue successfully.
+The user physically confirmed on iPhone that v1.1.434:
+- Catalogue loads.
+- Catalogue thumbnails are tappable.
+- Tapping a thumbnail opens the full rendered card.
+- Tapping the full card flips front/back.
+- The explicit **× close button works** and exits the inspector.
 
-Do not reintroduce the full `collectibleCardMarkup()` renderer into every Catalogue thumbnail. v1.1.400 did this and tapping Catalogue caused Safari's “A problem repeatedly occurred” page. v1.1.401 attempted lighter layered overlays but Catalogue still crashed.
+This took 9+ hours and many failed approaches. Preserve the working implementation exactly unless the user explicitly asks for a later UI pass.
 
-## Catalogue design approved by user
+## Why the final Catalogue inspector works
 
-The Catalogue should be a compact mobile collector view.
+Relevant file: `js/ui/app.js`.
+
+The working inspector uses the existing full `collectibleCardMarkup()` renderer for ONE inspected card. It is initially rendered inside Catalogue, then the modal backdrop is moved out of `#game/.catalogue-screen` and appended directly to `document.body`.
+
+This isolation is essential because the Catalogue stylesheet contains many historical thumbnail-specific overrides scoped under `.catalogue-screen`. Earlier inspector attempts opened the dark backdrop but made the full card invisible while it remained inside that CSS scope.
+
+Critical implementation details:
+- Modal classes: `superstar-card-modal deck-lab-card-modal catalogue-working-inspect`.
+- Card uses `hud-superstar-modal-card deck-lab-inspect-card`.
+- Flip attribute: `data-flip-catalogue-modal="1"`.
+- Backdrop: `data-catalogue-modal-backdrop="1"`.
+- Explicit close button: `data-close-catalogue-modal="1"`.
+- After `document.body.appendChild(backdrop)`, the close handler MUST be bound against the moved backdrop/body DOM, not only against `#game`.
+- The v1.1.433 close button was visible but did nothing because the binding queried `#game` after the modal had been moved out of it.
+- v1.1.434 fixes this by binding the close control after the body mount and directly removing the backdrop/clearing `catalogueInspect`.
+
+Do not move the inspector back under `.catalogue-screen`. Do not replace it with the failed native-clone implementation from v1.1.429.
+
+## Catalogue architecture — keep lightweight
+
+Never render hundreds of full `collectibleCardMarkup()` components in Catalogue. That previously crashed iPhone Safari.
+
+The stable architecture is:
+- Lightweight/static thumbnail composition for the catalogue grid.
+- Full canonical card renderer for only the ONE card currently being inspected.
+
+Current Catalogue ordering is approved:
+- Release-set order first.
+- Numeric card ID within each set.
+- Premiere first, then Money in the Bank.
+- PREM01 Roman is first.
+- Do not alphabetize.
+
+Current thumbnail plaque/layout is accepted **for now**. User explicitly said it can be revisited in the next UI pass. Do not alter it unless requested.
+
+Outstanding future visual item: printing border colours/thumbnail polish may need another UI pass, but it is not part of the now-working inspector.
+
+## Catalogue inspector failure history — do not repeat
+
+Failed approaches:
+- v1.1.425–427: repeated Catalogue-specific overlay/CSS sizing patches. Backdrop opened, card invisible.
+- v1.1.428: attempted reuse of Season modal while still inside Catalogue CSS scope. Same invisible-card symptom.
+- v1.1.429: custom DOM-clone/native inspector. Tap stopped working.
+- v1.1.430: reused Deck Lab structure but still inside Catalogue scope. Returned to dark backdrop/invisible card.
+- v1.1.431: moved the working full-card modal to `document.body`. Card became visible and flip worked.
+- v1.1.432: attempted outside-tap close. Still unreliable on physical iPhone.
+- v1.1.433: explicit × appeared, but its handler was bound from `#game` after modal relocation, so it did not fire.
+- **v1.1.434: explicit × handler bound after body mount. User confirmed working.**
+
+## App updater — still broken / next major issue
+
+The **Check for Update** button has effectively never worked reliably on the user's pinned iPhone app.
+
+On 2026-09-29 the user showed the Options screen still reporting **Installed v1.1.430** after v1.1.431 was published and after waiting/pressing Check for Update.
+
+Repository state was verified at that time:
+- `build.json` = 1.1.431
+- `js/config/build.js` = 1.1.431
+- `js/runtime/current.js` = 1.1.431
+- `index.html` = 1.1.431
+
+So this is not merely a version-stamping mismatch. The updater/handoff mechanism itself needs a proper redesign.
+
+Current updater code:
+- `js/config/update.js`: `fetchLatestBuild()` fetches `build.json?_=timestamp` with `cache:"no-store"`.
+- `js/ui/app.js`: `checkForAppUpdate()` compares manifest version to `BUILD_VERSION`.
+- `applyAppUpdate()` unregisters service workers, clears Cache Storage, stores `wweLegacyForcedBuild`, then navigates with `location.replace()` to `index.html?build=<version>&_update=<timestamp>`.
+
+Automatic update checks were deliberately removed after an earlier iOS reload-loop incident. **Keep update checks manual-only.**
+
+Next chat should investigate the actual GitHub Pages/pinned-iOS update path rather than adding another superficial cache parameter. The user wants the Check for Update button to genuinely work.
+
+## Release/version discipline
+
+Every release must keep these aligned:
+- `package.json`
+- `js/config/build.js`
+- `js/runtime/current.js`
+- `index.html` cache/query version and boot version
+- `build.json` — publish this LAST
+
+Current release is **1.1.434**.
+
+Important: do not blanket-rewrite version-numbered stylesheet filenames in `index.html`. Real filenames such as:
+- `css/v1.1.376-my-legacy-hub.css`
+- `css/v1.1.404-challenges-hub.css`
+- `css/v1.1.355-catalogue-five-printings.css`
+- `css/v1.1.384-catalogue-five-printings.css`
+must remain those filenames. Only their `?v=` cache query changes.
+
+`js/runtime/current.js` dynamically imports app.js with the runtime version and a `Date.now()` boot token.
+
+## Catalogue design locks
 
 Section order:
 1. Superstars
@@ -27,102 +125,32 @@ Section order:
 8. Momentum
 9. Managers
 
-Ordering inside every section is **release set first, then numeric card ID**:
-- Premiere is the first release.
-- Money in the Bank is the second release.
-- Therefore Superstar order is PREM01, PREM02, … PREM16, then MITB01.
-- Roman/PREM01 must always appear first where applicable.
-- Do not alphabetize cards.
+Superstars/Entrances: one printing each, five cards across where space allows.
 
-Superstars and Entrances have one printing each in the current collection model and should be shown as **five different cards across per row**.
-
-Cards with five printings (Finishers, Trademarks, Moves, etc.) should show **one card identity per row with its five printing variants across the row**. Do not show the card name/card ID in a separate left-hand column. The five cards should use the same available width as the five-across Superstar/Entrance rows.
-
-Printing names do not need to be written under thumbnails because the printing border communicates the tier.
+Five-printing cards: one card identity per row with Base/Emerald/Sapphire/Ruby/Amethyst across the row.
 
 Ownership:
-- Overlay `×0`, `×1`, etc. in the top-left of the thumbnail.
-- Unowned cards must be grayscale/dimmed but still clearly identifiable.
-- The accepted brightness treatment in v1.1.397 was approximately grayscale(.72), brightness(.68), contrast(.92), not near-black.
+- ×N overlay.
+- Unowned cards grayscale/dimmed, still identifiable.
 
-Interaction approved:
-- Tap a Catalogue thumbnail to open the actual card centered at roughly **60% of phone width**.
-- Tap the enlarged card to flip it.
-- Tap it again to return to the front.
-- Tap outside the card to close it.
-- The expensive/full card renderer is acceptable for this **single inspected card**, but not for every thumbnail.
-
-## Remaining Catalogue visual problem
-
-The stable lightweight thumbnails do not yet show the complete card presentation.
-
-User specifically requires:
-- Superstar cards must include their proper card background/baseplate, not just the wrestler cutout.
-- Entrances, Finishers, Trademarks, Moves and other cards must show their normal text overlays/card-face presentation.
-- Thumbnails should visually resemble the finished cards while remaining lightweight enough for iPhone Safari.
-
-The next solution should avoid constructing hundreds of live card components. Prefer a lightweight/static thumbnail composition or pre-rendered/final card-face asset path. Investigate existing finished Card Studio exports and whether the complete visual face can be represented by a single image per card/printing. Do not simply add many overlay DOM nodes to every thumbnail.
-
-## Catalogue implementation notes
-
-Relevant files:
-- `js/ui/app.js` — `renderCardCatalogue()`, thumbnail rendering, inspect overlay.
-- `js/data/catalogue.js` — filtering/sorting/page size.
-- `css/v1.1.384-catalogue-five-printings.css` — active Catalogue stylesheet despite old filename.
-- `index.html` — must continue loading the above stylesheet; previous version bumps accidentally changed the filename to nonexistent files.
-- `js/data/artwork.js` — finished/layered artwork lookup.
-- `js/data/variants.js` — printing tier behavior.
-
-Important sorting fix in v1.1.399:
-- Catalogue sorting now extracts the numeric collector number directly from `cardCode`/ID.
-- Set order is explicitly Premiere, then Money in the Bank, then later sets.
-- User confirmed the ordering shown in v1.1.399 was correct.
-
-Catalogue page size was previously raised to 500 so grouping sees the whole released catalogue before rendering sections. This contributes to memory pressure if thumbnails are complex. If needed, redesign rendering/virtualization rather than returning to incorrect pre-group pagination.
-
-## Version/update system
-
-A major updater bug was found: `js/config/build.js` had remained hard-coded at v1.1.368 while other files were being bumped.
-
-Current release files that must stay synchronized on every release:
-- `js/config/build.js`
-- `js/runtime/current.js`
-- `js/ui/app.js` where version strings occur
-- `index.html`
-- `build.json`
-
-The Check for Update flow was improved around v1.1.392 to update service workers, clear caches, add cache-busting query parameters and force navigation.
-
-Be careful with blanket version replacement in `index.html`: the real Catalogue stylesheet filename is permanently `css/v1.1.384-catalogue-five-printings.css`. Only its query/cache version should change. A previous replacement changed the filename itself to a nonexistent `v1.1.395-...` file, causing several builds to appear visually unchanged.
+Inspector:
+- Full card around 60% phone width.
+- Tap card to flip.
+- Explicit × closes.
+- User originally wanted outside-tap close too, but v1.1.434's confirmed reliable close path is the ×. Do not risk breaking the working inspector merely to remove the ×.
 
 ## Current released roster
 
 17 released Superstars:
-1. Roman Reigns
-2. Cody Rhodes
-3. Seth Rollins
-4. CM Punk
-5. Sami Zayn
-6. Randy Orton
-7. Rhea Ripley
-8. Liv Morgan
-9. IYO SKY
-10. Becky Lynch
-11. Alexa Bliss
-12. Charlotte Flair
-13. John Cena
-14. Stone Cold Steve Austin
-15. Tiffany Stratton
-16. Trish Stratus
-17. LA Knight
+Roman Reigns, Cody Rhodes, Seth Rollins, CM Punk, Sami Zayn, Randy Orton, Rhea Ripley, Liv Morgan, IYO SKY, Becky Lynch, Alexa Bliss, Charlotte Flair, John Cena, Stone Cold Steve Austin, Tiffany Stratton, Trish Stratus, LA Knight.
 
-Do not assume AJ Styles is released; he is not in the current released `superstars.js`.
+AJ Styles is not currently released.
 
 ## Live Events
 
-The rotating Live Events were previously repaired and are working. Preserve the launch mechanics from the working v1.1.368-era fix. Do not reintroduce the removed `RAW_LIVE_EVENT` object/reference.
+Rotating Live Events are working. Preserve the repaired implementation and do not reintroduce removed legacy `RAW_LIVE_EVENT` references.
 
-Approved weekly 3-per-day schedule:
+Approved weekly schedule:
 - Monday: Monday Night Raw — Roman; Big Time Becks — Becky; Never Give Up — Cena
 - Tuesday: Finish the Story — Cody; Tokyo Shock — IYO; Legend Killer — Randy
 - Wednesday: NXT Live — Rhea; Best in the World — CM Punk; Revenge Tour — Liv
@@ -131,36 +159,18 @@ Approved weekly 3-per-day schedule:
 - Saturday: SNME — Liv; Burn It Down — Seth; Bow Down to Queen — Charlotte
 - Sunday: My Brutality — Rhea; Megastar Tour — LA Knight; Stratusfaction — Trish
 
-## My Legacy / Challenges
+## Other preserved systems
 
-My Legacy is now a visual hub with Career Record at top and separate sub-screens. Superstar Records uses small rendered Superstar cards. The Superstar denominator was corrected to unique roster count (17).
+My Legacy is a visual hub with Career Record and sub-screens. Challenges uses the same hub/sub-screen philosophy.
 
-Challenges were similarly redesigned into a hub/sub-screen structure.
+Season progression starts at Tier 1 and proceeds Tier 1 → Tier 2, not Tier 0 → Tier 1.
 
-Achievements readability was fixed in v1.1.379.
+Rulebook should remain evergreen system documentation, not a dated list of events/rewards.
 
-## Season progression
+Five printing tiers:
+Base, Emerald, Sapphire, Ruby, Amethyst.
 
-New seasons start with Tier 1 unlocked and progress Tier 1 → Tier 2 rather than Tier 0 → Tier 1.
-
-Season screen duplicate stat boxes were removed and hero enlarged.
-
-## Rulebook
-
-Rulebook is intended to be evergreen system documentation, not a list of current events/rewards/content. It should only need changing when rules or modes change.
-
-It documents five printing tiers:
-- Base
-- Emerald
-- Sapphire
-- Ruby
-- Amethyst
-
-Avoid hard-coded current Season rewards, dated Live Event schedules, specific chase rewards, etc.
-
-## Duplicate Universe Points
-
-Approved duplicate conversion table:
+Duplicate Universe Points table:
 
 | Printing | Common 1★ | Uncommon 2★ | Rare 3★ | Very Rare 4★ |
 |---|---:|---:|---:|---:|
@@ -170,25 +180,16 @@ Approved duplicate conversion table:
 | Ruby | 10 | 20 | 30 | 40 |
 | Amethyst | 25 | 50 | 75 | 100 |
 
-Implemented in `js/data/store.js`; booster duplicate conversion passes the printing tier.
+Five Set Collection milestone tracks exist: Base/Collection, Emerald, Sapphire, Ruby, Amethyst, each using 25/50/75/100 milestones.
 
-## Set Collection milestones
+## Development rules
 
-Five milestone tracks exist:
-- Base/Collection
-- Emerald
-- Sapphire
-- Ruby
-- Amethyst
-
-Each uses the 25/50/75/100 milestone structure.
-
-## General development rules
-
-- User expects approved changes to be pushed directly to `main`.
-- Always fetch the latest SHA before updating a file.
-- Do not claim something is fixed/tested unless tool results or the user's physical iPhone test confirm it.
-- User tests frequently on a physical iPhone and screenshots/recordings are authoritative for UI behavior.
-- Preserve working gameplay mechanics and avoid unnecessary refactors.
-- Mobile readability and compact use of screen space are priorities.
-- The user supplies/approves card artwork; do not generate replacement artwork unless explicitly requested.
+- Push approved changes directly to `main`.
+- Fetch latest SHA before each file update.
+- User's physical iPhone is the authority for UI/stability confirmation.
+- Never claim physical success before user confirms it.
+- Preserve working gameplay and avoid unnecessary refactors.
+- Keep mobile UI graphic-heavy, readable and compact.
+- User supplies/approves card artwork; do not generate replacement artwork unless explicitly requested.
+- Do not reintroduce automatic update checks.
+- Most importantly: **v1.1.434 Catalogue inspector is physically confirmed working. Preserve it.**
