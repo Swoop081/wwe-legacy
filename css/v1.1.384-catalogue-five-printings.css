@@ -339,3 +339,23 @@
 .catalogue-screen .catalogue-card-image::before,
 .catalogue-screen .catalogue-card-image::after,
 .catalogue-screen .catalogue-thumb-plate{content:none!important;display:none!important}
+
+
+/* v1.1.416 — the artwork supplies the plaque; Catalogue supplies text only. */
+.catalogue-screen .catalogue-thumb-copy{
+  position:absolute!important;z-index:4!important;left:7%!important;right:7%!important;bottom:3.5%!important;
+  height:9.5%!important;box-sizing:border-box!important;margin:0!important;padding:0 2%!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3%!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:none!important;
+  color:#fff!important;text-align:center!important;text-transform:uppercase!important;overflow:hidden!important
+}
+.catalogue-screen .catalogue-thumb-copy .catalogue-thumb-title{
+  display:block!important;width:100%!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;
+  font-size:clamp(2.8px,.82vw,5.2px)!important;font-weight:950!important;line-height:1!important;letter-spacing:-.025em!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;text-shadow:0 1px 2px #000!important
+}
+.catalogue-screen .catalogue-thumb-copy .catalogue-thumb-detail{
+  display:block!important;width:100%!important;margin:0!important;padding:0!important;background:transparent!important;border:0!important;
+  font-size:clamp(2px,.5vw,3.3px)!important;font-weight:900!important;line-height:1!important;letter-spacing:.03em!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;text-shadow:0 1px 2px #000!important
+}
