@@ -1,11 +1,11 @@
 {
-  "version": "1.1.419",
+  "version": "1.1.420",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.419",
+  "physicalIphoneSmoke": "pending-v1.1.420",
   "launchStatus": "released",
-  "name": "Catalogue plaque text calibration"
+  "name": "Catalogue plaque renderer rebuild"
 }
