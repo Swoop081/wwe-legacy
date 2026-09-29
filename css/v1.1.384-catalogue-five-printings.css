@@ -489,3 +489,38 @@
 .catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat em{
   margin-top:1px!important;
 }
+
+
+/* v1.1.425 — Catalogue inspector uses the proven full collectible-card renderer. */
+.catalogue-card-modal{
+  position:fixed!important;
+  inset:0!important;
+  z-index:10000!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:rgba(0,0,0,.82)!important;
+}
+.catalogue-card-modal-inner{
+  position:relative!important;
+  width:min(72vw,390px)!important;
+  max-width:390px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.catalogue-card-modal .catalogue-inspect-card{
+  width:min(60vw,330px)!important;
+  max-width:330px!important;
+  height:auto!important;
+  aspect-ratio:680/1000!important;
+  margin:0!important;
+  flex:0 0 auto!important;
+}
+.catalogue-card-modal-inner>small{
+  margin-top:12px!important;
+  color:#fff!important;
+  text-align:center!important;
+  font-size:12px!important;
+}
