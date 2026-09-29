@@ -4547,13 +4547,10 @@ if (screen === "splash") renderSplash(); else if (screen === "starter") renderSt
 const flushLocalProfile = () => { if (profile) saveProfile(profile); };
 globalThis.window?.addEventListener?.("pagehide", flushLocalProfile);
 globalThis.window?.addEventListener?.("beforeunload", flushLocalProfile);
-globalThis.window?.addEventListener?.("pageshow", () => { checkForAppUpdate({ autoApply: true }); });
+// Update checks are manual-only. Automatic checks here could create an iOS
+// reload loop when build.json propagated before a cached module dependency.
 globalThis.document?.addEventListener?.("visibilitychange", () => {
   if (document.visibilityState === "hidden") flushLocalProfile();
-  else checkForAppUpdate({ autoApply: true });
 });
-if (globalThis.location?.href && typeof globalThis.fetch === "function") {
-  setTimeout(() => { checkForAppUpdate({ autoApply: true }); }, 1200);
-}
 
 setInterval(() => { if (globalThis.document?.visibilityState !== "hidden") refreshSeasonClocks(); }, 1000);
