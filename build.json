@@ -1,11 +1,11 @@
 {
-  "version": "1.1.384",
+  "version": "1.1.385",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.384",
+  "physicalIphoneSmoke": "pending-v1.1.385",
   "launchStatus": "released",
-  "name": "Five-printing thumbnail Card Catalogue"
+  "name": "Catalogue five-tier layout correction"
 }
