@@ -1,11 +1,11 @@
 {
-  "version": "1.1.399",
+  "version": "1.1.400",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.399",
+  "physicalIphoneSmoke": "pending-v1.1.400",
   "launchStatus": "released",
-  "name": "Ordered interactive Card Catalogue"
+  "name": "Complete Card Catalogue thumbnails"
 }
