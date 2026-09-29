@@ -3177,6 +3177,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
   // a complete image baseplate and must load directly without a background/template pass.
   const layeredFront = card.kind === "superstar" && Boolean(layeredCardArtFor(card));
   const finishedFront = card.kind !== "momentum" && !layeredFront && Boolean(finishedCardArtFor(card));
+  // Finished non-Superstar fronts are image baseplates only: always layer the live Card Studio ink over them.
   const forcedFinishedFront = false;
   const tribalChiefLiveFront = card?.id === "special-roman-reigns";
   const authoredRawArt = Boolean(artworkFor(card));
