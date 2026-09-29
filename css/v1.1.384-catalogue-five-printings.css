@@ -35,3 +35,13 @@
 .catalogue-type-superstar .catalogue-five-printings,.catalogue-type-entrance .catalogue-five-printings{grid-template-columns:56px!important;justify-content:start!important}
 .catalogue-type-superstar .catalogue-thumb-card,.catalogue-type-entrance .catalogue-thumb-card{width:56px!important;height:82px!important;max-height:82px!important}
 @media(max-width:390px){.catalogue-identity-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}.catalogue-identity-meta>b{font-size:12px!important}.catalogue-identity-meta>small{font-size:7px!important}}
+
+/* v1.1.389 — one card identity per row; five-printing cards read left-to-right */
+.catalogue-identity-list{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+.catalogue-identity-row{display:grid!important;grid-template-columns:minmax(105px,1fr) minmax(0,2.4fr)!important;align-items:center!important;gap:10px!important;padding:9px 10px!important}
+.catalogue-identity-meta{margin:0!important;align-self:center!important}
+.catalogue-five-printings{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:4px!important;align-items:start!important}
+.catalogue-thumb-card{width:100%!important;max-height:none!important;aspect-ratio:680/1000!important}
+.catalogue-type-superstar .catalogue-five-printings,.catalogue-type-entrance .catalogue-five-printings{grid-template-columns:58px!important;justify-content:end!important}
+.catalogue-type-superstar .catalogue-thumb-card,.catalogue-type-entrance .catalogue-thumb-card{width:58px!important;height:auto!important;max-height:none!important}
+@media(max-width:390px){.catalogue-identity-row{grid-template-columns:minmax(92px,.9fr) minmax(0,2.5fr)!important;gap:7px!important;padding:8px!important}.catalogue-five-printings{gap:3px!important}.catalogue-type-superstar .catalogue-five-printings,.catalogue-type-entrance .catalogue-five-printings{grid-template-columns:54px!important}.catalogue-type-superstar .catalogue-thumb-card,.catalogue-type-entrance .catalogue-thumb-card{width:54px!important}}
