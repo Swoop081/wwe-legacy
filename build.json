@@ -1,11 +1,11 @@
 {
-  "version": "1.1.400",
+  "version": "1.1.401",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.400",
+  "physicalIphoneSmoke": "pending-v1.1.401",
   "launchStatus": "released",
-  "name": "Complete Card Catalogue thumbnails"
+  "name": "Lightweight layered Catalogue thumbnails"
 }
