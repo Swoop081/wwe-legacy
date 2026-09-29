@@ -1,11 +1,11 @@
 {
-  "version": "1.1.397",
+  "version": "1.1.398",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.397",
+  "physicalIphoneSmoke": "pending-v1.1.398",
   "launchStatus": "released",
-  "name": "Readable unowned Catalogue cards"
+  "name": "Catalogue collector order and complete card faces"
 }
