@@ -167,17 +167,22 @@ async function applyAppUpdate(version = appUpdateState.latest) {
   try {
     if ("serviceWorker" in navigator) {
       const registrations = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(registrations.map(registration => registration.update().catch(()=>{})));
+      await Promise.all(registrations.map(registration => registration.unregister().catch(()=>false)));
     }
     if ("caches" in globalThis) {
       const keys = await caches.keys();
       await Promise.all(keys.map(key => caches.delete(key)));
     }
   } catch {}
+  try {
+    localStorage.setItem("wweLegacyForcedBuild", String(version || ""));
+  } catch {}
   const url = new URL(globalThis.location.href);
+  url.search = "";
+  url.hash = "";
   url.searchParams.set("build", String(version || Date.now()));
   url.searchParams.set("_update", String(Date.now()));
-  globalThis.location.replace(url.toString());
+  globalThis.location.href = url.toString();
   return true;
 }
 
