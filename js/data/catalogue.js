@@ -4,7 +4,8 @@ import { sets } from "./sets.js?v=1.1.132";
 import { isPlayerReleasedSetId } from "./release.js?v=1.1.132";
 import { MOVE_TYPE_LABELS } from "./move-types.js?v=1.1.132";
 
-export const CATALOGUE_PAGE_SIZE = 48;
+// Keep catalogue pages deliberately small: each identity renders five tier thumbnails on iPhone.
+export const CATALOGUE_PAGE_SIZE = 12;
 export const CATALOGUE_NUMERIC_OPERATORS = ["any", "eq", "lte", "gte"];
 export const CATALOGUE_REQUIREMENT_METHODS = ["strength", "strike", "technical", "agility"];
 
