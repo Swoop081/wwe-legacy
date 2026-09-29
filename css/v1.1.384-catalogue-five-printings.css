@@ -209,3 +209,19 @@
 }
 .catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::before{bottom:8.2%!important}
 .catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:3.1%!important}
+
+
+/* Catalogue face alignment + resilient inspector */
+.catalogue-screen .catalogue-card-image::before{
+  left:5%!important;right:5%!important;bottom:5.65%!important;
+  font-size:clamp(3.2px,1.18vw,7.2px)!important;line-height:1!important;
+  text-overflow:clip!important;letter-spacing:-.04em!important
+}
+.catalogue-screen .catalogue-card-image::after{
+  left:5%!important;right:5%!important;bottom:1.8%!important;
+  font-size:clamp(2.7px,.78vw,5px)!important;line-height:1!important
+}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::before{bottom:6.2%!important}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:2.05%!important}
+.catalogue-inspect-stage{width:min(60vw,330px)!important;aspect-ratio:680/1000!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important}
+.catalogue-inspect-stage>.ccg-card.catalogue-inspect-card{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;margin:0!important;display:block!important;position:relative!important}
