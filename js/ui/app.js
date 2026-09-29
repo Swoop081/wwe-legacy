@@ -3419,7 +3419,7 @@ function renderCardCatalogue() {
       const cards = pageCards.filter(test);
       if (!cards.length) return "";
       const singlePrinting = sectionKey==="superstar" || sectionKey==="entrance";
-      const tile = (card,tier) => { const count=ownedCount(profile,card.id,tier); return `<button type="button" class="catalogue-card-tile ${count>0?'is-owned':'is-unowned'}" data-catalogue-inspect="${card.id}" data-catalogue-tier="${tier}"><div class="catalogue-card-image ${tierCssClass(tier)}">${cardArtFace(card,{eager:false})}<span class="catalogue-owned-overlay">×${count}</span></div></button>`; };
+      const tile = (card,tier) => { const count=ownedCount(profile,card.id,tier); const art=finishedCardArtFor(card) || legacyFinishedCardArtFor(card) || layeredCardArtFor(card) || ""; return `<button type="button" class="catalogue-card-tile ${count>0?'is-owned':'is-unowned'}" data-catalogue-inspect="${card.id}" data-catalogue-tier="${tier}"><div class="catalogue-card-image ${tierCssClass(tier)}">${art?`<img class="catalogue-base-art" loading="lazy" decoding="async" src="${art}" alt="">`:""}<span class="catalogue-owned-overlay">×${count}</span></div></button>`; };
       const body = singlePrinting
         ? `<div class="catalogue-singles-grid">${cards.map(card=>`<article class="catalogue-single-item">${tile(card,printingTiersFor(card)[0])}<small>${card.cardCode}</small></article>`).join("")}</div>`
         : `<div class="catalogue-multiprint-list">${cards.map(card=>`<article class="catalogue-multiprint-row"><div class="catalogue-print-grid">${printingTiersFor(card).map(tier=>tile(card,tier)).join("")}</div></article>`).join("")}</div>`;
