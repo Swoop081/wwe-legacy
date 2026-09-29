@@ -104,3 +104,8 @@
 .catalogue-screen .catalogue-print-grid{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:3px!important;min-width:0!important;width:100%!important}
 .catalogue-screen .catalogue-type-section{overflow:hidden!important}
 @media(max-width:390px){.catalogue-screen .catalogue-singles-grid{gap:3px!important}.catalogue-screen .catalogue-multiprint-row{grid-template-columns:62px minmax(0,1fr)!important;padding:4px!important}.catalogue-screen .catalogue-multiprint-row>header b{font-size:8px!important}}
+
+/* v1.1.397 — unowned cards remain clearly identifiable while visibly unavailable */
+.catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image>img{filter:grayscale(.72) brightness(.68) contrast(.92)!important;opacity:.88!important}
+.catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image:after{background:rgba(4,6,9,.12)!important}
+.catalogue-screen .catalogue-card-tile.is-unowned .catalogue-owned-overlay{color:#fff!important;background:rgba(0,0,0,.78)!important;border-color:rgba(255,255,255,.7)!important}
