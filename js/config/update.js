@@ -27,7 +27,8 @@ export function updateNavigationUrl(currentHref, latestVersion, now = Date.now()
 export async function fetchLatestBuild(fetchImpl = globalThis.fetch, { baseUrl = globalThis.location?.href, now = Date.now() } = {}) {
   if (typeof fetchImpl !== "function") throw new Error("Update check is unavailable.");
   if (!baseUrl) throw new Error("Update check has no base URL.");
-  const url = new URL("./build.json", baseUrl);
+  const base = new URL(baseUrl);
+  const url = new URL("build.json", base.origin + base.pathname.replace(/\/[^/]*$/, "/"));
   url.searchParams.set("_", String(now));
   const response = await fetchImpl(url.toString(), { cache: "no-store" });
   if (!response?.ok) throw new Error(`Update check failed (${response?.status ?? "network"}).`);
