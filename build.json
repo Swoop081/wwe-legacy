@@ -1,11 +1,11 @@
 {
-  "version": "1.1.410",
+  "version": "1.1.411",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.410",
+  "physicalIphoneSmoke": "pending-v1.1.411",
   "launchStatus": "released",
-  "name": "Updater root resolution and Catalogue fixes"
+  "name": "Forced stale-cache updater recovery"
 }
