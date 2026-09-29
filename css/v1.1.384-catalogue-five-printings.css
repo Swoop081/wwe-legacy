@@ -359,3 +359,25 @@
   font-size:clamp(2px,.5vw,3.3px)!important;font-weight:900!important;line-height:1!important;letter-spacing:.03em!important;
   white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;text-shadow:0 1px 2px #000!important
 }
+
+
+/* v1.1.419 — physical-iPhone calibration.
+   The authored plaque is already baked into the artwork. Keep the two Catalogue
+   text lines in the upper/centre portion of that plaque instead of its lower edge. */
+.catalogue-screen .catalogue-thumb-copy{
+  left:7%!important;
+  right:7%!important;
+  bottom:6.9%!important;
+  height:6.8%!important;
+  padding:0 2%!important;
+  gap:1%!important;
+  justify-content:center!important;
+}
+.catalogue-screen .catalogue-thumb-copy .catalogue-thumb-title{
+  font-size:clamp(2.8px,.82vw,5.2px)!important;
+  line-height:.95!important;
+}
+.catalogue-screen .catalogue-thumb-copy .catalogue-thumb-detail{
+  font-size:clamp(2px,.5vw,3.3px)!important;
+  line-height:.95!important;
+}
