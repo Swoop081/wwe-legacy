@@ -440,3 +440,25 @@
 .catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat{
   top:43%!important;
 }
+
+
+/* v1.1.423 — final Move plaque typography spacing.
+   Keep the name at the top; create a clear gap before the stat block.
+   COST/DMG labels and their values use the same type size as the move name. */
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-name{
+  top:5%!important;
+  font-size:clamp(2.8px,.78vw,5.1px)!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat{
+  top:52%!important;
+  height:43%!important;
+  gap:14%!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat b,
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat em{
+  font-size:clamp(2.8px,.78vw,5.1px)!important;
+  line-height:.9!important;
+}
+.catalogue-screen .catalogue-move-plaque .catalogue-plaque-stat em{
+  margin-top:0!important;
+}
