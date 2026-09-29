@@ -1466,7 +1466,7 @@ export const superstars = {
   },
   "stoneCold": {
     "id": "stone-cold-steve-austin",
-    "name": "Stone Cold Steve Austin",
+    "name": "Stone Cold",
     "nickname": "Stone Cold",
     "setId": "premiere",
     "era": "attitude-era",
