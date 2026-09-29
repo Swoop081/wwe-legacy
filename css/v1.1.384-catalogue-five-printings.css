@@ -309,3 +309,26 @@
 }
 .catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::before{bottom:9.2%!important}
 .catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:6.15%!important}
+
+
+/* v1.1.414 — stop positioning Catalogue copy with pseudo-elements.
+   One explicit compact plaque owns both lines, so its size and text cannot drift independently. */
+.catalogue-screen .catalogue-card-image::before,
+.catalogue-screen .catalogue-card-image::after{content:none!important;display:none!important}
+.catalogue-screen .catalogue-thumb-plate{
+  position:absolute!important;z-index:4!important;left:6%!important;right:6%!important;bottom:3.5%!important;
+  height:10.5%!important;min-height:0!important;margin:0!important;padding:1.2% 3%!important;box-sizing:border-box!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4%!important;
+  overflow:hidden!important;background:rgba(5,5,7,.94)!important;border:1px solid rgba(255,255,255,.16)!important;
+  color:#fff!important;text-align:center!important;text-transform:uppercase!important;pointer-events:none!important
+}
+.catalogue-screen .catalogue-thumb-title{
+  display:block!important;width:100%!important;margin:0!important;padding:0!important;
+  font-size:clamp(2.8px,.82vw,5.2px)!important;font-weight:950!important;line-height:1!important;letter-spacing:-.025em!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;text-shadow:0 1px 2px #000!important
+}
+.catalogue-screen .catalogue-thumb-detail{
+  display:block!important;width:100%!important;margin:0!important;padding:0!important;
+  font-size:clamp(2px,.5vw,3.3px)!important;font-weight:900!important;line-height:1!important;letter-spacing:.03em!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important;opacity:.9!important
+}
