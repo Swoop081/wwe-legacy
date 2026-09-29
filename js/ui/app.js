@@ -3477,10 +3477,16 @@ function renderCardCatalogue() {
     catalogueInspect={...catalogueInspect,flipped:!catalogueInspect.flipped};
     renderCardCatalogue();
   }));
-  root.querySelectorAll("[data-catalogue-modal-backdrop]").forEach(backdrop=>backdrop.addEventListener("click",event=>{
-    if(event.target!==backdrop)return;
-    closeCatalogueInspect();
-  }));
+  root.querySelectorAll("[data-catalogue-modal-backdrop]").forEach(backdrop=>{
+    backdrop.addEventListener("click",event=>{
+      if(event.target!==backdrop)return;
+      closeCatalogueInspect();
+    });
+    // Catalogue has years of thumbnail-specific CSS overrides scoped under
+    // .catalogue-screen. Deck Lab's proven inspector must live outside that
+    // subtree or those overrides suppress/distort the full CCG card.
+    document.body.appendChild(backdrop);
+  });
 }
 
 
