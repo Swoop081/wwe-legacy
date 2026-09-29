@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=1.1.398";
-import { superstars } from "./superstars.js?v=1.1.398";
-import { sets } from "./sets.js?v=1.1.398";
-import { isPlayerReleasedSetId } from "./release.js?v=1.1.398";
-import { MOVE_TYPE_LABELS } from "./move-types.js?v=1.1.398";
+import { decks } from "./decks.js?v=1.1.399";
+import { superstars } from "./superstars.js?v=1.1.399";
+import { sets } from "./sets.js?v=1.1.399";
+import { isPlayerReleasedSetId } from "./release.js?v=1.1.399";
+import { MOVE_TYPE_LABELS } from "./move-types.js?v=1.1.399";
 
 // Keep catalogue pages deliberately small: each identity renders five tier thumbnails on iPhone.
 export const CATALOGUE_PAGE_SIZE = 500;
@@ -138,8 +138,13 @@ function primarySuperstarName(card) {
 
 function compareCards(a, b, sortBy, ownershipFor) {
   const number = (left, right) => (Number(left) || 0) - (Number(right) || 0);
+  const collectorNumber = card => {
+    const code = String(card?.cardCode ?? card?.id ?? "");
+    const match = code.match(/(\d+)/);
+    return match ? Number(match[1]) : Number(card?.cardNumber) || 999999;
+  };
   if (sortBy === "alpha") return String(a.name).localeCompare(String(b.name));
-  if (sortBy === "set") return (setRank[a.setId] ?? 999) - (setRank[b.setId] ?? 999) || number(a.cardNumber, b.cardNumber);
+  if (sortBy === "set") return (setRank[a.setId] ?? 999) - (setRank[b.setId] ?? 999) || collectorNumber(a) - collectorNumber(b);
   if (sortBy === "superstar") return primarySuperstarName(a).localeCompare(primarySuperstarName(b)) || String(a.name).localeCompare(String(b.name));
   if (sortBy === "kind") return String(a.kind).localeCompare(String(b.kind)) || String(a.name).localeCompare(String(b.name));
   if (sortBy === "rarity") return number(a.rarity, b.rarity) || String(a.name).localeCompare(String(b.name));
@@ -150,7 +155,7 @@ function compareCards(a, b, sortBy, ownershipFor) {
   if (sortBy === "technical") return number(a.requirements?.technical, b.requirements?.technical) || String(a.name).localeCompare(String(b.name));
   if (sortBy === "agility") return number(a.requirements?.agility, b.requirements?.agility) || String(a.name).localeCompare(String(b.name));
   if (sortBy === "owned") return number(ownershipFor?.(a)?.total, ownershipFor?.(b)?.total) || String(a.name).localeCompare(String(b.name));
-  return (setRank[a.setId] ?? 999) - (setRank[b.setId] ?? 999) || number(a.cardNumber, b.cardNumber) || String(a.name).localeCompare(String(b.name));
+  return (setRank[a.setId] ?? 999) - (setRank[b.setId] ?? 999) || collectorNumber(a) - collectorNumber(b) || String(a.name).localeCompare(String(b.name));
 }
 
 export function filterAndSortCatalogue(cards, filters = defaultCatalogueFilters(), ownershipFor = () => ({ total: 0 }), now = new Date()) {
