@@ -3173,8 +3173,10 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
   // Treat that as the normal front on every surface; cardArtFace performs the
   // runtime existence check and falls back to a flat finished export only if the
   // base plate itself is missing.
-  const layeredFront = card.kind !== "momentum" && Boolean(layeredCardArtFor(card));
-  const finishedFront = !layeredFront && card.kind !== "momentum" && Boolean(finishedCardArtFor(card));
+  // Only Superstar fronts are layered. Every other authored Premiere card is already
+  // a complete image baseplate and must load directly without a background/template pass.
+  const layeredFront = card.kind === "superstar" && Boolean(layeredCardArtFor(card));
+  const finishedFront = card.kind !== "momentum" && !layeredFront && Boolean(finishedCardArtFor(card));
   const forcedFinishedFront = false;
   const tribalChiefLiveFront = card?.id === "special-roman-reigns";
   const authoredRawArt = Boolean(artworkFor(card));
@@ -3202,7 +3204,7 @@ function collectibleCardMarkup(card, { flipped = false, tier = null, foil = null
       : tribalChiefLiveFront && finishedFront
         ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${tribalChiefFrontOverlayMarkup(card)}`
       : finishedFront
-        ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>`
+        ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span>${layeredFrontOverlayMarkup(card)}${layeredCardStudioInkMarkup(card)}`
         : `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card,{eager:eagerArt})}</span><span class="ccg-card-title"><small>${typeLabel} · ${tierTag}</small><strong>${card.name}</strong></span><span class="ccg-card-stats">${cardFrontBottom(card)}</span>`;
   const rootTag = interactive ? "button" : "span";
   const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. ${tierLabel(resolvedTier)} printing. ${missingCustomFront ? "Card details shown because custom front artwork is not installed." : `Tap to ${displayFlipped ? "view artwork" : "view effects"}.`}"` : `aria-hidden="true"`;
