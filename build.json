@@ -1,11 +1,11 @@
 {
-  "version": "1.1.395",
+  "version": "1.1.396",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.395",
+  "physicalIphoneSmoke": "pending-v1.1.396",
   "launchStatus": "released",
-  "name": "Catalogue stylesheet path fix"
+  "name": "Catalogue CSS filename correction"
 }
