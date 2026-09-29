@@ -1,11 +1,11 @@
 {
-  "version": "1.1.432",
+  "version": "1.1.433",
   "releasedAt": "2026-09-29",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.432",
+  "physicalIphoneSmoke": "pending-v1.1.433",
   "launchStatus": "released",
-  "name": "Catalogue inspector outside-tap close"
+  "name": "Catalogue explicit inspector close"
 }
