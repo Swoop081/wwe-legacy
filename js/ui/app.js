@@ -3438,7 +3438,7 @@ function renderCardCatalogue() {
         ? `<div class="catalogue-singles-grid">${cards.map(card=>`<article class="catalogue-single-item">${tile(card,printingTiersFor(card)[0])}<small>${card.cardCode}</small></article>`).join("")}</div>`
         : `<div class="catalogue-multiprint-list">${cards.map(card=>`<article class="catalogue-multiprint-row"><div class="catalogue-print-grid">${printingTiersFor(card).map(tier=>tile(card,tier)).join("")}</div></article>`).join("")}</div>`;
       return `<section class="catalogue-type-section catalogue-type-${sectionKey}"><div class="catalogue-type-heading"><strong>${label}</strong><small>${cards.reduce((n,c)=>n+printingTiersFor(c).length,0)} PRINTINGS</small></div>${body}</section>`;
-    }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>\n    ${catalogueInspect ? `<div class="catalogue-inspect-backdrop" data-catalogue-close><div class="catalogue-inspect-stage">${collectibleCardMarkup(catalogueInspect.card,{flipped:catalogueInspect.flipped,tier:catalogueInspect.tier,extraClass:"catalogue-inspect-card",flipAttr:'data-catalogue-flip="1"'})}</div></div>` : ""}\n    ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
+    }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>\n    ${catalogueInspect ? `<div class="superstar-card-modal deck-lab-card-modal catalogue-card-modal" data-catalogue-close><div class="superstar-card-modal-inner deck-lab-card-modal-inner"><button type="button" class="deck-lab-card-modal-close" data-catalogue-close-button aria-label="Close card inspector">×</button>${collectibleCardMarkup(catalogueInspect.card,{flipped:catalogueInspect.flipped,tier:catalogueInspect.tier,extraClass:"hud-superstar-modal-card deck-lab-inspect-card catalogue-inspect-card",flipAttr:'data-catalogue-flip="1"'})}<small>Tap card to ${catalogueInspect.flipped ? "show front" : "view effects"} · Tap outside to close</small></div></div>` : ""}\n    ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
   </section>`;
 
   $("#catalogue-filter-drawer")?.addEventListener("toggle", e => { catalogueFiltersOpen = e.currentTarget.open; });
@@ -3453,7 +3453,9 @@ function renderCardCatalogue() {
   }));
   root.querySelectorAll("[data-catalogue-inspect]").forEach(btn=>btn.addEventListener("click",()=>{ const card=visibleCards.find(c=>c.id===btn.dataset.catalogueInspect); if(!card)return; catalogueInspect={card,tier:btn.dataset.catalogueTier||"normal",flipped:false}; renderCardCatalogue(); }));
   root.querySelector("[data-catalogue-flip]")?.addEventListener("click",event=>{ event.stopPropagation(); if(!catalogueInspect)return; catalogueInspect={...catalogueInspect,flipped:!catalogueInspect.flipped}; renderCardCatalogue(); });
-  root.querySelector("[data-catalogue-close]")?.addEventListener("click",event=>{ if(event.target.closest("[data-catalogue-flip]"))return; catalogueInspect=null; renderCardCatalogue(); });
+  const closeCatalogueInspect=()=>{ catalogueInspect=null; renderCardCatalogue(); };
+  root.querySelector("[data-catalogue-close-button]")?.addEventListener("click",event=>{ event.stopPropagation(); closeCatalogueInspect(); });
+  root.querySelector("[data-catalogue-close]")?.addEventListener("click",event=>{ if(event.target!==event.currentTarget)return; closeCatalogueInspect(); });
 }
 
 
