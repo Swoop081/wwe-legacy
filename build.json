@@ -1,11 +1,11 @@
 {
-  "version": "1.1.441",
+  "version": "1.1.442",
   "releasedAt": "2026-09-30",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.441",
+  "physicalIphoneSmoke": "pending-v1.1.442",
   "launchStatus": "released",
-  "name": "Roster momentum requirement audit"
+  "name": "Restore approved starter deck Momentum identities"
 }
