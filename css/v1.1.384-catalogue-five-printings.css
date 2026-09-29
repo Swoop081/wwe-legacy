@@ -170,3 +170,15 @@
 .catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image::before,
 .catalogue-screen .catalogue-card-tile.is-unowned .catalogue-card-image::after{filter:none!important;opacity:1!important}
 .catalogue-screen .catalogue-owned-overlay{z-index:5!important}
+
+
+/* v1.1.404 — inspector is the card itself (no nested interactive card);
+   thumbnail supplemental labels occupy the authored lower plaque only. */
+.catalogue-inspect-backdrop>.ccg-card.catalogue-inspect-card{
+  position:relative!important;width:min(60vw,330px)!important;height:auto!important;aspect-ratio:680/1000!important;
+  max-width:60vw!important;max-height:82vh!important;margin:0!important;padding:0!important;display:block!important
+}
+.catalogue-screen .catalogue-card-image::before{bottom:7.2%!important}
+.catalogue-screen .catalogue-card-image::after{bottom:2.6%!important}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::before{bottom:8.2%!important}
+.catalogue-screen .catalogue-card-image[data-thumb-detail^="COST"]::after{bottom:3.1%!important}
