@@ -3479,7 +3479,10 @@ function renderCardCatalogue() {
   }));
   root.querySelectorAll("[data-catalogue-modal-backdrop]").forEach(backdrop=>{
     backdrop.addEventListener("click",event=>{
-      if(event.target!==backdrop)return;
+      // The modal's inner wrapper occupies the backdrop on iPhone, so checking
+      // target===backdrop makes the visible outside area impossible to close.
+      // Only the card itself is protected; every other tap closes the inspector.
+      if(event.target.closest("[data-flip-catalogue-modal]"))return;
       closeCatalogueInspect();
     });
     // Catalogue has years of thumbnail-specific CSS overrides scoped under
