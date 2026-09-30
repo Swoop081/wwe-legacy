@@ -1,11 +1,11 @@
 {
-  "version": "1.1.447",
+  "version": "1.1.448",
   "releasedAt": "2026-10-01",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.447",
+  "physicalIphoneSmoke": "pending-v1.1.448",
   "launchStatus": "released",
-  "name": "Dynamic full card face ink repaint"
+  "name": "iOS-safe Card Studio text renderer"
 }
