@@ -2980,6 +2980,22 @@ function renderCardStudioInkLayers(scope=document){
 }
 globalThis.WWELegacyRenderCardFaces = (scope=document) => renderCardStudioInkLayers(scope);
 
+// Card surfaces are created throughout gameplay, Deck Lab, Collection and Catalogue
+// after the initial boot repaint. Keep the shared Card Studio ink painter attached
+// to the DOM so every newly inserted card receives the complete face (title,
+// COST/DAMAGE, requirements/type and rarity stars), not only the static HTML name.
+let cardFacePaintQueued=false;
+function queueCardFacePaint(){
+  if(cardFacePaintQueued)return;
+  cardFacePaintQueued=true;
+  requestAnimationFrame(()=>{cardFacePaintQueued=false;renderCardStudioInkLayers(document);});
+}
+if(typeof MutationObserver!=="undefined"&&typeof document!=="undefined"){
+  new MutationObserver(mutations=>{
+    if(mutations.some(m=>[...m.addedNodes].some(n=>n?.nodeType===1&&(n.matches?.("canvas.ccg-card-studio-ink")||n.querySelector?.("canvas.ccg-card-studio-ink")))))queueCardFacePaint();
+  }).observe(document.documentElement,{childList:true,subtree:true});
+}
+
 
 
 function tribalChiefFrontOverlayMarkup(card) {
