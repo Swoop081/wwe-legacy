@@ -1,0 +1,15 @@
+/* v1.1.446 — canonical live Card Studio overlay geometry on every collectible surface. */
+.ccg-card .ccg-card-front{position:absolute!important;inset:0!important;overflow:hidden!important}
+.ccg-card .ccg-card-front>.ccg-card-art{position:absolute!important;inset:0!important;z-index:1!important}
+.ccg-card .ccg-card-front>.ccg-card-art img,
+.ccg-card .ccg-card-front>.ccg-card-art picture{width:100%!important;height:100%!important;object-fit:cover!important}
+.ccg-card .ccg-card-front>.ccg-live-front-data,
+.ccg-card .ccg-card-front>.ccg-live-superstar-rarity,
+.ccg-card .ccg-card-front>canvas.ccg-card-studio-ink{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  display:block!important;z-index:30!important;opacity:1!important;visibility:visible!important;
+  pointer-events:none!important;transform:none!important;
+}
+.ccg-card .ccg-card-front>canvas.ccg-card-studio-ink{object-fit:fill!important}
+.ccg-card .ccg-card-front>.ccg-premiere-front-set-logo{z-index:24!important}
+.ccg-card .ccg-card-front>.ccg-print-frame{z-index:40!important;pointer-events:none!important}
