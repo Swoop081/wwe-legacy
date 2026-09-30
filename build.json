@@ -1,11 +1,11 @@
 {
-  "version": "1.1.446",
+  "version": "1.1.447",
   "releasedAt": "2026-10-01",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.446",
+  "physicalIphoneSmoke": "pending-v1.1.447",
   "launchStatus": "released",
-  "name": "Global live card face overlay repair"
+  "name": "Dynamic full card face ink repaint"
 }
