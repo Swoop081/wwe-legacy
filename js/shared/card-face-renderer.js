@@ -33,7 +33,17 @@
   function scaleFor(width){return Number(width||BASE_W)/BASE_W;}
   function normalizeText(text){return String(text??"").replace(/[’‘]/g,"'").replace(/[“”]/g,'"').replace(/[—–]/g,"-").replace(/…/g,"...");}
   function glyphFor(ch){return FONT.glyphs[ch]||FONT.glyphs["?"]||null;}
-  function pathFor(ch){if(typeof Path2D!=="function")return null;if(PATH_CACHE.has(ch))return PATH_CACHE.get(ch);const g=glyphFor(ch);if(!g?.p)return null;const p=new Path2D(g.p);PATH_CACHE.set(ch,p);return p;}
+  function pathFor(ch){
+    // iOS WebKit exposes Path2D but does not reliably accept SVG path-data in
+    // the Path2D constructor. That failure aborts the whole face paint before
+    // COST/DAMAGE and rarity stars are reached. Use native canvas text on that
+    // engine; keep vector glyphs where SVG Path2D construction is supported.
+    if(typeof Path2D!=="function")return null;
+    if(PATH_CACHE.has(ch))return PATH_CACHE.get(ch);
+    const g=glyphFor(ch);if(!g?.p)return null;
+    try{const p=new Path2D(g.p);PATH_CACHE.set(ch,p);return p;}
+    catch(_error){PATH_CACHE.set(ch,null);return null;}
+  }
   function vectorMeasure(text,size,tracking=0,xScale=1){const s=Number(size)/FONT.upm,chars=[...normalizeText(text)];let width=0;chars.forEach((ch,i)=>{const g=glyphFor(ch);width+=(g?.a||FONT.upm*.5)*s*xScale;if(i<chars.length-1)width+=tracking;});return width;}
   function fitSize(text,maxWidth,start,min,tracking=0,xScale=1){let px=start;while(px>min&&vectorMeasure(text,px,tracking,xScale)>maxWidth)px-=1;return px;}
   function drawVectorText(ctx,text,x,y,opts={}){
@@ -58,5 +68,5 @@
     else{const type=card.kind==="merch"?`MERCH • ${card.duration??1} MATCH${Number(card.duration)===1?"":"ES"}`:(KIND_LABELS[card.kind]||String(card.kind||"CARD").toUpperCase());drawVectorText(ctx,type,cx,height*.909,{size:29*s,tracking:1*s,fillStyle:isSuperstar?"#ffffff":(isReward?"#f1d079":(theme.nameBottom||"#fff"))});}
   }
   function drawFace(ctx,card,opts={}){if(opts.drawPlaque!==false)drawPlaque(ctx,card,opts);if(opts.drawInk!==false)drawInk(ctx,card,opts);if(opts.drawStars!==false)drawRarityStars(ctx,card,opts);}
-  global.WWELegacyCardFaceRenderer=Object.freeze({version:"1.1.48",BASE_W,BASE_H,DEFAULT_THEME,THEMES,KIND_LABELS,METHOD_META,themeForSet,drawFace,drawPlaque,drawInk,drawRarityStars,drawRequirementDots,vectorMeasure});
+  global.WWELegacyCardFaceRenderer=Object.freeze({version:"1.1.448",BASE_W,BASE_H,DEFAULT_THEME,THEMES,KIND_LABELS,METHOD_META,themeForSet,drawFace,drawPlaque,drawInk,drawRarityStars,drawRequirementDots,vectorMeasure});
 })(globalThis);
