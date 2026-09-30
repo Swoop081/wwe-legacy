@@ -305,7 +305,7 @@ const WWE_COM_MENU_PHOTOS = Object.freeze({
   "john-cena": "https://www.wwe.com/f/styles/talent_champion_lg/public/2025/08/John_Cena_Profile.png",
   "la-knight": "https://www.wwe.com/f/styles/talent_champion_lg/public/2026/05/LA_Kniggt_PROFILE.png",
   "sami-zayn": "https://www.wwe.com/f/styles/talent_champion_lg/public/2026/06/OLD_Sami_Zayn_Profile.png",
-  "alexa-bliss": "https://www.wwe.com/f/styles/wwe_talent_bg_l/public/all/2019/02/Alexa_Bliss_Act--ced96db76b9d19cd6d47f6917c1f7122.jpg",
+  "alexa-bliss": "https://www.wwe.com/f/styles/talent_champion_lg/public/2025/11/Alexa_Bliss_Profile.png",
   "charlotte-flair": "https://www.wwe.com/f/styles/wwe_talent_bg_l/public/all/2023/06/SD_02032023DG_29342--059fd6e8363124d498465887be8151d3.JPG"
 });
 const menuSuperstarPhotoMarkup = (id, name, cls = "") => {
