@@ -1,11 +1,11 @@
 {
-  "version": "1.1.444",
-  "releasedAt": "2026-09-30",
+  "version": "1.1.445",
+  "releasedAt": "2026-10-01",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.444",
+  "physicalIphoneSmoke": "pending-v1.1.445",
   "launchStatus": "released",
-  "name": "Restore live card text and rarity overlays"
+  "name": "Alexa Bliss official WWE profile render"
 }
