@@ -1,11 +1,11 @@
 {
-  "version": "1.1.448",
-  "releasedAt": "2026-10-01",
+  "version": "1.1.449",
+  "releasedAt": "2026-10-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.448",
+  "physicalIphoneSmoke": "pending-v1.1.449",
   "launchStatus": "released",
-  "name": "iOS-safe Card Studio text renderer"
+  "name": "Card face artwork and ink stacking repair"
 }
