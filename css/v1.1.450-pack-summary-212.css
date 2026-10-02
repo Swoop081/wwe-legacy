@@ -1,0 +1,43 @@
+/* v1.1.450 — definitive five-card Pack Complete layout: 2 / rarest / 2. */
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,126px))!important;
+  grid-template-rows:auto auto auto!important;
+  grid-template-areas:"tl tr" "cc cc" "bl br"!important;
+  justify-content:center!important;
+  justify-items:center!important;
+  align-items:start!important;
+  gap:7px 12px!important;
+  width:100%!important;
+  max-width:390px!important;
+  margin:4px auto 0!important;
+  padding:0!important;
+}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary{
+  display:block!important;
+  width:min(31vw,126px)!important;
+  max-width:126px!important;
+  min-width:0!important;
+  margin:0!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  justify-self:center!important;
+}
+.streamlined-pack-summary .pack-summary-grid>.summary-top-left{grid-area:tl!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-top-right{grid-area:tr!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-center{grid-area:cc!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-bottom-left{grid-area:bl!important}
+.streamlined-pack-summary .pack-summary-grid>.summary-bottom-right{grid-area:br!important}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-actual-card{
+  width:100%!important;height:auto!important;aspect-ratio:680/1000!important;margin:0!important;
+}
+.streamlined-pack-summary .pack-summary-grid>.pack-summary-card .pack-summary-actual-card>.ccg-card.pack-summary-ccg{
+  width:100%!important;height:100%!important;margin:0!important;transform:none!important;
+}
+@media(max-width:390px){
+ .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{grid-template-columns:repeat(2,minmax(0,118px))!important;gap:6px 10px!important}
+ .streamlined-pack-summary .pack-summary-grid>.pack-summary-card.actual-card-summary{width:min(30vw,118px)!important}
+}
