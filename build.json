@@ -1,11 +1,11 @@
 {
-  "version": "1.1.449",
+  "version": "1.1.450",
   "releasedAt": "2026-10-02",
   "updatePolicy": "network-version-check",
   "releaseChannel": "stable",
   "featureFreeze": true,
   "criticalFixOnly": false,
-  "physicalIphoneSmoke": "pending-v1.1.449",
+  "physicalIphoneSmoke": "pending-v1.1.450",
   "launchStatus": "released",
-  "name": "Card face artwork and ink stacking repair"
+  "name": "Approved pack summary 2-1-2 grid"
 }
