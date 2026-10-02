@@ -1,0 +1,20 @@
+/* v1.1.449 — explicit card-face paint stack.
+   Artwork/baseplates must remain below live Card Studio text; print frame stays topmost. */
+.ccg-card .ccg-card-front{isolation:isolate!important}
+.ccg-card .ccg-card-front>.ccg-card-art{z-index:10!important}
+.ccg-card .ccg-card-front>.ccg-card-art,
+.ccg-card .ccg-card-front>.ccg-card-art>*,
+.ccg-card .ccg-card-front .ccg-finished-card-art-image,
+.ccg-card .ccg-card-front .ccg-layered-card-plate,
+.ccg-card .ccg-card-front .ccg-premiere-card-background{
+  position:absolute!important;
+  z-index:10!important;
+}
+.ccg-card .ccg-card-front>.ccg-live-front-data,
+.ccg-card .ccg-card-front>.ccg-live-superstar-rarity,
+.ccg-card .ccg-card-front>canvas.ccg-card-studio-ink{
+  z-index:100!important;
+}
+.ccg-card .ccg-card-front>.ccg-premiere-front-set-logo{z-index:110!important}
+.ccg-card .ccg-card-front>.ccg-tier-overlay{z-index:120!important;pointer-events:none!important}
+.ccg-card .ccg-card-front>.ccg-print-frame{z-index:130!important}
